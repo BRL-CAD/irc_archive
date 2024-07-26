@@ -8,3 +8,4 @@ able to record transcriptions of those discussions.
 Nowadays discussions tend to happen on other platforms, but the logs are
 preserved here for reference and historical interest.
 
+To view log pages, see https://brl-cad.github.io/irc_archive/
