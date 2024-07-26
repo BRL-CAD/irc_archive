@@ -1,225 +1,1251 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20111123</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20111123</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c8 {color: #6E6ED1}
+ span.c7 {color: #009900}
+ span.c6 {color: #CC00CC}
+ span.c5 {color: #E1E176}
+ span.c4 {color: #75DF75}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #6A6ACA}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20111123</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>01:19.35</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: you still have to check if BU_EXPORTS is defined, else you can end up with a double-definition error</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.55</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>er, BU_EXPORT</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:22.37</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>the plural naming convention you pulled from opennurbs doesn't really apply to C code too (wasn't even necessary for opennurbs really, they're all the same macro)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:23.23</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>that one's not a big deal, of course, just not necessary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:24.20</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe better to keep it consistent with opennurbs, that's fine too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:44.19</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47605 10/brlcad/trunk/include/bu.h: make sure BU_EXPORT isn't already defined (so callers have some means to override), and error out if caller tries to import and export simultaneously.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:45.28</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47606 10/brlcad/trunk/src/other/clipper/CMakeLists.txt: tweak clipper dll CMake logic.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:46.12</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: this still feels funny to me somehow - explicitly calling out the import with a library specific flag, rather than using the more "global" BRLCAD_DLL seems to complicate the build logic quite a bit...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:46.14</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>that template should work well, how's it look?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:48.24</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>it does complicate matters some given each library has to be listed now, that was to be expected</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:48.43</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem and benefit of BRLCAD_DLL is that it was global</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:48.59</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;don't we still need that last else case with the empty BU_EXPORT ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:49.03</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>it effectively meant *_IMPORT_DLL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:49.23</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - finding myself thinking that wasn't such a bad idea, really...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:50.17</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not a terrible idea but there are some downsides</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:50.39</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>can't make a target that both exports and imports (plugins, libraries)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.22</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: the "check for both definitions" case - will the logic ever get there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.26</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>also means that there's cross-library pollution which prevents core library components from standing on their own</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.29</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>shouldn't we be checking for that first?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.34</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., a libbu distribution akin to apr</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:52.27</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, you're right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:52.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>on both counts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:52.57</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>one sec..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.40</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>already fixed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.43</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47607 10/brlcad/trunk/include/bu.h: starseeker right on both counts, need the empty BU_EXPORT so preprocessor makes the symbol go away and the error case needs to be tested first</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.52</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47608 10/brlcad/trunk/src/other/clipper/clipper.hpp: Upgrade the export macro logic for clipper (hopefully)...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:54.46</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>do we need BU_DLL_IMPORTS for a library that just links to librt?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.15</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't remember the dll import/export rules that closely but I believe it depends how the library is defined</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.38</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>mm.&nbsp;&nbsp;Well, I guess there's always the "try it and see" approach...&nbsp;&nbsp;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.41</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if librt imports bu/bn and exports it's symbols, then I *think* it'll look for their dll when librt is loaded</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.55</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>guess I'll be playing with the windows build again tomorrow (joy...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.08</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if it doesn't import, they get linked static and have to be resolved at compile time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.50</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is trying to decide if librt should define an RT_DEFINES variable that holds BU_DLL_IMPORTS, BN_DLL_IMPORTS, etc...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:58.51</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>to do it "proper", I believe so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.25</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>rather, it needs to have them defined when librt is compiled .. but not necessarily when rt is compiled</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.45</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>(but can)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.54</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>it needs them when rt is compiled if librt doesn't import them or if it also uses bu/bn too (which it does)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:02.08</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to think tactically about how to set this up... would *really* suck to have to specify defines for executables per-exec instead of per directory</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:03.53</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>probably need to for exec targets in the same directory as a library (test apps, etc.) since I can't go defining both, but (say) in util I would prefer to "define 'em all and let the compiler sort it out", so to speak</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:12.14</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: how about in a/the exec wrapper macro, have it look for variables matching the provided prefix -- then it's a naming convention all our libs use to define their vars in one place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:12.43</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>you mean use the library list to go after the variables?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:13.07</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>might work, except when we send in libraries that aren't ours...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:13.14</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>something like BUILD_MY_EXEC(rt, LIBRT LIBBN LIBBU)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:13.38</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - BRLCAD_EXEC already has most of that</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:13.46</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>which would then look for LIBRT_LIBS, LIBRT_CPPFLAGS, LIBRT_CFLAGS, LIBBN_LIBS, LIBBN_CPPFLAGS, LIBBN_CFLAGS, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:14.01</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>come to think of it...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:14.30</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, there might be a way to handle it there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:14.39</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will look into it tomorrow</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:14.51</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>LIBRT_LDFLAGS might be different from LIBRT_LIBS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.07</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>-lrt vs deps -lbn -lbu -ltcl ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.19</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>cmake uses full paths for most things</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.37</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>I can recognize when I'm looking at a full path (do so for the distcheck logic)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.49</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>path isn't the issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:16.09</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>it's what libraries are added to the link line (and in what order if you want to get pedantic)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:16.26</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>I was thinking to use the list of libraries passed to BRLCAD_EXEC</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.09</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>couple ideas, actually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.10</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>right, but then if libraries are self-aware of their dependencies (and they are)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>then you wouldn't need to specify all the (potential) dependencies any time a library is used</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.58</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>like my example above -- kind of silly to list libbn and libbu since librt requires them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.11</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, I see...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.14</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>different issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.16</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>I couldv'e queried a var set by librt that told me bn, bu, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.36</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>that could greatly reduce redundancy throughout the build files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:19.06</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods... again less explicit though</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:19.55</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>yet less error-prone too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:20.20</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>most devs don't think very long about what the actual libs are, they copy-paste another similar and add libs until it compiles</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:20.40</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>true... the way we're trending here though, I'm going to *have* to write up some sort of detailed overview of what we're doing and why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:21.42</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>granting there are usually good reasons for what's being done, the further we get from "vanilla" the greater the hurdles become for a newbie to figure out what's happening and why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:22.08</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>already warranted with any custom macro -- it's obvious to you now because you wrote it and you still remember</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:22.19</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:22.38</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>in fact, for a lot of reasons I'd *better* do it now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:22.51</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">'s memory is... quirky</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.13</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>might let you clean out some unnecessary macros too if you attempt to document them :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.24</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>"oh yeah .. no longer need this one"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.48</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>heh - one of the fundamental arguments for literate programming, actually - "if I have to explain to a human what I'm trying to do, it's hard to hide the stupid parts :-P"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.00</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>it actually looks like you already do some sort of lib dependency expansion in BRLCAD_ADDEXEC</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.32</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... where are you looking?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.45</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>just looking at some binaries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.53</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>src/rt/CMakeLists.txt for example</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.04</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>no mention of libbu, but guarantee they all use it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.29</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>actually that's probably just dumb luck</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.35</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.53</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">enfeeds</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.43</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>that list is passed pretty much as-is to target_link_libraries - did it mainly because it cut a few hundred add_executable/target_link_libraries/install triplets down to a one-liner</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.10</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>s/a one-liner/one-liners/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.20</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, gotta get outta here</tt></td></tr>
-<tr><td><tt>02:34.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Technicus (~Technicus@DSLPool-net208-2.wctc.net)</font></tt></td></tr>
-<tr><td><tt>03:14.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Technicus (~Technicus@DSLPool-net208-2.wctc.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.23</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47609 10/brlcad/trunk/NEWS: nick added a new -r orientation option for the obj-g importer so you can specify 1/2/3 as values for unoriented, ccw, and cw orientation.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.30</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: then I'd wonder if cmake is doing some expansion for us since the libs deps are listed with the libs and it expands correctly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.48</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>either way, somehow it's happening now, so that's a good sign</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.12</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">installs cmake on gcc12 (openbsd sparc64)</font></tt></td></tr>
-<tr><td><tt>06:26.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>07:42.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:50.28</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r47610 10/brlcad/trunk/include/bu.h: add missing #endif</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:12.02</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, anne mccaffrey passed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:13.06</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>doom3 source released, too</tt></td></tr>
-<tr><td><tt>13:36.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@209.248.147.2.nw.nuvox.net)</font></tt></td></tr>
-<tr><td><tt>16:37.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Technicus (~Technicus@DSLPool-net208-2.wctc.net)</font></tt></td></tr>
-<tr><td><tt>16:37.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad 77CAA2ALN (~Technicus@DSLPool-net208-2.wctc.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.53</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47611 10/brlcad/trunk/HACKING: gentoo folks moved brl-cad from sci-misc to media-gfx</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.32</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: any technical reason for the lack of blank lines in the cmake files?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.17</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... not really</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.04</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>can't think of any offhand, although there may be a few cases where it matters (messages can't have stray end-of-line characters, for example...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.29</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>or rather, they can but it messes with the formatting of the printed result</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:41.19</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>that's fine, it's more whether there was some reason the logic or macros prohibited it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:42.37</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>like a C file without blank lines, a bit of a readability hindrance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:12.40</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47612 10/brlcad/trunk/misc/CMake/ (BRLCAD_CompilerFlags.cmake CompilerFlags.cmake): relax the comparisons to substring matches</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:14.22</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47613 10/brlcad/trunk/CMakeLists.txt: similar, relax string comparisons. makes the unknown value test a little more robust</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:18.12</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47614 10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: trying to make some sense of the logic, add ws for readability</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.43</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47615 10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: simplify logic with relaxed substring searching</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:41.02</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47616 10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: more logic simplification. reorder IF/ELSE to avoid needing NOT, eliminate need for multiple comparisons by using substring comparison. reword cache string to indicate what action is being taken.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47617 10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: Make an initial stab at support for library-wide usage of &lt;LIB&gt;_DLL_IMPORTS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: approach to building with MSVC. This is just hte macro logic and (for the</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: moment, until the rest of this is worked out) the Windows build is almost</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: certainly well and truly busted.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.13</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47618 10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: remove debug prints for now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.38</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47619 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.39</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: big restructuring in support of better reporting for whether bundled or sys libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.39</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: are being used (and why). few cases weren't being handled and the string</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.39</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: STREQUAL testing was causing cmake to report warnings. simplify string</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.39</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: comparisons to substrings where applicable, reduce/reorder logic for clarity,</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.39</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: and reword messages for consistency.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:52.33</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47620 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: stray duplicate comment line</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.05</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47621 10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.06</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: sync up with the same that was done for ThirdParty_Tcl.cmake using consistent</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.06</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: printing statements (e.g., they might not be libs), relax to substring matching</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.06</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: and reduced logic where we can. inject blank lines, separators, and comments</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.06</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: for improved readabaility.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:09.19</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47622 10/brlcad/trunk/include/ (22 files): Convert all the include headers to the &lt;LIB&gt;_DLL_IMPORTS format</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.34</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47623 10/brlcad/trunk/misc/CMake/ (33 files): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.34</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: as these are build system infrastructure and not actual build rules, they should</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.34</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: include the requisite license headers and footers like any other source file.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.34</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: CMakeLists.txt don't need the wrapping, but macro files should</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.11</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: uh... - a lot of those Find* cmake macro files are based on other macro files, might want to be careful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.43</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>I'd have to dig back to make sure, but I think at least FindGL, FindX11 and FindYACC are based off of other macros</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.02</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>I was waiting until things settled to do a thorough review of all of that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:38.47</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47624 10/brlcad/trunk/autogen.sh: given the magnitude of impact, add a massive deprecation notice to begin our requisite deprecation notification process. refer them to the INSTALL file for now since there's not (yet?) an equivalent step</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:39.23</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">is seeing tons of cmake breakage right now, <a href="http://paste.lisp.org/display/126045">http://paste.lisp.org/display/126045</a></font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:39.48</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>legally, that needs to happen asap and should have happened before a release was made with them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:40.17</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>k - I'll do a scan-through</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:41.21</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if they are mererly bundled for convenience, our header should be pulled or appended after theirs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:41.36</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>most of them are tweaked</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:41.52</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>maybe all of them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:45.34</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's not significant (like no logic changes, just additions of paths, removal of code, or just a couple lines) then our header is arguably not necessary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.19</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: your build failure looks related to r47617, work in progress .. though my build curiously worked, maybe I need to wipe cache to hit it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.58</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47625 10/brlcad/trunk/misc/CMake/ (BRLCAD_Util.cmake CheckCFileRuns.cmake): Add the full license text for ChechCFileRuns.cmake - need to fix up the rest of the Kitware-based files to have the full BSD license txt.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.05</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: do they use the same 3-clause license?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.03</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if they do, there can just be 2 copyright lines instead of two copies of the text</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.07</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>I believe so, give or take some minor wording and formatting...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.19</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>take a look at CheckCFileRuns.cmake, it's got both</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:54.06</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47626 10/brlcad/trunk/misc/CMake/CheckPrototypeExists.cmake: CheckPrototypeExists.cmake is from KDE, flesh out their BSD license and add a link to the file origin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:59.30</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47627 10/brlcad/trunk/autogen.sh: move the deprecation section down so we're more sure echo -n work. still before anything is printed.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:00.51</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47628 10/brlcad/trunk/misc/CMake/FindLEMON.cmake: FindLEMON was originally based on FindBISON - note that fact. Trying to stay close to the formatting of 'standard' CMake modules for those that we might have a hope of getting accepted into CMake proper at some point.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:03.11</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47629 10/brlcad/trunk/misc/CMake/FindLEX.cmake: FindLEX.cmake is basically FindFLEX.cmake slightly generalized, and we already had ourselves listed in the 'standard' CMake BSD license. We may not even need this at all once the perplex/re2c/lemon work is complete...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:04.07</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>mutter... looks like I got some of them "properly" containing the full license, but missed a few</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:04.44</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>I think in the GL/X11 case I might have been hoping to get the changes accepted back... ah well, no matter</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:08.22</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47630 10/brlcad/trunk/misc/CMake/ (FindGL.cmake FindX11.cmake FindZLIB.cmake): Add the rest of the 'full' licenses for the Kitware stuff - was hoping to commit these changes back to Kitware, but either way we'll have to hang on to these until we can require a modern enough CMake with the changes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:15.29</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47631 10/brlcad/trunk/configure.ac: add a similar massive deprecation notice with an annoying pause to configure.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:18.38</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47632 10/brlcad/trunk/configure.ac: put a deprecation notice in the summary too since most people actually read it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:23.06</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47633 10/brlcad/trunk/Makefile.am: last one, repeat the deprecation warning when they run autotools make too.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47634 10/brlcad/trunk/src/rt/view.c: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: can't compile due to cmake errors, but add an ambOffset parameter so you can</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: control how far we pull away from a surface before shooting ambient rays. this</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: is intended to help 'smooth out' shots against polygonal models where you get</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: artifacts from hitting nearby/neighboring polygons.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.09</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">reflects that with the new open source SCL activity, he's probably going to need to beef up the FindSCL macro...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.04</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47635 10/brlcad/trunk/src/rt/view.c: reduce the code duplication in ambient occlusion. pulling the branch out of both loops is inconsequential to performance in the long term.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.45</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47636 10/brlcad/trunk/ (9 files in 9 dirs): This should get the build working again on non Windows platforms... also, start the process of clearing out BRLCAD_DLL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.18</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: something else is busted - LEMON_EXECUTABLE is set to NOTFOUND</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.10</tt></td><td><font color="#e1e176"><tt>starseeker</tt></font></td><td width="100%"><tt>and the global BRLCAD_BUNDLED_LIBS flag being set to bundled isn't turning everything on anymore </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.18</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>curious, I didn't modify FindLEMON</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:21.15</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>the BRLCAD_BUNDLED_LIBS isn't too surprising, couldn't test it with the breakage and the logic in BRLCAD_Util seems quite a mess..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:40.14</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like the problem is actually in ThirdParty, fix forthcoming</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.22</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r47637 10/brlcad/trunk/include/ged.h: Added gdps_scale to ged_data_polygon_state.</tt></td></tr>
-<tr><td><tt>21:52.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:58.59</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47638 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: getting a feel for how the aggregate BRLCAD_BUNDLED_LIBS was implemented. this makes ccmake report proper propagation of the parent BUNDLED (AUTO) setting (but still keying off AUTO at higher precedence than BUNDLED).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.56</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47639 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.57</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: this seems to get things back to working for the parent BRLCAD_BUNDLED_LIBS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.57</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: option. wasn't accounting for a stray STREQUAL in the parent logic and wasn't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.57</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: setting the ON/OFF variable consistently with the statements being printed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47640 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: if BRLCAD_BUNDLED_LIBS is set to SYSTEM and system-installed libs aren't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: available, it's not our problem -- let them proceed as if it was installed and</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: found since that's what they asked for. perhaps useful for distribution</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: debugging.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.34</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47641 10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: mark BRLCAD_LIBS as advanced</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:16.09</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r47642 10/brlcad/trunk/src/other/ (re2c/CMake/FindLEMON.cmake step/CMake/FindLEMON.cmake): sync top-level cmake file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.32</tt></td><td><font color="#75df75"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r47643 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: LIBRARY-&gt;EXECUTABLE</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>01:19.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: you still have to check if
+BU_EXPORTS is defined, else you can end up with a double-definition
+error</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, BU_EXPORT</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:22.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the plural naming convention you pulled from
+opennurbs doesn't really apply to C code too (wasn't even necessary
+for opennurbs really, they're all the same macro)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:23.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that one's not a big deal, of course, just not
+necessary</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:24.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>maybe better to keep it consistent with
+opennurbs, that's fine too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:44.19</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47605
+10/brlcad/trunk/include/bu.h: make sure BU_EXPORT isn't already
+defined (so callers have some means to override), and error out if
+caller tries to import and export simultaneously.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:45.28</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47606
+10/brlcad/trunk/src/other/clipper/CMakeLists.txt: tweak clipper dll
+CMake logic.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:46.12</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: this still feels funny to me somehow -
+explicitly calling out the import with a library specific flag,
+rather than using the more "global" BRLCAD_DLL seems to complicate
+the build logic quite a bit...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:46.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that template should work well, how's it
+look?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:48.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it does complicate matters some given each
+library has to be listed now, that was to be expected</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:48.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the problem and benefit of BRLCAD_DLL is that
+it was global</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:48.59</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad:  don't we still need that last else
+case with the empty BU_EXPORT ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:49.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it effectively meant *_IMPORT_DLL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:49.23</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">nods - finding myself
+thinking that wasn't such a bad idea, really...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:50.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's not a terrible idea but there are some
+downsides</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:50.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>can't make a target that both exports and
+imports (plugins, libraries)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.22</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: the "check for both definitions" case
+- will the logic ever get there?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also means that there's cross-library
+pollution which prevents core library components from standing on
+their own</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.29</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>shouldn't we be checking for that
+first?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>e.g., a libbu distribution akin to
+apr</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:52.27</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, you're right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:52.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>on both counts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:52.57</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>one sec..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>already fixed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.43</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47607
+10/brlcad/trunk/include/bu.h: starseeker right on both counts, need
+the empty BU_EXPORT so preprocessor makes the symbol go away and
+the error case needs to be tested first</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.52</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47608
+10/brlcad/trunk/src/other/clipper/clipper.hpp: Upgrade the export
+macro logic for clipper (hopefully)...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:54.46</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>do we need BU_DLL_IMPORTS for a library that
+just links to librt?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I don't remember the dll import/export rules
+that closely but I believe it depends how the library is
+defined</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.38</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>mm.  Well, I guess there's always the "try it
+and see" approach...  </tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if librt imports bu/bn and exports it's
+symbols, then I *think* it'll look for their dll when librt is
+loaded</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.55</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>guess I'll be playing with the windows build
+again tomorrow (joy...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it doesn't import, they get linked static
+and have to be resolved at compile time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.50</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">is trying to decide if librt
+should define an RT_DEFINES variable that holds BU_DLL_IMPORTS,
+BN_DLL_IMPORTS, etc...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:58.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>to do it "proper", I believe so</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:59.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rather, it needs to have them defined when
+librt is compiled .. but not necessarily when rt is
+compiled</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:59.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(but can)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:00.54</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it needs them when rt is compiled if librt
+doesn't import them or if it also uses bu/bn too (which it
+does)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:02.08</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">needs to think tactically
+about how to set this up... would *really* suck to have to specify
+defines for executables per-exec instead of per
+directory</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:03.53</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>probably need to for exec targets in the same
+directory as a library (test apps, etc.) since I can't go defining
+both, but (say) in util I would prefer to "define 'em all and let
+the compiler sort it out", so to speak</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:12.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: how about in a/the exec wrapper
+macro, have it look for variables matching the provided prefix --
+then it's a naming convention all our libs use to define their vars
+in one place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:12.43</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you mean use the library list to go after the
+variables?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:13.07</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>might work, except when we send in libraries
+that aren't ours...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:13.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>something like BUILD_MY_EXEC(rt, LIBRT LIBBN
+LIBBU)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:13.38</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">nods - BRLCAD_EXEC already
+has most of that</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:13.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which would then look for LIBRT_LIBS,
+LIBRT_CPPFLAGS, LIBRT_CFLAGS, LIBBN_LIBS, LIBBN_CPPFLAGS,
+LIBBN_CFLAGS, etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:14.01</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>come to think of it...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:14.30</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, there might be a way to handle it
+there</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:14.39</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">will look into it
+tomorrow</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:14.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>LIBRT_LDFLAGS might be different from
+LIBRT_LIBS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>-lrt vs deps -lbn -lbu -ltcl ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.19</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cmake uses full paths for most
+things</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.37</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I can recognize when I'm looking at a full
+path (do so for the distcheck logic)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>path isn't the issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:16.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's what libraries are added to the link line
+(and in what order if you want to get pedantic)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:16.26</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I was thinking to use the list of libraries
+passed to BRLCAD_EXEC</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:17.09</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>couple ideas, actually</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:17.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>right, but then if libraries are self-aware of
+their dependencies (and they are)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:17.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then you wouldn't need to specify all the
+(potential) dependencies any time a library is used</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:17.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>like my example above -- kind of silly to list
+libbn and libbu since librt requires them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.11</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>oh, I see...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.14</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>different issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I couldv'e queried a var set by librt that
+told me bn, bu, etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that could greatly reduce redundancy
+throughout the build files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:19.06</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">nods... again less explicit
+though</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:19.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yet less error-prone too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:20.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>most devs don't think very long about what the
+actual libs are, they copy-paste another similar and add libs until
+it compiles</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:20.40</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>true... the way we're trending here though,
+I'm going to *have* to write up some sort of detailed overview of
+what we're doing and why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:21.42</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>granting there are usually good reasons for
+what's being done, the further we get from "vanilla" the greater
+the hurdles become for a newbie to figure out what's happening and
+why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:22.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>already warranted with any custom macro --
+it's obvious to you now because you wrote it and you still
+remember</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:22.19</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:22.38</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>in fact, for a lot of reasons I'd *better* do
+it now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:22.51</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">'s memory is...
+quirky</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:23.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>might let you clean out some unnecessary
+macros too if you attempt to document them :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:23.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"oh yeah .. no longer need this one"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:23.48</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>heh - one of the fundamental arguments for
+literate programming, actually - "if I have to explain to a human
+what I'm trying to do, it's hard to hide the stupid parts
+:-P"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:24.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it actually looks like you already do some
+sort of lib dependency expansion in BRLCAD_ADDEXEC</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:24.32</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>uh... where are you looking?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:24.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just looking at some binaries</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:24.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>src/rt/CMakeLists.txt for example</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:25.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no mention of libbu, but guarantee they all
+use it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:25.29</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>actually that's probably just dumb
+luck</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:25.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:25.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c6">enfeeds</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:26.43</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that list is passed pretty much as-is to
+target_link_libraries - did it mainly because it cut a few hundred
+add_executable/target_link_libraries/install triplets down to a
+one-liner</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.10</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>s/a one-liner/one-liners/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.20</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, gotta get outta here</tt></td>
+</tr>
+<tr>
+<td><tt>02:34.59</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Technicus
+(~Technicus@DSLPool-net208-2.wctc.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>03:14.39</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Technicus
+(~Technicus@DSLPool-net208-2.wctc.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:13.23</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47609
+10/brlcad/trunk/NEWS: nick added a new -r orientation option for
+the obj-g importer so you can specify 1/2/3 as values for
+unoriented, ccw, and cw orientation.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:26.30</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: then I'd wonder if cmake is doing
+some expansion for us since the libs deps are listed with the libs
+and it expands correctly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:26.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>either way, somehow it's happening now, so
+that's a good sign</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:27.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c6">installs cmake on gcc12
+(openbsd sparc64)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:26.23</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:42.45</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad merzo
+(~merzo@193.254.217.44)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:50.28</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r47610
+10/brlcad/trunk/include/bu.h: add missing #endif</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:12.02</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hm, anne mccaffrey passed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:13.06</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>doom3 source released, too</tt></td>
+</tr>
+<tr>
+<td><tt>13:36.21</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad KimK
+(~Kim__@209.248.147.2.nw.nuvox.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:37.07</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Technicus
+(~Technicus@DSLPool-net208-2.wctc.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:37.07</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad 77CAA2ALN
+(~Technicus@DSLPool-net208-2.wctc.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.53</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47611
+10/brlcad/trunk/HACKING: gentoo folks moved brl-cad from sci-misc
+to media-gfx</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:32.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: any technical reason for the lack
+of blank lines in the cmake files?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.17</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>uh... not really</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.04</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>can't think of any offhand, although there may
+be a few cases where it matters (messages can't have stray
+end-of-line characters, for example...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.29</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>or rather, they can but it messes with the
+formatting of the printed result</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:41.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's fine, it's more whether there was some
+reason the logic or macros prohibited it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:42.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>like a C file without blank lines, a bit of a
+readability hindrance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:12.40</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47612
+10/brlcad/trunk/misc/CMake/ (BRLCAD_CompilerFlags.cmake
+CompilerFlags.cmake): relax the comparisons to substring
+matches</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:14.22</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47613
+10/brlcad/trunk/CMakeLists.txt: similar, relax string comparisons.
+makes the unknown value test a little more robust</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:18.12</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47614
+10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: trying to make
+some sense of the logic, add ws for readability</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.43</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47615
+10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: simplify logic
+with relaxed substring searching</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:41.02</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47616
+10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: more logic
+simplification. reorder IF/ELSE to avoid needing NOT, eliminate
+need for multiple comparisons by using substring comparison. reword
+cache string to indicate what action is being taken.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:42.44</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47617
+10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:42.44</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Make an initial stab at support for
+library-wide usage of &lt;LIB&gt;_DLL_IMPORTS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:42.44</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: approach to building with MSVC. This
+is just hte macro logic and (for the</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:42.44</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: moment, until the rest of this is
+worked out) the Windows build is almost</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:42.44</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: certainly well and truly
+busted.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.13</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47618
+10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: remove debug prints
+for now.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.38</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47619
+10/brlcad/trunk/misc/CMake/ThirdParty.cmake:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.39</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: big restructuring in support of
+better reporting for whether bundled or sys libs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.39</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: are being used (and why). few cases
+weren't being handled and the string</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.39</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: STREQUAL testing was causing cmake to
+report warnings. simplify string</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.39</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: comparisons to substrings where
+applicable, reduce/reorder logic for clarity,</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.39</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: and reword messages for
+consistency.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:52.33</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47620
+10/brlcad/trunk/misc/CMake/ThirdParty.cmake: stray duplicate
+comment line</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.05</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47621
+10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.06</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: sync up with the same that was done
+for ThirdParty_Tcl.cmake using consistent</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.06</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: printing statements (e.g., they might
+not be libs), relax to substring matching</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.06</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: and reduced logic where we can.
+inject blank lines, separators, and comments</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.06</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: for improved readabaility.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:09.19</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47622
+10/brlcad/trunk/include/ (22 files): Convert all the include
+headers to the &lt;LIB&gt;_DLL_IMPORTS format</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:15.34</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47623
+10/brlcad/trunk/misc/CMake/ (33 files):</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:15.34</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: as these are build system
+infrastructure and not actual build rules, they should</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:15.34</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: include the requisite license headers
+and footers like any other source file.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:15.34</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: CMakeLists.txt don't need the
+wrapping, but macro files should</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.11</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: uh... - a lot of those Find* cmake
+macro files are based on other macro files, might want to be
+careful</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.43</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I'd have to dig back to make sure, but I think
+at least FindGL, FindX11 and FindYACC are based off of other
+macros</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.02</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I was waiting until things settled to do a
+thorough review of all of that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:38.47</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47624
+10/brlcad/trunk/autogen.sh: given the magnitude of impact, add a
+massive deprecation notice to begin our requisite deprecation
+notification process. refer them to the INSTALL file for now since
+there's not (yet?) an equivalent step</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:39.23</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c6">is seeing tons of cmake
+breakage right now, <a href=
+"http://paste.lisp.org/display/126045">http://paste.lisp.org/display/126045</a></span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:39.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>legally, that needs to happen asap and should
+have happened before a release was made with them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:40.17</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>k - I'll do a scan-through</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:41.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if they are mererly bundled for convenience,
+our header should be pulled or appended after theirs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:41.36</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>most of them are tweaked</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:41.52</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>maybe all of them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:45.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's not significant (like no logic
+changes, just additions of paths, removal of code, or just a couple
+lines) then our header is arguably not necessary</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:47.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: your build failure looks related to
+r47617, work in progress .. though my build curiously worked, maybe
+I need to wipe cache to hit it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:47.58</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47625
+10/brlcad/trunk/misc/CMake/ (BRLCAD_Util.cmake
+CheckCFileRuns.cmake): Add the full license text for
+ChechCFileRuns.cmake - need to fix up the rest of the Kitware-based
+files to have the full BSD license txt.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: do they use the same 3-clause
+license?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if they do, there can just be 2 copyright
+lines instead of two copies of the text</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.07</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I believe so, give or take some minor wording
+and formatting...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.19</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>take a look at CheckCFileRuns.cmake, it's got
+both</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:54.06</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47626
+10/brlcad/trunk/misc/CMake/CheckPrototypeExists.cmake:
+CheckPrototypeExists.cmake is from KDE, flesh out their BSD license
+and add a link to the file origin</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:59.30</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47627
+10/brlcad/trunk/autogen.sh: move the deprecation section down so
+we're more sure echo -n work. still before anything is
+printed.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:00.51</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47628
+10/brlcad/trunk/misc/CMake/FindLEMON.cmake: FindLEMON was
+originally based on FindBISON - note that fact. Trying to stay
+close to the formatting of 'standard' CMake modules for those that
+we might have a hope of getting accepted into CMake proper at some
+point.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:03.11</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47629
+10/brlcad/trunk/misc/CMake/FindLEX.cmake: FindLEX.cmake is
+basically FindFLEX.cmake slightly generalized, and we already had
+ourselves listed in the 'standard' CMake BSD license. We may not
+even need this at all once the perplex/re2c/lemon work is
+complete...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:04.07</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>mutter... looks like I got some of them
+"properly" containing the full license, but missed a few</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:04.44</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I think in the GL/X11 case I might have been
+hoping to get the changes accepted back... ah well, no
+matter</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:08.22</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47630
+10/brlcad/trunk/misc/CMake/ (FindGL.cmake FindX11.cmake
+FindZLIB.cmake): Add the rest of the 'full' licenses for the
+Kitware stuff - was hoping to commit these changes back to Kitware,
+but either way we'll have to hang on to these until we can require
+a modern enough CMake with the changes.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:15.29</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47631
+10/brlcad/trunk/configure.ac: add a similar massive deprecation
+notice with an annoying pause to configure.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:18.38</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47632
+10/brlcad/trunk/configure.ac: put a deprecation notice in the
+summary too since most people actually read it.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:23.06</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47633
+10/brlcad/trunk/Makefile.am: last one, repeat the deprecation
+warning when they run autotools make too.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47634
+10/brlcad/trunk/src/rt/view.c:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: can't compile due to cmake errors,
+but add an ambOffset parameter so you can</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: control how far we pull away from a
+surface before shooting ambient rays. this</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: is intended to help 'smooth out'
+shots against polygonal models where you get</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: artifacts from hitting
+nearby/neighboring polygons.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.09</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c6">reflects that with the new
+open source SCL activity, he's probably going to need to beef up
+the FindSCL macro...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.04</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47635
+10/brlcad/trunk/src/rt/view.c: reduce the code duplication in
+ambient occlusion. pulling the branch out of both loops is
+inconsequential to performance in the long term.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.45</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47636
+10/brlcad/trunk/ (9 files in 9 dirs): This should get the build
+working again on non Windows platforms... also, start the process
+of clearing out BRLCAD_DLL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:04.18</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: something else is busted -
+LEMON_EXECUTABLE is set to NOTFOUND</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:06.10</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>and the global BRLCAD_BUNDLED_LIBS flag being
+set to bundled isn't turning everything on anymore</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>curious, I didn't modify FindLEMON</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:21.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the BRLCAD_BUNDLED_LIBS isn't too surprising,
+couldn't test it with the breakage and the logic in BRLCAD_Util
+seems quite a mess..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:40.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>looks like the problem is actually in
+ThirdParty, fix forthcoming</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.22</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r47637
+10/brlcad/trunk/include/ged.h: Added gdps_scale to
+ged_data_polygon_state.</tt></td>
+</tr>
+<tr>
+<td><tt>21:52.05</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:58.59</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47638
+10/brlcad/trunk/misc/CMake/ThirdParty.cmake: getting a feel for how
+the aggregate BRLCAD_BUNDLED_LIBS was implemented. this makes
+ccmake report proper propagation of the parent BUNDLED (AUTO)
+setting (but still keying off AUTO at higher precedence than
+BUNDLED).</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.56</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47639
+10/brlcad/trunk/misc/CMake/ThirdParty.cmake:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.57</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: this seems to get things back to
+working for the parent BRLCAD_BUNDLED_LIBS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.57</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: option. wasn't accounting for a stray
+STREQUAL in the parent logic and wasn't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.57</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: setting the ON/OFF variable
+consistently with the statements being printed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47640
+10/brlcad/trunk/misc/CMake/ThirdParty.cmake:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: if BRLCAD_BUNDLED_LIBS is set to
+SYSTEM and system-installed libs aren't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: available, it's not our problem --
+let them proceed as if it was installed and</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: found since that's what they asked
+for. perhaps useful for distribution</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.01</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: debugging.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.34</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47641
+10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: mark BRLCAD_LIBS as
+advanced</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:16.09</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r47642
+10/brlcad/trunk/src/other/ (re2c/CMake/FindLEMON.cmake
+step/CMake/FindLEMON.cmake): sync top-level cmake file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:46.32</tt></td>
+<td><span class="c4"><tt>CIA-61</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r47643
+10/brlcad/trunk/misc/CMake/ThirdParty.cmake:
+LIBRARY-&gt;EXECUTABLE</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

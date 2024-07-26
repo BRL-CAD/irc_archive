@@ -1,350 +1,1897 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>irclog2html for #brlcad on 20060708</title>
-	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
-	<meta name="version" content="Version 1.5 - 11th May 2000">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>irclog2html for #brlcad on 20060708</title>
+<meta name="generator" content="irclog2html.pl by Jeff Waugh" />
+<meta name="version" content="Version 1.5 - 11th May 2000" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c12 {color: #C56868}
+ span.c11 {color: #68C668}
+ span.c10 {color: #B35EB3}
+ span.c9 {color: #E27777}
+ span.c8 {color: #000099}
+ span.c7 {color: #C769C7}
+ span.c6 {color: #E1E176}
+ span.c5 {color: #6D6DCF}
+ span.c4 {color: #009900}
+ span.c3 {color: #4D4D93}
+ tr.c2 {background-color: #EEEEEE}
+ span.c1 {color: #4B904B}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>irclog2html for #brlcad on 20060708</h1>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:00.11</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>but if a forcing point is added, it's overflowed its area</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:00.13</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>since it's also an arbitrary list of polygon data</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:00.44</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>rt_bot_export() ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.06</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it will, and elsewhere in librt it handles how to deal with marking db nodes as invalid and reutilizing them as new writes are requested</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.25</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>from your perspective, though, you just return your binary block of data</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.06</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>ahhhh, ok, so there is SOME notion of memory management built in, that's nice</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.26</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.05</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the database spec completely supports the idea.. how well the library implements it may be another contention point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.32</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>still, that's a fix looking for a problem.. i'd do what the other prims do for now and not worry about it (as it's generally not a problem)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.49</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you can invoke a database compaction in mged with the "garbage_collect" command</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.14</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>(full instead of the on-going dynmaic reuse)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.52</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.19</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>and I suppose the interface for bot is a good example for metaballs?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.01</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>for the db i/o it's probably not bad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.03</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>relatively new</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.15</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I meant the user interface</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.17</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>a little contorted with the hooks into nmg, but it's still dynamic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.32</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, bot's have a very primitive interface</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.40</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- is able to make, like, boxes and spheres now...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.50</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>that's about the limit of my modelling ability iwth the package :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.06</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i mean you can actually tweak individual triangle vertex positions, in fact you HAVE to edit them that way :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.18</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no gui edit support, minimal menu support</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.26</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>so gui-wise, they're not there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.42</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>something older would be better from that perspective like torus and arbs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.44</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>hehehe, I didn't say anything about graphical :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.57</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>torus and arbs have a fixed number of values, though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.08</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>it's the dynamic nature that is difficult... :) I think o.O</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.11</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>btw, you mentioned the "in" command, that's src/mged/typein.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.28</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>some aspects of implementation are not in the library, the live in mged or libwdb</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.59</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>and src/tclscripts/mged of course for the tcl aspects</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.02</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I started going through manual II, I got as far as making the radio and learning a little about 'mater'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.08</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>that's as far as I've gotten so far...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.27</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- ignyant</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.37</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>right, torus and arbs are fixed values but again that only affects the _export() and _import() routines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.52</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that doesn't affect the mged hookage or raytracing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.50</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>um, I'm not sure I understand... arb4 takes 4 points... period... you can't add another point to it ... or delete a point...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.57</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a laundry list of about 10 files that HAVE to be updated to properly add a new primitive (v5 only), and a couple optional</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.17</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>g_xxx.c lists some of that... I'm not sure it's complete, or entirely correct...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.35</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the g_ file is one of the 10</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.55</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>g_xxx.c (and two others) have a big comment that say "do this, then do that, then edit this..."</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.08</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>there's the object table in librt, the typein cmd, the make cmd, mged menu, couple headers, *scratches head*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.20</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>talks about rtgeom.h, db.h, the function table, ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.40</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>teh g_ template only tells you how to hook the primitive in for ray-tracing, not creation or editing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.46</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>starting at line 27...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.31</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>those directions are outdated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.35</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I figured...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.36</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>those are v4 instructions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.45</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>lee told me to look at 'em... I've had no success with those...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.55</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I doubt lee has added a v5 primitive</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.21</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the superell is the newest primitive to be added -- it's incomplete from a ray-trace perspective but it IS hooked into all the right place and is easy to grep on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.50</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>only thing you'll have to watch out for is that it also implements v4 support, which you really shouldn't bother with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.58</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>this gives the list:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.00</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>find . -type f \( -name \*.c -or -name \*.h \) -exec grep -r -i superell {} /dev/null \; | cut -f1 -d: | sort&nbsp;&nbsp;| uniq</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.23</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>heh... I know 'nuff unix for that shit, dude :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.24</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't need db.h, that's v4</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.41</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hey, just trying to help :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.53</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- not gonna look at it until thursday, is doing greening</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.14</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>drinking and womanizing on the weekend, then greening, *THEN* coding :D *duck*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.15</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like I was right on the mark -- 10 files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.30</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, I still haven't done greening</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.04</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm kinda surprised I'm going... jay-lo is, too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.10</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>wonder if it's any more informative than a week at ROTC training</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.21</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>the agenda looks interesting</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.29</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>have you done a week at rotc?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.35</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.57</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr><td><tt>00:20.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LawrenceG (n=Lawrence@S010600045ae2c372.pk.shawcable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.10</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- did 3 yrs njrotc... decided it sucked balls, so started growing his hair</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.17</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>did the whole survival boot camp, disassemble m16's, go shooting, go rapelling, early morning pt, etc </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.48</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.50</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>was considering joining rotc at the time just on a whim</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.12</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>almost did, no particular reason I didn't other than it was a huge amount of time and I wanted to leave my options open :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.39</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>njrotc is very navy focused, and just highschool kids, so *shrug* :) no obligations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.43</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>shooting the m16 is pretty fun, I could see doing that as a hobby</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.43</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>just a way to get out of gym</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.00</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm hoping they let us shoot 'em on monday</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.15</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>supposed to go to the range to learn about m16, m203, and m14...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.16</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i hear they don't any more.. but who knows.. it's been years</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.30</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I've held an m203 combo, and worn night vision goggles... haven't shot one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.06</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>hehehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.14</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>those'd be a wee bit trickier to work out :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.28</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you'd think of all the places that could be arranged... :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.32</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>supposedly the third day, they'll have two abrams and two bradleys... "with drivers"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.10</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>40 knots on 5" of water is fun shit :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.08</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://ftp.brlcad.org/statcvs/">http://ftp.brlcad.org/statcvs/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.52</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>man, you went and shuffled all my files so I'm not even listed *sigh*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.55</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that has bad author line counts due to the open sourcing "significant derivative work"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.22</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>here's a normalized one that takes it out of the picture, but then scews the project line count: <a href="http://ftp.brlcad.org/statcvs.normalized/">http://ftp.brlcad.org/statcvs.normalized/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:28.03</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, only 486 of my lines remain unmutilated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:28.32</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not counting remaining -- it only basis the numbers on +- values in the commit log, not an annotate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.00</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you feed it a cvs log and the sources only, so it's only the info it derives from those two</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.18</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i ran the same tool on m3 and bzflag.. interesting results :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.31</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i love how on the Authors page, you can actually see how different devs work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.46</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i mean you can see when jra changed his schedule and when he even goes to lunch!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.54</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you can see who's a 9-5er and who works around the clock, who infrequently participates, who's heavily involved, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.07</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.12</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>m3 cvs behavior is very... sub-par.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.23</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm sure you noticed long silences, then bursts of huge activity</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.31</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>from the dev's sitting on their changes for weeks at a time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.43</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>and quit calling it m3, you're sullying the name of my car!!!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.56</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>lets just say you can see when the demo was given and the aftermath</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.02</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>hah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.42</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the only thing that statcvs doesn't show that would be cool is the magnitude of the commit, it's more frequency</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.00</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>coloring them as a heat graph instead of just red would be sweet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.12</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>so, uh... fix it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.20</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm sure it's just a littel perl script or something :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.52</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://math.missouristate.edu/~erik/normal_kittens.jpeg">http://math.missouristate.edu/~erik/normal_kittens.jpeg</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:34.11</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>ask me how much time I want to put into a cvs graph program</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:34.42</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>not the 10 minutes to make the change? heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:34.47</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>there are others that can be run that work on the cvsroot, i might give one of them a try</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.14</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>what it did point out, though is that there are about 6 bad rcs/cvs files with wierdness in them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.26</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>one of them you somehow caused, and like 5 others in librt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.43</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>wow, I broke a file? awesome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.45</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>which one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.53</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>some header in h/ that was removed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.03</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>bah, who cares, then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.05</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.19</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>well it causes problems when you branch and merge I've noticed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.22</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>at least the librt ones</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.44</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>it will revive the librt directory on the branch and if you're not paying attention, you commit it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.05</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>has happened several times and even after it gets deleted again, it's revived later due to whatever is bad in the base rcs file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.49</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>how exactly is it 'bad'?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.44</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i haven't looked into the cause, just noticed the effect</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.25</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>Thank you for contacting NVIDIA Customer Care.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.25</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>I am really sorry for the priviuos responce.However, due to the competitive nature of this business, we can not discuss information on unannounced future products. We apologize for the inconvenience this may cause.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.26</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>Regards,</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.28</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>NVIDIA Customer Care.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.53</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>nice spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.08</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>*cough* out-source much *cough*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.41</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>I just need a 20" display for this machine and it'll be bangin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:20.52</tt></td><td><font color="#e1e176"><tt>IriX64</tt></font></td><td width="100%"><tt>I Trust I am amongst friends here? a greeting i used to use when i first entered a channel.</tt></td></tr>
-<tr><td><tt>01:21.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@c-69-250-236-111.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:21.40</tt></td><td><font color="#e1e176"><tt>IriX64</tt></font></td><td width="100%"><tt>gotta go, new toy...vmware 5.5 or something.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:34.02</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>yet he still needs to reboot</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:34.46</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>I wonder if Irix64 is Unitions cousin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:36.01</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>he's a quirky old timer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:38.13</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>laptops ship?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:48.27</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>hahaha</tt></td></tr>
-<tr><td><tt>02:45.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bjorkBSD (n=bjork@ip70-178-169-173.ks.ks.cox.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:57.45</tt></td><td><font color="#c769c7"><tt>bjorkBSD</tt></font></td><td width="100%"><tt>brlcad does this sorta thing, right? -&gt; <a href="http://www.varicad.com/gallery.phtml">http://www.varicad.com/gallery.phtml</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:09.32</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>bjorkBSD: sure does</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:10.09</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>limited gallery here: <a href="http://sourceforge.net/project/screenshots.php?group_id=105292">http://sourceforge.net/project/screenshots.php?group_id=105292</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:11.15</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>alas would love to chat more, but tis time to recouperate for morning training session</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:11.33</tt></td><td><font color="#c769c7"><tt>bjorkBSD</tt></font></td><td width="100%"><tt>okay. thanks it looks good.</tt></td></tr>
-<tr><td><tt>04:02.08</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad LawrenceG (n=Lawrence@S010600045ae2c372.pk.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>06:43.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@c-24-23-59-104.hsd1.ca.comcast.net)</font></tt></td></tr>
-<tr><td><tt>08:53.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad fenn (n=fenn@adsl-66-72-64-24.dsl.bltnin.ameritech.net)</font></tt></td></tr>
-<tr><td><tt>13:58.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ^Eugenics (n=^Eugenic@bau06-1-89-81-0-71.dsl.club-internet.fr)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:21.48</tt></td><td><font color="#e27777"><tt>^Eugenics</tt></font></td><td width="100%"><tt>does anyone know where to find a link that describes how to make drafts with brlcad?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.20</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>there's not really a link that describes the process, brl-cad has limited drafting capabilities mostly geared around providing the hidden line drawings sans annotations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.59</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>rtedge is the hidden line renderer, has a manpage, example at <a href="http://ftp.brlcad.org/images/havoc_rtedge.png">http://ftp.brlcad.org/images/havoc_rtedge.png</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:32.59</tt></td><td><font color="#e27777"><tt>^Eugenics</tt></font></td><td width="100%"><tt>piere told me about a render to ps -&gt; pstoedit (dxf) and then finnish up in a 2d cad app.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.24</tt></td><td><font color="#e27777"><tt>^Eugenics</tt></font></td><td width="100%"><tt>it's a pinc solutionn but still something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.55</tt></td><td><font color="#e27777"><tt>^Eugenics</tt></font></td><td width="100%"><tt>panic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.15</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, you can save any mged wireframe to postscript</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.56</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>there's an output option on the file menu, as well as a handful of mged commands</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.55</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the MGED Quick Reference might be of interest if you haven't seen it: <a href="http://ftp.brlcad.org/MGED_Quick_Reference_Card.pdf">http://ftp.brlcad.org/MGED_Quick_Reference_Card.pdf</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:00.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>under the Manipulating the View section, it shows the "ps" command to save to postscript -- you can similarly save to a unix .pl plot file and use pl-ps on the command line outside mged as well</tt></td></tr>
-<tr><td><tt>16:33.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (i=clock@84-72-62-150.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.42</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>my first patch submitted to brlcad ;-)</tt></td></tr>
-<tr><td><tt>16:36.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (i=clock@84-72-62-150.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:40.50</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>clock_: cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:42.24</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>brlcad: I guess it's OK. I hope there are not system which BRLCAD supports where #include &lt;time.h&gt; doesn't work and one has to write extern long time();.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:43.59</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>brlcad: I installed OpenBSD instead of Linux.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:44.14</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>What was BSD developed on? BSD? Commercial UNIX?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:44.22</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>BSD -&gt; BRL-CAD</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.55</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>clock_: actually there are systems that don't have time.h still around, but they are pretty darn obscure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:12.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>20+ year old systems most likely</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:12.46</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>BRL-CAD was developed on a myriad of systems including BSD and SYSV variants from 20+ years ago (hence where the extern long time() comes from)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:14.12</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>brlcad: so is my patch OK?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:24.35</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>which obsd did you install?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:26.55</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>3.9 the latest</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:27.00</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>do you use obsd?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:27.32</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>mged doesn't run without glx module inserted in X, is this mentioned in the README?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.46</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>I have 3.8 installed on a work box</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.53</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>mged will run without X</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.17</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the binaries just happen to be set up for x11/ogl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.31</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>any news on laptops?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.36</tt></td><td><font color="#b35eb3"><tt>clock_</tt></font></td><td width="100%"><tt>so it's a problem of opengl installation in this case</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.48</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>Twingy: on schedule</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.56</tt></td><td><font color="#6d6dcf"><tt>Twingy</tt></font></td><td width="100%"><tt>jul 15th?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>21</tt></td></tr>
-<tr><td><tt>19:27.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@toronto-HSE-ppp4310781.sympatico.ca)</font></tt></td></tr>
-<tr><td><tt>21:07.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Lapo (n=kvirc@81-208-74-176.ip.fastwebnet.it)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.11</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Hi all guys :-D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.56</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I got this problem when trying to start mged:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.00</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>mged: error while loading shared libraries: /usr/brlcad/lib/libtermio.so.19: ELF file OS ABI invalid</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.08</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Can someone help me please?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:19.18</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Anybody there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.20</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.48</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>if you do a "file /usr/brlcad/lib/libtermio.so.19" and "file /usr/lib/libm.so" (or whatever .so in there) .. what do you get?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.49</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Hi brlcad :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:35.00</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>just a moment</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:35.40</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>libtermio.so.19: ELF 32-bit LSB shared object, Intel 80386, version 1 (Free&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BSD), not stripped</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:36.28</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>libm.so: symbolic link to `../../lib/libm.so.6'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:36.57</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>"file /lib/libm.so.6"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:37.55</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>libm-2.3.3.so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.17</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>keep running file until you get to the actual library</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.26</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.36</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>or just look in the dir and pick one of the real libraries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.40</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>or resolve it *shrug*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.41</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't matter which</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.12</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>libm-2.3.3.so: ELF 32-bit LSB shared object, Intel 80386, version 1 (SYSV), stripped</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.24</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>what OS are you running, lapo?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.35</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Linux Mandrake 10.1 Community</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.45</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>on pentium 4 </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.48</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>then why are you trying to run a freebsd binary of brlcad?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.57</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ehm...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:40.23</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok let me check che tar.gz file I downloaded yesterday</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:40.25</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>which binary distribution did you download?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.09</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>you need the one from "BRLCAD for Linux" which is 7.8.0, not the one that is "BRLCAD for FreeBSD"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.10</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>damn I 've deleted the tar.gz</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.11</tt></td><td><font color="#4b904b"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.12</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you probably want&lt; <a href="http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.0_linux_ia32.tar.bz2?download">http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.0_linux_ia32.tar.bz2?download</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.29</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok I try to install it again</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.36</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>sorry for the stupid problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.54</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>not resolved yet, but hopefully that was the problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:48.45</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ouch...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.03</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I've installed the version you give me.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.31</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>when trying to launch mged it says me:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.34</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Initializing and backgrounding, please wait...mged: symbol lookup error: mged: undefined symbol: Tk_Init</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.35</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Mutex destroy failure: Device or resource busy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.35</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ICE default IO error handler doing an exit(), pid = 8753, errno = 0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.35</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ICE default IO error handler doing an exit(), pid = 8765, errno = 0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.43</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Detached</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.50</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hrmph</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.02</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I'm really unlucky with brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.10</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>ls -la /usr/brlcad/lib/libtk*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.50</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>a lot of output...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:51.16</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr><td><tt>21:51.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Lapo (n=kvirc@81-208-74-176.ip.fastwebnet.it)</font></tt></td></tr>
-<tr><td><tt>21:52.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Lapo (n=kvirc@81-208-74-176.ip.fastwebnet.it)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:52.32</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>~pastebin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:52.33</tt></td><td><font color="#c56868"><tt>ibot</tt></font></td><td width="100%"><tt>pastebin is, like, a place to paste your stuff without flooding the channel - try <a href="http://pastebin.com/,">http://pastebin.com/,</a> or <a href="http://pastebin.ca,">http://pastebin.ca,</a> or <a href="http://channels.debian.net/paste,">http://channels.debian.net/paste,</a> or for #oe use <a href="http://oe.pastebin.com,">http://oe.pastebin.com,</a> or <a href="http://bzflag.pastebin.ca/">http://bzflag.pastebin.ca/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:52.34</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>sorry I was banned cause flooding</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:56.55</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt><a href="http://pastebin.ca/82749">http://pastebin.ca/82749</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.45</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>echo $LD_LIBRARY_PATH</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.52</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>thanks for the tip :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.59</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:00.22</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>in general if it's more than 4 lines, use pastebin :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:00.35</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:00.46</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ehm... no output</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:00.46</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>also: ldd /usr/brlcad/bin/mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:00.53</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, that's fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:02.19</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt><a href="http://pastebin.ca/82754">http://pastebin.ca/82754</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:02.47</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I suppose I have to check if I have all these library now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:03.17</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>no, you have them or the output would be different</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:03.27</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:03.52</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>what's odd is that it can't find Tk_Init</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:04.33</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I got a similar problem months ago when installed an older version of brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:05.07</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>nm /usr/brlcad/lib/libtk.a | grep Tk_Init | grep -v U</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:05.58</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>00000358 T Tk_InitOptions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:05.58</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>00000000 T Tk_InitConsoleChannels</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:05.58</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>00000000 T Tk_InitImageArgs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:06.09</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>00000000 T Tk_InitImageArgs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:06.10</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>00000000 T Tk_InitStubs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:06.10</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>00001c50 T Tk_Init</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:06.46</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>baffling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:06.57</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you have Tk_Init right there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:07.22</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:07.44</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you might have to just compile the package yourself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:08.06</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>wow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:08.12</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>it's pretty simple</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:08.12</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>that's an hard task :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:08.17</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:08.37</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>or maybe I'll use the Windows version</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:08.57</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>download this: <a href="http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.2.tar.bz2?download">http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.2.tar.bz2?download</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:09.14</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok now I try</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:09.30</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>then when it decompresses, run "./configure --enable-optimized"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:09.54</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>then "make", then "sudo make install" or however you become superuser to install binaries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:10.06</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>delete everything in /usr/brlcad before you start</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:10.22</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:15.25</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>configure gone</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:15.33</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>now make</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:24.22</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>make still running....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:43.10</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>make ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:43.16</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>now make install</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.38</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>see, not so painful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.47</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>:-D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.11</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>finish</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.24</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>damn</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.29</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>same problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.34</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>really?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.43</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Initializing and backgrounding, please wait...mged: symbol lookup error: mged: undefined symbol: Tk_Init</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.52</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>:-(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.14</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>try mged -c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.24</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>does it still give that error?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.30</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.36</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>it aske me for an input</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.48</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>(nu|X|ogl|)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.49</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hit enter</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you're at an mged prompt?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.07</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>now I have "mged&gt;"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.11</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.21</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>run "gui"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.43</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>invalid command "gui"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:49.40</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>It works!!!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:49.42</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>finally</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:49.49</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hrm?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:49.58</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I started mged from /usr/brlcad/bin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.18</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>before I was starting it by typing simply mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.19</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you mean you changed directories to there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.40</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>or just typed it all out?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.53</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>if I run locate mged:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.10</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>"/usr/bin/mged"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.20</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>"/usr/brlcad/bin/mged"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.31</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I have two mged....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.37</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>/usr/bin ... wicked..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.44</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.34</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Now I'm ready to explore brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.40</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>thanks a lot :-D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.36</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>how'd you get an mged in /usr/bin?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.51</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>I don't know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.05</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>maybe I copied it there in a past installation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.21</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>Do you think it's better to delete it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.51</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>probably</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.59</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ok </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:57.01</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem is who knows what else you copied there :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:57.14</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>what does ldd /usr/bin/mged say?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:57.16</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>LOL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:58.40</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt><a href="http://pastebin.ca/82798">http://pastebin.ca/82798</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:00.55</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>ahhh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:00.58</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that explains it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.08</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that mged wasn't linked against Tk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.21</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>ouch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.48</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>thanks for your support</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.53</tt></td><td><font color="#68c668"><tt>Lapo</tt></font></td><td width="100%"><tt>bye ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.56</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>no problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.59</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>glad it works</tt></td></tr>
-<tr><td><tt>23:03.10</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Lapo (n=kvirc@81-208-74-176.ip.fastwebnet.it)</font></tt></td></tr>
-<tr><td><tt>23:21.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@c-69-250-236-111.hsd1.md.comcast.net)</font></tt></td></tr>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c2">
+<td><tt>00:00.11</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>but if a forcing point is added, it's
+overflowed its area</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:00.13</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>since it's also an arbitrary list of polygon
+data</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:00.44</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>rt_bot_export() ?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:01.06</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, it will, and elsewhere in librt it
+handles how to deal with marking db nodes as invalid and
+reutilizing them as new writes are requested</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:01.25</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>from your perspective, though, you just return
+your binary block of data</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:02.06</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ahhhh, ok, so there is SOME notion of memory
+management built in, that's nice</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:02.26</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:03.05</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the database spec completely supports the
+idea.. how well the library implements it may be another contention
+point</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:03.32</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>still, that's a fix looking for a problem..
+i'd do what the other prims do for now and not worry about it (as
+it's generally not a problem)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:03.49</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can invoke a database compaction in mged
+with the "garbage_collect" command</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:04.14</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(full instead of the on-going dynmaic
+reuse)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:04.52</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hm</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:05.19</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and I suppose the interface for bot is a good
+example for metaballs?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.01</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for the db i/o it's probably not bad</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.03</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>relatively new</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.15</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I meant the user interface</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>a little contorted with the hooks into nmg,
+but it's still dynamic</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.32</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ah, bot's have a very primitive
+interface</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.40</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- is able to make, like, boxes and
+spheres now...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:06.50</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that's about the limit of my modelling ability
+iwth the package :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:07.06</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i mean you can actually tweak individual
+triangle vertex positions, in fact you HAVE to edit them that way
+:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:07.18</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's no gui edit support, minimal menu
+support</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:07.26</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so gui-wise, they're not there</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:07.42</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>something older would be better from that
+perspective like torus and arbs</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:07.44</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hehehe, I didn't say anything about graphical
+:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:07.57</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>torus and arbs have a fixed number of values,
+though</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:08.08</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>it's the dynamic nature that is difficult...
+:) I think o.O</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:08.11</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>btw, you mentioned the "in" command, that's
+src/mged/typein.c</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:08.28</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>some aspects of implementation are not in the
+library, the live in mged or libwdb</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:08.59</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and src/tclscripts/mged of course for the tcl
+aspects</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:09.02</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I started going through manual II, I got as
+far as making the radio and learning a little about
+'mater'</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:09.08</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that's as far as I've gotten so
+far...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:09.27</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- ignyant</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:09.37</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>right, torus and arbs are fixed values but
+again that only affects the _export() and _import()
+routines</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:09.52</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that doesn't affect the mged hookage or
+raytracing</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:10.50</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, I'm not sure I understand... arb4 takes 4
+points... period... you can't add another point to it ... or delete
+a point...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:10.57</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's a laundry list of about 10 files that
+HAVE to be updated to properly add a new primitive (v5 only), and a
+couple optional</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:11.17</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>g_xxx.c lists some of that... I'm not sure
+it's complete, or entirely correct...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:11.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the g_ file is one of the 10</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:11.55</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>g_xxx.c (and two others) have a big comment
+that say "do this, then do that, then edit this..."</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:12.08</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's the object table in librt, the typein
+cmd, the make cmd, mged menu, couple headers, *scratches
+head*</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:12.20</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>talks about rtgeom.h, db.h, the function
+table, ...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:12.40</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>teh g_ template only tells you how to hook the
+primitive in for ray-tracing, not creation or editing</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:12.46</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>starting at line 27...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:13.31</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>those directions are outdated</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:13.35</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I figured...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:13.36</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>those are v4 instructions</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:13.45</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>lee told me to look at 'em... I've had no
+success with those...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:13.55</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I doubt lee has added a v5 primitive</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:14.21</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the superell is the newest primitive to be
+added -- it's incomplete from a ray-trace perspective but it IS
+hooked into all the right place and is easy to grep on</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:15.50</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>only thing you'll have to watch out for is
+that it also implements v4 support, which you really shouldn't
+bother with</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:17.58</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this gives the list:</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:18.00</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>find . -type f \( -name \*.c -or -name \*.h \)
+-exec grep -r -i superell {} /dev/null \; | cut -f1 -d: | sort  |
+uniq</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:18.23</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh... I know 'nuff unix for that shit, dude
+:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:18.24</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you don't need db.h, that's v4</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:18.41</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hey, just trying to help :P</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:18.53</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- not gonna look at it until thursday, is
+doing greening</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:19.14</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>drinking and womanizing on the weekend, then
+greening, *THEN* coding :D *duck*</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:19.15</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>looks like I was right on the mark -- 10
+files</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:19.30</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ahh, I still haven't done greening</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:20.04</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm kinda surprised I'm going... jay-lo is,
+too</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:20.10</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wonder if it's any more informative than a
+week at ROTC training</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:20.21</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the agenda looks interesting</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:20.29</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>have you done a week at rotc?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:20.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:20.57</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr>
+<td><tt>00:20.59</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad LawrenceG
+(n=Lawrence@S010600045ae2c372.pk.shawcable.net)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:21.10</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- did 3 yrs njrotc... decided it sucked
+balls, so started growing his hair</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:21.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>did the whole survival boot camp, disassemble
+m16's, go shooting, go rapelling, early morning pt, etc</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:21.48</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:21.50</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>was considering joining rotc at the time just
+on a whim</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:22.12</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>almost did, no particular reason I didn't
+other than it was a huge amount of time and I wanted to leave my
+options open :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:22.39</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>njrotc is very navy focused, and just
+highschool kids, so *shrug* :) no obligations</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:22.43</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>shooting the m16 is pretty fun, I could see
+doing that as a hobby</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:22.43</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>just a way to get out of gym</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:23.00</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm hoping they let us shoot 'em on
+monday</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:23.15</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>supposed to go to the range to learn about
+m16, m203, and m14...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:23.16</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i hear they don't any more.. but who knows..
+it's been years</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:23.30</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I've held an m203 combo, and worn night vision
+goggles... haven't shot one</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:24.06</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hehehe</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:24.14</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>those'd be a wee bit trickier to work out
+:D</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:24.28</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you'd think of all the places that could be
+arranged... :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:24.32</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>supposedly the third day, they'll have two
+abrams and two bradleys... "with drivers"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:25.10</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>40 knots on 5" of water is fun shit
+:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:26.08</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://ftp.brlcad.org/statcvs/">http://ftp.brlcad.org/statcvs/</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:26.52</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>man, you went and shuffled all my files so I'm
+not even listed *sigh*</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:26.55</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that has bad author line counts due to the
+open sourcing "significant derivative work"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:27.22</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>here's a normalized one that takes it out of
+the picture, but then scews the project line count: <a href=
+"http://ftp.brlcad.org/statcvs.normalized/">http://ftp.brlcad.org/statcvs.normalized/</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:28.03</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>huh, only 486 of my lines remain
+unmutilated</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:28.32</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's not counting remaining -- it only basis
+the numbers on +- values in the commit log, not an
+annotate</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:29.00</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you feed it a cvs log and the sources only, so
+it's only the info it derives from those two</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:29.18</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i ran the same tool on m3 and bzflag..
+interesting results :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:29.31</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i love how on the Authors page, you can
+actually see how different devs work</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:29.46</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i mean you can see when jra changed his
+schedule and when he even goes to lunch!</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:30.54</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can see who's a 9-5er and who works around
+the clock, who infrequently participates, who's heavily involved,
+etc</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:31.07</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hm</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:31.12</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>m3 cvs behavior is very... sub-par.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:31.23</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm sure you noticed long silences, then
+bursts of huge activity</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:31.31</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>from the dev's sitting on their changes for
+weeks at a time</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:31.43</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and quit calling it m3, you're sullying the
+name of my car!!!</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:31.56</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>lets just say you can see when the demo was
+given and the aftermath</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:32.02</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hah</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:32.42</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the only thing that statcvs doesn't show that
+would be cool is the magnitude of the commit, it's more
+frequency</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:33.00</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>coloring them as a heat graph instead of just
+red would be sweet</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:33.12</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>so, uh... fix it?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:33.20</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm sure it's just a littel perl script or
+something :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:33.52</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><a href=
+"http://math.missouristate.edu/~erik/normal_kittens.jpeg">http://math.missouristate.edu/~erik/normal_kittens.jpeg</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:34.11</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ask me how much time I want to put into a cvs
+graph program</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:34.42</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>not the 10 minutes to make the change?
+heh</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:34.47</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are others that can be run that work on
+the cvsroot, i might give one of them a try</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:35.14</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what it did point out, though is that there
+are about 6 bad rcs/cvs files with wierdness in them</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:35.26</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one of them you somehow caused, and like 5
+others in librt</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:35.43</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>wow, I broke a file? awesome</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:35.45</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>which one?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:35.53</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>some header in h/ that was removed</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:36.03</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>bah, who cares, then</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:36.05</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:36.19</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well it causes problems when you branch and
+merge I've noticed</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:36.22</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at least the librt ones</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:36.44</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it will revive the librt directory on the
+branch and if you're not paying attention, you commit it</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:37.05</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>has happened several times and even after it
+gets deleted again, it's revived later due to whatever is bad in
+the base rcs file</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:37.49</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>how exactly is it 'bad'?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:38.44</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i haven't looked into the cause, just noticed
+the effect</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:58.25</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>Thank you for contacting NVIDIA Customer
+Care.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:58.25</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>I am really sorry for the priviuos
+responce.However, due to the competitive nature of this business,
+we can not discuss information on unannounced future products. We
+apologize for the inconvenience this may cause.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:58.26</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>Regards,</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:58.28</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>NVIDIA Customer Care.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:58.53</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>nice spelling</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:59.08</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>*cough* out-source much *cough*</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>00:59.41</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>I just need a 20" display for this machine and
+it'll be bangin</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:20.52</tt></td>
+<td><span class="c6"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>I Trust I am amongst friends here? a greeting
+i used to use when i first entered a channel.</tt></td>
+</tr>
+<tr>
+<td><tt>01:21.37</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad Twingy
+(n=justin@c-69-250-236-111.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:21.40</tt></td>
+<td><span class="c6"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>gotta go, new toy...vmware 5.5 or
+something.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:34.02</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>yet he still needs to reboot</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:34.46</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>I wonder if Irix64 is Unitions
+cousin</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:36.01</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>he's a quirky old timer</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:38.13</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>laptops ship?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>01:48.27</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hahaha</tt></td>
+</tr>
+<tr>
+<td><tt>02:45.12</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad bjorkBSD
+(n=bjork@ip70-178-169-173.ks.ks.cox.net)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>02:57.45</tt></td>
+<td><span class="c7"><tt>bjorkBSD</tt></span></td>
+<td width="100%"><tt>brlcad does this sorta thing, right? -&gt;
+<a href=
+"http://www.varicad.com/gallery.phtml">http://www.varicad.com/gallery.phtml</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>03:09.32</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bjorkBSD: sure does</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>03:10.09</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>limited gallery here: <a href=
+"http://sourceforge.net/project/screenshots.php?group_id=105292">http://sourceforge.net/project/screenshots.php?group_id=105292</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>03:11.15</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>alas would love to chat more, but tis time to
+recouperate for morning training session</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>03:11.33</tt></td>
+<td><span class="c7"><tt>bjorkBSD</tt></span></td>
+<td width="100%"><tt>okay. thanks it looks good.</tt></td>
+</tr>
+<tr>
+<td><tt>04:02.08</tt></td>
+<td colspan="2"><tt><span class="c8">*** part/#brlcad LawrenceG
+(n=Lawrence@S010600045ae2c372.pk.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:43.52</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad DTRemenak
+(n=DTRemena@c-24-23-59-104.hsd1.ca.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:53.26</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad fenn
+(n=fenn@adsl-66-72-64-24.dsl.bltnin.ameritech.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:58.56</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad ^Eugenics
+(n=^Eugenic@bau06-1-89-81-0-71.dsl.club-internet.fr)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>14:21.48</tt></td>
+<td><span class="c9"><tt>^Eugenics</tt></span></td>
+<td width="100%"><tt>does anyone know where to find a link that
+describes how to make drafts with brlcad?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:23.20</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's not really a link that describes the
+process, brl-cad has limited drafting capabilities mostly geared
+around providing the hidden line drawings sans
+annotations</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:23.59</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rtedge is the hidden line renderer, has a
+manpage, example at <a href=
+"http://ftp.brlcad.org/images/havoc_rtedge.png">http://ftp.brlcad.org/images/havoc_rtedge.png</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:32.59</tt></td>
+<td><span class="c9"><tt>^Eugenics</tt></span></td>
+<td width="100%"><tt>piere told me about a render to ps -&gt;
+pstoedit (dxf) and then finnish up in a 2d cad app.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:33.24</tt></td>
+<td><span class="c9"><tt>^Eugenics</tt></span></td>
+<td width="100%"><tt>it's a pinc solutionn but still
+something</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:33.55</tt></td>
+<td><span class="c9"><tt>^Eugenics</tt></span></td>
+<td width="100%"><tt>panic</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:57.15</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, you can save any mged wireframe to
+postscript</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:57.56</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's an output option on the file menu, as
+well as a handful of mged commands</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>15:58.55</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the MGED Quick Reference might be of interest
+if you haven't seen it: <a href=
+"http://ftp.brlcad.org/MGED_Quick_Reference_Card.pdf">http://ftp.brlcad.org/MGED_Quick_Reference_Card.pdf</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:00.04</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>under the Manipulating the View section, it
+shows the "ps" command to save to postscript -- you can similarly
+save to a unix .pl plot file and use pl-ps on the command line
+outside mged as well</tt></td>
+</tr>
+<tr>
+<td><tt>16:33.49</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad clock_
+(i=clock@84-72-62-150.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:34.42</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>my first patch submitted to brlcad
+;-)</tt></td>
+</tr>
+<tr>
+<td><tt>16:36.32</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad clock_
+(i=clock@84-72-62-150.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:40.50</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>clock_: cool</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:42.24</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>brlcad: I guess it's OK. I hope there are not
+system which BRLCAD supports where #include &lt;time.h&gt; doesn't
+work and one has to write extern long time();.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:43.59</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>brlcad: I installed OpenBSD instead of
+Linux.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:44.14</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>What was BSD developed on? BSD? Commercial
+UNIX?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>16:44.22</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>BSD -&gt; BRL-CAD</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:11.55</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>clock_: actually there are systems that don't
+have time.h still around, but they are pretty darn
+obscure</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:12.04</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>20+ year old systems most likely</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:12.46</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>BRL-CAD was developed on a myriad of systems
+including BSD and SYSV variants from 20+ years ago (hence where the
+extern long time() comes from)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:14.12</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>brlcad: so is my patch OK?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:24.35</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>which obsd did you install?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:26.55</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>3.9 the latest</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:27.00</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>do you use obsd?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:27.32</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>mged doesn't run without glx module inserted
+in X, is this mentioned in the README?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:32.46</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I have 3.8 installed on a work box</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:32.53</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mged will run without X</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:33.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the binaries just happen to be set up for
+x11/ogl</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:33.31</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>any news on laptops?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:33.36</tt></td>
+<td><span class="c10"><tt>clock_</tt></span></td>
+<td width="100%"><tt>so it's a problem of opengl installation in
+this case</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:33.48</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Twingy: on schedule</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:33.56</tt></td>
+<td><span class="c5"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>jul 15th?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>17:34.04</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>21</tt></td>
+</tr>
+<tr>
+<td><tt>19:27.08</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad IriX64
+(n=IriX64@toronto-HSE-ppp4310781.sympatico.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:07.04</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad Lapo
+(n=kvirc@81-208-74-176.ip.fastwebnet.it)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:07.11</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Hi all guys :-D</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:09.56</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I got this problem when trying to start
+mged:</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:10.00</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>mged: error while loading shared libraries:
+/usr/brlcad/lib/libtermio.so.19: ELF file OS ABI invalid</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:10.08</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Can someone help me please?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:19.18</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Anybody there?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:33.20</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hello</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:34.48</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you do a "file
+/usr/brlcad/lib/libtermio.so.19" and "file /usr/lib/libm.so" (or
+whatever .so in there) .. what do you get?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:34.49</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Hi brlcad :-)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:35.00</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>just a moment</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:35.40</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>libtermio.so.19: ELF 32-bit LSB shared object,
+Intel 80386, version 1 (Free                                       
+          BSD), not stripped</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:36.28</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>libm.so: symbolic link to
+`../../lib/libm.so.6'</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:36.57</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"file /lib/libm.so.6"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:37.55</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>libm-2.3.3.so</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:38.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>keep running file until you get to the actual
+library</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:38.26</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:38.36</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or just look in the dir and pick one of the
+real libraries</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:38.40</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>or resolve it *shrug*</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:38.41</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>doesn't matter which</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:39.12</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>libm-2.3.3.so: ELF 32-bit LSB shared object,
+Intel 80386, version 1 (SYSV), stripped</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:39.24</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>what OS are you running, lapo?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:39.35</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Linux Mandrake 10.1 Community</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:39.45</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>on pentium 4</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:39.48</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>then why are you trying to run a freebsd
+binary of brlcad?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:39.57</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ehm...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:40.23</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok let me check che tar.gz file I downloaded
+yesterday</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:40.25</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which binary distribution did you
+download?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.09</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>you need the one from "BRLCAD for Linux" which
+is 7.8.0, not the one that is "BRLCAD for FreeBSD"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.10</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>damn I 've deleted the tar.gz</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.11</tt></td>
+<td><span class="c1"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.12</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you probably want&lt; <a href=
+"http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.0_linux_ia32.tar.bz2?download">
+http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.0_linux_ia32.tar.bz2?download</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.29</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok I try to install it again</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.36</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>sorry for the stupid problem</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:41.54</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>not resolved yet, but hopefully that was the
+problem</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:48.45</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ouch...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.03</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I've installed the version you give
+me.</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.31</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>when trying to launch mged it says
+me:</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.34</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Initializing and backgrounding, please
+wait...mged: symbol lookup error: mged: undefined symbol:
+Tk_Init</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.35</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Mutex destroy failure: Device or resource
+busy</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.35</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ICE default IO error handler doing an exit(),
+pid = 8753, errno = 0</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.35</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ICE default IO error handler doing an exit(),
+pid = 8765, errno = 0</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.43</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Detached</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:49.50</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hrmph</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:50.02</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I'm really unlucky with brlcad</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:50.10</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ls -la /usr/brlcad/lib/libtk*</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:50.50</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>a lot of output...</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:51.16</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr>
+<td><tt>21:51.52</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad Lapo
+(n=kvirc@81-208-74-176.ip.fastwebnet.it)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:52.21</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad Lapo
+(n=kvirc@81-208-74-176.ip.fastwebnet.it)</span></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:52.32</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>~pastebin</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:52.33</tt></td>
+<td><span class="c12"><tt>ibot</tt></span></td>
+<td width="100%"><tt>pastebin is, like, a place to paste your stuff
+without flooding the channel - try <a href=
+"http://pastebin.com/,">http://pastebin.com/,</a> or <a href=
+"http://pastebin.ca,">http://pastebin.ca,</a> or <a href=
+"http://channels.debian.net/paste,">http://channels.debian.net/paste,</a>
+or for #oe use <a href=
+"http://oe.pastebin.com,">http://oe.pastebin.com,</a> or <a href=
+"http://bzflag.pastebin.ca/">http://bzflag.pastebin.ca/</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:52.34</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>sorry I was banned cause flooding</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:56.55</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt><a href=
+"http://pastebin.ca/82749">http://pastebin.ca/82749</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:59.45</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>echo $LD_LIBRARY_PATH</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:59.52</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>thanks for the tip :-)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>21:59.59</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:00.22</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in general if it's more than 4 lines, use
+pastebin :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:00.35</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok ;-)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:00.46</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ehm... no output</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:00.46</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also: ldd /usr/brlcad/bin/mged</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:00.53</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>okay, that's fine</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:02.19</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt><a href=
+"http://pastebin.ca/82754">http://pastebin.ca/82754</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:02.47</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I suppose I have to check if I have all these
+library now</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:03.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no, you have them or the output would be
+different</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:03.27</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:03.52</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what's odd is that it can't find
+Tk_Init</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:04.33</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I got a similar problem months ago when
+installed an older version of brlcad</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:05.07</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nm /usr/brlcad/lib/libtk.a | grep Tk_Init |
+grep -v U</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:05.58</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>00000358 T Tk_InitOptions</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:05.58</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>00000000 T Tk_InitConsoleChannels</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:05.58</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>00000000 T Tk_InitImageArgs</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:06.09</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>00000000 T Tk_InitImageArgs</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:06.10</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>00000000 T Tk_InitStubs</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:06.10</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>00001c50 T Tk_Init</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:06.46</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>baffling</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:06.57</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you have Tk_Init right there</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:07.22</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:07.44</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you might have to just compile the package
+yourself</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:08.06</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>wow</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:08.12</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's pretty simple</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:08.12</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>that's an hard task :-)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:08.17</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>oh ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:08.37</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>or maybe I'll use the Windows
+version</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:08.57</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>download this: <a href=
+"http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.2.tar.bz2?download">
+http://prdownloads.sourceforge.net/brlcad/brlcad-7.8.2.tar.bz2?download</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:09.14</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok now I try</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:09.30</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then when it decompresses, run "./configure
+--enable-optimized"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:09.54</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then "make", then "sudo make install" or
+however you become superuser to install binaries</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:10.06</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>delete everything in /usr/brlcad before you
+start</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:10.22</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:15.25</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>configure gone</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:15.33</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>now make</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:24.22</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>make still running....</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:43.10</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>make ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:43.16</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>now make install</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:45.38</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>see, not so painful</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:45.47</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>:-D</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:46.11</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>finish</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:46.24</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>damn</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:46.29</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>same problem</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:46.34</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>really?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:46.43</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Initializing and backgrounding, please
+wait...mged: symbol lookup error: mged: undefined symbol:
+Tk_Init</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:46.52</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>:-(</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:47.14</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>try mged -c</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:47.24</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>does it still give that error?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:47.30</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>no</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:47.36</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>it aske me for an input</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:47.48</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>(nu|X|ogl|)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:47.49</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hit enter</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:48.04</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you're at an mged prompt?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:48.07</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>now I have "mged&gt;"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:48.11</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:48.21</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>run "gui"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:48.43</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>invalid command "gui"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:49.40</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>It works!!!</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:49.42</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>finally</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:49.49</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hrm?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:49.58</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I started mged from /usr/brlcad/bin</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:50.18</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>before I was starting it by typing simply
+mged</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:50.19</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you mean you changed directories to
+there?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:50.40</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or just typed it all out?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:50.53</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>if I run locate mged:</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:52.10</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>"/usr/bin/mged"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:52.20</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>"/usr/brlcad/bin/mged"</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:52.31</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I have two mged....</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:52.37</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>/usr/bin ... wicked..</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:52.44</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:53.34</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Now I'm ready to explore brlcad</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:53.40</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>thanks a lot :-D</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:54.36</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>how'd you get an mged in /usr/bin?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:54.51</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>I don't know</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:55.05</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>maybe I copied it there in a past
+installation</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:55.21</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>Do you think it's better to delete
+it?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:56.51</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:56.59</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:57.01</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the problem is who knows what else you copied
+there :)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:57.14</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what does ldd /usr/bin/mged say?</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:57.16</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>LOL</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>22:58.40</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt><a href=
+"http://pastebin.ca/82798">http://pastebin.ca/82798</a></tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:00.55</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ahhh</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:00.58</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that explains it</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:01.08</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that mged wasn't linked against Tk</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:01.21</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>ouch</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:02.48</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>thanks for your support</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:02.53</tt></td>
+<td><span class="c11"><tt>Lapo</tt></span></td>
+<td width="100%"><tt>bye ;-)</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:02.56</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no problem</tt></td>
+</tr>
+<tr class="c2">
+<td><tt>23:02.59</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>glad it works</tt></td>
+</tr>
+<tr>
+<td><tt>23:03.10</tt></td>
+<td colspan="2"><tt><span class="c8">*** part/#brlcad Lapo
+(n=kvirc@81-208-74-176.ip.fastwebnet.it)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:21.09</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad Twingy
+(n=justin@c-69-250-236-111.hsd1.md.comcast.net)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl by
-<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
-<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
-Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
-<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
-</body></html>
+<br />
+Generated by irclog2html.pl by <a href=
+"mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at <a href=
+"http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work
+with <a href="http://blootbot.sourceforge.net/">blootbot</a> logs,
+split per channel, etc.
+</body>
+</html>

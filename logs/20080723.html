@@ -1,241 +1,1245 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20080723</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20080723</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c18 {color: #6363BD}
+ span.c17 {color: #BC63BC}
+ span.c16 {color: #5EB4B4}
+ span.c15 {color: #B25EB2}
+ span.c14 {color: #5D5DB1}
+ span.c13 {color: #5CB05C}
+ span.c12 {color: #000099}
+ span.c11 {color: #64BEBE}
+ span.c10 {color: #62BABA}
+ span.c9 {color: #BABA62}
+ span.c8 {color: #6161BA}
+ span.c7 {color: #61B961}
+ span.c6 {color: #5E5EB3}
+ tr.c5 {background-color: #EEEEEE}
+ span.c4 {color: #CC00CC}
+ span.c3 {color: #7474DC}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20080723</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>00:17.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
-<tr><td><tt>00:34.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
-<tr><td><tt>01:11.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:36.17</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">returns home semi-exhausted</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.27</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: so there are several ways to shoot secondary rays</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.09</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>and yes, rt shoots secondary rays -- though it does so as part of the phong calculations (and some of it is done by liboptical</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.49</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>rt_shootray is ultimately what fires a ray so looking for that call is a very strong indicator and good place to start for finding whom all is shooting rays (and why)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:51.13</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>you can trace down how rt does it by following rt's hit callback (colorview) which leads you to liboptical (via viewshade) which leads you to ... more stuff, but that direction won't readily help you understand</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:05.36</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: I'd say just first write your own ray-trace test app where you fire your own ray using rt_shootray (or undersand rtexample.c and/or rt_simple.c)</tt></td></tr>
-<tr><td><tt>03:17.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:21.34</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r31909 10/brlcad/trunk/src/rt/rtexample.c: start merging in the additional comments from rt_simple.c into rtexample.c -- there only needs to be one 'simple' example.</tt></td></tr>
-<tr><td><tt>03:25.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr><td><tt>03:49.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.39</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt>hello, cadheads</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.45</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>hi yukonbob</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.55</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt>how're things, pacman87?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:53.32</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>pretty good; finally tracked down a bug caused by one character (2 instead of 1)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.16</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>another?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.25</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>right now i'm wondering why my kde panel stops 83% of the way across the screen</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.37</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>Ralith: the last bug was 4 characters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.40</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>j++;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.48</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>I'm wondering why brl-cad doesn't like tcl 8.5.3 :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.57</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt>louipc: interesting... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.20</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>pacman87: bah.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.34</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">is re-attacking 8.5.3 on his machine, which happens to be NetBSD -current, just to make things even more difficult... </font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.08</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: define "doesn't like"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.36</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>mafm: ping?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:06.57</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: your patches are high in my to-be-reviewed queue just so you know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:07.25</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>cool :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:07.28</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:07.47</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>they're all very straightforward, except for that X11 mouse handling bit which might not even be necessary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:07.56</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.07</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>once I can get g3d building, I can test that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.14</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>ogre's proving to be very finnicky though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.37</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>have to touch ogre.cfg in ./ before it'll even init, and now it wants some png that I don't have</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.08</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>for some reason, kde thinks my monitor is 1400x1050 instead of 1680x1050 when maximizing windows</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.38</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>but the desktop background is lined up and centered properly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.19</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.29</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>lightweight and simple DEs ftw</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:21.09</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>Ralith: what do you run? :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:21.15</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>pacman87: restart X?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:21.38</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>poolio: xfce at the moment, but if I was less lazy I'd have transitioned over to something even lighter like fluxbox</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.19</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>Cool cool. I went KDE -&gt; xfce -&gt; fluxbox -&gt; ratpoision -&gt; xmonad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.04</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt>next stop is running everything in text mode on a wrist watch and imagining what it would look like if graphical...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.17</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>I don't even use any part of xfce but the WM and the keybindings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.17</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>wow, what a nasty thunderstorm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.34</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>yukonbob: no, you always need X for web browsing if nothing else</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.47</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt>Ralith: links, w3m...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.00</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt>vesafb</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.18</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>yay for having all computers and networking equipment on ups'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.41</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>yukonbob: all kind of suck.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.52</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>(as the power drops in an out about two dozens times over the past two minutes alone)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.53</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>and are suitable for emergency fallbacks.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.08</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: That bit missed north of me...but I fear the next part</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.19</tt></td><td><font color="#61b961"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">uses elinks, and firefox as an emergency backup these days... :P</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.24</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: I have nothing on UPS...uh oh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.30</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, eep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:28.20</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>wow .. so much lightning.....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:28.35</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>power is fluctuating mad .. hadn't seen this bad in years</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:28.58</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">bets he'll lose power hard eventually</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:29.07</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: You must be in that bright red area :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:29.56</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>brlcad: oh it decides to build the bundled 8.5.1</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:30.43</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: config.log should say why it's thinking it fails</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.16</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh.. so that's what they mean by "severe thunderstorm warning" for this area</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.05</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>Hasn't it passed you by now?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.19</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>hail, wind gusts to 60mph</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.27</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>nope, it's roaring outside right now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.40</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: unrelated: if I'm interested in continuing work on beset and working with some CMU people, is that all kosher? There's no conflict with CMU and ARL?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.45</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>brlcad: yeah I peeked at it but I can't really make sense of it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.49</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt><a href="http://louipc.yi.org/brlcad/config.log">http://louipc.yi.org/brlcad/config.log</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:34.18</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>looks like it wants 8.6 or something? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:34.20</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt><font color="#CC00CC">shrugs</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:35.13</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: no, keep reading -- it tries versions in order</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:35.41</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>so 8.6 failed (naturally), but checking for Tcl_Main in -ltcl8.5 actually succeeds, so the lib check passed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:36.17</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>the other two potential checks are header checks (which tcl doesn't directly check for) and a functionality/sanity check (which is what is probably is failing)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:37.36</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, tcl does have a header check, my bad -- but it passed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.34</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>er...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.35</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>configure:42641: checking whether to build Tcl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.35</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>configure:42662: result: no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:39.35</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>aha..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:39.36</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>configure:43388: WARNING: Unable to find a system incrTcl compatible with the available system Tcl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:39.39</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>configure:43390: WARNING: Enabling compilation of both Tcl and incrTcl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:40.00</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>that should have been visible in your basic configure output too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:41.00</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: of course it's kosher, it's encouraged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:41.02</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>ah, thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:41.35</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc .. now whether the itcl test should have failed, that's another story</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:43.10</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: ah, looks like you didn't have a system incrTcl according to the tests, so the failure is correct/intentional</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:43.42</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>though using our incrtcl against a system 8.5 should be fine -- right now it just tries an all-or-nothing in order to support the macs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:44.55</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>ah. It used to be cool with system tcl + bundled itcl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:45.13</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>it is/was/still is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:45.20</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>just so long as the versions match up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:46.01</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>macs have 8.4 installed and it was finding it .. but no itcl installed, and 8.4 doesn't work with our incrtcl sources (they require 8.5)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:03.17</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>hmm! </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:07.32</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r31910 10/brlcad/trunk/configure.ac: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:07.32</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: per louipc's discoverage, make the warning about mixing non-system incrtcl with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:07.32</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: system tcl a lot more in-thy-face obvious during output. for his case, though,</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:07.32</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: he was trying the one version that should work (8.5) so try to make that work.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:09.08</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>give that a go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:14.09</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: what you're suggesting strongly relates to this topic:&nbsp;&nbsp;<a href="http://brlcad.org/wiki/Google_Summer_of_Code/Project_Ideas#CSG_ray-trace_optimizations">http://brlcad.org/wiki/Google_Summer_of_Code/Project_Ideas#CSG_ray-trace_optimizations</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:14.25</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>particularly the last two sentances ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:16.08</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: ah yes. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:29.17</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r31911 10/brlcad/trunk/src/rt/rtexample.c: merge in the rest of rt_simple.c's comments including a plethora of new ones by yours truely.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:31.32</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>poolio: CMU?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:32.31</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r31912 10/brlcad/trunk/src/rt/ (Makefile.am rt_simple.c): ding dong, rt_simple.c is no longer with us. it overlapped with rtexample.c too much so the two were merged into one.</tt></td></tr>
-<tr><td><tt>05:33.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-95-3.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:33.41</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>Carnegie Mellon University?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:35.31</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:36.28</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>aye.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:50.02</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>ah.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:50.53</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">might apply there</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:53.25</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03louipc * r31913 10/brlcad/trunk/configure.ac: Fix problem with quotes.</tt></td></tr>
-<tr><td><tt>06:49.33</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad ewilhelm (n=ewilhelm@pool-71-111-83-56.ptldor.dsl-w.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:22.18</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">reyawns</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:26.31</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">deyawns</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:32.26</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r31914 10/brlcad/trunk/TODO: there is no rt_simple, but could use one for rtexample if it's going to be installed</tt></td></tr>
-<tr><td><tt>07:41.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-91-240.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>08:05.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>08:53.53</tt></td><td><font color="#5cb05c"><tt>mafm</tt></font></td><td width="100%"><tt>Ralith: are you there?</tt></td></tr>
-<tr><td><tt>08:58.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elmom (n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:02.04</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>mafm: sorry, heading off now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:02.08</tt></td><td><font color="#baba62"><tt>Ralith</tt></font></td><td width="100%"><tt>check your email though</tt></td></tr>
-<tr><td><tt>09:35.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-91-240.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>09:42.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist_emc (n=archivis@host81-149-119-172.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>09:53.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5B14DD1B.dip.t-dialin.net)</font></tt></td></tr>
-<tr><td><tt>10:09.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
-<tr><td><tt>11:04.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.134.230)</font></tt></td></tr>
-<tr><td><tt>11:24.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.134.230)</font></tt></td></tr>
-<tr><td><tt>12:18.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad safdgd (n=58df2a30@bz.bzflag.bz)</font></tt></td></tr>
-<tr><td><tt>12:19.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
-<tr><td><tt>13:03.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jonored (n=jonored@c-76-19-120-77.hsd1.ma.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:20.16</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31915 10/rt^3/trunk/src/g3d/ (CameraMode.cxx CameraMode.h): Adding Axis enumerator useful for some of the modes (Shift-grips at least), and renaming of variables to be more correct.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.29</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31916 10/rt^3/trunk/src/g3d/ (CameraManager.cxx CameraModeMGED.cxx CameraModeMGED.h): Initial commit for my work on MGED mode. At the moment only scaling works, and not very well...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:07.45</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03homovulgaris * r31917 10/brlcad/trunk/src/libpc/ (pcParser.cpp pcParser.h): remove deprecated warning by using boost::spirit::classic instead of boost::spirit</tt></td></tr>
-<tr><td><tt>14:32.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.199.245)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.14</tt></td><td><font color="#5cb05c"><tt>mafm</tt></font></td><td width="100%"><tt>yahhoooooo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.54</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31918 10/rt^3/trunk/src/g3d/ (CameraMode.cxx CameraMode.h): More renamings, forgot about these before...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:46.57</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31919 10/rt^3/trunk/src/g3d/ (CameraModeMGED.cxx CameraModeMGED.h): I think that at last I got the scale commands right, and in a simpler way than I was expecting...</tt></td></tr>
-<tr><td><tt>15:04.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:04.56</tt></td><td><font color="#5cb05c"><tt>mafm</tt></font></td><td width="100%"><tt>aloha pacman87</tt></td></tr>
-<tr><td><tt>15:06.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jonored (n=jonored@c-76-19-120-77.hsd1.ma.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.46</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>hi mafm</tt></td></tr>
-<tr><td><tt>15:23.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad geocalc (n=geocalc@91-171-218-234.rev.libertysurf.net)</font></tt></td></tr>
-<tr><td><tt>15:24.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:34.05</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31920 10/rt^3/trunk/src/g3d/ (CameraModeMGED.cxx CameraModeMGED.h): Variable renaming, for consistency</tt></td></tr>
-<tr><td><tt>15:34.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad45 (n=3f71d20b@bz.bzflag.bz)</font></tt></td></tr>
-<tr><td><tt>15:34.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.142.8)</font></tt></td></tr>
-<tr><td><tt>16:44.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-89-178.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:53.30</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31921 10/rt^3/trunk/src/g3d/ (4 files): Implementing basic translation for Shift-grips mode, although not working very well at the moment...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:21.26</tt></td><td><font color="#5cb05c"><tt>mafm</tt></font></td><td width="100%"><tt>gotta go, laters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.09</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31922 10/brlcad/trunk/src/librt/namegen.c: add first cut at argc+argv mechanism</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:47.50</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31923 10/brlcad/trunk/src/librt/namegen.c: Succeeding with multiple tests.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:28.25</tt></td><td><font color="#5d5db1"><tt>homovulgaris</tt></font></td><td width="100%"><tt><font color="#CC00CC">longs for heterogeneous STL containers</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:43.58</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>um, yeah, that's one reason I keep going back to scheme/lisp</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:53.28</tt></td><td><font color="#5d5db1"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:) scheme is awesome.. &lt;- tautology </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:18.49</tt></td><td><font color="#5eb4b4"><tt>jonored</tt></font></td><td width="100%"><tt><font color="#CC00CC">still has the impulse to start writing reader macros and the like to load other languages into lisp...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:43.44</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>can i tell 'attach X' to attach to a different X session?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:45.22</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>how about if if you set DISPLAY?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:45.58</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>how?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:46.45</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>DISPLAY=:0.1 mged -c ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.18</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>(if in bash, csh is a little... different)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.35</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>true true :) I've been using exclusively bsah for ... ever</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.46</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>me too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.03</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>Starting an X display manager</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.03</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>X Error of failed request:&nbsp;&nbsp;BadMatch (invalid parameter attributes)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.22</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>pacman87: It may not be :0.1, it might be :1 or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.49</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>:0.0 is the current session</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.25</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>Try it with :1.0 or just :1</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.26</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>host:server.workspace</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.41</tt></td><td><font color="#64bebe"><tt>poolio</tt></font></td><td width="100%"><tt>yeah that :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.49</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>:0 is equivelant to localhost:0.0 and server 0 means port 6000</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.55</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>:1 is 6001, ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:52.17</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>'DISPLAY=:0.1 kedit' works as expected</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:52.38</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>but 'DISPLAY=:0.1 mged' fails</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.02</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>neat, what about 'wish' or 'bwish'?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.21</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>TK might have some "extra special" relationship to this task O.o :)</tt></td></tr>
-<tr><td><tt>20:28.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.34</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>i'm getting 'interesting' raytraces from overlapping geometry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.13</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>ie, rectangle from -1,-1 to 2,1</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.27</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>revolved more than 180 degrees</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.51</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt><a href="https://webspace.utexas.edu/trv82/www/rev_rt20.png">https://webspace.utexas.edu/trv82/www/rev_rt20.png</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.02</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>^^ that's from (-4,-1) to (8,1) revolved 270deg</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.51</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31924 10/brlcad/trunk/src/librt/namegen.c: Misc tweaks, add note about switching parser to use regex</tt></td></tr>
-<tr><td><tt>21:05.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr><td><tt>21:17.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-88-221.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>21:28.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulg1ris (n=d@117.196.142.8)</font></tt></td></tr>
-<tr><td><tt>22:03.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad prasad1 (n=psilva@h-72-245-122-226.mclnva23.covad.net)</font></tt></td></tr>
-<tr><td><tt>22:06.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (n=MinuteEl@silentflame/member/pdpc.base.minuteelectron) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:06.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@bz.bzflag.bz) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:06.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@bz.bzflag.bz) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:06.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad prasad_ (n=psilva@h-67-103-183-185.mclnva23.covad.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:13.05</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, this was too good, on the drive home, annoying little honda civic 'si' with the fart cannon and everything, license plate said "baka"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:13.14</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>(japanese for "stupid", for those who don't know)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:13.41</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>you should've taken a pic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:14.18</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>I wish I had a camera</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:20.08</tt></td><td><font color="#bc63bc"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>ive always got one with me now</tt></td></tr>
-<tr><td><tt>22:22.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.47</tt></td><td><font color="#b25eb2"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- can't carry one when he goes to work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.03</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>i couldn't either, last summer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.24</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>had a bit of trouble finding a cell phone without one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.15</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>yeah it's ridiculous</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.31</tt></td><td><font color="#62baba"><tt>louipc</tt></font></td><td width="100%"><tt>you can't buy just a phone anymore</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:27.08</tt></td><td><font color="#6161ba"><tt>pacman87</tt></font></td><td width="100%"><tt>i ended up getting a motorola L6 and swapping for my mom's L2</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:39.34</tt></td><td><font color="#5e5eb3"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03homovulgaris * r31925 10/brlcad/trunk/src/libpc/ (8 files): De-templating the Constraint object since it should not have been based on a template in the first place. need to sort out a preexisting segfault in the solver</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:41.53</tt></td><td><font color="#6363bd"><tt>homovulg1ris</tt></font></td><td width="100%"><tt><font color="#CC00CC">gave up cellphones 6 months ago :)</font></tt></td></tr>
-<tr><td><tt>22:58.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
-<tr><td><tt>23:28.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (n=Matthew@whitecalf.net)</font></tt></td></tr>
-<tr><td><tt>23:29.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad saltan (n=lieven@d51530284.access.telenet.be)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>00:17.30</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Twingy
+(n=justin@74.92.144.217)</span></tt></td>
+</tr>
+<tr>
+<td><tt>00:34.32</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:11.08</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad louipc
+(n=louipc@archlinux/trusteduser/louipc)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>02:36.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c4">returns home
+semi-exhausted</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>02:39.27</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrecastelo: so there are several ways to
+shoot secondary rays</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>02:40.09</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and yes, rt shoots secondary rays -- though it
+does so as part of the phong calculations (and some of it is done
+by liboptical</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>02:40.49</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rt_shootray is ultimately what fires a ray so
+looking for that call is a very strong indicator and good place to
+start for finding whom all is shooting rays (and why)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>02:51.13</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can trace down how rt does it by following
+rt's hit callback (colorview) which leads you to liboptical (via
+viewshade) which leads you to ... more stuff, but that direction
+won't readily help you understand</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:05.36</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrecastelo: I'd say just first write your
+own ray-trace test app where you fire your own ray using
+rt_shootray (or undersand rtexample.c and/or rt_simple.c)</tt></td>
+</tr>
+<tr>
+<td><tt>03:17.08</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:21.34</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r31909
+10/brlcad/trunk/src/rt/rtexample.c: start merging in the additional
+comments from rt_simple.c into rtexample.c -- there only needs to
+be one 'simple' example.</tt></td>
+</tr>
+<tr>
+<td><tt>03:25.25</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr>
+<td><tt>03:49.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad louipc
+(n=louipc@archlinux/trusteduser/louipc)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:52.39</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>hello, cadheads</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:52.45</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>hi yukonbob</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:52.55</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>how're things, pacman87?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:53.32</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>pretty good; finally tracked down a bug caused
+by one character (2 instead of 1)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:54.16</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>another?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:54.25</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>right now i'm wondering why my kde panel stops
+83% of the way across the screen</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:54.37</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>Ralith: the last bug was 4
+characters</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:54.40</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>j++;</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:57.48</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I'm wondering why brl-cad doesn't like tcl
+8.5.3 :/</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:57.57</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>louipc: interesting...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:58.20</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>pacman87: bah.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>03:58.34</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt><span class="c4">is re-attacking 8.5.3 on his
+machine, which happens to be NetBSD -current, just to make things
+even more difficult...</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:05.08</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>louipc: define "doesn't like"</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:05.36</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>mafm: ping?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:06.57</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ralith: your patches are high in my
+to-be-reviewed queue just so you know</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:07.25</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>cool :D</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:07.28</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>thanks</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:07.47</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>they're all very straightforward, except for
+that X11 mouse handling bit which might not even be
+necessary</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:07.56</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c4">nods</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:08.07</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>once I can get g3d building, I can test
+that</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:08.14</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>ogre's proving to be very finnicky
+though</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:08.37</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>have to touch ogre.cfg in ./ before it'll even
+init, and now it wants some png that I don't have</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:18.08</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>for some reason, kde thinks my monitor is
+1400x1050 instead of 1680x1050 when maximizing windows</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:18.38</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>but the desktop background is lined up and
+centered properly</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:20.19</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>O.o</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:20.29</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>lightweight and simple DEs ftw</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:21.09</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Ralith: what do you run? :P</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:21.15</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>pacman87: restart X?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:21.38</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>poolio: xfce at the moment, but if I was less
+lazy I'd have transitioned over to something even lighter like
+fluxbox</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:23.19</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Cool cool. I went KDE -&gt; xfce -&gt; fluxbox
+-&gt; ratpoision -&gt; xmonad</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:24.04</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>next stop is running everything in text mode
+on a wrist watch and imagining what it would look like if
+graphical...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:24.17</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>I don't even use any part of xfce but the WM
+and the keybindings</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:24.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wow, what a nasty thunderstorm</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:24.34</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>yukonbob: no, you always need X for web
+browsing if nothing else</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:24.47</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>Ralith: links, w3m...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:25.00</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>vesafb</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:25.18</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yay for having all computers and networking
+equipment on ups'</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:25.41</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>yukonbob: all kind of suck.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:25.52</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(as the power drops in an out about two dozens
+times over the past two minutes alone)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:25.53</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>and are suitable for emergency
+fallbacks.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:26.08</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: That bit missed north of me...but I
+fear the next part</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:26.19</tt></td>
+<td><span class="c7"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt><span class="c4">uses elinks, and firefox as
+an emergency backup these days... :P</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:26.24</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: I have nothing on UPS...uh
+oh</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:26.30</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, eep</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:28.20</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wow .. so much lightning.....</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:28.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>power is fluctuating mad .. hadn't seen this
+bad in years</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:28.58</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c4">bets he'll lose power hard
+eventually</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:29.07</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: You must be in that bright red area
+:P</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:29.56</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>brlcad: oh it decides to build the bundled
+8.5.1</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:30.43</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>louipc: config.log should say why it's
+thinking it fails</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:32.16</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ahh.. so that's what they mean by "severe
+thunderstorm warning" for this area</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:33.05</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Hasn't it passed you by now?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:33.19</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hail, wind gusts to 60mph</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:33.27</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nope, it's roaring outside right now</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:33.40</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: unrelated: if I'm interested in
+continuing work on beset and working with some CMU people, is that
+all kosher? There's no conflict with CMU and ARL?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:33.45</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>brlcad: yeah I peeked at it but I can't really
+make sense of it</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:33.49</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt><a href=
+"http://louipc.yi.org/brlcad/config.log">http://louipc.yi.org/brlcad/config.log</a></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:34.18</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>looks like it wants 8.6 or
+something?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:34.20</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt><span class="c4">shrugs</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:35.13</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>louipc: no, keep reading -- it tries versions
+in order</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:35.41</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so 8.6 failed (naturally), but checking for
+Tcl_Main in -ltcl8.5 actually succeeds, so the lib check
+passed</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:36.17</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the other two potential checks are header
+checks (which tcl doesn't directly check for) and a
+functionality/sanity check (which is what is probably is
+failing)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:37.36</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ah, tcl does have a header check, my bad --
+but it passed</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:38.34</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:38.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>configure:42641: checking whether to build
+Tcl</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:38.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>configure:42662: result: no</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:39.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>aha..</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:39.36</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>configure:43388: WARNING: Unable to find a
+system incrTcl compatible with the available system Tcl</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:39.39</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>configure:43390: WARNING: Enabling compilation
+of both Tcl and incrTcl</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:40.00</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that should have been visible in your basic
+configure output too</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:41.00</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: of course it's kosher, it's
+encouraged</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:41.02</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>ah, thanks</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:41.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>louipc .. now whether the itcl test should
+have failed, that's another story</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:43.10</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>louipc: ah, looks like you didn't have a
+system incrTcl according to the tests, so the failure is
+correct/intentional</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:43.42</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>though using our incrtcl against a system 8.5
+should be fine -- right now it just tries an all-or-nothing in
+order to support the macs</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:44.55</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>ah. It used to be cool with system tcl +
+bundled itcl</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:45.13</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it is/was/still is</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:45.20</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just so long as the versions match
+up</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>04:46.01</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>macs have 8.4 installed and it was finding it
+.. but no itcl installed, and 8.4 doesn't work with our incrtcl
+sources (they require 8.5)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:03.17</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>hmm!</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:07.32</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r31910
+10/brlcad/trunk/configure.ac:</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:07.32</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: per louipc's discoverage, make the
+warning about mixing non-system incrtcl with</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:07.32</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: system tcl a lot more in-thy-face
+obvious during output. for his case, though,</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:07.32</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: he was trying the one version that
+should work (8.5) so try to make that work.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:09.08</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>give that a go</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:14.09</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: what you're suggesting strongly
+relates to this topic:  <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code/Project_Ideas#CSG_ray-trace_optimizations">
+http://brlcad.org/wiki/Google_Summer_of_Code/Project_Ideas#CSG_ray-trace_optimizations</a></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:14.25</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>particularly the last two sentances
+;)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:16.08</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: ah yes.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:29.17</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r31911
+10/brlcad/trunk/src/rt/rtexample.c: merge in the rest of
+rt_simple.c's comments including a plethora of new ones by yours
+truely.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:31.32</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>poolio: CMU?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:32.31</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r31912
+10/brlcad/trunk/src/rt/ (Makefile.am rt_simple.c): ding dong,
+rt_simple.c is no longer with us. it overlapped with rtexample.c
+too much so the two were merged into one.</tt></td>
+</tr>
+<tr>
+<td><tt>05:33.19</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad clock_
+(n=clock@77-56-95-3.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:33.41</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>Carnegie Mellon University?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:35.31</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c4">nods</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:36.28</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>aye.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:50.02</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>ah.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:50.53</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt><span class="c4">might apply
+there</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>05:53.25</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03louipc * r31913
+10/brlcad/trunk/configure.ac: Fix problem with quotes.</tt></td>
+</tr>
+<tr>
+<td><tt>06:49.33</tt></td>
+<td colspan="2"><tt><span class="c12">*** part/#brlcad ewilhelm
+(n=ewilhelm@pool-71-111-83-56.ptldor.dsl-w.verizon.net)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>07:22.18</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c4">reyawns</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>07:26.31</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt><span class="c4">deyawns</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>07:32.26</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r31914
+10/brlcad/trunk/TODO: there is no rt_simple, but could use one for
+rtexample if it's going to be installed</tt></td>
+</tr>
+<tr>
+<td><tt>07:41.36</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad clock_
+(n=clock@84-72-91-240.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:05.30</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Axman6
+(n=Axman6@pdpc/supporter/student/Axman6)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>08:53.53</tt></td>
+<td><span class="c13"><tt>mafm</tt></span></td>
+<td width="100%"><tt>Ralith: are you there?</tt></td>
+</tr>
+<tr>
+<td><tt>08:58.32</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad elmom
+(n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>09:02.04</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>mafm: sorry, heading off now</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>09:02.08</tt></td>
+<td><span class="c9"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>check your email though</tt></td>
+</tr>
+<tr>
+<td><tt>09:35.48</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad clock_
+(n=clock@84-72-91-240.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:42.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad archivist_emc
+(n=archivis@host81-149-119-172.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:53.20</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Elperion
+(n=Bary@p5B14DD1B.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:09.32</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad elite01
+(n=elite01@unaffiliated/elite01)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:04.28</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad homovulgaris
+(n=d@117.196.134.230)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:24.21</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad homovulgaris
+(n=d@117.196.134.230)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:18.56</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad safdgd
+(n=58df2a30@bz.bzflag.bz)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:19.02</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mafm
+(n=mafm@elnet-111.lip.pt)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:03.03</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad jonored
+(n=jonored@c-76-19-120-77.hsd1.ma.comcast.net)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>13:20.16</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31915
+10/rt^3/trunk/src/g3d/ (CameraMode.cxx CameraMode.h): Adding Axis
+enumerator useful for some of the modes (Shift-grips at least), and
+renaming of variables to be more correct.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>14:03.29</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31916
+10/rt^3/trunk/src/g3d/ (CameraManager.cxx CameraModeMGED.cxx
+CameraModeMGED.h): Initial commit for my work on MGED mode. At the
+moment only scaling works, and not very well...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>14:07.45</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03homovulgaris * r31917
+10/brlcad/trunk/src/libpc/ (pcParser.cpp pcParser.h): remove
+deprecated warning by using boost::spirit::classic instead of
+boost::spirit</tt></td>
+</tr>
+<tr>
+<td><tt>14:32.59</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad docelic
+(n=docelic@78.134.199.245)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>14:35.14</tt></td>
+<td><span class="c13"><tt>mafm</tt></span></td>
+<td width="100%"><tt>yahhoooooo</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>14:41.54</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31918
+10/rt^3/trunk/src/g3d/ (CameraMode.cxx CameraMode.h): More
+renamings, forgot about these before...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>14:46.57</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31919
+10/rt^3/trunk/src/g3d/ (CameraModeMGED.cxx CameraModeMGED.h): I
+think that at last I got the scale commands right, and in a simpler
+way than I was expecting...</tt></td>
+</tr>
+<tr>
+<td><tt>15:04.37</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>15:04.56</tt></td>
+<td><span class="c13"><tt>mafm</tt></span></td>
+<td width="100%"><tt>aloha pacman87</tt></td>
+</tr>
+<tr>
+<td><tt>15:06.31</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad jonored
+(n=jonored@c-76-19-120-77.hsd1.ma.comcast.net)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>15:15.46</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>hi mafm</tt></td>
+</tr>
+<tr>
+<td><tt>15:23.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad geocalc
+(n=geocalc@91-171-218-234.rev.libertysurf.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:24.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad elite01
+(n=elite01@unaffiliated/elite01)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>15:34.05</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31920
+10/rt^3/trunk/src/g3d/ (CameraModeMGED.cxx CameraModeMGED.h):
+Variable renaming, for consistency</tt></td>
+</tr>
+<tr>
+<td><tt>15:34.35</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad cad45
+(n=3f71d20b@bz.bzflag.bz)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:34.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad homovulgaris
+(n=d@117.196.142.8)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:44.48</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad clock_
+(n=clock@77-56-89-178.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>16:53.30</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31921
+10/rt^3/trunk/src/g3d/ (4 files): Implementing basic translation
+for Shift-grips mode, although not working very well at the
+moment...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>17:21.26</tt></td>
+<td><span class="c13"><tt>mafm</tt></span></td>
+<td width="100%"><tt>gotta go, laters</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>17:33.09</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31922
+10/brlcad/trunk/src/librt/namegen.c: add first cut at argc+argv
+mechanism</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>17:47.50</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31923
+10/brlcad/trunk/src/librt/namegen.c: Succeeding with multiple
+tests.</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>18:28.25</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt><span class="c4">longs for heterogeneous STL
+containers</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>18:43.58</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, yeah, that's one reason I keep going back
+to scheme/lisp</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>18:53.28</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>:) scheme is awesome.. &lt;-
+tautology</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:18.49</tt></td>
+<td><span class="c16"><tt>jonored</tt></span></td>
+<td width="100%"><tt><span class="c4">still has the impulse to
+start writing reader macros and the like to load other languages
+into lisp...</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:43.44</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>can i tell 'attach X' to attach to a different
+X session?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:45.22</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>how about if if you set DISPLAY?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:45.58</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>how?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:46.45</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>DISPLAY=:0.1 mged -c ...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:47.18</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(if in bash, csh is a little...
+different)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:47.35</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>true true :) I've been using exclusively bsah
+for ... ever</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:47.46</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>me too</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:48.03</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>Starting an X display manager</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:48.03</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>X Error of failed request:  BadMatch (invalid
+parameter attributes)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:48.22</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>pacman87: It may not be :0.1, it might be :1
+or something</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:48.49</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>:0.0 is the current session</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:49.25</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Try it with :1.0 or just :1</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:49.26</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>host:server.workspace</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:49.41</tt></td>
+<td><span class="c11"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah that :)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:49.49</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:0 is equivelant to localhost:0.0 and server 0
+means port 6000</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:49.55</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:1 is 6001, ...</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:52.17</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>'DISPLAY=:0.1 kedit' works as
+expected</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:52.38</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>but 'DISPLAY=:0.1 mged' fails</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:57.02</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>neat, what about 'wish' or 'bwish'?</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>19:57.21</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>TK might have some "extra special"
+relationship to this task O.o :)</tt></td>
+</tr>
+<tr>
+<td><tt>20:28.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad PrezKennedy
+(i=Matthew@whitecalf.net)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>20:42.34</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>i'm getting 'interesting' raytraces from
+overlapping geometry</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>20:43.13</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>ie, rectangle from -1,-1 to 2,1</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>20:43.27</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>revolved more than 180 degrees</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>20:47.51</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt><a href=
+"https://webspace.utexas.edu/trv82/www/rev_rt20.png">https://webspace.utexas.edu/trv82/www/rev_rt20.png</a></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>20:50.02</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>^^ that's from (-4,-1) to (8,1) revolved
+270deg</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>20:52.51</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31924
+10/brlcad/trunk/src/librt/namegen.c: Misc tweaks, add note about
+switching parser to use regex</tt></td>
+</tr>
+<tr>
+<td><tt>21:05.59</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:17.05</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad clock_
+(n=clock@77-56-88-221.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:28.08</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad homovulg1ris
+(n=d@117.196.142.8)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:03.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad prasad1
+(n=psilva@h-72-245-122-226.mclnva23.covad.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:06.27</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad
+MinuteElectron
+(n=MinuteEl@silentflame/member/pdpc.base.minuteelectron) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:06.27</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad poolio
+(n=poolio@bz.bzflag.bz) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:06.27</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad starseeker
+(n=starseek@bz.bzflag.bz) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:06.28</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad prasad_
+(n=psilva@h-67-103-183-185.mclnva23.covad.net) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:13.05</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, this was too good, on the drive home,
+annoying little honda civic 'si' with the fart cannon and
+everything, license plate said "baka"</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:13.14</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(japanese for "stupid", for those who don't
+know)</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:13.41</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>you should've taken a pic</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:14.18</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I wish I had a camera</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:20.08</tt></td>
+<td><span class="c17"><tt>PrezKennedy</tt></span></td>
+<td width="100%"><tt>ive always got one with me now</tt></td>
+</tr>
+<tr>
+<td><tt>22:22.25</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:22.47</tt></td>
+<td><span class="c15"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- can't carry one when he goes to
+work</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:23.03</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>i couldn't either, last summer</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:23.24</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>had a bit of trouble finding a cell phone
+without one</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:25.15</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>yeah it's ridiculous</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:25.31</tt></td>
+<td><span class="c10"><tt>louipc</tt></span></td>
+<td width="100%"><tt>you can't buy just a phone anymore</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:27.08</tt></td>
+<td><span class="c8"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>i ended up getting a motorola L6 and swapping
+for my mom's L2</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:39.34</tt></td>
+<td><span class="c6"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03homovulgaris * r31925
+10/brlcad/trunk/src/libpc/ (8 files): De-templating the Constraint
+object since it should not have been based on a template in the
+first place. need to sort out a preexisting segfault in the
+solver</tt></td>
+</tr>
+<tr class="c5">
+<td><tt>22:41.53</tt></td>
+<td><span class="c18"><tt>homovulg1ris</tt></span></td>
+<td width="100%"><tt><span class="c4">gave up cellphones 6 months
+ago :)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:58.28</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:28.21</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad PrezKennedy
+(n=Matthew@whitecalf.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:29.17</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad saltan
+(n=lieven@d51530284.access.telenet.be)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

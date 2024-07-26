@@ -1,346 +1,1941 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20130806</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20130806</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c13 {color: #70D670}
+ span.c12 {color: #6CCE6C}
+ span.c11 {color: #63BCBC}
+ span.c10 {color: #5F5FB4}
+ span.c9 {color: #5EB45E}
+ span.c8 {color: #AF5CAF}
+ span.c7 {color: #009900}
+ span.c6 {color: #AD5B5B}
+ span.c5 {color: #73DA73}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #CC00CC}
+ span.c2 {color: #6262BB}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20130806</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:48.13</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can try stepping it through a debugger...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:57.51</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: it's using the operator in CompareByAngle at 1425</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:57.58</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>gdiam.cpp:1425</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.30</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt><a href="http://stackoverflow.com/questions/8532224/invalid-operator-while-sorting-stdlist">http://stackoverflow.com/questions/8532224/invalid-operator-while-sorting-stdlist</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.48</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>has me wondering if that comparison isn't satisfying some property the compiler is trying to guarantee</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:02.29</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt><a href="http://stackoverflow.com/questions/5786296/overloading-comparision-operator-in-c-results-in-invalid-operator">http://stackoverflow.com/questions/5786296/overloading-comparision-operator-in-c-results-in-invalid-operator</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:10.29</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">trys to puzzle out if CompareByAngle satisfies strict weak ordering, and if so why it doesn't...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:11.03</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>or could just use qsort...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:22.57</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56610 brlcad/trunk/src/other/libgdiam/gdiam.cpp: C++ comparison operators are supposed to satisfy the strict weak ordering property, and MSVC seems to think this function doesn't. This might be one reason - return false if the lengths end up being equal.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:25.11</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... no, that shouldn't change anything logically...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:40.55</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56611 brlcad/trunk/src/other/libgdiam/gdiam.cpp: Doesn't logically change behavior.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:50.20</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that's not the right operator</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:50.27</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it needs to define the &lt; operator</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:50.42</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>well, according to gdb that's where it's landing...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.15</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>it looks like it's intended as a &lt; operator, even if they didn't call it that...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.46</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>in theory, the functor operator should be sufficient</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.55</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>but msvc is apparently just using &lt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.56</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>trying to figure out how a &lt; b &amp;&amp; b &lt; a might be true from that logic... that's what the error seems to be suggesting is possible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.18</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>or rather, (!(_Left &lt; _Right) &amp;&amp; (_Right &lt; _Left))</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.20</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>not sure what that return&nbsp;&nbsp;(sgn &gt; 0) might be doing to mess with things...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.16</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>i don't see what code you're referring to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.23</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>line 1444</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:58.27</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>calling a function to determine if the area is positive, negative, or zero.&nbsp;&nbsp;If the points a, b, and base are colinear, that function is going to return zero no matter what order a and b are fed in</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.26</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>if a and b are then the same distance from base, their lengths are the same and swapping them will get the same result of the length comparison</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.31</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: first code block in this post is what MSVC is tripping up on: <a href="http://stackoverflow.com/a/5787053/2037687">http://stackoverflow.com/a/5787053/2037687</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.02</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>I was trying to figure out what about that function might not satisfy that property</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.12</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>return sgn &gt; 0?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.36</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>that's OK, but it's only triggered if sgn != 0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.45</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>if sgn == 0, it proceeds with the length test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.59</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>1448</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:02.48</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>and if dist(a,base) == dist(b,base) that comparison is going to give the same result no matter which order a and b are fed in (if I understand correctly how the logic is flowing)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:14.50</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>that compare functor doesn't make a whole lot of sense to me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.57</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56612 brlcad/trunk/src/other/libgdiam/gdiam.cpp: Take another stab at ensuring (!(a &lt; b) &amp;&amp; (b &lt; a)) for the gdiam comparison operator...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:19.13</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will try that tomorrow - if that really is a runtime check, I'll pay more attention to what actual values are causing it to trip</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.43</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56613 brlcad/trunk/src/libicv/filter.c: style spacing, function, and comment consistency cleanup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.05</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: please see r56613 and check the other files for similar cleanup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.15</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>yow - axis aligned arbn doesn't do well at all performance wise with bb -o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.56</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56614 brlcad/trunk/src/libbn/plot3.c: apply kesha's sf patch #165 that performs a code reduction in libbn's plot inteface code. 70 line reduction overall. looks good.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:51.57</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>huh - if you have an unlimited budget... <a href="http://www.rotateright.com/">http://www.rotateright.com/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:20.00</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56615 (brlcad/trunk/src/tclscripts/mged/bindings.tcl brlcad/trunk/src/tclscripts/mged/openw.tcl): accept sf patch #193 from Emory Huff which provides a new 'c' keybinding on the graphics window that brings the command window back. right now, assumes id_0 exists and is the command window we want to restore which means we'll get an error if id_0 was destroyed.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:21.01</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56616 brlcad/trunk/src/libbn/plot3.c: stray '}' in the patch...kesha</tt></td></tr>
-<tr><td><tt>03:38.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>05:50.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23_ (~caen23@92.81.176.7)</font></tt></td></tr>
-<tr><td><tt>07:14.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LaMule (~lamule@82.236.20.42)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:15.02</tt></td><td><font color="#af5caf"><tt>LaMule</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
-<tr><td><tt>07:50.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr><td><tt>07:58.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr><td><tt>08:14.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr><td><tt>10:04.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.176.7)</font></tt></td></tr>
-<tr><td><tt>10:46.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor_ (~mpictor_@2600:1015:b112:a83e:0:3b:516:5701)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:58.50</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>hello LaMule </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.24</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56617 brlcad/trunk/src/libbu/tests/bu_semaphore.c: getopt returns an int, otherwise this can be an infinite loop.</tt></td></tr>
-<tr><td><tt>12:52.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@195.24.220.16)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:54.48</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 56618 (brlcad/branches/opencl/src/librt/CMakeLists.txt brlcad/branches/opencl/src/librt/primitives/ell/ell.c brlcad/branches/opencl/src/librt/primitives/sph/sph.c): move to sph.c; raytracer changes; cmake</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:11.53</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 56619 (brlcad/trunk/src/libbn/plot3.c brlcad/trunk/src/libdm/dm-qt.cpp brlcad/trunk/src/mged/dm-qt.c): remove trailing blanks/tabs</tt></td></tr>
-<tr><td><tt>13:38.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:46.28</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56620 (brlcad/trunk/src/libicv/color_space.c brlcad/trunk/src/libicv/decimate.c): Add proper spacing in declaration of the variables.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:49.05</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56621 brlcad/trunk/src/libicv/decimate.c: WS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:08.48</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 56622 (brlcad/branches/opencl/src/librt/CMakeLists.txt brlcad/branches/opencl/src/librt/primitives/sph/sph.c): configure with cmake and compile successfully</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:22.35</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5933 /wiki/User:NyahCh3ck20/GSoc2013/Coding_Repor: /* 5 August - 11 August */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:33.24</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>``Erik: starseeker: waiting on the reviews so as to get done with this commit access stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.31</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>Ch3ck_: the issue in patch 222 with lines 141-143 needing to be collapsed is trivial, but the tabs vs spaces issue is one we need to know you can get your environment set up to deal with.. awaiting the patch to prove it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.46</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, I just noticed that the last } of check_results() is in the wrong place, as well</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:45.34</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:45.44</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i have set my editor tab to 8 characters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:46.34</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>give me all the changes for this file i am to make it all right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:46.45</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>so i could do the fixes on the other patches too.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:46.59</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>I think I already have... if you want it looked at before making a patch, you can scp it to bz and let me know where to look</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:47.09</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:48.50</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>(indent.sh seems to work ok on bz, as well)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.18</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>(bz being the old name for brlcad.org)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.01</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.11</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i've scp&nbsp;&nbsp;ied the file already</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.03</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 56623 brlcad/branches/opencl/src/librt/primitives/sph/sph.c: fix error in opencl code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.05</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>still has 8 spaces instead of a tab</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.37</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>where should i put the tab?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.42</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>at the&nbsp;&nbsp;first level?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.46</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>indentation?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:52.18</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, if it's indent 3 levels (12 spaces worth), the actual file contents for that line should start with "\t&nbsp;&nbsp;&nbsp;&nbsp;"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:53.47</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i've tried the '\t' and its equal to 4 spaces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:54.09</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>O.o editor misconfigured?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:54.18</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which is the same thing..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:54.40</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>I don't understand</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:54.53</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>how many spaces are for the first level?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:54.57</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>indentation 4 right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:55.21</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>4 spaces for the first level, 1 tab for the second level, 1 tab followed by 4 spaces for the third, ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:55.37</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:56.27</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>the hex would be 20202020 then 09 then 0920202020 then 0909 then 090920202020</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:57.46</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>fixed the file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:57.51</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>should i scp it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:57.58</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:58.00</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>uploading patch now..</tt></td></tr>
-<tr><td><tt>14:58.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed_ (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:59.30</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>should see the patch now..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:00.07</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>and .c file on bzflag</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:01.43</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>no, still not right, check results, for example... the line with 'for' is correct, the line wtih 'if' should use just a tab at the beginning (no spaces), and the line with return -1 should have a tab, then 4 spaces, then 'return'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:02.15</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>please correct the file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:02.21</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>manually and send to me..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:02.28</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>so i could correct the others</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:02.39</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i can't actually visualise completely all what you're saying..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:03.57</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>look at the file src/libbn/poly.c, the function bn_poly_add shows up to 3 levels of indentation done correctly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:04.44</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>observe where tabs are used instead of spaces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:07.18</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>what's the difference between using tabs and using space numbers equivalent to a tab?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:07.23</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>this gedit plugin will help: <a href="https://help.gnome.org/users/gedit/stable/gedit-plugins-draw-spaces.html.en">https://help.gnome.org/users/gedit/stable/gedit-plugins-draw-spaces.html.en</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:07.32</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56624 (brlcad/trunk/src/libicv/bw.c brlcad/trunk/src/libicv/decimate.c and 5 others): Cleaning Stylistic WhiteSpaces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.21</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>different file contents, and the goal is to maintain a consistent style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:09.11</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>(personally, I like to use all tabs and people can set their tabstop wherever they want, but BRL-CAD uses the sw=4 ts=8 approach)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:11.23</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56625 (brlcad/trunk/src/libicv/bw.c brlcad/trunk/src/libicv/decimate.c and 2 others): Trailing WS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:12.41</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>having this patches reviewed is sucking alot of my time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.11</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i would have prefered working on my project and getting it reviewed following all these conventions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.14</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>and the the commit access.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.34</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>... it's sucking a lot of my time, too... I'd much rather you'd gotten it right a long time ago</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:29.59</tt></td><td><font color="#63bcbc"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik : I am not sure but on my machine i have been having trouble with indent.sh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:30.22</tt></td><td><font color="#63bcbc"><tt>zero_level</tt></font></td><td width="100%"><tt>It leaves 2 spaces instead of 4 spaces.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.00</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>I'd guess it's a system emacs config or something... *shrug* I never use indent.sh, it never works right for me... vim with :set sw=4 ts=8 is what I use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.10</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>I only use emacs for lisp code :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.11</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5934 /wiki/User:KeshaSShah/GSoC13/Reports: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.28</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56626 (brlcad/trunk/include/brep.h brlcad/trunk/src/libbrep/intersect.cpp): Make sub_curve() a global export function, and mark all other functions that should be only used within intersect.cpp with HIDDEN.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:42.13</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56627 brlcad/trunk/src/libbrep/boolean.cpp: Use ON_Curve rather than ON_NurbsCurve for better generality. And don't always assume that the curves are all polyline curves.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:44.34</tt></td><td><font color="#63bcbc"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik : Even i do the same setting in vim. But smtimes i see blunders, while opeing out the file.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:44.53</tt></td><td><font color="#63bcbc"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik : on a lighter note :What do shrug mean?:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:44.58</tt></td><td><font color="#63bcbc"><tt>zero_level</tt></font></td><td width="100%"><tt>;0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:45.09</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5935 /wiki/User:Phoenix/GSoc2013/Reports: /* Week 8 */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:46.02</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5936 /wiki/User:Phoenix/GSoc2013/Reports: /* Week 8 */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.29</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>``Erik: updated patch..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.32</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56628 brlcad/trunk/src/libbrep/boolean.cpp: Rename shadowed variable.</tt></td></tr>
-<tr><td><tt>16:22.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.07</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 56629 brlcad/trunk/src/conv/g-dot.c: remove H, and simplify output of usage</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.49</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56630 brlcad/trunk/src/libbrep/boolean.cpp: Should not delete c3d as it's used in GetNurbForm() followed.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.41</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 5937 /wiki/User:Harman052/GSoc2013/Logs: </tt></td></tr>
-<tr><td><tt>17:00.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vladbogo@188.25.239.5)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.52</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 56631 brlcad/trunk/include/brep.h: use javadoc style in comments</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:44.15</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56632 brlcad/trunk/src/libbrep/boolean.cpp: The type of the params should be double, not int. And fix a wrong variable used (brepA =&gt; brep).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:50.12</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56633 (brlcad/trunk/src/conv/step/CMakeLists.txt brlcad/trunk/src/conv/step/ON_Brep.cpp brlcad/trunk/src/conv/step/g-step.cpp): First successful generation of STEP formatted content containing data from an ON_Brep.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:02.27</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56634 brlcad/trunk/src/libbrep/boolean.cpp: Use an enum to improve readablity of m_in_out. And append the faces to out.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:03.54</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: we all would have preferred you be working on your project and not having to discuss issues of whitespace and style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:04.12</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:04.18</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>this thing has sucked my day..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:04.28</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>normally, you would have been failed from participation for not having understood what you need to do by now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:04.41</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>this is not hard, it shouldn't have to be explained over and over</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:04.57</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i've done everything i know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.07</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>and still still get this white space errors </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.11</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>used indent.sh and ws.sh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.19</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>still there are still errors so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i don't get it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.27</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>so you don't understand</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.37</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you not understand?&nbsp;&nbsp;the problem isn't the scripts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.47</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>you said yesterday that your patch was about 180 lines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.59</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>that should take less than two minutes to manually format perfectly</tt></td></tr>
-<tr><td><tt>18:06.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak__ (~Izak@195.24.220.16)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:06.44</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i have</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:06.46</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>already</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:06.54</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>still wondering why it has not been applied yet.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.01</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>to continue with the others.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.26</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>you mean the patch you just updated yet again today?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.34</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.37</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>wow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.43</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>patch 222 and 223</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:08.02</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>uhm, because we don't have all day to iterate with you as you figure out how to indent a file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:08.09</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>your impatients and frustration is rude</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:08.44</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it was your reponsibility to learn this, and instruction was given in multiple forms two months ago</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, someone didn't drop everything they were doing right now to review you'r Nth patch update, you'll have to work on something else, perhaps re-read HACKING one more time still to make sure you understand the format, look at other examples throughout the code, use the gedit patch that erik mentioned, ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:12.58</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>this is frustrating and time consuming for both, please respect other people's time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:17.58</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:18.04</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>will do..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:24.09</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: I just reviewed the latest 222 patch and there's not a single tab in there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:24.20</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>rather, there's 1 tab, one you accidentally removed in an unrelated file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.08</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well since my tabs were not working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.19</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i used 4 character spacing to aline</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.23</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>them..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.23</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>your editor may be messing things up for you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.45</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>do you at least understand what it's supposed to be?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:26.29</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a difference between hitting the tab key and inserting a tab character</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:27.53</tt></td><td><font color="#6cce6c"><tt>vladbogo</tt></font></td><td width="100%"><tt>hi all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.26</tt></td><td><font color="#6cce6c"><tt>vladbogo</tt></font></td><td width="100%"><tt>brlcad: I have tried using blocking Qt events but for the moment (at least until keyboard is integrated) this does not work because everything blocks waiting for a qt events which does not occur</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.51</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad: it think its about the same thing right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:30.10</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not at all the same thing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:30.24</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>that may be why this is frustrating you because you think they are the same</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:31.08</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>we care about the type encoding, that there are actual tab characters so that the format is compressed (fewer bytes, smaller download, etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:32.52</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: see this example: <a href="http://paste.kde.org/p2fe26c7b/">http://paste.kde.org/p2fe26c7b/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:32.58</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>.=space</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:33.03</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]=tab</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:33.18</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>that is basically what is expected byte-wise</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:33.49</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, all sequences of 8 ........ get turned into a tab</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.28</tt></td><td><font color="#6cce6c"><tt>vladbogo</tt></font></td><td width="100%"><tt>brlcad: also I have been thinking about how to integrate events between qt and tk so that there could be easy to add/delete any key bindings.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.46</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>now i see clearly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.56</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>since your patch is predominantly correct with spaces and is just missing tabs, running the sh/ws.sh script on your code will do the tab replacements (or you can do it manually)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.57</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>so is this now i'm supposed to be doing the indentation?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:35.07</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:35.16</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>then i'll do it. now and submit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:35.18</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:35.58</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 56635 brlcad/trunk/src/librt/primitives/brep/brep.cpp: remove debug prints</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:36.03</tt></td><td><font color="#6cce6c"><tt>vladbogo</tt></font></td><td width="100%"><tt>my idea is to associate to every tcl binding a qt event and every time that qt event occurs to force the corresponding tcl one. How does this sound?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:36.46</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds good to me vladbogo , whatever works ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:37.38</tt></td><td><font color="#6cce6c"><tt>vladbogo</tt></font></td><td width="100%"><tt>ok then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.27</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 0 /wiki/File:Rotate1.png: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.45</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 0 /wiki/File:Rotate2.png: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.56</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad: just uploaded the patch.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:43.17</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 56636 brlcad/branches/opencl/src/librt/primitives/sph/sph.c: complete shot function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:43.34</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5940 /wiki/User:Vladbogolin/GSoC2013/Logs: /* Week 8 */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:47.51</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56637 brlcad/trunk/HACKING: add a visual example of the indentation style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:47.59</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5941 /wiki/User:Izak/GSOC_2013_logs: /* August 5th to August 9th */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:57.41</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: woo hoo, that looks right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:58.15</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I just noticed that there's an entire second page of updates on that patch... I was looking at only your fourth attempt... my bad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:58.33</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>actually your 6th</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:59.03</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>instead of your .. 8th, which did still have issues, but the 9th looks right :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:59.18</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: have you read that patch file?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:59.56</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which one the last one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:00.00</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:00.11</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>or pretty much all before too I think</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:00.29</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:00.34</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>is there a problem?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:00.39</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>what files does it say were edited?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.10</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well it talks of a certain bn_tri_tri_isect.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.20</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which i've done nothing to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.35</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>but don't understand why it was edited in the first place.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.52</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>you edited it at some point, somehow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.08</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>the patch doesn't lie :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.16</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.20</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it obviously might not have been intentional</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.30</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>but if i opened it was just to check indentation..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.41</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>but can't remember editing anything there..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.42</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>but you should run "svn status" and if a file is modified that should not, you should revert it: svn revert src/libbn/...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:03.03</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.01</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I suspect you maybe just hit tab on that line and gedit did the conversion to spaces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.20</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>you wouldn't have seen a change since it just replaced a tab with 8 spaces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.31</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>(unless you install that plugin erik mentioned)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.10</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>uploaded new patch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.13</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>now..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:11.00</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i've not installed the plugin yet..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.38</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56638 brlcad/trunk/src/libbn/tests/CMakeLists.txt: woot! looks like 10th time is the charm. accept sf patch 222 from Ch3ck which adds a unit test for bn_poly_scale().</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.46</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it will help if you're going to keep using gedit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.49</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>though I strongly recommend taking the time to learn a real development editor like emacs, slickedit, eclipse, vim, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:17.20</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56639 brlcad/trunk/src/libbn/tests/bn_poly_scale.c: reduce scope of input/output to static as a stop-gap. desirable to minimize/eliminate globals. also fix unreachable code condition.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:20.50</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>will rework the other patch now..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:20.58</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56640 brlcad/trunk/src/libbn/tests/bn_poly_scale.c: spoke a little too soon, few more style errors to fix</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:21.14</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: check out some fixes in r56639 and r56640</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:21.25</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.15</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: if the remaining patches are flawless, you'll be set</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.28</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.29</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>so you know, this isn't just about being picky about style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.40</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i now understand </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.53</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>what``Erik was trying to explain since morning</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.59</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's obviously frustrating because it's not something one often has to think about when learning how to write code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:24.42</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>so you're not familiar with the terminology he used or the difference between tab characters and what happens in an editor when you press the [tab] key</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:25.02</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>(which can insert tabs, spaces, both, or neither depending on the software)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:25.19</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>but this isn't just being pedantic/strict about style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:25.25</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's about maintainability</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.05</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>consistency is fundamentally intertwined with maintainability, if the code is inconsistent, it DIES</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.43</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad has survived for nearly as long as I've been alive because of a never-ending rigorous attention to maintainability</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.16</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>which in terms of indentation and whitespace, it's attention to details that most new developers are not familiar with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.43</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:r_weiss * 56641 brlcad/trunk/src/conv/fast4-g.c: Fixed a bug in the fast4-g converter where memory was corrupted when the group_head list became larger than its allocated size. Changed the code to allow the group_head list to grow dynamically.</tt></td></tr>
-<tr><td><tt>19:30.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23_ (~caen23@92.81.162.23)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:36.53</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah i understand</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:36.59</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>the next patch is ready now..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:37.01</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>uploading..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:38.13</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>checking 224</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:39.03</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, not yet updated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:40.23</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Level zero * 5942 /wiki/User:Level_zero/GSOC13/logs: /* Week 7 */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:40.51</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Level zero * 5943 /wiki/User:Level_zero/GSOC13/logs: Logs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:42.13</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>i've uploaded.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:43.06</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>you should see it now..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:45.44</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik:Any feedback on reviews of ticket 228</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.48</tt></td><td><font color="#5eb45e"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad: have you seen the patch?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:08.58</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>Izak__: excellent, only one small issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:09.08</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 56642 brlcad/trunk/src/librt/primitives/table.c: apply patch 228 from Izak</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:09.19</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>please what is that ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:09.36</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: What was the issue?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:09.56</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 56643 brlcad/trunk/src/librt/primitives/hrt/hrt.c: update copyright line, this did not exist in 1985</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.17</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>*point* I fixed it, it's a rare, weird and irregular issue, so not worth a bounce</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.24</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: I am acquainted with Copyrights creation and Intellectual property law. the only thing I know is that I should reference my sources and not steal anything</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:14.13</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>Izak__: you are correct, this certain aspect is a US law thing and our specific interpretation... you're not expected to know this detail... if you use someone else code, check the license and attribute (ask if you're unsure)... you did great, this detail was out of your responsibility as far as I'm concerned</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:14.39</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:14.49</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:15.53</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: As I write hrt.c, how can I always show you the status of my code so you could correct ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:16.37</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>Do u prefer kde.paste website or should I upload it to bzflag account</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:16.45</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:17.34</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>Izak__: either is fine... for what it's worth, you can create a public_html directory in your home directory and files you put in there will be available via the website</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.19</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>for example, my username is "erik" and I've created a file called public_html/dump.html at one point, and now you can point a web browser to <a href="http://brlcad.org/~erik/dump.html">http://brlcad.org/~erik/dump.html</a> and see it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:24.05</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: Thanks very much.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:26.27</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>Izak__: the only patch I see left for you is the updated rb_delete one that brlcad indicated he'd like proof of improvement for, am I missing any? was the old code proven to have the bug discussed in the paper?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:28.00</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>The old one was not proven to have that bug</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:29.02</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:29.13</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>Izak__: hm, I'm going to have to be very careful phrasing this... is it possible to prove that the old one does not have the bug?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:30.36</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik:Well let me check what the TODO file says first</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.09</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm trying to assess if the modifications to rb_delete are worth incorporating... if there is real benefit, then it may be worth you reworking 191 into a good patch... if not, then let's just close it and move on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.53</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56644 brlcad/trunk/src/other/libgdiam/gdiam.hpp: Clear the warnings about floating point comparisons from gdiam.hpp</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.57</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: The TODO file says to check the libbu implementation of red-black trees in bu.h which in turn says that the second edition of the rb_delete algorithm in the Cormen book (which is the basis of the current BRL-CAD rb_delete.c) has been updated to delete the node actually requested</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.52</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56645 brlcad/trunk/src/other/libgdiam/gdiam.cpp: Try a zero clamping to see if it helps with ordering sensitivity in the results.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.52</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>iff ours has the bug and yours does not, it's worth integrating</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.37</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>so it's the first part of that todo .. check the libbu implementation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.10</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>can't make a decision until someone does that, and that really should take just a few minutes to research the bug and write a little test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.22</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>brlcad: Are the rb_nodes rays ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.23</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt>``Erik: Are the requested nodes to be deleted by rb_delete.c rays ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.39</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5944 /wiki/User:Izak/GSOC_2013_logs: /* August 5th to August 9th */</tt></td></tr>
-<tr><td><tt>20:53.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.33</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5945 /wiki/User:Izak/GSOC_2013_logs: /* August 5th to August 9th */</tt></td></tr>
-<tr><td><tt>20:56.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad avneet (~avneet@202.164.53.122)</font></tt></td></tr>
-<tr><td><tt>20:59.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.162.23)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.32</tt></td><td><font color="#70d670"><tt>Izak__</tt></font></td><td width="100%"><tt><font color="#CC00CC">super and resting</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:16.14</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56646 brlcad/trunk/src/other/libgdiam/gdiam.cpp: Try a few robustness tweaks, but the C++ &lt; sort still isn't happy.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.34</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>growl...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:24.40</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>did somebody not svn add files for the hrt primitive?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:25.09</tt></td><td><font color="#6262bb"><tt>starseeker</tt></font></td><td width="100%"><tt>build is busted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.44</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 56647 brlcad/trunk/src/librt/primitives/table.c: Turn off the hrt definition in table.c - causing undefined reference errors?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:04.35</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 56648 brlcad/trunk/src/conv/dxf/g-dxf.c: implement h?, and also put P into the usage statement</tt></td></tr>
-<tr><td><tt>22:13.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad avneet (~avneet@202.164.53.122)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:38.12</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>erm, ehhh, whu? your stuff must be busted or somethin', starseeker O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.27</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>whupz</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.42</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 56649 brlcad/trunk/src/librt/CMakeLists.txt: add hrt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:47.19</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 56650 brlcad/trunk/src/librt/primitives/table.c: revert 56647</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:48.40</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>did the commit in librt/primitives instead of librt</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c4">
+<td><tt>00:48.13</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c3">can try stepping it through a
+debugger...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>00:57.51</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: it's using the operator in
+CompareByAngle at 1425</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>00:57.58</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>gdiam.cpp:1425</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>00:59.30</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><a href=
+"http://stackoverflow.com/questions/8532224/invalid-operator-while-sorting-stdlist">
+http://stackoverflow.com/questions/8532224/invalid-operator-while-sorting-stdlist</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>00:59.48</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>has me wondering if that comparison isn't
+satisfying some property the compiler is trying to
+guarantee</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:02.29</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><a href=
+"http://stackoverflow.com/questions/5786296/overloading-comparision-operator-in-c-results-in-invalid-operator">
+http://stackoverflow.com/questions/5786296/overloading-comparision-operator-in-c-results-in-invalid-operator</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:10.29</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c3">trys to puzzle out if
+CompareByAngle satisfies strict weak ordering, and if so why it
+doesn't...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:11.03</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>or could just use qsort...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:22.57</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56610
+brlcad/trunk/src/other/libgdiam/gdiam.cpp: C++ comparison operators
+are supposed to satisfy the strict weak ordering property, and MSVC
+seems to think this function doesn't. This might be one reason -
+return false if the lengths end up being equal.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:25.11</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm... no, that shouldn't change anything
+logically...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:40.55</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56611
+brlcad/trunk/src/other/libgdiam/gdiam.cpp: Doesn't logically change
+behavior.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:50.20</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: that's not the right
+operator</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:50.27</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it needs to define the &lt; operator</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:50.42</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>well, according to gdb that's where it's
+landing...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:51.15</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it looks like it's intended as a &lt;
+operator, even if they didn't call it that...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:51.46</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in theory, the functor operator should be
+sufficient</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:51.55</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but msvc is apparently just using
+&lt;</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:51.56</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>trying to figure out how a &lt; b &amp;&amp; b
+&lt; a might be true from that logic... that's what the error seems
+to be suggesting is possible</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:53.18</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>or rather, (!(_Left &lt; _Right) &amp;&amp;
+(_Right &lt; _Left))</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:55.20</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>not sure what that return  (sgn &gt; 0) might
+be doing to mess with things...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:56.16</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i don't see what code you're referring
+to</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:57.23</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>line 1444</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:58.27</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>calling a function to determine if the area is
+positive, negative, or zero.  If the points a, b, and base are
+colinear, that function is going to return zero no matter what
+order a and b are fed in</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:59.26</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>if a and b are then the same distance from
+base, their lengths are the same and swapping them will get the
+same result of the length comparison</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:00.31</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: first code block in this post is what
+MSVC is tripping up on: <a href=
+"http://stackoverflow.com/a/5787053/2037687">http://stackoverflow.com/a/5787053/2037687</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.02</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I was trying to figure out what about that
+function might not satisfy that property</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.12</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>return sgn &gt; 0?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.36</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that's OK, but it's only triggered if sgn !=
+0</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.45</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>if sgn == 0, it proceeds with the length
+test</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.59</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>1448</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:02.48</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>and if dist(a,base) == dist(b,base) that
+comparison is going to give the same result no matter which order a
+and b are fed in (if I understand correctly how the logic is
+flowing)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:14.50</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that compare functor doesn't make a whole lot
+of sense to me</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:17.57</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56612
+brlcad/trunk/src/other/libgdiam/gdiam.cpp: Take another stab at
+ensuring (!(a &lt; b) &amp;&amp; (b &lt; a)) for the gdiam
+comparison operator...)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:19.13</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c3">will try that tomorrow - if
+that really is a runtime check, I'll pay more attention to what
+actual values are causing it to trip</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:25.43</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56613
+brlcad/trunk/src/libicv/filter.c: style spacing, function, and
+comment consistency cleanup</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:26.05</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>zero_level: please see r56613 and check the
+other files for similar cleanup</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:35.15</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yow - axis aligned arbn doesn't do well at all
+performance wise with bb -o</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:48.56</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56614
+brlcad/trunk/src/libbn/plot3.c: apply kesha's sf patch #165 that
+performs a code reduction in libbn's plot inteface code. 70 line
+reduction overall. looks good.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:51.57</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>huh - if you have an unlimited budget...
+<a href=
+"http://www.rotateright.com/">http://www.rotateright.com/</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:20.00</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56615
+(brlcad/trunk/src/tclscripts/mged/bindings.tcl
+brlcad/trunk/src/tclscripts/mged/openw.tcl): accept sf patch #193
+from Emory Huff which provides a new 'c' keybinding on the graphics
+window that brings the command window back. right now, assumes id_0
+exists and is the command window we want to restore which means
+we'll get an error if id_0 was destroyed.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:21.01</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56616
+brlcad/trunk/src/libbn/plot3.c: stray '}' in the
+patch...kesha</tt></td>
+</tr>
+<tr>
+<td><tt>03:38.03</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad archivist
+(~archivist@host81-149-189-98.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:50.21</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad caen23_
+(~caen23@92.81.176.7)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:14.59</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad LaMule
+(~lamule@82.236.20.42)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>07:15.02</tt></td>
+<td><span class="c8"><tt>LaMule</tt></span></td>
+<td width="100%"><tt>hi</tt></td>
+</tr>
+<tr>
+<td><tt>07:50.03</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha_
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:58.25</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha_
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:14.02</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha__
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:04.06</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad caen23
+(~caen23@92.81.176.7)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:46.33</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad mpictor_
+(~mpictor_@2600:1015:b112:a83e:0:3b:516:5701)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:58.50</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hello LaMule</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.24</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56617
+brlcad/trunk/src/libbu/tests/bu_semaphore.c: getopt returns an int,
+otherwise this can be an infinite loop.</tt></td>
+</tr>
+<tr>
+<td><tt>12:52.18</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Ch3ck_
+(~Ch3ck@195.24.220.16)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:54.48</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 56618
+(brlcad/branches/opencl/src/librt/CMakeLists.txt
+brlcad/branches/opencl/src/librt/primitives/ell/ell.c
+brlcad/branches/opencl/src/librt/primitives/sph/sph.c): move to
+sph.c; raytracer changes; cmake</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:11.53</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 56619
+(brlcad/trunk/src/libbn/plot3.c brlcad/trunk/src/libdm/dm-qt.cpp
+brlcad/trunk/src/mged/dm-qt.c): remove trailing
+blanks/tabs</tt></td>
+</tr>
+<tr>
+<td><tt>13:38.41</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha__
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:46.28</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:mohitdaga * 56620
+(brlcad/trunk/src/libicv/color_space.c
+brlcad/trunk/src/libicv/decimate.c): Add proper spacing in
+declaration of the variables.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:49.05</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:mohitdaga * 56621
+brlcad/trunk/src/libicv/decimate.c: WS</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:08.48</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 56622
+(brlcad/branches/opencl/src/librt/CMakeLists.txt
+brlcad/branches/opencl/src/librt/primitives/sph/sph.c): configure
+with cmake and compile successfully</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:22.35</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5933
+/wiki/User:NyahCh3ck20/GSoc2013/Coding_Repor: /* 5 August - 11
+August */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:33.24</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>``Erik: starseeker: waiting on the reviews so
+as to get done with this commit access stuff</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:41.31</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Ch3ck_: the issue in patch 222 with lines
+141-143 needing to be collapsed is trivial, but the tabs vs spaces
+issue is one we need to know you can get your environment set up to
+deal with.. awaiting the patch to prove it :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:42.46</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>oh, I just noticed that the last } of
+check_results() is in the wrong place, as well</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:45.34</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:45.44</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i have set my editor tab to 8
+characters</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:46.34</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>give me all the changes for this file i am to
+make it all right</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:46.45</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>so i could do the fixes on the other patches
+too.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:46.59</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I think I already have... if you want it
+looked at before making a patch, you can scp it to bz and let me
+know where to look</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:47.09</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:48.50</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(indent.sh seems to work ok on bz, as
+well)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:49.18</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(bz being the old name for
+brlcad.org)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:50.01</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:50.11</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i've scp  ied the file already</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:51.03</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 56623
+brlcad/branches/opencl/src/librt/primitives/sph/sph.c: fix error in
+opencl code</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:51.05</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>still has 8 spaces instead of a tab</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:51.37</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>where should i put the tab?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:51.42</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>at the  first level?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:51.46</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>indentation?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:52.18</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, if it's indent 3 levels (12 spaces
+worth), the actual file contents for that line should start with
+"\t    "</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:53.47</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i've tried the '\t' and its equal to 4
+spaces</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:54.09</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>O.o editor misconfigured?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:54.18</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>which is the same thing..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:54.40</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>I don't understand</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:54.53</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>how many spaces are for the first
+level?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:54.57</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>indentation 4 right?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:55.21</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>4 spaces for the first level, 1 tab for the
+second level, 1 tab followed by 4 spaces for the third,
+...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:55.37</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:56.27</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the hex would be 20202020 then 09 then
+0920202020 then 0909 then 090920202020</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:57.46</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>fixed the file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:57.51</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>should i scp it?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:57.58</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>sure</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:58.00</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>uploading patch now..</tt></td>
+</tr>
+<tr>
+<td><tt>14:58.29</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad n_reed_
+(~molto_cre@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:59.30</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>should see the patch now..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:00.07</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>and .c file on bzflag</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:01.43</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>no, still not right, check results, for
+example... the line with 'for' is correct, the line wtih 'if'
+should use just a tab at the beginning (no spaces), and the line
+with return -1 should have a tab, then 4 spaces, then
+'return'</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:02.15</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>please correct the file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:02.21</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>manually and send to me..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:02.28</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>so i could correct the others</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:02.39</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i can't actually visualise completely all what
+you're saying..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:03.57</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>look at the file src/libbn/poly.c, the
+function bn_poly_add shows up to 3 levels of indentation done
+correctly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:04.44</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>observe where tabs are used instead of
+spaces</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:07.18</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>what's the difference between using tabs and
+using space numbers equivalent to a tab?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:07.23</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>this gedit plugin will help: <a href=
+"https://help.gnome.org/users/gedit/stable/gedit-plugins-draw-spaces.html.en">
+https://help.gnome.org/users/gedit/stable/gedit-plugins-draw-spaces.html.en</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:07.32</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:mohitdaga * 56624
+(brlcad/trunk/src/libicv/bw.c brlcad/trunk/src/libicv/decimate.c
+and 5 others): Cleaning Stylistic WhiteSpaces</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:08.21</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>different file contents, and the goal is to
+maintain a consistent style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:09.11</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(personally, I like to use all tabs and people
+can set their tabstop wherever they want, but BRL-CAD uses the sw=4
+ts=8 approach)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:11.23</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:mohitdaga * 56625
+(brlcad/trunk/src/libicv/bw.c brlcad/trunk/src/libicv/decimate.c
+and 2 others): Trailing WS</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:12.41</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>having this patches reviewed is sucking alot
+of my time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:13.11</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i would have prefered working on my project
+and getting it reviewed following all these conventions</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:13.14</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>and the the commit access.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:13.34</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>... it's sucking a lot of my time, too... I'd
+much rather you'd gotten it right a long time ago</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:29.59</tt></td>
+<td><span class="c11"><tt>zero_level</tt></span></td>
+<td width="100%"><tt>``Erik : I am not sure but on my machine i
+have been having trouble with indent.sh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:30.22</tt></td>
+<td><span class="c11"><tt>zero_level</tt></span></td>
+<td width="100%"><tt>It leaves 2 spaces instead of 4
+spaces.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:33.00</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'd guess it's a system emacs config or
+something... *shrug* I never use indent.sh, it never works right
+for me... vim with :set sw=4 ts=8 is what I use</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:33.10</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I only use emacs for lisp code :D</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:33.11</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5934
+/wiki/User:KeshaSShah/GSoC13/Reports:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:33.28</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 56626
+(brlcad/trunk/include/brep.h
+brlcad/trunk/src/libbrep/intersect.cpp): Make sub_curve() a global
+export function, and mark all other functions that should be only
+used within intersect.cpp with HIDDEN.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:42.13</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 56627
+brlcad/trunk/src/libbrep/boolean.cpp: Use ON_Curve rather than
+ON_NurbsCurve for better generality. And don't always assume that
+the curves are all polyline curves.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:44.34</tt></td>
+<td><span class="c11"><tt>zero_level</tt></span></td>
+<td width="100%"><tt>``Erik : Even i do the same setting in vim.
+But smtimes i see blunders, while opeing out the file.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:44.53</tt></td>
+<td><span class="c11"><tt>zero_level</tt></span></td>
+<td width="100%"><tt>``Erik : on a lighter note :What do shrug
+mean?:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:44.58</tt></td>
+<td><span class="c11"><tt>zero_level</tt></span></td>
+<td width="100%"><tt>;0</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:45.09</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5935
+/wiki/User:Phoenix/GSoc2013/Reports: /* Week 8 */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:46.02</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5936
+/wiki/User:Phoenix/GSoc2013/Reports: /* Week 8 */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:48.29</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>``Erik: updated patch..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:08.32</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 56628
+brlcad/trunk/src/libbrep/boolean.cpp: Rename shadowed
+variable.</tt></td>
+</tr>
+<tr>
+<td><tt>16:22.06</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha_
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:26.07</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 56629
+brlcad/trunk/src/conv/g-dot.c: remove H, and simplify output of
+usage</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:28.49</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 56630
+brlcad/trunk/src/libbrep/boolean.cpp: Should not delete c3d as it's
+used in GetNurbForm() followed.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:47.41</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 5937
+/wiki/User:Harman052/GSoc2013/Logs:</tt></td>
+</tr>
+<tr>
+<td><tt>17:00.36</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad vladbogo
+(~vladbogo@188.25.239.5)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:37.52</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 56631
+brlcad/trunk/include/brep.h: use javadoc style in
+comments</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:44.15</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 56632
+brlcad/trunk/src/libbrep/boolean.cpp: The type of the params should
+be double, not int. And fix a wrong variable used (brepA =&gt;
+brep).</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:50.12</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56633
+(brlcad/trunk/src/conv/step/CMakeLists.txt
+brlcad/trunk/src/conv/step/ON_Brep.cpp
+brlcad/trunk/src/conv/step/g-step.cpp): First successful generation
+of STEP formatted content containing data from an
+ON_Brep.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:02.27</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 56634
+brlcad/trunk/src/libbrep/boolean.cpp: Use an enum to improve
+readablity of m_in_out. And append the faces to out.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:03.54</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: we all would have preferred you be
+working on your project and not having to discuss issues of
+whitespace and style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:04.12</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:04.18</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>this thing has sucked my day..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:04.28</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>normally, you would have been failed from
+participation for not having understood what you need to do by
+now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:04.41</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this is not hard, it shouldn't have to be
+explained over and over</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:04.57</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i've done everything i know</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.07</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>and still still get this white space
+errors</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.11</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>used indent.sh and ws.sh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.19</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>still there are still errors so</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.24</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i don't get it.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.27</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you don't understand</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.37</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what do you not understand?  the problem isn't
+the scripts</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.47</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you said yesterday that your patch was about
+180 lines</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:05.59</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that should take less than two minutes to
+manually format perfectly</tt></td>
+</tr>
+<tr>
+<td><tt>18:06.24</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Izak__
+(~Izak@195.24.220.16)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:06.44</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i have</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:06.46</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>already</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:06.54</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>still wondering why it has not been applied
+yet.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:07.01</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>to continue with the others.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:07.26</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you mean the patch you just updated yet again
+today?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:07.34</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:07.37</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wow</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:07.43</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>patch 222 and 223</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:08.02</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>uhm, because we don't have all day to iterate
+with you as you figure out how to indent a file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:08.09</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>your impatients and frustration is
+rude</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:08.44</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it was your reponsibility to learn this, and
+instruction was given in multiple forms two months ago</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:10.43</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, someone didn't drop everything they were
+doing right now to review you'r Nth patch update, you'll have to
+work on something else, perhaps re-read HACKING one more time still
+to make sure you understand the format, look at other examples
+throughout the code, use the gedit patch that erik mentioned,
+...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:12.58</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this is frustrating and time consuming for
+both, please respect other people's time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:17.58</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>yeah..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:18.04</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>will do..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:24.09</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: I just reviewed the latest 222 patch
+and there's not a single tab in there</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:24.20</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rather, there's 1 tab, one you accidentally
+removed in an unrelated file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:25.08</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>well since my tabs were not working</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:25.19</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i used 4 character spacing to aline</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:25.23</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>them..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:25.23</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>your editor may be messing things up for
+you</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:25.45</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>do you at least understand what it's supposed
+to be?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:26.29</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's a difference between hitting the tab
+key and inserting a tab character</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:27.53</tt></td>
+<td><span class="c12"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>hi all</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:29.26</tt></td>
+<td><span class="c12"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>brlcad: I have tried using blocking Qt events
+but for the moment (at least until keyboard is integrated) this
+does not work because everything blocks waiting for a qt events
+which does not occur</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:29.51</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>brlcad: it think its about the same thing
+right?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:30.10</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's not at all the same thing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:30.24</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that may be why this is frustrating you
+because you think they are the same</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:31.08</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we care about the type encoding, that there
+are actual tab characters so that the format is compressed (fewer
+bytes, smaller download, etc)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:32.52</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: see this example: <a href=
+"http://paste.kde.org/p2fe26c7b/">http://paste.kde.org/p2fe26c7b/</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:32.58</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>.=space</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:33.03</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>[      ]=tab</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:33.18</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that is basically what is expected
+byte-wise</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:33.49</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>basically, all sequences of 8 ........ get
+turned into a tab</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:34.28</tt></td>
+<td><span class="c12"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>brlcad: also I have been thinking about how to
+integrate events between qt and tk so that there could be easy to
+add/delete any key bindings.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:34.46</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>now i see clearly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:34.56</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>since your patch is predominantly correct with
+spaces and is just missing tabs, running the sh/ws.sh script on
+your code will do the tab replacements (or you can do it
+manually)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:34.57</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>so is this now i'm supposed to be doing the
+indentation?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:35.07</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:35.16</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>then i'll do it. now and submit</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:35.18</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:35.58</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 56635
+brlcad/trunk/src/librt/primitives/brep/brep.cpp: remove debug
+prints</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:36.03</tt></td>
+<td><span class="c12"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>my idea is to associate to every tcl binding a
+qt event and every time that qt event occurs to force the
+corresponding tcl one. How does this sound?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:36.46</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sounds good to me vladbogo , whatever works
+;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:37.38</tt></td>
+<td><span class="c12"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>ok then</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.27</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 0
+/wiki/File:Rotate1.png:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.45</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 0
+/wiki/File:Rotate2.png:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.56</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>brlcad: just uploaded the patch.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:43.17</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 56636
+brlcad/branches/opencl/src/librt/primitives/sph/sph.c: complete
+shot function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:43.34</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5940
+/wiki/User:Vladbogolin/GSoC2013/Logs: /* Week 8 */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:47.51</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56637 brlcad/trunk/HACKING:
+add a visual example of the indentation style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:47.59</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5941
+/wiki/User:Izak/GSOC_2013_logs: /* August 5th to August 9th
+*/</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:57.41</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: woo hoo, that looks right</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:58.15</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I just noticed that there's an entire second
+page of updates on that patch... I was looking at only your fourth
+attempt... my bad</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:58.33</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>actually your 6th</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:59.03</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>instead of your .. 8th, which did still have
+issues, but the 9th looks right :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:59.18</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: have you read that patch
+file?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:59.56</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>which one the last one?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:00.00</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:00.11</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or pretty much all before too I
+think</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:00.29</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:00.34</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>is there a problem?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:00.39</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what files does it say were edited?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:01.10</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>well it talks of a certain
+bn_tri_tri_isect.c</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:01.20</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>which i've done nothing to</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:01.35</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>but don't understand why it was edited in the
+first place.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:01.52</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you edited it at some point, somehow</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:02.08</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the patch doesn't lie :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:02.16</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>well yeah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:02.20</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it obviously might not have been
+intentional</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:02.30</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>but if i opened it was just to check
+indentation..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:02.41</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>but can't remember editing anything
+there..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:02.42</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but you should run "svn status" and if a file
+is modified that should not, you should revert it: svn revert
+src/libbn/...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:03.03</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:04.01</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I suspect you maybe just hit tab on that line
+and gedit did the conversion to spaces</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:04.20</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you wouldn't have seen a change since it just
+replaced a tab with 8 spaces</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:04.31</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(unless you install that plugin erik
+mentioned)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:05.10</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>uploaded new patch</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:05.13</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>now..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:11.00</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i've not installed the plugin yet..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:12.38</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56638
+brlcad/trunk/src/libbn/tests/CMakeLists.txt: woot! looks like 10th
+time is the charm. accept sf patch 222 from Ch3ck which adds a unit
+test for bn_poly_scale().</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:12.46</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it will help if you're going to keep using
+gedit</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:13.49</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>though I strongly recommend taking the time to
+learn a real development editor like emacs, slickedit, eclipse,
+vim, etc</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:17.20</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56639
+brlcad/trunk/src/libbn/tests/bn_poly_scale.c: reduce scope of
+input/output to static as a stop-gap. desirable to
+minimize/eliminate globals. also fix unreachable code
+condition.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:20.50</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>will rework the other patch now..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:20.58</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 56640
+brlcad/trunk/src/libbn/tests/bn_poly_scale.c: spoke a little too
+soon, few more style errors to fix</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:21.14</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: check out some fixes in r56639 and
+r56640</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:21.25</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:23.15</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ch3ck_: if the remaining patches are flawless,
+you'll be set</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:23.28</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:23.29</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you know, this isn't just about being picky
+about style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:23.40</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i now understand</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:23.53</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>what``Erik was trying to explain since
+morning</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:23.59</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's obviously frustrating because it's not
+something one often has to think about when learning how to write
+code</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:24.42</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you're not familiar with the terminology he
+used or the difference between tab characters and what happens in
+an editor when you press the [tab] key</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:25.02</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(which can insert tabs, spaces, both, or
+neither depending on the software)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:25.19</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but this isn't just being pedantic/strict
+about style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:25.25</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's about maintainability</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:26.05</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>consistency is fundamentally intertwined with
+maintainability, if the code is inconsistent, it DIES</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:26.43</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>brl-cad has survived for nearly as long as
+I've been alive because of a never-ending rigorous attention to
+maintainability</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:27.16</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which in terms of indentation and whitespace,
+it's attention to details that most new developers are not familiar
+with</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:27.43</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:r_weiss * 56641
+brlcad/trunk/src/conv/fast4-g.c: Fixed a bug in the fast4-g
+converter where memory was corrupted when the group_head list
+became larger than its allocated size. Changed the code to allow
+the group_head list to grow dynamically.</tt></td>
+</tr>
+<tr>
+<td><tt>19:30.16</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad caen23_
+(~caen23@92.81.162.23)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:36.53</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>yeah i understand</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:36.59</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>the next patch is ready now..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:37.01</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>uploading..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:38.13</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>checking 224</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:39.03</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm, not yet updated</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:40.23</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Level zero * 5942
+/wiki/User:Level_zero/GSOC13/logs: /* Week 7 */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:40.51</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Level zero * 5943
+/wiki/User:Level_zero/GSOC13/logs: Logs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:42.13</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>i've uploaded.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:43.06</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>you should see it now..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:45.44</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik:Any feedback on reviews of ticket
+228</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:51.48</tt></td>
+<td><span class="c9"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>brlcad: have you seen the patch?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:08.58</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Izak__: excellent, only one small
+issue</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:09.08</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:erikgreenwald * 56642
+brlcad/trunk/src/librt/primitives/table.c: apply patch 228 from
+Izak</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:09.19</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>please what is that ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:09.36</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: What was the issue?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:09.56</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:erikgreenwald * 56643
+brlcad/trunk/src/librt/primitives/hrt/hrt.c: update copyright line,
+this did not exist in 1985</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:12.17</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*point* I fixed it, it's a rare, weird and
+irregular issue, so not worth a bounce</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:12.24</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: I am acquainted with Copyrights
+creation and Intellectual property law. the only thing I know is
+that I should reference my sources and not steal anything</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:14.13</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Izak__: you are correct, this certain aspect
+is a US law thing and our specific interpretation... you're not
+expected to know this detail... if you use someone else code, check
+the license and attribute (ask if you're unsure)... you did great,
+this detail was out of your responsibility as far as I'm
+concerned</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:14.39</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:14.49</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:15.53</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: As I write hrt.c, how can I always
+show you the status of my code so you could correct ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:16.37</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>Do u prefer kde.paste website or should I
+upload it to bzflag account</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:16.45</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:17.34</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Izak__: either is fine... for what it's worth,
+you can create a public_html directory in your home directory and
+files you put in there will be available via the website</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:19.19</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>for example, my username is "erik" and I've
+created a file called public_html/dump.html at one point, and now
+you can point a web browser to <a href=
+"http://brlcad.org/~erik/dump.html">http://brlcad.org/~erik/dump.html</a>
+and see it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:24.05</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: Thanks very much.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:26.27</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Izak__: the only patch I see left for you is
+the updated rb_delete one that brlcad indicated he'd like proof of
+improvement for, am I missing any? was the old code proven to have
+the bug discussed in the paper?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:28.00</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>The old one was not proven to have that
+bug</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:29.02</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: ;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:29.13</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Izak__: hm, I'm going to have to be very
+careful phrasing this... is it possible to prove that the old one
+does not have the bug?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:30.36</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik:Well let me check what the TODO file
+says first</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:34.09</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm trying to assess if the modifications to
+rb_delete are worth incorporating... if there is real benefit, then
+it may be worth you reworking 191 into a good patch... if not, then
+let's just close it and move on</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:38.53</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56644
+brlcad/trunk/src/other/libgdiam/gdiam.hpp: Clear the warnings about
+floating point comparisons from gdiam.hpp</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:39.57</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: The TODO file says to check the libbu
+implementation of red-black trees in bu.h which in turn says that
+the second edition of the rb_delete algorithm in the Cormen book
+(which is the basis of the current BRL-CAD rb_delete.c) has been
+updated to delete the node actually requested</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:41.52</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56645
+brlcad/trunk/src/other/libgdiam/gdiam.cpp: Try a zero clamping to
+see if it helps with ordering sensitivity in the results.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:41.52</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>iff ours has the bug and yours does not, it's
+worth integrating</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:42.37</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so it's the first part of that todo .. check
+the libbu implementation</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:43.10</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>can't make a decision until someone does that,
+and that really should take just a few minutes to research the bug
+and write a little test</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:45.22</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>brlcad: Are the rb_nodes rays ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:52.23</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt>``Erik: Are the requested nodes to be deleted
+by rb_delete.c rays ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:52.39</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5944
+/wiki/User:Izak/GSOC_2013_logs: /* August 5th to August 9th
+*/</tt></td>
+</tr>
+<tr>
+<td><tt>20:53.44</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha_
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.33</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5945
+/wiki/User:Izak/GSOC_2013_logs: /* August 5th to August 9th
+*/</tt></td>
+</tr>
+<tr>
+<td><tt>20:56.02</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad avneet
+(~avneet@202.164.53.122)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:59.50</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad caen23
+(~caen23@92.81.162.23)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:10.32</tt></td>
+<td><span class="c13"><tt>Izak__</tt></span></td>
+<td width="100%"><tt><span class="c3">super and
+resting</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:16.14</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56646
+brlcad/trunk/src/other/libgdiam/gdiam.cpp: Try a few robustness
+tweaks, but the C++ &lt; sort still isn't happy.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:20.34</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>growl...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:24.40</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>did somebody not svn add files for the hrt
+primitive?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:25.09</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>build is busted</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:26.44</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 56647
+brlcad/trunk/src/librt/primitives/table.c: Turn off the hrt
+definition in table.c - causing undefined reference
+errors?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:04.35</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 56648
+brlcad/trunk/src/conv/dxf/g-dxf.c: implement h?, and also put P
+into the usage statement</tt></td>
+</tr>
+<tr>
+<td><tt>22:13.18</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad avneet
+(~avneet@202.164.53.122)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:38.12</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>erm, ehhh, whu? your stuff must be busted or
+somethin', starseeker O.o</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:46.27</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>whupz</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:46.42</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:erikgreenwald * 56649
+brlcad/trunk/src/librt/CMakeLists.txt: add hrt</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:47.19</tt></td>
+<td><span class="c5"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:erikgreenwald * 56650
+brlcad/trunk/src/librt/primitives/table.c: revert 56647</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:48.40</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>did the commit in librt/primitives instead of
+librt</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

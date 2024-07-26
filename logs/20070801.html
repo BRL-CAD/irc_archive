@@ -1,385 +1,2054 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20070801</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20070801</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c13 {color: #B15DB1}
+ span.c12 {color: #AF5CAF}
+ span.c11 {color: #D3D36F}
+ span.c10 {color: #000099}
+ span.c9 {color: #B3B35E}
+ span.c8 {color: #5F5FB5}
+ span.c7 {color: #C266C2}
+ span.c6 {color: #009900}
+ span.c5 {color: #D36F6F}
+ span.c4 {color: #5BAE5B}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #4B904B}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20070801</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:09.57</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: yes, profile (gprof), valgrind, write isolated unit test cases (that just test ONE function), and then polish your code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.34</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>those four steps should reveal at least a few issues if not many (particularly the isolated unit tests and valgrind)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.42</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Well, I don't think there is really an issue. I can't see anything is wrong. Speed is something that I could look at with profiling, but as far as I can see it's working fine, the algorithm just isn't doing too great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.02</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not to find an issues, that's just due diligence on any code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Wait, so you're saying I should profile anyway?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.37</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>all code could ideally have all four of those cases written.. and they very OFTEN do uncover entirely unexpected issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.41</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.51</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>alright. I'll get on that.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>plus it's just good a exercise to get proficient in, particularly if you've never done it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.24</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the configure option --enable-profile will turn on the gprof profile flag</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.42</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>use that with debugging symbols enabled</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.21</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>then run gprof and your program name in the dir with the gmon.out log and it'll generate a report -- see the web for some tutorials, manpage for docs, etc .. there are a lot of options</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.52</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>undoubtedly, it will be spending a ton of time in the ray evaluation routines as you're very much cpu-bound, but there could be some surprises</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.57</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>alrighty. there's still some code clean up that I may do first, but that sounds good.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.20</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>i'd suggest running valgrind before doing gprof</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.27</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>but I mean shouldn't I still be going for getting better results out of the GA?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.46</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>this will be a good "breather" for a day or two :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.49</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: yeah the issue with valgrind is it seperates the reports with each thread</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.00</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>heh, dont have time for a breather :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.05</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>so run it single threaded first :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.34</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a few things it'll likely report in librt itself that don't clean up on exit, and those are known/can be ignored</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.53</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.11</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise it should be nearly a clean/empty report</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there should be zero "definitely lost" leaks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.21</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>even in system libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.49</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==14776== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 17 from 1)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.24</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>what's left on the 7.10.2 checklist, yo?</tt></td></tr>
-<tr><td><tt>00:54.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.12</tt></td><td><font color="#c266c2"><tt>louipc</tt></font></td><td width="100%"><tt>is there a point where you'll check that it builds nicely before release?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:20.29</tt></td><td><font color="#c266c2"><tt>louipc</tt></font></td><td width="100%"><tt>I'd like to check if it works on archlinux, last time it didn't work so I didn't update the pkg. I didn't feel like patching it from heh. :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.59</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: I don't think my timer is fast enough...? </tt></td></tr>
-<tr><td><tt>04:19.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
-<tr><td><tt>08:01.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-29 (n=CIA@208.69.182.149)</font></tt></td></tr>
-<tr><td><tt>08:40.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Laniakea (i=clock@217-162-228-71.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:34.20</tt></td><td><font color="#5f5fb5"><tt>Laniakea</tt></font></td><td width="100%"><tt>msg -lugs tarzeau do you wear contact lenses?</tt></td></tr>
-<tr><td><tt>10:00.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:01.43</tt></td><td><font color="#5f5fb5"><tt>Laniakea</tt></font></td><td width="100%"><tt>omg</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:11.55</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>morning?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:11.56</tt></td><td><font color="#b3b35e"><tt>tarzeau</tt></font></td><td width="100%"><tt>Laniakea: sometimes?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:12.03</tt></td><td><font color="#b3b35e"><tt>tarzeau</tt></font></td><td width="100%"><tt>Laniakea: you got an irc problem?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:13.53</tt></td><td><font color="#5f5fb5"><tt>Laniakea</tt></font></td><td width="100%"><tt>tarzeau: no I left out the /</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:14.17</tt></td><td><font color="#5f5fb5"><tt>Laniakea</tt></font></td><td width="100%"><tt>tarzeau: see query</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:14.22</tt></td><td><font color="#5f5fb5"><tt>Laniakea</tt></font></td><td width="100%"><tt>(on lugs)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:26.00</tt></td><td><font color="#5f5fb5"><tt>Laniakea</tt></font></td><td width="100%"><tt>tarzeau: do you see my query? You are not responding</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:26.12</tt></td><td><font color="#b3b35e"><tt>tarzeau</tt></font></td><td width="100%"><tt>wait</tt></td></tr>
-<tr><td><tt>11:30.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>11:44.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016141081.customer.alfanett.no)</font></tt></td></tr>
-<tr><td><tt>11:44.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AchiestDragon (n=david@whipy.demon.co.uk)</font></tt></td></tr>
-<tr><td><tt>11:57.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@210-84-29-115.dyn.iinet.net.au)</font></tt></td></tr>
-<tr><td><tt>11:59.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>12:52.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>13:06.58</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad thing0 (n=ric@210-84-29-115.dyn.iinet.net.au)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:37.01</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>louipc: the last step before release is to take the candidate tarball to a slew of os/arch combos and make sure it compiles, runs benchmark, and does a fistful of things in mged... which I *THINK* is what brlcad is sorta doing now</tt></td></tr>
-<tr><td><tt>14:02.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>14:04.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:27.06</tt></td><td><font color="#d3d36f"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * 10brlcad/src/libtclcad/ (Makefile.am tkCanvBezier.c): actually remove tkCanvBezier.c as it's no longer used</tt></td></tr>
-<tr><td><tt>14:45.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.48</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: is there a way to identify what data structure is eating away at the memory?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.05</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Like I know I have a memory leak somewhere I'm just having a hard time finding it by hand</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.17</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>depends on the nature of the leak -- if it is a true leak, valgrind should have found it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.04</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>what was the rest of valgrind's report -- errors aren't the only part</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.14</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>memcheck whines about stuff internal to librt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.45</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Oh woah, it changed since the last time I ran it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.30</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>hmm. I have a bunch of definitely lost bytes :\</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:15.56</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>if valgrind and boehm don't find them, they're still reachable by something in the frame stack</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:16.57</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>well valgrind found some</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.03</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>but it doesn't make senes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.04</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>e</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.37</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: <a href="http://rafb.net/p/eCHfmb31.html">http://rafb.net/p/eCHfmb31.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.26</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>might not make sense but i've yet to see valgrid be wrong :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.26</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>It's saying that rt_init_resource is leaking, but I rt_clean the resources for sure...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.58</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Yeah yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that one is known</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.08</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>alright, so that's all normal?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.10</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the ptbl ones can be ignored</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.39</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there is no counterpart to rt_init_resource</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.47</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>so items it allocated are never freed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.56</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Well that's a big issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.09</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Because I re-allocate resources every time I raytrace a new individual</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.25</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>what about rt_clean_resource() ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.34</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that should be fine, it releases if you call init again</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.53</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>so I don't need to run rt_clean_resources() ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.50</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>no, you should</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.31</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Ok, and what about the rt_gettree one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there could be a leak in rt_clean_resources(), I'll look into it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.07</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's one that shouldn't be there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.36</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I'm calling it so much, the leaks just get bigger and bigger</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.48</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>you've not freed the item from rt_gettree() I believe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.29</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Well, I rt_gettree() into some rtip, and I rt_free_rti() that rtip. So shouldn't that take care of it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.23</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;and this? <a href="http://rafb.net/p/vhqFb112.html">http://rafb.net/p/vhqFb112.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.50</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>now that's a huge leak</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.56</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>shouldn't rt_free_rti() take care of that too?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:29.52</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I feel like there's something I need to do with the rtip besides rt_free_rti()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:29.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>in general, no -- rt_free_rti only free's the rti itself, not objects the rti holds</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:30.16</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>as there can be multiple instances and other issues at play</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:31.01</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>ah alright. So I need to somehow free the structures rt_gettree() creates as well as rt_prep() ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.42</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>don't know for sure for these two cases, so I'm looking -- you take the big one, i'll take the little one :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.38</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>alrighty</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.42</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it could be a librt leak with certain calling order or some free not being called that your code needs to be doing, hard to say without tracing the leak</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.11</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>make no assumptions, just follow the memory and read the code that relates to it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.25</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:37.23</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>er, are you used CVS head?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:37.34</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:37.39</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>hmm.. my line numbers aren't matching yours</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:37.56</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Hmm, haven't updated for a little while</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:38.06</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>guess I can do that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:38.30</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>let me know if db_tree.c updates</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:40.12</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: I've got clean builds so feel free to test and let me know if you have build issues on your end</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:41.03</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: i've not got a solaris on hand if you want to test them out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:41.31</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: yeah it changed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:41.52</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: Ah, I think it's that I hadn't updated since you changed the copyright comments last week</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:42.06</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, okay</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:42.15</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that sounds about right offset-wise</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:42.27</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>new report would be good to see</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:43.40</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>ah wait</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:43.46</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I need to recompile dont I</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.29</tt></td><td><font color="#d3d36f"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03poolio * 10brlcad/src/gtools/beset/ (fitness.c population.c population.h): more mutation support and cosmetics</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.59</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.31</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>this is gonna take a while :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:51.27</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>grargh what did I break?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:51.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>make: *** No rule to make target `m4/restore.m4', needed by `Makefile.in'.&nbsp;&nbsp;Stop.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.02</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>fixed.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.12</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: even with rt_clean() I get the memory leaks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.45</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Which doesn' tmake sense, it looks like rt_clean() frees _all_ the dynamic structures inside of the rtip. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:03.08</tt></td><td><font color="#af5caf"><tt>Maloeran</tt></font></td><td width="100%"><tt>Valgrind, boehm... Personally, I found that the best tool to investigate memory leaks is a wrapper around malloc/free/realloc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:05.15</tt></td><td><font color="#af5caf"><tt>Maloeran</tt></font></td><td width="100%"><tt>BRL-CAD of course has an interface on top of these, but I haven't looked if it can be used to trace leaks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:08.56</tt></td><td><font color="#af5caf"><tt>Maloeran</tt></font></td><td width="100%"><tt>( The pseudo-function to get addresses of calling functions, useful for such debugging, is a GCC extension though )</tt></td></tr>
-<tr><td><tt>17:20.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=mariodot@bas2-sudbury98-1128565171.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:20.46</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>boehm is a wrapper that stubs in place of malloc/free/realloc/calloc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:24.04</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>libbu does have it's own memory bounds checking that works pretty well</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:24.41</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>bounds, yes, but does it retain alloc lists and look for 'forgotten' bits?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:25.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>i tend to prefer valgrind's even over the *alloc/free wrappers though as it generally does a much better job and often detects things that other approaches won't/can't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:25.49</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>valgrind seems pretty married to leenewx, though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:26.00</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>efence, boehm, ccmalloc, dmalloc... those're pretty portable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:28.43</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>sushi:~/brlcad morrison$ ./a.out 300120 malloc&nbsp;&nbsp;&nbsp;&nbsp; 20 alloc 300128 free&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;free</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:28.46</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>ERROR bu_free(x300128, free) pointer bad, or not allocated with bu_malloc!&nbsp;&nbsp;Ignored.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:29.27</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>ah, so bu keeps its own malloc info ontop of the system malloc info</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:29.39</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>*ponder*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:30.01</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>free(bu_malloc()-bumallocstructsize); hehehehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:30.13</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://pastebin.bzflag.bz/m2661afe4">http://pastebin.bzflag.bz/m2661afe4</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:31.50</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- gonna build sunos 5.8 using gnu toolchain first, then if that works, try sunwpro</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.06</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds good, what I usually do too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.26</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>cause if sunwpro doesn't work, not a big deal .. so long as one of the two does easily</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.03</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>and if it just requires a few tweaks, it can always be annotated in doc/README.Solaris</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.27</tt></td><td><font color="#b15db1"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://www3.sympatico.ca/mario.dulisse2/castle.png">http://www3.sympatico.ca/mario.dulisse2/castle.png</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.30</tt></td><td><font color="#b15db1"><tt>IriX64</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.57</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>now back in the day, it was a beefy machine... I must be gettin' spoiled, dual 450mhz usparcIIi just seems sssssooooooo ssssssllllllooooooowwwwwwww</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.01</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the reason valgrind tends to do better than the wrappers is why it's (unfortunately) linux-specific .. performance counters and other low-level issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.09</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>*nod*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.13</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>um</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.19</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>there's one in chud, right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.27</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>not bigtop, um, ... hrm, not saturn I don't think</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.30</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's not too shabby either</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.39</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>the frankenstein one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.44</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, something like that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.48</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>two of them actually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.54</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>one that watches cocoa memory allocations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.00</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>another that watches all allocations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.02</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- has used shark and the ogl profiler, not the others really</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.11</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>and shark usually from the command line</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.17</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>i've only used it a couple times to notice that it was pretty cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.28</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>shark from the command line .. o.O</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.30</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>shark -i ./myprog ; open *mshark</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.36</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.11</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: any luck?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.41</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: was waiting on the new report, or did I miss it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.52</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>hehe, it's on the way, one sec</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.55</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>so line numbers match up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.59</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah sorry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:38.07</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>make just finished :\</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:38.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty sure I see the offsets, but I'd rather not guess</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:41.19</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>rawr! I set the wrong prefix and now I have to rebuild. d'oh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:42.04</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:42.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't have to install</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:42.16</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>you can run in place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:42.42</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>just have to be sure to wrap correctly so it doesn't pick up installed libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:44.09</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah but I already uninstalled previous </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:44.18</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>and I'd like to have it installed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:44.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>so I'll just do some more code clea up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:45.45</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>gah, silly system doesn't have a functional 64-bit libX11, but *does* have functional 64-bit libGL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:45.56</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's really fscked up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:46.53</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:46.54</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>can 64bit libGL even function without a 64bit X11?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:47.09</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>if it has another display path, sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.09</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>hah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.15</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>"Frist Post!!!11eleven!!!1"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:54.33</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, probably just need to make the OGL interface check for both ogl and x11 since it's really x11-specific</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:56.26</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>ahhhhhhhhhhhh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:56.30</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>my laptops at 83C</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:56.35</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>my legs burn.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:59.37</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>man, that pastebin sucks, it doesn't have&nbsp;&nbsp;syntax highlighting for uh.. uhhhhh.... uhhhhhhhh.... erlang!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:59.50</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>haha</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:59.51</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>(damn that's a lot of highlighting options)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:00.24</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:00.32</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: <a href="http://rafb.net/p/w7nvet33.html">http://rafb.net/p/w7nvet33.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:02.19</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>thx</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:02.29</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>hum, no captcha, wonder how long before it starts seeing spam</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:03.24</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah figured id just see how long it takes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:16.56</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>into liboptical on solaris with the gnu chain</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:35.58</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: I really fail to see why when using rt_clean() there's still a memory leak according to valgrind</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:59.41</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: it's also giving me a lot of whining about unitialized values that are for sure initialized</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:00.50</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>example of one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.48</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==20025== Conditional jump or move depends on uninitialised value(s)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.48</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==20025==&nbsp;&nbsp;&nbsp;&nbsp;at 0x491F397: __printf_fp (in /lib/i686/cmov/libc-2.5.so)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.55</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.07</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==20025==&nbsp;&nbsp;&nbsp;&nbsp;by 0x8049578: main (beset.c:170)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.47</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>And 27 more of those same contexts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:03.12</tt></td><td><font color="#b15db1"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://www3.sympatico.ca/mario.dulisse2/7.10.1.png">http://www3.sympatico.ca/mario.dulisse2/7.10.1.png</a>&nbsp;&nbsp;:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:03.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: Can I just pastebin the whole output?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:03.30</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>that smells like gnu suckism</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:03.37</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: yes please</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.25</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: <a href="http://rafb.net/p/JlQa3L28.html">http://rafb.net/p/JlQa3L28.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.42</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>All of the still reachable blocks are leaked I think</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:10.59</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Alright, but there's still massive memory leaks somewhere</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:11.16</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I think the amount of memory leaked is proportional to the population size</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:11.20</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>that doesn't help much though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.06</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>line 556 seems to be the biggy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.47</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>You mean 566?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.55</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad said 556 was known</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.57</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, sorry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.07</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>the gettree stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.12</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.20</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>shouldn't rt_clean() properly free that stuff? it looked like it did</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:14.07</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>man, solaris is wigging out my nfs server here, heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.50</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, why is it count+1? (</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.41</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>where?</tt></td></tr>
-<tr><td><tt>19:18.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@host131.objectsciences.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.02</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: oh, it includes the current node as part of the count so that it plays nicely with db_count_tree_nodes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.24</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.58</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: were you referencing the return 1+n1+n2?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:21.28</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>src/librt/tree.c:233 :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:22.06</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>aha! so that's never being free'd?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:22.37</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>prep has some free's around there, mebbe it's missing those cases</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.53</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>are you calling rt_clean() or rt_del_regtree() ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:24.01</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>rt_clean()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:24.03</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm, ye syou are</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:24.45</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>librt/prep.c:891 should be taking care of that :/</tt></td></tr>
-<tr><td><tt>19:24.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Laniakea (i=clock@217-162-228-71.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.42</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>ahhh, the +1 is to dump in a null terminator</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:28.00</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>hummmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:28.55</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>you might hack up librt, have a static counter initialized to zero, inc it in tree.c and dec it in prep.c and after the rt_clean, see what that # is, then set it to 0 if you'r egoing to make another pass?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:29.02</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>But still, try running the program, it goes crazy with memory, talking a couple hundred megs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:29.37</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: hmm worth a shot, I'll have a go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:29.38</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>to see if you're alloc'ing different amounts? it may be that you get a failed alloc in the middle of the alloc loop, and the dealloc stops at the fail instead of the end?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:31.13</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>that's only 650k, it lists 420 megs as still reachable at the end</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:31.20</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, accidently msg'd that to brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.39</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah, the 420megs it's what's messed up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.42</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>let me re-run valgrind</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.57</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>if it's reachable, valgrind won't magically find it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:34.05</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>I mean, you grok what it means, right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:36.29</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>grok?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:38.10</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>understand... really well...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:39.46</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>reachable means there's still a pointer to it but it wasn't freed at exit, right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:41.59</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad/``Erik: it looks like the big memory leak is also related to the bu_ptbl_init</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.46</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>well, it's free'd at exit() (or, rather, _exit() or whatever exit() calls)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.15</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah the issue is it fills up my memory during run-time and I need to free it before exit()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.20</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>but it means that there is still a legitimate way to get to that allocated data via the current stack, globals, or statics</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.33</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>I'd hope you're not using globals or statics</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.46</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>mmmmmaayyyyyyybeeeee </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.49</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>I thought you had to free it between iterations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.57</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>free what?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.02</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Well yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.06</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>that'd be true, during iterations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.07</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>the mountains of iteration specific data? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.10</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>*in-between as you said</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.31</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>having reachable data at exit() isn't a bad thing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.52</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>no modern OS has system leaks from os space anymore, I think an early win95 was the last to do that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.52</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I understand, but I have _too much_ reachable data at exit()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:52.24</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>is it building up over iterations? like from not freeing iteration specific stuff?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.07</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Seems like it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.23</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>The longer it runs the greater the memory used</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.39</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>And the amount of data the program should be using shouldn't be growing from iteration to iteratin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.44</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>the results you posted are from a single iteration?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.49</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.52</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I think there were like 10</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:54.04</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I need to go help jump my mom's car, I'll be back in a bit.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:13.22</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>k, i'm back</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:13.29</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: so any ideas?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.13</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>is pop-&gt;parent[0] the best or worst after sorting</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.44</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: worst</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:20.06</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:21.26</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>the globals in population.c would be my best guess for growth at this moment... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:21.41</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: Yeah...but they're just pointers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:21.59</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I use them when searching for individuals to crossover or mutate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:22.13</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>... pointers are what you're looking for, dude :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:22.27</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>well they're pointers to things that are handled elsewhere</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:23.04</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>mebbe write some quick recursive 'count' functions for 'em to see the size, and print those values between iterations?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:23.15</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>or null them out between iterations so valgrind can give you better info</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:24.57</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Yeah that was a really nasty solution there..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:25.12</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>I think when I came up with it, it was just going to be temporary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:25.26</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>but I don't see a better way other than passing it as an argument</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:25.28</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:27.05</tt></td><td><font color="#d3d36f"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/gtools/beset/beset.c: initialize some vars</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.18</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>bah fek</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.21</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: you fixed the comments, but just FYI the user passes a number and that number is treated as a percentage. So it's keep upper n%, but internally I store it as keep upper n where n != n%</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.53</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:36.38</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: so it's a good practice to initalize my variables even if I know they will not be used uninitialized?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:37.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.12</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>gcc's warnings will usually flag that situation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.26</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>it's good practice to have your CFLAGS include something like -W -Wall -Werror -ansi -pedantic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.27</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>yeah I test with -Wall as well as a few others</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.33</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.46</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>sometimes I hate -pedantic though...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.55</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, it's so... pedantic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.29</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's generally good practice as someone down the road might not necessarily be using the same compiler, same conditions, or even worse as the code changes over the years</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.46</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>lies! it shall never change ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.12</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>someone edits the code in a couple years (maybe even yourself) and those same assumptions that "some intermediate call" happened to initialize it may no longer hold</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.23</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>true true.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.27</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>code that never changes generally does so because no one ever uses it...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.35</tt></td><td><font color="#d36f6f"><tt>``Erik</tt></font></td><td width="100%"><tt>I mean, the freakin' LANGUAGE changes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.47</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>sure it's a problem down the road, but it's easy enough to just initialize, makes debugging easier too as they're in a known state at the start of the stack</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.24</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==21574== 15,531,368 (74,128 direct, 15,457,240 indirect) bytes in 31 blocks are definitely lost in loss record 10 of 10</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==21574==&nbsp;&nbsp;&nbsp;&nbsp;at 0x40227EF: calloc (vg_replace_malloc.c:279)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.30</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==21574==&nbsp;&nbsp;&nbsp;&nbsp;by 0x4759652: bu_alloc (malloc.c:284)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.33</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==21574==&nbsp;&nbsp;&nbsp;&nbsp;by 0x4760078: bu_ptbl_init (ptbl.c:77)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.35</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>==21574==&nbsp;&nbsp;&nbsp;&nbsp;by 0x42453BD: rt_init_resource (prep.c:648</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.28</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>one step at a time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.29</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Goes up ~1mb/s</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.35</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.46</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>did the printf's go away?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.14</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>no.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.35</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>so there's still something there, I'm just not seeing it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.44</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>something where? in my stuff?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.53</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>if it was just some glibc issue, it'd be on other printf's</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.18</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's on a specific one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.18</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>true</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.23</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>it could be possible it is uninitialized</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.23</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's valgrind giving you a hint</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.28</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>but the program outputs reasonable results</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.02</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>eek. 82C. (doing a larger run</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.03</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.58</tt></td><td><font color="#d3d36f"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/gtools/beset/ (beset.c beset.h population.c population.h): no need to malloc a single struct once, just use it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.04</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>fstate?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.54</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's another one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.58</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: longer run: <a href="http://rafb.net/p/JWdT8589.html">http://rafb.net/p/JWdT8589.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.32</tt></td><td><font color="#d3d36f"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03poolio * 10brlcad/src/gtools/beset/population.c: some documentation. re-initialize global vars every iteration.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.42</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: are you dealing with fstate? I can do that if you want</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.56</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>go for it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.07</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.16</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>eek I broke something.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.57</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: going to pick up car, back in 10</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.11</tt></td><td><font color="#d3d36f"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/gtools/beset/ (beset.c population.c): quell several warnings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.14</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>be sure to update, I think I missed some parens on that first update</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.18</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>cya</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.06</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr><td><tt>21:21.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016141081.customer.alfanett.no)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.30</tt></td><td><font color="#5bae5b"><tt>poolio</tt></font></td><td width="100%"><tt>Bad magic number in re_solid_btiv list</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:13.53</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: are you compiled optimized or debug?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:28.17</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>some big issue with your usage of the resource structure, curious to see how things look after refactoring fstate</tt></td></tr>
-<tr><td><tt>23:28.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:09.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: yes, profile (gprof), valgrind, write
+isolated unit test cases (that just test ONE function), and then
+polish your code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>those four steps should reveal at least a few
+issues if not many (particularly the isolated unit tests and
+valgrind)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.42</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Well, I don't think there is really an issue.
+I can't see anything is wrong. Speed is something that I could look
+at with profiling, but as far as I can see it's working fine, the
+algorithm just isn't doing too great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's not to find an issues, that's just due
+diligence on any code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Wait, so you're saying I should profile
+anyway?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>all code could ideally have all four of those
+cases written.. and they very OFTEN do uncover entirely unexpected
+issues</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.51</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>alright. I'll get on that.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>plus it's just good a exercise to get
+proficient in, particularly if you've never done it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the configure option --enable-profile will
+turn on the gprof profile flag</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>use that with debugging symbols
+enabled</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then run gprof and your program name in the
+dir with the gmon.out log and it'll generate a report -- see the
+web for some tutorials, manpage for docs, etc .. there are a lot of
+options</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>undoubtedly, it will be spending a ton of time
+in the ray evaluation routines as you're very much cpu-bound, but
+there could be some surprises</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.57</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>alrighty. there's still some code clean up
+that I may do first, but that sounds good.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'd suggest running valgrind before doing
+gprof</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.27</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>but I mean shouldn't I still be going for
+getting better results out of the GA?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this will be a good "breather" for a day or
+two :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.49</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: yeah the issue with valgrind is it
+seperates the reports with each thread</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.00</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>heh, dont have time for a breather
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so run it single threaded first :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's a few things it'll likely report in
+librt itself that don't clean up on exit, and those are known/can
+be ignored</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.53</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:21.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>otherwise it should be nearly a clean/empty
+report</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there should be zero "definitely lost"
+leaks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even in system libs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.49</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==14776== ERROR SUMMARY: 0 errors from 0
+contexts (suppressed: 17 from 1)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.24</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>what's left on the 7.10.2 checklist,
+yo?</tt></td>
+</tr>
+<tr>
+<td><tt>00:54.59</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dtidrow
+(n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.12</tt></td>
+<td><span class="c7"><tt>louipc</tt></span></td>
+<td width="100%"><tt>is there a point where you'll check that it
+builds nicely before release?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:20.29</tt></td>
+<td><span class="c7"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I'd like to check if it works on archlinux,
+last time it didn't work so I didn't update the pkg. I didn't feel
+like patching it from heh. :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.59</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: I don't think my timer is fast
+enough...?</tt></td>
+</tr>
+<tr>
+<td><tt>04:19.07</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dtidrow
+(n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:01.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad CIA-29
+(n=CIA@208.69.182.149)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:40.43</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Laniakea
+(i=clock@217-162-228-71.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:34.20</tt></td>
+<td><span class="c8"><tt>Laniakea</tt></span></td>
+<td width="100%"><tt>msg -lugs tarzeau do you wear contact
+lenses?</tt></td>
+</tr>
+<tr>
+<td><tt>10:00.54</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad poolio
+(n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:01.43</tt></td>
+<td><span class="c8"><tt>Laniakea</tt></span></td>
+<td width="100%"><tt>omg</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:11.55</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>morning?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:11.56</tt></td>
+<td><span class="c9"><tt>tarzeau</tt></span></td>
+<td width="100%"><tt>Laniakea: sometimes?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:12.03</tt></td>
+<td><span class="c9"><tt>tarzeau</tt></span></td>
+<td width="100%"><tt>Laniakea: you got an irc problem?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:13.53</tt></td>
+<td><span class="c8"><tt>Laniakea</tt></span></td>
+<td width="100%"><tt>tarzeau: no I left out the /</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:14.17</tt></td>
+<td><span class="c8"><tt>Laniakea</tt></span></td>
+<td width="100%"><tt>tarzeau: see query</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:14.22</tt></td>
+<td><span class="c8"><tt>Laniakea</tt></span></td>
+<td width="100%"><tt>(on lugs)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:26.00</tt></td>
+<td><span class="c8"><tt>Laniakea</tt></span></td>
+<td width="100%"><tt>tarzeau: do you see my query? You are not
+responding</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:26.12</tt></td>
+<td><span class="c9"><tt>tarzeau</tt></span></td>
+<td width="100%"><tt>wait</tt></td>
+</tr>
+<tr>
+<td><tt>11:30.31</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elite01
+(n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:44.03</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad b0ef
+(n=b0ef@062016141081.customer.alfanett.no)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:44.43</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad AchiestDragon
+(n=david@whipy.demon.co.uk)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:57.50</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad thing0
+(n=ric@210-84-29-115.dyn.iinet.net.au)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:59.38</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elite01
+(n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:52.15</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elite01
+(n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:06.58</tt></td>
+<td colspan="2"><tt><span class="c10">*** part/#brlcad thing0
+(n=ric@210-84-29-115.dyn.iinet.net.au)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:37.01</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>louipc: the last step before release is to
+take the candidate tarball to a slew of os/arch combos and make
+sure it compiles, runs benchmark, and does a fistful of things in
+mged... which I *THINK* is what brlcad is sorta doing now</tt></td>
+</tr>
+<tr>
+<td><tt>14:02.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elite01
+(n=elite01@dslc-082-082-076-163.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:04.09</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dtidrow
+(n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:27.06</tt></td>
+<td><span class="c11"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald *
+10brlcad/src/libtclcad/ (Makefile.am tkCanvBezier.c): actually
+remove tkCanvBezier.c as it's no longer used</tt></td>
+</tr>
+<tr>
+<td><tt>14:45.56</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad poolio
+(n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.48</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: is there a way to identify what data
+structure is eating away at the memory?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.05</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Like I know I have a memory leak somewhere I'm
+just having a hard time finding it by hand</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>depends on the nature of the leak -- if it is
+a true leak, valgrind should have found it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what was the rest of valgrind's report --
+errors aren't the only part</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.14</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>memcheck whines about stuff internal to
+librt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.45</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Oh woah, it changed since the last time I ran
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:06.30</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>hmm. I have a bunch of definitely lost bytes
+:\</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:15.56</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if valgrind and boehm don't find them, they're
+still reachable by something in the frame stack</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:16.57</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well valgrind found some</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.03</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>but it doesn't make senes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.04</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>e</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.37</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>``Erik: <a href=
+"http://rafb.net/p/eCHfmb31.html">http://rafb.net/p/eCHfmb31.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>might not make sense but i've yet to see
+valgrid be wrong :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.26</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>It's saying that rt_init_resource is leaking,
+but I rt_clean the resources for sure...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.58</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Yeah yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that one is known</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.08</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>alright, so that's all normal?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the ptbl ones can be ignored</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there is no counterpart to
+rt_init_resource</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so items it allocated are never
+freed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.56</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Well that's a big issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.09</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Because I re-allocate resources every time I
+raytrace a new individual</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.25</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>what about rt_clean_resource() ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that should be fine, it releases if you call
+init again</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.53</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>so I don't need to run rt_clean_resources()
+?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no, you should</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.31</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Ok, and what about the rt_gettree
+one?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there could be a leak in rt_clean_resources(),
+I'll look into it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's one that shouldn't be there</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.36</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I'm calling it so much, the leaks just get
+bigger and bigger</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you've not freed the item from rt_gettree() I
+believe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.29</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Well, I rt_gettree() into some rtip, and I
+rt_free_rti() that rtip. So shouldn't that take care of
+it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.23</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad:  and this? <a href=
+"http://rafb.net/p/vhqFb112.html">http://rafb.net/p/vhqFb112.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>now that's a huge leak</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.56</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>shouldn't rt_free_rti() take care of that
+too?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:29.52</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I feel like there's something I need to do
+with the rtip besides rt_free_rti()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:29.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in general, no -- rt_free_rti only free's the
+rti itself, not objects the rti holds</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:30.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>as there can be multiple instances and other
+issues at play</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:31.01</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>ah alright. So I need to somehow free the
+structures rt_gettree() creates as well as rt_prep() ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't know for sure for these two cases, so
+I'm looking -- you take the big one, i'll take the little one
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.38</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>alrighty</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it could be a librt leak with certain calling
+order or some free not being called that your code needs to be
+doing, hard to say without tracing the leak</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>make no assumptions, just follow the memory
+and read the code that relates to it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.25</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:37.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, are you used CVS head?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:37.34</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:37.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hmm.. my line numbers aren't matching
+yours</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:37.56</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Hmm, haven't updated for a little
+while</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:38.06</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>guess I can do that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:38.30</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>let me know if db_tree.c updates</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:40.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>louipc: I've got clean builds so feel free to
+test and let me know if you have build issues on your end</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:41.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: i've not got a solaris on hand if you
+want to test them out</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:41.31</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: yeah it changed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:41.52</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: Ah, I think it's that I hadn't updated
+since you changed the copyright comments last week</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:42.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ahh, okay</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:42.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that sounds about right offset-wise</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:42.27</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>new report would be good to see</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:43.40</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>ah wait</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:43.46</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I need to recompile dont I</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.29</tt></td>
+<td><span class="c11"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03poolio * 10brlcad/src/gtools/beset/
+(fitness.c population.c population.h): more mutation support and
+cosmetics</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.59</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.31</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>this is gonna take a while :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:51.27</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>grargh what did I break?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:51.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>make: *** No rule to make target
+`m4/restore.m4', needed by `Makefile.in'.  Stop.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.02</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>fixed.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.12</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: even with rt_clean() I get the memory
+leaks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.45</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Which doesn' tmake sense, it looks like
+rt_clean() frees _all_ the dynamic structures inside of the
+rtip.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:03.08</tt></td>
+<td><span class="c12"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Valgrind, boehm... Personally, I found that
+the best tool to investigate memory leaks is a wrapper around
+malloc/free/realloc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:05.15</tt></td>
+<td><span class="c12"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>BRL-CAD of course has an interface on top of
+these, but I haven't looked if it can be used to trace
+leaks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:08.56</tt></td>
+<td><span class="c12"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>( The pseudo-function to get addresses of
+calling functions, useful for such debugging, is a GCC extension
+though )</tt></td>
+</tr>
+<tr>
+<td><tt>17:20.03</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad IriX64
+(n=mariodot@bas2-sudbury98-1128565171.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:20.46</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>boehm is a wrapper that stubs in place of
+malloc/free/realloc/calloc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:24.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>libbu does have it's own memory bounds
+checking that works pretty well</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:24.41</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>bounds, yes, but does it retain alloc lists
+and look for 'forgotten' bits?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:25.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i tend to prefer valgrind's even over the
+*alloc/free wrappers though as it generally does a much better job
+and often detects things that other approaches
+won't/can't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:25.49</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>valgrind seems pretty married to leenewx,
+though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:26.00</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>efence, boehm, ccmalloc, dmalloc... those're
+pretty portable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:28.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sushi:~/brlcad morrison$ ./a.out 300120 malloc
+    20 alloc 300128 free          free</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:28.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ERROR bu_free(x300128, free) pointer bad, or
+not allocated with bu_malloc!  Ignored.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:29.27</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ah, so bu keeps its own malloc info ontop of
+the system malloc info</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:29.39</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*ponder*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:30.01</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>free(bu_malloc()-bumallocstructsize);
+hehehehe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:30.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://pastebin.bzflag.bz/m2661afe4">http://pastebin.bzflag.bz/m2661afe4</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:31.50</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- gonna build sunos 5.8 using gnu
+toolchain first, then if that works, try sunwpro</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:32.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sounds good, what I usually do too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:32.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cause if sunwpro doesn't work, not a big deal
+.. so long as one of the two does easily</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and if it just requires a few tweaks, it can
+always be annotated in doc/README.Solaris</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.27</tt></td>
+<td><span class="c13"><tt>IriX64</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www3.sympatico.ca/mario.dulisse2/castle.png">http://www3.sympatico.ca/mario.dulisse2/castle.png</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.30</tt></td>
+<td><span class="c13"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.57</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>now back in the day, it was a beefy machine...
+I must be gettin' spoiled, dual 450mhz usparcIIi just seems
+sssssooooooo ssssssllllllooooooowwwwwwww</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the reason valgrind tends to do better than
+the wrappers is why it's (unfortunately) linux-specific ..
+performance counters and other low-level issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.09</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*nod*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.13</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.19</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>there's one in chud, right?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.27</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>not bigtop, um, ... hrm, not saturn I don't
+think</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.30</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, it's not too shabby either</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.39</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the frankenstein one?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, something like that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>two of them actually</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.54</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one that watches cocoa memory
+allocations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>another that watches all allocations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.02</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- has used shark and the ogl profiler,
+not the others really</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.11</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and shark usually from the command
+line</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i've only used it a couple times to notice
+that it was pretty cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>shark from the command line .. o.O</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.30</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>shark -i ./myprog ; open *mshark</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ah, heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.11</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: any luck?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: was waiting on the new report, or did
+I miss it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.52</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>hehe, it's on the way, one sec</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so line numbers match up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.59</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah sorry</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:38.07</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>make just finished :\</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:38.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pretty sure I see the offsets, but I'd rather
+not guess</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:41.19</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>rawr! I set the wrong prefix and now I have to
+rebuild. d'oh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:42.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hehe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:42.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you don't have to install</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:42.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can run in place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:42.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just have to be sure to wrap correctly so it
+doesn't pick up installed libs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:44.09</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah but I already uninstalled
+previous</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:44.18</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>and I'd like to have it installed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:44.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>so I'll just do some more code clea
+up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:45.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>gah, silly system doesn't have a functional
+64-bit libX11, but *does* have functional 64-bit libGL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:45.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's really fscked up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:46.53</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:46.54</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>can 64bit libGL even function without a 64bit
+X11?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:47.09</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if it has another display path, sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.09</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.15</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>"Frist Post!!!11eleven!!!1"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:54.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm, probably just need to make the OGL
+interface check for both ogl and x11 since it's really
+x11-specific</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:56.26</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>ahhhhhhhhhhhh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:56.30</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>my laptops at 83C</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:56.35</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>my legs burn.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:59.37</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>man, that pastebin sucks, it doesn't have 
+syntax highlighting for uh.. uhhhhh.... uhhhhhhhh....
+erlang!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:59.50</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>haha</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:59.51</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(damn that's a lot of highlighting
+options)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:00.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:00.32</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://rafb.net/p/w7nvet33.html">http://rafb.net/p/w7nvet33.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:02.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>thx</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:02.29</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hum, no captcha, wonder how long before it
+starts seeing spam</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:03.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah figured id just see how long it
+takes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:16.56</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>into liboptical on solaris with the gnu
+chain</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:35.58</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: I really fail to see why when using
+rt_clean() there's still a memory leak according to
+valgrind</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:59.41</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: it's also giving me a lot of whining
+about unitialized values that are for sure initialized</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:00.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>example of one?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.48</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==20025== Conditional jump or move depends on
+uninitialised value(s)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.48</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==20025==    at 0x491F397: __printf_fp (in
+/lib/i686/cmov/libc-2.5.so)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.55</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:02.07</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==20025==    by 0x8049578: main
+(beset.c:170)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:02.47</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>And 27 more of those same contexts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:03.12</tt></td>
+<td><span class="c13"><tt>IriX64</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www3.sympatico.ca/mario.dulisse2/7.10.1.png">http://www3.sympatico.ca/mario.dulisse2/7.10.1.png</a>
+ :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:03.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: Can I just pastebin the whole
+output?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:03.30</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that smells like gnu suckism</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:03.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: yes please</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:04.25</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://rafb.net/p/JlQa3L28.html">http://rafb.net/p/JlQa3L28.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:05.42</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>All of the still reachable blocks are leaked I
+think</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:10.59</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Alright, but there's still massive memory
+leaks somewhere</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:11.16</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I think the amount of memory leaked is
+proportional to the population size</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:11.20</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>that doesn't help much though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:12.06</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>line 556 seems to be the biggy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:12.47</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>You mean 566?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:12.55</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad said 556 was known</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:12.57</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, sorry</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.07</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the gettree stuff</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.12</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.20</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>shouldn't rt_clean() properly free that stuff?
+it looked like it did</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:14.07</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>man, solaris is wigging out my nfs server
+here, heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:15.50</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>huh, why is it count+1? (</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.41</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>where?</tt></td>
+</tr>
+<tr>
+<td><tt>19:18.49</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dtidrow
+(n=dtidrow@host131.objectsciences.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.02</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>``Erik: oh, it includes the current node as
+part of the count so that it plays nicely with
+db_count_tree_nodes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.24</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.58</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>``Erik: were you referencing the return
+1+n1+n2?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:21.28</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>src/librt/tree.c:233 :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:22.06</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>aha! so that's never being free'd?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:22.37</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>prep has some free's around there, mebbe it's
+missing those cases</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:23.53</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>are you calling rt_clean() or rt_del_regtree()
+?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:24.01</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>rt_clean()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:24.03</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hrm, ye syou are</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:24.45</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>librt/prep.c:891 should be taking care of that
+:/</tt></td>
+</tr>
+<tr>
+<td><tt>19:24.47</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Laniakea
+(i=clock@217-162-228-71.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.42</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ahhh, the +1 is to dump in a null
+terminator</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:28.00</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hummmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:28.55</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>you might hack up librt, have a static counter
+initialized to zero, inc it in tree.c and dec it in prep.c and
+after the rt_clean, see what that # is, then set it to 0 if you'r
+egoing to make another pass?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:29.02</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>But still, try running the program, it goes
+crazy with memory, talking a couple hundred megs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:29.37</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>``Erik: hmm worth a shot, I'll have a
+go</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:29.38</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>to see if you're alloc'ing different amounts?
+it may be that you get a failed alloc in the middle of the alloc
+loop, and the dealloc stops at the fail instead of the
+end?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:31.13</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that's only 650k, it lists 420 megs as still
+reachable at the end</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:31.20</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, accidently msg'd that to brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.39</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah, the 420megs it's what's messed
+up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.42</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>let me re-run valgrind</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.57</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if it's reachable, valgrind won't magically
+find it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:34.05</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I mean, you grok what it means,
+right?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:36.29</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>grok?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:38.10</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>understand... really well...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:39.46</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>reachable means there's still a pointer to it
+but it wasn't freed at exit, right?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:41.59</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad/``Erik: it looks like the big memory
+leak is also related to the bu_ptbl_init</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:49.46</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>well, it's free'd at exit() (or, rather,
+_exit() or whatever exit() calls)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.15</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah the issue is it fills up my memory during
+run-time and I need to free it before exit()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.20</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>but it means that there is still a legitimate
+way to get to that allocated data via the current stack, globals,
+or statics</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.33</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'd hope you're not using globals or
+statics</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.46</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>mmmmmaayyyyyyybeeeee</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.49</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I thought you had to free it between
+iterations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.57</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>free what?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.02</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Well yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.06</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>that'd be true, during iterations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.07</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the mountains of iteration specific data?
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.10</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>*in-between as you said</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.31</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>having reachable data at exit() isn't a bad
+thing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.52</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>no modern OS has system leaks from os space
+anymore, I think an early win95 was the last to do that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:51.52</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I understand, but I have _too much_ reachable
+data at exit()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:52.24</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>is it building up over iterations? like from
+not freeing iteration specific stuff?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.07</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Seems like it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.23</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>The longer it runs the greater the memory
+used</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.39</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>And the amount of data the program should be
+using shouldn't be growing from iteration to iteratin</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.44</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the results you posted are from a single
+iteration?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.49</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:53.52</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I think there were like 10</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:54.04</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I need to go help jump my mom's car, I'll be
+back in a bit.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:13.22</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>k, i'm back</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:13.29</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: so any ideas?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>is pop-&gt;parent[0] the best or worst after
+sorting</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.44</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: worst</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:20.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:21.26</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the globals in population.c would be my best
+guess for growth at this moment...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:21.41</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>``Erik: Yeah...but they're just
+pointers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:21.59</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I use them when searching for individuals to
+crossover or mutate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:22.13</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>... pointers are what you're looking for, dude
+:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:22.27</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well they're pointers to things that are
+handled elsewhere</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:23.04</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>mebbe write some quick recursive 'count'
+functions for 'em to see the size, and print those values between
+iterations?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:23.15</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>or null them out between iterations so
+valgrind can give you better info</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:24.57</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Yeah that was a really nasty solution
+there..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:25.12</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I think when I came up with it, it was just
+going to be temporary</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:25.26</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>but I don't see a better way other than
+passing it as an argument</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:25.28</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:27.05</tt></td>
+<td><span class="c11"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad *
+10brlcad/src/gtools/beset/beset.c: initialize some vars</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.18</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>bah fek</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.21</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: you fixed the comments, but just FYI
+the user passes a number and that number is treated as a
+percentage. So it's keep upper n%, but internally I store it as
+keep upper n where n != n%</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:36.38</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: so it's a good practice to initalize
+my variables even if I know they will not be used
+uninitialized?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:37.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.12</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>gcc's warnings will usually flag that
+situation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.26</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>it's good practice to have your CFLAGS include
+something like -W -Wall -Werror -ansi -pedantic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.27</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah I test with -Wall as well as a few
+others</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.33</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>``Erik: :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.46</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>sometimes I hate -pedantic though...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.55</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yeah, it's so... pedantic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:39.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's generally good practice as someone down
+the road might not necessarily be using the same compiler, same
+conditions, or even worse as the code changes over the
+years</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:39.46</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>lies! it shall never change ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>someone edits the code in a couple years
+(maybe even yourself) and those same assumptions that "some
+intermediate call" happened to initialize it may no longer
+hold</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.23</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>true true.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.27</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>code that never changes generally does so
+because no one ever uses it...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.35</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I mean, the freakin' LANGUAGE
+changes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure it's a problem down the road, but it's
+easy enough to just initialize, makes debugging easier too as
+they're in a known state at the start of the stack</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.24</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==21574== 15,531,368 (74,128 direct,
+15,457,240 indirect) bytes in 31 blocks are definitely lost in loss
+record 10 of 10</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==21574==    at 0x40227EF: calloc
+(vg_replace_malloc.c:279)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.30</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==21574==    by 0x4759652: bu_alloc
+(malloc.c:284)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.33</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==21574==    by 0x4760078: bu_ptbl_init
+(ptbl.c:77)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.35</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>==21574==    by 0x42453BD: rt_init_resource
+(prep.c:648</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one step at a time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.29</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Goes up ~1mb/s</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.35</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>did the printf's go away?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.14</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>no.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so there's still something there, I'm just not
+seeing it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.44</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>something where? in my stuff?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it was just some glibc issue, it'd be on
+other printf's</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's on a specific one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.18</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>true</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.23</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>it could be possible it is
+uninitialized</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's valgrind giving you a hint</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.28</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>but the program outputs reasonable
+results</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.02</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>eek. 82C. (doing a larger run</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.03</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:50.58</tt></td>
+<td><span class="c11"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/gtools/beset/
+(beset.c beset.h population.c population.h): no need to malloc a
+single struct once, just use it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.04</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>fstate?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.54</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's another one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.58</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: longer run: <a href=
+"http://rafb.net/p/JWdT8589.html">http://rafb.net/p/JWdT8589.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:57.32</tt></td>
+<td><span class="c11"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03poolio *
+10brlcad/src/gtools/beset/population.c: some documentation.
+re-initialize global vars every iteration.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.42</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: are you dealing with fstate? I can do
+that if you want</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:00.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>go for it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:01.07</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.16</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>eek I broke something.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:07.57</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: going to pick up car, back in
+10</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.11</tt></td>
+<td><span class="c11"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/gtools/beset/
+(beset.c population.c): quell several warnings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>be sure to update, I think I missed some
+parens on that first update</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cya</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.06</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr>
+<td><tt>21:21.56</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad b0ef
+(n=b0ef@062016141081.customer.alfanett.no)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.30</tt></td>
+<td><span class="c4"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Bad magic number in re_solid_btiv
+list</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:13.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: are you compiled optimized or
+debug?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:28.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>some big issue with your usage of the resource
+structure, curious to see how things look after refactoring
+fstate</tt></td>
+</tr>
+<tr>
+<td><tt>23:28.45</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Twingy
+(n=justin@74.92.144.217)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

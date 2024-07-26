@@ -1,76 +1,310 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20180311</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20180311</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c6 {color: #B9B961}
+ span.c5 {color: #D9D972}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #C3C366}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20180311</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>01:19.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>01:19.42</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD and open source CAx discussion ! Also @ <a href="http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> ! Logs @ <a href="http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></font></tt></td></tr>
-<tr><td><tt>01:33.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad odqeywdqlmgagnir (~armin@dslb-088-066-132-181.088.066.pools.vodafone-ip.de)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.24</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>Okay, I think I have got a basic idea how librt works.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.51</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>Appleseed uses boost::thread for multithreading. It divides an image into tiles and render each tile in separate thread. ( = pixel parallelization and not ray parallelization)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.08</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>Back to brl-cad. I believe each thread must have a separate resource structure to use rt_shootray() and all we can get from Appleseed is current thread's id (via boost::this_thread::get_id()).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.23</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>So, here's how I run rt_shootray() in multiple threads right now:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.40</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>I have got a BrlcadProceduralObject. It contains rt_i structure (which is initialized in the constructor); an array of resources for different threads; std::set for threads' Ids; a mutex&nbsp;&nbsp;(boost::mutex). In intersection function before calling rt_shootray(), I lock the mutex, add curent thread's id to the set,&nbsp;&nbsp;get the index for curent thread's resource structure, assign it to the application structure, unlock the mutex and call rt_s</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.36</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>But it's probably not the best way to do this. Of course the whole mutex routine is not really computationally expensive compared to rt_shootray for large scenes, but still it's gonna be called pixels*samples times (plus additional pixels from tiles' overlaps) plus threads are gonna block each other a little. And resource assignment probably could be done more efficiently without std::set.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.44</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>But at least it's something to start with.</tt></td></tr>
-<tr><td><tt>04:13.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:17.33</tt></td><td><font color="#d9d972"><tt>Stragus</tt></font></td><td width="100%"><tt>Locking a mutex for every ray is some crazy overhead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:18.19</tt></td><td><font color="#d9d972"><tt>Stragus</tt></font></td><td width="100%"><tt>You should be able to buffer results in preallocated arrays without any mutex</tt></td></tr>
-<tr><td><tt>05:21.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Radicarian (~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:25.28</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>&gt;is some crazy overhead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:25.33</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>Yeah, I thought so too at first.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.20</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>And what results? I use mutex for choosing a proper resource. There's nothing except thread's id as an input. And resources are allocated in the constructor.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.28</tt></td><td><font color="#d9d972"><tt>Stragus</tt></font></td><td width="100%"><tt>I missed some parts, what do you need/want to do with the ray tracing results?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.50</tt></td><td><font color="#d9d972"><tt>Stragus</tt></font></td><td width="100%"><tt>(what comes out of rt_shootray() )</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:28.39</tt></td><td><font color="#d9d972"><tt>Stragus</tt></font></td><td width="100%"><tt>Considering each CPU core can trace many million rays per second, there must be no per-ray memory allocation or per-ray mutex locking</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:28.57</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>I have got no problems with results.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:29.22</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>The problem is a correct resource allocation for different threads</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:32.50</tt></td><td><font color="#d9d972"><tt>Stragus</tt></font></td><td width="100%"><tt>I guess I'm lacking too much contextual information to comment properly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:32.54</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>In librt when rt_shootray is used in parallel, the resources are assigned at the start. And with appleseed without rewriting appleseed's core I believe the only way to assign allocated resources is with thread's id.</tt></td></tr>
-<tr><td><tt>08:03.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>08:04.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>08:05.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>08:06.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>08:06.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>13:49.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>14:50.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SaranNarayan (1b611e37@gateway/web/freenode/ip.27.97.30.55)</font></tt></td></tr>
-<tr><td><tt>16:29.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
-<tr><td><tt>16:46.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>17:58.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness (uid10044@gateway/web/irccloud.com/x-vplselmngmbimrpq)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.50</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP: so you have a solution, mutext locking when getting resources, which is fine for getting started but obviously not ideal</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.19</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>another trick that eliminates the overhead is to simply create a large array of resources (e.g., struct resource r[MAX_PSW]) and then just access get_id() % MAX_PSW</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:54.11</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>of course, that's not guaranteed but in practice (for development) that works &gt;90% of the time, so also good enough for testing/development</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:54.51</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>the real fix needed requires a mod to appleseed, they need to set the thread ID during creation and make that accessible to the threads in some manner</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:58.21</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>for gsoc planning, that's probably last on the priority list given the other two alternatives get things going</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:11.42</tt></td><td><font color="#c3c366"><tt>DenisP</tt></font></td><td width="100%"><tt>yeah, I agree</tt></td></tr>
-<tr><td><tt>21:12.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Radicarian (~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</font></tt></td></tr>
-<tr><td><tt>23:05.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness (uid10044@gateway/web/irccloud.com/x-qoaueyjaqdhccyka)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>01:19.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad infobot
+(ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:19.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** topic/#brlcad is BRL-CAD
+and open source CAx discussion ! Also @ <a href=
+"http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> !
+Logs @ <a href=
+"http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></span></tt></td>
+</tr>
+<tr>
+<td><tt>01:33.16</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad
+odqeywdqlmgagnir
+(~armin@dslb-088-066-132-181.088.066.pools.vodafone-ip.de)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:09.24</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Okay, I think I have got a basic idea how
+librt works.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:09.51</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Appleseed uses boost::thread for
+multithreading. It divides an image into tiles and render each tile
+in separate thread. ( = pixel parallelization and not ray
+parallelization)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:10.08</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Back to brl-cad. I believe each thread must
+have a separate resource structure to use rt_shootray() and all we
+can get from Appleseed is current thread's id (via
+boost::this_thread::get_id()).</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:10.23</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>So, here's how I run rt_shootray() in multiple
+threads right now:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:10.40</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>I have got a BrlcadProceduralObject. It
+contains rt_i structure (which is initialized in the constructor);
+an array of resources for different threads; std::set for threads'
+Ids; a mutex  (boost::mutex). In intersection function before
+calling rt_shootray(), I lock the mutex, add curent thread's id to
+the set,  get the index for curent thread's resource structure,
+assign it to the application structure, unlock the mutex and call
+rt_s</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:11.36</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>But it's probably not the best way to do this.
+Of course the whole mutex routine is not really computationally
+expensive compared to rt_shootray for large scenes, but still it's
+gonna be called pixels*samples times (plus additional pixels from
+tiles' overlaps) plus threads are gonna block each other a little.
+And resource assignment probably could be done more efficiently
+without std::set.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:11.44</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>But at least it's something to start
+with.</tt></td>
+</tr>
+<tr>
+<td><tt>04:13.53</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:17.33</tt></td>
+<td><span class="c5"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Locking a mutex for every ray is some crazy
+overhead</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:18.19</tt></td>
+<td><span class="c5"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>You should be able to buffer results in
+preallocated arrays without any mutex</tt></td>
+</tr>
+<tr>
+<td><tt>05:21.55</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Radicarian
+(~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:25.28</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>&gt;is some crazy overhead</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:25.33</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Yeah, I thought so too at first.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:26.20</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>And what results? I use mutex for choosing a
+proper resource. There's nothing except thread's id as an input.
+And resources are allocated in the constructor.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:27.28</tt></td>
+<td><span class="c5"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I missed some parts, what do you need/want to
+do with the ray tracing results?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:27.50</tt></td>
+<td><span class="c5"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>(what comes out of rt_shootray() )</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:28.39</tt></td>
+<td><span class="c5"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Considering each CPU core can trace many
+million rays per second, there must be no per-ray memory allocation
+or per-ray mutex locking</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:28.57</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>I have got no problems with results.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:29.22</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>The problem is a correct resource allocation
+for different threads</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:32.50</tt></td>
+<td><span class="c5"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I guess I'm lacking too much contextual
+information to comment properly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:32.54</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>In librt when rt_shootray is used in parallel,
+the resources are assigned at the start. And with appleseed without
+rewriting appleseed's core I believe the only way to assign
+allocated resources is with thread's id.</tt></td>
+</tr>
+<tr>
+<td><tt>08:03.41</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:04.31</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:05.16</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:06.09</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:06.54</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:49.12</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:50.36</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad SaranNarayan
+(1b611e37@gateway/web/freenode/ip.27.97.30.55)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:29.16</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DenisP
+(d40d70a2@gateway/web/freenode/ip.212.13.112.162)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:46.53</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:58.36</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad witness
+(uid10044@gateway/web/irccloud.com/x-vplselmngmbimrpq)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:51.50</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP: so you have a solution, mutext locking
+when getting resources, which is fine for getting started but
+obviously not ideal</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:53.19</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>another trick that eliminates the overhead is
+to simply create a large array of resources (e.g., struct resource
+r[MAX_PSW]) and then just access get_id() % MAX_PSW</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:54.11</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of course, that's not guaranteed but in
+practice (for development) that works &gt;90% of the time, so also
+good enough for testing/development</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:54.51</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the real fix needed requires a mod to
+appleseed, they need to set the thread ID during creation and make
+that accessible to the threads in some manner</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:58.21</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for gsoc planning, that's probably last on the
+priority list given the other two alternatives get things
+going</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:11.42</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>yeah, I agree</tt></td>
+</tr>
+<tr>
+<td><tt>21:12.29</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Radicarian
+(~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:05.55</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad witness
+(uid10044@gateway/web/irccloud.com/x-qoaueyjaqdhccyka)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

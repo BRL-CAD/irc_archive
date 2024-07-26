@@ -1,112 +1,515 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20080213</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20080213</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c10 {color: #C5C567}
+ span.c9 {color: #B05CB0}
+ span.c8 {color: #5DB15D}
+ span.c7 {color: #E2E277}
+ span.c6 {color: #73DA73}
+ span.c5 {color: #7373DC}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #6F6FD4}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20080213</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>01:26.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vedge (i=vedge@ubar.csoft.net)</font></tt></td></tr>
-<tr><td><tt>04:07.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@host81-149-119-172.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:24.42</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>yukonbob: that's news to me -- they should be strings that Tcl manages with error messages in them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:25.01</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>they can be error messages for *anything*, similar to errno</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.44</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>in mged (at least on the C side), it should only get reported during dbopen and parsing the .mgedrc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:34.31</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>and I don't see anything of relevance on the tcl side either ..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:24.11</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: try this:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:24.22</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>proc vartrace {n1 n2 op} { puts "$n1: $op -- [set $n1]"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:24.22</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>}</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:24.36</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>trace add variable errorCode write vartrace</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:24.36</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>trace add variable errorInfo write vartrace</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:36.28</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>... new version:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:36.30</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:36.50</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>proc vartrace {n1 n2 op} { puts "$n1: $op -- $::errorInfo"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:36.50</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>}</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:37.01</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>trace add variable errorInfo write vartrace</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:37.37</tt></td><td><font color="#7373dc"><tt>yukonbob</tt></font></td><td width="100%"><tt>^-- type this into mged, and then watch as you type your commands... see if anything looks familiar (error-wise)</tt></td></tr>
-<tr><td><tt>08:01.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
-<tr><td><tt>09:40.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6_ (n=Axman6@210-11-146-180.netspeed.com.au)</font></tt></td></tr>
-<tr><td><tt>11:00.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@195.37.106.60)</font></tt></td></tr>
-<tr><td><tt>11:52.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016141231.customer.alfanett.no)</font></tt></td></tr>
-<tr><td><tt>13:04.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jgay (n=jgay@fsf/staff/jgay)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:41.46</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>yukonbob: I'm not sure what that's actually showing me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:41.55</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>other than internal tcl garbage</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.09</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm not seeing error messages, just temp junk from the commands</tt></td></tr>
-<tr><td><tt>13:45.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vedge (i=vedge@ubar.csoft.net)</font></tt></td></tr>
-<tr><td><tt>14:12.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslc-082-082-071-033.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>14:12.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54876B89.dip.t-dialin.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.27</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>well I've at least finally traced down the cause of why the opengl framebuffer stopped working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:14.23</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>it was the machine.h change that made smp work on the intel macs .. it was falling through to the static case and that apparently works</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.02</tt></td><td><font color="#73da73"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm, all that trouble cuz we've been putting off moving that functionality into configure.ac :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:26.40</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>that doesn't matter</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:26.51</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>still doesn't explain why it's actually not working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:27.24</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>if it were in configure, it'd still be just as broken because it's getting to the section that *should* be right</tt></td></tr>
-<tr><td><tt>15:43.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jgay (n=jgay@fsf/staff/jgay)</font></tt></td></tr>
-<tr><td><tt>16:07.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matt@74.86.45.130)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.44</tt></td><td><font color="#e2e277"><tt>clock_</tt></font></td><td width="100%"><tt>brlcad: unfortunately the BRL-CAD documentation is not very helpful when it contains errors like this: <a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1892876&amp;group_id=105292&amp;atid=640802">http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1892876&amp;group_id=105292&amp;atid=640802</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:38.35</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>k, thx</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:39.11</tt></td><td><font color="#e2e277"><tt>clock_</tt></font></td><td width="100%"><tt>you're welcome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:39.32</tt></td><td><font color="#e2e277"><tt>clock_</tt></font></td><td width="100%"><tt>I don't mean it as criticism I just want to say it's hard to learn in a situation like this</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:40.02</tt></td><td><font color="#6f6fd4"><tt>brlcad</tt></font></td><td width="100%"><tt>understandably</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:42.52</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30275 10/brlcad/trunk/src/lgt/resource.c: ws and header</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:43.29</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30276 10/brlcad/trunk/src/lgt/do_options.c: cleanup function, unprotect since bu_avail_cpus() does the protection for us.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:47.32</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30277 10/brlcad/trunk/src/lgt/do_options.c: if there's only one proc, don't bother asking</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:50.48</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30278 10/brlcad/trunk/src/lgt/resource.c: wtf, the functions in resource.c arent' even used. get rid of it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:51.28</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30279 10/brlcad/trunk/src/lgt/Makefile.am: remove the unused resource.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.35</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30280 10/brlcad/trunk/src/libbu/parallel.c: make bu_avail_cpus() behave neatly if we're not compiling PARALLEL so that it just returns 1</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30281 10/brlcad/trunk/ (8 files in 6 dirs): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: remove/refactor DEFAULT_PSW from machine.h so that now it's really just up to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: rt_avail_cpus() to report the max and up to the user to decide how many. the</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: default is now consistently set the same for everyone to the number of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.44</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: processors available. if someone needs to re-port to an old CRAY and specifying</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.46</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: -P1 from userland isn't sufficient, we can refactor a bu_default_cpus() routine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.48</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: with better logic. one step closer to removing machine.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:10.40</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30282 10/brlcad/trunk/ (include/machine.h src/libbu/convert.c): get rid of IEEE_FLOAT .. the code didn't actually use it except for one case in 'cv' and was set to 1 for all platforms. if something needs to know, there are configure tests for ieee float.</tt></td></tr>
-<tr><td><tt>19:31.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Z80-Boy (i=clock@77-56-81-29.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.40</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30283 10/brlcad/trunk/ (include/machine.h src/libbu/malloc.c): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.40</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: remove MALLOC_NOT_MP_SAFE from machine.h, moving it to src/libbu/malloc.c and</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.40</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: enabling it for all platforms. there were only a few old platforms that were</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.40</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: not specifically set as malloc-not-mp-safe and it's not clear which of those</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.40</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: were actually verified as safe so just turn it on for all for now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.01</tt></td><td><font color="#5db15d"><tt>CIA-31</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30284 10/brlcad/trunk/src/rt/ (Makefile.am scat.h): scat.h seems to be completely unused, remove it</tt></td></tr>
-<tr><td><tt>22:09.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-4 (n=CIA@208.69.182.149)</font></tt></td></tr>
-<tr><td><tt>22:48.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezzKennedy (i=Matt@74.86.45.130)</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezzKennedy (i=Matt@74.86.45.130) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016141231.customer.alfanett.no) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (n=yukonbob@198.235.198.234) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=CY@c-68-33-217-173.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad curious (i=curious@gjv234.internetdsl.tpnet.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (n=MinuteEl@silentflame/member/pdpc.base.minuteelectron) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>22:55.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad toxygen (i=toxygen@stip-static-98.213-81-186.telecom.sk) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:09.10</tt></td><td><font color="#b05cb0"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30285 10/brlcad/trunk/src/libbu/parallel.c: ansify</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:10.09</tt></td><td><font color="#b05cb0"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30286 10/brlcad/trunk/ (3 files in 2 dirs): remove FOPEN_MAX from machine.h, moving it over to the only single place it's used over in libtermio.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:16.23</tt></td><td><font color="#b05cb0"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30287 10/brlcad/trunk/include/ (bu.h machine.h): with the exception of the convex (where it was 'long long'), bitv_t was set to 'long' for all platforms. so move the bitv_t typedef out of machine.h and into bu.h</tt></td></tr>
-<tr><td><tt>23:56.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Genestealer (n=dennis@pool-71-112-78-93.sttlwa.dsl-w.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:56.31</tt></td><td><font color="#c5c567"><tt>Genestealer</tt></font></td><td width="100%"><tt>hey peoples</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>01:26.08</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad vedge
+(i=vedge@ubar.csoft.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>04:07.38</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad archivist
+(n=archivis@host81-149-119-172.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:24.42</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yukonbob: that's news to me -- they should be
+strings that Tcl manages with error messages in them</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:25.01</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they can be error messages for *anything*,
+similar to errno</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:27.44</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in mged (at least on the C side), it should
+only get reported during dbopen and parsing the .mgedrc</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:34.31</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and I don't see anything of relevance on the
+tcl side either ..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:24.11</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>brlcad: try this:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:24.22</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>proc vartrace {n1 n2 op} { puts "$n1: $op --
+[set $n1]"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:24.22</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>}</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:24.36</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>trace add variable errorCode write
+vartrace</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:24.36</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>trace add variable errorInfo write
+vartrace</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:36.28</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>... new version:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:36.30</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:36.50</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>proc vartrace {n1 n2 op} { puts "$n1: $op --
+$::errorInfo"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:36.50</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>}</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:37.01</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>trace add variable errorInfo write
+vartrace</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:37.37</tt></td>
+<td><span class="c5"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>^-- type this into mged, and then watch as you
+type your commands... see if anything looks familiar
+(error-wise)</tt></td>
+</tr>
+<tr>
+<td><tt>08:01.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad clock_
+(n=clock@zux221-122-143.adsl.green.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:40.19</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Axman6_
+(n=Axman6@210-11-146-180.netspeed.com.au)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:00.11</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad elite01
+(n=elite01@195.37.106.60)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:52.28</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad b0ef
+(n=b0ef@062016141231.customer.alfanett.no)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:04.30</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad jgay
+(n=jgay@fsf/staff/jgay)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:41.46</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yukonbob: I'm not sure what that's actually
+showing me</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:41.55</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>other than internal tcl garbage</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:43.09</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'm not seeing error messages, just temp junk
+from the commands</tt></td>
+</tr>
+<tr>
+<td><tt>13:45.54</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad vedge
+(i=vedge@ubar.csoft.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:12.37</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad elite01
+(n=elite01@dslc-082-082-071-033.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:12.41</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Elperion
+(n=Bary@p54876B89.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:13.27</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well I've at least finally traced down the
+cause of why the opengl framebuffer stopped working</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:14.23</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it was the machine.h change that made smp work
+on the intel macs .. it was falling through to the static case and
+that apparently works</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:23.02</tt></td>
+<td><span class="c6"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hrm, all that trouble cuz we've been putting
+off moving that functionality into configure.ac :D</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:26.40</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that doesn't matter</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:26.51</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>still doesn't explain why it's actually not
+working</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:27.24</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it were in configure, it'd still be just as
+broken because it's getting to the section that *should* be
+right</tt></td>
+</tr>
+<tr>
+<td><tt>15:43.08</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad jgay
+(n=jgay@fsf/staff/jgay)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:07.31</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad PrezKennedy
+(i=Matt@74.86.45.130)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:34.44</tt></td>
+<td><span class="c7"><tt>clock_</tt></span></td>
+<td width="100%"><tt>brlcad: unfortunately the BRL-CAD
+documentation is not very helpful when it contains errors like
+this: <a href=
+"http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1892876&amp;group_id=105292&amp;atid=640802">
+http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1892876&amp;group_id=105292&amp;atid=640802</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:38.35</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>k, thx</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:39.11</tt></td>
+<td><span class="c7"><tt>clock_</tt></span></td>
+<td width="100%"><tt>you're welcome</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:39.32</tt></td>
+<td><span class="c7"><tt>clock_</tt></span></td>
+<td width="100%"><tt>I don't mean it as criticism I just want to
+say it's hard to learn in a situation like this</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:40.02</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>understandably</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:42.52</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30275
+10/brlcad/trunk/src/lgt/resource.c: ws and header</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:43.29</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30276
+10/brlcad/trunk/src/lgt/do_options.c: cleanup function, unprotect
+since bu_avail_cpus() does the protection for us.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:47.32</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30277
+10/brlcad/trunk/src/lgt/do_options.c: if there's only one proc,
+don't bother asking</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:50.48</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30278
+10/brlcad/trunk/src/lgt/resource.c: wtf, the functions in
+resource.c arent' even used. get rid of it.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:51.28</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30279
+10/brlcad/trunk/src/lgt/Makefile.am: remove the unused
+resource.c</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:21.35</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30280
+10/brlcad/trunk/src/libbu/parallel.c: make bu_avail_cpus() behave
+neatly if we're not compiling PARALLEL so that it just returns
+1</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.44</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30281 10/brlcad/trunk/ (8
+files in 6 dirs):</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.44</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: remove/refactor DEFAULT_PSW from
+machine.h so that now it's really just up to</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.44</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: rt_avail_cpus() to report the max and
+up to the user to decide how many. the</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.44</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: default is now consistently set the
+same for everyone to the number of</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.44</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: processors available. if someone
+needs to re-port to an old CRAY and specifying</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.46</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: -P1 from userland isn't sufficient,
+we can refactor a bu_default_cpus() routine</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:42.48</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: with better logic. one step closer to
+removing machine.h</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:10.40</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30282 10/brlcad/trunk/
+(include/machine.h src/libbu/convert.c): get rid of IEEE_FLOAT ..
+the code didn't actually use it except for one case in 'cv' and was
+set to 1 for all platforms. if something needs to know, there are
+configure tests for ieee float.</tt></td>
+</tr>
+<tr>
+<td><tt>19:31.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Z80-Boy
+(i=clock@77-56-81-29.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.40</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30283 10/brlcad/trunk/
+(include/machine.h src/libbu/malloc.c):</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.40</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: remove MALLOC_NOT_MP_SAFE from
+machine.h, moving it to src/libbu/malloc.c and</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.40</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: enabling it for all platforms. there
+were only a few old platforms that were</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.40</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: not specifically set as
+malloc-not-mp-safe and it's not clear which of those</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.40</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: were actually verified as safe so
+just turn it on for all for now.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:54.01</tt></td>
+<td><span class="c8"><tt>CIA-31</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30284
+10/brlcad/trunk/src/rt/ (Makefile.am scat.h): scat.h seems to be
+completely unused, remove it</tt></td>
+</tr>
+<tr>
+<td><tt>22:09.46</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad CIA-4
+(n=CIA@208.69.182.149)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:48.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad PrezzKennedy
+(i=Matt@74.86.45.130)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad PrezzKennedy
+(i=Matt@74.86.45.130) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad b0ef
+(n=b0ef@062016141231.customer.alfanett.no) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad dtidrow
+(n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(n=yukonbob@198.235.198.234) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad starseeker
+(n=CY@c-68-33-217-173.hsd1.md.comcast.net) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad curious
+(i=curious@gjv234.internetdsl.tpnet.pl) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Maloeran
+(n=maloeran@glvortex.net) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.46</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad
+MinuteElectron
+(n=MinuteEl@silentflame/member/pdpc.base.minuteelectron) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:55.46</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad toxygen
+(i=toxygen@stip-static-98.213-81-186.telecom.sk) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:09.10</tt></td>
+<td><span class="c9"><tt>CIA-4</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30285
+10/brlcad/trunk/src/libbu/parallel.c: ansify</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:10.09</tt></td>
+<td><span class="c9"><tt>CIA-4</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30286 10/brlcad/trunk/ (3
+files in 2 dirs): remove FOPEN_MAX from machine.h, moving it over
+to the only single place it's used over in libtermio.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:16.23</tt></td>
+<td><span class="c9"><tt>CIA-4</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r30287
+10/brlcad/trunk/include/ (bu.h machine.h): with the exception of
+the convex (where it was 'long long'), bitv_t was set to 'long' for
+all platforms. so move the bitv_t typedef out of machine.h and into
+bu.h</tt></td>
+</tr>
+<tr>
+<td><tt>23:56.07</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Genestealer
+(n=dennis@pool-71-112-78-93.sttlwa.dsl-w.verizon.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:56.31</tt></td>
+<td><span class="c10"><tt>Genestealer</tt></span></td>
+<td width="100%"><tt>hey peoples</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

@@ -1,101 +1,455 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20160510</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20160510</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c9 {color: #000099}
+ span.c8 {color: #E076E0}
+ span.c7 {color: #62BB62}
+ span.c6 {color: #5959A9}
+ span.c5 {color: #009900}
+ span.c4 {color: #CC00CC}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #407A40}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20160510</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:00.02</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>but it did avoid introducing the observed overlap</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:00.28</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">isn't particularly attached to r67850 if you'd prefer to revert...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.03</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: anything I can to to help with release prep?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.15</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is doing another test build on Windows...</font></tt></td></tr>
-<tr><td><tt>00:16.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mathnerd314 (~quassel@supertux/Mathnerd314)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.34</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>don't care much about r67850, think it doesn't do much overall </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.51</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>clamping introduces and fixes problems because it's essentially making corrections so far out on the decimal that are introduced simply by loading geoemtry into floating point registers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.24</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>so not clamping will obviously not introduce but also not fix other error being introduced</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.26</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., consider a modeler that uses the in command to make some geometry at x=52, and it gets written out as 52.0000001000100301235345 ... preserving that without clamping is preserving error we introduced</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.15</tt></td><td><font color="#62bb62"><tt>Stragus</tt></font></td><td width="100%"><tt>So someone is complaining because converting from binary to ascii and back reduces precision?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.17</tt></td><td><font color="#62bb62"><tt>Stragus</tt></font></td><td width="100%"><tt>o.O</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:45.14</tt></td><td><font color="#62bb62"><tt>Stragus</tt></font></td><td width="100%"><tt>Although, if you print enough digits, I believe glibc guarantees you'll get the same binary representation back</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:46.03</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: not directly - they're complaining because an overlap manifested with gqa that didn't manifest before the conversion - basically, it was "right on the edge" and the g2asc-&gt;asc2g round trip nudged it just enough</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:46.55</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>that's why I left all of the calls to the matrix encoder as clamping except the low level one in the tree walker</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:47.17</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>the idea being "what's there is there, but what we're editing/changing gets clamped."</tt></td></tr>
-<tr><td><tt>00:49.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad byckxtpgmsptffqr (~armin@dslc-082-083-186-230.pools.arcor-ip.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:24.35</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I think it's for the better, leave it that way</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:25.05</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>only downside is the API inconsistency with the other routines that do the same thing for non-matrix data</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:46.18</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I can update those tomorrow to be consistent if you like</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:27.30</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>it's undocumented API, so can update or leave until it for distillation removal review</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:31.19</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67851 brlcad/trunk/include/bu/ptbl.h: revisit work back in r57743 and r57742 where we try to avoid ptbl crashes when referencing NULL, trying to give our bomb checks a chance to catch them more gracefully. since pointers could be data on the stack, we need to trick the compiler a bit to not warn about the test always being true (it's the ones that are not that we care more about). we do this by</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:31.21</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>forcing a conversion to int first.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:31.23</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>...</tt></td></tr>
-<tr><td><tt>03:48.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.03</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67852 brlcad/trunk/src/libbu/ptbl.c: allow truncating to any size less than the initialized allocation. this lets us to set a size in both directions.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.54</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67853 brlcad/trunk/src/librt/prep.c: use bu_ptbl_trunc now that it will set the end marker to decrease or increase, but to some truncation at or under the initialized size.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.48</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67854 brlcad/trunk/src/librt/primitives/submodel/submodel.c: eliminate the last instance where we were accessing -&gt;end merely to expand the size for null pointers. instead, call bu_ptbl_trunc to set it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.03</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67855 brlcad/trunk/src/libbu/ptbl.c: make bu_ptbl_trunc take a size_t instead of an int for better intent-based comparison and warning-free compiles</tt></td></tr>
-<tr><td><tt>04:26.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poxip (~poxip@unaffiliated/mrpoxipol)</font></tt></td></tr>
-<tr><td><tt>05:27.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>06:57.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>06:58.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>07:37.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee` (bc5c2134@gateway/web/freenode/ip.188.92.33.52)</font></tt></td></tr>
-<tr><td><tt>08:07.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>08:10.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad catchchaos (6ad8958b@gateway/web/freenode/ip.106.216.149.139)</font></tt></td></tr>
-<tr><td><tt>08:19.36</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad catchchaos (6ad8958b@gateway/web/freenode/ip.106.216.149.139)</font></tt></td></tr>
-<tr><td><tt>08:57.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad criado (~criado@edurd1.unican.es)</font></tt></td></tr>
-<tr><td><tt>09:09.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>09:24.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>10:39.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>12:39.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@177.189.140.33)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:42.59</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67856 (brlcad/trunk/include/bn/str.h brlcad/trunk/src/libbn/str.c and 19 others): Add a clamp flag to the other bn_encode functions for consistency.</tt></td></tr>
-<tr><td><tt>13:07.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.126.143)</font></tt></td></tr>
-<tr><td><tt>13:11.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>13:54.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mathnerd314 (~quassel@supertux/Mathnerd314)</font></tt></td></tr>
-<tr><td><tt>14:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (b64b2d01@gateway/web/freenode/ip.182.75.45.1)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:39.44</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67857 brlcad/trunk/src/libbu/dirent.c: Use bu_strcmp to keep regress-repository happy</tt></td></tr>
-<tr><td><tt>15:01.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.29.238)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:19.04</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67858 brlcad/trunk/include/bu/ptbl.h: make bu_ptbl_trunc take a size_t instead of an int for better intent-based comparison and warning-free compiles</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:19.10</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>oops, missed committing a file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.02</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: testing now, but I think that was all that was missing?</tt></td></tr>
-<tr><td><tt>15:45.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.214.30.65)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.20</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, now I'm getting it .. some reason had to wipe out the build dir</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.44</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67859 brlcad/trunk/AUTHORS: Add commit name for D. Remenak</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.11</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67860 brlcad/trunk/AUTHORS: Add Doug's commit name</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.11</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67861 brlcad/trunk/AUTHORS: Associate Issac's commit name</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.02</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67862 brlcad/trunk/AUTHORS: associate Peter's commit name</tt></td></tr>
-<tr><td><tt>17:12.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (3d0c28b1@gateway/web/freenode/session)</font></tt></td></tr>
-<tr><td><tt>17:16.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (71c1890f@gateway/web/freenode/session)</font></tt></td></tr>
-<tr><td><tt>18:41.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (71c1890f@gateway/web/freenode/ip.113.193.137.15)</font></tt></td></tr>
-<tr><td><tt>19:02.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad criado (~criado@47.61.245.238)</font></tt></td></tr>
-<tr><td><tt>19:14.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:55.56</tt></td><td><font color="#e076e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67863 brlcad/trunk/src/librt/bool.c: some compilers, ither being clever or erroneous, are noticing the potential NULL back from the ternary operator and warning. stashing into a pointer first does the trick.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:27.57</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: fixed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.04</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: awesome, thanks!</tt></td></tr>
-<tr><td><tt>20:50.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>22:43.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad skat00sh (uid103741@gateway/web/irccloud.com/x-lxwuieqpgnkjpugd)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:00.02</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>but it did avoid introducing the observed
+overlap</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:00.28</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c4">isn't particularly attached
+to r67850 if you'd prefer to revert...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.03</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: anything I can to to help with release
+prep?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.15</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c4">is doing another test build
+on Windows...</span></tt></td>
+</tr>
+<tr>
+<td><tt>00:16.01</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Mathnerd314
+(~quassel@supertux/Mathnerd314)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.34</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't care much about r67850, think it doesn't
+do much overall</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.51</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>clamping introduces and fixes problems because
+it's essentially making corrections so far out on the decimal that
+are introduced simply by loading geoemtry into floating point
+registers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:25.24</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so not clamping will obviously not introduce
+but also not fix other error being introduced</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.26</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>e.g., consider a modeler that uses the in
+command to make some geometry at x=52, and it gets written out as
+52.0000001000100301235345 ... preserving that without clamping is
+preserving error we introduced</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.15</tt></td>
+<td><span class="c7"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>So someone is complaining because converting
+from binary to ascii and back reduces precision?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.17</tt></td>
+<td><span class="c7"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>o.O</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:45.14</tt></td>
+<td><span class="c7"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Although, if you print enough digits, I
+believe glibc guarantees you'll get the same binary representation
+back</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:46.03</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: not directly - they're complaining
+because an overlap manifested with gqa that didn't manifest before
+the conversion - basically, it was "right on the edge" and the
+g2asc-&gt;asc2g round trip nudged it just enough</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:46.55</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that's why I left all of the calls to the
+matrix encoder as clamping except the low level one in the tree
+walker</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:47.17</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the idea being "what's there is there, but
+what we're editing/changing gets clamped."</tt></td>
+</tr>
+<tr>
+<td><tt>00:49.09</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad
+byckxtpgmsptffqr
+(~armin@dslc-082-083-186-230.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:24.35</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: I think it's for the better, leave
+it that way</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:25.05</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>only downside is the API inconsistency with
+the other routines that do the same thing for non-matrix
+data</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:46.18</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c4">nods - I can update those
+tomorrow to be consistent if you like</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:27.30</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's undocumented API, so can update or leave
+until it for distillation removal review</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:31.19</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67851
+brlcad/trunk/include/bu/ptbl.h: revisit work back in r57743 and
+r57742 where we try to avoid ptbl crashes when referencing NULL,
+trying to give our bomb checks a chance to catch them more
+gracefully. since pointers could be data on the stack, we need to
+trick the compiler a bit to not warn about the test always being
+true (it's the ones that are not that we care more about). we do
+this by</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:31.21</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>forcing a conversion to int first.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:31.23</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>...</tt></td>
+</tr>
+<tr>
+<td><tt>03:48.02</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:08.03</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67852
+brlcad/trunk/src/libbu/ptbl.c: allow truncating to any size less
+than the initialized allocation. this lets us to set a size in both
+directions.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:09.54</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67853
+brlcad/trunk/src/librt/prep.c: use bu_ptbl_trunc now that it will
+set the end marker to decrease or increase, but to some truncation
+at or under the initialized size.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:14.48</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67854
+brlcad/trunk/src/librt/primitives/submodel/submodel.c: eliminate
+the last instance where we were accessing -&gt;end merely to expand
+the size for null pointers. instead, call bu_ptbl_trunc to set
+it.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:17.03</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67855
+brlcad/trunk/src/libbu/ptbl.c: make bu_ptbl_trunc take a size_t
+instead of an int for better intent-based comparison and
+warning-free compiles</tt></td>
+</tr>
+<tr>
+<td><tt>04:26.33</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad poxip
+(~poxip@unaffiliated/mrpoxipol)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:27.22</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:57.52</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:58.12</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:37.53</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad teepee`
+(bc5c2134@gateway/web/freenode/ip.188.92.33.52)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:07.40</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:10.39</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad catchchaos
+(6ad8958b@gateway/web/freenode/ip.106.216.149.139)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:19.36</tt></td>
+<td colspan="2"><tt><span class="c9">*** part/#brlcad catchchaos
+(6ad8958b@gateway/web/freenode/ip.106.216.149.139)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:57.37</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad criado
+(~criado@edurd1.unican.es)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:09.40</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:24.33</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:39.05</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:39.33</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad yorik
+(~yorik@177.189.140.33)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:42.59</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 67856
+(brlcad/trunk/include/bn/str.h brlcad/trunk/src/libbn/str.c and 19
+others): Add a clamp flag to the other bn_encode functions for
+consistency.</tt></td>
+</tr>
+<tr>
+<td><tt>13:07.14</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.126.143)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:11.22</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:54.11</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Mathnerd314
+(~quassel@supertux/Mathnerd314)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:30.43</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad tandoorichick
+(b64b2d01@gateway/web/freenode/ip.182.75.45.1)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:39.44</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 67857
+brlcad/trunk/src/libbu/dirent.c: Use bu_strcmp to keep
+regress-repository happy</tt></td>
+</tr>
+<tr>
+<td><tt>15:01.45</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad sniok
+(~sniok@89.252.29.238)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:19.04</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67858
+brlcad/trunk/include/bu/ptbl.h: make bu_ptbl_trunc take a size_t
+instead of an int for better intent-based comparison and
+warning-free compiles</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:19.10</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oops, missed committing a file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:33.02</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: testing now, but I think that was
+all that was missing?</tt></td>
+</tr>
+<tr>
+<td><tt>15:45.05</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad amarjeet
+(~Amarjeet@101.214.30.65)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.20</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ah, now I'm getting it .. some reason had to
+wipe out the build dir</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.44</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 67859
+brlcad/trunk/AUTHORS: Add commit name for D. Remenak</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.11</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 67860
+brlcad/trunk/AUTHORS: Add Doug's commit name</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.11</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 67861
+brlcad/trunk/AUTHORS: Associate Issac's commit name</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.02</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 67862
+brlcad/trunk/AUTHORS: associate Peter's commit name</tt></td>
+</tr>
+<tr>
+<td><tt>17:12.48</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad tandoorichick
+(3d0c28b1@gateway/web/freenode/session)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:16.28</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad shubham
+(71c1890f@gateway/web/freenode/session)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:41.56</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad shubham
+(71c1890f@gateway/web/freenode/ip.113.193.137.15)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:02.15</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad criado
+(~criado@47.61.245.238)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:14.46</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:55.56</tt></td>
+<td><span class="c8"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 67863
+brlcad/trunk/src/librt/bool.c: some compilers, ither being clever
+or erroneous, are noticing the potential NULL back from the ternary
+operator and warning. stashing into a pointer first does the
+trick.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:27.57</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: fixed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:39.04</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: awesome, thanks!</tt></td>
+</tr>
+<tr>
+<td><tt>20:50.23</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:43.53</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad skat00sh
+(uid103741@gateway/web/irccloud.com/x-lxwuieqpgnkjpugd)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

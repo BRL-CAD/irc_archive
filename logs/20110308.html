@@ -1,264 +1,1412 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20110308</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20110308</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c11 {color: #000099}
+ span.c10 {color: #BE64BE}
+ span.c9 {color: #61B961}
+ span.c8 {color: #5F5FB4}
+ span.c7 {color: #6868C6}
+ span.c6 {color: #009900}
+ span.c5 {color: #CC00CC}
+ span.c4 {color: #D9D972}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #4D4D93}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20110308</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:01.05</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>I rarely test from install unless I'm nearing release testing, several extra minutes saved per compile, which adds up fast</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.42</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I'm the same way</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.06</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>it's a possible difference to check - the cmake build and the autotools build runs are quite different</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.56</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.45</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I just verified that your halfspace test failed for half on linux too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.56</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>it's the oed.mged set of tests</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.04</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - wonder if I just commented it out and moved on...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.19</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>I was running them manually since they're easier to isolate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.23</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>some of those were a little tricky to set up, so I may have just assumed I had done it wrong</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.30</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.37</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>so it maybe always has failed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.10</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>thing is, it stops the whole testing progression and stops pretty early on with it trying to move a half</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.24</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>possibly - that has to be over a year since I've touched those, and probably longer, so I don't recall much</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.24</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>with the fix, it gets all the way to the end</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.29</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>sweet!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.39</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>successfully even</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.45</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>now the log is another matter...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.00</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, it lists slews of errors and failures, but it's not clear which are intentional and which are not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.12</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., saw a "killall*" in there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.35</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>but then that might have been a prefix or something too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.38</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>urm... don't recall if I got to the intentional failure checking or not...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.00</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">mainly recalls a lot of time spent on primitives and quick reference card commands</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.52</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: you still build primarily in the source tree?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.01</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>well then, it looks like I maybe just implemented non-pushed matrix edit support for halfspaces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.27</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>depends on the platform, maybe half the time but I wouldn't say it's primarily in or out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.11</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>some platforms are almost exclusively out of dir (linux), some are mix in/out depending on what I'm doing (mac), and others still are almost always in dir (release)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.19</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>k - don't know why that would still matter but also something to keep in mind</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.03</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>possible, but it was a pretty isolated failure with the double-class error</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.35</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i'll give it another test post-release</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.02</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I think we found your new commuter car:&nbsp;&nbsp;<a href="http://blogs.wsj.com/tech-europe/2011/03/07/the-car-faster-than-a-speeding-bullet/">http://blogs.wsj.com/tech-europe/2011/03/07/the-car-faster-than-a-speeding-bullet/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.57</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: yep:&nbsp;&nbsp;ERROR: NULL rt_half_internal pointer, file primitives/half/half.c, line 505</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.13</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">updates to confirm fix</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.18</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.28</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty much confirms, awesome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.49</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, I don't see how/where oed actually applies the matrix</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.10</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: for which test?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.44</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, confirmed that regression is fixed with the latest update</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.58</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that's bizzare though too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.10</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the test does oed / oed_half.c/oed_half.s</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.35</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>then merely presses accept</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.47</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that results in the halfspace import fail</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.53</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>fishy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.57</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.13</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>*sigh* .. back to gdb for understanding</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.10</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>technically we don't have to pass those for release, they were never added to the "offical" regression testing...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.58</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not a matter of passing the test, it's a failure related to code that changed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.23</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the tests are simple enough, they're worth checking into to make sure something else wasn't horked</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.57</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - just noting that some of the "failures" may be nothing new...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:39.31</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:39.42</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>but they're the closest thing to a test at this point for all the librt code that was changed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:39.49</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:10.52</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... cmake build succeeds in running rtwizard and archer on 10.6, although I do see those kCGError messages</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:11.03</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will have to try autotools tomorrow</font></tt></td></tr>
-<tr><td><tt>01:15.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.01</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43770 10/brlcad/trunk/NEWS: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.01</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: inadvertently reviewing and fixing bugs for release, fixed a never-implemented</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.01</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: feature of halfspaces. if you put them into a combination and apply a matrix to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.01</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: the combination, librt would bomb with an invalid magic error. the half</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.01</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: primitive was updated to handle that case which is used by mged to apply</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.02</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: matrices to wireframes without writing to a disk record.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:49.00</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43771 10/brlcad/trunk/TODO: technically unbusted though only because it's half-reverted. still investigating the cause, but todo is todone.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:16.09</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">gives bottie a final round of testing</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:16.32</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: the last report on bottie was "consistently crashing"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:17.47</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43772 10/brlcad/trunk/src/librt/primitives/half/half.c: oops, wrong cast</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:19.10</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:29.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>just worked with a simple sphere test case</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>50% speedup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.46</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>(of tie vs bot .. sph was around 200% faster)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:33.58</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:34.14</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>huh, this is interesting:&nbsp;&nbsp;<a href="http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/">http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:34.16</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>nice 300% improvement on a model with just 9k tris</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:34.25</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>600k rtfm vs 200k rtfm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:35.15</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>I think I've seen that site</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.16</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to read through that</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.18</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>and it scales nicely on a big image, 21 sec vs 7 sec</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.23</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>awesome :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.26</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the whole team should read through that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.41</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>about once a year ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.52</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:38.24</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will probably rediscover it around this time next year</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.13</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>wow, actual 10x increase on a 0.5M poly bot (simple sphere)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:00.28</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>and on a 1.2M poly...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:02.41</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>3 sec vs 62 sec</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:02.58</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hawt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:04.33</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>so that's about as good as it will probably get comparison-wise since it's a simple shape that's best for kdtree being compared with a bot not using pieces optimization (default) and is but a single simple shape</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.00</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>nice, 5x increase on t62</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.13</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>(after removing the silly "I want normals" limitation)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.05</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, maybe not on that one ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.32</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that wasn't right, looking to be about 40% faster (about 13s vs 21s) on a fully hierarchical bot t62</tt></td></tr>
-<tr><td><tt>04:44.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>04:44.20</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release prep for 7.18.2 under way (20110202)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:55.51</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43773 10/brlcad/trunk/NEWS: looks like today is the day. reword the BoT-TIE metrics having directly observed (valid) performance from 40% to 20x faster. include details that the acceleration is presently disabled by default.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:58.37</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43774 10/brlcad/trunk/TODO: peformance tested, results very promising</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:00.02</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>bottie breaks on 32b</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:00.40</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>took some work to get a 32b linux build (needs fixing), but it breaks there, too, not just fbsd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:01.55</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43775 10/brlcad/trunk/src/librt/primitives/bot/bot.c: since it's disabled by default, is there really any point in requiring normals and orientation? tested on several unoriented and normal-free bots with success too.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:02.04</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>(--disable-64bit-build causes failed build on a 64b linux build, -m32 is not being added correctly to src/other)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:02.22</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, see README.Linux about that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:02.58</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>you basically have to force it kicking and screaming</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:03.54</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, had to ./configure CFLAGS=-m32 CXXFLAGS=m32 and then force compile tk and another with /usr/lib/libfonconfig.so.1 instead of -lfontconfig</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:04.25</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>probably because you need LDFLAGS-m32 too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:04.45</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>no, there is no /usr/lib/libfontconfig.so ... mebbe an arl screwup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:05.02</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>probably, I manually fixed a couple bad X11 libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:05.11</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>bad == missing symlink</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:05.47</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>either way, results looking pretty good now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:05.53</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>aaanyways, 32b tie crashes where I tried it, I've a lot of mods at work digging into it, but if you wanna dig in, knock yourself out... imma go unconcious</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:06.25</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm satisfied with it, I'm pressing for release tagging -- one last thing to check on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:06.51</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>it was working well enough to put numbers on the gains</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:07.14</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>t62 is pretty darn close to real-world, it was around 40%</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:07.15</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>it takes a bit of work to trigger, so whatever... I'm not keen on release notes when it doesn't work 32b, but *shrug* I have more important stuff to worry about</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:07.33</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>the notes say it's disabled by default and preliminary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:07.44</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>so there can be a future not when it's not off by default</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:09.43</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43776 10/brlcad/trunk/TODO: note 32b issue for bottie</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:10.21</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>tomorrow; geomcore.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:12.16</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43777 10/brlcad/trunk/TODO: huzzah! .. looks like the nmg failures were related to one of the other failures (probably nmg) because now everything is working again.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:00.49</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>tomorrow; tag.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:00.53</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>er, today</tt></td></tr>
-<tr><td><tt>07:46.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>08:28.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@188.119.210.222)</font></tt></td></tr>
-<tr><td><tt>08:29.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
-<tr><td><tt>09:13.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
-<tr><td><tt>12:39.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad packrat (~packrator@99-67-225-40.lightspeed.livnmi.sbcglobal.net)</font></tt></td></tr>
-<tr><td><tt>12:51.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.192.248.2)</font></tt></td></tr>
-<tr><td><tt>12:51.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>12:58.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.250.138)</font></tt></td></tr>
-<tr><td><tt>12:58.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:59.37</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">reflects that a function to find all local maximums and minimums in a dsp dataset would probably be a good start at more intelligent spline surface generation...</font></tt></td></tr>
-<tr><td><tt>13:16.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.250.138)</font></tt></td></tr>
-<tr><td><tt>13:16.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>13:22.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.250.138)</font></tt></td></tr>
-<tr><td><tt>13:22.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>13:22.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@dsl-173-248-211-229.acanac.net)</font></tt></td></tr>
-<tr><td><tt>13:31.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.250.138)</font></tt></td></tr>
-<tr><td><tt>13:31.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>13:42.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.192.248.2)</font></tt></td></tr>
-<tr><td><tt>13:42.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:49.34</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43778 10/brlcad/branches/cmake/CMakeLists.txt: Add some documentation on what the distcheck routine does</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.20</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03jordisayol * r43779 10/brlcad/trunk/ (misc/debian/rules sh/make_rpm.sh): change the number of simultaneous jobs on "make", during deb/rpm building process</tt></td></tr>
-<tr><td><tt>13:53.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:52.22</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, dns issues with brlcad.org ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:04.18</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43780 10/brlcad/trunk/misc/Makefile.am: debian/application-x-brlcad.png was replaced with two v4/v5 png files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:05.30</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't be</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:06.35</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>I can't resolve from several different machines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:06.39</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>including bz</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.40</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>working for me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.55</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>on bz? tried other machines to avoid cache artifacts?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:09.06</tt></td><td><font color="#61b961"><tt>epileg</tt></font></td><td width="100%"><tt>``Erik: not working here in Spain</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:09.33</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>just reset named, try again</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:12.08</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>"no servers could be reached"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:12.52</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>(from several different machines using different dns servers, other domains resolve)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.08</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>what query you using?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.19</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>does "nslookup google.com - bzflag.bz" work for you?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.25</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>"nslookup brlcad.org" and "dig brlcad.org"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.41</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, that works</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:14.43</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>oh my</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:14.58</tt></td><td><font color="#61b961"><tt>epileg</tt></font></td><td width="100%"><tt>here in spain, exactly same as ``Erik</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.07</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>on one machine, I got, um</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.17</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>;; reply from unexpected source: 76.96.5.201#53, expected 68.87.71.230#53</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.20</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>stuff like that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.46</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>could be related to zoneedit migration</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:17.00</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug* we'll see if it clears up, ah surpose</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:19.16</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, NS1.ZONEEDIT.COM is not responding</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:20.05</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>all three appear to be snookered</tt></td></tr>
-<tr><td><tt>15:20.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ezzieyguywuf (~wolfie@cpe-071-070-255-232.nc.res.rr.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:20.12</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>they don't have site redundant secondaries? O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:21.29</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>ah, pay per secondary, lame :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:22.15</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">jabs some code for a while</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.17</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">is paying for a secondary</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.28</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why there's three, one's even in the uk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.37</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>all three are unreachable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:23.56</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, 99.998, guess this is that .002</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:27.29</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>irssi for noobs lessons *sigh* :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:32.51</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>of 7 dns servers, looks like 5 of them are down</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:35.08</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>er, 13 of 19</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:39.46</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: oh, don't worry - in another 10 years or so I may not be a noob anymore</tt></td></tr>
-<tr><td><tt>15:46.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:47.03</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>so'z I gotta enjoy it while I can, right? :&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:47.21</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.10</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>note that brlcad.org is still reachable as bzflag.bz (at least for now)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.04</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://63.246.136.17/d/">http://63.246.136.17/d/</a> will get you to the website</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.19</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt>ayup, that's what I did earlier for my comic page, before calling out the dns issue (was poking around to see if the httpd was having issues, if'n ya look at the sudo log)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.13</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43781 10/geomcore/trunk/TODO: UUID is wired in and QT is gone</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.19</tt></td><td><font color="#5f5fb4"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.youtube.com/watch?v=xQqQ-Kcjowg">http://www.youtube.com/watch?v=xQqQ-Kcjowg</a>&nbsp;&nbsp; "rental car olympics"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.21</tt></td><td><font color="#4d4d93"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr><td><tt>16:21.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Zaebos (~irc@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
-<tr><td><tt>16:23.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~Nohla@64.76.19.227)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.58</tt></td><td><font color="#be64be"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, my first try for rt_revolve_xform(), <a href="http://pastebin.com/Tf3Qsg7J">http://pastebin.com/Tf3Qsg7J</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.53</tt></td><td><font color="#be64be"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, still reading include/rtgeom.h</tt></td></tr>
-<tr><td><tt>16:57.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.202.21.22)</font></tt></td></tr>
-<tr><td><tt>16:57.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:19.38</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:25.11</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>What the... I'm seeing warning messages on OSX that are suppressed by adding -Werror</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.32</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>no, that's not it...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.08</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah - it's the presence or absence of STRICT_FLAGS in brlcad_config.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.48</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>Ohhhhh. I see.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:38.22</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>bu.h linen 160</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43782 10/brlcad/branches/cmake/ (6 files in 5 dirs): (log message trimmed)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: Rework how CFLAGS are assigned in CMake. Major changes are using build type</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: specific flags to hold things instead of the catch-all, and changing the</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: STRICT_FLAGS brlcad_config.h include to WARNING_FLAGS. The way CMake sets</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: things up, turning on the warnings but not strict just means you're expecting to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: see all the same output without failing. Conditionalizing the bu.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:05.24</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: undef/redefine logic on strict and not warning violated that principle, because</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:18.32</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43783 10/brlcad/branches/cmake/CMakeLists.txt: Setting linker flags now, not compiler flags</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:20.45</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43784 10/geomcore/trunk/tests/svntest/main.c: don't do a region subdirectory</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.23</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43785 10/geomcore/trunk/src/utility/GSThread.cxx: destroy the mutex in the GSMutex destructor</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:51.15</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I still can't reproduce the rtwizard/archer/bwish issue</tt></td></tr>
-<tr><td><tt>19:25.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~Nohla@64.76.19.227)</font></tt></td></tr>
-<tr><td><tt>19:45.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~Nohla@64.76.19.227)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.52</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43786 10/brlcad/branches/cmake/ (10 files in 9 dirs): MFC r43785</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:01.18</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43787 10/brlcad/branches/cmake/src/other/ (13 files in 6 dirs): Ah, right - src/other builds actually have to do their thing properly now. Get tkpng, tktable and tkhtml set up with some find_package calls.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.37</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43788 10/geomcore/trunk/ (CMake/ CMakeLists.txt cmake/): Do like most other projects and put our CMake modules in a CMake directory</tt></td></tr>
-<tr><td><tt>20:21.28</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:37.01</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43789 10/geomcore/trunk/ (3 files in 2 dirs): Make realpath happy on OSX</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.58</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03jordisayol * r43790 10/brlcad/trunk/ (3 files in 2 dirs): add an "update gtk icon cache" and some minor improvements on "install" and "remove" scripts of deb/rpm packages</tt></td></tr>
-<tr><td><tt>20:59.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli_ (~dli@dsl-69-171-148-245.acanac.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.21</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r43791 10/brlcad/trunk/src/tclscripts/lib/TkTable.tcl: Added a TkTable::see method.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.09</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43792 10/geomcore/trunk/src/libNet/NetMsgRouter.cxx: update getListOfHandlers to work correctly with STL maps</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.05</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43793 10/brlcad/trunk/src/libged/gqa.c: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.06</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: add some error recovery to gqa so that we don't bomb out during</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.06</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: bu_malloc/bu_calloc when passed a zero size allocation. probably means</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.06</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: something earlier went awry but check here regardless so we can be more graceful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.06</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: about halting.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.29</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: that's got it, thanks!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:34.36</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43794 10/geomcore/trunk/tests/svntest/main.c: Put each geometry object into its own directory.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:39.03</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: about 50 seconds when I put each object in its own directory (regions and assemblies)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:10.30</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43795 10/brlcad/branches/cmake/include/bu.h: Go ahead and keep the old comment</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:13.47</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43796 10/brlcad/trunk/ (configure.ac include/bu.h): STRICT_FLAGS -&gt; WARNING_FLAGS - just a rename as far as autotools is concerned, no behavior change</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:45.26</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43797 10/geomcore/trunk/src/GS/ (9 files): First step of renaming geoclient and geoserv to geomclient and geomserv</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:47.36</tt></td><td><font color="#6868c6"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43798 10/geomcore/trunk/src/GS/ (geomclient.cxx geomserv.cxx): geoclient and geoserv renamed to use geom prefix - sounds less like geospatial related software</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:01.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I rarely test from install unless I'm nearing
+release testing, several extra minutes saved per compile, which
+adds up fast</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.42</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods - I'm the same
+way</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.06</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it's a possible difference to check - the
+cmake build and the autotools build runs are quite
+different</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, I just verified that your halfspace test
+failed for half on linux too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's the oed.mged set of tests</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.04</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - wonder if I just commented it out and
+moved on...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I was running them manually since they're
+easier to isolate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.23</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>some of those were a little tricky to set up,
+so I may have just assumed I had done it wrong</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so it maybe always has failed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>thing is, it stops the whole testing
+progression and stops pretty early on with it trying to move a
+half</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.24</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>possibly - that has to be over a year since
+I've touched those, and probably longer, so I don't recall
+much</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>with the fix, it gets all the way to the
+end</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.29</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>sweet!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>successfully even</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>now the log is another matter...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, it lists slews of errors and failures,
+but it's not clear which are intentional and which are
+not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>e.g., saw a "killall*" in there</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but then that might have been a prefix or
+something too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>urm... don't recall if I got to the
+intentional failure checking or not...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">mainly recalls a lot of time
+spent on primitives and quick reference card
+commands</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.52</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: you still build primarily in the
+source tree?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well then, it looks like I maybe just
+implemented non-pushed matrix edit support for halfspaces</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.27</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>depends on the platform, maybe half the time
+but I wouldn't say it's primarily in or out</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>some platforms are almost exclusively out of
+dir (linux), some are mix in/out depending on what I'm doing (mac),
+and others still are almost always in dir (release)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.19</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>k - don't know why that would still matter but
+also something to keep in mind</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>possible, but it was a pretty isolated failure
+with the double-class error</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'll give it another test
+post-release</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.02</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I think we found your new commuter
+car:  <a href=
+"http://blogs.wsj.com/tech-europe/2011/03/07/the-car-faster-than-a-speeding-bullet/">
+http://blogs.wsj.com/tech-europe/2011/03/07/the-car-faster-than-a-speeding-bullet/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:21.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: yep:  ERROR: NULL rt_half_internal
+pointer, file primitives/half/half.c, line 505</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.13</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">updates to confirm
+fix</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pretty much confirms, awesome</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm, I don't see how/where oed actually applies
+the matrix</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:31.10</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: for which test?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:31.44</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>oh, confirmed that regression is fixed with
+the latest update</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:32.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's bizzare though too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the test does oed /
+oed_half.c/oed_half.s</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then merely presses accept</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that results in the halfspace import
+fail</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>fishy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:35.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>*sigh* .. back to gdb for
+understanding</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.10</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>technically we don't have to pass those for
+release, they were never added to the "offical" regression
+testing...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's not a matter of passing the test, it's a
+failure related to code that changed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the tests are simple enough, they're worth
+checking into to make sure something else wasn't horked</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods - just noting that some
+of the "failures" may be nothing new...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:39.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:39.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but they're the closest thing to a test at
+this point for all the librt code that was changed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:39.49</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah, point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:10.52</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm... cmake build succeeds in running
+rtwizard and archer on 10.6, although I do see those kCGError
+messages</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:11.03</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">will have to try autotools
+tomorrow</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:15.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Ralith
+(~ralith@S010600221561996a.vc.shawcable.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.01</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43770
+10/brlcad/trunk/NEWS:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.01</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: inadvertently reviewing and fixing
+bugs for release, fixed a never-implemented</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.01</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: feature of halfspaces. if you put
+them into a combination and apply a matrix to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.01</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: the combination, librt would bomb
+with an invalid magic error. the half</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.01</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: primitive was updated to handle that
+case which is used by mged to apply</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.02</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: matrices to wireframes without
+writing to a disk record.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:49.00</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43771
+10/brlcad/trunk/TODO: technically unbusted though only because it's
+half-reverted. still investigating the cause, but todo is
+todone.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:16.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">gives bottie a final round of
+testing</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:16.32</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: the last report on bottie was
+"consistently crashing"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:17.47</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43772
+10/brlcad/trunk/src/librt/primitives/half/half.c: oops, wrong
+cast</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:19.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:29.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just worked with a simple sphere test
+case</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>50% speedup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(of tie vs bot .. sph was around 200%
+faster)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:33.58</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:34.14</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>huh, this is interesting:  <a href=
+"http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/">http://www.cs.mtu.edu/~shene/COURSES/cs3621/NOTES/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:34.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nice 300% improvement on a model with just 9k
+tris</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:34.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>600k rtfm vs 200k rtfm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:35.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I think I've seen that site</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">needs to read through
+that</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and it scales nicely on a big image, 21 sec vs
+7 sec</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.23</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>awesome :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the whole team should read through
+that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>about once a year ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.52</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hehe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:38.24</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">will probably rediscover it
+around this time next year</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:57.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wow, actual 10x increase on a 0.5M poly bot
+(simple sphere)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:00.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and on a 1.2M poly...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:02.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>3 sec vs 62 sec</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:02.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hawt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:04.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so that's about as good as it will probably
+get comparison-wise since it's a simple shape that's best for
+kdtree being compared with a bot not using pieces optimization
+(default) and is but a single simple shape</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:09.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nice, 5x increase on t62</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:09.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(after removing the silly "I want normals"
+limitation)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm, maybe not on that one ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:23.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, that wasn't right, looking to be about
+40% faster (about 13s vs 21s) on a fully hierarchical bot
+t62</tt></td>
+</tr>
+<tr>
+<td><tt>04:44.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>04:44.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || <a href=
+"http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a>
+|| #brlcad logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| BRL-CAD release prep for 7.18.2 under way
+(20110202)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:55.51</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43773
+10/brlcad/trunk/NEWS: looks like today is the day. reword the
+BoT-TIE metrics having directly observed (valid) performance from
+40% to 20x faster. include details that the acceleration is
+presently disabled by default.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:58.37</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43774
+10/brlcad/trunk/TODO: peformance tested, results very
+promising</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:00.02</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>bottie breaks on 32b</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:00.40</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>took some work to get a 32b linux build (needs
+fixing), but it breaks there, too, not just fbsd</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:01.55</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43775
+10/brlcad/trunk/src/librt/primitives/bot/bot.c: since it's disabled
+by default, is there really any point in requiring normals and
+orientation? tested on several unoriented and normal-free bots with
+success too.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:02.04</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(--disable-64bit-build causes failed build on
+a 64b linux build, -m32 is not being added correctly to
+src/other)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:02.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep, see README.Linux about that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:02.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you basically have to force it kicking and
+screaming</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:03.54</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, had to ./configure CFLAGS=-m32
+CXXFLAGS=m32 and then force compile tk and another with
+/usr/lib/libfonconfig.so.1 instead of -lfontconfig</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:04.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably because you need LDFLAGS-m32
+too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:04.45</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>no, there is no /usr/lib/libfontconfig.so ...
+mebbe an arl screwup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:05.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably, I manually fixed a couple bad X11
+libs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:05.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bad == missing symlink</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:05.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>either way, results looking pretty good
+now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:05.53</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>aaanyways, 32b tie crashes where I tried it,
+I've a lot of mods at work digging into it, but if you wanna dig
+in, knock yourself out... imma go unconcious</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:06.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'm satisfied with it, I'm pressing for
+release tagging -- one last thing to check on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:06.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it was working well enough to put numbers on
+the gains</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:07.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>t62 is pretty darn close to real-world, it was
+around 40%</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:07.15</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>it takes a bit of work to trigger, so
+whatever... I'm not keen on release notes when it doesn't work 32b,
+but *shrug* I have more important stuff to worry about</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:07.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the notes say it's disabled by default and
+preliminary</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:07.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so there can be a future not when it's not off
+by default</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:09.43</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43776
+10/brlcad/trunk/TODO: note 32b issue for bottie</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:10.21</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>tomorrow; geomcore.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:12.16</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43777
+10/brlcad/trunk/TODO: huzzah! .. looks like the nmg failures were
+related to one of the other failures (probably nmg) because now
+everything is working again.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:00.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tomorrow; tag.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:00.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, today</tt></td>
+</tr>
+<tr>
+<td><tt>07:46.36</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:28.59</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad epileg
+(~epileg@188.119.210.222)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:29.02</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad epileg
+(~epileg@unaffiliated/epileg)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:13.01</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad epileg
+(~epileg@unaffiliated/epileg)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:39.23</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad packrat
+(~packrator@99-67-225-40.lightspeed.livnmi.sbcglobal.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:51.07</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@117.192.248.2)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:51.07</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:58.10</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@122.167.250.138)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:58.10</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:59.37</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">reflects that a function to
+find all local maximums and minimums in a dsp dataset would
+probably be a good start at more intelligent spline surface
+generation...</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:16.35</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@122.167.250.138)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:16.35</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:22.07</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@122.167.250.138)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:22.07</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:22.30</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dli
+(~dli@dsl-173-248-211-229.acanac.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:31.37</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@122.167.250.138)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:31.37</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:42.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@117.192.248.2)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:42.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:49.34</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43778
+10/brlcad/branches/cmake/CMakeLists.txt: Add some documentation on
+what the distcheck routine does</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.20</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03jordisayol * r43779
+10/brlcad/trunk/ (misc/debian/rules sh/make_rpm.sh): change the
+number of simultaneous jobs on "make", during deb/rpm building
+process</tt></td>
+</tr>
+<tr>
+<td><tt>13:53.19</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:52.22</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hm, dns issues with brlcad.org ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:04.18</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43780
+10/brlcad/trunk/misc/Makefile.am: debian/application-x-brlcad.png
+was replaced with two v4/v5 png files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:05.30</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>shouldn't be</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:06.35</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I can't resolve from several different
+machines</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:06.39</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>including bz</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:08.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>working for me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:08.55</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>on bz? tried other machines to avoid cache
+artifacts?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:09.06</tt></td>
+<td><span class="c9"><tt>epileg</tt></span></td>
+<td width="100%"><tt>``Erik: not working here in Spain</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:09.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just reset named, try again</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:12.08</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>"no servers could be reached"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:12.52</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(from several different machines using
+different dns servers, other domains resolve)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:13.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what query you using?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:13.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>does "nslookup google.com - bzflag.bz" work
+for you?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:13.25</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>"nslookup brlcad.org" and "dig
+brlcad.org"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:13.41</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, that works</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:14.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oh my</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:14.58</tt></td>
+<td><span class="c9"><tt>epileg</tt></span></td>
+<td width="100%"><tt>here in spain, exactly same as
+``Erik</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:15.07</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>on one machine, I got, um</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:15.17</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>;; reply from unexpected source:
+76.96.5.201#53, expected 68.87.71.230#53</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:15.20</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>stuff like that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:15.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>could be related to zoneedit
+migration</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:17.00</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*shrug* we'll see if it clears up, ah
+surpose</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:19.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, NS1.ZONEEDIT.COM is not
+responding</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:20.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>all three appear to be snookered</tt></td>
+</tr>
+<tr>
+<td><tt>15:20.08</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ezzieyguywuf
+(~wolfie@cpe-071-070-255-232.nc.res.rr.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:20.12</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>they don't have site redundant secondaries?
+O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:21.29</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ah, pay per secondary, lame :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:22.15</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c5">jabs some code for a
+while</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:23.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">is paying for a
+secondary</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:23.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's why there's three, one's even in the
+uk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:23.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>all three are unreachable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:23.56</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, 99.998, guess this is that .002</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:27.29</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>irssi for noobs lessons *sigh* :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:32.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of 7 dns servers, looks like 5 of them are
+down</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:35.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, 13 of 19</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:39.46</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>``Erik: oh, don't worry - in another 10 years
+or so I may not be a noob anymore</tt></td>
+</tr>
+<tr>
+<td><tt>15:46.01</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad epileg
+(~epileg@unaffiliated/epileg)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:47.03</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>so'z I gotta enjoy it while I can, right?
+:&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:47.21</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:49.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>note that brlcad.org is still reachable as
+bzflag.bz (at least for now)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://63.246.136.17/d/">http://63.246.136.17/d/</a> will get you
+to the website</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.19</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ayup, that's what I did earlier for my comic
+page, before calling out the dns issue (was poking around to see if
+the httpd was having issues, if'n ya look at the sudo
+log)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.13</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43781
+10/geomcore/trunk/TODO: UUID is wired in and QT is gone</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.19</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www.youtube.com/watch?v=xQqQ-Kcjowg">http://www.youtube.com/watch?v=xQqQ-Kcjowg</a>
+  "rental car olympics"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr>
+<td><tt>16:21.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Zaebos
+(~irc@pd95b7f5e.dip0.t-ipconnect.de)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:23.08</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Nohla
+(~Nohla@64.76.19.227)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.58</tt></td>
+<td><span class="c10"><tt>dli</tt></span></td>
+<td width="100%"><tt>brlcad, my first try for rt_revolve_xform(),
+<a href=
+"http://pastebin.com/Tf3Qsg7J">http://pastebin.com/Tf3Qsg7J</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.53</tt></td>
+<td><span class="c10"><tt>dli</tt></span></td>
+<td width="100%"><tt>brlcad, still reading
+include/rtgeom.h</tt></td>
+</tr>
+<tr>
+<td><tt>16:57.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@117.202.21.22)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:57.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:19.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:25.11</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>What the... I'm seeing warning messages on OSX
+that are suppressed by adding -Werror</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.32</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>no, that's not it...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Ah - it's the presence or absence of
+STRICT_FLAGS in brlcad_config.h</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.48</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Ohhhhh. I see.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:38.22</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bu.h linen 160</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43782
+10/brlcad/branches/cmake/ (6 files in 5 dirs): (log message
+trimmed)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Rework how CFLAGS are assigned in
+CMake. Major changes are using build type</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: specific flags to hold things instead
+of the catch-all, and changing the</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: STRICT_FLAGS brlcad_config.h include
+to WARNING_FLAGS. The way CMake sets</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: things up, turning on the warnings
+but not strict just means you're expecting to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: see all the same output without
+failing. Conditionalizing the bu.h</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:05.24</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: undef/redefine logic on strict and
+not warning violated that principle, because</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:18.32</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43783
+10/brlcad/branches/cmake/CMakeLists.txt: Setting linker flags now,
+not compiler flags</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:20.45</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43784
+10/geomcore/trunk/tests/svntest/main.c: don't do a region
+subdirectory</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.23</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43785
+10/geomcore/trunk/src/utility/GSThread.cxx: destroy the mutex in
+the GSMutex destructor</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:51.15</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I still can't reproduce the
+rtwizard/archer/bwish issue</tt></td>
+</tr>
+<tr>
+<td><tt>19:25.47</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Nohla
+(~Nohla@64.76.19.227)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:45.24</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Nohla
+(~Nohla@64.76.19.227)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:50.52</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43786
+10/brlcad/branches/cmake/ (10 files in 9 dirs): MFC
+r43785</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:01.18</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43787
+10/brlcad/branches/cmake/src/other/ (13 files in 6 dirs): Ah, right
+- src/other builds actually have to do their thing properly now.
+Get tkpng, tktable and tkhtml set up with some find_package
+calls.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:12.37</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43788
+10/geomcore/trunk/ (CMake/ CMakeLists.txt cmake/): Do like most
+other projects and put our CMake modules in a CMake
+directory</tt></td>
+</tr>
+<tr>
+<td><tt>20:21.28</tt></td>
+<td colspan="2"><tt><span class="c11">*** part/#brlcad epileg
+(~epileg@unaffiliated/epileg)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:37.01</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43789
+10/geomcore/trunk/ (3 files in 2 dirs): Make realpath happy on
+OSX</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.58</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03jordisayol * r43790
+10/brlcad/trunk/ (3 files in 2 dirs): add an "update gtk icon
+cache" and some minor improvements on "install" and "remove"
+scripts of deb/rpm packages</tt></td>
+</tr>
+<tr>
+<td><tt>20:59.53</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dli_
+(~dli@dsl-69-171-148-245.acanac.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:01.21</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r43791
+10/brlcad/trunk/src/tclscripts/lib/TkTable.tcl: Added a
+TkTable::see method.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:06.09</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43792
+10/geomcore/trunk/src/libNet/NetMsgRouter.cxx: update
+getListOfHandlers to work correctly with STL maps</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.05</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r43793
+10/brlcad/trunk/src/libged/gqa.c:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.06</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: add some error recovery to gqa so
+that we don't bomb out during</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.06</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: bu_malloc/bu_calloc when passed a
+zero size allocation. probably means</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.06</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: something earlier went awry but check
+here regardless so we can be more graceful</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.06</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: about halting.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.29</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>``Erik: that's got it, thanks!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:34.36</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43794
+10/geomcore/trunk/tests/svntest/main.c: Put each geometry object
+into its own directory.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:39.03</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: about 50 seconds when I put each
+object in its own directory (regions and assemblies)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:10.30</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43795
+10/brlcad/branches/cmake/include/bu.h: Go ahead and keep the old
+comment</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:13.47</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43796
+10/brlcad/trunk/ (configure.ac include/bu.h): STRICT_FLAGS -&gt;
+WARNING_FLAGS - just a rename as far as autotools is concerned, no
+behavior change</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:45.26</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43797
+10/geomcore/trunk/src/GS/ (9 files): First step of renaming
+geoclient and geoserv to geomclient and geomserv</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:47.36</tt></td>
+<td><span class="c7"><tt>CIA-14</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r43798
+10/geomcore/trunk/src/GS/ (geomclient.cxx geomserv.cxx): geoclient
+and geoserv renamed to use geom prefix - sounds less like
+geospatial related software</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

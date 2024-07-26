@@ -1,96 +1,394 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20190326</title>
- <meta name="generator" content="irclog2html.pl">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20190326</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta name="viewport" content=
+"width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c6 {color: #009900}
+ span.c5 {color: #CC00CC}
+ span.c4 {color: #A25555}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #4B904B}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20190326</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:20.47</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>confound it...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.45</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>getting an erratic and not reproducible recurrance of the nil free problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:41.56</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, got gdb on it:&nbsp;&nbsp;<a href="https://paste.ubuntu.com/p/hd9xYxkXTp/">https://paste.ubuntu.com/p/hd9xYxkXTp/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:47.17</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: hmm... the db_close at cache.c:635... how could another thread get to that dbip before closure?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:48.58</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>It shouldn't be in the cache at all, if I'm reading this right - cache_read_dbip will create a new one with db_open...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:53.12</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>could another thread generate the same temp file name if it hits the same object at the same time?&nbsp;&nbsp;I don't know how robust uuid is...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:55.18</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: in some ways, I almost wish we could do a tree walk, build the set of all unique objects, and then process that list so we could be sure none of the threads were trying to prep the same object at the same time...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.39</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>gah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.21</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: here's what's in the dbip:&nbsp;&nbsp;<a href="https://paste.ubuntu.com/p/shN5vDMhtB/">https://paste.ubuntu.com/p/shN5vDMhtB/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.39</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>I've still got gdb on it if there's anything else to be gleaned</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.46</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>per original question, don't think the unit tests should actually do shot validation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.00</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - works</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.17</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm still looking at the changes you made to see if I understand them correctly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.39</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:01.26</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>to see the behavior I was seeing, just revert my changes and run any of the rt_cache tests (e.g. rt_cache 1)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:02.12</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>it was trying to re-populate the mapped_file list after calling free on it that caused the blow-up</tt></td></tr>
-<tr><td><tt>01:02.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-088-066-140-085.088.066.pools.vodafone-ip.de)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:05.50</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>at a quick glance, db_close() looks like it may not be entirely threadsafe</tt></td></tr>
-<tr><td><tt>01:14.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>01:21.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:23.44</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I was considering trying to use subprocesses to hit test caches with multiple processes simultaneously, over and above threads... is that worth doing, or does the multithread testing provide all the benefits we might see there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:25.01</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>separate concerns</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:27.27</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>in theory the rename construct made it fully multiprocess-safe now barring maybe some obscure moments when the cache directory is first constructed when the version file is created</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:27.34</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>the cache files themselves should be golden and my manual hammering seems to confirm that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:27.55</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>that said, can't hurt so long as the tests are bugfree ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:28.46</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>heh.&nbsp;&nbsp;OK, I'll see what I can cook up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:08.42</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">finishes round one of test code consolidation</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:09.13</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>I'll try the subprocess stuff tomorrow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:09.17</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">must get trash</font></tt></td></tr>
-<tr><td><tt>02:23.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>02:39.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:58.20</tt></td><td><font color="#a25555"><tt>brlcad</tt></font></td><td width="100%"><tt>that does it for now</tt></td></tr>
-<tr><td><tt>06:59.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@48-10-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>07:53.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@48-10-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>09:21.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@195.20.130.10)</font></tt></td></tr>
-<tr><td><tt>09:46.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>10:37.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>10:49.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
-<tr><td><tt>10:51.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:56.42</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: with trunk I'm getting "(nil) free ERROR free mapped file pointers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:56.50</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>building the sample .g files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:59.58</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>stack smash is back with rt_cache 1, follows the "free ERROR" message.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:00.10</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt>however, all bu_mappedfile tests pass</tt></td></tr>
-<tr><td><tt>11:02.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
-<tr><td><tt>11:04.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:23.59</tt></td><td><font color="#4b904b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">reflects and thinks he needs to add another mappedfile test...</font></tt></td></tr>
-<tr><td><tt>11:35.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>11:37.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@195.20.130.10)</font></tt></td></tr>
-<tr><td><tt>12:12.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raingloom (~raingloom@catv-178-48-182-39.catv.broadband.hu)</font></tt></td></tr>
-<tr><td><tt>12:30.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>12:38.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
-<tr><td><tt>13:01.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>13:13.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:ee35:290:f5ff:fedc:3bb2)</font></tt></td></tr>
-<tr><td><tt>14:27.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>15:23.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:ee35:290:f5ff:fedc:3bb2)</font></tt></td></tr>
-<tr><td><tt>19:06.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raingloom (~raingloom@catv-178-48-182-40.catv.broadband.hu)</font></tt></td></tr>
-<tr><td><tt>19:15.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>20:27.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@168-38-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>21:29.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>22:29.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~textual@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>23:53.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raingloom (~raingloom@catv-178-48-182-38.catv.broadband.hu)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:20.47</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>confound it...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.45</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>getting an erratic and not reproducible
+recurrance of the nil free problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:41.56</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah, got gdb on it:  <a href=
+"https://paste.ubuntu.com/p/hd9xYxkXTp/">https://paste.ubuntu.com/p/hd9xYxkXTp/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:47.17</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: hmm... the db_close at cache.c:635...
+how could another thread get to that dbip before closure?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:48.58</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>It shouldn't be in the cache at all, if I'm
+reading this right - cache_read_dbip will create a new one with
+db_open...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:53.12</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>could another thread generate the same temp
+file name if it hits the same object at the same time?  I don't
+know how robust uuid is...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:55.18</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: in some ways, I almost wish we could
+do a tree walk, build the set of all unique objects, and then
+process that list so we could be sure none of the threads were
+trying to prep the same object at the same time...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:58.39</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>gah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:59.21</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: here's what's in the dbip:  <a href=
+"https://paste.ubuntu.com/p/shN5vDMhtB/">https://paste.ubuntu.com/p/shN5vDMhtB/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:59.39</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I've still got gdb on it if there's anything
+else to be gleaned</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:59.46</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>per original question, don't think the unit
+tests should actually do shot validation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.00</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods - works</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.17</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'm still looking at the changes you made to
+see if I understand them correctly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.39</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:01.26</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>to see the behavior I was seeing, just revert
+my changes and run any of the rt_cache tests (e.g. rt_cache
+1)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:02.12</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it was trying to re-populate the mapped_file
+list after calling free on it that caused the blow-up</tt></td>
+</tr>
+<tr>
+<td><tt>01:02.44</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad LordOfBikes
+(~armin@dslb-088-066-140-085.088.066.pools.vodafone-ip.de)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:05.50</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at a quick glance, db_close() looks like it
+may not be entirely threadsafe</tt></td>
+</tr>
+<tr>
+<td><tt>01:14.41</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:21.53</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee_
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:23.44</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I was considering trying to use
+subprocesses to hit test caches with multiple processes
+simultaneously, over and above threads... is that worth doing, or
+does the multithread testing provide all the benefits we might see
+there?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:25.01</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>separate concerns</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:27.27</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in theory the rename construct made it fully
+multiprocess-safe now barring maybe some obscure moments when the
+cache directory is first constructed when the version file is
+created</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:27.34</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the cache files themselves should be golden
+and my manual hammering seems to confirm that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:27.55</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that said, can't hurt so long as the tests are
+bugfree ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:28.46</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>heh.  OK, I'll see what I can cook
+up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:08.42</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">finishes round one of test
+code consolidation</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:09.13</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I'll try the subprocess stuff
+tomorrow</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:09.17</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">must get
+trash</span></tt></td>
+</tr>
+<tr>
+<td><tt>02:23.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>02:39.54</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:58.20</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that does it for now</tt></td>
+</tr>
+<tr>
+<td><tt>06:59.32</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@48-10-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:53.12</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@48-10-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:21.24</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@195.20.130.10)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:46.23</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee_
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:37.56</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:49.24</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Caterpillar
+(~caterpill@unaffiliated/caterpillar)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:51.25</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:56.42</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: with trunk I'm getting "(nil) free
+ERROR free mapped file pointers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:56.50</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>building the sample .g files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:59.58</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>stack smash is back with rt_cache 1, follows
+the "free ERROR" message.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:00.10</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>however, all bu_mappedfile tests
+pass</tt></td>
+</tr>
+<tr>
+<td><tt>11:02.04</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Caterpillar
+(~caterpill@unaffiliated/caterpillar)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:04.38</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Caterpillar
+(~caterpill@unaffiliated/caterpillar)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:23.59</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">reflects and thinks he needs
+to add another mappedfile test...</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:35.03</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:37.42</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@195.20.130.10)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:12.29</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad raingloom
+(~raingloom@catv-178-48-182-39.catv.broadband.hu)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:30.05</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:38.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee-
+(bc5c2133@gateway/web/freenode/ip.188.92.33.51)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:01.57</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:13.13</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad yorik
+(~yorik@2804:431:f721:ee35:290:f5ff:fedc:3bb2)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:27.17</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:23.59</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad yorik
+(~yorik@2804:431:f721:ee35:290:f5ff:fedc:3bb2)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:06.08</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad raingloom
+(~raingloom@catv-178-48-182-40.catv.broadband.hu)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:15.16</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:27.49</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@168-38-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:29.26</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:29.05</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kintel
+(~textual@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:53.40</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad raingloom
+(~raingloom@catv-178-48-182-38.catv.broadband.hu)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

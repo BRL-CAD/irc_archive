@@ -1,354 +1,2063 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20160813</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20160813</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c10 {color: #E2E277}
+ span.c9 {color: #AF5CAF}
+ span.c8 {color: #009900}
+ span.c7 {color: #73DA73}
+ span.c6 {color: #C8C869}
+ span.c5 {color: #CC00CC}
+ span.c4 {color: #65C1C1}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #6ED16E}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20160813</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:44.56</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: there definitely is too much "public" redblack api in libbu terms </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:45.35</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>frankly none of it should probably be public, instead providing higher level containers like hash, list, vector, map, with redblack under the hood (stl operates exactly that way)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:46.55</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: before merging in the latest github sources, how many regression tests do we have? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:47.43</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we need at least one test that exercises a variety of entities and hierarchy with mixed attributes (the cause of the last regression failure when we tried to update)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:48.26</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>if the nist samples do that, then by all means</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:18.49</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes his head - I doubt we have a test case like that to hand</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.30</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>the NIST files (except for the 7-10 aggregation) are all single objects, and the 7-10 aggregation I had to do as a 3DM both for multi-color support and speed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.45</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">agrees we should build several test cases</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:31.08</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">agrees - the log(n) behavior of the STL containers is one of my main drivers for using C++ - if we had set,map,etc. in C there'd be a lot less incentive</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:37.49</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>I think I have written a bunch of such code...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:41.54</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: can the bu_badmagic change be considered minimally impacting, or does it need deprecation?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.01</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: not surprised :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.14</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Besides, the C++ containers are terrible (unusable) for high performance multithreaded code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.58</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>If I'm not mistaken, you can't have 64 threads hammering the same C++ map, it would all have to be serialized on a single lock</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.13</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:44.08</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>I think an early version of my hash table with concurrent multithreaded access is in the mesh decimation code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:44.36</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>might be worth pulling into libbu</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:46.21</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Just in case you are interested&nbsp;&nbsp;-&nbsp;&nbsp;<a href="http://www.rayforce.net/mmhash.c">http://www.rayforce.net/mmhash.c</a>&nbsp;&nbsp;<a href="http://www.rayforce.net/mmhash.h">http://www.rayforce.net/mmhash.h</a>&nbsp;&nbsp;<a href="http://www.rayforce.net/mmhashinternal.h">http://www.rayforce.net/mmhashinternal.h</a>&nbsp;&nbsp;<a href="http://www.rayforce.net/mmhashinline.h">http://www.rayforce.net/mmhashinline.h</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.00</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: cool! that's the latest version?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.52</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Should be, it's meant to use atomics (pthread fallback) so there are minor dependencies on some other headers you probably have somewhere</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:48.38</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>what's the state of atomics these days</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:49.38</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">remembers discussing some of that with brlcad a while back, but I don't recall the details</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:49.42</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Frankly, no idea, always using my own inline assembly, but I'm sure you'll frown on that. I always include some slower pthread-based fallback... <a href="http://www.rayforce.net/mmatomic.h">http://www.rayforce.net/mmatomic.h</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:50.36</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: that hasn't been too difficult to keep portable?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.10</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>The pthread fallback is portable, the problem is the big performance drop you get when not running on x86/amd64 with a GCC compatible compiler :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.24</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>C11 is supposed to have atomics, but I have no idea what platforms are supported. And it's not exactly "complete"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.52</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>nor is it (or will it be) portable to MSVC unless C++ incorporates the C version</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.55</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>grr...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:52.36</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: do you set build flags manually, or are there a set of configure-time tests you've built up to detect ssystem capabilities?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.14</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">sees a lot of ifdefs in the atomics file, which is probably inevitable, but winces a little at the system introspection tests needed to drive it properly...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.37</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>I have never personally worried much about portability (I know that's a big problem for you guys...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.45</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:54.04</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>at one point we actually built (non-graphically) on Haiku-OS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:54.19</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>should fix that, actually...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.22</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can see atomics being a bit like openblas - high performance may require system specific tweaking...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.33</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>latest c11 and c++11 standards both have complete atomics support</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.33</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>It bothers me when the inline assembly atomic version provides perfect scalability on a 64 cores machine (and beyond, probably), but some portable pthread-based solution just doesn't scale</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.57</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://en.cppreference.com/w/c/atomic">http://en.cppreference.com/w/c/atomic</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.23</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: oh, that reminds me - did you decide if you were going to release your high-performance OpenGL GUI element drawing library as a stand-alone?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.57</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>C11 atomics are missing a few important details... Let's say I have threads waiting in a spin loop for some variable to change, I really need to "rep nop" to tell a hyperthreading CPU core: "I'm a spin loop, try to run another concurrent thread"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.18</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Without that, spin loops are a problem on hyperthreading processors</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:58.27</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>starseeker: I would like to... Do you think you guys would perhaps use it? I would say that makes a difference on the grade of motivation :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.24</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: fair enough.&nbsp;&nbsp;for me, the biggest driver for Qt is the availability of things like html rendering widgets and tree widgets that are "pre-packaged" - I'm not sure if it's practical to code stuff like that up for a custom OpenGL interface</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.26</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: I'm not sure I'd agree that's a critical detail missing -- it's more a threading issue than anything to do with atomics, and there are so many ways to code around that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.52</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Well brlcad, atomics are all about threads, this kind of stuff is very closely related</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.22</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>starseeker: HTML rendering would be monstrous task, for sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.47</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>that smacks of self-justification</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:02.11</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>sure atomics are heavily used by threads and used for thread synching (among man other uses), but that's not their sole purpose</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:02.24</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: yeah, I think the most practical solutions I've seen for OpenGL have been those that render the html to an image </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:02.42</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>thread api could just as well yield or be architected to not sit there spinning idle in the first place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:03.11</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>brlcad: Have you used atomics in a different context? While writing to device mapped memory I guess?... That's not very common</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:03.25</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>ironically enough, tkhtml3 would probably be the most logical starting point for a "native OpenGL" html rendering widget, but small as it is compared to webkit there's still quite a lot of logic there :-/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:04.11</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm not fond enough of HTML to ever consider using it unless I'm forced to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:04.28</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>actually, yeah used it as an initialization construct to implement lock-free data structures</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:05.59</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: heh.&nbsp;&nbsp;Don't blame you - I use tkhtml3, but the few times I've tried digging into its guts I ended up backing away slowly...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.06</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>And an "yield" is totally different, that goes back to the OS which is something you never want in a spin lock, the "rep nop" just makes a hyperthreading processor switch to other threads resident on the CPU core</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:09.25</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, here's the library I was thinking of - the "C Container Library":&nbsp;&nbsp;<a href="https://github.com/starseeker/ccl">https://github.com/starseeker/ccl</a> - thought I'd stashed a copy before the google project vanished.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:11.03</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>over 300 pages of docs - don't know how good the library itself is implementation wise, but Jacob Navia clearly put a lot of work into it...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:11.27</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Not thread safe, but there's quite a bit of work into that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:11.36</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.33</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>The self-balanced RB tree wasn't written to be as efficient as possible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.57</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: yeah, it's probably not the solution I thought it might be when I first found it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.18</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>there are several RB implementations floating around online (one of the "nicer" looking ones, looking casually, is in sudo: <a href="https://github.com/millert/sudo/blob/master/plugins/sudoers/redblack.c)">https://github.com/millert/sudo/blob/master/plugins/sudoers/redblack.c)</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.58</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>to my eye it looks well organized and readable, but I'm not sure if it's efficient</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:22.40</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>It's less messy... but I still don't like this idea of having a "compare" callback find where to insert the node, among other things. The calling code can traverse the tree and find the insertion point in one function, without the overhead of 15 tiny function calls</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.02</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>there's this:&nbsp;&nbsp;<a href="http://www.25thandclement.com/~william/projects/llrb.h.html">http://www.25thandclement.com/~william/projects/llrb.h.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.16</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>not sure how the preprocessor-only approach works from a usability standpoint, but has the plus of duplicating the BSD api</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.50</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Doesn't seem to make sense if you get any "compare" and "key/value/whatever" out of the core tree code itself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.11</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Headers with preprocessor abuse makes more sense when some critical callback has to be inlined, like sort functions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:29.13</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>suppose we'll end up implementing the public APIs we want and trying several rb backends to see what works best</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:30.08</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">does confess that the combo of liberal license plus single small header appeals</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.30</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>I tend to write everything from scratch and I'll probably stick to that :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.07</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">chuckles - to each their own.  I'm not smart enough to get away with that - I like having other people shake out the bugs before I add my own</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.34</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68659 (brlcad/trunk/include/dm.h brlcad/trunk/src/libdm/dm-Null.c and 8 others): make the remainder of the dm device callback signatures all consistently return int</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.22</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Eh, I don't think it's a matter of smartness. I like writing my own reusable chunks because once I made them as optimized as possible, I never have to worry about it again</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.38</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>until the hardware changes ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:36.08</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Yup. :) Mostly, mmatomic.h would have to be expanded with new architectures...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:36.32</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>As well as the SSE/AVX abuse</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.35</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>It's hard to trust other people's code when performance matters. You would think qsort() with an inlined comparison function would be fast enough? But it's 30% slower than it should be!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:41.03</tt></td><td><font color="#c8c869"><tt>Stragus</tt></font></td><td width="100%"><tt>Sorry, 38% slower</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:52.18</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: do you know if anyone has ever looked into the possibility of using libpkg instead of Tcl channels for communication on Windows?&nbsp;&nbsp;I have very vague memories of trying it when I first arrived and finding out the hard way that libpkg didn't work on Windows, but I don't recall if I ever followed up further.&nbsp;&nbsp;It's an issue of more interest now, since that's one of the major pieces keeping a Tcl </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:52.24</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>dependency in libged</tt></td></tr>
-<tr><td><tt>07:41.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (b64b2de1@gateway/web/freenode/ip.182.75.45.225)</font></tt></td></tr>
-<tr><td><tt>08:10.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@188.173.16.122)</font></tt></td></tr>
-<tr><td><tt>09:15.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.2.135)</font></tt></td></tr>
-<tr><td><tt>09:35.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar2 (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:35.53</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>hi, in next daya I will start working on including brl-cad into Fedora repositories</tt></td></tr>
-<tr><td><tt>12:08.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad asad_ (~asad00@host10-2.natpool.mwn.de)</font></tt></td></tr>
-<tr><td><tt>12:49.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.2.135)</font></tt></td></tr>
-<tr><td><tt>13:33.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mandeep_Singh (~mandeep@117.220.151.253)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:36.20</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:36.30</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Caterpillar2: nice!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:37.05</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>it's been a while since anyone had a run at that - last effort I recall was the Redhat packaging effort, and that got hung up in the src/other stuf</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:37.09</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>s/stuf/stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:38.27</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>ah yes <a href="https://bugzilla.redhat.com/show_bug.cgi?id=518949">https://bugzilla.redhat.com/show_bug.cgi?id=518949</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.10</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>so tnt/jama is no longer an issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.18</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>openNURBS is still the same situation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.43</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>someone would need to package STEPcode, but in principle we should be able to work with them externally...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:41.06</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>there's been no change on the tkhtml3 and utah raster toolkit fronts - if someone needs those projects set up we could put a bit more effort into it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:42.44</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: ah I did not know about that ticket.&nbsp;&nbsp; The libraries you just mentioned, are them included in brlcad?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:42.54</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.00</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>src/other subdirectory </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.17</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: ok, I will have to package them separately</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.34</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>most of what's in src/other has packages already</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.45</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>the ones I called out are the problem children</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:44.02</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>children problem?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:44.34</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>er, sorry - libraries for which we expect difficulty with the Redhat/Fedora upstream</tt></td></tr>
-<tr><td><tt>13:44.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (b64b2de1@gateway/web/freenode/ip.182.75.45.225)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:44.48</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>libraries for which there are not already packages</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:45.25</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>that is not a problem, we can package them. It will only require more time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:45.35</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:46.27</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad will be a good thing to push Fedora usage among engineers, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.41</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>fyi - I'm not sure the current CMake logic for RPM generation is correct</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.46</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>in BRL-CAD</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.49</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: why?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:51.21</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68660 (brlcad/trunk/src/libpkg/example/client.c brlcad/trunk/src/libpkg/example/server.c brlcad/trunk/src/libpkg/tpkg.c): libpkg appears to be excluded from the normal repository regression tests, but I'm not seeing any reason to keep the stdio includes when bio.h is included... go ahead and remove for now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:51.23</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>when I tried to generate an RPM for 7.26.0, it was a lot smaller than the tarballs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:51.45</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>I need to figure out why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:55.47</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: so you have a quite working spec file? This will be a great help to start with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.07</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>not really - we use CMake's CPack mechanisms to create a package</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.16</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>it generates a spec file, I believe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.51</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: I don't know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.53</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Caterpillar2: our logic for this starts in the top level CMakeLists.txt around line 2873</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.23</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>this is the list of packages that I (co)maintain in Fedora <a href="https://admin.fedoraproject.org/pkgdb/packager/germano/">https://admin.fedoraproject.org/pkgdb/packager/germano/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.53</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>nice!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.45</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>in my experience, everytime we add a package into Fedora repositories, we always have some nice exchange of ideas with upstream developers, so for sure something good will pop-up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:00.25</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I recommend reading over the older Redhat ticket - a couple of the issues are obsolete, but many still remain to be resolved</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:00.35</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>my skill in making new packages of software writte in C is not high (I have taken orphaned packages), but I have very high skilled people that can suggest me </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:00.56</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>yep I just subscribed to that ticket</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.28</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>you'll probably want to start with stepcode, utahrle and perhaps openNURBS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.54</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>the primary difficulty with openNURBS is that we do patch it and so far our patches have not been accepted upstream</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.40</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: oh, why openNURBS upstream developers did not accept them?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.53</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... it's a long story</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.12</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>in one case there's a disagreement about what the "right" code is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:04.01</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>mmh... but we can take your patches and appy them to the corrispective Fedora package :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:04.21</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>that would be workable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:04.43</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>you may also want our build system for openNURBS ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:05.35</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>what is made of?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:05.42</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>CMake</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:05.50</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>ah ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:06.09</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>fyi - there was apparently some interest in an openNURBS package back in 2011:&nbsp;&nbsp;<a href="https://lists.fedoraproject.org/archives/list/legal@lists.fedoraproject.org/thread/JP2RTIBREMZ5SIFMJ35AHXXQDJHQPQLX/">https://lists.fedoraproject.org/archives/list/legal@lists.fedoraproject.org/thread/JP2RTIBREMZ5SIFMJ35AHXXQDJHQPQLX/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:06.35</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>I added a comment, so that if any of other Fedora contributors wants to help me, he can contact me <a href="https://bugzilla.redhat.com/show_bug.cgi?id=518949#c29">https://bugzilla.redhat.com/show_bug.cgi?id=518949#c29</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:08.04</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: I can contact the guy who wanted to package openNURBS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:08.22</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>I don't know if he made any progress - just something to be aware of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.53</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: I have just made a query to find his name among Fedora contributors, but he seems to not be present. For your info, to do such queries, you have to query zodbot (that is present in all #fedora-* channels) and enter command&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fas name surname&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp; fas nickname.&nbsp;&nbsp;&nbsp;&nbsp;Then you will get some results, and when you get his Fedora-Account-System name, you do:&nbsp;&nbsp;&nbsp;&nbsp;fasinfo foo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.13</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">ndos</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.18</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>nods rather</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.14</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Caterpillar2: the stepcode upstream site is here:&nbsp;&nbsp;<a href="http://stepcode.org/">http://stepcode.org/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.46</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>Caterpillar2: the openNURBS site is here: <a href="https://www.rhino3d.com/opennurbs">https://www.rhino3d.com/opennurbs</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.58</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:13.17</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>I don't think we've synced our own sources to the latest openNURBS yet, so there may be a bit of work to do there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:13.57</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>this is the upstream project we started to establish for utahrle:&nbsp;&nbsp;<a href="https://sourceforge.net/projects/utahrle/">https://sourceforge.net/projects/utahrle/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.03</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>ok I will save this chat log, make a list of libraries that have to be packaged, and starting sorting my ideas</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.29</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>I am going to add #brlcad to my autojoin channels list</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.50</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>cool - good luck!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:15.07</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:15.34</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>another point - I know definitely at the moment that some parts of our code will not work with the new Itcl/Itk 4 packages</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:15.48</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>if Fedora is on Tcl/Tk 8.6, that may be an issue</tt></td></tr>
-<tr><td><tt>14:16.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.2.135)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:17.24</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>you can find my email address at&nbsp;&nbsp; <a href="https://fedoraproject.org/wiki/User:Germano#Contact">https://fedoraproject.org/wiki/User:Germano#Contact</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:17.38</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: is tcl/tk&nbsp;&nbsp; --&gt;&gt;&nbsp;&nbsp;tcl-tkpng.x86_64 : Tcl/Tk support for PNG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:18.13</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>mmh no it seems not</tt></td></tr>
-<tr><td><tt>14:25.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (3d0c28b1@gateway/web/freenode/ip.61.12.40.177)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:26.07</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68661 brlcad/trunk/regress/repository.cmake: Add a mechanism to exclude files in the build directory, should it be located in the source directory. Can't do anything about the in-src-dir case (yet) but this is a start...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:26.09</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68662 brlcad/trunk/misc/CMake/test_srcs/sleep.c: another unistd include when we have bio</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.50</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68663 brlcad/trunk/include/pkg.h: Add common.h to pkg.h, unless/until we find out there's a reason not to...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:56.22</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68664 brlcad/trunk/regress/repository.cmake: list a few more files and patterns we don't want to examine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:03.40</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68665 brlcad/trunk/regress/repository.cmake: There are a few 'public' headers that do have one or both of bio and bnetwork in them - excempt them from this check, since it hasn't been a regress-repository breaker...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:04.14</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68666 brlcad/trunk/src/burst/paint.c: Only include common.h once</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:05.15</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68667 brlcad/trunk/src/libged/simulate/interface.cpp: common.h and ged.h get included regardless</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:06.04</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68668 brlcad/trunk/src/libged/simulate/physics_world.hpp: add common.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:36.02</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I notice that repository.sh doesn't report WIN32 et. al. instances in any of the include header files.&nbsp;&nbsp;Is this intentional?</tt></td></tr>
-<tr><td><tt>16:03.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.2.135)</font></tt></td></tr>
-<tr><td><tt>17:03.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>17:22.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.208.5.88)</font></tt></td></tr>
-<tr><td><tt>17:58.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.208.5.88)</font></tt></td></tr>
-<tr><td><tt>18:20.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.208.5.88)</font></tt></td></tr>
-<tr><td><tt>18:31.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.208.5.88)</font></tt></td></tr>
-<tr><td><tt>18:35.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.208.5.88)</font></tt></td></tr>
-<tr><td><tt>18:35.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (b64b2d01@gateway/web/freenode/ip.182.75.45.1)</font></tt></td></tr>
-<tr><td><tt>18:36.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.208.5.88)</font></tt></td></tr>
-<tr><td><tt>18:42.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet_ (~Amarjeet@101.211.235.40)</font></tt></td></tr>
-<tr><td><tt>18:47.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.235.40)</font></tt></td></tr>
-<tr><td><tt>18:56.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:58.11</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: pkg instead of tcl channels has been discussed before, but nobody has looked or tried</tt></td></tr>
-<tr><td><tt>19:02.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.228.237)</font></tt></td></tr>
-<tr><td><tt>19:03.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.228.237)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.29</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: what do you mean it doesn't report headers?&nbsp;&nbsp;it does, was, or at least should be (see line 268)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:07.46</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: also regarding pkg .. I think you tried before anyone had gotten libpkg compiling (nothing tricky, we just needed the winsock2 init bits and types)</tt></td></tr>
-<tr><td><tt>19:10.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet_ (~Amarjeet@101.211.237.160)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:11.39</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: shall I set you as a maintainer for fedora, to receive release notifications?</tt></td></tr>
-<tr><td><tt>19:27.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.237.160)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:31.06</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: my cmake scripts are reporting WIN32 instances in bu/defines.h, common.h and a few other headers - I'm not seeing these listed in the repository.sh report, unless I'm missing something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:31.28</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>trying to make the CMake script a full replacement for the .sh script, which means matching its results...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.23</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm getting close to being ready to set up individual tests to do in parallel, but I don't want to do that until I've first achieved functional parity</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:35.58</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68669 brlcad/trunk/regress/repository.cmake: Do less expensive matching tests before we go for the all-upregex match, although we have to be careful with this - common.h test, for example, looks for either system includes or common.h so we can't rely on a simple qualification test there. If this works as well as it seems to now, cuts execution time from about 70 seconds to a little over 30.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:36.00</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>repository.sh is about 21, so if we can execute individual tests in parallel we should get a significant speed up overall.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:36.02</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:40.35</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68670 brlcad/trunk/HACKING: add Caterpillar2 as a maintainer for fedora</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:42.09</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: they are printed in sections, headers first then sources then build files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:42.22</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>so maybe in a different section/earlier in the output?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.36</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.48</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: cool, great! thank you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.21</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>you can pass the torch on at any time, it just means you'll get an e-mail notification whenever we push out a new release, so you can decide whether to update fedora</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:56.12</tt></td><td><font color="#73da73"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68671 (brlcad/trunk/include/ged/defines.h brlcad/trunk/src/libged/rt.c and 2 others): eliminate exposing tcl types and symbols in ged's public header, cast accordingly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:56.58</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:59.12</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: the process of bringing brlcad into Fedora repositories will take some months, because of various libraries that have to be included into Fedora repositories</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:05.48</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: yes, I understand .. it's a lot of work and greatly appreciated!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:06.27</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:08.07</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>starseeker: brlcad: I have forgotten to also say that brlcad will be included in Fedora EPEL repositories too, that means that it will be available for RHEL, CentOS, ScientificLinux, Oracle Linux too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:09.21</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>that's great to hear</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:09.48</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt><a href="https://fedoraproject.org/wiki/EPEL/">https://fedoraproject.org/wiki/EPEL/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:10.40</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, was just reading up on it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:11.16</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:11.21</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we manually pull together rpm's for RHEL currently</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.03</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: I have heard from starseeker that you use a particular way to make RPM packages</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.09</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, for what it's worth -- we have a variety of build materials in misc/ that may be of interest/relevance to you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:13.10</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>misc/archlinux, misc/brlcad.spec,.in and misc/debian&nbsp;&nbsp;in particular</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:13.23</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>ah ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:13.49</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's helpful for you to store files or make changes, let me know and I'll get you set up so you can commit as needed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:15.30</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: on which distro did you test the spec file?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:17.35</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: it was last used 4 years ago and just as a spec file for our manually prepared rpm installer, but maybe has some relevant/useful bits</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.52</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>several distro managers (e.g., gentoo's ebuild) choose to maintain their build logic in their repo system, others stash their files into our repo for convenience</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:20.56</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: I am forced to use Fedora infrastructure. If I do not use it, I cannot update packages in official Fedora repositories</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:21.21</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>that's fine, just giving you options ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:22.18</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: this may also be of interest, manual build instructions for linux lists some expected deps (should be fairly up-to-date): <a href="http://brlcad.org/wiki/Compiling">http://brlcad.org/wiki/Compiling</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:22.59</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>I notice that list is not consistent with <a href="http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux">http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux</a> ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:25.32</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: ah, I think that the <a href="http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux">http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux</a> should be updated soon</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.18</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>let me know what updates, or send a diff/patch ... that's in our repo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.50</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>it's in doc/README.Linux in a checkout if that wasn't obvious :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.31</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: I haven't seen it yet, but I said that after you wrote that there is a unconsistence between <a href="http://brlcad.org/wiki/Compiling">http://brlcad.org/wiki/Compiling</a> and <a href="http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux">http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.04</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>which distro do you use usually?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.07</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: only reason I can recall for disallowing bio/bnetwork/etc in public headers is because, like common.h, we don't yet define who owns them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.05</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: I hop all around, but most often on mac and freebsd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.26</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>main professional platform is rhel</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.33</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>(and windows)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.29</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>while mostly mac and bsd, I also play/help a bit with haiku, rtems, and minix development</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.46</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: should just skip all of misc/ for repository testing, just like src/other</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.39</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: what is the homepage of upstream gct library?&nbsp;&nbsp;&nbsp;&nbsp;( brlcad-7.26.0/src/other/gct/ )</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:48.34</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>it probably shouldn't be in src/other .. there is no upstream location</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.29</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: is it a library developed by brlcad developers?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.05</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: it's in src/other simply because it was written by a dev that doesn't usually write code for brl-cad (directly, at least), but as far as I know, we're the only public presence it has as that was code developed under contract for public release inclusion in brl-cad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.56</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: care to comment on GCT?&nbsp;&nbsp;does it exist anywhere else such that fedora would point to it as a stand-alone thing that we depend on?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.29</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>Caterpillar2: it was primarily written by that guy there, so you can ask him.. ;)&nbsp;&nbsp;he has a habit of writing useful code and then not packaging it up </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.34</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: I asked because <a href="https://fedoraproject.org/wiki/Packaging:Guidelines#Bundling_and_Duplication_of_system_libraries">https://fedoraproject.org/wiki/Packaging:Guidelines#Bundling_and_Duplication_of_system_libraries</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://fedoraproject.org/wiki/Bundled_Libraries?rd=Packaging:Bundled_Libraries">https://fedoraproject.org/wiki/Bundled_Libraries?rd=Packaging:Bundled_Libraries</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; so I started reading stuff in /others&nbsp;&nbsp;and searching of ach item, if there is already a package into Fedora repositories. GCT was the first occurrence of a /others library that is not present into Fedora </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.36</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>repositories</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.58</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>of i'm the opinion that it doesn't belong in src/other, that we should move it under one of our processing libs as a backend detail (not a stand-alone lib)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:59.53</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>so unless Stragus has some fundamental objection or plans to turn it into a project, give it a home, then we'll treat it as our code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.06</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we kind of already did with a slew of widespread changes for portability</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.04</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we may even end up ripping it out if we can't eaily fix a few issues already encountered in the decimation logic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.11</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>how many stable developers are involved in brlcad?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.20</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>about a dozen depending on who you count</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.49</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>ohloh says 6 in the last 30 days, 12 over past year, 84 committers over lifetime</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.25</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>few more if you count the github repos which cover various web services</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.47</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>does USA's army still spend money for its development or is it entirely in community hands?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.25</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>still spending quite a bit annually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.20</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>BRL-CAD is tightly integrated into a complex DoD analysis workflow so it's used by several agencies, Army in particular</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.54</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>good to hear that money is spent for a product freely available for everybody</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.17</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>it would probably cost $50.M USD minimum to uncouple BRL-CAD and do something different</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.40</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: what DoD stands for?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.46</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>~dod</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.46</tt></td><td><font color="#e2e277"><tt>infobot</tt></font></td><td width="100%"><tt>it has been said that dod is Dial on Demand, a way of making the modem dial whenever you try and send info to the inet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.50</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, not that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.06</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>~dod is also the U.S. Department of Defense</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.06</tt></td><td><font color="#e2e277"><tt>infobot</tt></font></td><td width="100%"><tt>okay, brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.10</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.26</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>open source has been catching up, though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.55</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>before this year's burnout lull, open source activity surpassed funded activity a number of times last year and the year before</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:13.34</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd like to see that grow even more, all the more reason we need better integration with repos, more devs working projects, scrape off our usability warts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:14.33</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>I will start asking some mechanical engineer professors at University of Rome Tor Vergata, to try using brlcad for their work, in order to get some nice feedbacks, etc.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:15.16</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>to be completely honest, it's often jarring for them as our interface is very different from the commercial systems</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:16.36</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>and dod's obsession with analysis requirements is not their requirements (they want usability, annotated engineering drawings, tight integration with FEA codes, etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.22</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we're definitely working on briding that gap, though -- feedback from them is always appreciated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.55</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we have a couple engineering universities in India also providing good feedback (and devs to help improve)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:18.22</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>need devs more than we need users ... we should probably put that on our website ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.17</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>what are FEA codes?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:20.51</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>~fea</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:21.02</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>infobot: you are 0 for 2</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:21.02</tt></td><td><font color="#e2e277"><tt>infobot</tt></font></td><td width="100%"><tt>brlcad: I think you lost me on that one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:22.36</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>~fea is Finite Element Analysis does hard math and science on geometry chopped up into little pieces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:22.36</tt></td><td><font color="#e2e277"><tt>infobot</tt></font></td><td width="100%"><tt>okay, brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:23.39</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>it would be great if in the future brlcad will have a Qt based GUI</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.55</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>if one day there will be some funds to start such work, I know a guy that works on KDE' ark software, that is skilled in Qt libraries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.02</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>that work is already started, qt branch in rpo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.07</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>*repo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.43</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>uh good</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.46</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: Qt5?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.52</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>we've had a gsoc project defined as well, but nobody skilled enough to propose it as their project: <a href="http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt">http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.45</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/wiki/User:Vladbogolin/qt-display-manager">http://brlcad.org/wiki/User:Vladbogolin/qt-display-manager</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.29</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>don't recall, that was circa 2013 which was shortly after qt5 </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.35</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>I think it was </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:36.45</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>sorry for the question (English is not my first language):&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;but nobody skilled enough to propose it as their project: <a href="http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt&gt;&gt;">http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt&gt;&gt;</a> does it mean that nobody worked on brlCAD Google Summer of Code project?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:37.16</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>no no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:37.52</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>nobody has ever proposed the "convert mged to qt" project for the gsoc program</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.02</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>at least nobody skilled enough</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.26</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>there was someone that worked on some qt infrastructure, though, for a different gsoc project</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.42</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>and a couple core devs have been working that area a bit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.20</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker was working on a new prototype in qt, got pretty far</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.55</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>several of our india devs have been working on recreating things in web technologies using node.js and friends</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:40.31</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>interesting</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:40.41</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>anyway if you need some Qt developers I can suggest you some guys</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.06</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>you can see that work here: <a href="http://brlcad.org/wiki/OGV">http://brlcad.org/wiki/OGV</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.15</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, good to know thanks!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.12</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>the web GUI is very nice</tt></td></tr>
-<tr><td><tt>21:44.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:48.25</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>one of our tasks for the next couple months is to integrate the 700+ design and code submissions from participating in the GCI program</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:48.42</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>several items in there that were really pretty exciting were really awesome GUI prototypes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.22</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>one such example: <a href="http://brlcad.org/design/gui/gci_skriptkid_prototype/brlCad-03.png">http://brlcad.org/design/gui/gci_skriptkid_prototype/brlCad-03.png</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.43</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>some more fun ones at <a href="http://yash-m.github.io/BRL-CAD-Portfolio/">http://yash-m.github.io/BRL-CAD-Portfolio/</a> under GUI</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.53</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: nice, is that qt stuff?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:55.05</tt></td><td><font color="#6ed16e"><tt>brlcad</tt></font></td><td width="100%"><tt>they're mock-up designs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:56.05</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: ah ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:02.29</tt></td><td><font color="#af5caf"><tt>Caterpillar2</tt></font></td><td width="100%"><tt>brlcad: I have to go to bed, see you tomorrow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:15.07</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs another knock-down-and-drag-out round with libdm/libfb before we're really going to be in a good position for the Qt stuff</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.57</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: do you want to skip misc/CMake as well for the build files?&nbsp;&nbsp;We do define a lot of our macros/functions there...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:26.13</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: here's what I'm currently seeing from the sh script:&nbsp;&nbsp;<a href="http://brlcad.org/~starseeker/regress_repository_sh.log">http://brlcad.org/~starseeker/regress_repository_sh.log</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:26.53</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>and the CMake version: <a href="http://brlcad.org/~starseeker/regress_repository_cmake.log">http://brlcad.org/~starseeker/regress_repository_cmake.log</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:27.21</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>fwiw, the sh script does look in misc/CMake...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:38.56</tt></td><td><font color="#65c1c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: when I boil it down the the line reports, here's the current diff:&nbsp;&nbsp;<a href="http://brlcad.org/~starseeker/repository_reports.diff.txt">http://brlcad.org/~starseeker/repository_reports.diff.txt</a></tt></td></tr>
-<tr><td><tt>22:51.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:44.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: there definitely is too much
+"public" redblack api in libbu terms</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:45.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>frankly none of it should probably be public,
+instead providing higher level containers like hash, list, vector,
+map, with redblack under the hood (stl operates exactly that
+way)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:46.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: before merging in the latest
+github sources, how many regression tests do we have?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:47.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we need at least one test that exercises a
+variety of entities and hierarchy with mixed attributes (the cause
+of the last regression failure when we tried to update)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:48.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if the nist samples do that, then by all
+means</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:18.49</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">shakes his head - I doubt we
+have a test case like that to hand</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the NIST files (except for the 7-10
+aggregation) are all single objects, and the 7-10 aggregation I had
+to do as a 3DM both for multi-color support and speed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.45</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">agrees we should build
+several test cases</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:31.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">agrees - the log(n) behavior
+of the STL containers is one of my main drivers for using C++ - if
+we had set,map,etc. in C there'd be a lot less
+incentive</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:37.49</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I think I have written a bunch of such
+code...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:41.54</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: can the bu_badmagic change be
+considered minimally impacting, or does it need
+deprecation?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.01</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: not surprised :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.14</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Besides, the C++ containers are terrible
+(unusable) for high performance multithreaded code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.58</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>If I'm not mistaken, you can't have 64 threads
+hammering the same C++ map, it would all have to be serialized on a
+single lock</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.13</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:44.08</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I think an early version of my hash table with
+concurrent multithreaded access is in the mesh decimation
+code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:44.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>might be worth pulling into libbu</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:46.21</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Just in case you are interested  -  <a href=
+"http://www.rayforce.net/mmhash.c">http://www.rayforce.net/mmhash.c</a>
+ <a href=
+"http://www.rayforce.net/mmhash.h">http://www.rayforce.net/mmhash.h</a>
+ <a href=
+"http://www.rayforce.net/mmhashinternal.h">http://www.rayforce.net/mmhashinternal.h</a>
+ <a href=
+"http://www.rayforce.net/mmhashinline.h">http://www.rayforce.net/mmhashinline.h</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: cool! that's the latest
+version?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.52</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Should be, it's meant to use atomics (pthread
+fallback) so there are minor dependencies on some other headers you
+probably have somewhere</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:48.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>what's the state of atomics these
+days</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:49.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">remembers discussing some of
+that with brlcad a while back, but I don't recall the
+details</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:49.42</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Frankly, no idea, always using my own inline
+assembly, but I'm sure you'll frown on that. I always include some
+slower pthread-based fallback... <a href=
+"http://www.rayforce.net/mmatomic.h">http://www.rayforce.net/mmatomic.h</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:50.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: that hasn't been too difficult to
+keep portable?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.10</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>The pthread fallback is portable, the problem
+is the big performance drop you get when not running on x86/amd64
+with a GCC compatible compiler :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.24</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>C11 is supposed to have atomics, but I have no
+idea what platforms are supported. And it's not exactly
+"complete"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.52</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>nor is it (or will it be) portable to MSVC
+unless C++ incorporates the C version</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.55</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>grr...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:52.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: do you set build flags manually, or
+are there a set of configure-time tests you've built up to detect
+ssystem capabilities?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.14</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">sees a lot of ifdefs in the
+atomics file, which is probably inevitable, but winces a little at
+the system introspection tests needed to drive it
+properly...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.37</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I have never personally worried much about
+portability (I know that's a big problem for you guys...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.45</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:54.04</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>at one point we actually built
+(non-graphically) on Haiku-OS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:54.19</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>should fix that, actually...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.22</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">can see atomics being a bit
+like openblas - high performance may require system specific
+tweaking...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>latest c11 and c++11 standards both have
+complete atomics support</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.33</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It bothers me when the inline assembly atomic
+version provides perfect scalability on a 64 cores machine (and
+beyond, probably), but some portable pthread-based solution just
+doesn't scale</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://en.cppreference.com/w/c/atomic">http://en.cppreference.com/w/c/atomic</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.23</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: oh, that reminds me - did you decide
+if you were going to release your high-performance OpenGL GUI
+element drawing library as a stand-alone?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.57</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>C11 atomics are missing a few important
+details... Let's say I have threads waiting in a spin loop for some
+variable to change, I really need to "rep nop" to tell a
+hyperthreading CPU core: "I'm a spin loop, try to run another
+concurrent thread"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.18</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Without that, spin loops are a problem on
+hyperthreading processors</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:58.27</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>starseeker: I would like to... Do you think
+you guys would perhaps use it? I would say that makes a difference
+on the grade of motivation :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:00.24</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: fair enough.  for me, the biggest
+driver for Qt is the availability of things like html rendering
+widgets and tree widgets that are "pre-packaged" - I'm not sure if
+it's practical to code stuff like that up for a custom OpenGL
+interface</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:00.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Stragus: I'm not sure I'd agree that's a
+critical detail missing -- it's more a threading issue than
+anything to do with atomics, and there are so many ways to code
+around that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:00.52</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Well brlcad, atomics are all about threads,
+this kind of stuff is very closely related</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:01.22</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>starseeker: HTML rendering would be monstrous
+task, for sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:01.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that smacks of self-justification</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:02.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure atomics are heavily used by threads and
+used for thread synching (among man other uses), but that's not
+their sole purpose</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:02.24</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: yeah, I think the most practical
+solutions I've seen for OpenGL have been those that render the html
+to an image</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:02.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>thread api could just as well yield or be
+architected to not sit there spinning idle in the first
+place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:03.11</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>brlcad: Have you used atomics in a different
+context? While writing to device mapped memory I guess?... That's
+not very common</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:03.25</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ironically enough, tkhtml3 would probably be
+the most logical starting point for a "native OpenGL" html
+rendering widget, but small as it is compared to webkit there's
+still quite a lot of logic there :-/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:04.11</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I'm not fond enough of HTML to ever consider
+using it unless I'm forced to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:04.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>actually, yeah used it as an initialization
+construct to implement lock-free data structures</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:05.59</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: heh.  Don't blame you - I use
+tkhtml3, but the few times I've tried digging into its guts I ended
+up backing away slowly...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:06.06</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>And an "yield" is totally different, that goes
+back to the OS which is something you never want in a spin lock,
+the "rep nop" just makes a hyperthreading processor switch to other
+threads resident on the CPU core</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:09.25</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah, here's the library I was thinking of - the
+"C Container Library":  <a href=
+"https://github.com/starseeker/ccl">https://github.com/starseeker/ccl</a>
+- thought I'd stashed a copy before the google project
+vanished.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:11.03</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>over 300 pages of docs - don't know how good
+the library itself is implementation wise, but Jacob Navia clearly
+put a lot of work into it...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:11.27</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Not thread safe, but there's quite a bit of
+work into that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:11.36</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.33</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>The self-balanced RB tree wasn't written to be
+as efficient as possible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: yeah, it's probably not the solution
+I thought it might be when I first found it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>there are several RB implementations floating
+around online (one of the "nicer" looking ones, looking casually,
+is in sudo: <a href=
+"https://github.com/millert/sudo/blob/master/plugins/sudoers/redblack.c)">
+https://github.com/millert/sudo/blob/master/plugins/sudoers/redblack.c)</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.58</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>to my eye it looks well organized and
+readable, but I'm not sure if it's efficient</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:22.40</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It's less messy... but I still don't like this
+idea of having a "compare" callback find where to insert the node,
+among other things. The calling code can traverse the tree and find
+the insertion point in one function, without the overhead of 15
+tiny function calls</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:23.02</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>there's this:  <a href=
+"http://www.25thandclement.com/~william/projects/llrb.h.html">http://www.25thandclement.com/~william/projects/llrb.h.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:25.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>not sure how the preprocessor-only approach
+works from a usability standpoint, but has the plus of duplicating
+the BSD api</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:26.50</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Doesn't seem to make sense if you get any
+"compare" and "key/value/whatever" out of the core tree code
+itself</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.11</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Headers with preprocessor abuse makes more
+sense when some critical callback has to be inlined, like sort
+functions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:29.13</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>suppose we'll end up implementing the public
+APIs we want and trying several rb backends to see what works
+best</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:30.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">does confess that the combo
+of liberal license plus single small header
+appeals</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.30</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I tend to write everything from scratch and
+I'll probably stick to that :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.07</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">chuckles - to each their own.
+I'm not smart enough to get away with that - I like having other
+people shake out the bugs before I add my own</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.34</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 68659
+(brlcad/trunk/include/dm.h brlcad/trunk/src/libdm/dm-Null.c and 8
+others): make the remainder of the dm device callback signatures
+all consistently return int</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.22</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Eh, I don't think it's a matter of smartness.
+I like writing my own reusable chunks because once I made them as
+optimized as possible, I never have to worry about it
+again</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>until the hardware changes ;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:36.08</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Yup. :) Mostly, mmatomic.h would have to be
+expanded with new architectures...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:36.32</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>As well as the SSE/AVX abuse</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.35</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It's hard to trust other people's code when
+performance matters. You would think qsort() with an inlined
+comparison function would be fast enough? But it's 30% slower than
+it should be!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:41.03</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Sorry, 38% slower</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:52.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: do you know if anyone has ever looked
+into the possibility of using libpkg instead of Tcl channels for
+communication on Windows?  I have very vague memories of trying it
+when I first arrived and finding out the hard way that libpkg
+didn't work on Windows, but I don't recall if I ever followed up
+further.  It's an issue of more interest now, since that's one of
+the major pieces keeping a Tcl</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:52.24</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>dependency in libged</tt></td>
+</tr>
+<tr>
+<td><tt>07:41.26</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad tandoorichick
+(b64b2de1@gateway/web/freenode/ip.182.75.45.225)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:10.57</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad merzo
+(~merzo@188.173.16.122)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:15.32</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad sniok
+(~sniok@89.252.2.135)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:35.34</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Caterpillar2
+(~caterpill@unaffiliated/caterpillar)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:35.53</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>hi, in next daya I will start working on
+including brl-cad into Fedora repositories</tt></td>
+</tr>
+<tr>
+<td><tt>12:08.31</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad asad_
+(~asad00@host10-2.natpool.mwn.de)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:49.17</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad sniok
+(~sniok@89.252.2.135)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:33.19</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Mandeep_Singh
+(~mandeep@117.220.151.253)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:36.20</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>:-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:36.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Caterpillar2: nice!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:37.05</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it's been a while since anyone had a run at
+that - last effort I recall was the Redhat packaging effort, and
+that got hung up in the src/other stuf</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:37.09</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>s/stuf/stuff</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:38.27</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah yes <a href=
+"https://bugzilla.redhat.com/show_bug.cgi?id=518949">https://bugzilla.redhat.com/show_bug.cgi?id=518949</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:39.10</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>so tnt/jama is no longer an issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:39.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>openNURBS is still the same
+situation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:39.43</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>someone would need to package STEPcode, but in
+principle we should be able to work with them
+externally...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:41.06</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>there's been no change on the tkhtml3 and utah
+raster toolkit fronts - if someone needs those projects set up we
+could put a bit more effort into it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:42.44</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: ah I did not know about that
+ticket.   The libraries you just mentioned, are them included in
+brlcad?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:42.54</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:43.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>src/other subdirectory</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:43.17</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: ok, I will have to package them
+separately</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:43.34</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>most of what's in src/other has packages
+already</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:43.45</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the ones I called out are the problem
+children</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:44.02</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>children problem?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:44.34</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>er, sorry - libraries for which we expect
+difficulty with the Redhat/Fedora upstream</tt></td>
+</tr>
+<tr>
+<td><tt>13:44.39</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad tandoorichick
+(b64b2de1@gateway/web/freenode/ip.182.75.45.225)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:44.48</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>libraries for which there are not already
+packages</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:45.25</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>that is not a problem, we can package them. It
+will only require more time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:45.35</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:46.27</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad will be a good thing to push Fedora
+usage among engineers, etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.41</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>fyi - I'm not sure the current CMake logic for
+RPM generation is correct</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.46</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>in BRL-CAD</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.49</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: why?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:51.21</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68660
+(brlcad/trunk/src/libpkg/example/client.c
+brlcad/trunk/src/libpkg/example/server.c
+brlcad/trunk/src/libpkg/tpkg.c): libpkg appears to be excluded from
+the normal repository regression tests, but I'm not seeing any
+reason to keep the stdio includes when bio.h is included... go
+ahead and remove for now.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:51.23</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>when I tried to generate an RPM for 7.26.0, it
+was a lot smaller than the tarballs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:51.45</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I need to figure out why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:55.47</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: so you have a quite working spec
+file? This will be a great help to start with</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.07</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>not really - we use CMake's CPack mechanisms
+to create a package</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it generates a spec file, I believe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.51</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: I don't know</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Caterpillar2: our logic for this starts in the
+top level CMakeLists.txt around line 2873</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.23</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>this is the list of packages that I
+(co)maintain in Fedora <a href=
+"https://admin.fedoraproject.org/pkgdb/packager/germano/">https://admin.fedoraproject.org/pkgdb/packager/germano/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>nice!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.45</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>in my experience, everytime we add a package
+into Fedora repositories, we always have some nice exchange of
+ideas with upstream developers, so for sure something good will
+pop-up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:00.25</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods - I recommend reading
+over the older Redhat ticket - a couple of the issues are obsolete,
+but many still remain to be resolved</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:00.35</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>my skill in making new packages of software
+writte in C is not high (I have taken orphaned packages), but I
+have very high skilled people that can suggest me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:00.56</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>yep I just subscribed to that ticket</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.28</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you'll probably want to start with stepcode,
+utahrle and perhaps openNURBS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.54</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the primary difficulty with openNURBS is that
+we do patch it and so far our patches have not been accepted
+upstream</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.40</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: oh, why openNURBS upstream
+developers did not accept them?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>uh... it's a long story</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.12</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>in one case there's a disagreement about what
+the "right" code is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:04.01</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>mmh... but we can take your patches and appy
+them to the corrispective Fedora package :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:04.21</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that would be workable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:04.43</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you may also want our build system for
+openNURBS ;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:05.35</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>what is made of?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:05.42</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>CMake</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:05.50</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>ah ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:06.09</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>fyi - there was apparently some interest in an
+openNURBS package back in 2011:  <a href=
+"https://lists.fedoraproject.org/archives/list/legal@lists.fedoraproject.org/thread/JP2RTIBREMZ5SIFMJ35AHXXQDJHQPQLX/">
+https://lists.fedoraproject.org/archives/list/legal@lists.fedoraproject.org/thread/JP2RTIBREMZ5SIFMJ35AHXXQDJHQPQLX/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:06.35</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>I added a comment, so that if any of other
+Fedora contributors wants to help me, he can contact me <a href=
+"https://bugzilla.redhat.com/show_bug.cgi?id=518949#c29">https://bugzilla.redhat.com/show_bug.cgi?id=518949#c29</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:08.04</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: I can contact the guy who wanted
+to package openNURBS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:08.22</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I don't know if he made any progress - just
+something to be aware of</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.53</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: I have just made a query to find
+his name among Fedora contributors, but he seems to not be present.
+For your info, to do such queries, you have to query zodbot (that
+is present in all #fedora-* channels) and enter command        fas
+name surname         or   fas nickname.    Then you will get some
+results, and when you get his Fedora-Account-System name, you do:  
+ fasinfo foo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.13</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">ndos</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>nods rather</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.14</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Caterpillar2: the stepcode upstream site is
+here:  <a href=
+"http://stepcode.org/">http://stepcode.org/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.46</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Caterpillar2: the openNURBS site is here:
+<a href=
+"https://www.rhino3d.com/opennurbs">https://www.rhino3d.com/opennurbs</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.58</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:13.17</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I don't think we've synced our own sources to
+the latest openNURBS yet, so there may be a bit of work to do
+there</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:13.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>this is the upstream project we started to
+establish for utahrle:  <a href=
+"https://sourceforge.net/projects/utahrle/">https://sourceforge.net/projects/utahrle/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.03</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>ok I will save this chat log, make a list of
+libraries that have to be packaged, and starting sorting my
+ideas</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.29</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>I am going to add #brlcad to my autojoin
+channels list</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.50</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cool - good luck!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:15.07</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:15.34</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>another point - I know definitely at the
+moment that some parts of our code will not work with the new
+Itcl/Itk 4 packages</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:15.48</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>if Fedora is on Tcl/Tk 8.6, that may be an
+issue</tt></td>
+</tr>
+<tr>
+<td><tt>14:16.02</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad sniok
+(~sniok@89.252.2.135)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:17.24</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>you can find my email address at   <a href=
+"https://fedoraproject.org/wiki/User:Germano#Contact">https://fedoraproject.org/wiki/User:Germano#Contact</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:17.38</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: is tcl/tk   --&gt;&gt; 
+tcl-tkpng.x86_64 : Tcl/Tk support for PNG      ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:18.13</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>mmh no it seems not</tt></td>
+</tr>
+<tr>
+<td><tt>14:25.37</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad tandoorichick
+(3d0c28b1@gateway/web/freenode/ip.61.12.40.177)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:26.07</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68661
+brlcad/trunk/regress/repository.cmake: Add a mechanism to exclude
+files in the build directory, should it be located in the source
+directory. Can't do anything about the in-src-dir case (yet) but
+this is a start...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:26.09</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68662
+brlcad/trunk/misc/CMake/test_srcs/sleep.c: another unistd include
+when we have bio</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:50.50</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68663
+brlcad/trunk/include/pkg.h: Add common.h to pkg.h, unless/until we
+find out there's a reason not to...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:56.22</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68664
+brlcad/trunk/regress/repository.cmake: list a few more files and
+patterns we don't want to examine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:03.40</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68665
+brlcad/trunk/regress/repository.cmake: There are a few 'public'
+headers that do have one or both of bio and bnetwork in them -
+excempt them from this check, since it hasn't been a
+regress-repository breaker...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:04.14</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68666
+brlcad/trunk/src/burst/paint.c: Only include common.h
+once</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:05.15</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68667
+brlcad/trunk/src/libged/simulate/interface.cpp: common.h and ged.h
+get included regardless</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:06.04</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68668
+brlcad/trunk/src/libged/simulate/physics_world.hpp: add
+common.h</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:36.02</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I notice that repository.sh doesn't
+report WIN32 et. al. instances in any of the include header files. 
+Is this intentional?</tt></td>
+</tr>
+<tr>
+<td><tt>16:03.26</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad sniok
+(~sniok@89.252.2.135)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:03.07</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:22.23</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.208.5.88)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:58.24</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.208.5.88)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:20.50</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.208.5.88)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:31.02</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.208.5.88)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:35.20</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.208.5.88)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:35.33</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad tandoorichick
+(b64b2d01@gateway/web/freenode/ip.182.75.45.1)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:36.54</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.208.5.88)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:42.09</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet_
+(~Amarjeet@101.211.235.40)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:47.45</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.211.235.40)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:56.26</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:58.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: pkg instead of tcl channels has
+been discussed before, but nobody has looked or tried</tt></td>
+</tr>
+<tr>
+<td><tt>19:02.35</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.211.228.237)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:03.14</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.211.228.237)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:04.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: what do you mean it doesn't report
+headers?  it does, was, or at least should be (see line
+268)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:07.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: also regarding pkg .. I think you
+tried before anyone had gotten libpkg compiling (nothing tricky, we
+just needed the winsock2 init bits and types)</tt></td>
+</tr>
+<tr>
+<td><tt>19:10.10</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet_
+(~Amarjeet@101.211.237.160)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:11.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: shall I set you as a maintainer
+for fedora, to receive release notifications?</tt></td>
+</tr>
+<tr>
+<td><tt>19:27.55</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad amarjeet
+(~Amarjeet@101.211.237.160)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:31.06</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: my cmake scripts are reporting WIN32
+instances in bu/defines.h, common.h and a few other headers - I'm
+not seeing these listed in the repository.sh report, unless I'm
+missing something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:31.28</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>trying to make the CMake script a full
+replacement for the .sh script, which means matching its
+results...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.23</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I'm getting close to being ready to set up
+individual tests to do in parallel, but I don't want to do that
+until I've first achieved functional parity</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:35.58</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 68669
+brlcad/trunk/regress/repository.cmake: Do less expensive matching
+tests before we go for the all-upregex match, although we have to
+be careful with this - common.h test, for example, looks for either
+system includes or common.h so we can't rely on a simple
+qualification test there. If this works as well as it seems to now,
+cuts execution time from about 70 seconds to a little over
+30.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:36.00</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>repository.sh is about 21, so if we can
+execute individual tests in parallel we should get a significant
+speed up overall.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:36.02</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:40.35</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 68670 brlcad/trunk/HACKING:
+add Caterpillar2 as a maintainer for fedora</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:42.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: they are printed in sections,
+headers first then sources then build files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:42.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so maybe in a different section/earlier in the
+output?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:47.36</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:48.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: cool, great! thank you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:49.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can pass the torch on at any time, it just
+means you'll get an e-mail notification whenever we push out a new
+release, so you can decide whether to update fedora</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:56.12</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 68671
+(brlcad/trunk/include/ged/defines.h brlcad/trunk/src/libged/rt.c
+and 2 others): eliminate exposing tcl types and symbols in ged's
+public header, cast accordingly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:56.58</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:59.12</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: the process of bringing brlcad into
+Fedora repositories will take some months, because of various
+libraries that have to be included into Fedora
+repositories</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:05.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: yes, I understand .. it's a lot
+of work and greatly appreciated!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:06.27</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:08.07</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>starseeker: brlcad: I have forgotten to also
+say that brlcad will be included in Fedora EPEL repositories too,
+that means that it will be available for RHEL, CentOS,
+ScientificLinux, Oracle Linux too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:09.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's great to hear</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:09.48</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt><a href=
+"https://fedoraproject.org/wiki/EPEL/">https://fedoraproject.org/wiki/EPEL/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:10.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, was just reading up on it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:11.16</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>:-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:11.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we manually pull together rpm's for RHEL
+currently</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:12.03</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: I have heard from starseeker that you
+use a particular way to make RPM packages</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:12.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oh, for what it's worth -- we have a variety
+of build materials in misc/ that may be of interest/relevance to
+you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:13.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>misc/archlinux, misc/brlcad.spec,.in and
+misc/debian  in particular</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:13.23</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>ah ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:13.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's helpful for you to store files or make
+changes, let me know and I'll get you set up so you can commit as
+needed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:15.30</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: on which distro did you test the spec
+file?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:17.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: it was last used 4 years ago and
+just as a spec file for our manually prepared rpm installer, but
+maybe has some relevant/useful bits</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>several distro managers (e.g., gentoo's
+ebuild) choose to maintain their build logic in their repo system,
+others stash their files into our repo for convenience</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:20.56</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: I am forced to use Fedora
+infrastructure. If I do not use it, I cannot update packages in
+official Fedora repositories</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:21.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's fine, just giving you options
+;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:22.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: this may also be of interest,
+manual build instructions for linux lists some expected deps
+(should be fairly up-to-date): <a href=
+"http://brlcad.org/wiki/Compiling">http://brlcad.org/wiki/Compiling</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:22.59</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I notice that list is not consistent with
+<a href=
+"http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux">http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux</a>
+...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:25.32</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: ah, I think that the <a href=
+"http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux">http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux</a>
+should be updated soon</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:32.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>let me know what updates, or send a diff/patch
+... that's in our repo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:32.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's in doc/README.Linux in a checkout if that
+wasn't obvious :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:34.31</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: I haven't seen it yet, but I said that
+after you wrote that there is a unconsistence between <a href=
+"http://brlcad.org/wiki/Compiling">http://brlcad.org/wiki/Compiling</a>
+and <a href=
+"http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux">http://diyhpl.us/~bryan/irc/brlcad/doc/README.Linux</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.04</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>which distro do you use usually?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: only reason I can recall for
+disallowing bio/bnetwork/etc in public headers is because, like
+common.h, we don't yet define who owns them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: I hop all around, but most often
+on mac and freebsd</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>main professional platform is rhel</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(and windows)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>while mostly mac and bsd, I also play/help a
+bit with haiku, rtems, and minix development</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: should just skip all of misc/ for
+repository testing, just like src/other</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:47.39</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: what is the homepage of upstream gct
+library?    ( brlcad-7.26.0/src/other/gct/ )</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:48.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it probably shouldn't be in src/other .. there
+is no upstream location</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:50.29</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: is it a library developed by brlcad
+developers?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: it's in src/other simply because
+it was written by a dev that doesn't usually write code for brl-cad
+(directly, at least), but as far as I know, we're the only public
+presence it has as that was code developed under contract for
+public release inclusion in brl-cad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:53.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Stragus: care to comment on GCT?  does it
+exist anywhere else such that fedora would point to it as a
+stand-alone thing that we depend on?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:56.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Caterpillar2: it was primarily written by that
+guy there, so you can ask him.. ;)  he has a habit of writing
+useful code and then not packaging it up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:56.34</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: I asked because <a href=
+"https://fedoraproject.org/wiki/Packaging:Guidelines#Bundling_and_Duplication_of_system_libraries">
+https://fedoraproject.org/wiki/Packaging:Guidelines#Bundling_and_Duplication_of_system_libraries</a>
+       and         <a href=
+"https://fedoraproject.org/wiki/Bundled_Libraries?rd=Packaging:Bundled_Libraries">
+https://fedoraproject.org/wiki/Bundled_Libraries?rd=Packaging:Bundled_Libraries</a>
+          so I started reading stuff in /others  and searching of
+ach item, if there is already a package into Fedora repositories.
+GCT was the first occurrence of a /others library that is not
+present into Fedora</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:56.36</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>repositories</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of i'm the opinion that it doesn't belong in
+src/other, that we should move it under one of our processing libs
+as a backend detail (not a stand-alone lib)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:59.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so unless Stragus has some fundamental
+objection or plans to turn it into a project, give it a home, then
+we'll treat it as our code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:00.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we kind of already did with a slew of
+widespread changes for portability</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:01.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we may even end up ripping it out if we can't
+eaily fix a few issues already encountered in the decimation
+logic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:01.11</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>how many stable developers are involved in
+brlcad?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>about a dozen depending on who you
+count</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ohloh says 6 in the last 30 days, 12 over past
+year, 84 committers over lifetime</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>few more if you count the github repos which
+cover various web services</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.47</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>does USA's army still spend money for its
+development or is it entirely in community hands?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:06.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>still spending quite a bit annually</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:07.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>BRL-CAD is tightly integrated into a complex
+DoD analysis workflow so it's used by several agencies, Army in
+particular</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:07.54</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>good to hear that money is spent for a product
+freely available for everybody</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it would probably cost $50.M USD minimum to
+uncouple BRL-CAD and do something different</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.40</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: what DoD stands for?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>~dod</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.46</tt></td>
+<td><span class="c10"><tt>infobot</tt></span></td>
+<td width="100%"><tt>it has been said that dod is Dial on Demand, a
+way of making the modem dial whenever you try and send info to the
+inet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, not that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:10.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>~dod is also the U.S. Department of
+Defense</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:10.06</tt></td>
+<td><span class="c10"><tt>infobot</tt></span></td>
+<td width="100%"><tt>okay, brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:10.10</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>open source has been catching up,
+though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>before this year's burnout lull, open source
+activity surpassed funded activity a number of times last year and
+the year before</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:13.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'd like to see that grow even more, all the
+more reason we need better integration with repos, more devs
+working projects, scrape off our usability warts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:14.33</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>I will start asking some mechanical engineer
+professors at University of Rome Tor Vergata, to try using brlcad
+for their work, in order to get some nice feedbacks, etc.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:15.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>to be completely honest, it's often jarring
+for them as our interface is very different from the commercial
+systems</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:16.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and dod's obsession with analysis requirements
+is not their requirements (they want usability, annotated
+engineering drawings, tight integration with FEA codes,
+etc)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:17.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we're definitely working on briding that gap,
+though -- feedback from them is always appreciated</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:17.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we have a couple engineering universities in
+India also providing good feedback (and devs to help
+improve)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:18.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>need devs more than we need users ... we
+should probably put that on our website ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.17</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>what are FEA codes?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:20.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>~fea</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:21.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>infobot: you are 0 for 2</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:21.02</tt></td>
+<td><span class="c10"><tt>infobot</tt></span></td>
+<td width="100%"><tt>brlcad: I think you lost me on that
+one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:22.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>~fea is Finite Element Analysis does hard math
+and science on geometry chopped up into little pieces</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:22.36</tt></td>
+<td><span class="c10"><tt>infobot</tt></span></td>
+<td width="100%"><tt>okay, brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:23.39</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>it would be great if in the future brlcad will
+have a Qt based GUI</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:26.55</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>if one day there will be some funds to start
+such work, I know a guy that works on KDE' ark software, that is
+skilled in Qt libraries</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that work is already started, qt branch in
+rpo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>*repo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.43</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>uh good</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.46</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: Qt5?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we've had a gsoc project defined as well, but
+nobody skilled enough to propose it as their project: <a href=
+"http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt">http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:33.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://brlcad.org/wiki/User:Vladbogolin/qt-display-manager">http://brlcad.org/wiki/User:Vladbogolin/qt-display-manager</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:34.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't recall, that was circa 2013 which was
+shortly after qt5</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:34.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I think it was</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:36.45</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>sorry for the question (English is not my
+first language):    &lt;&lt;but nobody skilled enough to propose it
+as their project: <a href=
+"http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt%3E%3E">http://brlcad.org/wiki/Convert_MGED_from_Tk_to_Qt&gt;&gt;</a>
+does it mean that nobody worked on brlCAD Google Summer of Code
+project?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:37.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:37.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nobody has ever proposed the "convert mged to
+qt" project for the gsoc program</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:38.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at least nobody skilled enough</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:38.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there was someone that worked on some qt
+infrastructure, though, for a different gsoc project</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:38.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and a couple core devs have been working that
+area a bit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:39.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker was working on a new prototype in
+qt, got pretty far</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:39.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>several of our india devs have been working on
+recreating things in web technologies using node.js and
+friends</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:40.31</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>interesting</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:40.41</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>anyway if you need some Qt developers I can
+suggest you some guys</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:41.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can see that work here: <a href=
+"http://brlcad.org/wiki/OGV">http://brlcad.org/wiki/OGV</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:41.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>okay, good to know thanks!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.12</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>the web GUI is very nice</tt></td>
+</tr>
+<tr>
+<td><tt>21:44.19</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:48.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one of our tasks for the next couple months is
+to integrate the 700+ design and code submissions from
+participating in the GCI program</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:48.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>several items in there that were really pretty
+exciting were really awesome GUI prototypes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:50.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one such example: <a href=
+"http://brlcad.org/design/gui/gci_skriptkid_prototype/brlCad-03.png">
+http://brlcad.org/design/gui/gci_skriptkid_prototype/brlCad-03.png</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:54.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>some more fun ones at <a href=
+"http://yash-m.github.io/BRL-CAD-Portfolio/">http://yash-m.github.io/BRL-CAD-Portfolio/</a>
+under GUI</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:54.53</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: nice, is that qt stuff?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:55.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they're mock-up designs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:56.05</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: ah ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:02.29</tt></td>
+<td><span class="c9"><tt>Caterpillar2</tt></span></td>
+<td width="100%"><tt>brlcad: I have to go to bed, see you
+tomorrow</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:15.07</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">needs another
+knock-down-and-drag-out round with libdm/libfb before we're really
+going to be in a good position for the Qt stuff</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:22.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: do you want to skip misc/CMake as well
+for the build files?  We do define a lot of our macros/functions
+there...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:26.13</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: here's what I'm currently seeing from
+the sh script:  <a href=
+"http://brlcad.org/~starseeker/regress_repository_sh.log">http://brlcad.org/~starseeker/regress_repository_sh.log</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:26.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>and the CMake version: <a href=
+"http://brlcad.org/~starseeker/regress_repository_cmake.log">http://brlcad.org/~starseeker/regress_repository_cmake.log</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:27.21</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>fwiw, the sh script does look in
+misc/CMake...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:38.56</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: when I boil it down the the line
+reports, here's the current diff:  <a href=
+"http://brlcad.org/~starseeker/repository_reports.diff.txt">http://brlcad.org/~starseeker/repository_reports.diff.txt</a></tt></td>
+</tr>
+<tr>
+<td><tt>22:51.03</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad ries
+(~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

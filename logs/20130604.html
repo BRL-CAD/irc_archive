@@ -1,353 +1,2007 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20130604</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20130604</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c12 {color: #AFAF5C}
+ span.c11 {color: #5CAFAF}
+ span.c10 {color: #B55F5F}
+ span.c9 {color: #5FB5B5}
+ span.c8 {color: #CC00CC}
+ span.c7 {color: #5B5BAD}
+ span.c6 {color: #C36666}
+ span.c5 {color: #C165C1}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #C0C065}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20130604</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>00:21.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor_ (~mpictor_@2600:1015:b109:b3ba:0:39:4f8c:8301)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.02</tt></td><td><font color="#c0c065"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://cheezburger.com/7521949696">http://cheezburger.com/7521949696</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.31</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I figured out what I need to do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.59</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>needed to distinguish between a symbol existing and being declared</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.25</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>appropriately, turns out cmake has a macro for this</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.53</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>unfortunately, their macro blows major chunks and is basically broken for our needs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.41</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>CHECK_PROTOTYPE_EXISTS() is the gem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:36.03</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>I'll just have to implement it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.05</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55643 brlcad/trunk/CMakeLists.txt: test for fileno() since the function disappears in c99 pedantic mode (it's a posix function). instead, check for kill() and fileno() being declared.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:10.42</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55644 brlcad/trunk/src/libbn/plane.c: need stdlib.h for modf() and nextafter() but remove the long double support since it requires build system infrastructure. several relatively common platforms (some not so common, some common) don't support long doubles. (gnulib quotes FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8, HP-UX 11, IRIX 6.5, Solaris 9, Cygwin, Interix 3.5) moreover, we'd need</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:10.44</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>other changes to make fastf_t be more than single or double precision.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:12.55</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55645 brlcad/trunk/include/config_win.h: windows has fileno() (because we define it to _fileno()), and there aren't c99 declaration issues because msvc doesn't give a hoot about it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:16.16</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55646 brlcad/trunk/include/config_win_cmake.h.in: ditto, we have fileno()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:24.39</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55647 brlcad/trunk/src/libbu/backtrace.c: hook off of the configure tests so we don't get duplciate declarations when the posix kill() and fileno() functions are available.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:39.03</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55648 brlcad/trunk/src/libbu/units.c: the ctype functions technically take an 'int' derived from an unsigned char, so netbsd is appropriately warning about the danger passing a signed char. we know these are strings, so casting to unsigned char is sufficient to quell.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.13</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55649 brlcad/trunk/misc/CMake/CompilerFlags.cmake: revert r54119 by caen23 that made debug compilation also use gnu99 instead of gnu89. as noted in the preceding comment, we intentionally compile with both to provoke more warnings. need more info on the clang failures.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:02.53</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55650 brlcad/trunk/misc/CMake/CompilerFlags.cmake: separate the comments so it's more obvious that we intentionally use two different standards during compilation testing.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.15</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55651 brlcad/trunk/misc/CMake/CompilerFlags.cmake: the gnu1x line was leftover, remove</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:21.43</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55652 brlcad/trunk/misc/CMake/BRLCAD_CompilerFlags.cmake: two more warnings to aspire to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:27.53</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 55653 (brlcad/trunk/src/libbrep/PullbackCurve.cpp brlcad/trunk/src/libbrep/libbrep_brep_tools.cpp and 3 others): run ws.sh on src/libbrep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:31.05</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55654 brlcad/trunk/CMakeLists.txt: so CHECK_PROTOTYPE_EXISTS() is woefully busted in numerous ways. assumes c++, has a bad symbol test, results in unused var warnings, and doesn't work with preprocessor-wrapped symbols coming from system headers. former versions of CHECK_SYMBOL_EXISTS() almost did exactly what we need (a simple (void)symbol; test just like AC_CHECK_DECL) but was bastardized in</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:31.07</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>recent versions so it now spews an error too (it's busted and has been reported).</tt></td></tr>
-<tr><td><tt>05:37.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.85.92.235)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:05.33</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55655 brlcad/trunk/CMakeLists.txt: manually wrap a couple simple tests since both CHECK_SYMBOL_EXISTS and CHECK_PROTOTYPE_EXISTS appear to be completely unusable for testing header declarations. deserves a macro in the meantime, but the issue has been reported.</tt></td></tr>
-<tr><td><tt>06:25.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.171.72)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:27.18</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55656 brlcad/trunk/src/libfb/if_tk.c: more ctype argument type cleansing</tt></td></tr>
-<tr><td><tt>07:28.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak (4ddc01da@gateway/web/freenode/ip.77.220.1.218)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:32.58</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5360 /wiki/User:Izak: /* PERSONAL INFORMATION */</tt></td></tr>
-<tr><td><tt>07:44.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>09:07.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.213.245)</font></tt></td></tr>
-<tr><td><tt>09:29.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~chatzilla@188.25.101.47)</font></tt></td></tr>
-<tr><td><tt>09:43.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@60-178-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:04.09</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt><a href="http://www.ebay.com/itm/Blackbird-Faster-Than-The-Wind-vehicle-/281114481020">http://www.ebay.com/itm/Blackbird-Faster-Than-The-Wind-vehicle-/281114481020</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:04.32</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">votes the Smithsonian should buy it - that's one seriously *cool* vehicle</font></tt></td></tr>
-<tr><td><tt>10:37.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor_ (~mpictor_@2600:1015:b109:b3ba:0:39:4f8c:8301)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:37.56</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55657 brlcad/trunk/CMakeLists.txt: thanks netbsd 5 ... they partially implemented TLS support so it compiles and links, but will simply crash at runtime. (gives __tls_get_addr() runtime link failure on library linkage) change the test to also run the test, not just compile it for the __thread test only to catch this failure. pthread fallback should hopefully still work.</tt></td></tr>
-<tr><td><tt>11:43.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vlad@188.25.101.47)</font></tt></td></tr>
-<tr><td><tt>11:45.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@60-178-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:59.17</tt></td><td><font color="#5fb5b5"><tt>d_rossberg</tt></font></td><td width="100%"><tt>vladbogo: look e.g. at src/libdm/CMakeLists.txt: BRLCAD_ENABLE_TK =&gt; DM_TK ... QT should be similar</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:59.45</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: we can make our own local copy of CheckSymbolExists.cmake - if I remember correctly how that works it should be used in place of the system version, as long as we've specified the directory correctly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:00.19</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>d_rossberg: thanks. I was currently searching for that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:00.54</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt>CheckPrototypeExists.cmake too, for that matter... we already have local copies of that since (IIRC) it originally came from KDE and wasn't in CMake proper</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:01.49</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt>or I should say some of the src/other builds do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:03.09</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt>probably would have to do that anyway, unless we want to make our minimum CMake version the one where they fix the macros</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:14.00</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 55658 (brlcad/trunk/src/libged/brep.c brlcad/trunk/src/librt/primitives/brep/brep_debug.cpp): Eliminate max_dis in the brep command for SSI.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:51.13</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>d_rossberg: it is ok if i set the BRLCAD_ENABLE_QT in libdm/CMakeLists.txt or should I set it somewhere else?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:22.10</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5361 /wiki/User:Phoenix/GSoc2013/Reports: /* Community bonding */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.48</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5362 /wiki/MGED_CMD_brep: /* Syntax */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:25.46</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5363 /wiki/MGED_CMD_brep: /* Argument(s) */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:25.59</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5364 /wiki/MGED_CMD_brep: /* Argument(s) */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:26.57</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5365 /wiki/MGED_CMD_brep: /* Example(s) */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:27.50</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5366 /wiki/MGED_Commands: /* B */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:45.46</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 55659 (brlcad/trunk/src/libged/brep.c brlcad/trunk/src/librt/primitives/brep/brep_debug.cpp): Extended the brep command to handle P/P, P/C, P/S, C/C and C/S.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:46.18</tt></td><td><font color="#5fb5b5"><tt>d_rossberg</tt></font></td><td width="100%"><tt>vladbogo: look for BRLCAD_ENABLE in CMakeLists.txt at the root directory ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.48</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>d_rossberg: thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:48.59</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 55660 brlcad/trunk/src/libbrep/px_event.cpp: Fix the format of ON_PX_EVENT::Dump().</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.36</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5367 /wiki/User:Phoenix/GSoc2013/Reports: /* Community bonding */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:09.37</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I know, that was my thought as well -- it still needed to be reported upstream</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.10</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>and I didn't want to take the time to test getting a macro perfect for inclusion in our build or submission to the cmake guys as a patch until after release</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.28</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>so just a couple quick compile tests did the trick, just have to pick up from there after releae</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.43</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">is having a heckuva morning</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:18.32</tt></td><td><font color="#5fb5b5"><tt>d_rossberg</tt></font></td><td width="100%"><tt>vladbogo: your last comment to your patch is emty (?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:20.09</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>d_rossberg: I initially added it empty by mistake, but I've edited the post</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:39.44</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>vladbogo: just a sanity check, are you compiling with default flags or do you have strict compilation (warnings as errors) disabled?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.40</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>mm, behold the awesome of: find -L -type l</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.59</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>an equivalent of that for 'search' would be crazy useful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.25</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55661 brlcad/trunk/src/util/dunncolor.c: implement -h and -?, and 'Program continues running:' for no-arguments help</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:59.55</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55662 brlcad/trunk/src/sig/dstats.c: remove verbose flag and reference to 'mode'; implement -h, -?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:02.24</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>brlcad: it seems I had strict compilation disabled. Is there any problem with one of the patches? I will recompile them shortly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:06.10</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>vladbogo: if you disable strict compilation, there will almost certainly be problems later if there aren't already some now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:07.37</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>I hadn't applied your patch yet, but it looked like it lacked some attention to details right away (also demonstrated by all of rossberg's feedback)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:07.43</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>had my doubts that it would actually pass compilation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.03</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>brlcad: I know. My bad. I had a compiling script with the wiki/compiling commands and somehow I missed the fact that strict compilation is disabled</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.10</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>in any regard, you should be compiling with strict enabled -- it just means you should not ignore what the compiler is telling you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.18</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>must resolve all warnings properly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.26</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>no worries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:08.32</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>that's what discussion is for ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:09.45</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>thanks:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:10.44</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>if there's a warning you don't understand, just search it up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:11.13</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>there's usually several dozen articles, pages, stackoverflow questions, and more for each that explain them in detail</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:11.26</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>or failing all that, ask here</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:11.31</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>I've pretty much seen them all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:11.37</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>I will. I'm waiting for the compilation process right now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:13.38</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>also I wanted to ask you about the additional info section on the melange page. How detailed should it be: should it be a general description of the project or something more specific? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.04</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>you mean the public summary?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:16.18</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>this write-up?&nbsp;&nbsp;<a href="http://www.google-melange.com/gsoc/project/google/gsoc2013/vladbogolin/47001">http://www.google-melange.com/gsoc/project/google/gsoc2013/vladbogolin/47001</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:18.08</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>Yes. When editing there is also an additional information in which I haven't written nothing for the moment and appears as a TODO</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:19.47</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>vladbogo: additional info shows up like this: <a href="http://www.google-melange.com/gsoc/project/google/gsoc2013/phoenixyjll/40001">http://www.google-melange.com/gsoc/project/google/gsoc2013/phoenixyjll/40001</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:20.19</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>include whatever you like, but your abstract write-up looks good to me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:20.34</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>ok thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:20.36</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>a link to your wiki and/or dev log would be good</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:21.43</tt></td><td><font color="#b55f5f"><tt>vladbogo</tt></font></td><td width="100%"><tt>also I have just compiled the latest version of the qt display manager patch and it was successful. About this version were you talking about?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:28.59</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>woo hoo, netbsd compilation complete</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:31.29</tt></td><td><font color="#c165c1"><tt>brlcad</tt></font></td><td width="100%"><tt>I believe this release demonstrates that we've finally grown development activity beyond the need for release branches</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:57.29</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">blinks - netbsd got added to our list of targeted platforms for this release?</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:58.52</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt>find -L -type l searches for broken symbolic links?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:59.26</tt></td><td><font color="#5b5bad"><tt>starseeker</tt></font></td><td width="100%"><tt>ah - you're thinking of a way to look for entries in combs that reference geometry that doesn't exist in the db?</tt></td></tr>
-<tr><td><tt>18:07.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure_ (~kanzure@131.252.130.248)</font></tt></td></tr>
-<tr><td><tt>18:07.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck_ (~cdk@24.212.219.10)</font></tt></td></tr>
-<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GSoC 2013! <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></font></tt></td></tr>
-<tr><td><tt>18:19.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>18:19.13</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GSoC 2013! <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></font></tt></td></tr>
-<tr><td><tt>18:27.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22_ (~gcimaths@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>18:32.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk_ (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
-<tr><td><tt>19:09.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>19:09.11</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GSoC 2013! <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></font></tt></td></tr>
-<tr><td><tt>19:16.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
-<tr><td><tt>19:18.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>19:37.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mpictor_@99-93-104-202.lightspeed.iplsin.sbcglobal.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:39.23</tt></td><td><font color="#5cafaf"><tt>tofu</tt></font></td><td width="100%"><tt>starseek1r: libGLU is somehow getting found in a /usr/pkg/lib directory</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:39.59</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>is there a Find GLU different from our FindOpenGL?&nbsp;&nbsp;I don't see any reference to /usr/pkg in our tree and it's causing a problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:45.55</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: there shouldn't be... what plaform is this, netbsd?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:46.05</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:46.58</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>FindGL.cmake and FindX11.cmake in our tree ook in /usr/pkg/xorg</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.04</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>s/ook/look</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:47.37</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>are there symlinks in /usr/pkg/xorg ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.02</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.08</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>fwiw: <a href="http://paste.lisp.org/+2Y2I">http://paste.lisp.org/+2Y2I</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.33</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>/usr/pkg/xorg does not exist</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.56</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>it might be one of the "standard" system search paths CMake sets on NetBSD...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:50.15</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>how to find out where it's coming from?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.00</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks at our FindGL.cmake</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.28</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>I don't understand why there would be a cyclic dependency there...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:51.59</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>what's even more frustrating, /usr/X11R7/lib/libGLU.so exists and is the one it needs to use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:52.28</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>what's the other one doing there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.26</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>I think one is the base install, the other is the netbsd package management system</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:55.39</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>my first test would be to add NO_DEFAULT_PATH to the OPENGL_glu_LIBRARY find_library call in misc/CMake/FindGL.cmake and see if that changes anything</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:56.05</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>they *really* shouldn't do that, especially if there are system incompatibilities in the libraries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.02</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>do I need to replace all the FindGL.cmake files in the tree or just the top-level?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.11</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>er, NO_CMAKE_SYSTEM_PATH rather</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.20</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>just the top level should work...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.45</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>FindX11.cmake uses NO_CMAKE_SYSTEM_PATH, I think for similar reasons...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:58.05</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will update the others once a solution is found</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:58.16</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I can add it if you like...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:58.40</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>tweaking the FindGL.cmake file will involve a fair bit of testing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:59.24</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>so adding it to the find_library() call (line 22)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:59.43</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>then clear the cache, and see what it finds</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:59.47</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>in misc/CMake/FindGL.cmake?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:00.23</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:00.29</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>line 22 is in the header comments...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:01.37</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>sry, line 220</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:01.51</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:02.07</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>so another question, are those tests affected by other/prior tests?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:02.14</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>the other find_ calls in that case should probably have it to, for that matter...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:02.29</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>like if a find libz finds it in /usr/pkg/lib, is it going to look there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:02.34</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>only a previous version of the same check</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:03.00</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>ah.&nbsp;&nbsp;not sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:03.24</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>I doubt it if the libz search specically added that path to its own search</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:04.00</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>well if it's a system default path</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:04.17</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>that for whatever reason is mysteriously being searched before our specified paths</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:04.23</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>then it will always look there unless we tell it not to in that specific search</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:05.12</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>right, but if we let it search system for libz and then tell it not system for libGLU, will it affect libGLU searching</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:05.40</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>I want to say no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:06.01</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>but there are a lot of layers to the find_ macros</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:06.18</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: try r55664</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:06.32</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - we seem to have lost our bot</tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor_ (~mpictor_@2600:1015:b114:3e93:0:39:4fd0:8901)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mark@99-93-104-202.lightspeed.iplsin.sbcglobal.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (~erik@pool-74-103-121-45.bltmmd.fios.verizon.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22_ (~gcimaths@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck_ (~cdk@24.212.219.10)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@60-178-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>20:30.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vlad@188.25.101.47)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.213.245)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@wsip-184-176-200-171.ks.ks.cox.net)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Don_desk (~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad papna (~papna@python/site-packages/papna)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
-<tr><td><tt>20:30.43</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by calvino.freenode.net</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.27</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>well with the detection measures in place, it's "the one that works" :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.28</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>but depending on which X11 and which OpenGL library you previously selected, that choice may change</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.28</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>digging with this default path stuff, I think I've found part of the issue on the netbsd and there may be another approach altogether</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.28</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>both GLU libraries actually seem to work just fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.29</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.30</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>ick</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.32</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>it's like OSX where you have the system Xorg X11 and one installed by fink - what's the "right" answer?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.36</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>you want/need there to be one, and there's really not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.36</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>that's the whole arbitrary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.59</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>frankly, I'd say we just look in whatever location the *vendor* shipped with (only) and let the user specify anything else</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:33.39</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o isn't that pretty much what we're currently doing with FindX11.cmake and FindGL.cmake ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.17</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>nah, we search a ton of convention in those .. and cmake default does even more it appears</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.46</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>wait, terminology check - by vendor do you mean the OS distribution or the original project (Xorg, Mesa, etc.)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.46</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>and yeah, even my notion of a vendor is no more or less flawed (arbitrary) given enough distros and vendors and time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:36.18</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's looking like with this netbsd system, it's basically a togl build system issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:36.39</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>it needs to test the glew.h header because it requires a rather new version of it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:36.54</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>it provides one in its include directory, but that is searched after system dirs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:37.01</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can't help thinking our "builds easily out of the box" experience that we try to guarantee with src/other is sunk before it sails if we force the user to specify basic things like X11 location...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:37.08</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.01</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>that's... odd - I thought I took steps to check in the local src directories before the system dirs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.03</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>who is talking about forcing the user to specify things like X11 location??</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.11</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>non sequitor?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.33</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>just because you can't sometimes know the answer doesn't mean you'd always force them to tell you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.35</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>if we don't check in the various locations we've got in FindX11 and FindGL, we'll need user input</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.14</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>you make them tell when it's not obvious ... or we make sure we test everything we're using so it doesn't result in errors down the line that they can't decipher</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.16</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>isn't that the "searching a ton of convention" you were objecting to earlier?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.57</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>you're reading into what I'm saying as implying something I've not said...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.05</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is confused</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.12</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>I've said what I mean and only mean what I've said ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.28</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>that is to say I've not objected to anything that I recall</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.45</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>just commenting on the system, our options, noting various deficiencies</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.49</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>that is all...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.35</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>You had said earlier "if we're going to even try and be smart/fancy/auto-detecting like this..." - the implication being that we have the option *not* to try it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.29</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>we certainly do have that option .. it's code?&nbsp;&nbsp;still wasn't implying that was the thing to do or not do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.10</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>ah - I had the distinct impression over the last few years that you were not a fan of the automatic searching approach</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.24</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>relevance? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.25</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>as you say, reading in...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.59</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>well, you're the project lead... if you don't like it then it's probably not a good idea for me to push in that direction :-P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.19</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm not a fan of using a mouse either, but that doesn't mean it's not good for lots of things or that I need to use it or that it's inherently bad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.31</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>even if I thought it was BAD, it doesn't mean it's workable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.44</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>*not workable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.13</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm more thinking long term how we evolve this even more so that it continues to get better</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.36</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>in my experience, if you're thumbs down on something it's usually 'cause you have a better idea - given the number of times I've lost those arguments, it's usually more efficient to just skip to the system you want and try to get that working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.50</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>and not being hamstrung by any decision or punting that current is as good as it's going to get</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.24</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., if the current searching really is as good as it gets with this approach, then I would naturally be a proponent of considering other approaches if only to keep us improving</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.47</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>(that said, before you read into that! .. I don't think this is as good as it gets by a long shot)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:48.33</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I just want to know what needs to be coded up to solve the problem to your satisfaction</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:48.48</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>so back to the problem at hand, a build failure and what to do about it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.01</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">mutters under his breath about nuking togl from orbit</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.12</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>stop trying to please me, make the code be the best it can possibly be</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.38</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>whether incrementally or in stages or steps .. it has to evolve with our needs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.43</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>it is just code, after all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.46</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>all code can be improved</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.54</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>alright, glew details - you say it's finding a system glew that it doesn't like?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.02</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>raises a good point, what is togl in there for?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.10</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>adrt?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.15</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>isst gui, and customer code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.24</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>maybe just isst gui now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.45</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>if we do what archer/mged do to provide an opengl context to feed ISST, that might be the way out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:51.50</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so either hooking isst through libdm or integrating togl into archer would be some semblance of forward</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.18</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>isst gui by itself is pretty compelling evidence to retain</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.02</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>isst gui probably should be hooking through libdm, actually - I think togl was just the quick-and-dirty way to get an opengl context to play with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.43</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks a STEP/ISST viewer would be highly valued pairing</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.27</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>the question will be whether ``Erik's fast drawing trick can work inside a libdm opengl window - if it can, then isst would actually become a poster child for how to do "stand-alone" libdm apps</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.39</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>absolutely</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.49</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>and if libdm can't handle that, we should make it handle it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.54</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>(it should be able to)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.33</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">pulls up the isst code...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.02</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>just before release... heck of a time for this, but what the hey...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.46</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>I worked on a stand-along libdm app a while back ... recall keybindings being the biggest obstacle</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.35</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, that was an issue with togl too iirc - let's see if we can get the libdm opengl context up in place of the togl opengl context as a first step</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.45</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: for glew, do you know if there would be any issue always searching their provided include dir first?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.08</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>you mean togl's?&nbsp;&nbsp;I thought that's what it *was* doing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.14</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>if it isn't, go for it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.44</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">actually stuck glew in when doing the initial import of togl, IIRC - was needed to wrap some nastiness</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.42</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's not doing that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.01</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>searches system first -- thought it might have been intentional (to get a newer glew)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.19</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>testing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.28</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">scowls... this is probably going to be a significant restructure, actually - I cheated and used togl's Tcl command line init-and-pack routines to create and stash the context in a Tcl_Obj, which is opened up by various call-back functions</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.59</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>you think it's safer to revert the no-system-paths change for release?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.06</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>or safe to keep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.36</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: dunno.&nbsp;&nbsp;It was apparently an issue on netbsd... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.44</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>worked OK on Linux here when I tried it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.10</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>that just leaves a lot of other untested environments :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.19</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah - I'd say revert it for now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.45</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's feeling more stable after the past weekends changes going in</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.45</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>but we probably want to stick it back in afterwards, if for no other reason than to match better what we do when searching for X11</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.50</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>just need another windows sanity test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.13</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>regex/red sanity, or just archer/mged generic testing?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.15</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>I can kick off a slew of compiles to test that change one last time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.20</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>just compilation sanity</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.27</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">starts a build</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.41</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>lot of little things that could kick off a failure on windows</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.08</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>woot</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.09</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>In file included from /home/sean/brlcad/src/other/togl/src/glew/glew.c:32:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.09</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>/home/sean/brlcad/src/other/togl/src/../include/GL/glew.h:2580:2: error: #error got here</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.15</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>(that's a good error)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.20</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.47</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... 2580 in glew.h doesn't seem to have anything that would complain about "got here"...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.52</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I don't suppose plugging in the newest glew would help?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.23</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>that was my own code, testing that it got to a critical symbol it needs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.29</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.33</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>i think this'll fix it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.50</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>ah - phew :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:14.00</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>woot, togl compiled clean .. now to check the rest of the build</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.29</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, bugger, that's right - if we go with libdm we'll need code for wgl and ogl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.47</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>(assuming we can get the TIE stuff to work on Windows...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:19.00</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you mean?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:19.56</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>I guess I should say we *may* need code for both - ogl is X11 only, so if we want an ISST opengl context on Windows we'll need a wgl display manager</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:19.57</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds like "to go with libdm, we need another hook function so we don't end up with dm-platform-specific code in the client applications"&nbsp;&nbsp;:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:21.09</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>judging by tclcad_obj, we'll at least need to pass in the DM_OGL and DM_WGL build flags for the right headers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:21.39</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>don't know if we'll need more platform specific stuff until we see how ``Erik's fast TIE display behaves with libdm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:22.48</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>hopefully not, but if I understand correctly his drawing approach is pretty different from what's usually done with libbm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:25.00</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>you say that but all i hear are things that need to be fixed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:25.25</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>callers aren't supposed to be aware of DM types (at all, ever)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.13</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>of course, this is not the current state of affairs, but I consider that a failure of attention only ... :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.18</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik's fast display uses some OpenGL specific stuff, so I'm guessing he would need to pull the opengl context out of the dm_vars</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.26</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.38</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, opengl is about as "aware" as they need to be</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:26.51</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>but that's like a DM attribute/setting that should be queryable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:27.04</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>well, if we can get away with togl for this release it would be nice to fix whatever needs fixing and nuke it - it's been a royal pain</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:27.46</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>not to mention we could use libdm's proper quaternion support for rotation instead of that miserable hack that's in there now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:28.11</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:29.13</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>being able to make it a "mode" in archer would solve a number of other things, like proper tree support</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:30.56</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>but that *would* be a major "binding" problem :-)&nbsp;&nbsp;tree actions, mouse actions, keys... probably not too different from sketch in some ways as a distinct interaction mode</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.01</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>windows build commencing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:43.35</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: did you want me to revert the FindGL.cmake change?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:04.20</tt></td><td><font color="#afaf5c"><tt>starseeker</tt></font></td><td width="100%"><tt>build succeeded on Windows, mged comes up and raytraces toyjeep</tt></td></tr>
-<tr><td><tt>22:12.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.213.245)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:24.24</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: no, we can run with it if you think it's "better"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.05</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>netbsd is now clean and compiles default</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.19</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>only issue is it seems to have littered the source tree with generated man pages</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:26.04</tt></td><td><font color="#5cafaf"><tt>brlcad</tt></font></td><td width="100%"><tt>and symbolic links in build tree</tt></td></tr>
-<tr><td><tt>23:02.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.31</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55663 brlcad/trunk/src/util/dunnsnap.c: remove h for high-res ('s 1024' or 'S 1024' in its place), and implement -h,-?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.43</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 55664 brlcad/trunk/misc/CMake/FindGL.cmake: Add NO_CMAKE_SYSTEM_PATH to OpenGL searches, to mirror FindX11 behavior.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.45</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55665 brlcad/trunk/src/sig/dwin.c: implement -h and -? for help, specify usage of files (not stdin/stdout), and change old h to H</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.55</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55666 brlcad/trunk/src/other/togl/src/CMakeLists.txt: search the provided source directories for headers before searching for them in system directories. fixes a build error encountered on a system where the system-installed glew.h was too old to be used. warrants a header compatibility test if we encounter a case where the system dirs need to get searched first.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:04.10</tt></td><td><font color="#c36666"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55667 brlcad/trunk/src/conv/dxf/dxf-g.c: remove a 'break'; add -h,-?; add 'Usage'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:42.29</tt></td><td><font color="#c0c065"><tt>``Erik</tt></font></td><td width="100%"><tt>sooo much backlog</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:45.35</tt></td><td><font color="#c0c065"><tt>``Erik</tt></font></td><td width="100%"><tt>the subset of togl actually used by isst could be rewritten with very little effort... allz isst does is update a texture and blast it to the screen with one big quad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:47.06</tt></td><td><font color="#c0c065"><tt>``Erik</tt></font></td><td width="100%"><tt>the ogl dm, iirc, draws rle scanlines using glrect, which is pretty crappy on modern hw (slow on osX, probably due to how glRect() is emulated)... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:49.12</tt></td><td><font color="#c0c065"><tt>``Erik</tt></font></td><td width="100%"><tt>and yeh, 'convention' is all over the map, linux is weird in the greater scheme in how similar the distros tend to be.. even before lsb :) some systems considered it normal to put executables in /etc/, and frequently, /opt/&lt;package&gt;/ is normal... and that's just unix</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>00:21.05</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mpictor_
+(~mpictor_@2600:1015:b109:b3ba:0:39:4f8c:8301)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:27.02</tt></td>
+<td><span class="c3"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><a href=
+"http://cheezburger.com/7521949696">http://cheezburger.com/7521949696</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:32.31</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: I figured out what I need to
+do</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:32.59</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>needed to distinguish between a symbol
+existing and being declared</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:33.25</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>appropriately, turns out cmake has a macro for
+this</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:33.53</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>unfortunately, their macro blows major chunks
+and is basically broken for our needs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:35.41</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>CHECK_PROTOTYPE_EXISTS() is the gem</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:36.03</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'll just have to implement it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:39.05</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55643
+brlcad/trunk/CMakeLists.txt: test for fileno() since the function
+disappears in c99 pedantic mode (it's a posix function). instead,
+check for kill() and fileno() being declared.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:10.42</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55644
+brlcad/trunk/src/libbn/plane.c: need stdlib.h for modf() and
+nextafter() but remove the long double support since it requires
+build system infrastructure. several relatively common platforms
+(some not so common, some common) don't support long doubles.
+(gnulib quotes FreeBSD 6.0, NetBSD 5.0, OpenBSD 3.8, Minix 3.1.8,
+HP-UX 11, IRIX 6.5, Solaris 9, Cygwin, Interix 3.5) moreover, we'd
+need</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:10.44</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>other changes to make fastf_t be more than
+single or double precision.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:12.55</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55645
+brlcad/trunk/include/config_win.h: windows has fileno() (because we
+define it to _fileno()), and there aren't c99 declaration issues
+because msvc doesn't give a hoot about it.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:16.16</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55646
+brlcad/trunk/include/config_win_cmake.h.in: ditto, we have
+fileno()</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:24.39</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55647
+brlcad/trunk/src/libbu/backtrace.c: hook off of the configure tests
+so we don't get duplciate declarations when the posix kill() and
+fileno() functions are available.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:39.03</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55648
+brlcad/trunk/src/libbu/units.c: the ctype functions technically
+take an 'int' derived from an unsigned char, so netbsd is
+appropriately warning about the danger passing a signed char. we
+know these are strings, so casting to unsigned char is sufficient
+to quell.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:57.13</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55649
+brlcad/trunk/misc/CMake/CompilerFlags.cmake: revert r54119 by
+caen23 that made debug compilation also use gnu99 instead of gnu89.
+as noted in the preceding comment, we intentionally compile with
+both to provoke more warnings. need more info on the clang
+failures.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:02.53</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55650
+brlcad/trunk/misc/CMake/CompilerFlags.cmake: separate the comments
+so it's more obvious that we intentionally use two different
+standards during compilation testing.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:20.15</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55651
+brlcad/trunk/misc/CMake/CompilerFlags.cmake: the gnu1x line was
+leftover, remove</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:21.43</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55652
+brlcad/trunk/misc/CMake/BRLCAD_CompilerFlags.cmake: two more
+warnings to aspire to</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:27.53</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 55653
+(brlcad/trunk/src/libbrep/PullbackCurve.cpp
+brlcad/trunk/src/libbrep/libbrep_brep_tools.cpp and 3 others): run
+ws.sh on src/libbrep</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:31.05</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55654
+brlcad/trunk/CMakeLists.txt: so CHECK_PROTOTYPE_EXISTS() is
+woefully busted in numerous ways. assumes c++, has a bad symbol
+test, results in unused var warnings, and doesn't work with
+preprocessor-wrapped symbols coming from system headers. former
+versions of CHECK_SYMBOL_EXISTS() almost did exactly what we need
+(a simple (void)symbol; test just like AC_CHECK_DECL) but was
+bastardized in</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:31.07</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>recent versions so it now spews an error too
+(it's busted and has been reported).</tt></td>
+</tr>
+<tr>
+<td><tt>05:37.58</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad caen23
+(~caen23@92.85.92.235)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:05.33</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55655
+brlcad/trunk/CMakeLists.txt: manually wrap a couple simple tests
+since both CHECK_SYMBOL_EXISTS and CHECK_PROTOTYPE_EXISTS appear to
+be completely unusable for testing header declarations. deserves a
+macro in the meantime, but the issue has been reported.</tt></td>
+</tr>
+<tr>
+<td><tt>06:25.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad caen23
+(~caen23@92.81.171.72)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:27.18</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55656
+brlcad/trunk/src/libfb/if_tk.c: more ctype argument type
+cleansing</tt></td>
+</tr>
+<tr>
+<td><tt>07:28.41</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Izak
+(4ddc01da@gateway/web/freenode/ip.77.220.1.218)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>07:32.58</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5360
+/wiki/User:Izak: /* PERSONAL INFORMATION */</tt></td>
+</tr>
+<tr>
+<td><tt>07:44.58</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad d_rossberg
+(~rossberg@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:07.28</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad caen23
+(~caen23@92.81.213.245)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:29.37</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad vladbogo
+(~chatzilla@188.25.101.47)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:43.29</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@60-178-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:04.09</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www.ebay.com/itm/Blackbird-Faster-Than-The-Wind-vehicle-/281114481020">
+http://www.ebay.com/itm/Blackbird-Faster-Than-The-Wind-vehicle-/281114481020</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:04.32</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">votes the Smithsonian should
+buy it - that's one seriously *cool* vehicle</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:37.14</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mpictor_
+(~mpictor_@2600:1015:b109:b3ba:0:39:4f8c:8301)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:37.56</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55657
+brlcad/trunk/CMakeLists.txt: thanks netbsd 5 ... they partially
+implemented TLS support so it compiles and links, but will simply
+crash at runtime. (gives __tls_get_addr() runtime link failure on
+library linkage) change the test to also run the test, not just
+compile it for the __thread test only to catch this failure.
+pthread fallback should hopefully still work.</tt></td>
+</tr>
+<tr>
+<td><tt>11:43.25</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad vladbogo
+(~vlad@188.25.101.47)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:45.44</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@60-178-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:59.17</tt></td>
+<td><span class="c9"><tt>d_rossberg</tt></span></td>
+<td width="100%"><tt>vladbogo: look e.g. at
+src/libdm/CMakeLists.txt: BRLCAD_ENABLE_TK =&gt; DM_TK ... QT
+should be similar</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:59.45</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: we can make our own local copy of
+CheckSymbolExists.cmake - if I remember correctly how that works it
+should be used in place of the system version, as long as we've
+specified the directory correctly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:00.19</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>d_rossberg: thanks. I was currently searching
+for that</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:00.54</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>CheckPrototypeExists.cmake too, for that
+matter... we already have local copies of that since (IIRC) it
+originally came from KDE and wasn't in CMake proper</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:01.49</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>or I should say some of the src/other builds
+do</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:03.09</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>probably would have to do that anyway, unless
+we want to make our minimum CMake version the one where they fix
+the macros</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:14.00</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 55658
+(brlcad/trunk/src/libged/brep.c
+brlcad/trunk/src/librt/primitives/brep/brep_debug.cpp): Eliminate
+max_dis in the brep command for SSI.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:51.13</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>d_rossberg: it is ok if i set the
+BRLCAD_ENABLE_QT in libdm/CMakeLists.txt or should I set it
+somewhere else?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:22.10</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5361
+/wiki/User:Phoenix/GSoc2013/Reports: /* Community bonding
+*/</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:23.48</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5362
+/wiki/MGED_CMD_brep: /* Syntax */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:25.46</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5363
+/wiki/MGED_CMD_brep: /* Argument(s) */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:25.59</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5364
+/wiki/MGED_CMD_brep: /* Argument(s) */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:26.57</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5365
+/wiki/MGED_CMD_brep: /* Example(s) */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:27.50</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5366
+/wiki/MGED_Commands: /* B */</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:45.46</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 55659
+(brlcad/trunk/src/libged/brep.c
+brlcad/trunk/src/librt/primitives/brep/brep_debug.cpp): Extended
+the brep command to handle P/P, P/C, P/S, C/C and C/S.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:46.18</tt></td>
+<td><span class="c9"><tt>d_rossberg</tt></span></td>
+<td width="100%"><tt>vladbogo: look for BRLCAD_ENABLE in
+CMakeLists.txt at the root directory ;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:47.48</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>d_rossberg: thanks</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:48.59</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 55660
+brlcad/trunk/src/libbrep/px_event.cpp: Fix the format of
+ON_PX_EVENT::Dump().</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:59.36</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5367
+/wiki/User:Phoenix/GSoc2013/Reports: /* Community bonding
+*/</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:09.37</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: I know, that was my thought as
+well -- it still needed to be reported upstream</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:10.10</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and I didn't want to take the time to test
+getting a macro perfect for inclusion in our build or submission to
+the cmake guys as a patch until after release</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:10.28</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so just a couple quick compile tests did the
+trick, just have to pick up from there after releae</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:10.43</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c8">is having a heckuva
+morning</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:18.32</tt></td>
+<td><span class="c9"><tt>d_rossberg</tt></span></td>
+<td width="100%"><tt>vladbogo: your last comment to your patch is
+emty (?)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:20.09</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>d_rossberg: I initially added it empty by
+mistake, but I've edited the post</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:39.44</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>vladbogo: just a sanity check, are you
+compiling with default flags or do you have strict compilation
+(warnings as errors) disabled?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:49.40</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mm, behold the awesome of: find -L -type
+l</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:50.59</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>an equivalent of that for 'search' would be
+crazy useful</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:51.25</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 55661
+brlcad/trunk/src/util/dunncolor.c: implement -h and -?, and
+'Program continues running:' for no-arguments help</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:59.55</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 55662
+brlcad/trunk/src/sig/dstats.c: remove verbose flag and reference to
+'mode'; implement -h, -?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:02.24</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>brlcad: it seems I had strict compilation
+disabled. Is there any problem with one of the patches? I will
+recompile them shortly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:06.10</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>vladbogo: if you disable strict compilation,
+there will almost certainly be problems later if there aren't
+already some now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:07.37</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I hadn't applied your patch yet, but it looked
+like it lacked some attention to details right away (also
+demonstrated by all of rossberg's feedback)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:07.43</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>had my doubts that it would actually pass
+compilation</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:08.03</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>brlcad: I know. My bad. I had a compiling
+script with the wiki/compiling commands and somehow I missed the
+fact that strict compilation is disabled</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:08.10</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in any regard, you should be compiling with
+strict enabled -- it just means you should not ignore what the
+compiler is telling you</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:08.18</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>must resolve all warnings properly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:08.26</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no worries</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:08.32</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's what discussion is for ;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:09.45</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>thanks:)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:10.44</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if there's a warning you don't understand,
+just search it up</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:11.13</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's usually several dozen articles, pages,
+stackoverflow questions, and more for each that explain them in
+detail</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:11.26</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or failing all that, ask here</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:11.31</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I've pretty much seen them all</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:11.37</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>I will. I'm waiting for the compilation
+process right now.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:13.38</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>also I wanted to ask you about the additional
+info section on the melange page. How detailed should it be: should
+it be a general description of the project or something more
+specific?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:15.04</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you mean the public summary?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:16.18</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this write-up?  <a href=
+"http://www.google-melange.com/gsoc/project/google/gsoc2013/vladbogolin/47001">
+http://www.google-melange.com/gsoc/project/google/gsoc2013/vladbogolin/47001</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:18.08</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>Yes. When editing there is also an additional
+information in which I haven't written nothing for the moment and
+appears as a TODO</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:19.47</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>vladbogo: additional info shows up like this:
+<a href=
+"http://www.google-melange.com/gsoc/project/google/gsoc2013/phoenixyjll/40001">
+http://www.google-melange.com/gsoc/project/google/gsoc2013/phoenixyjll/40001</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:20.19</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>include whatever you like, but your abstract
+write-up looks good to me</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:20.34</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>ok thanks</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:20.36</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>a link to your wiki and/or dev log would be
+good</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:21.43</tt></td>
+<td><span class="c10"><tt>vladbogo</tt></span></td>
+<td width="100%"><tt>also I have just compiled the latest version
+of the qt display manager patch and it was successful. About this
+version were you talking about?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:28.59</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>woo hoo, netbsd compilation complete</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:31.29</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I believe this release demonstrates that we've
+finally grown development activity beyond the need for release
+branches</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:57.29</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">blinks - netbsd got added to
+our list of targeted platforms for this release?</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:58.52</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>find -L -type l searches for broken symbolic
+links?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:59.26</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah - you're thinking of a way to look for
+entries in combs that reference geometry that doesn't exist in the
+db?</tt></td>
+</tr>
+<tr>
+<td><tt>18:07.00</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kanzure_
+(~kanzure@131.252.130.248)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:07.40</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad crdueck_
+(~cdk@24.212.219.10)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:17.17</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:17.17</tt></td>
+<td colspan="2"><tt><span class="c2">*** topic/#brlcad is BRL-CAD
+|| <a href="http://brlcad.org">http://brlcad.org</a> || logs:
+<a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| GSoC 2013! <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></span></tt></td>
+</tr>
+<tr>
+<td><tt>18:19.13</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:19.13</tt></td>
+<td colspan="2"><tt><span class="c2">*** topic/#brlcad is BRL-CAD
+|| <a href="http://brlcad.org">http://brlcad.org</a> || logs:
+<a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| GSoC 2013! <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></span></tt></td>
+</tr>
+<tr>
+<td><tt>18:27.54</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad maths22_
+(~gcimaths@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:32.13</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad cstirk_
+(~quassel@c-71-56-216-45.hsd1.co.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:09.11</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:09.11</tt></td>
+<td colspan="2"><tt><span class="c2">*** topic/#brlcad is BRL-CAD
+|| <a href="http://brlcad.org">http://brlcad.org</a> || logs:
+<a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| GSoC 2013! <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></span></tt></td>
+</tr>
+<tr>
+<td><tt>19:16.02</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kanzure
+(~kanzure@131.252.130.248)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:18.50</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad tofu
+(~sean@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:37.05</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mpictor
+(~mpictor_@99-93-104-202.lightspeed.iplsin.sbcglobal.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:39.23</tt></td>
+<td><span class="c11"><tt>tofu</tt></span></td>
+<td width="100%"><tt>starseek1r: libGLU is somehow getting found in
+a /usr/pkg/lib directory</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:39.59</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>is there a Find GLU different from our
+FindOpenGL?  I don't see any reference to /usr/pkg in our tree and
+it's causing a problem</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:45.55</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: there shouldn't be... what plaform is
+this, netbsd?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:46.05</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:46.58</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>FindGL.cmake and FindX11.cmake in our tree ook
+in /usr/pkg/xorg</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:47.04</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>s/ook/look</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:47.37</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>are there symlinks in /usr/pkg/xorg
+?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:48.02</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c8">checks</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:48.08</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>fwiw: <a href=
+"http://paste.lisp.org/+2Y2I">http://paste.lisp.org/+2Y2I</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:48.33</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>/usr/pkg/xorg does not exist</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:48.56</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it might be one of the "standard" system
+search paths CMake sets on NetBSD...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:50.15</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>how to find out where it's coming
+from?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:51.00</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">looks at our
+FindGL.cmake</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:51.28</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I don't understand why there would be a cyclic
+dependency there...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:51.59</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what's even more frustrating,
+/usr/X11R7/lib/libGLU.so exists and is the one it needs to
+use</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:52.28</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>what's the other one doing there?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:53.26</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I think one is the base install, the other is
+the netbsd package management system</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:55.39</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>my first test would be to add NO_DEFAULT_PATH
+to the OPENGL_glu_LIBRARY find_library call in
+misc/CMake/FindGL.cmake and see if that changes anything</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:56.05</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>they *really* shouldn't do that, especially if
+there are system incompatibilities in the libraries</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:57.02</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>do I need to replace all the FindGL.cmake
+files in the tree or just the top-level?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:57.11</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>er, NO_CMAKE_SYSTEM_PATH rather</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:57.20</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>just the top level should work...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:57.45</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>FindX11.cmake uses NO_CMAKE_SYSTEM_PATH, I
+think for similar reasons...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:58.05</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">will update the others once a
+solution is found</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:58.16</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I can add it if you like...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:58.40</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>tweaking the FindGL.cmake file will involve a
+fair bit of testing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:59.24</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so adding it to the find_library() call (line
+22)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:59.43</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then clear the cache, and see what it
+finds</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:59.47</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>in misc/CMake/FindGL.cmake?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:00.23</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:00.29</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>line 22 is in the header comments...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:01.37</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sry, line 220</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:01.51</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:02.07</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so another question, are those tests affected
+by other/prior tests?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:02.14</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the other find_ calls in that case should
+probably have it to, for that matter...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:02.29</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>like if a find libz finds it in /usr/pkg/lib,
+is it going to look there?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:02.34</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>only a previous version of the same
+check</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:03.00</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah.  not sure</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:03.24</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I doubt it if the libz search specically added
+that path to its own search</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:04.00</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well if it's a system default path</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:04.17</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that for whatever reason is mysteriously being
+searched before our specified paths</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:04.23</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>then it will always look there unless we tell
+it not to in that specific search</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:05.12</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>right, but if we let it search system for libz
+and then tell it not system for libGLU, will it affect libGLU
+searching</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:05.40</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I want to say no</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:06.01</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>but there are a lot of layers to the find_
+macros</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:06.18</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: try r55664</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:06.32</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - we seem to have lost our bot</tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mpictor_
+(~mpictor_@2600:1015:b114:3e93:0:39:4fd0:8901)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mpictor
+(~mark@99-93-104-202.lightspeed.iplsin.sbcglobal.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad brlcad
+(~sean@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kanzure
+(~kanzure@131.252.130.248)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad starseeker
+(~starseeke@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ``Erik
+(~erik@pool-74-103-121-45.bltmmd.fios.verizon.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad archivist
+(~archivist@host81-149-189-98.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad cstirk
+(~quassel@c-71-56-216-45.hsd1.co.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad maths22_
+(~gcimaths@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad crdueck_
+(~cdk@24.212.219.10)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@60-178-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad vladbogo
+(~vlad@188.25.101.47)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad caen23
+(~caen23@92.81.213.245)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad KimK
+(~Kim__@wsip-184-176-200-171.ks.ks.cox.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad n_reed
+(~molto_cre@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Don_desk
+(~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad papna
+(~papna@python/site-packages/papna)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ChanServ
+(ChanServ@services.)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:30.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** mode/#brlcad [+o ChanServ]
+by calvino.freenode.net</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.27</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well with the detection measures in place,
+it's "the one that works" :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.28</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>but depending on which X11 and which OpenGL
+library you previously selected, that choice may change</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.28</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>digging with this default path stuff, I think
+I've found part of the issue on the netbsd and there may be another
+approach altogether</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.28</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>both GLU libraries actually seem to work just
+fine</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.29</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">winces</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.30</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ick</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.32</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it's like OSX where you have the system Xorg
+X11 and one installed by fink - what's the "right"
+answer?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.36</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you want/need there to be one, and there's
+really not</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.36</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's the whole arbitrary</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:32.59</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>frankly, I'd say we just look in whatever
+location the *vendor* shipped with (only) and let the user specify
+anything else</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:33.39</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>O.o isn't that pretty much what we're
+currently doing with FindX11.cmake and FindGL.cmake ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:34.17</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nah, we search a ton of convention in those ..
+and cmake default does even more it appears</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:35.46</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>wait, terminology check - by vendor do you
+mean the OS distribution or the original project (Xorg, Mesa,
+etc.)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:35.46</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and yeah, even my notion of a vendor is no
+more or less flawed (arbitrary) given enough distros and vendors
+and time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:36.18</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's looking like with this netbsd system,
+it's basically a togl build system issue</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:36.39</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it needs to test the glew.h header because it
+requires a rather new version of it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:36.54</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it provides one in its include directory, but
+that is searched after system dirs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:37.01</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">can't help thinking our
+"builds easily out of the box" experience that we try to guarantee
+with src/other is sunk before it sails if we force the user to
+specify basic things like X11 location...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:37.08</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: ah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:38.01</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that's... odd - I thought I took steps to
+check in the local src directories before the system dirs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:38.03</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>who is talking about forcing the user to
+specify things like X11 location??</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:38.11</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>non sequitor?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:38.33</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just because you can't sometimes know the
+answer doesn't mean you'd always force them to tell you</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:38.35</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>if we don't check in the various locations
+we've got in FindX11 and FindGL, we'll need user input</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:39.14</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you make them tell when it's not obvious ...
+or we make sure we test everything we're using so it doesn't result
+in errors down the line that they can't decipher</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:39.16</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>isn't that the "searching a ton of convention"
+you were objecting to earlier?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:39.57</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you're reading into what I'm saying as
+implying something I've not said...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:40.05</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">is confused</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:41.12</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I've said what I mean and only mean what I've
+said ;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:41.28</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that is to say I've not objected to anything
+that I recall</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:41.45</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just commenting on the system, our options,
+noting various deficiencies</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:41.49</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that is all...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:42.35</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>You had said earlier "if we're going to even
+try and be smart/fancy/auto-detecting like this..." - the
+implication being that we have the option *not* to try it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:43.29</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we certainly do have that option .. it's code?
+ still wasn't implying that was the thing to do or not do</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:44.10</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah - I had the distinct impression over the
+last few years that you were not a fan of the automatic searching
+approach</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:44.24</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>relevance? :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:44.25</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>as you say, reading in...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:44.59</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>well, you're the project lead... if you don't
+like it then it's probably not a good idea for me to push in that
+direction :-P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:45.19</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'm not a fan of using a mouse either, but
+that doesn't mean it's not good for lots of things or that I need
+to use it or that it's inherently bad</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:45.31</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even if I thought it was BAD, it doesn't mean
+it's workable</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:45.44</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>*not workable</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:46.13</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'm more thinking long term how we evolve this
+even more so that it continues to get better</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:46.36</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>in my experience, if you're thumbs down on
+something it's usually 'cause you have a better idea - given the
+number of times I've lost those arguments, it's usually more
+efficient to just skip to the system you want and try to get that
+working</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:46.50</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and not being hamstrung by any decision or
+punting that current is as good as it's going to get</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:47.24</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>e.g., if the current searching really is as
+good as it gets with this approach, then I would naturally be a
+proponent of considering other approaches if only to keep us
+improving</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:47.47</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(that said, before you read into that! .. I
+don't think this is as good as it gets by a long shot)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:48.33</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I just want to know what needs to be
+coded up to solve the problem to your satisfaction</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:48.48</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so back to the problem at hand, a build
+failure and what to do about it :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.01</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">mutters under his breath
+about nuking togl from orbit</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.12</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>stop trying to please me, make the code be the
+best it can possibly be</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.38</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>whether incrementally or in stages or steps ..
+it has to evolve with our needs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.43</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it is just code, after all</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.46</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>all code can be improved</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.54</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>alright, glew details - you say it's finding a
+system glew that it doesn't like?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:50.02</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>raises a good point, what is togl in there
+for?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:50.10</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>adrt?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:50.15</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>isst gui, and customer code</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:50.24</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>maybe just isst gui now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:50.45</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>if we do what archer/mged do to provide an
+opengl context to feed ISST, that might be the way out</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:51.50</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>okay, so either hooking isst through libdm or
+integrating togl into archer would be some semblance of
+forward</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:52.18</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>isst gui by itself is pretty compelling
+evidence to retain</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:53.02</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>isst gui probably should be hooking through
+libdm, actually - I think togl was just the quick-and-dirty way to
+get an opengl context to play with</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:53.43</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c8">thinks a STEP/ISST viewer
+would be highly valued pairing</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.27</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the question will be whether ``Erik's fast
+drawing trick can work inside a libdm opengl window - if it can,
+then isst would actually become a poster child for how to do
+"stand-alone" libdm apps</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.39</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>absolutely</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.49</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and if libdm can't handle that, we should make
+it handle it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.54</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(it should be able to)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.33</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">pulls up the isst
+code...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:56.02</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>just before release... heck of a time for
+this, but what the hey...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:56.46</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I worked on a stand-along libdm app a while
+back ... recall keybindings being the biggest obstacle</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:57.35</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, that was an issue with togl too iirc -
+let's see if we can get the libdm opengl context up in place of the
+togl opengl context as a first step</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:00.45</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: for glew, do you know if there
+would be any issue always searching their provided include dir
+first?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:01.08</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you mean togl's?  I thought that's what it
+*was* doing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:01.14</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>if it isn't, go for it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:01.44</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">actually stuck glew in when
+doing the initial import of togl, IIRC - was needed to wrap some
+nastiness</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:03.42</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, it's not doing that</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:04.01</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>searches system first -- thought it might have
+been intentional (to get a newer glew)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:04.19</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>testing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:04.28</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">scowls... this is probably
+going to be a significant restructure, actually - I cheated and
+used togl's Tcl command line init-and-pack routines to create and
+stash the context in a Tcl_Obj, which is opened up by various
+call-back functions</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:04.59</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you think it's safer to revert the
+no-system-paths change for release?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:05.06</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or safe to keep</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:05.36</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: dunno.  It was apparently an issue on
+netbsd...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:05.44</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>worked OK on Linux here when I tried
+it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.10</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that just leaves a lot of other untested
+environments :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.19</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah - I'd say revert it for now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.45</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's feeling more stable after the past
+weekends changes going in</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.45</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>but we probably want to stick it back in
+afterwards, if for no other reason than to match better what we do
+when searching for X11</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.50</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just need another windows sanity
+test</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.13</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>regex/red sanity, or just archer/mged generic
+testing?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.15</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I can kick off a slew of compiles to test that
+change one last time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.20</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just compilation sanity</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.27</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">starts a
+build</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.41</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>lot of little things that could kick off a
+failure on windows</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.08</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>woot</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.09</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>In file included from
+/home/sean/brlcad/src/other/togl/src/glew/glew.c:32:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.09</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%">
+<tt>/home/sean/brlcad/src/other/togl/src/../include/GL/glew.h:2580:2:
+error: #error got here</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.15</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(that's a good error)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.20</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hehe</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:10.47</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>uh... 2580 in glew.h doesn't seem to have
+anything that would complain about "got here"...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:11.52</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I don't suppose plugging in the newest
+glew would help?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:12.23</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that was my own code, testing that it got to a
+critical symbol it needs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:12.29</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nope</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:12.33</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i think this'll fix it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:12.50</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah - phew :-)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:14.00</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>woot, togl compiled clean .. now to check the
+rest of the build</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:17.29</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah, bugger, that's right - if we go with libdm
+we'll need code for wgl and ogl</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:17.47</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>(assuming we can get the TIE stuff to work on
+Windows...)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:19.00</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what do you mean?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:19.56</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I guess I should say we *may* need code for
+both - ogl is X11 only, so if we want an ISST opengl context on
+Windows we'll need a wgl display manager</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:19.57</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sounds like "to go with libdm, we need another
+hook function so we don't end up with dm-platform-specific code in
+the client applications"  :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:21.09</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>judging by tclcad_obj, we'll at least need to
+pass in the DM_OGL and DM_WGL build flags for the right
+headers</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:21.39</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>don't know if we'll need more platform
+specific stuff until we see how ``Erik's fast TIE display behaves
+with libdm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:22.48</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hopefully not, but if I understand correctly
+his drawing approach is pretty different from what's usually done
+with libbm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:25.00</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you say that but all i hear are things that
+need to be fixed</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:25.25</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>callers aren't supposed to be aware of DM
+types (at all, ever)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:26.13</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of course, this is not the current state of
+affairs, but I consider that a failure of attention only ...
+:)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:26.18</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>``Erik's fast display uses some OpenGL
+specific stuff, so I'm guessing he would need to pull the opengl
+context out of the dm_vars</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:26.26</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:26.38</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, opengl is about as "aware" as they need
+to be</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:26.51</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but that's like a DM attribute/setting that
+should be queryable</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:27.04</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>well, if we can get away with togl for this
+release it would be nice to fix whatever needs fixing and nuke it -
+it's been a royal pain</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:27.46</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>not to mention we could use libdm's proper
+quaternion support for rotation instead of that miserable hack
+that's in there now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:28.11</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c8">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:29.13</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>being able to make it a "mode" in archer would
+solve a number of other things, like proper tree support</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:30.56</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>but that *would* be a major "binding" problem
+:-)  tree actions, mouse actions, keys... probably not too
+different from sketch in some ways as a distinct interaction
+mode</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:41.01</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>windows build commencing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:43.35</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: did you want me to revert the
+FindGL.cmake change?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:04.20</tt></td>
+<td><span class="c12"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>build succeeded on Windows, mged comes up and
+raytraces toyjeep</tt></td>
+</tr>
+<tr>
+<td><tt>22:12.22</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad caen23
+(~caen23@92.81.213.245)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:24.24</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: no, we can run with it if you
+think it's "better"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:25.05</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>netbsd is now clean and compiles
+default</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:25.19</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>only issue is it seems to have littered the
+source tree with generated man pages</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:26.04</tt></td>
+<td><span class="c11"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and symbolic links in build tree</tt></td>
+</tr>
+<tr>
+<td><tt>23:02.36</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Notify
+(~notify@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:03.31</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 55663
+brlcad/trunk/src/util/dunnsnap.c: remove h for high-res ('s 1024'
+or 'S 1024' in its place), and implement -h,-?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:03.43</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 55664
+brlcad/trunk/misc/CMake/FindGL.cmake: Add NO_CMAKE_SYSTEM_PATH to
+OpenGL searches, to mirror FindX11 behavior.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:03.45</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 55665
+brlcad/trunk/src/sig/dwin.c: implement -h and -? for help, specify
+usage of files (not stdin/stdout), and change old h to H</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:03.55</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 55666
+brlcad/trunk/src/other/togl/src/CMakeLists.txt: search the provided
+source directories for headers before searching for them in system
+directories. fixes a build error encountered on a system where the
+system-installed glew.h was too old to be used. warrants a header
+compatibility test if we encounter a case where the system dirs
+need to get searched first.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:04.10</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 55667
+brlcad/trunk/src/conv/dxf/dxf-g.c: remove a 'break'; add -h,-?; add
+'Usage'</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:42.29</tt></td>
+<td><span class="c3"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>sooo much backlog</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:45.35</tt></td>
+<td><span class="c3"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the subset of togl actually used by isst could
+be rewritten with very little effort... allz isst does is update a
+texture and blast it to the screen with one big quad</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:47.06</tt></td>
+<td><span class="c3"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the ogl dm, iirc, draws rle scanlines using
+glrect, which is pretty crappy on modern hw (slow on osX, probably
+due to how glRect() is emulated)...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:49.12</tt></td>
+<td><span class="c3"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and yeh, 'convention' is all over the map,
+linux is weird in the greater scheme in how similar the distros
+tend to be.. even before lsb :) some systems considered it normal
+to put executables in /etc/, and frequently, /opt/&lt;package&gt;/
+is normal... and that's just unix</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

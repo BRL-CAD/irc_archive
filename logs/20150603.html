@@ -1,279 +1,1493 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20150603</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20150603</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c14 {color: #65C0C0}
+ span.c13 {color: #000099}
+ span.c12 {color: #B0B05D}
+ span.c11 {color: #66C366}
+ span.c10 {color: #5E5EB3}
+ span.c9 {color: #6A6ACA}
+ span.c8 {color: #63BCBC}
+ span.c7 {color: #B86161}
+ span.c6 {color: #CC00CC}
+ span.c5 {color: #009900}
+ span.c4 {color: #818144}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #407A40}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20150603</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:00.00</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Depends how it's done</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:00.35</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>well only way to know is to do it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:00.41</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it its too slow i'll think of something else</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:00.59</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>It will be twice as slow as it should be</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.13</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>That would qualify as "too slow" for me :p</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.14</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>if i could estimate a reasonable upper bound it work too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.24</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it sounds like that but sometimes its not as simple as that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.41</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>There are many, many ways to approach the problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.43</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i've had experience with grid algorithms which use counting to determine size before doing the set and the code is faster</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.02</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>the working set of the data is smaller </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.03</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>You could use X segments per ray, flag these rays for partial traversal, count how many extra segments they need, allocate, then finish the ray</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.27</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Or you could allocate on the fly the missing segments with multiple "fat buffers" with atomic counters (not just one counter, use many)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.45</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i'm going to have dozens of threads</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.48</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>or hundreds</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.56</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>more like hundreds</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.08</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Uh. If it's OpenCL/CUDA, you should have thousands</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.13</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.15</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Like &gt; 10000</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.20</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>my gpu has like 1024 i think</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.32</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.45</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>That's not the count of cores/lanes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.04</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>A GPU has multiple processing units, and each processing units can handle so many threads simultaneously</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.18</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>but the max work group size is the max</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.24</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>It can handle more threads than it has cores, because GPUs hide memory latency by switching to different threads</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.37</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>You use many "work groups", what we call blocks in CUDA</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.40</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.56</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Bottom line, *always* launch more than 10000 threads</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.04</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Heck, launch a million if you can :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.08</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>sure but *concurrently* its not gonna be more than 1024</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.24</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>which is what matters for the locks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.24</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>This is 1024 threads for each SMM</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.28</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>My GPU has 16 SMM</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.37</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>nah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.04</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>A "work group" (block) isn't shared across multiple processing units</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.59</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Also, when a thread is done processing, you want the GPU to already have more work at hand ready to go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.08</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.14</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Seriously, you want more than 10000 threads, this is pretty much a minimum</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.24</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i'm going to have one per pixel</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.29</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I frequently launch thread counts in the millions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.36</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Good</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.25</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it can be a problem though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.51</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>if the block size is too big and not all threads finish at the same time the GPU utilization rate can be crap</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.09</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i'll worry about that later</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.15</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm not following</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.22</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>The GPU will work as fast as it can until all threads are done</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.36</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>lets say i split the image to be renderer in blocks with 16x16 pixels</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.54</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Except of course, that groups of 32 threads run synchroneously, so a group of 32 threads can only be "done" (freeing computing resources) when all 32 threads are fully done</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.55</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>but one of those pixels takes like 10x more time to process than the others</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.00</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.01</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Indeed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.29</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>If that's a frequent occurence, you can detect such cases and have the other 31 threads grab more work from some global buffer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.34</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>That's a headache though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.42</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah work stealing. that's an option people use.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.17</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Generally, for raytracing, a group of primary rays (pixels) will be fairly coherent for processing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.23</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>It's not worth the trouble for primary rays</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.38</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah most of the issue will be along edges and things like that</tt></td></tr>
-<tr><td><tt>00:12.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.40</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>It's also not worth the trouble because if you grab more work, memory loads will become incoherent, losing memory coalescing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.40</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>So your memory loads take longuer, and if that was the bottleneck in the first place, you don't gain much and with overhead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.40</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah this is an issue too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.22</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>so another idea is if you can estimate the time each pixel will take and the space it traverses then you can use then to roughly sort rays.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.34</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>before rendering.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.44</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>What kind of rays do you want to sort? Bouncing rays?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.58</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>this it will be mostly useful for secondaries yes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.14</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>True sorting of rays imply scattered writes which is *terrible*, but there are other ways</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.37</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>For example, from a group of 32 primary rays, you can pick 32 bouncing rays with roughly the same direction and process them together</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.58</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>So the origin and direction will be similar with little overhead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.08</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>not necessarily</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.16</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>imagine your rays hit a sphere</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.25</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>they will diverge </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.52</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm assuming you launch many bouncing rays per primary hit, and you can quickly pick ones with roughly similar directions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.04</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>But each case is different. Just don't even try sorting with scattered writes :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.04</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>in that case sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.13</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>actually some people do that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.21</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>and claim its better than not sorting at all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.08</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i'm not going into that until i get the basics working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.15</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I have explored that stuff, it all depends how your data is organized and if you have tricks to make a rough sort that will statistically be somehwat coherent at a low cost</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.23</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>there's all sorts of issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.27</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>(I wrote a high performance CUDA raytracer by the way)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.34</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.00</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it is publically available?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.24</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>publicly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.49</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>A first version was put on sourceforge and never (?) updated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.00</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>You can google "Rayforce"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.20</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i saw the webpage. it says it doesn't use bsps and stuff but isn't very explicit in the technique</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.34</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>the performance seems good</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.57</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>It was the fastest raytracer when we presented at the Nvidia conference</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.11</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>But the preparation time is terrible :p (single threaded, very computionally intensive)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.24</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>And I haven't followed developments, so others could be faster</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.02</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>you need to build some acceleration structure and that is single-threaded?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.26</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>but the rendering and moving the camera is fast?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.35</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Yup, pretty much</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.41</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>that's typical</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.49</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>The scene preparation could be much faster, it just wasn't an issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.02</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>there's a lot of work in last 5-7 years on fast build acceleration structure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.16</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it typically can take tens or hundreds of ms now to build one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.47</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://web.ist.utl.pt/~vasco.costa/uploads/Main/cgi2015.pdf">http://web.ist.utl.pt/~vasco.costa/uploads/Main/cgi2015.pdf</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.56</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>this is a short paper i made on fast build grids on gpus</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:28.29</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it can build a grid for the san miguel scene at over 25hz</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:28.29</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Cool. Yes, I know there has been a lot of work on making the preparation fast</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:28.45</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>i went completely the other way. How fast can raytracing be, even if you need minutes to prepare? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:28.52</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>this is good too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.07</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>there were some papers decades back on what they called 'constant time ray tracing'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.11</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Since you can build and cache the whole graph, it's not always an issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.36</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i haven't seen a lot since</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:29.49</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>do you have some paper on this or slides?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.18</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't personally have this... A colleage wrote some paper on a tiny piece of the work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.30</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.33</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I agreed to help writing a paper, but they wanted to split the information into 5-6 papers or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.35</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">sighs</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.36</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>well i'll look at the code when i have time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.43</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm not from academia :p</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.58</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>well it can be pretty hard to publish system papers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.04</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>its easier to publish algorithm papers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.15</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>so its probably like a paper per main algorithm what they wanted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.40</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm generally not interested to write, publish or read papers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.24</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>well its a different way to transmit knowledge that's all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.58</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i did my undergraduate, then went to work in the private sector, then came back to do my phd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.03</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>so i've seen both sides</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:34.07</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>There's just so much... garbage in papers, with all of academia pressured to write as many papers as they can, even when they have absolutely nothing to say</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:34.12</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>and its true that there's nothing truer than the source code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:34.50</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>that happens</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.07</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>but you usually won't get published anywhere good with something like that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.35</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>it doesn't help that you get performance evaluated on numbers of papers published</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.49</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>this is a problem with any of those kinds of performance evaluation schemes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.44</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:JackySandman1 * 0 /wiki/User:JackySandman1: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.00</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>Yup. I have glanced over too many worthless papers to generally bother anymore</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.25</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>While the "good idea", if there's one at all, can often be resumed in two lines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.33</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.48</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:JackySandman1 * 8531 /wiki/Documentation: Undo revision 8302 by [[Special:Contributions/Sean|Sean]] ([[User talk:Sean|talk]])</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:37.59</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>but you need to prove it works so you need tests and test results and so on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.52</tt></td><td><font color="#407a40"><tt>Stragus</tt></font></td><td width="100%"><tt>I'll let others take care of that :p</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:39.10</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:JackySandman1 * 0 /wiki/File:Picture.jpg: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.55</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>the traversal code is a bit of a mess</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.58</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>i'll continue tomorrow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:01.00</tt></td><td><font color="#818144"><tt>vasc</tt></font></td><td width="100%"><tt>good night</tt></td></tr>
-<tr><td><tt>01:15.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes_ (~armin@dslb-092-074-231-184.092.074.pools.vodafone-ip.de)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.36</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:59.91.113.247 * 8533 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:31.11</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:59.91.113.247 * 8534 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.35</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 8535 /wiki/Documentation: Reverted edits by [[Special:Contributions/JackySandman1|JackySandman1]] ([[User talk:JackySandman1|talk]]) to last revision by [[User:Sean|Sean]]</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.53</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/User:JackySandman1: Inserting nonsense/gibberish into pages</tt></td></tr>
-<tr><td><tt>02:36.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cardinot (~cardinot@unaffiliated/cardinot)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:36.38</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/Alexander_Tatarnikov_(diezel_sun): Spam: spam</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.00</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/File:Picture.jpg: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.28</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/File:Picture.jpg: </tt></td></tr>
-<tr><td><tt>03:19.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Gurwinder (3b5b71f7@gateway/web/freenode/ip.59.91.113.247)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.43</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 65159 brlcad/trunk/src/other/openNURBS/opennurbs_system.h: add support for compiling with the AIX 7.1 compiler/linker</tt></td></tr>
-<tr><td><tt>04:45.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Milinda (c0f80842@gateway/web/freenode/ip.192.248.8.66)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:45.41</tt></td><td><font color="#63bcbc"><tt>Milinda</tt></font></td><td width="100%"><tt>Anyone know a good tutorial to create a brl-cad display manager instance in qt ?</tt></td></tr>
-<tr><td><tt>05:30.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (~DarkCalf@64.185.232.90)</font></tt></td></tr>
-<tr><td><tt>05:34.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dracarys983 (dracarys98@nat/iiit/x-anzpkzgrsvgdekfc)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:03.06</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 65160 brlcad/trunk/src/librt/screened_poisson.cpp: quell dir1 being set but unused by using it. warnings-as-errors should probably be enabled for librt c++... more has crept in.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:13.51</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 65161 brlcad/trunk/src/libbu/fgets.c: per manpage, buffer contents are supposed to remain unchanged if eof is encountered before we read</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:23.33</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 65162 brlcad/trunk/src/libbu/vls.c: it's possible for bu_fgets to return an empty string, so make sure we don't try to index -1</tt></td></tr>
-<tr><td><tt>06:27.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Gurwinder (caa43575@gateway/web/freenode/ip.202.164.53.117)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:47.36</tt></td><td><font color="#6a6aca"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad, starseeker, ``Erik: I have to study raytracing in detail for my Honors work and it seems we've shifted to PBRT for the experimentation and extension. How is the book "Physically Based Rendering" for the task?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:51.51</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 65163 brlcad/trunk/src/mged/mged.c: make sure we don't try to index into an invalid -1 address if the prompt happens to be empty</tt></td></tr>
-<tr><td><tt>07:00.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andromeda-galaxy (~andromeda@108-225-17-54.lightspeed.sntcca.sbcglobal.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>08:17.07</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Andrei.ilinca24 * 8536 /wiki/User:Andrei.ilinca24/logs: /* Coding Period */</tt></td></tr>
-<tr><td><tt>09:06.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
-<tr><td><tt>09:37.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.53.117)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:39.22</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>starseeker, hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:40.04</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>i want to add new xsl stylesheet in brlcad-build system how i do this ? which code i need to edit.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:30.54</tt></td><td><font color="#66c366"><tt>``Erik</tt></font></td><td width="100%"><tt>msvc is primarily a C++ compiler, not a C compiler... I doubt they actually fully support c89, just a common subset (and iirc, they introduce c++isms in violation of c89)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:31.32</tt></td><td><font color="#66c366"><tt>``Erik</tt></font></td><td width="100%"><tt>woops, brlcad already said that :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:08.53</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Muslattoggariso * 0 /wiki/File:Picrure.jpg: Picture, diezelsun.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:10.22</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Muslattoggariso * 8539 /wiki/Talk:Alexander_Tatarnikov_(diezel_sun): Created page with "Here and so it is necessary to expertly create pictures in graphic programs."</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:11.48</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Muslattoggariso * 8540 /wiki/Alexander_Tatarnikov_(diezel_sun): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:11.04</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 65164 (svn:mergeinfo ## -3,4 +3,4 ## and 6 others): record revisions merged to trunkProperty Changed:----------------brlcad/branches/brep-debug/brlcad/branches/brep-debug/src/libged/polyclip.cpp</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.33</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 65165 (brlcad/branches/brep-debug/AUTHORS brlcad/branches/brep-debug/BUGS and 1184 others): sync from trunk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:51.17</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 65166 (svn:mergeinfo ## -1,5 +1,5 ## and 7 others): record merge revisionProperty Changed:----------------brlcad/trunk/brlcad/trunk/src/libged/polyclip.cpp</tt></td></tr>
-<tr><td><tt>14:38.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.33</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8541 /wiki/User:MeShubham99/GSoc15/log_developmen: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.32</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8542 /wiki/User:MeShubham99/GSoc15/log_developmen: </tt></td></tr>
-<tr><td><tt>16:34.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d3r1ck (~root@195.24.220.134)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.58</tt></td><td><font color="#b0b05d"><tt>d3r1ck</tt></font></td><td width="100%"><tt>Ch3ck: he is not around</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.03</tt></td><td><font color="#b0b05d"><tt>d3r1ck</tt></font></td><td width="100%"><tt>hello all</tt></td></tr>
-<tr><td><tt>16:36.22</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad d3r1ck (~root@195.24.220.134)</font></tt></td></tr>
-<tr><td><tt>16:36.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad snowlove (~albertcod@1.39.35.154)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:54.10</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:59.91.114.217 * 8543 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
-<tr><td><tt>17:20.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad snowlove (~albertcod@1.39.32.65)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:24.23</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8544 /wiki/User:MeShubham99/GSoc15/log_developmen: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:30.43</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8545 /wiki/User:MeShubham99/GSoc15/OGV_production_ready_plan: </tt></td></tr>
-<tr><td><tt>17:47.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad terrywen (~twen6@pool-71-97-144-189.bltmmd.fios.verizon.net)</font></tt></td></tr>
-<tr><td><tt>17:48.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_il (~andrei@109.100.128.78)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:55.56</tt></td><td><font color="#66c366"><tt>``Erik</tt></font></td><td width="100%"><tt>mm, full screen terminal with no decorations, 'snice. why haven't I done this before? O.o</tt></td></tr>
-<tr><td><tt>18:24.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-092-074-231-184.092.074.pools.vodafone-ip.de)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.14</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 65167 brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: refactor find_ccone_cutout() and implement find_csphere_cutout()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:42.00</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 65168 brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: make db_i's const</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:56.09</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/File:Picrure.jpg: spam</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:56.23</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/User:Muslattoggariso: Spamming links to external sites</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:56.56</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/File:Picrure.jpg: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:57.54</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 0 /wiki/Talk:Alexander_Tatarnikov_(diezel_sun): spam</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:11.58</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:202.164.45.204 * 8546 /wiki/User:Hiteshsofat/GSoc15/log_developmen: </tt></td></tr>
-<tr><td><tt>19:12.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.204)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.15</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>brlcad, hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.00</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>I am done the work of worspress xsl stylesheet noe i want to add this xsl file into brlcad buid system so how i do this ? I want run this xsl on all document and convert into wordpress php and store into another directory .</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.12</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>dracarys983: it's a good book, written specifically for teaching ray tracing concepts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.45</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>sofat: what searching have you done to figure this out on your own</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:17.02</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>s/noe/now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:17.48</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>you've asked the question 3 times :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.46</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>sofat: what searching have you done?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.53</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>yes but i want to know how i use this file in your brlcad building so now want konw which file i need to edit for this.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.59</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>I know what you want</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:20.05</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>s/konw/know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:20.18</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm asking what have you done to try and figure it out on your own?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:21.06</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 65169 brlcad/trunk/src/util/bwmod.c: remove initialization of c, because it's immediately set in a 'while' statement</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:22.44</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>it's nobody's job to simply answer your questions -- the mentors are to help when you are stuck (which requires understanding why you are stuck), to help you stay motivated (which requires encouragement and testing), and help YOU find the answers you're looking for (which requires teaching you how to learn, not simply answer questions)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:22.46</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>yes i am checking some .cmake files but i am not got right direction</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:22.58</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>which files?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.25</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>CMakeList.txt files</tt></td></tr>
-<tr><td><tt>19:24.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CNCProShane (~cncpro@70-88-111-205-Michigan.hfc.comcastbusiness.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:24.35</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>... which CMakeList.txt files?&nbsp;&nbsp;there are thousands in the tree</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.38</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>doc/docbook/CMakeLists.txt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.54</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>excellent, that's a great place to start</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.07</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>doc/docbook/article/CMakeLists.txt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.25</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>also appropriate as that one even identifies a stylesheet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:28.46</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>do you notice in that first file how the logic is wrapped in various BRLCAD_EXTRADOCS_* variables?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:28.55</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., BRLCAD_EXTRADOCS_HTML</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:29.57</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>yes?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.04</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>no?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.20</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>*crickets*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.30</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.37</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.57</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>so what you essentially need to do is add your own BRLCAD_EXTRADOCS_* logic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:31.23</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>probably BRLCAD_EXTRADOCS_WORDPRESS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:31.45</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>and fortunately, the BRLCAD_EXTRADOCS_HTML code is almost exactly what you need already</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.04</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>so start there, search the tree for that symbol and add your own for wordpress</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.08</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.27</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>grep -r BRLCAD_EXTRADOCS_HTML .</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.58</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>you'll basically find a little bit of logic in the top CMakeLists.txt file, a little in misc/CMake, and a lot in the doc/docbook subdirectories</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.38</tt></td><td><font color="#65c0c0"><tt>brlcad</tt></font></td><td width="100%"><tt>some day starseeker might revisit his promise to clean that all up so it's not so sprawling and redundant, but that's your pattern for now ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:34.24</tt></td><td><font color="#5e5eb3"><tt>sofat</tt></font></td><td width="100%"><tt>ok i will check</tt></td></tr>
-<tr><td><tt>19:55.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cox (~quassel@188.226.208.53)</font></tt></td></tr>
-<tr><td><tt>19:56.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad terrywen (~twen6@pool-71-97-144-189.bltmmd.fios.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:03.50</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 65170 brlcad/trunk/doc/docbook/system/man1/en/bwmod.xml: redo parts of the bwmod man page</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:11.20</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 65171 brlcad/trunk/doc/docbook/system/man1/en/bwstat.xml: modify the remark about square root</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.22</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Andrei.ilinca24 * 8547 /wiki/User:Andrei.ilinca24/logs: /* Coding Period */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.14</tt></td><td><font color="#6a6aca"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: Cool. Thanks :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:47.31</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Konrado DJ * 8548 /wiki/User:Konrado_DJ/GSoc2015/logs: /* 2 JUNE 2015 */</tt></td></tr>
-<tr><td><tt>21:50.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.11</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 65172 brlcad/trunk/doc/docbook/system/man1/en/bwmod.xml: put 'bwstat' in boldface, and fix the line breaks near it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.30</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 65173 brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: refactoring</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:34.00</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 65174 brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: disable comb_representable() for now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:36.14</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 65175 brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: formatting</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:00.00</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Depends how it's done</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:00.35</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>well only way to know is to do it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:00.41</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it its too slow i'll think of something
+else</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:00.59</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It will be twice as slow as it should
+be</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.13</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>That would qualify as "too slow" for me
+:p</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.14</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>if i could estimate a reasonable upper bound
+it work too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.24</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it sounds like that but sometimes its not as
+simple as that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.41</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>There are many, many ways to approach the
+problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.43</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i've had experience with grid algorithms which
+use counting to determine size before doing the set and the code is
+faster</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.02</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>the working set of the data is
+smaller</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.03</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>You could use X segments per ray, flag these
+rays for partial traversal, count how many extra segments they
+need, allocate, then finish the ray</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.27</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Or you could allocate on the fly the missing
+segments with multiple "fat buffers" with atomic counters (not just
+one counter, use many)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.45</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i'm going to have dozens of threads</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.48</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>or hundreds</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.56</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>more like hundreds</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.08</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Uh. If it's OpenCL/CUDA, you should have
+thousands</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.13</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>well</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.15</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Like &gt; 10000</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.20</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>my gpu has like 1024 i think</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.32</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.45</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>That's not the count of cores/lanes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.04</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>A GPU has multiple processing units, and each
+processing units can handle so many threads
+simultaneously</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.18</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>but the max work group size is the
+max</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.24</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It can handle more threads than it has cores,
+because GPUs hide memory latency by switching to different
+threads</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.37</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>You use many "work groups", what we call
+blocks in CUDA</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.40</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.56</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Bottom line, *always* launch more than 10000
+threads</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.04</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Heck, launch a million if you can :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.08</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>sure but *concurrently* its not gonna be more
+than 1024</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.24</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>which is what matters for the locks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.24</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>This is 1024 threads for each SMM</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.28</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>My GPU has 16 SMM</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.37</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>nah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.04</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>A "work group" (block) isn't shared across
+multiple processing units</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.59</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Also, when a thread is done processing, you
+want the GPU to already have more work at hand ready to
+go</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.08</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.14</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Seriously, you want more than 10000 threads,
+this is pretty much a minimum</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.24</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i'm going to have one per pixel</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.29</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I frequently launch thread counts in the
+millions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.36</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Good</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.25</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it can be a problem though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.51</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>if the block size is too big and not all
+threads finish at the same time the GPU utilization rate can be
+crap</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.09</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i'll worry about that later</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.15</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I'm not following</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.22</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>The GPU will work as fast as it can until all
+threads are done</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.36</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>lets say i split the image to be renderer in
+blocks with 16x16 pixels</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.54</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Except of course, that groups of 32 threads
+run synchroneously, so a group of 32 threads can only be "done"
+(freeing computing resources) when all 32 threads are fully
+done</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.55</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>but one of those pixels takes like 10x more
+time to process than the others</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.00</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.01</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Indeed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.29</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>If that's a frequent occurence, you can detect
+such cases and have the other 31 threads grab more work from some
+global buffer</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.34</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>That's a headache though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.42</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah work stealing. that's an option people
+use.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.17</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Generally, for raytracing, a group of primary
+rays (pixels) will be fairly coherent for processing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.23</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It's not worth the trouble for primary
+rays</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.38</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah most of the issue will be along edges and
+things like that</tt></td>
+</tr>
+<tr>
+<td><tt>00:12.49</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.40</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It's also not worth the trouble because if you
+grab more work, memory loads will become incoherent, losing memory
+coalescing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.40</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>So your memory loads take longuer, and if that
+was the bottleneck in the first place, you don't gain much and with
+overhead</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.40</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah this is an issue too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.22</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>so another idea is if you can estimate the
+time each pixel will take and the space it traverses then you can
+use then to roughly sort rays.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.34</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>before rendering.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.44</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>What kind of rays do you want to sort?
+Bouncing rays?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.58</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>this it will be mostly useful for secondaries
+yes.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.14</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>True sorting of rays imply scattered writes
+which is *terrible*, but there are other ways</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.37</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>For example, from a group of 32 primary rays,
+you can pick 32 bouncing rays with roughly the same direction and
+process them together</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.58</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>So the origin and direction will be similar
+with little overhead</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.08</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>not necessarily</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.16</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>imagine your rays hit a sphere</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.25</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>they will diverge</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.52</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I'm assuming you launch many bouncing rays per
+primary hit, and you can quickly pick ones with roughly similar
+directions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.04</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>But each case is different. Just don't even
+try sorting with scattered writes :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.04</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>in that case sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.13</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>actually some people do that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.21</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>and claim its better than not sorting at
+all</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.08</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i'm not going into that until i get the basics
+working</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.15</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I have explored that stuff, it all depends how
+your data is organized and if you have tricks to make a rough sort
+that will statistically be somehwat coherent at a low
+cost</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.23</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>there's all sorts of issues</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.27</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>(I wrote a high performance CUDA raytracer by
+the way)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.34</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.00</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it is publically available?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.24</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>publicly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.49</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>A first version was put on sourceforge and
+never (?) updated</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.00</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>You can google "Rayforce"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.20</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i saw the webpage. it says it doesn't use bsps
+and stuff but isn't very explicit in the technique</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.34</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>the performance seems good</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.57</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>It was the fastest raytracer when we presented
+at the Nvidia conference</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:25.11</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>But the preparation time is terrible :p
+(single threaded, very computionally intensive)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:25.24</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>And I haven't followed developments, so others
+could be faster</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.02</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>you need to build some acceleration structure
+and that is single-threaded?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.26</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>but the rendering and moving the camera is
+fast?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.35</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Yup, pretty much</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.41</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>that's typical</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.49</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>The scene preparation could be much faster, it
+just wasn't an issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.02</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>there's a lot of work in last 5-7 years on
+fast build acceleration structure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.16</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it typically can take tens or hundreds of ms
+now to build one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.47</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt><a href=
+"http://web.ist.utl.pt/~vasco.costa/uploads/Main/cgi2015.pdf">http://web.ist.utl.pt/~vasco.costa/uploads/Main/cgi2015.pdf</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.56</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>this is a short paper i made on fast build
+grids on gpus</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:28.29</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it can build a grid for the san miguel scene
+at over 25hz</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:28.29</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Cool. Yes, I know there has been a lot of work
+on making the preparation fast</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:28.45</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>i went completely the other way. How fast can
+raytracing be, even if you need minutes to prepare? :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:28.52</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>this is good too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:29.07</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>there were some papers decades back on what
+they called 'constant time ray tracing'</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:29.11</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Since you can build and cache the whole graph,
+it's not always an issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:29.36</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i haven't seen a lot since</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:29.49</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>do you have some paper on this or
+slides?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.18</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I don't personally have this... A colleage
+wrote some paper on a tiny piece of the work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.30</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.33</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I agreed to help writing a paper, but they
+wanted to split the information into 5-6 papers or
+something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.35</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt><span class="c6">sighs</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.36</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>well i'll look at the code when i have
+time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.43</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I'm not from academia :p</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.58</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>well it can be pretty hard to publish system
+papers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:31.04</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>its easier to publish algorithm
+papers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:31.15</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>so its probably like a paper per main
+algorithm what they wanted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:31.40</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I'm generally not interested to write, publish
+or read papers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:32.24</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>well its a different way to transmit knowledge
+that's all</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:32.58</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i did my undergraduate, then went to work in
+the private sector, then came back to do my phd</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.03</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>so i've seen both sides</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:34.07</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>There's just so much... garbage in papers,
+with all of academia pressured to write as many papers as they can,
+even when they have absolutely nothing to say</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:34.12</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>and its true that there's nothing truer than
+the source code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:34.50</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>that happens</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:35.07</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>but you usually won't get published anywhere
+good with something like that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:35.35</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>it doesn't help that you get performance
+evaluated on numbers of papers published</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:35.49</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>this is a problem with any of those kinds of
+performance evaluation schemes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:36.44</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:JackySandman1 * 0
+/wiki/User:JackySandman1:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.00</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Yup. I have glanced over too many worthless
+papers to generally bother anymore</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.25</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>While the "good idea", if there's one at all,
+can often be resumed in two lines</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.33</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.48</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:JackySandman1 * 8531
+/wiki/Documentation: Undo revision 8302 by
+[[Special:Contributions/Sean|Sean]] ([[User
+talk:Sean|talk]])</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:37.59</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>but you need to prove it works so you need
+tests and test results and so on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.52</tt></td>
+<td><span class="c2"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>I'll let others take care of that :p</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:39.10</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:JackySandman1 * 0
+/wiki/File:Picture.jpg:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.55</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>the traversal code is a bit of a
+mess</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.58</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>i'll continue tomorrow</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:01.00</tt></td>
+<td><span class="c4"><tt>vasc</tt></span></td>
+<td width="100%"><tt>good night</tt></td>
+</tr>
+<tr>
+<td><tt>01:15.16</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad LordOfBikes_
+(~armin@dslb-092-074-231-184.092.074.pools.vodafone-ip.de)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:24.36</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:59.91.113.247 * 8533
+/wiki/User:Gurwinder_Singh/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:31.11</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:59.91.113.247 * 8534
+/wiki/User:Gurwinder_Singh/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.35</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 8535
+/wiki/Documentation: Reverted edits by
+[[Special:Contributions/JackySandman1|JackySandman1]] ([[User
+talk:JackySandman1|talk]]) to last revision by
+[[User:Sean|Sean]]</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.53</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/User:JackySandman1: Inserting nonsense/gibberish into
+pages</tt></td>
+</tr>
+<tr>
+<td><tt>02:36.28</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad cardinot
+(~cardinot@unaffiliated/cardinot)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:36.38</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/Alexander_Tatarnikov_(diezel_sun): Spam: spam</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.00</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/File:Picture.jpg:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.28</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/File:Picture.jpg:</tt></td>
+</tr>
+<tr>
+<td><tt>03:19.43</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Gurwinder
+(3b5b71f7@gateway/web/freenode/ip.59.91.113.247)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.43</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 65159
+brlcad/trunk/src/other/openNURBS/opennurbs_system.h: add support
+for compiling with the AIX 7.1 compiler/linker</tt></td>
+</tr>
+<tr>
+<td><tt>04:45.36</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Milinda
+(c0f80842@gateway/web/freenode/ip.192.248.8.66)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:45.41</tt></td>
+<td><span class="c8"><tt>Milinda</tt></span></td>
+<td width="100%"><tt>Anyone know a good tutorial to create a
+brl-cad display manager instance in qt ?</tt></td>
+</tr>
+<tr>
+<td><tt>05:30.59</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad DarkCalf
+(~DarkCalf@64.185.232.90)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:34.47</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad dracarys983
+(dracarys98@nat/iiit/x-anzpkzgrsvgdekfc)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:03.06</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 65160
+brlcad/trunk/src/librt/screened_poisson.cpp: quell dir1 being set
+but unused by using it. warnings-as-errors should probably be
+enabled for librt c++... more has crept in.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:13.51</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 65161
+brlcad/trunk/src/libbu/fgets.c: per manpage, buffer contents are
+supposed to remain unchanged if eof is encountered before we
+read</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:23.33</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 65162
+brlcad/trunk/src/libbu/vls.c: it's possible for bu_fgets to return
+an empty string, so make sure we don't try to index -1</tt></td>
+</tr>
+<tr>
+<td><tt>06:27.40</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Gurwinder
+(caa43575@gateway/web/freenode/ip.202.164.53.117)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:47.36</tt></td>
+<td><span class="c9"><tt>dracarys983</tt></span></td>
+<td width="100%"><tt>brlcad, starseeker, ``Erik: I have to study
+raytracing in detail for my Honors work and it seems we've shifted
+to PBRT for the experimentation and extension. How is the book
+"Physically Based Rendering" for the task?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:51.51</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 65163
+brlcad/trunk/src/mged/mged.c: make sure we don't try to index into
+an invalid -1 address if the prompt happens to be empty</tt></td>
+</tr>
+<tr>
+<td><tt>07:00.42</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad
+andromeda-galaxy
+(~andromeda@108-225-17-54.lightspeed.sntcca.sbcglobal.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>08:17.07</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Andrei.ilinca24 * 8536
+/wiki/User:Andrei.ilinca24/logs: /* Coding Period */</tt></td>
+</tr>
+<tr>
+<td><tt>09:06.09</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad merzo
+(~merzo@user-94-45-58-141.skif.com.ua)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:37.42</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad sofat
+(~sofat@202.164.53.117)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:39.22</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>starseeker, hello</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:40.04</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>i want to add new xsl stylesheet in
+brlcad-build system how i do this ? which code i need to
+edit.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:30.54</tt></td>
+<td><span class="c11"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>msvc is primarily a C++ compiler, not a C
+compiler... I doubt they actually fully support c89, just a common
+subset (and iirc, they introduce c++isms in violation of
+c89)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:31.32</tt></td>
+<td><span class="c11"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>woops, brlcad already said that :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:08.53</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Muslattoggariso * 0
+/wiki/File:Picrure.jpg: Picture, diezelsun.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:10.22</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Muslattoggariso * 8539
+/wiki/Talk:Alexander_Tatarnikov_(diezel_sun): Created page with
+"Here and so it is necessary to expertly create pictures in graphic
+programs."</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:11.48</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Muslattoggariso * 8540
+/wiki/Alexander_Tatarnikov_(diezel_sun):</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:11.04</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 65164 (svn:mergeinfo ##
+-3,4 +3,4 ## and 6 others): record revisions merged to
+trunkProperty
+Changed:----------------brlcad/branches/brep-debug/brlcad/branches/brep-debug/src/libged/polyclip.cpp</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:23.33</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 65165
+(brlcad/branches/brep-debug/AUTHORS brlcad/branches/brep-debug/BUGS
+and 1184 others): sync from trunk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:51.17</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 65166 (svn:mergeinfo ##
+-1,5 +1,5 ## and 7 others): record merge revisionProperty
+Changed:----------------brlcad/trunk/brlcad/trunk/src/libged/polyclip.cpp</tt></td>
+</tr>
+<tr>
+<td><tt>14:38.44</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.33</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8541
+/wiki/User:MeShubham99/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.32</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8542
+/wiki/User:MeShubham99/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr>
+<td><tt>16:34.37</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad d3r1ck
+(~root@195.24.220.134)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.58</tt></td>
+<td><span class="c12"><tt>d3r1ck</tt></span></td>
+<td width="100%"><tt>Ch3ck: he is not around</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.03</tt></td>
+<td><span class="c12"><tt>d3r1ck</tt></span></td>
+<td width="100%"><tt>hello all</tt></td>
+</tr>
+<tr>
+<td><tt>16:36.22</tt></td>
+<td colspan="2"><tt><span class="c13">*** part/#brlcad d3r1ck
+(~root@195.24.220.134)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:36.36</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad snowlove
+(~albertcod@1.39.35.154)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:54.10</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:59.91.114.217 * 8543
+/wiki/User:Gurwinder_Singh/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr>
+<td><tt>17:20.25</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad snowlove
+(~albertcod@1.39.32.65)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:24.23</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8544
+/wiki/User:MeShubham99/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:30.43</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 8545
+/wiki/User:MeShubham99/GSoc15/OGV_production_ready_plan:</tt></td>
+</tr>
+<tr>
+<td><tt>17:47.15</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad terrywen
+(~twen6@pool-71-97-144-189.bltmmd.fios.verizon.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:48.19</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad andrei_il
+(~andrei@109.100.128.78)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:55.56</tt></td>
+<td><span class="c11"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>mm, full screen terminal with no decorations,
+'snice. why haven't I done this before? O.o</tt></td>
+</tr>
+<tr>
+<td><tt>18:24.45</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad LordOfBikes
+(~armin@dslb-092-074-231-184.092.074.pools.vodafone-ip.de)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:34.14</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 65167
+brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: refactor
+find_ccone_cutout() and implement find_csphere_cutout()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:42.00</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 65168
+brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: make
+db_i's const</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:56.09</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/File:Picrure.jpg: spam</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:56.23</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/User:Muslattoggariso: Spamming links to external
+sites</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:56.56</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/File:Picrure.jpg:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:57.54</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Sean * 0
+/wiki/Talk:Alexander_Tatarnikov_(diezel_sun): spam</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:11.58</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:202.164.45.204 * 8546
+/wiki/User:Hiteshsofat/GSoc15/log_developmen:</tt></td>
+</tr>
+<tr>
+<td><tt>19:12.59</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad sofat
+(~sofat@202.164.45.204)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.15</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>brlcad, hello</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:15.00</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>I am done the work of worspress xsl stylesheet
+noe i want to add this xsl file into brlcad buid system so how i do
+this ? I want run this xsl on all document and convert into
+wordpress php and store into another directory .</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.12</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>dracarys983: it's a good book, written
+specifically for teaching ray tracing concepts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.45</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sofat: what searching have you done to figure
+this out on your own</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:17.02</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>s/noe/now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:17.48</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you've asked the question 3 times :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.46</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sofat: what searching have you done?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.53</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>yes but i want to know how i use this file in
+your brlcad building so now want konw which file i need to edit for
+this.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.59</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I know what you want</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:20.05</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>s/konw/know</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:20.18</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'm asking what have you done to try and
+figure it out on your own?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:21.06</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 65169
+brlcad/trunk/src/util/bwmod.c: remove initialization of c, because
+it's immediately set in a 'while' statement</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:22.44</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's nobody's job to simply answer your
+questions -- the mentors are to help when you are stuck (which
+requires understanding why you are stuck), to help you stay
+motivated (which requires encouragement and testing), and help YOU
+find the answers you're looking for (which requires teaching you
+how to learn, not simply answer questions)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:22.46</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>yes i am checking some .cmake files but i am
+not got right direction</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:22.58</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which files?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:23.25</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>CMakeList.txt files</tt></td>
+</tr>
+<tr>
+<td><tt>19:24.01</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad CNCProShane
+(~cncpro@70-88-111-205-Michigan.hfc.comcastbusiness.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:24.35</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>... which CMakeList.txt files?  there are
+thousands in the tree</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.38</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>doc/docbook/CMakeLists.txt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.54</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>excellent, that's a great place to
+start</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.07</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>doc/docbook/article/CMakeLists.txt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.25</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also appropriate as that one even identifies a
+stylesheet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:28.46</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>do you notice in that first file how the logic
+is wrapped in various BRLCAD_EXTRADOCS_* variables?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:28.55</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>e.g., BRLCAD_EXTRADOCS_HTML</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:29.57</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:30.04</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:30.20</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>*crickets*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:30.30</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:30.37</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>okay, great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:30.57</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so what you essentially need to do is add your
+own BRLCAD_EXTRADOCS_* logic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:31.23</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably BRLCAD_EXTRADOCS_WORDPRESS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:31.45</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and fortunately, the BRLCAD_EXTRADOCS_HTML
+code is almost exactly what you need already</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.04</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so start there, search the tree for that
+symbol and add your own for wordpress</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.08</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.27</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>grep -r BRLCAD_EXTRADOCS_HTML .</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.58</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you'll basically find a little bit of logic in
+the top CMakeLists.txt file, a little in misc/CMake, and a lot in
+the doc/docbook subdirectories</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.38</tt></td>
+<td><span class="c14"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>some day starseeker might revisit his promise
+to clean that all up so it's not so sprawling and redundant, but
+that's your pattern for now ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:34.24</tt></td>
+<td><span class="c10"><tt>sofat</tt></span></td>
+<td width="100%"><tt>ok i will check</tt></td>
+</tr>
+<tr>
+<td><tt>19:55.48</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad cox
+(~quassel@188.226.208.53)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:56.09</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad terrywen
+(~twen6@pool-71-97-144-189.bltmmd.fios.verizon.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:03.50</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 65170
+brlcad/trunk/doc/docbook/system/man1/en/bwmod.xml: redo parts of
+the bwmod man page</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:11.20</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 65171
+brlcad/trunk/doc/docbook/system/man1/en/bwstat.xml: modify the
+remark about square root</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.22</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Andrei.ilinca24 * 8547
+/wiki/User:Andrei.ilinca24/logs: /* Coding Period */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.14</tt></td>
+<td><span class="c9"><tt>dracarys983</tt></span></td>
+<td width="100%"><tt>brlcad: Cool. Thanks :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:47.31</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Konrado DJ * 8548
+/wiki/User:Konrado_DJ/GSoc2015/logs: /* 2 JUNE 2015 */</tt></td>
+</tr>
+<tr>
+<td><tt>21:50.05</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad KimK
+(~Kim__@ip68-102-30-143.ks.ok.cox.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.11</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 65172
+brlcad/trunk/doc/docbook/system/man1/en/bwmod.xml: put 'bwstat' in
+boldface, and fix the line breaks near it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.30</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 65173
+brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp:
+refactoring</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:34.00</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 65174
+brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: disable
+comb_representable() for now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:36.14</tt></td>
+<td><span class="c7"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:ejno * 65175
+brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp:
+formatting</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

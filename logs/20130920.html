@@ -1,127 +1,621 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20130920</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20130920</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c9 {color: #AEAE5B}
+ span.c8 {color: #6E6ED1}
+ span.c7 {color: #009900}
+ span.c6 {color: #C5C568}
+ span.c5 {color: #CC00CC}
+ span.c4 {color: #AD5B5B}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #818144}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20130920</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:01.01</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>this document <a href="http://www.steptools.com/support/stdev_docs/express/ap203/recprac203v8.pdf">http://www.steptools.com/support/stdev_docs/express/ap203/recprac203v8.pdf</a>&nbsp;&nbsp;(...very helpful) seems to indicate that you specify them as non-scaling placements</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.22</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>(page 36)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.39</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like cartesian_transformation_operator_3d is translation, supertype provides scaling, orientation .. what a mess!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.46</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: very helpful, but LOTS of false positives .. talked to the dev and he said the -ignore-bugon-post flag should be quelling the ones I described to him</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: do you know if that flag was used?&nbsp;&nbsp;he said it was included in the optck script by default</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.20</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt>brlcad: yes, it contains -ignore-bugon-post, and they haven't updated the master branch since then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:44.16</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt>I didn't build llvm/clang exactly as specified - I just let gentoo do its thing - but I assume that a misconfiguration would result in a build failure or crash rather than false positives</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.14</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, that'd be why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.29</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>he said it has to be built that way so that exit() is properly detected</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.42</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise llvm doesn't output some information they need</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.51</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt>all they want is --enable-cxx11 --enable-targets=host --enable-bindings=none --enable-shared --enable-debug-symbols --enable-optimized</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:48.37</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders how hard it would be to set up an ebuild for stack that does it right</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.38</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>his statement was: "Make sure to build your own clang as instructed in the INSTALL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.41</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>file; don't use a prebuilt clang, which doesn't emit names for basic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.44</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>blocks and causes a lot of false positives."</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:52.41</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt>If I get time, I'll try to rebuild as they specify and compare the output</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.01</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>of course, he also says that functions marked noreturn shouldn't be reported.. and ours should marked as that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.17</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.27</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, they are</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.44</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>of course, hidden behind a preprocessor symbol, maybe it has issues with that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:13.10</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: it's definitely finding issues, but so far it's about 90% false positives with the null-dereference issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:14.20</tt></td><td><font color="#ad5b5b"><tt>mpictor</tt></font></td><td width="100%"><tt>I'll try to rebuild tomorrow.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:50.48</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57773 brlcad/trunk/src/libged/analyze.c: use snprintf instead of sprintf for safety printing into the fixed-size buffer. can probably switch to bu_vls_printf now and fix the FIXMEs.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:52.11</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57774 brlcad/trunk/src/libged/analyze.c: ws indent cleanup</tt></td></tr>
-<tr><td><tt>03:08.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness__ (uid10044@gateway/web/irccloud.com/x-zcrsunauvuqnonbq)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:12.06</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57775 brlcad/trunk/src/shapes/wire.c: remove the newbie dev end scope markers. remove the dead code else case (i &gt; 99).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:12.55</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57776 brlcad/trunk/src/shapes/wire.c: remove newbie dev start scope comments.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:15.23</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57777 brlcad/trunk/src/shapes/wire.c: style fixes</tt></td></tr>
-<tr><td><tt>04:03.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness__ (uid10044@gateway/web/irccloud.com/x-ijulyuyzetygqhtn)</font></tt></td></tr>
-<tr><td><tt>06:35.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:31.39</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:indianlarry * 57778 (brlcad/branches/nurbs/CHANGES brlcad/branches/nurbs/TODO and 20 others): Merging trunk into branch 'nurbs' r:57745:57777</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:37.04</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 57779 (brlcad/trunk/src/libbrep/boolean.cpp brlcad/trunk/src/libbrep/intersect.cpp): Add more comment.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:40.19</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 6157 /wiki/User:Phoenix/GSoc2013/Reports: /* Week 14 */</tt></td></tr>
-<tr><td><tt>10:45.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Shadownet@195.24.220.16)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:45.03</tt></td><td><font color="#6e6ed1"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>join ##security</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:47.35</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>moin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:53.24</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 6158 /wiki/User:Phoenix/GSoc2013/Reports: /* Final summary */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:53.35</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 6159 /wiki/User:Phoenix/GSoc2013/Reports: /* Final summary */</tt></td></tr>
-<tr><td><tt>11:56.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Shadownet@195.24.220.16)</font></tt></td></tr>
-<tr><td><tt>12:45.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (0e8b7a72@gateway/web/freenode/ip.14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:59.34</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:iiizzzaaakkk * 57780 brlcad/trunk/src/librt/primitives/hrt/hrt.c: Some fixes to rt_hrt_norm, multiplying the transposed rotation matrix by the normal causes the bumps in the middle of the heart.After running the rt command on a heart object, I realised that unitizing is useless</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:02.04</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 6160 /wiki/User:NyahCh3ck20/GSoc2013/Coding_Repor: /* Coding Log Report for GSoc 2013 */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:10.35</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 6161 /wiki/User:Izak/GSOC_2013_logs: /* September 16th to September 21st */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:15.02</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves to brlcad </font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:15.19</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt>Did you see at those tests ?</tt></td></tr>
-<tr><td><tt>13:24.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.29.25)</font></tt></td></tr>
-<tr><td><tt>13:45.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseek1r (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr><td><tt>14:33.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.29.25)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:34.57</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 57781 (brlcad/trunk/CHANGES brlcad/trunk/src/conv/step/g-step/Comb_Tree.cpp): fix spellings (this includes CHANGES file)</tt></td></tr>
-<tr><td><tt>14:41.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr><td><tt>14:56.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.27.226)</font></tt></td></tr>
-<tr><td><tt>15:17.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:27.14</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6162 /wiki/Code_Cleanup: /* CPPCHECK-CLEANUP */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:36.20</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6163 /wiki/Deuces: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:31.09</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6164 /wiki/Deuces: /* Implement a primitive surface area function */</tt></td></tr>
-<tr><td><tt>16:57.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Gaganjyot (~gagan@106.192.6.9)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:02.40</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6165 /wiki/User:Harman052/GSoc2013/Logs: </tt></td></tr>
-<tr><td><tt>18:34.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr><td><tt>18:38.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AndChat|317009 (~AndChat31@1.38.27.226)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:50.09</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 57782 brlcad/trunk/src/conv/g-xxx_facets.c: remove unneeded braces (however, lack of storage of file name makes me doubt this program is in use)</tt></td></tr>
-<tr><td><tt>19:14.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.42</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6166 /wiki/Deuces: /* Implement a primitive centroid function */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:43.30</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:indianlarry * 57783 brlcad/branches/nurbs/src/librt/primitives/brep/brep.cpp: hybrid get closest point pullback working for hood but not getting through all of the M1025 geometry need to lookat, still WIP with a lot of debug code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:44.20</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6167 /wiki/Deuces: /* Implement a primitive UV-mapping callback */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.17</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6168 /wiki/User:KeshaSShah/GSoC13/Reports: /* Week 14 */</tt></td></tr>
-<tr><td><tt>20:04.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Gaganjyot (~gagan@106.192.33.170)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.03</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: dykstra's brl-cad overview paper references a brl report that I don't think I've seen, and it's not in our .bib</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.25</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>ref #8</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:36.53</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>that looks like possibly the first actual publication from the team on brl-cad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.29</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57784 brlcad/trunk/doc/BRL-CAD.bib: sort the publications by year so it's easier to find if things are listed in here. probably an automatic way availlable, but did this manually.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.49</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57785 brlcad/trunk/doc/BRL-CAD.bib: consistency, most do not have commas separating the multiple authors</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:48.09</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt>brlcad: ping ! hi ..</tt></td></tr>
-<tr><td><tt>20:50.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.27.226)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.33</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57786 brlcad/trunk/doc/BRL-CAD.bib: author cleanup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.17</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>kesha: pong</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.28</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57787 brlcad/trunk/doc/BRL-CAD.bib: dykstra's oct. 1987 brl-cad overview paper mentions the existence of a brl internal publication (brl report?) in june 1987.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.34</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt>brlcad: :D Do you recieve my mail ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:59.32</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt>Look at few recent patches on sf when free and merge it or provide feedback, if needed some modifications :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:59.59</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt>Also, I need some guidance abt next tasks ..</tt></td></tr>
-<tr><td><tt>21:05.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.27.226)</font></tt></td></tr>
-<tr><td><tt>21:06.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.27.226)</font></tt></td></tr>
-<tr><td><tt>21:06.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mark@c-67-177-102-131.hsd1.in.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.44</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 57788 brlcad/trunk/src/shapes/gastank.c: remove set of unneeded braces; ensure that numtnk is handled the same way either as answer-to-question or as -n argument</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:30.15</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: it's also entirely possible that it was just the 1.21 release, though I did find another reference that it presented in some form</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.10</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>kesha: yes, I received your e-mail but have not read it yet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.23</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>I also saw the patches, I get notified every time</tt></td></tr>
-<tr><td><tt>21:37.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:37.44</tt></td><td><font color="#aeae5b"><tt>kesha</tt></font></td><td width="100%"><tt>brlcad: okay .. cool ! (y)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.01</tt></td><td><font color="#818144"><tt>brlcad</tt></font></td><td width="100%"><tt>oof, another I haven't seen: <a href="http://books.google.com/books?id=KuvC5-OML7sC">http://books.google.com/books?id=KuvC5-OML7sC</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:43.18</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 6169 /wiki/User:Vladbogolin/GSoC2013/Logs: /* Week 14 */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.54</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 57789 brlcad/trunk/src/util/CMakeLists.txt: add another file for testing static structs for arg parsing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.51</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 57790 brlcad/trunk/src/util/bu_arg_parse.h: add structs and funcs for static init use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.09</tt></td><td><font color="#c5c568"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 57791 brlcad/trunk/src/util/bu_arg_parse.h: use tmp names for disambiguation while two methods (APIs) in use</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:01.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this document <a href=
+"http://www.steptools.com/support/stdev_docs/express/ap203/recprac203v8.pdf">
+http://www.steptools.com/support/stdev_docs/express/ap203/recprac203v8.pdf</a>
+ (...very helpful) seems to indicate that you specify them as
+non-scaling placements</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(page 36)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>looks like
+cartesian_transformation_operator_3d is translation, supertype
+provides scaling, orientation .. what a mess!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mpictor: very helpful, but LOTS of false
+positives .. talked to the dev and he said the -ignore-bugon-post
+flag should be quelling the ones I described to him</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mpictor: do you know if that flag was used? 
+he said it was included in the optck script by default</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.20</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt>brlcad: yes, it contains -ignore-bugon-post,
+and they haven't updated the master branch since then</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:44.16</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt>I didn't build llvm/clang exactly as specified
+- I just let gentoo do its thing - but I assume that a
+misconfiguration would result in a build failure or crash rather
+than false positives</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ahh, that'd be why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>he said it has to be built that way so that
+exit() is properly detected</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>otherwise llvm doesn't output some information
+they need</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.51</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt>all they want is --enable-cxx11
+--enable-targets=host --enable-bindings=none --enable-shared
+--enable-debug-symbols --enable-optimized</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:48.37</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt><span class="c5">wonders how hard it would be
+to set up an ebuild for stack that does it right</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>his statement was: "Make sure to build your
+own clang as instructed in the INSTALL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>file; don't use a prebuilt clang, which
+doesn't emit names for basic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>blocks and causes a lot of false
+positives."</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:52.41</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt>If I get time, I'll try to rebuild as they
+specify and compare the output</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of course, he also says that functions marked
+noreturn shouldn't be reported.. and ours should marked as
+that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.17</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.27</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep, they are</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of course, hidden behind a preprocessor
+symbol, maybe it has issues with that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:13.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mpictor: it's definitely finding issues, but
+so far it's about 90% false positives with the null-dereference
+issues</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:14.20</tt></td>
+<td><span class="c4"><tt>mpictor</tt></span></td>
+<td width="100%"><tt>I'll try to rebuild tomorrow.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:50.48</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57773
+brlcad/trunk/src/libged/analyze.c: use snprintf instead of sprintf
+for safety printing into the fixed-size buffer. can probably switch
+to bu_vls_printf now and fix the FIXMEs.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:52.11</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57774
+brlcad/trunk/src/libged/analyze.c: ws indent cleanup</tt></td>
+</tr>
+<tr>
+<td><tt>03:08.03</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad witness__
+(uid10044@gateway/web/irccloud.com/x-zcrsunauvuqnonbq)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:12.06</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57775
+brlcad/trunk/src/shapes/wire.c: remove the newbie dev end scope
+markers. remove the dead code else case (i &gt; 99).</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:12.55</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57776
+brlcad/trunk/src/shapes/wire.c: remove newbie dev start scope
+comments.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:15.23</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57777
+brlcad/trunk/src/shapes/wire.c: style fixes</tt></td>
+</tr>
+<tr>
+<td><tt>04:03.44</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad witness__
+(uid10044@gateway/web/irccloud.com/x-ijulyuyzetygqhtn)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:35.53</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad d_rossberg
+(~rossberg@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:31.39</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:indianlarry * 57778
+(brlcad/branches/nurbs/CHANGES brlcad/branches/nurbs/TODO and 20
+others): Merging trunk into branch 'nurbs' r:57745:57777</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:37.04</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:phoenixyjll * 57779
+(brlcad/trunk/src/libbrep/boolean.cpp
+brlcad/trunk/src/libbrep/intersect.cpp): Add more
+comment.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:40.19</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 6157
+/wiki/User:Phoenix/GSoc2013/Reports: /* Week 14 */</tt></td>
+</tr>
+<tr>
+<td><tt>10:45.00</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Ch3ck_
+(~Shadownet@195.24.220.16)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:45.03</tt></td>
+<td><span class="c8"><tt>Ch3ck_</tt></span></td>
+<td width="100%"><tt>join ##security</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:47.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>moin</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:53.24</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 6158
+/wiki/User:Phoenix/GSoc2013/Reports: /* Final summary */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:53.35</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 6159
+/wiki/User:Phoenix/GSoc2013/Reports: /* Final summary */</tt></td>
+</tr>
+<tr>
+<td><tt>11:56.21</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Ch3ck_
+(~Shadownet@195.24.220.16)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:45.24</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha
+(0e8b7a72@gateway/web/freenode/ip.14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:59.34</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:iiizzzaaakkk * 57780
+brlcad/trunk/src/librt/primitives/hrt/hrt.c: Some fixes to
+rt_hrt_norm, multiplying the transposed rotation matrix by the
+normal causes the bumps in the middle of the heart.After running
+the rt command on a heart object, I realised that unitizing is
+useless</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:02.04</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 6160
+/wiki/User:NyahCh3ck20/GSoc2013/Coding_Repor: /* Coding Log Report
+for GSoc 2013 */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:10.35</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 6161
+/wiki/User:Izak/GSOC_2013_logs: /* September 16th to September 21st
+*/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:15.02</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt><span class="c5">waves to
+brlcad</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:15.19</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt>Did you see at those tests ?</tt></td>
+</tr>
+<tr>
+<td><tt>13:24.58</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kimzzzz
+(~AndChat31@1.38.29.25)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:45.46</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad starseek1r
+(~starseeke@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:33.10</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kimzzzz
+(~AndChat31@1.38.29.25)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:34.57</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 57781
+(brlcad/trunk/CHANGES
+brlcad/trunk/src/conv/step/g-step/Comb_Tree.cpp): fix spellings
+(this includes CHANGES file)</tt></td>
+</tr>
+<tr>
+<td><tt>14:41.25</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:56.56</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kimzzzz
+(~AndChat31@1.38.27.226)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:17.28</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:27.14</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6162
+/wiki/Code_Cleanup: /* CPPCHECK-CLEANUP */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:36.20</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6163
+/wiki/Deuces:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:31.09</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6164 /wiki/Deuces:
+/* Implement a primitive surface area function */</tt></td>
+</tr>
+<tr>
+<td><tt>16:57.07</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Gaganjyot
+(~gagan@106.192.6.9)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:02.40</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6165
+/wiki/User:Harman052/GSoc2013/Logs:</tt></td>
+</tr>
+<tr>
+<td><tt>18:34.15</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:38.06</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad
+AndChat|317009 (~AndChat31@1.38.27.226)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:50.09</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 57782
+brlcad/trunk/src/conv/g-xxx_facets.c: remove unneeded braces
+(however, lack of storage of file name makes me doubt this program
+is in use)</tt></td>
+</tr>
+<tr>
+<td><tt>19:14.46</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.42</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6166 /wiki/Deuces:
+/* Implement a primitive centroid function */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:43.30</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:indianlarry * 57783
+brlcad/branches/nurbs/src/librt/primitives/brep/brep.cpp: hybrid
+get closest point pullback working for hood but not getting through
+all of the M1025 geometry need to lookat, still WIP with a lot of
+debug code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:44.20</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6167 /wiki/Deuces:
+/* Implement a primitive UV-mapping callback */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:57.17</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6168
+/wiki/User:KeshaSShah/GSoC13/Reports: /* Week 14 */</tt></td>
+</tr>
+<tr>
+<td><tt>20:04.05</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Gaganjyot
+(~gagan@106.192.33.170)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: dykstra's brl-cad overview paper
+references a brl report that I don't think I've seen, and it's not
+in our .bib</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ref #8</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:36.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that looks like possibly the first actual
+publication from the team on brl-cad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.29</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57784
+brlcad/trunk/doc/BRL-CAD.bib: sort the publications by year so it's
+easier to find if things are listed in here. probably an automatic
+way availlable, but did this manually.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.49</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57785
+brlcad/trunk/doc/BRL-CAD.bib: consistency, most do not have commas
+separating the multiple authors</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:48.09</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt>brlcad: ping ! hi ..</tt></td>
+</tr>
+<tr>
+<td><tt>20:50.29</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kimzzzz
+(~AndChat31@1.38.27.226)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.33</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57786
+brlcad/trunk/doc/BRL-CAD.bib: author cleanup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:57.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>kesha: pong</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:57.28</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 57787
+brlcad/trunk/doc/BRL-CAD.bib: dykstra's oct. 1987 brl-cad overview
+paper mentions the existence of a brl internal publication (brl
+report?) in june 1987.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.34</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt>brlcad: :D Do you recieve my mail ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:59.32</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt>Look at few recent patches on sf when free and
+merge it or provide feedback, if needed some modifications
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:59.59</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt>Also, I need some guidance abt next tasks
+..</tt></td>
+</tr>
+<tr>
+<td><tt>21:05.25</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kimzzzz
+(~AndChat31@1.38.27.226)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:06.14</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kimzzzz
+(~AndChat31@1.38.27.226)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:06.17</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad mpictor
+(~mark@c-67-177-102-131.hsd1.in.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.44</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 57788
+brlcad/trunk/src/shapes/gastank.c: remove set of unneeded braces;
+ensure that numtnk is handled the same way either as
+answer-to-question or as -n argument</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:30.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: it's also entirely possible that
+it was just the 1.21 release, though I did find another reference
+that it presented in some form</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:31.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>kesha: yes, I received your e-mail but have
+not read it yet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:31.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I also saw the patches, I get notified every
+time</tt></td>
+</tr>
+<tr>
+<td><tt>21:37.21</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad kesha
+(~kesha@14.139.122.114)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:37.44</tt></td>
+<td><span class="c9"><tt>kesha</tt></span></td>
+<td width="100%"><tt>brlcad: okay .. cool ! (y)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oof, another I haven't seen: <a href=
+"http://books.google.com/books?id=KuvC5-OML7sC">http://books.google.com/books?id=KuvC5-OML7sC</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:43.18</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 6169
+/wiki/User:Vladbogolin/GSoC2013/Logs: /* Week 14 */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.54</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:tbrowder2 * 57789
+brlcad/trunk/src/util/CMakeLists.txt: add another file for testing
+static structs for arg parsing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:45.51</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:tbrowder2 * 57790
+brlcad/trunk/src/util/bu_arg_parse.h: add structs and funcs for
+static init use</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.09</tt></td>
+<td><span class="c6"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:tbrowder2 * 57791
+brlcad/trunk/src/util/bu_arg_parse.h: use tmp names for
+disambiguation while two methods (APIs) in use</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

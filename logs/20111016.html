@@ -1,122 +1,571 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20111016</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20111016</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c9 {color: #CC00CC}
+ span.c8 {color: #6BCCCC}
+ span.c7 {color: #B6B65F}
+ span.c6 {color: #B15D5D}
+ span.c5 {color: #009900}
+ span.c4 {color: #A25555}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #97974F}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20111016</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:01.29</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: NEAR_EQUAL() probably didn't work because it compares against the open set</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e., the values between val-tol to val+tol, but not including those values</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.12</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: open set ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.21</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.00</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>a simple == may work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.29</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>no, that's the point of the macros</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>you cannot rely on == with floating point, it is not reliable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.45</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.14</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>so there are no macros which include the boundary values ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.28</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that's part why NEAR_EQUAL() uses the open set, you cannot reliably compare if a value &lt;= some other value</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.41</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>you can only compare if it's &lt; or &lt; </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.43</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>er &gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.48</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so to get the looping effect you were attempting, you were basically just off-by-one due to the tolerance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.45</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes i wanted it to go upto 1.0000, but it stopped at 0.96</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.52</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>changing to what you did is fine, val &lt; (max+tol)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.00</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>though that should have been effectively equiv to&nbsp;&nbsp;!NEAR_EQUAL(val, max, tol)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.03</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>er, I mean !NEAR_EQUAL(val, max+tol, tol)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:29.26</tt></td><td><font color="#a25555"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right :)</tt></td></tr>
-<tr><td><tt>06:14.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:11.33</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>why is delete used as a "quit terminal" &gt;_&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:52.35</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>I wonder what the easiest way would be to get a prism with a 10degree slope</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:02.54</tt></td><td><font color="#b6b65f"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r47269 10/brlcad/trunk/doc/docbook/ (ElNode.pm read-db-xml.pl): add two tools to read DB xml and extract data for archer</tt></td></tr>
-<tr><td><tt>11:09.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:17.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cvds_: delete used as a quit terminal?&nbsp;&nbsp;in what? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:19.01</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: in mged console mode</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:19.10</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>if I hit delete on an empty command line mged closes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:19.32</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>not a problem unless it happens the first time, I went o_O</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:29.50</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>eek, that doesn't sound like a quit terminal, that sounds like it's crashing!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:29.57</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>have you ever run gdb before?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>gdb --args path/to/mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.14</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>run</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.36</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>use it, hit delete, see if it returns you to a gdb prompt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.41</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>then "bt"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:42.15</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>will do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:43.54</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>I need to install that ghdb first tho</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:46.20</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>gdb*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:58.11</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>also should I worry if rendering with 'E' gives me a wall of text ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:05.53</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://pastebin.com/rrtTqJpC">http://pastebin.com/rrtTqJpC</a> however I dont have a version including debug symbols, so not sure i&nbsp;&nbsp;useful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:05.59</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>if its*</tt></td></tr>
-<tr><td><tt>13:06.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:09.35</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cvds_: typing delete inserted that "exit" command?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:10.11</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not a crash, that's a normal exit .. but it's certainly not expected</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:10.32</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>E giving a wall of text is normal - it's the output from tessellating the geometry into a polygonal mesh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:13.12</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>including: ERROR: first hit on bodyCOuter.s (surfno = 12) is an exit at (-6.42262 13 11) ray start = (-4.451251276587e+00 1.300000000000e+01 1.100000000000e+01), ray dir = (1.000000000000e+00 0.000000000000e+00 -1.366428338000e-16)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:13.37</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>and technically its not "typing" delete but pressing the delete key :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:14.30</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>but its indeed curious why its linked to exit, ctrl-d works as well btw, but that I do find expectid behavior</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:14.39</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>expected*</tt></td></tr>
-<tr><td><tt>13:20.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yiyus (1242712427@je.je.je)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:33.46</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>another thing I noticed that after using red the comb_color will have reset</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.47</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>which version are you using?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.54</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://pastebin.com/3VmSQiZt">http://pastebin.com/3VmSQiZt</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:19.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cvds_: for future reference, pastebin.com not only sucks but is inaccessible to most in the channel some of the time due to network blocks -- suggest pastebin.ca or paste.debian.org or just about any other ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:19.34</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I'll verify, but I'm pretty sure that red bug was fixed in 7.20</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:23.26</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: okies, will divert to the debian one for further posts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:23.51</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>first component is nearing the done stage... took a long time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:26.13</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>well the first version... no doubt that after printing I will be making adjustments</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.35</tt></td><td><font color="#6bcccc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">cusses Windows and Tcl/Tk both</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.11</tt></td><td><font color="#6bcccc"><tt>starseeker</tt></font></td><td width="100%"><tt>just when I thought I finally had this licked, I can't get wish going on Win32 with 8.6</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.02</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.19</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cvds_: would love to see pics of your work (before and after printing)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:10.57</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: Maybe I can post some renders on flickr later today</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:12.28</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>last couple of primitives to add</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.08</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://flic.kr/s/aHsjwoVYoK">http://flic.kr/s/aHsjwoVYoK</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.48</tt></td><td><font color="#6bcccc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">growses... what's the poing of a HAVE_ZLIB flag if you're going to guarantee you always have zlib...</font></tt></td></tr>
-<tr><td><tt>16:17.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:57.14</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cvds_: that's pretty awesome!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:57.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so you're going to have that geometry printed?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:57.56</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>either way, pretty cool .. nice level of detail</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:57.59</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>what is it? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:58.02</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: yes, but have to build the printer first :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:58.31</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>its a finger switch with 5 directions, N E S W and down</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.36</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>and I would not be amazed that I need to adjust some of it to make it printer compitable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.46</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>comaptible*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:02.02</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>hmm here is to hoping I can fit the 2 missing optocoupler space</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:02.03</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>s</tt></td></tr>
-<tr><td><tt>17:15.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad velociostrich (~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:59.12</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>and thanks for the compliment</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:01.50</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>hmm a raytrace from a sliced version takes way longer</tt></td></tr>
-<tr><td><tt>18:23.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad velociostrich (~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.04</tt></td><td><font color="#b15d5d"><tt>cvds_</tt></font></td><td width="100%"><tt>brlcad: more renders: <a href="http://flic.kr/s/aHsjwoVYoK">http://flic.kr/s/aHsjwoVYoK</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:11.25</tt></td><td><font color="#b6b65f"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47270 10/brlcad/trunk/src/libged/simulate/ (7 files): Separated the list of manifolds generated by bullet and that generated by rt, as they are required at different times during the simulation iterations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:24.51</tt></td><td><font color="#b6b65f"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47271 10/brlcad/trunk/src/libged/simulate/ (simrt.c simulate.h): Corrected some errors in setting up the linked list</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.25</tt></td><td><font color="#b6b65f"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47272 10/brlcad/trunk/src/libged/simulate/ (simcollisionalgo.cpp simrt.c): Corrected some code for generating the normals and depth values correctly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:27.01</tt></td><td><font color="#b6b65f"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47273 10/brlcad/trunk/src/libged/simulate/simcollisionalgo.cpp: The manifold points were not getting inserted correctly, fixed it to some extent, still cant keep objects steady on top of each other, hunting for what I am missing out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:55.05</tt></td><td><font color="#6bcccc"><tt>starseeker</tt></font></td><td width="100%"><tt>cvds_: the -k option to rt is helpful when you're doing sliced views</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:55.24</tt></td><td><font color="#6bcccc"><tt>starseeker</tt></font></td><td width="100%"><tt>(think it's -k - the cutting plane)</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:01.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>abhi2011: NEAR_EQUAL() probably didn't work
+because it compares against the open set</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i.e., the values between val-tol to val+tol,
+but not including those values</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.12</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>brlcad: open set ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.21</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.00</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>a simple == may work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no, that's the point of the macros</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you cannot rely on == with floating point, it
+is not reliable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.45</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>hmm yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.14</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so there are no macros which include the
+boundary values ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's part why NEAR_EQUAL() uses the open
+set, you cannot reliably compare if a value &lt;= some other
+value</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can only compare if it's &lt; or
+&lt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er &gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.48</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so to get the looping effect you were
+attempting, you were basically just off-by-one due to the
+tolerance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.45</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yes i wanted it to go upto 1.0000, but it
+stopped at 0.96</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>changing to what you did is fine, val &lt;
+(max+tol)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.00</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>though that should have been effectively equiv
+to  !NEAR_EQUAL(val, max, tol)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, I mean !NEAR_EQUAL(val, max+tol,
+tol)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:29.26</tt></td>
+<td><span class="c4"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yes right :)</tt></td>
+</tr>
+<tr>
+<td><tt>06:14.27</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:11.33</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>why is delete used as a "quit terminal"
+&gt;_&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:52.35</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>I wonder what the easiest way would be to get
+a prism with a 10degree slope</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:02.54</tt></td>
+<td><span class="c7"><tt>CIA-48</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r47269
+10/brlcad/trunk/doc/docbook/ (ElNode.pm read-db-xml.pl): add two
+tools to read DB xml and extract data for archer</tt></td>
+</tr>
+<tr>
+<td><tt>11:09.12</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:17.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cvds_: delete used as a quit terminal?  in
+what?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:19.01</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: in mged console mode</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:19.10</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>if I hit delete on an empty command line mged
+closes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:19.32</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>not a problem unless it happens the first
+time, I went o_O</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:29.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>eek, that doesn't sound like a quit terminal,
+that sounds like it's crashing!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:29.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>have you ever run gdb before?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:30.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>gdb --args path/to/mged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:30.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>run</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:30.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>use it, hit delete, see if it returns you to a
+gdb prompt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:30.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then "bt"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:42.15</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>will do</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:43.54</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>I need to install that ghdb first
+tho</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:46.20</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>gdb*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:58.11</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>also should I worry if rendering with 'E'
+gives me a wall of text ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:05.53</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://pastebin.com/rrtTqJpC">http://pastebin.com/rrtTqJpC</a>
+however I dont have a version including debug symbols, so not sure
+i  useful</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:05.59</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>if its*</tt></td>
+</tr>
+<tr>
+<td><tt>13:06.55</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:09.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cvds_: typing delete inserted that "exit"
+command?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:10.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's not a crash, that's a normal exit ..
+but it's certainly not expected</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:10.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>E giving a wall of text is normal - it's the
+output from tessellating the geometry into a polygonal
+mesh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:13.12</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>including: ERROR: first hit on bodyCOuter.s
+(surfno = 12) is an exit at (-6.42262 13 11) ray start =
+(-4.451251276587e+00 1.300000000000e+01 1.100000000000e+01), ray
+dir = (1.000000000000e+00 0.000000000000e+00
+-1.366428338000e-16)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:13.37</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>and technically its not "typing" delete but
+pressing the delete key :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:14.30</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>but its indeed curious why its linked to exit,
+ctrl-d works as well btw, but that I do find expectid
+behavior</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:14.39</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>expected*</tt></td>
+</tr>
+<tr>
+<td><tt>13:20.09</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad yiyus
+(1242712427@je.je.je)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:33.46</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>another thing I noticed that after using red
+the comb_color will have reset</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which version are you using?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.54</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://pastebin.com/3VmSQiZt">http://pastebin.com/3VmSQiZt</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:19.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cvds_: for future reference, pastebin.com not
+only sucks but is inaccessible to most in the channel some of the
+time due to network blocks -- suggest pastebin.ca or
+paste.debian.org or just about any other ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:19.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, I'll verify, but I'm pretty sure that
+red bug was fixed in 7.20</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:23.26</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: okies, will divert to the debian one
+for further posts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:23.51</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>first component is nearing the done stage...
+took a long time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:26.13</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>well the first version... no doubt that after
+printing I will be making adjustments</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:41.35</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c9">cusses Windows and Tcl/Tk
+both</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.11</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>just when I thought I finally had this licked,
+I can't get wish going on Win32 with 8.6</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cvds_: would love to see pics of your work
+(before and after printing)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:10.57</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: Maybe I can post some renders on
+flickr later today</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:12.28</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>last couple of primitives to add</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.08</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://flic.kr/s/aHsjwoVYoK">http://flic.kr/s/aHsjwoVYoK</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.48</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c9">growses... what's the poing
+of a HAVE_ZLIB flag if you're going to guarantee you always have
+zlib...</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:17.38</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:57.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cvds_: that's pretty awesome!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:57.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you're going to have that geometry
+printed?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:57.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>either way, pretty cool .. nice level of
+detail</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:57.59</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what is it? :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:58.02</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: yes, but have to build the printer
+first :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:58.31</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>its a finger switch with 5 directions, N E S W
+and down</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.36</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>and I would not be amazed that I need to
+adjust some of it to make it printer compitable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.46</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>comaptible*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:02.02</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>hmm here is to hoping I can fit the 2 missing
+optocoupler space</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:02.03</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>s</tt></td>
+</tr>
+<tr>
+<td><tt>17:15.13</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad velociostrich
+(~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:59.12</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>and thanks for the compliment</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:01.50</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>hmm a raytrace from a sliced version takes way
+longer</tt></td>
+</tr>
+<tr>
+<td><tt>18:23.47</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad velociostrich
+(~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.04</tt></td>
+<td><span class="c6"><tt>cvds_</tt></span></td>
+<td width="100%"><tt>brlcad: more renders: <a href=
+"http://flic.kr/s/aHsjwoVYoK">http://flic.kr/s/aHsjwoVYoK</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:11.25</tt></td>
+<td><span class="c7"><tt>CIA-48</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03abhi2011 * r47270
+10/brlcad/trunk/src/libged/simulate/ (7 files): Separated the list
+of manifolds generated by bullet and that generated by rt, as they
+are required at different times during the simulation
+iterations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:24.51</tt></td>
+<td><span class="c7"><tt>CIA-48</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03abhi2011 * r47271
+10/brlcad/trunk/src/libged/simulate/ (simrt.c simulate.h):
+Corrected some errors in setting up the linked list</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:56.25</tt></td>
+<td><span class="c7"><tt>CIA-48</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03abhi2011 * r47272
+10/brlcad/trunk/src/libged/simulate/ (simcollisionalgo.cpp
+simrt.c): Corrected some code for generating the normals and depth
+values correctly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:27.01</tt></td>
+<td><span class="c7"><tt>CIA-48</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03abhi2011 * r47273
+10/brlcad/trunk/src/libged/simulate/simcollisionalgo.cpp: The
+manifold points were not getting inserted correctly, fixed it to
+some extent, still cant keep objects steady on top of each other,
+hunting for what I am missing out</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:55.05</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cvds_: the -k option to rt is helpful when
+you're doing sliced views</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:55.24</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>(think it's -k - the cutting plane)</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

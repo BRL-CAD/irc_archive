@@ -1,147 +1,787 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20130326</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20130326</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c9 {color: #73DBDB}
+ span.c8 {color: #D16ED1}
+ span.c7 {color: #6D6DCF}
+ span.c6 {color: #000099}
+ span.c5 {color: #6AC96A}
+ span.c4 {color: #009900}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #C3C366}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20130326</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:13.10</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54861 brlcad/trunk/src/mged/mged.c: remove the debug printing to the non-portable /tmp/stdout file, makes several bogus assumptions. also be sure to remove our bu_log hook that redirects output to the GUI when we're closing the application. there may be other calls to bu_log() that will crash after Tcl is shut down.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.56</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54862 brlcad/trunk/src/mged/mged.h: declare gui_output</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.16</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54863 brlcad/trunk/src/mged/cmd.c: moved gui_setup to mged.h so no longer need to declare here</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.32</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54864 brlcad/trunk/src/mged/mged.c: looks like LOGFILE is no longer used, which is good because this looks like a total non-portable hack</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.04</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54865 brlcad/trunk/src/mged/mged.c: slow commit, wasn't supposed to get this yet</tt></td></tr>
-<tr><td><tt>01:17.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>01:30.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed_ (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:40.56</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54866 brlcad/trunk/src/mged/mged.c: restore stdout and stderr when we're done with the GUI by capturing them with a dup() call and then later restoring back with dup2(). this fixes a problem where an atexit() callback couldn't write out anything during shutdown (SIGPIPE) because Tcl had destroyed the channel we set up. document and descope a couple of the globals while we're at it. untested, but</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:40.59</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>this should work fine on windows as well because dup/dup2 are c89 and msdn-supported. begging for some _WIN32 cleanup consolidation (the duplication seems unnecessary).</tt></td></tr>
-<tr><td><tt>01:44.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>01:54.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.06</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>Anyone active to assist?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.44</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>I was kinda forced to move to another distro. I was using Fedora but it was far too unstable for even basic usage. I am now using centOS but the old instructions from last time are no longer applicable. I will have to build from source this time unless one of the fedora RPMs will work. Will a fedora RPM work for centOS?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.20</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>I'll re-ask tomorrow if no one is active.</tt></td></tr>
-<tr><td><tt>02:04.53</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.17</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54867 brlcad/trunk/src/libbu/heap.c: make the debug printing conditional on bu_debug being set to something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:21.42</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>mm, have to wait longer than that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:49.27</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54868 brlcad/trunk/src/liboptical/sh_light.c: not just rare but unlikely that there are thousands of light sources, so let them be allocated on the system heap. pretty big struct (295 bytes)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:04.44</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54869 brlcad/trunk/src/libbu/heap.c: support a wider range of allocation request sizes (1-1024) but keep page sizes at 1MB per size. add the ability to bomb on out-of-range requests so they can be traced.</tt></td></tr>
-<tr><td><tt>03:08.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:31.58</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54870 brlcad/trunk/include/conf/PATCH: significant third-party updates, bump patch to keep track</tt></td></tr>
-<tr><td><tt>03:35.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.17</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54871 brlcad/trunk/include/bu.h: rt_avail_cpus() was renamed to bu_avail_cpus() a long time ago, update comment along with bu_hist_range()</tt></td></tr>
-<tr><td><tt>04:44.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@95.132.33.92)</font></tt></td></tr>
-<tr><td><tt>08:02.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>08:03.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad luca79 (~luca@net-188-216-230-48.cust.dsl.vodafone.it)</font></tt></td></tr>
-<tr><td><tt>09:06.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>09:14.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad luca79 (~luca@net-188-216-230-48.cust.dsl.vodafone.it)</font></tt></td></tr>
-<tr><td><tt>09:30.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr><td><tt>09:31.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo_ (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
-<tr><td><tt>10:34.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>11:15.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>12:13.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr><td><tt>12:28.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:08.35</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 54872 brlcad/trunk/src/other/libpng.dist: Add config.h.in to png dist file.</tt></td></tr>
-<tr><td><tt>13:20.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.46</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 54873 brlcad/trunk/src/mged/mged.c: fix spelling in a comment</tt></td></tr>
-<tr><td><tt>14:07.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad luca79 (~luca@net-188-216-230-48.cust.dsl.vodafone.it)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:13.43</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 54874 brlcad/trunk/src/libged/draw.c: fix leaked path memory in ged_redraw</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:22.17</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54875 brlcad/trunk/src/util/pix-png.c: undo apparent accidental inclusion of pix-png.c in r54858. it made help options not work (and incorrectly spits an error about not outputting to a tty).</tt></td></tr>
-<tr><td><tt>14:39.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo_ (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.27</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 54876 (brlcad/trunk/src/other/step/src/clstepcore/STEPaggregate.h brlcad/trunk/src/other/step/src/fedex_plus/classes.c and 3 others): Facilitate merge work by removing the const_ typedef return types introducded in r49683. It's not clear that returned values need const qualification, or that they are assigned to lvalues that preserve that qualification, so these const_ types are presently an</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.28</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>elaborate way to accomplish nothing, and moreover have caused issues parsing some express inputs. Until someone can authoritatively determine what values should and should-not be considered read-only, we'll take a much simpler approach to suppressing misued qualifier warnings by just omitting the erroneous application of const to generated return types.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:59.10</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:r_weiss * 54877 (brlcad/trunk/src/other/tk/win/wish.exe.manifest =================================================================== and 34 others): This file is needed for windows to build.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:02.01</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 54878 brlcad/trunk/src/other/step/src/fedex_plus/classes.c: put attrFlags declarations in preprocessor conditionals to match wrapped uses; avoids unused variable warnings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.33</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54879 (brlcad/trunk/src/other/step/src/express/expparse.y brlcad/trunk/src/other/step/src/express/generated/expparse.c): looks like a stack size of 0 means grow dynamically on the heap instead of static allocation. array is going to be faster, but it's more critical to not hit a compile-time limit. by default, grow the dynamic allocation from 256 in powers of two.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:16.34</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54880 brlcad/trunk/src/other/lemon/lempar.c: set the initial dynamic allocation to 256 for better memory alignment and doubling in powers of two</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:40.59</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>Is the new server today?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:45.09</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54881 (brlcad/trunk/src/other/step/cmake/Generated_Source_Utils.cmake brlcad/trunk/src/other/step/src/express/generated/verification_info.cmake): if we only strip evil carriage returns, we can use md5sum on the file directly to verify and update them.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:45.23</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: good question -- it's supposed to be</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:45.30</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>I believe the scheduled time is 11pm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.00</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>Does that mean our running processes will be killed?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.04</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>i.e. irssi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:00.26</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, kind of hard to pull the hard drive out and put it into another machine with new hardware while keeping the processes running ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.01</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>this isn't enterprise sun solaris hardware</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.28</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54882 brlcad/trunk/src/other/step/src/express/generated/verification_info.cmake: missing a 9, typo apparently</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.17</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>so the physical harddrive moves; the data is not transfered to a new hdd.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:11.56</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.50</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>I didn't want to go through yet another drawn out filesystem migration, that was painful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:13.36</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>was that what happened last time?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:13.47</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>if they can just move the drive, everything should stay the same except for maybe a one-liner if the network interface name changes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.04</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>also, will the server ip change?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.07</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, the DIY route</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.13</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>no, it shouldn't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.45</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>last time IPs changed, major OS version changes, nothing was compatible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:15.20</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>this is close enough hardware and ``Erik has the operating system enough up-to-date that it should just boot up happy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:15.41</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>and if not, I'm still paying them to get it working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:15.51</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>so more expensive, but way faster than relying on my time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.31</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>Do they perform the network interface changes locally?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.12</tt></td><td><font color="#d16ed1"><tt>maths22</tt></font></td><td width="100%"><tt>Also, can the hardware support two hdds?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.43</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:r_weiss * 54883 brlcad/trunk/src/proc-db/molecule.c: Fix a windows build error.</tt></td></tr>
-<tr><td><tt>16:31.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:44.03</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: the hwardware can support two hds, but will only have the one (we'll have offsite backups)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:44.14</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>the network interface change is just a line in a text file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:49.41</tt></td><td><font color="#73dbdb"><tt>``Erik</tt></font></td><td width="100%"><tt>2 lines in rc.conf, iirc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.15</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 54884 brlcad/trunk/src/tclscripts/archer/ArcherCore.tcl: -----------</tt></td></tr>
-<tr><td><tt>17:55.12</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad witness (uid10044@gateway/web/irccloud.com/x-kmepvsuuoqzwxsmb)</font></tt></td></tr>
-<tr><td><tt>18:07.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.57</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>I move to another distro. I was using Fedora but it was too unstable for even basic usage. I am using centOS but the old instructions from last time I was here are no longer applicable. I will have to build from source this time unless one of the fedora RPMs will work. Will a fedora RPM work for centOS?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:08.11</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>^ I moved to another distro...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:59.20</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 54885 brlcad/trunk/src/util/pixfilter.c: touchup so that pixfilter.c resembles, as close as possible, bwfilter.c .</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.00</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>FLOSSrookie: did you try one of the rpms?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.06</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>rpm will tell you whether it works or not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.15</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>and if it doesn't, rpm can uninstall it ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.39</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>brlcad: I was concerned I might ruin the system by attempting such an install if they were not compatible.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.06</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>brlcad-7.22.0-0.x86_64 requires libstdc++.so.6(GLIBCXX_3.4.15)(64bit)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:12.06</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>brlcad-7.22.0-0.x86_64 requires libc.so.6(GLIBC_2.14)(64bit)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.07</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you have installed?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.24</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>brlcad: Help me find out.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:13.28</tt></td><td><font color="#6ac96a"><tt>FLOSSrookie</tt></font></td><td width="100%"><tt>What commands?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.13</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>oof, it's been a long time, I'd be running man rpm :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.31</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>need to search what libstdc++ you have installed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.35</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>and libc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:19.43</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's the same version, you're probably fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:20.13</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>if you hang around long enough, jordi will be able to help you too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.13</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54886 brlcad/trunk/src/libbu/heap.c: implement a per-cpu data structure so that we can support multithreaded memory requests without pooching our data and without needing to acquire a performance-killer semaphore lock. restructure the bin data into a single struct container which should give better data coherence as well (but need to verify).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.22</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: notify web interface crashy crashy if I go to More graphs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.48</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>and applying a user filter didn't seem to do anything except give me a blue button with that user's name (didn't filter)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.55</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>and the main commit listing doesn't seem to be rendering right in IE (footer is just blue, truncates)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.03</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54887 (brlcad/trunk/include/bu.h brlcad/trunk/src/libbu/CMakeLists.txt brlcad/trunk/src/libbu/parallel.c): apply skriptkid's (akshay kashyap's) gci patch (<a href="http://www.google-melange.com/gci/task/view/google/gci2012/8070202)">http://www.google-melange.com/gci/task/view/google/gci2012/8070202)</a> that implements cpu thread affinity. initial testing showed a HUGE impact on massively parallel systems with one 64-core ibm power7 system showing a benchmark performance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.05</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>improvement around 50% (VGR increase from 120k to 180k). currently only implemented for pthread systems, but should be easily extended to other platforms and gives bu_parallel() some initial infrastructure so bu_parallel threads can know their CPU id. very cool.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:24.54</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54888 brlcad/trunk/src/libbu/affinity.c: ws style comment cleanup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:27.11</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54889 (brlcad/trunk/include/bu.h brlcad/trunk/src/libbu/affinity.c): move comments from source to header, remove unhelpful file comment, include common.h before system headers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.17</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54890 (brlcad/trunk/include/bu.h brlcad/trunk/src/libbu/CMakeLists.txt and 3 others): bu_set_affinity() doesn't need to be public API if we call it on all bu_parallel() threads for the user. it becomes an implementation detail. rename to parallel_set_affinity(), update accordingly to depublish, and add to old build.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.20</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 54891 brlcad/trunk/src/libbu/parallel.c: clean up the array indexing, inconsistently unconventional</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.48</tt></td><td><font color="#6d6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>only tested that on mac, so feel free to pound it on linux or other systems</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.18</tt></td><td><font color="#73dbdb"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: more graphs issue, izzit something like: The value "1 day" is not of type LOCAL-TIME:TIMESTAMP.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.57</tt></td><td><font color="#73dbdb"><tt>``Erik</tt></font></td><td width="100%"><tt>odd that the user filter doesn't work right, mebbe something was lost int he backing store migration :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.03</tt></td><td><font color="#73dbdb"><tt>``Erik</tt></font></td><td width="100%"><tt>and who the eff uses ie? O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.31</tt></td><td><font color="#73dbdb"><tt>``Erik</tt></font></td><td width="100%"><tt>ah, heh, lame, user/file filtering was all lost during backing store migration</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.45</tt></td><td><font color="#73dbdb"><tt>``Erik</tt></font></td><td width="100%"><tt>!notify todo fix user/file filtering in project view</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.45</tt></td><td><font color="#c3c366"><tt>Notify</tt></font></td><td width="100%"><tt>OK, added to <a href="https://elfga.com/notify/todo">https://elfga.com/notify/todo</a></tt></td></tr>
-<tr><td><tt>22:26.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@92-33-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:13.10</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54861
+brlcad/trunk/src/mged/mged.c: remove the debug printing to the
+non-portable /tmp/stdout file, makes several bogus assumptions.
+also be sure to remove our bu_log hook that redirects output to the
+GUI when we're closing the application. there may be other calls to
+bu_log() that will crash after Tcl is shut down.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.56</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54862
+brlcad/trunk/src/mged/mged.h: declare gui_output</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.16</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54863
+brlcad/trunk/src/mged/cmd.c: moved gui_setup to mged.h so no longer
+need to declare here</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:21.32</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54864
+brlcad/trunk/src/mged/mged.c: looks like LOGFILE is no longer used,
+which is good because this looks like a total non-portable
+hack</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.04</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54865
+brlcad/trunk/src/mged/mged.c: slow commit, wasn't supposed to get
+this yet</tt></td>
+</tr>
+<tr>
+<td><tt>01:17.30</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:30.54</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad n_reed_
+(~molto_cre@66-118-151-70.static.sagonet.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:40.56</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54866
+brlcad/trunk/src/mged/mged.c: restore stdout and stderr when we're
+done with the GUI by capturing them with a dup() call and then
+later restoring back with dup2(). this fixes a problem where an
+atexit() callback couldn't write out anything during shutdown
+(SIGPIPE) because Tcl had destroyed the channel we set up. document
+and descope a couple of the globals while we're at it. untested,
+but</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:40.59</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>this should work fine on windows as well
+because dup/dup2 are c89 and msdn-supported. begging for some
+_WIN32 cleanup consolidation (the duplication seems
+unnecessary).</tt></td>
+</tr>
+<tr>
+<td><tt>01:44.11</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:54.48</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad FLOSSrookie
+(~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.06</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>Anyone active to assist?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.44</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>I was kinda forced to move to another distro.
+I was using Fedora but it was far too unstable for even basic
+usage. I am now using centOS but the old instructions from last
+time are no longer applicable. I will have to build from source
+this time unless one of the fedora RPMs will work. Will a fedora
+RPM work for centOS?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.20</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>I'll re-ask tomorrow if no one is
+active.</tt></td>
+</tr>
+<tr>
+<td><tt>02:04.53</tt></td>
+<td colspan="2"><tt><span class="c6">*** part/#brlcad FLOSSrookie
+(~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:17.17</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54867
+brlcad/trunk/src/libbu/heap.c: make the debug printing conditional
+on bu_debug being set to something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:21.42</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mm, have to wait longer than that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:49.27</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54868
+brlcad/trunk/src/liboptical/sh_light.c: not just rare but unlikely
+that there are thousands of light sources, so let them be allocated
+on the system heap. pretty big struct (295 bytes)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:04.44</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54869
+brlcad/trunk/src/libbu/heap.c: support a wider range of allocation
+request sizes (1-1024) but keep page sizes at 1MB per size. add the
+ability to bomb on out-of-range requests so they can be
+traced.</tt></td>
+</tr>
+<tr>
+<td><tt>03:08.09</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:31.58</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54870
+brlcad/trunk/include/conf/PATCH: significant third-party updates,
+bump patch to keep track</tt></td>
+</tr>
+<tr>
+<td><tt>03:35.44</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:55.17</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54871
+brlcad/trunk/include/bu.h: rt_avail_cpus() was renamed to
+bu_avail_cpus() a long time ago, update comment along with
+bu_hist_range()</tt></td>
+</tr>
+<tr>
+<td><tt>04:44.17</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad merzo
+(~merzo@95.132.33.92)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:02.18</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:03.55</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad luca79
+(~luca@net-188-216-230-48.cust.dsl.vodafone.it)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:06.18</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:14.17</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad luca79
+(~luca@net-188-216-230-48.cust.dsl.vodafone.it)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:30.03</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:31.55</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad merzo_
+(~merzo@user-94-45-58-138-1.skif.com.ua)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:34.46</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:15.36</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:13.42</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:28.52</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:08.35</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:starseeker * 54872
+brlcad/trunk/src/other/libpng.dist: Add config.h.in to png dist
+file.</tt></td>
+</tr>
+<tr>
+<td><tt>13:20.51</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad milamber
+(~devlin@d118-75-244-176.try.wideopenwest.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.46</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 54873
+brlcad/trunk/src/mged/mged.c: fix spelling in a comment</tt></td>
+</tr>
+<tr>
+<td><tt>14:07.04</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad luca79
+(~luca@net-188-216-230-48.cust.dsl.vodafone.it)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:13.43</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 54874
+brlcad/trunk/src/libged/draw.c: fix leaked path memory in
+ged_redraw</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:22.17</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54875
+brlcad/trunk/src/util/pix-png.c: undo apparent accidental inclusion
+of pix-png.c in r54858. it made help options not work (and
+incorrectly spits an error about not outputting to a
+tty).</tt></td>
+</tr>
+<tr>
+<td><tt>14:39.36</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad merzo_
+(~merzo@user-94-45-58-138-1.skif.com.ua)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:51.27</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 54876
+(brlcad/trunk/src/other/step/src/clstepcore/STEPaggregate.h
+brlcad/trunk/src/other/step/src/fedex_plus/classes.c and 3 others):
+Facilitate merge work by removing the const_ typedef return types
+introducded in r49683. It's not clear that returned values need
+const qualification, or that they are assigned to lvalues that
+preserve that qualification, so these const_ types are presently
+an</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:51.28</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>elaborate way to accomplish nothing, and
+moreover have caused issues parsing some express inputs. Until
+someone can authoritatively determine what values should and
+should-not be considered read-only, we'll take a much simpler
+approach to suppressing misued qualifier warnings by just omitting
+the erroneous application of const to generated return
+types.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:59.10</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:r_weiss * 54877
+(brlcad/trunk/src/other/tk/win/wish.exe.manifest
+===================================================================
+and 34 others): This file is needed for windows to build.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:02.01</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:n_reed * 54878
+brlcad/trunk/src/other/step/src/fedex_plus/classes.c: put attrFlags
+declarations in preprocessor conditionals to match wrapped uses;
+avoids unused variable warnings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:15.33</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54879
+(brlcad/trunk/src/other/step/src/express/expparse.y
+brlcad/trunk/src/other/step/src/express/generated/expparse.c):
+looks like a stack size of 0 means grow dynamically on the heap
+instead of static allocation. array is going to be faster, but it's
+more critical to not hit a compile-time limit. by default, grow the
+dynamic allocation from 256 in powers of two.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:16.34</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54880
+brlcad/trunk/src/other/lemon/lempar.c: set the initial dynamic
+allocation to 256 for better memory alignment and doubling in
+powers of two</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:40.59</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>Is the new server today?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:45.09</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54881
+(brlcad/trunk/src/other/step/cmake/Generated_Source_Utils.cmake
+brlcad/trunk/src/other/step/src/express/generated/verification_info.cmake):
+if we only strip evil carriage returns, we can use md5sum on the
+file directly to verify and update them.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:45.23</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>maths22: good question -- it's supposed to
+be</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:45.30</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I believe the scheduled time is 11pm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.00</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>Does that mean our running processes will be
+killed?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.04</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>i.e. irssi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:00.26</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, kind of hard to pull the hard drive out
+and put it into another machine with new hardware while keeping the
+processes running ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.01</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this isn't enterprise sun solaris
+hardware</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:04.28</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54882
+brlcad/trunk/src/other/step/src/express/generated/verification_info.cmake:
+missing a 9, typo apparently</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.17</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>so the physical harddrive moves; the data is
+not transfered to a new hdd.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:11.56</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.50</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I didn't want to go through yet another drawn
+out filesystem migration, that was painful</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:13.36</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>was that what happened last time?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:13.47</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if they can just move the drive, everything
+should stay the same except for maybe a one-liner if the network
+interface name changes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.04</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>also, will the server ip change?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.07</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, the DIY route</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.13</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no, it shouldn't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.45</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>last time IPs changed, major OS version
+changes, nothing was compatible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:15.20</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>this is close enough hardware and ``Erik has
+the operating system enough up-to-date that it should just boot up
+happy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:15.41</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and if not, I'm still paying them to get it
+working</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:15.51</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so more expensive, but way faster than relying
+on my time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.31</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>Do they perform the network interface changes
+locally?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.12</tt></td>
+<td><span class="c8"><tt>maths22</tt></span></td>
+<td width="100%"><tt>Also, can the hardware support two
+hdds?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.43</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:r_weiss * 54883
+brlcad/trunk/src/proc-db/molecule.c: Fix a windows build
+error.</tt></td>
+</tr>
+<tr>
+<td><tt>16:31.33</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad hsrai
+(~hsrai@202.164.53.116)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:44.03</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>maths22: the hwardware can support two hds,
+but will only have the one (we'll have offsite backups)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:44.14</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the network interface change is just a line in
+a text file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:49.41</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>2 lines in rc.conf, iirc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.15</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:bob1961 * 54884
+brlcad/trunk/src/tclscripts/archer/ArcherCore.tcl:
+-----------</tt></td>
+</tr>
+<tr>
+<td><tt>17:55.12</tt></td>
+<td colspan="2"><tt><span class="c6">*** part/#brlcad witness
+(uid10044@gateway/web/irccloud.com/x-kmepvsuuoqzwxsmb)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:07.14</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad FLOSSrookie
+(~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:07.57</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>I move to another distro. I was using Fedora
+but it was too unstable for even basic usage. I am using centOS but
+the old instructions from last time I was here are no longer
+applicable. I will have to build from source this time unless one
+of the fedora RPMs will work. Will a fedora RPM work for
+centOS?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:08.11</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>^ I moved to another distro...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:59.20</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:carlmoore * 54885
+brlcad/trunk/src/util/pixfilter.c: touchup so that pixfilter.c
+resembles, as close as possible, bwfilter.c .</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.00</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>FLOSSrookie: did you try one of the
+rpms?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.06</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rpm will tell you whether it works or
+not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.15</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and if it doesn't, rpm can uninstall it
+;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:05.39</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>brlcad: I was concerned I might ruin the
+system by attempting such an install if they were not
+compatible.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:12.06</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>brlcad-7.22.0-0.x86_64 requires
+libstdc++.so.6(GLIBCXX_3.4.15)(64bit)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:12.06</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>brlcad-7.22.0-0.x86_64 requires
+libc.so.6(GLIBC_2.14)(64bit)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.07</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what do you have installed?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.24</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>brlcad: Help me find out.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:13.28</tt></td>
+<td><span class="c5"><tt>FLOSSrookie</tt></span></td>
+<td width="100%"><tt>What commands?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.13</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oof, it's been a long time, I'd be running man
+rpm :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.31</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>need to search what libstdc++ you have
+installed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.35</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and libc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:19.43</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's the same version, you're probably
+fine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:20.13</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you hang around long enough, jordi will be
+able to help you too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.13</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54886
+brlcad/trunk/src/libbu/heap.c: implement a per-cpu data structure
+so that we can support multithreaded memory requests without
+pooching our data and without needing to acquire a
+performance-killer semaphore lock. restructure the bin data into a
+single struct container which should give better data coherence as
+well (but need to verify).</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.22</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: notify web interface crashy crashy if
+I go to More graphs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.48</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and applying a user filter didn't seem to do
+anything except give me a blue button with that user's name (didn't
+filter)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.55</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and the main commit listing doesn't seem to be
+rendering right in IE (footer is just blue, truncates)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.03</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54887
+(brlcad/trunk/include/bu.h brlcad/trunk/src/libbu/CMakeLists.txt
+brlcad/trunk/src/libbu/parallel.c): apply skriptkid's (akshay
+kashyap's) gci patch (<a href=
+"http://www.google-melange.com/gci/task/view/google/gci2012/8070202)">http://www.google-melange.com/gci/task/view/google/gci2012/8070202)</a>
+that implements cpu thread affinity. initial testing showed a HUGE
+impact on massively parallel systems with one 64-core ibm power7
+system showing a benchmark performance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.05</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>improvement around 50% (VGR increase from 120k
+to 180k). currently only implemented for pthread systems, but
+should be easily extended to other platforms and gives
+bu_parallel() some initial infrastructure so bu_parallel threads
+can know their CPU id. very cool.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:24.54</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54888
+brlcad/trunk/src/libbu/affinity.c: ws style comment
+cleanup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:27.11</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54889
+(brlcad/trunk/include/bu.h brlcad/trunk/src/libbu/affinity.c): move
+comments from source to header, remove unhelpful file comment,
+include common.h before system headers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.17</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54890
+(brlcad/trunk/include/bu.h brlcad/trunk/src/libbu/CMakeLists.txt
+and 3 others): bu_set_affinity() doesn't need to be public API if
+we call it on all bu_parallel() threads for the user. it becomes an
+implementation detail. rename to parallel_set_affinity(), update
+accordingly to depublish, and add to old build.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.20</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>03BRL-CAD:brlcad * 54891
+brlcad/trunk/src/libbu/parallel.c: clean up the array indexing,
+inconsistently unconventional</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.48</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>only tested that on mac, so feel free to pound
+it on linux or other systems</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:01.18</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>brlcad: more graphs issue, izzit something
+like: The value "1 day" is not of type
+LOCAL-TIME:TIMESTAMP.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:01.57</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>odd that the user filter doesn't work right,
+mebbe something was lost int he backing store migration
+:/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.03</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and who the eff uses ie? O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.31</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ah, heh, lame, user/file filtering was all
+lost during backing store migration</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.45</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>!notify todo fix user/file filtering in
+project view</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.45</tt></td>
+<td><span class="c2"><tt>Notify</tt></span></td>
+<td width="100%"><tt>OK, added to <a href=
+"https://elfga.com/notify/todo">https://elfga.com/notify/todo</a></tt></td>
+</tr>
+<tr>
+<td><tt>22:26.22</tt></td>
+<td colspan="2"><tt><span class="c4">*** join/#brlcad merzo
+(~merzo@92-33-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

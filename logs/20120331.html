@@ -1,294 +1,1637 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20120331</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20120331</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c16 {color: #5F5FB5}
+ span.c15 {color: #5E5EB3}
+ span.c14 {color: #73DBDB}
+ span.c13 {color: #6A6ACA}
+ span.c12 {color: #C86969}
+ span.c11 {color: #6969C7}
+ span.c10 {color: #000099}
+ span.c9 {color: #D7D771}
+ span.c8 {color: #009900}
+ span.c7 {color: #6ED2D2}
+ span.c6 {color: #CC00CC}
+ span.c5 {color: #6ED16E}
+ span.c4 {color: #C3C366}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #62BB62}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20120331</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:05.32</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>crdueck: sph would be perfectly suitable (doesn't get any simpler)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.09</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49848 10/brlcad/trunk/src/vdeck/ (cgarbs.c match.c parsarg.c): ws, style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.20</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>brlcad: yes exactly, i'm just confused as to how primitive "objects" are passed to functions. also, is it appropriate to be asking these types of questions or should i be answering these myself? I have been reading lots of source and trying to figure it out for myself before asking here but i'm still confused.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.57</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>crdueck: all primitives define a set of callbacks (see src/librt/primitives/table.c) -- you're basically stubbing in a new function for use in a future callback</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.23</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it's perfectly appropriate to ask these types of questions, you're not expected to just figure stuff out on your own</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.07</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it's hard enough to write the code, this isn't academic -- we want you to learn the code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.32</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>questions are just fine, the more specific you can make them the better</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.09</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, you'd be adding a function that takes an rt_db_internal, and you go from there to figure out the area</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe something with a signature like: int rt_ell_volume(fastf_t *volume, const struct rt_db_internal *ip);</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.07</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>for volume, none are defined yet so you'd be stubbing in the first one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.45</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>okay, so i see that rt_db_internal has fields idb_{major,minor}_type, what do these represent? the type of primitive?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.12</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>that's an unwrapped database object</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.58</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if you look at rt_sph_prep() you'll see how to crack out the actual rt_ell_internal from it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.54</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>by casting the rt_db_internal as a rt_ell_internal and accessing the idb_ptr field</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.04</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>and that contains the relevent vectors a,b,c to define the ell</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.09</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>relevant*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.05</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, include/rtgeom.h has the definition</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.04</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if you really want to get fancy, you could create a test harness that proves the implementation is correct with a few specific test cases (similar to src/libbu/test_*.c)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.25</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>examples creating objects programmatically in src/proc-db (e.g. src/proc-db/csgbrep.cpp)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:21.48</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>i'm still having trouble compiling the svn version unfortunately. i'm going to sort that out but i wanted to get my hands dirty with a patch first. like you said, there's time to get everything in working order after the application deadline</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:27.05</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49849 10/brlcad/trunk/src/conv/comgeom/comgeom-g.1: correct typo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:28.45</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49850 10/brlcad/trunk/src/conv/comgeom/comgeom-g.1: correct example for current usage</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:38.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:45.23</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>for those looking for a good patch topic - the function rt_bot_bbox does not currently create a correct bounding box </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:51.12</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>the function rt_bot_prep_pieces_ in src/librt/primitives/bot/g_bot_include.c does produce a good bounding box, so something about that logic is not captured correctly by rt_bot_bbox</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.12</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I was just looking at that, but a quick check of the function looks like it just iterates over vertices, no?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:53.53</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>that was the idea, but there's some quirk I didn't track down successfully</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:54.12</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>I think you were the one who noticed it wasn't working originally...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:54.29</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I did, but then I don't remember the problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:54.44</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>bbox was too big</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.11</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I remember the brep bbox being too big because of the way it was aligning</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.45</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>but for bot, I just remember it being "different" and giving rt changes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:55.49</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>brep has other issues, IIRC - I think the bbox is calculated without factoring in the trims</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:56.52</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>well, either way that'd be a good one to suggest to the list, maybe with a hint on how to test it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.23</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>svn diff -r46385:46386 shows it was turned off, so reversing that will turn it back on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:58.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I didn't suggest it to the nurbs guy just because I thought it'd be better to see nurbs code from him, but bot bbox was the first thing that came to mind actually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.58</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49851 10/brlcad/trunk/src/conv/comgeom/ (cvt.c f2a.c mat.c read.c region.c solid.c): ws, style</tt></td></tr>
-<tr><td><tt>03:03.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/fellow/louipc)</font></tt></td></tr>
-<tr><td><tt>03:39.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@24-176-220-90.static.lnbh.ca.charter.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.11</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Crdueck 07<a href="http://brlcad.org">http://brlcad.org</a> * r3405 10/wiki/User:Crdueck: GSoC 2012 - crdueck ~WIP~</tt></td></tr>
-<tr><td><tt>04:17.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>04:54.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>05:31.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil__ (~chatzilla@117.229.20.128)</font></tt></td></tr>
-<tr><td><tt>05:39.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
-<tr><td><tt>06:41.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr><td><tt>07:05.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.175.75)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:05.36</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
-<tr><td><tt>07:17.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
-<tr><td><tt>07:20.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>07:24.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>07:24.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:29.15</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I m running the script from <a href="http://brlcad.org/wiki/Code_Cleanup">http://brlcad.org/wiki/Code_Cleanup</a>&nbsp;&nbsp;on the brlcad svn-source.&nbsp;&nbsp;This is the output I recieve. In my opinion the 20k duplicated lines doesn't sound as much. Can someone please check the output I posted is correct ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:30.02</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I m executing <a href="http://pastebin.ca/2134240">http://pastebin.ca/2134240</a> while having both&nbsp;&nbsp;brlcad source , simian and the script in the same directory. This is the output I recieve : <a href="http://pastebin.ca/2134240">http://pastebin.ca/2134240</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:42.05</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr><td><tt>08:27.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>08:34.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
-<tr><td><tt>08:39.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.36.145)</font></tt></td></tr>
-<tr><td><tt>08:46.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>08:51.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness_ (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>09:17.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (~Al_Da_Bes@027e71f6.bb.sky.com)</font></tt></td></tr>
-<tr><td><tt>09:20.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.36.145)</font></tt></td></tr>
-<tr><td><tt>09:36.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.175.75)</font></tt></td></tr>
-<tr><td><tt>09:37.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.175.75)</font></tt></td></tr>
-<tr><td><tt>10:33.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad atneik (~atneik@59.178.154.162)</font></tt></td></tr>
-<tr><td><tt>10:46.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
-<tr><td><tt>11:02.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>11:21.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>12:08.40</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad atneik (~atneik@59.178.154.162)</font></tt></td></tr>
-<tr><td><tt>12:35.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~cristina@188.24.64.167)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.31</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:52.37</tt></td><td><font color="#c86969"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.44</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>hey ( just had to be a different greeting way)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.55</tt></td><td><font color="#6a6aca"><tt>``Erik</tt></font></td><td width="100%"><tt>yargh, mateys, shiver me timbers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.20</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>cristina: howdy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.49</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>cristina: just curious, were you still interested in the CSG visualization project?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.51</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>If so, you might be interested in this CMake-based Goblin source tarball, which has the part of Goblin we can use:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/goblin-2.8b30-cmake.tar.gz">http://bzflag.bz/~starseeker/goblin-2.8b30-cmake.tar.gz</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:20.38</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: a coverity scan account could certainly be provided, but there's only a couple dozen issues remaining (maybe a week's worth of work)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:21.57</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: as for the quantity of duplication, that's not entirely relevant because you probably won't get through more than a few thousand lines in one summer regardless of there being 100k or 20k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:22.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>that said I think your simian settings could probably be relaxed a little / changed to detect more patterns of duplication</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:22.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if you read the simian manpage, you might find some more duplication</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:23.05</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>cristina: how's the proposal coming along?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:24.13</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>brlcad, my proposal is not ready yet</tt></td></tr>
-<tr><td><tt>14:24.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad atneik_ (~atneik@59.178.154.162)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:24.35</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>I'm behind the schedule</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:24.45</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: oh, also if you want to schedule time in your proposal to work on coverity issues, that's fine but it probably shouldn't account for more than a couple weeks of work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:24.55</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>cristina: ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:25.13</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>do you know if you might have a rough draft sometime early this week?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:25.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it'd be nice to see at least a rough draft three or four days before the submission deadline so we have to provide feedback and you have time to respond to that feedback</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:26.38</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad :&nbsp;&nbsp;I don't know if you noted , I submitted&nbsp;&nbsp;the latest version of my proposal draft here : <a href="https://docs.google.com/file/d/0BzrcTnxrBIMvdlFuMTFNWkFRX3FEMU9qbU1JUW9Hdw/edit">https://docs.google.com/file/d/0BzrcTnxrBIMvdlFuMTFNWkFRX3FEMU9qbU1JUW9Hdw/edit</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:27.05</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I did not, can't keep track of everyone :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:27.23</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>brlcad I know that it's useful to get feedback and I'll try to make it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:27.58</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>cristina: that would be fantastic, especially given how interesting and useful that project is, hopefully something you're excited to work on :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:28.14</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>sorry, I didn't want to make it sound like a reproach</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:29.47</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:30.29</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad : anyhow , I have two main issues&nbsp;&nbsp;with my proposal. Focusing on a very specific part of code ( I wil follow your advice regarding simian) and the deliverable section I don t know how to fit it to be neither unrealistic nor insufficient</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:31.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: so especially for a code refactoring project, it's great to scope out some goals and be realistic, but that is also the easiest type of project to rescope and change direction on once you've started</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:32.44</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>so I should have a strict plan and follow it closesly</tt></td></tr>
-<tr><td><tt>14:32.47</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:32.48</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so you could work on the largest line counts first, just working down the list; or you could hit up all the issues in a given directory; etc .. but the approach doesn't matter as much as having some initial plan to begin with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:33.46</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>we just need something measureable so that we can determine whether you're making progress or whether we need to adjust your goals</tt></td></tr>
-<tr><td><tt>14:34.36</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad atneik_ (~atneik@59.178.154.162)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:34.42</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so you can just pick a plan that is appealing to you, is conservatively reasonable based on your skills, and then just go to town with patches until you get commit access</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.02</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I think you already did a patch, yes?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.06</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.17</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so that's great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.25</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>you mentioned the "patch" to remove a global var</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.34</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>right, that's an easy starting point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>another might be to actually fix just one of the simian duplications</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:36.23</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>so it's an actual acceptable approach to follow the simian output</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:36.30</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:36.53</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I m not sure how I should change the script provided&nbsp;&nbsp;, in order to be more relevant for my cause</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:37.32</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it doesn't even matter whether you start from the top to bottom, bottom to top, or even out of order as long as there's a method to the madness ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:37.54</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: do you understand what the script is doing?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:38.20</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:38.30</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>it&nbsp;&nbsp;goes through every file in the specified path</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:38.39</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>excluding the&nbsp;&nbsp;stated paths</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:39.38</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>basically it uses simian for every file in&nbsp;&nbsp;source&nbsp;&nbsp;with the selected extension except for those with -not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:39.46</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>cristina: if you're having trouble scoping the project or working out design ideas, please feel free to discuss them in channel</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:39.59</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>that's why we're here :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:40.11</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: that's basically correct</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:40.35</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it runs the 'find' command to get a list of some files (man find) and then it runs the simian command on that list of files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:40.52</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>it something like ./find | grep " what interests me "</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.11</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>cristina: we aren't expecting you to have a fully mature, polished solution written up in the first draft</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.27</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>refinement is a normal part of the process</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.29</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: yeah, sorta</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.45</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: so assuming you're in the right directory, the list of files is what it is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.58</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>you can then just focus on the simian command</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.29</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if you read the simian manual page and look at the line in the script, you'll see that right now the wiki page example just passes the -threshold=25 option</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.39</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>there are LOTS of other options iirc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.59</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>plus you could get rid of that threshold option and you'll see a lot more</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:43.31</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>you have a point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:43.52</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I need a better understanding of Simian to have a good starting point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:44.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>again, that aspect doesn't really matter so much right now either other than you should at least read the simian manual page and be basically familiar with what it's capable of if you're going to propose using it all summer ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:44.28</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>the 20k you have is certainly plenty and more than you could work on all summer anyways</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:45.00</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>after this discussion&nbsp;&nbsp;I believe that aswell...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:46.19</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>even if you're some amazing hot-shot and you got through all 20k in the first month and you actually didn't introduce bad API or bugs, it's VERY easy to find more work for you -- no worries there whatsoever. ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:46.38</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>haha</tt></td></tr>
-<tr><td><tt>14:46.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:47.26</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I wouldn't expect more than 5% reduction when you add in time for discussion and refactoring that goes along with reducing code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:48.19</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>because usually the best way to eliminate duplication isn't to just make a new function -- it's to utilize an existing function and completely rewriting the place where there was duplication</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:48.19</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>my issue right now is simian and the fact that I have never used it before</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:48.37</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so that is your priority</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:48.40</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>read the simian docs </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.03</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't take more than an hour even if you're slow and fall asleep :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.13</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>more likely, 10 minutes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.22</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.30</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>if you mean the overview they have on their site</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.39</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I have read it when I downloaded simian</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.39</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>wherever they have their docs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.11</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I mean, can you tell me without looking what that -threshold=25 does?&nbsp;&nbsp;hopefully you can if you're using it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if not, worth re-reading</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.48</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:50.51</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>how "deep" to go?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>nope :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:51.59</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so, all that means is it's worth re-reading the docs again, now especially that you're run the tool and are a little familiar with the output</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:52.17</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:52.18</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it might make more sense and "stick" better</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:52.30</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I found exactly what I was looking for, I found a page that explain each parameter and what it does</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:53.03</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>as I didn't manage to find any manual in simian before. I do need to have a better look</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:56.34</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>so threshold tells simian to ignore files with less than 25 duplicated lines</tt></td></tr>
-<tr><td><tt>14:59.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.36.145)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:03.45</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>this is how I currently run the script . I consider this a bit better for what I need</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:03.52</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>java -Xms200m -Xmx2000m -jar simian-2.3.33.jar -threshold=10 -reportDuplicateText $files </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:06.58</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>in any case, thanks a lot&nbsp;&nbsp;for the help:) will get back to work.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.50</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>starseeker, I looked through the functionalities of the Goblin library and I got the idea that their C++ methods could be used to implement the back end graph structures</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.40</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: no problem, good discussion</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:55.12</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>I'm not familiar with tcl/tk so I'm having some trouble understanding how to use these structures in order to construct the graphical widgets</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:18.47</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>cristina: so you have two choices with respect to the gui -- you can aim on implementing something near-term or long-term</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>near-term being some time less than 3 years and long-term probably greater</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.57</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>the difference being the near-term is learning the tcl/tk capabilities of archer, learning how to use their widgets and running with that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.28</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>long-term would be to use Qt or some drawing layer that works with Qt canvases or OGRE opengl contexts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>the latter is arguably easier if you don't know Tcl/Tk but wouldn't be a capability put into use for quite some time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.22</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, more flexibility in the long-term but more rapid development and widespread use with a near-term approach</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.33</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>(tcl/tk is really pretty easy to learn)</tt></td></tr>
-<tr><td><tt>16:23.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad matovitch (5c672642@gateway/web/freenode/ip.92.103.38.66)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.53</tt></td><td><font color="#73dbdb"><tt>matovitch</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.56</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so something to keep in mind</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.58</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>hello matovitch </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.03</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>brlcad, I assume it's better if the result of this project would be put in use sooner</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.14</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>I see that there's still a migration to archer phase. Is this why you mentioned the 3 year period?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.17</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>both are valuable, it's what is more interesting to you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.38</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, migration TO archer is still under way and will take at *least* 2-3 years</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.08</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>archer will stay in use then for 2-5 years afterwards probably while a new interface is built up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.29</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>aha, so I would have to make use of the capabilities of mged and later, after they are entirely migrated, use the ones of archer?</tt></td></tr>
-<tr><td><tt>17:01.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.36.145)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:02.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>cristina: no entiendo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:03.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if you use tcl/tk, you do have access to all of the current capabilities of mged/archer now (which is a lot)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:03.41</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>whereas with Qt, you'd have to implement a lot more low-level access to walk the hierarchy&nbsp;&nbsp;(not hard, but it'd be another week or two of work)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:06.43</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>brlcad: ok. yo entiendo ahora</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:08.41</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>I misunderstood something. I thought archer is going to replace mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:09.43</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:10.40</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>for all intensive purposes, they are one in the same .. archer is about to go into alpha status and will "merge" with mged within the next two years</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.11</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it all depends on the length of the alpha and beta timeframes, but it's estimated to be around 2-3 years</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:12.08</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>the underpinnings to archer are nearly identical to mged, though, so the real difference would be with a qt-interface</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:15.09</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>this is what I wanted to know. If there are any differences between mged and archer on the tcl/tk capabilities that I'm going to learn</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:28.30</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>there are some differences, but they're pretty minor -- archer and mged share most of the same underlying commands that you'd use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.28</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>cristina: for a CSG viewing widget, you would actually be creating (initially) a stand-alone Tcl/Tk widget with an API, and then hooking that into mged/archer as a second step (as I understand it)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:07.40</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>assuming you go the Tcl/Tk route, of course</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:11.10</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>when it comes to the "get geometry information" aspects, there are several possibilities - you can either use commands at the Tcl/Tk level, or use BRL-CAD's C library API's "behind the scenes" - you'll probably be doing a bit of both, at different levels </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:14.40</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>To create the widget, the pieces needed are a) ability to extract BRL-CAD's geometry hierarchy and format it in such a way that it can be fed to a graph layout API (Goblin or some other choice) b) take the output from the graph generator and use that to create a visual layout (in Tcl/Tk or some other toolkit) and c) make the visual layout interactive</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:17.24</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>That gives you some milestones to focus on, since each stage builds on the previous stages and the individual stages can each be tested</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.31</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>Goblin has an application in it called goblet that does some visual graph layouts, so that's a starting point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:20.05</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>or at least, something to study to see how c++ data -&gt; tcl/tk graphics can be accomplished</tt></td></tr>
-<tr><td><tt>18:21.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (~Al_Da_Bes@027e71f6.bb.sky.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:22.19</tt></td><td><font color="#6ed2d2"><tt>starseeker</tt></font></td><td width="100%"><tt>cristina: if you don't have time to work out all the details of how you would generate the visual widgets, then that's something to schedule in your timeline for your application</tt></td></tr>
-<tr><td><tt>18:29.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:41.26</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Matovitch 07<a href="http://brlcad.org">http://brlcad.org</a> * r3406 10/wiki/User:Matovitch: First edit :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:43.54</tt></td><td><font color="#6969c7"><tt>cristina</tt></font></td><td width="100%"><tt>starseeker: I am going to include a "research" period in which I can decide this</tt></td></tr>
-<tr><td><tt>18:50.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad matovitch (5c672642@gateway/web/freenode/ip.92.103.38.66)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:50.09</tt></td><td><font color="#73dbdb"><tt>matovitch</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:58.31</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49852 10/brlcad/trunk/src/other/CMakeLists.txt: Mark the SCL variables as advanced</tt></td></tr>
-<tr><td><tt>18:59.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@210.56.122.39)</font></tt></td></tr>
-<tr><td><tt>19:00.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@79-79-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:01.45</tt></td><td><font color="#5e5eb3"><tt>harmanpreet</tt></font></td><td width="100%"><tt>hi..!! may I know how can I made page on wiki of brlcad? I created my account, but couldn't find any way to create page there.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.15</tt></td><td><font color="#73dbdb"><tt>matovitch</tt></font></td><td width="100%"><tt>I had the same problem. ^^</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:02.38</tt></td><td><font color="#73dbdb"><tt>matovitch</tt></font></td><td width="100%"><tt>Your page is already create.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:03.09</tt></td><td><font color="#73dbdb"><tt>matovitch</tt></font></td><td width="100%"><tt>Go to the /User:your_name and edit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.31</tt></td><td><font color="#c86969"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Welcome to Wiki's :P Yeah, every page exists as soon as it gets edited</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.44</tt></td><td><font color="#5e5eb3"><tt>harmanpreet</tt></font></td><td width="100%"><tt>thanks matovitch..!!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.56</tt></td><td><font color="#73dbdb"><tt>matovitch</tt></font></td><td width="100%"><tt>you're welcome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.49</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad : I have just finishing removing a global variable , but it does fit the word "minimal" a bit too good.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.51</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>there is a counter in /libbu/ globals.c called bu_n_realloc which is incremented by a function in malloc.c but is never used aside of that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.56</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I have simply commented it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:42.54</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>and the same with bu_n_malloc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:43.29</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>are they still needed in case of debugs, or is this a acceptable fix?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:18.41</tt></td><td><font color="#5f5fb5"><tt>bhinesley</tt></font></td><td width="100%"><tt>brlcad: I'm working on a proposal for adding -exec to the search command. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.02</tt></td><td><font color="#5f5fb5"><tt>bhinesley</tt></font></td><td width="100%"><tt>we've talked before about registering libged commands, so that a list of them can be obtained</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.17</tt></td><td><font color="#5f5fb5"><tt>bhinesley</tt></font></td><td width="100%"><tt>can't seem to find the relevant log entries...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.47</tt></td><td><font color="#5f5fb5"><tt>bhinesley</tt></font></td><td width="100%"><tt>but it seems this will be necessary for the project</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:20.41</tt></td><td><font color="#5f5fb5"><tt>bhinesley</tt></font></td><td width="100%"><tt>I'm assuming there is a particular way you'd like this implemented..?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:22.51</tt></td><td><font color="#5f5fb5"><tt>bhinesley</tt></font></td><td width="100%"><tt>I'll give you a chance to respond before I ask you anything specific :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:26.48</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49853 10/brlcad/trunk/src/vdeck/ (cgarbs.c std.h): ws, align code chunks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.43</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>if those above-stated are acceptable global removals , on what should I move on? Moving to Simian output?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.24</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Matovitch 07<a href="http://brlcad.org">http://brlcad.org</a> * r3407 10/wiki/User:Matovitch:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:38.32</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49854 10/brlcad/trunk/src/vdeck/cgarbs.c: update K&amp;R to ANSII C function arg style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:39.34</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49855 10/brlcad/trunk/src/vdeck/vdeck.c: ws, style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.00</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Matovitch 07<a href="http://brlcad.org">http://brlcad.org</a> * r3408 10/wiki/User:Matovitch:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.34</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: I'm thinking you didn't attempt a recompile</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>try this: grep bu_n_malloc src/*/*.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.10</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I did</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.24</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>and I used eclipse to check the dependencies upon /libbu/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.38</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>ooooh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.47</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>a second</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.00</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>I think I ignored the upper dependencies. Right.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.52</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>src/libbu/globals.c:long bu_n_malloc = 0;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.54</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>src/libbu/malloc.c:&nbsp;&nbsp;&nbsp;&nbsp;bu_n_malloc++;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.55</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>src/rt/main.c:longmdelta = bu_n_malloc - n_malloc;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.57</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>src/rt/main.c:&nbsp;&nbsp;&nbsp;&nbsp;n_malloc = bu_n_malloc;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.00</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>this is what I got.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.07</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I know the result, no need to paste it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.58</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>it could be added as a parameter to the hidden function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.43</tt></td><td><font color="#d7d771"><tt>andrei_</tt></font></td><td width="100%"><tt>anyhow, so much for the quick joy. Thanks for help and getting back to&nbsp;&nbsp;fixing this properly.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.42</tt></td><td><font color="#6ed16e"><tt>crdueck</tt></font></td><td width="100%"><tt>i've posted a first draft of my application to the wiki, it's still very rough and i'd very much appreciate any feedback. you can find it here: <a href="http://brlcad.org/wiki/User:Crdueck">http://brlcad.org/wiki/User:Crdueck</a> thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.58</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49856 10/brlcad/trunk/src/vdeck/vdeck.c: ws</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.01</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Bhinesley 07<a href="http://brlcad.org">http://brlcad.org</a> * r3409 10/wiki/User:Bhinesley/gsoc2012/search_proposal: /* Prior commitments */</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.26</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49857 10/brlcad/trunk/src/conv/comgeom/ (3d.h solid.c tools.c): ws</tt></td></tr>
-<tr><td><tt>21:29.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr><td><tt>21:58.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.211)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:20.25</tt></td><td><font color="#c3c366"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Bhinesley 07<a href="http://brlcad.org">http://brlcad.org</a> * r3410 10/wiki/User:Bhinesley/gsoc2012/search_proposal: /* Summary */ aka outline (for the more in depth "description" section)</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:05.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>crdueck: sph would be perfectly suitable
+(doesn't get any simpler)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.09</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49848
+10/brlcad/trunk/src/vdeck/ (cgarbs.c match.c parsarg.c): ws,
+style</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.20</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>brlcad: yes exactly, i'm just confused as to
+how primitive "objects" are passed to functions. also, is it
+appropriate to be asking these types of questions or should i be
+answering these myself? I have been reading lots of source and
+trying to figure it out for myself before asking here but i'm still
+confused.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>crdueck: all primitives define a set of
+callbacks (see src/librt/primitives/table.c) -- you're basically
+stubbing in a new function for use in a future callback</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's perfectly appropriate to ask these types
+of questions, you're not expected to just figure stuff out on your
+own</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's hard enough to write the code, this isn't
+academic -- we want you to learn the code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>questions are just fine, the more specific you
+can make them the better</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>basically, you'd be adding a function that
+takes an rt_db_internal, and you go from there to figure out the
+area</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>maybe something with a signature like: int
+rt_ell_volume(fastf_t *volume, const struct rt_db_internal
+*ip);</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for volume, none are defined yet so you'd be
+stubbing in the first one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.45</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>okay, so i see that rt_db_internal has fields
+idb_{major,minor}_type, what do these represent? the type of
+primitive?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's an unwrapped database object</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you look at rt_sph_prep() you'll see how to
+crack out the actual rt_ell_internal from it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.54</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>by casting the rt_db_internal as a
+rt_ell_internal and accessing the idb_ptr field</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:25.04</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>and that contains the relevent vectors a,b,c
+to define the ell</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:25.09</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>relevant*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, include/rtgeom.h has the
+definition</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you really want to get fancy, you could
+create a test harness that proves the implementation is correct
+with a few specific test cases (similar to
+src/libbu/test_*.c)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>examples creating objects programmatically in
+src/proc-db (e.g. src/proc-db/csgbrep.cpp)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:21.48</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>i'm still having trouble compiling the svn
+version unfortunately. i'm going to sort that out but i wanted to
+get my hands dirty with a patch first. like you said, there's time
+to get everything in working order after the application
+deadline</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:27.05</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49849
+10/brlcad/trunk/src/conv/comgeom/comgeom-g.1: correct
+typo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:28.45</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49850
+10/brlcad/trunk/src/conv/comgeom/comgeom-g.1: correct example for
+current usage</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:38.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c6">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:45.23</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>for those looking for a good patch topic - the
+function rt_bot_bbox does not currently create a correct bounding
+box</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:51.12</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the function rt_bot_prep_pieces_ in
+src/librt/primitives/bot/g_bot_include.c does produce a good
+bounding box, so something about that logic is not captured
+correctly by rt_bot_bbox</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: I was just looking at that, but a
+quick check of the function looks like it just iterates over
+vertices, no?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:53.53</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that was the idea, but there's some quirk I
+didn't track down successfully</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:54.12</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I think you were the one who noticed it wasn't
+working originally...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:54.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I did, but then I don't remember the
+problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:54.44</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bbox was too big</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I remember the brep bbox being too big because
+of the way it was aligning</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but for bot, I just remember it being
+"different" and giving rt changes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:55.49</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brep has other issues, IIRC - I think the bbox
+is calculated without factoring in the trims</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:56.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well, either way that'd be a good one to
+suggest to the list, maybe with a hint on how to test it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.23</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>svn diff -r46385:46386 shows it was turned
+off, so reversing that will turn it back on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:58.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I didn't suggest it to the nurbs guy just
+because I thought it'd be better to see nurbs code from him, but
+bot bbox was the first thing that came to mind actually</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:59.58</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49851
+10/brlcad/trunk/src/conv/comgeom/ (cvt.c f2a.c mat.c read.c
+region.c solid.c): ws, style</tt></td>
+</tr>
+<tr>
+<td><tt>03:03.47</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad louipc
+(~louipc@archlinux/fellow/louipc)</span></tt></td>
+</tr>
+<tr>
+<td><tt>03:39.13</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad abhi2011
+(~chatzilla@24-176-220-90.static.lnbh.ca.charter.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:11.11</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Crdueck 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3405
+10/wiki/User:Crdueck: GSoC 2012 - crdueck ~WIP~</tt></td>
+</tr>
+<tr>
+<td><tt>04:17.36</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>04:54.50</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:31.54</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Neil__
+(~chatzilla@117.229.20.128)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:39.46</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Stattrav_
+(~Stattrav@61.12.114.82)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:41.28</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:05.32</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad andrei_
+(~andrei@188.25.175.75)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:05.36</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>hello</tt></td>
+</tr>
+<tr>
+<td><tt>07:17.42</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Stattrav_
+(~Stattrav@61.12.114.82)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:20.33</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:24.05</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:24.13</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Stattrav_
+(~Stattrav@61.12.114.82)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:29.15</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I m running the script from <a href=
+"http://brlcad.org/wiki/Code_Cleanup">http://brlcad.org/wiki/Code_Cleanup</a>
+ on the brlcad svn-source.  This is the output I recieve. In my
+opinion the 20k duplicated lines doesn't sound as much. Can someone
+please check the output I posted is correct ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:30.02</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I m executing <a href=
+"http://pastebin.ca/2134240">http://pastebin.ca/2134240</a> while
+having both  brlcad source , simian and the script in the same
+directory. This is the output I recieve : <a href=
+"http://pastebin.ca/2134240">http://pastebin.ca/2134240</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:42.05</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr>
+<td><tt>08:27.25</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:34.18</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Stattrav_
+(~Stattrav@61.12.114.82)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:39.31</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad stas
+(~stas@188.24.36.145)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:46.03</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:51.58</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness_
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:17.45</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Al_Da_Best
+(~Al_Da_Bes@027e71f6.bb.sky.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:20.09</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad stas
+(~stas@188.24.36.145)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:36.21</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad andrei_
+(~andrei@188.25.175.75)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:37.23</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad andrei_
+(~andrei@188.25.175.75)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:33.38</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad atneik
+(~atneik@59.178.154.162)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:46.02</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Stattrav_
+(~Stattrav@61.12.114.82)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:02.38</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:21.00</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:08.40</tt></td>
+<td colspan="2"><tt><span class="c10">*** part/#brlcad atneik
+(~atneik@59.178.154.162)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:35.28</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad cristina
+(~cristina@188.24.64.167)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:35.31</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>hello</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:52.37</tt></td>
+<td><span class="c12"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Hi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:00.44</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>hey ( just had to be a different greeting
+way)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.55</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yargh, mateys, shiver me timbers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.20</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cristina: howdy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.49</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cristina: just curious, were you still
+interested in the CSG visualization project?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.51</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>If so, you might be interested in this
+CMake-based Goblin source tarball, which has the part of Goblin we
+can use:  <a href=
+"http://bzflag.bz/~starseeker/goblin-2.8b30-cmake.tar.gz">http://bzflag.bz/~starseeker/goblin-2.8b30-cmake.tar.gz</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:20.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: a coverity scan account could
+certainly be provided, but there's only a couple dozen issues
+remaining (maybe a week's worth of work)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:21.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: as for the quantity of duplication,
+that's not entirely relevant because you probably won't get through
+more than a few thousand lines in one summer regardless of there
+being 100k or 20k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:22.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that said I think your simian settings could
+probably be relaxed a little / changed to detect more patterns of
+duplication</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:22.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you read the simian manpage, you might find
+some more duplication</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:23.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cristina: how's the proposal coming
+along?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:24.13</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>brlcad, my proposal is not ready yet</tt></td>
+</tr>
+<tr>
+<td><tt>14:24.28</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad atneik_
+(~atneik@59.178.154.162)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:24.35</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>I'm behind the schedule</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:24.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: oh, also if you want to schedule time
+in your proposal to work on coverity issues, that's fine but it
+probably shouldn't account for more than a couple weeks of
+work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:24.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cristina: ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:25.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>do you know if you might have a rough draft
+sometime early this week?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:25.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it'd be nice to see at least a rough draft
+three or four days before the submission deadline so we have to
+provide feedback and you have time to respond to that
+feedback</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:26.38</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad :  I don't know if you noted , I
+submitted  the latest version of my proposal draft here : <a href=
+"https://docs.google.com/file/d/0BzrcTnxrBIMvdlFuMTFNWkFRX3FEMU9qbU1JUW9Hdw/edit">
+https://docs.google.com/file/d/0BzrcTnxrBIMvdlFuMTFNWkFRX3FEMU9qbU1JUW9Hdw/edit</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:27.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I did not, can't keep track of everyone
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:27.23</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>brlcad I know that it's useful to get feedback
+and I'll try to make it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:27.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cristina: that would be fantastic, especially
+given how interesting and useful that project is, hopefully
+something you're excited to work on :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:28.14</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>sorry, I didn't want to make it sound like a
+reproach</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:29.47</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>:-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:30.29</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad : anyhow , I have two main issues  with
+my proposal. Focusing on a very specific part of code ( I wil
+follow your advice regarding simian) and the deliverable section I
+don t know how to fit it to be neither unrealistic nor
+insufficient</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:31.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: so especially for a code refactoring
+project, it's great to scope out some goals and be realistic, but
+that is also the easiest type of project to rescope and change
+direction on once you've started</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:32.44</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>so I should have a strict plan and follow it
+closesly</tt></td>
+</tr>
+<tr>
+<td><tt>14:32.47</tt></td>
+<td colspan="2"><tt><span class="c10">*** part/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:32.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you could work on the largest line counts
+first, just working down the list; or you could hit up all the
+issues in a given directory; etc .. but the approach doesn't matter
+as much as having some initial plan to begin with</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:33.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we just need something measureable so that we
+can determine whether you're making progress or whether we need to
+adjust your goals</tt></td>
+</tr>
+<tr>
+<td><tt>14:34.36</tt></td>
+<td colspan="2"><tt><span class="c10">*** part/#brlcad atneik_
+(~atneik@59.178.154.162)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:34.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you can just pick a plan that is appealing
+to you, is conservatively reasonable based on your skills, and then
+just go to town with patches until you get commit access</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I think you already did a patch,
+yes?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.06</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so that's great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.25</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>you mentioned the "patch" to remove a global
+var</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>right, that's an easy starting point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>another might be to actually fix just one of
+the simian duplications</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:36.23</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>so it's an actual acceptable approach to
+follow the simian output</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:36.30</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:36.53</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I m not sure how I should change the script
+provided  , in order to be more relevant for my cause</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:37.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it doesn't even matter whether you start from
+the top to bottom, bottom to top, or even out of order as long as
+there's a method to the madness ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:37.54</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: do you understand what the script is
+doing?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:38.20</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:38.30</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it  goes through every file in the specified
+path</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:38.39</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>excluding the  stated paths</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:39.38</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>basically it uses simian for every file in 
+source  with the selected extension except for those with
+-not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:39.46</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cristina: if you're having trouble scoping the
+project or working out design ideas, please feel free to discuss
+them in channel</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:39.59</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that's why we're here :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:40.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: that's basically correct</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:40.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it runs the 'find' command to get a list of
+some files (man find) and then it runs the simian command on that
+list of files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:40.52</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it something like ./find | grep " what
+interests me "</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:41.11</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cristina: we aren't expecting you to have a
+fully mature, polished solution written up in the first
+draft</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:41.27</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>refinement is a normal part of the
+process</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:41.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: yeah, sorta</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:41.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: so assuming you're in the right
+directory, the list of files is what it is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:41.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can then just focus on the simian
+command</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you read the simian manual page and look at
+the line in the script, you'll see that right now the wiki page
+example just passes the -threshold=25 option</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are LOTS of other options iirc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.59</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>plus you could get rid of that threshold
+option and you'll see a lot more</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:43.31</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>you have a point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:43.52</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I need a better understanding of Simian to
+have a good starting point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:44.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>again, that aspect doesn't really matter so
+much right now either other than you should at least read the
+simian manual page and be basically familiar with what it's capable
+of if you're going to propose using it all summer ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:44.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the 20k you have is certainly plenty and more
+than you could work on all summer anyways</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:45.00</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>after this discussion  I believe that
+aswell...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:46.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even if you're some amazing hot-shot and you
+got through all 20k in the first month and you actually didn't
+introduce bad API or bugs, it's VERY easy to find more work for you
+-- no worries there whatsoever. ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:46.38</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>haha</tt></td>
+</tr>
+<tr>
+<td><tt>14:46.57</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Stattrav_
+(~Stattrav@61.12.114.82)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:47.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I wouldn't expect more than 5% reduction when
+you add in time for discussion and refactoring that goes along with
+reducing code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:48.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>because usually the best way to eliminate
+duplication isn't to just make a new function -- it's to utilize an
+existing function and completely rewriting the place where there
+was duplication</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:48.19</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>my issue right now is simian and the fact that
+I have never used it before</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:48.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so that is your priority</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:48.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>read the simian docs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>shouldn't take more than an hour even if
+you're slow and fall asleep :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>more likely, 10 minutes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.22</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>oh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.30</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>if you mean the overview they have on their
+site</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.39</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I have read it when I downloaded
+simian</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:49.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wherever they have their docs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:50.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I mean, can you tell me without looking what
+that -threshold=25 does?  hopefully you can if you're using
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:50.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if not, worth re-reading</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:50.48</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:50.51</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>how "deep" to go?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:51.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nope :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:51.59</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so, all that means is it's worth re-reading
+the docs again, now especially that you're run the tool and are a
+little familiar with the output</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:52.17</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:52.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it might make more sense and "stick"
+better</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:52.30</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I found exactly what I was looking for, I
+found a page that explain each parameter and what it does</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:53.03</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>as I didn't manage to find any manual in
+simian before. I do need to have a better look</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:56.34</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>so threshold tells simian to ignore files with
+less than 25 duplicated lines</tt></td>
+</tr>
+<tr>
+<td><tt>14:59.40</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad stas
+(~stas@188.24.36.145)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:03.45</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>this is how I currently run the script . I
+consider this a bit better for what I need</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:03.52</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>java -Xms200m -Xmx2000m -jar simian-2.3.33.jar
+-threshold=10 -reportDuplicateText $files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:06.58</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>in any case, thanks a lot  for the help:) will
+get back to work.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.50</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>starseeker, I looked through the
+functionalities of the Goblin library and I got the idea that their
+C++ methods could be used to implement the back end graph
+structures</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: no problem, good discussion</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:55.12</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>I'm not familiar with tcl/tk so I'm having
+some trouble understanding how to use these structures in order to
+construct the graphical widgets</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:18.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cristina: so you have two choices with respect
+to the gui -- you can aim on implementing something near-term or
+long-term</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>near-term being some time less than 3 years
+and long-term probably greater</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the difference being the near-term is learning
+the tcl/tk capabilities of archer, learning how to use their
+widgets and running with that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>long-term would be to use Qt or some drawing
+layer that works with Qt canvases or OGRE opengl contexts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the latter is arguably easier if you don't
+know Tcl/Tk but wouldn't be a capability put into use for quite
+some time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>basically, more flexibility in the long-term
+but more rapid development and widespread use with a near-term
+approach</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(tcl/tk is really pretty easy to
+learn)</tt></td>
+</tr>
+<tr>
+<td><tt>16:23.48</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad matovitch
+(5c672642@gateway/web/freenode/ip.92.103.38.66)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.53</tt></td>
+<td><span class="c14"><tt>matovitch</tt></span></td>
+<td width="100%"><tt>hello</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so something to keep in mind</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hello matovitch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.03</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>brlcad, I assume it's better if the result of
+this project would be put in use sooner</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.14</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>I see that there's still a migration to archer
+phase. Is this why you mentioned the 3 year period?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>both are valuable, it's what is more
+interesting to you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, migration TO archer is still under way
+and will take at *least* 2-3 years</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>archer will stay in use then for 2-5 years
+afterwards probably while a new interface is built up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.29</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>aha, so I would have to make use of the
+capabilities of mged and later, after they are entirely migrated,
+use the ones of archer?</tt></td>
+</tr>
+<tr>
+<td><tt>17:01.50</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad stas
+(~stas@188.24.36.145)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:02.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cristina: no entiendo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:03.00</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you use tcl/tk, you do have access to all
+of the current capabilities of mged/archer now (which is a
+lot)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:03.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>whereas with Qt, you'd have to implement a lot
+more low-level access to walk the hierarchy  (not hard, but it'd be
+another week or two of work)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:06.43</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>brlcad: ok. yo entiendo ahora</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:08.41</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>I misunderstood something. I thought archer is
+going to replace mged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:09.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:10.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for all intensive purposes, they are one in
+the same .. archer is about to go into alpha status and will
+"merge" with mged within the next two years</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:11.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it all depends on the length of the alpha and
+beta timeframes, but it's estimated to be around 2-3
+years</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:12.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the underpinnings to archer are nearly
+identical to mged, though, so the real difference would be with a
+qt-interface</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:15.09</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>this is what I wanted to know. If there are
+any differences between mged and archer on the tcl/tk capabilities
+that I'm going to learn</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:28.30</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are some differences, but they're pretty
+minor -- archer and mged share most of the same underlying commands
+that you'd use</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:07.28</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cristina: for a CSG viewing widget, you would
+actually be creating (initially) a stand-alone Tcl/Tk widget with
+an API, and then hooking that into mged/archer as a second step (as
+I understand it)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:07.40</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>assuming you go the Tcl/Tk route, of
+course</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:11.10</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>when it comes to the "get geometry
+information" aspects, there are several possibilities - you can
+either use commands at the Tcl/Tk level, or use BRL-CAD's C library
+API's "behind the scenes" - you'll probably be doing a bit of both,
+at different levels</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:14.40</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>To create the widget, the pieces needed are a)
+ability to extract BRL-CAD's geometry hierarchy and format it in
+such a way that it can be fed to a graph layout API (Goblin or some
+other choice) b) take the output from the graph generator and use
+that to create a visual layout (in Tcl/Tk or some other toolkit)
+and c) make the visual layout interactive</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:17.24</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>That gives you some milestones to focus on,
+since each stage builds on the previous stages and the individual
+stages can each be tested</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.31</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Goblin has an application in it called goblet
+that does some visual graph layouts, so that's a starting
+point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:20.05</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>or at least, something to study to see how c++
+data -&gt; tcl/tk graphics can be accomplished</tt></td>
+</tr>
+<tr>
+<td><tt>18:21.50</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad Al_Da_Best
+(~Al_Da_Bes@027e71f6.bb.sky.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:22.19</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cristina: if you don't have time to work out
+all the details of how you would generate the visual widgets, then
+that's something to schedule in your timeline for your
+application</tt></td>
+</tr>
+<tr>
+<td><tt>18:29.50</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:41.26</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Matovitch 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3406
+10/wiki/User:Matovitch: First edit :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:43.54</tt></td>
+<td><span class="c11"><tt>cristina</tt></span></td>
+<td width="100%"><tt>starseeker: I am going to include a "research"
+period in which I can decide this</tt></td>
+</tr>
+<tr>
+<td><tt>18:50.00</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad matovitch
+(5c672642@gateway/web/freenode/ip.92.103.38.66)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:50.09</tt></td>
+<td><span class="c14"><tt>matovitch</tt></span></td>
+<td width="100%"><tt>hello</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:58.31</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r49852
+10/brlcad/trunk/src/other/CMakeLists.txt: Mark the SCL variables as
+advanced</tt></td>
+</tr>
+<tr>
+<td><tt>18:59.22</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad harmanpreet
+(~chatzilla@210.56.122.39)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:00.52</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad merzo
+(~merzo@79-79-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:01.45</tt></td>
+<td><span class="c15"><tt>harmanpreet</tt></span></td>
+<td width="100%"><tt>hi..!! may I know how can I made page on wiki
+of brlcad? I created my account, but couldn't find any way to
+create page there.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:02.15</tt></td>
+<td><span class="c14"><tt>matovitch</tt></span></td>
+<td width="100%"><tt>I had the same problem. ^^</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:02.38</tt></td>
+<td><span class="c14"><tt>matovitch</tt></span></td>
+<td width="100%"><tt>Your page is already create.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:03.09</tt></td>
+<td><span class="c14"><tt>matovitch</tt></span></td>
+<td width="100%"><tt>Go to the /User:your_name and edit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:04.31</tt></td>
+<td><span class="c12"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Welcome to Wiki's :P Yeah, every page exists
+as soon as it gets edited</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.44</tt></td>
+<td><span class="c15"><tt>harmanpreet</tt></span></td>
+<td width="100%"><tt>thanks matovitch..!!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.56</tt></td>
+<td><span class="c14"><tt>matovitch</tt></span></td>
+<td width="100%"><tt>you're welcome</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.49</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad : I have just finishing removing a
+global variable , but it does fit the word "minimal" a bit too
+good.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.51</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>there is a counter in /libbu/ globals.c called
+bu_n_realloc which is incremented by a function in malloc.c but is
+never used aside of that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.56</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I have simply commented it.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:42.54</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>and the same with bu_n_malloc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:43.29</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>are they still needed in case of debugs, or is
+this a acceptable fix?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:18.41</tt></td>
+<td><span class="c16"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>brlcad: I'm working on a proposal for adding
+-exec to the search command.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.02</tt></td>
+<td><span class="c16"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>we've talked before about registering libged
+commands, so that a list of them can be obtained</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.17</tt></td>
+<td><span class="c16"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>can't seem to find the relevant log
+entries...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.47</tt></td>
+<td><span class="c16"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>but it seems this will be necessary for the
+project</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:20.41</tt></td>
+<td><span class="c16"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>I'm assuming there is a particular way you'd
+like this implemented..?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:22.51</tt></td>
+<td><span class="c16"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>I'll give you a chance to respond before I ask
+you anything specific :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:26.48</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49853
+10/brlcad/trunk/src/vdeck/ (cgarbs.c std.h): ws, align code
+chunks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:34.43</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>if those above-stated are acceptable global
+removals , on what should I move on? Moving to Simian
+output?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.24</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Matovitch 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3407
+10/wiki/User:Matovitch:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:38.32</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49854
+10/brlcad/trunk/src/vdeck/cgarbs.c: update K&amp;R to ANSII C
+function arg style</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:39.34</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49855
+10/brlcad/trunk/src/vdeck/vdeck.c: ws, style</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.00</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Matovitch 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3408
+10/wiki/User:Matovitch:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: I'm thinking you didn't attempt a
+recompile</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>try this: grep bu_n_malloc src/*/*.c</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.10</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I did</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.24</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>and I used eclipse to check the dependencies
+upon /libbu/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.38</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>ooooh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.47</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>a second</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.00</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I think I ignored the upper dependencies.
+Right.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.52</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>src/libbu/globals.c:long bu_n_malloc =
+0;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.54</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>src/libbu/malloc.c:   
+bu_n_malloc++;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.55</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>src/rt/main.c:longmdelta = bu_n_malloc -
+n_malloc;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.57</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>src/rt/main.c:    n_malloc =
+bu_n_malloc;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.00</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>this is what I got.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I know the result, no need to paste it
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.58</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it could be added as a parameter to the hidden
+function</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:47.43</tt></td>
+<td><span class="c9"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>anyhow, so much for the quick joy. Thanks for
+help and getting back to  fixing this properly.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.42</tt></td>
+<td><span class="c5"><tt>crdueck</tt></span></td>
+<td width="100%"><tt>i've posted a first draft of my application to
+the wiki, it's still very rough and i'd very much appreciate any
+feedback. you can find it here: <a href=
+"http://brlcad.org/wiki/User:Crdueck">http://brlcad.org/wiki/User:Crdueck</a>
+thanks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:06.58</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49856
+10/brlcad/trunk/src/vdeck/vdeck.c: ws</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.01</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Bhinesley 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3409
+10/wiki/User:Bhinesley/gsoc2012/search_proposal: /* Prior
+commitments */</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:17.26</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49857
+10/brlcad/trunk/src/conv/comgeom/ (3d.h solid.c tools.c):
+ws</tt></td>
+</tr>
+<tr>
+<td><tt>21:29.55</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:58.27</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad witness123
+(~witness@14.139.228.211)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:20.25</tt></td>
+<td><span class="c4"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Bhinesley 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3410
+10/wiki/User:Bhinesley/gsoc2012/search_proposal: /* Summary */ aka
+outline (for the more in depth "description" section)</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

@@ -1,126 +1,624 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20120830</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20120830</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c7 {color: #BA61BA}
+ span.c6 {color: #009900}
+ span.c5 {color: #C165C1}
+ span.c4 {color: #B660B6}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #B86161}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20120830</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:13.07</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>In wdb_obj.c there are 2 tables where commands are registered why is that? Also I think I should add the joint command to the second table, right? the "static struct bu_cmdtab wdb_cmds[]" one.&nbsp;&nbsp;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.00</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>Also in the src/mged/cmd.c there's a function int mged_cmd() that verifies if the number of arguments for a command are right and then passes the control to that function, is there something similar in the libged files?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:20.33</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52278 10/brlcad/trunk/src/librt/test_botpatches.cpp: simplify some code a bit using mk_edge</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:33.52</tt></td><td><font color="#c165c1"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: <a href="http://projects.blender.org/tracker/?func=detail&amp;atid=127&amp;aid=4345&amp;group_id=9">http://projects.blender.org/tracker/?func=detail&amp;atid=127&amp;aid=4345&amp;group_id=9</a></tt></td></tr>
-<tr><td><tt>02:55.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf_ (~elf@109.97.159.5)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.29</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.50</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>next to get them to hook into librt for all geometry ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.35</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: you can ignore wdb_obj.c for the most part</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.11</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>but to answer your question, yes some are *also* registered there but that's because it's a completely different command "object" interface different from the one used when you type a commands into mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.05</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>there are two tables because one is for the newer libged functions and the other is for the older previous functions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.31</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>you'll see that similar setup in mged too, which is where you'll be paying attention to the old and new style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.56</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>f_joint() is old, ged_joint() will be new .. so you're changing the setup.c table</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:57.51</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>Ah, now it does make sense, I have to modify the setup.c table and to make that ged_joint() function so that it can be added in the table as {"joint",&nbsp;&nbsp;cmd_somekindofwrapper, ged_joint}</tt></td></tr>
-<tr><td><tt>06:47.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>06:47.35</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
-<tr><td><tt>06:51.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>06:51.08</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
-<tr><td><tt>06:55.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>06:55.20</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
-<tr><td><tt>06:56.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@64-118-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>07:01.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>07:01.42</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
-<tr><td><tt>07:05.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>07:05.22</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
-<tr><td><tt>07:08.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>07:08.41</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
-<tr><td><tt>08:30.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~quassel@188.24.44.191)</font></tt></td></tr>
-<tr><td><tt>09:11.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>10:35.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@64-118-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>10:38.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@d173-238-127-19.home4.cgocable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:28.38</tt></td><td><font color="#c165c1"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: unfortunately, it was back in 2006 and I think I saw a post indicating it didn't perform well in blender :-/</tt></td></tr>
-<tr><td><tt>11:53.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:12.43</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>Okay, so I followed some of the commands in the /mged/setup.c table, the ones that are lowered on the libged, and I tried to do the same for the joint command.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:16.35</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>Here's what I did so far: <a href="http://paste.ubuntu.com/1175850/">http://paste.ubuntu.com/1175850/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:17.00</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>When I run compile I get those errors <a href="http://paste.ubuntu.com/1175838/">http://paste.ubuntu.com/1175838/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:17.34</tt></td><td><font color="#b86161"><tt>elf_</tt></font></td><td width="100%"><tt>and I can't figure out why :(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.14</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52279 10/brlcad/trunk/src/librt/test_botpatches.cpp: just use ON_3dPoint - no point in custom point type here.</tt></td></tr>
-<tr><td><tt>13:43.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf__ (~elf@92.80.34.163)</font></tt></td></tr>
-<tr><td><tt>13:52.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf (~elf@92.80.38.108)</font></tt></td></tr>
-<tr><td><tt>13:53.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf_ (~elf@92.80.38.108)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.54</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52280 10/brlcad/trunk/src/librt/test_botpatches.cpp: cleanup, simplify (slightly)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:15.56</tt></td><td><font color="#ba61ba"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: hm, I thought it looked familiar</tt></td></tr>
-<tr><td><tt>14:17.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~quassel@188.24.44.191)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:34.33</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03Elf11 07<a href="http://brlcad.org">http://brlcad.org</a> * r4378 10/wiki/User:Elf11: /* Log */</tt></td></tr>
-<tr><td><tt>14:48.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf (~elf@109.97.138.82)</font></tt></td></tr>
-<tr><td><tt>14:51.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf_ (~elf@109.97.138.82)</font></tt></td></tr>
-<tr><td><tt>15:40.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@d173-238-127-19.home4.cgocable.net)</font></tt></td></tr>
-<tr><td><tt>15:40.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
-<tr><td><tt>15:41.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
-<tr><td><tt>16:36.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (~Al_Da_Bes@5e0e1434.bb.sky.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:40.49</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52281 10/brlcad/trunk/misc/Doxyfile: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:42.49</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52282 10/brlcad/trunk/misc/Doxyfile.in: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:49.35</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52283 10/brlcad/trunk/misc/fortran_example.f: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.49</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52284 10/brlcad/trunk/autogen.sh: fix spellings in 3 places</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.18</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52285 10/brlcad/trunk/TODO: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:12.51</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52286 10/brlcad/trunk/NEWS: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:21.10</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52287 10/brlcad/trunk/src/conv/fast4-g.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:21.53</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52288 10/brlcad/trunk/src/conv/fast4-g.c: and fix another spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:24.24</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52289 10/brlcad/trunk/src/conv/g-shell-rect.1: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.34</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52290 10/brlcad/trunk/misc/CMake/FindTCL.cmake: fix spelling of a variable as advised</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.08</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52291 10/brlcad/trunk/misc/NIST_DENSITIES: as advised, fix spelling of 'Dichlorobenzene'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.12</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52292 10/brlcad/trunk/src/lgt/reflect.c: fix 5 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.04</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52293 10/brlcad/trunk/src/lgt/char.c: fix spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.59</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52294 10/brlcad/trunk/src/lgt/grid_rotate.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.48</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52295 10/brlcad/trunk/src/lgt/hmenu.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:48.45</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52296 10/brlcad/trunk/src/lgt/error.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:50.15</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52297 10/brlcad/trunk/src/lgt/prnt.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:51.23</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52298 10/brlcad/trunk/src/lgt/trie.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.16</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52299 10/brlcad/trunk/src/lgt/glob.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.07</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52300 10/brlcad/trunk/src/conv/poly-bot.c: fix misspelling in error message</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.30</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52301 10/brlcad/trunk/src/lgt/cursors.h: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.08</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52302 10/brlcad/trunk/src/lgt/lgt.1: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.02</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52303 10/brlcad/trunk/src/canon/canonize.1: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.34</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52304 10/brlcad/trunk/src/fbed/fb_ik.h: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.46</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52305 10/brlcad/trunk/src/brlman/brlman.sh.in: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.32</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52306 10/brlcad/trunk/src/anim/anim_script.1: fix 7 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.55</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52307 10/brlcad/trunk/src/anim/chan_mult.1: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:15.26</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52308 10/brlcad/trunk/src/anim/anim_track.1: fix spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.27</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52309 10/brlcad/trunk/src/anim/anim_turn.1: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:25.25</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52310 10/brlcad/trunk/src/anim/anim_sort.1: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:27.01</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52311 10/brlcad/trunk/src/anim/anim_hardtrack.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:30.52</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52312 10/brlcad/trunk/src/burst/Hm.h: fix 3 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.40</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52313 10/brlcad/trunk/src/burst/prnt.c: fix spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.13</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52314 10/brlcad/trunk/src/burst/trie.c: fix 1 spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:36.08</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52315 10/brlcad/trunk/src/burst/grid.c: fix spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.46</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52316 10/brlcad/trunk/src/external/ProEngineer/proe-brl.c: fix spelling in 4 places</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:46.31</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52317 10/brlcad/trunk/src/anim/Makefile.am: per Sean Morrison, fix a 'hardtrack' spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:03.40</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52318 10/brlcad/trunk/src/util/wavelet.1: fix spelling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:05.22</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52319 10/brlcad/trunk/src/util/pixbackgnd.c: fix 2 spellings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:10.09</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r52320 10/brlcad/trunk/src/librt/primitives/nmg/nmg_misc.c: Update to function "nmg_loop_plane_area2" in file "nmg_misc.c". This is a work in progress. These changes are to correct floating point problems computing the plane of very small polygons.</tt></td></tr>
-<tr><td><tt>22:13.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@30-113-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.49</tt></td><td><font color="#b660b6"><tt>CIA-69</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52321 10/brlcad/trunk/src/librt/test_botpatches.cpp: Make edge set building code more compact.</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:13.07</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>In wdb_obj.c there are 2 tables where commands
+are registered why is that? Also I think I should add the joint
+command to the second table, right? the "static struct bu_cmdtab
+wdb_cmds[]" one.  </tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.00</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>Also in the src/mged/cmd.c there's a function
+int mged_cmd() that verifies if the number of arguments for a
+command are right and then passes the control to that function, is
+there something similar in the libged files?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:20.33</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r52278
+10/brlcad/trunk/src/librt/test_botpatches.cpp: simplify some code a
+bit using mk_edge</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:33.52</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>``Erik: <a href=
+"http://projects.blender.org/tracker/?func=detail&amp;atid=127&amp;aid=4345&amp;group_id=9">
+http://projects.blender.org/tracker/?func=detail&amp;atid=127&amp;aid=4345&amp;group_id=9</a></tt></td>
+</tr>
+<tr>
+<td><tt>02:55.06</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elf_
+(~elf@109.97.159.5)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:47.29</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:47.50</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>next to get them to hook into librt for all
+geometry ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:52.35</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>elf_: you can ignore wdb_obj.c for the most
+part</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:57.11</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but to answer your question, yes some are
+*also* registered there but that's because it's a completely
+different command "object" interface different from the one used
+when you type a commands into mged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:59.05</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are two tables because one is for the
+newer libged functions and the other is for the older previous
+functions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:59.31</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you'll see that similar setup in mged too,
+which is where you'll be paying attention to the old and new
+style</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:59.56</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>f_joint() is old, ged_joint() will be new ..
+so you're changing the setup.c table</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:57.51</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>Ah, now it does make sense, I have to modify
+the setup.c table and to make that ged_joint() function so that it
+can be added in the table as {"joint",  cmd_somekindofwrapper,
+ged_joint}</tt></td>
+</tr>
+<tr>
+<td><tt>06:47.35</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:47.35</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| Congratulations to our 11 accepted GSoC
+students!!</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:51.08</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:51.08</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| Congratulations to our 11 accepted GSoC
+students!!</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:55.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:55.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| Congratulations to our 11 accepted GSoC
+students!!</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:56.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@64-118-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:01.42</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:01.42</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| Congratulations to our 11 accepted GSoC
+students!!</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:05.22</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:05.22</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| Congratulations to our 11 accepted GSoC
+students!!</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:08.41</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ibot
+(~ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:08.41</tt></td>
+<td colspan="2"><tt><span class="c6">*** topic/#brlcad is BRL-CAD
+Open Source Solid Modeling || <a href=
+"http://brlcad.org">http://brlcad.org</a> || logs: <a href=
+"http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a>
+|| Congratulations to our 11 accepted GSoC
+students!!</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:30.52</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad cristina
+(~quassel@188.24.44.191)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:11.12</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad archivist
+(~archivist@host81-149-189-98.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:35.06</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@64-118-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:38.47</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad crdueck
+(~cdk@d173-238-127-19.home4.cgocable.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:28.38</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: unfortunately, it was back in 2006 and
+I think I saw a post indicating it didn't perform well in blender
+:-/</tt></td>
+</tr>
+<tr>
+<td><tt>11:53.36</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Yoshi47
+(~jan@64.235.102.210)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:12.43</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>Okay, so I followed some of the commands in
+the /mged/setup.c table, the ones that are lowered on the libged,
+and I tried to do the same for the joint command.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:16.35</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>Here's what I did so far: <a href=
+"http://paste.ubuntu.com/1175850/">http://paste.ubuntu.com/1175850/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:17.00</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>When I run compile I get those errors <a href=
+"http://paste.ubuntu.com/1175838/">http://paste.ubuntu.com/1175838/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:17.34</tt></td>
+<td><span class="c2"><tt>elf_</tt></span></td>
+<td width="100%"><tt>and I can't figure out why :(</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:23.14</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r52279
+10/brlcad/trunk/src/librt/test_botpatches.cpp: just use ON_3dPoint
+- no point in custom point type here.</tt></td>
+</tr>
+<tr>
+<td><tt>13:43.59</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elf__
+(~elf@92.80.34.163)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:52.46</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elf
+(~elf@92.80.38.108)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:53.45</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elf_
+(~elf@92.80.38.108)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.54</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r52280
+10/brlcad/trunk/src/librt/test_botpatches.cpp: cleanup, simplify
+(slightly)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:15.56</tt></td>
+<td><span class="c7"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: hm, I thought it looked
+familiar</tt></td>
+</tr>
+<tr>
+<td><tt>14:17.36</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad cristina
+(~quassel@188.24.44.191)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:34.33</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Elf11 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r4378
+10/wiki/User:Elf11: /* Log */</tt></td>
+</tr>
+<tr>
+<td><tt>14:48.00</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elf
+(~elf@109.97.138.82)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:51.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elf_
+(~elf@109.97.138.82)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:40.33</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad crdueck
+(~cdk@d173-238-127-19.home4.cgocable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:40.33</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kanzure
+(~kanzure@131.252.130.248)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:41.04</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad kanzure
+(~kanzure@131.252.130.248)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:36.13</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Al_Da_Best
+(~Al_Da_Bes@5e0e1434.bb.sky.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:40.49</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52281
+10/brlcad/trunk/misc/Doxyfile: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:42.49</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52282
+10/brlcad/trunk/misc/Doxyfile.in: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:49.35</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52283
+10/brlcad/trunk/misc/fortran_example.f: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:57.49</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52284
+10/brlcad/trunk/autogen.sh: fix spellings in 3 places</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:12.18</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52285
+10/brlcad/trunk/TODO: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:12.51</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52286
+10/brlcad/trunk/NEWS: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:21.10</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52287
+10/brlcad/trunk/src/conv/fast4-g.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:21.53</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52288
+10/brlcad/trunk/src/conv/fast4-g.c: and fix another
+spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:24.24</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52289
+10/brlcad/trunk/src/conv/g-shell-rect.1: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:32.34</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52290
+10/brlcad/trunk/misc/CMake/FindTCL.cmake: fix spelling of a
+variable as advised</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.08</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52291
+10/brlcad/trunk/misc/NIST_DENSITIES: as advised, fix spelling of
+'Dichlorobenzene'</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.12</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52292
+10/brlcad/trunk/src/lgt/reflect.c: fix 5 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.04</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52293
+10/brlcad/trunk/src/lgt/char.c: fix spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.59</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52294
+10/brlcad/trunk/src/lgt/grid_rotate.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.48</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52295
+10/brlcad/trunk/src/lgt/hmenu.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:48.45</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52296
+10/brlcad/trunk/src/lgt/error.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:50.15</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52297
+10/brlcad/trunk/src/lgt/prnt.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:51.23</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52298
+10/brlcad/trunk/src/lgt/trie.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:53.16</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52299
+10/brlcad/trunk/src/lgt/glob.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:55.07</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52300
+10/brlcad/trunk/src/conv/poly-bot.c: fix misspelling in error
+message</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:57.30</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52301
+10/brlcad/trunk/src/lgt/cursors.h: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:00.08</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52302
+10/brlcad/trunk/src/lgt/lgt.1: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.02</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52303
+10/brlcad/trunk/src/canon/canonize.1: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.34</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52304
+10/brlcad/trunk/src/fbed/fb_ik.h: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:07.46</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52305
+10/brlcad/trunk/src/brlman/brlman.sh.in: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:11.32</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52306
+10/brlcad/trunk/src/anim/anim_script.1: fix 7 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.55</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52307
+10/brlcad/trunk/src/anim/chan_mult.1: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:15.26</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52308
+10/brlcad/trunk/src/anim/anim_track.1: fix spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:17.27</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52309
+10/brlcad/trunk/src/anim/anim_turn.1: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:25.25</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52310
+10/brlcad/trunk/src/anim/anim_sort.1: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:27.01</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52311
+10/brlcad/trunk/src/anim/anim_hardtrack.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:30.52</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52312
+10/brlcad/trunk/src/burst/Hm.h: fix 3 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.40</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52313
+10/brlcad/trunk/src/burst/prnt.c: fix spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:34.13</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52314
+10/brlcad/trunk/src/burst/trie.c: fix 1 spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:36.08</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52315
+10/brlcad/trunk/src/burst/grid.c: fix spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.46</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52316
+10/brlcad/trunk/src/external/ProEngineer/proe-brl.c: fix spelling
+in 4 places</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:46.31</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52317
+10/brlcad/trunk/src/anim/Makefile.am: per Sean Morrison, fix a
+'hardtrack' spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:03.40</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52318
+10/brlcad/trunk/src/util/wavelet.1: fix spelling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:05.22</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03carlmoore * r52319
+10/brlcad/trunk/src/util/pixbackgnd.c: fix 2 spellings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:10.09</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03r_weiss * r52320
+10/brlcad/trunk/src/librt/primitives/nmg/nmg_misc.c: Update to
+function "nmg_loop_plane_area2" in file "nmg_misc.c". This is a
+work in progress. These changes are to correct floating point
+problems computing the plane of very small polygons.</tt></td>
+</tr>
+<tr>
+<td><tt>22:13.53</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad merzo
+(~merzo@30-113-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:45.49</tt></td>
+<td><span class="c4"><tt>CIA-69</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r52321
+10/brlcad/trunk/src/librt/test_botpatches.cpp: Make edge set
+building code more compact.</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

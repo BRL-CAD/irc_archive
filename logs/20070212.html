@@ -1,92 +1,471 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>irclog2html for #brlcad on 20070212</title>
-	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
-	<meta name="version" content="Version 1.5 - 11th May 2000">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>irclog2html for #brlcad on 20070212</title>
+<meta name="generator" content="irclog2html.pl by Jeff Waugh" />
+<meta name="version" content="Version 1.5 - 11th May 2000" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c5 {color: #B660B6}
+ span.c4 {color: #B4B45F}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #5E5EB3}
+ span.c1 {color: #009900}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>irclog2html for #brlcad on 20070212</h1>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>01:46.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas3-sudbury98-1168057882.dsl.bell.ca)</font></tt></td></tr>
-<tr><td><tt>02:42.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:22.11</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Erik or brlcad, are you there? I could use your knowledge of non-Linux platforms</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:23.14</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Basically, I would like to solve the problem of running on NUMA platforms. Having a copy of the datasets into each memory bank, and having specific threads on specific cores working on each copy is something that can be done on Linux</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:24.26</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Since that might be tricky to support all platforms this way, I was thinking about a more general way... Each die, each chunk of cores accessing the same memory bank, could have its own process running ; the processes working together by distributed processing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.22</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Are other platforms clever enough to allocate memory into the memory bank specific to the processor a process is running on? Are they bright enough to put all the threads of the process on the cores of the same die?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.57</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That really would be a simple solution. The processes can synchronize each other by shared memory to avoid most of the networking overhead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:29.28</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>not always</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:29.44</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Can it be manually forced?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:29.51</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>fbsd doesn't seem to do bank association on amd64 from dorking around... no way to force it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.00</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I think that's far less trouble than having NUMA-aware built in ; just having a process per memory bank</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.05</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ouch!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.32</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>and if you have one hard running thread hard running on a dual proc mac, it'll aggressively rotate it between procs to keep temps even</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.43</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>This is terrible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:30.53</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug* it's the way things go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:31.22</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>(the bsd thing needs to be fixed... if I had free time, I'd get elbow deep into the allocator and scheduler and make it happen... but time is a rare commodity)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:31.58</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Do you have any thought about numa-aware code within a single process, storing multiple copies of the dataset, or just having multiple synchronized processes?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:32.32</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>that all depends on if there's enough ram *shrug*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:32.32</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>The second way seems easier to get to work on different OSes, if the OSes themselves are numa-aware</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:32.40</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Right, of coures</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:32.44</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>course, even</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:35.22</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm surprised that, even manually, one can't force threads on cores and allocation in banks... That's probably part of the explanation on why clusters don't run BSD</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.29</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>a lot of similar concepts to numa</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:38.01</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>additional reading with details on threading: <a href="http://www-941.ibm.com/collaboration/wiki/display/WikiPtype/POWER5+Architecture">http://www-941.ibm.com/collaboration/wiki/display/WikiPtype/POWER5+Architecture</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:38.34</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Thanks brlcad, seems similar to the Opteron docs I read at first glance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:39.31</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm mostly wondering about how to solve the software aspect of the problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.01</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>eh, devil the in details .. exceptionally high-end server market, no commodity aspects</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.15</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the documents go into software implications</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.23</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Right, great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.48</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>in particular the latter that details execution, threading, and memory management</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:42.25</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>could probably get an account on an sp4 to play with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:42.47</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Wouldn't that be Power5-OSX specific? It's awfully specific to the OS, there's no standard for NUMA management</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:43.26</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>os x doesn't run on power5</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:43.45</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>MacOS9 then :), I really didn't follow that line of software</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:44.06</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the power series are what are used by the high-end supercomputers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:44.21</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>they have no relation to apple/mac</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:45.05</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Oh. Great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:46.24</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the G4 and G5 have architecture aspects similar to the power series, and some have suggested that the G5 is effectively the Power3 or Power4 with some of the high-end supercomputing facilities removed (data management, simultaneous core execution, larger L1/L2/L3 memories, etc, etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.02</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Thanks, that clears things up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.28</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>'cept the g[45] series have altivec, ibm/ppc doesn't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.44</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>'cluster' is an awfully broad term o.O</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.57</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Exactly :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:48.16</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>that's like saying you want to learn how to write assembly for computers...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:49.11</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>The comparison is valid ; learning assembly for the main architectures, or learning scalable software for the main cluster architectures</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:51.33</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>valid, but potentially vary misleading -- comparing athlon/G5/P4/whatever to the Power architecture is sort of like comparing the GForce 2 to the Quaddro FX .. there are correlations, but one is the exceptional high-end with various features that can be leveraged for extra order(s) performance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.53</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, my analogy was to point out how vague the notion of mals statement was, as there are many radically different archs... as there are cluster technologies *shrug*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.32</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, yeah, the power line displaced the mips line, its immediate ancestor.. :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.04</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, and have been king ever since.. for what? a decade now?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.26</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>since at least 1998 iirc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.48</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Erik, and I'm interested in learning scalable programming for the main ones</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.48</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>the unf/$ leans more towards opterons, though *shrug*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.52</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>opteron has certainly been on the rise with the revival of cray</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.10</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>some amusing quotes from seymour</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.08</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>NUMA-aware threading code isn't too much trouble on Linux, but as for some other OSes..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.08</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>'numa' is a pretty broad category</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.13</tt></td><td><font color="#5e5eb3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Assigning threads to memory banks is a fairly simple concept</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.47</tt></td><td><font color="#b4b45f"><tt>``Erik</tt></font></td><td width="100%"><tt>the simplest of forms and provided the OS exposes it, sure *shrug*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.01</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>at the top 500 level, it rarely has to do with $$.. it's reliability and performance first followed by probably support and installation impact</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.35</tt></td><td><font color="#b660b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the technology is usually second to just computing things as fast as possible</tt></td></tr>
-<tr><td><tt>08:33.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas3-sudbury98-1168057882.dsl.bell.ca)</font></tt></td></tr>
-<tr><td><tt>09:17.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
-<tr><td><tt>09:59.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
-<tr><td><tt>10:03.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad32 (n=503708da@bz.bzflag.bz)</font></tt></td></tr>
-<tr><td><tt>13:52.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@084202025057.customer.alfanett.no)</font></tt></td></tr>
-<tr><td><tt>14:55.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@212.15.183.78)</font></tt></td></tr>
-<tr><td><tt>15:27.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@212.15.174.172)</font></tt></td></tr>
-<tr><td><tt>15:55.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (n=sean@bz.bzflag.bz) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>15:59.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@084202025057.customer.alfanett.no) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>16:00.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@212.15.174.172) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>16:00.33</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o brlcad] by ChanServ</font></tt></td></tr>
-<tr><td><tt>16:58.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@212.15.185.121)</font></tt></td></tr>
-<tr><td><tt>17:55.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad debarshi (n=rishi@202.141.130.198)</font></tt></td></tr>
-<tr><td><tt>22:37.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FthrNtr (n=IriX64@bas3-sudbury98-1168056909.dsl.bell.ca)</font></tt></td></tr>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>01:46.05</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad IriX64
+(n=IriX64@bas3-sudbury98-1168057882.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>02:42.55</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad Twingy
+(n=justin@74.92.144.217)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:22.11</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Erik or brlcad, are you there? I could use
+your knowledge of non-Linux platforms</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:23.14</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Basically, I would like to solve the problem
+of running on NUMA platforms. Having a copy of the datasets into
+each memory bank, and having specific threads on specific cores
+working on each copy is something that can be done on
+Linux</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:24.26</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Since that might be tricky to support all
+platforms this way, I was thinking about a more general way... Each
+die, each chunk of cores accessing the same memory bank, could have
+its own process running ; the processes working together by
+distributed processing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.22</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Are other platforms clever enough to allocate
+memory into the memory bank specific to the processor a process is
+running on? Are they bright enough to put all the threads of the
+process on the cores of the same die?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.57</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>That really would be a simple solution. The
+processes can synchronize each other by shared memory to avoid most
+of the networking overhead</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:29.28</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>not always</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:29.44</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Can it be manually forced?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:29.51</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>fbsd doesn't seem to do bank association on
+amd64 from dorking around... no way to force it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.00</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>I think that's far less trouble than having
+NUMA-aware built in ; just having a process per memory
+bank</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.05</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Ouch!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.32</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and if you have one hard running thread hard
+running on a dual proc mac, it'll aggressively rotate it between
+procs to keep temps even</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.43</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>This is terrible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:30.53</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*shrug* it's the way things go</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:31.22</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(the bsd thing needs to be fixed... if I had
+free time, I'd get elbow deep into the allocator and scheduler and
+make it happen... but time is a rare commodity)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:31.58</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Do you have any thought about numa-aware code
+within a single process, storing multiple copies of the dataset, or
+just having multiple synchronized processes?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:32.32</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that all depends on if there's enough ram
+*shrug*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:32.32</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>The second way seems easier to get to work on
+different OSes, if the OSes themselves are numa-aware</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:32.40</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Right, of coures</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:32.44</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>course, even</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:35.22</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>I'm surprised that, even manually, one can't
+force threads on cores and allocation in banks... That's probably
+part of the explanation on why clusters don't run BSD</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:37.29</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>a lot of similar concepts to numa</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:38.01</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>additional reading with details on threading:
+<a href=
+"http://www-941.ibm.com/collaboration/wiki/display/WikiPtype/POWER5+Architecture">
+http://www-941.ibm.com/collaboration/wiki/display/WikiPtype/POWER5+Architecture</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:38.34</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Thanks brlcad, seems similar to the Opteron
+docs I read at first glance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:39.31</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>I'm mostly wondering about how to solve the
+software aspect of the problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:41.01</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>eh, devil the in details .. exceptionally
+high-end server market, no commodity aspects</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:41.15</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the documents go into software
+implications</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:41.23</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Right, great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:41.48</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in particular the latter that details
+execution, threading, and memory management</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:42.25</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>could probably get an account on an sp4 to
+play with</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:42.47</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Wouldn't that be Power5-OSX specific? It's
+awfully specific to the OS, there's no standard for NUMA
+management</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:43.26</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>os x doesn't run on power5</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:43.45</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>MacOS9 then :), I really didn't follow that
+line of software</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:44.06</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the power series are what are used by the
+high-end supercomputers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:44.21</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they have no relation to apple/mac</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:45.05</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Oh. Great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:46.24</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the G4 and G5 have architecture aspects
+similar to the power series, and some have suggested that the G5 is
+effectively the Power3 or Power4 with some of the high-end
+supercomputing facilities removed (data management, simultaneous
+core execution, larger L1/L2/L3 memories, etc, etc)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:47.02</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Thanks, that clears things up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:47.28</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'cept the g[45] series have altivec, ibm/ppc
+doesn't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:47.44</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'cluster' is an awfully broad term
+o.O</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:47.57</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Exactly :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:48.16</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that's like saying you want to learn how to
+write assembly for computers...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:49.11</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>The comparison is valid ; learning assembly
+for the main architectures, or learning scalable software for the
+main cluster architectures</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:51.33</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>valid, but potentially vary misleading --
+comparing athlon/G5/P4/whatever to the Power architecture is sort
+of like comparing the GForce 2 to the Quaddro FX .. there are
+correlations, but one is the exceptional high-end with various
+features that can be leveraged for extra order(s)
+performance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.53</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, my analogy was to point out how vague the
+notion of mals statement was, as there are many radically different
+archs... as there are cluster technologies *shrug*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:55.32</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, yeah, the power line displaced the mips
+line, its immediate ancestor.. :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:56.04</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, and have been king ever since.. for
+what? a decade now?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:56.26</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>since at least 1998 iirc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:56.48</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Erik, and I'm interested in learning scalable
+programming for the main ones</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:56.48</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the unf/$ leans more towards opterons, though
+*shrug*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:56.52</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>opteron has certainly been on the rise with
+the revival of cray</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:57.10</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>some amusing quotes from seymour</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:58.08</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>NUMA-aware threading code isn't too much
+trouble on Linux, but as for some other OSes..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:58.08</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'numa' is a pretty broad category</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:58.13</tt></td>
+<td><span class="c2"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Assigning threads to memory banks is a fairly
+simple concept</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:58.47</tt></td>
+<td><span class="c4"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the simplest of forms and provided the OS
+exposes it, sure *shrug*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:59.01</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at the top 500 level, it rarely has to do with
+$$.. it's reliability and performance first followed by probably
+support and installation impact</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:59.35</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the technology is usually second to just
+computing things as fast as possible</tt></td>
+</tr>
+<tr>
+<td><tt>08:33.22</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad IriX64
+(n=IriX64@bas3-sudbury98-1168057882.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:17.33</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad dtidrow
+(n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:59.21</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad clock_
+(n=clock@zux221-122-143.adsl.green.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:03.35</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad cad32
+(n=503708da@bz.bzflag.bz)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:52.38</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad b0ef
+(n=b0ef@084202025057.customer.alfanett.no)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:55.18</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad docelic
+(n=docelic@212.15.183.78)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:27.54</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad docelic
+(n=docelic@212.15.174.172)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:55.47</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad brlcad
+(n=sean@bz.bzflag.bz) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:59.33</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad b0ef
+(n=b0ef@084202025057.customer.alfanett.no) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:00.07</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad docelic
+(n=docelic@212.15.174.172) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:00.33</tt></td>
+<td colspan="2"><tt><span class="c1">*** mode/#brlcad [+o brlcad]
+by ChanServ</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:58.10</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad docelic
+(n=docelic@212.15.185.121)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:55.50</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad debarshi
+(n=rishi@202.141.130.198)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:37.02</tt></td>
+<td colspan="2"><tt><span class="c1">*** join/#brlcad FthrNtr
+(n=IriX64@bas3-sudbury98-1168056909.dsl.bell.ca)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl by
-<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
-<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
-Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
-<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
-</body></html>
+<br />
+Generated by irclog2html.pl by <a href=
+"mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at <a href=
+"http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work
+with <a href="http://blootbot.sourceforge.net/">blootbot</a> logs,
+split per channel, etc.
+</body>
+</html>

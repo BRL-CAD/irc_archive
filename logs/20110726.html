@@ -1,360 +1,2012 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20110726</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20110726</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c13 {color: #D1D16E}
+ span.c12 {color: #D9D972}
+ span.c11 {color: #6DD0D0}
+ span.c10 {color: #BC63BC}
+ span.c9 {color: #62BB62}
+ span.c8 {color: #B1B15D}
+ span.c7 {color: #CC00CC}
+ span.c6 {color: #7676E0}
+ span.c5 {color: #6CCDCD}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #CC6BCC}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20110726</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>00:46.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@201.53.206.27)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:39.59</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>starseeker: I can build BRL-CAD as a whole, if you check my patch it's the environment</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:40.28</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>LainIwakuraX: what behavior do you see if you try the above?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:40.43</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>1 sec</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:41.00</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>yeah I get that too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:41.19</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.12</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>how do I track down that sort of thing? =/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.26</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>LainIwakuraX: gdb to start with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.52</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>figure out which call is producing the error, examine the data being fed in and why it's wiping out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.41</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>ah okay..first time working with gdb, I'll try to get this sorted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.56</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>it's a good skill to have :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:44.05</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>bt (backtrace) is quite useful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:44.44</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>ah I think I know what may be causing this bug, I can go fix it in source</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.29</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>It looks like somewhere a std::string is being assigned to NULL when it probably should be ""</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.43</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>this might take a few minutes to hunt down</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.00</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, I thought it might be something like this:&nbsp;&nbsp;<a href="http://stackoverflow.com/questions/2407711/avoiding-improper-stdstring-initialization-with-null-const-char-using-g">http://stackoverflow.com/questions/2407711/avoiding-improper-stdstring-initialization-with-null-const-char-using-g</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.15</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>possibly SCLstring tolerated NULL as an initialization input...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.13</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>mhm. I found a few spots where I said "new std::string" and I changed those to initialize with "" for sure...but that didn't fix it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.29</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I'll look around</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.33</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>LainIwakuraX: I probably added a few of those myself...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.45</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>=x</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45628 10/brlcad/trunk/src/libged/edit.c: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Tracked down an issue where the last object wasn't being added, and the last</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: node in the linked list was empty. Added support for numeric args (as abs coord,</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: rel pos, or obj offset). Added/renamed constants for specifying coordinates, so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: that significance goes from left to right:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.13</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: '%s/EDIT\([[:upper:]]\)_COORD/EDIT_COORD_\1/g'. Several smaller,</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.14</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: formatting/comment corrections.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:20.07</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>starseeker: If you find the spot where it's being initialized to null let me know, I haven't found it yet =(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:21.08</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>LainIwakuraX: it might even be a function of what it's parsing... my C++ foo is a bit weak, unfortunately</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:21.38</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>probably very simple once we figure it out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:22.43</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>yeah, I know that when I see it I'll know it lol it's just finding it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.04</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>gdb gives me some info..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.14</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>STEPWrapper::load(std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;&amp;) ()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.28</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I can't find STEPWrapper::load anywhere though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.42</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if ddd might be helpful...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.51</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">spent about a hour wrestling ddd crashes today</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.57</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>LainIwakuraX: when in doubt: `find . -name "*.cpp" -exec grep "STEPWrapper::load" --with-filename {} \;`</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:28.26</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>or use ctags (even better)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:31.00</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>doesn't bring up anything =(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:31.22</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I usually use: grep -H -r "&lt;thing to search for&gt;" . | grep -v svn | less</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.42</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>oho...may have found it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.17</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>ugh it was in a different directory! I forgot two were involved in my editing process...this should be easier now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:43.36</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>starseeker: I've found the offending code I'm in the process of debugging it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.27</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>Registry::AddType, clstepcore/Registry.inline.cc:221 ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.33</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>No</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.44</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>nmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.53</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>conv/step/STEPWrapper.cpp</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.56</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>the load function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.57</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:15.06</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>okay the "offending" code was sort of offending, after travelling to 4 different functions I found the real offending code =P working on it..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.04</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>starseeker: I fixed that bug, but now we get a segfault</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.13</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>Reading Data from ../brlcad/src/other/step/data/ap203/cube1.p21...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.16</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>segfault</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:38.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker, probably a little premature on the cross-post, no? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:39.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>best when collaborating to announce after we've fully vetted/tested ourselves</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.04</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>interesting that I didn't run into a failure on my test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.27</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">tests that particular p21 file</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.31</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>yes, it is curious but the bug I found would have indeed failed on something eventually =P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.35</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>the line said</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.43</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>std::string schmn = NULL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.53</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>that won't work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:44.16</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:44.22</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, BAD cmake rebuild</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:48.55</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>Uhh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:49.05</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I got it to work without a segfault</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:49.20</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>it says Reading Data from ../brlcad/src/other/step/data/ap203/cube1.p21...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:49.33</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>Then it says basic_string::_S_construct null not valid</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:49.38</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>then the program exits normally...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:49.45</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>(according to gdb)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:53.34</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>brlcad: what gcc do most devs use?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:53.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, my test of the patch was quite flawed, two build systems got in the way of each other</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:53.54</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>I figured I'd install a lower version so I can use strict</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.12</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>bhinesley: a pretty wide variety, actually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>just nobody on gcc 4.6 yet (except you ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.26</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.35</tt></td><td><font color="#bc63bc"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">uses 4.2 (fbsd standard) and 4.1 (apple standard) mostly</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.36</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it's been out for about a month</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.54</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>bhinesley: have you rebuilt lately?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.15</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>doing so now, but strict is off</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I fixed a slew of the ones abhit reported over the weekend, about a thousand issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.27</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>nice</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.28</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>save a full build log</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.46</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>make 2&gt;&amp;1 | tee build.log</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.02</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>okay, in just a bit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.29</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>I just did a svn update... you guys were busy over the weekend :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.38</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm sure I didn't get everything since I don't have the compiler warning if I missed anything, but it should be far better</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.51</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.57</tt></td><td><font color="#bc63bc"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: I put gcc4.7 on crit if you get the urge to play</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.59</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>I saw the logs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.09</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>most oft he things it's warning about are really trivial to fix</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.26</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>vars not being used, print specifier consistency</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.37</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: good to know, thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">reproduces the step-g failure</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.23</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: I have that fixed to not crash, cleaning up some things and submitting a patch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:01.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>LainIwakuraX: okay, great .. so I shouldn't go debugging</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.36</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: Patch is submitted...like I said in the notes though even though there isn't a crash I still don't know if it "works"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.54</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>If you could test that it'd be great =) I haven't used this program before, I don't know what to expect from it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.32</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>LainIwakuraX: what was the issue with STEPWrapper::load() ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>changing from a std::string&amp; to a std::string merely makes it make a copy (alloc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.27</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>if that fixes a crash, some further investigating is probably warranted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.35</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: Uh, that shouldn't have been changed- that was a test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.46</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: debugging is not enabled by default?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.30</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>patch files are text, you should review them before posting .. just like you should review the diff before a commit too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.42</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>svn revert will restore a file to an unedited state</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.09</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>"svn diff | less" and you can manually inspect what changes are getting included</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.41</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: if you give me two seconds I'll upload a better patch file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.45</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:15.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>also make sure you're up-to-date (svn up) so the line offsets are correct</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.20</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.36</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I put my &amp;'s on string, not the variable name..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.05</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>it was string &amp;step_file but now it's string&amp; step_file..that's fine though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>they are equivalent</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.24</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.31</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>that's why I said it's fine =P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.36</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.22</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>convention is usually to bind the type together with c++ but separate them for c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.34</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so string&amp; is peachy for scl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.39</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>k the better patch is up there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">gets</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:21.54</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I'll brb in ~10 mins, let me know how it goes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:22.25</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>testing now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.18</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so it no longer hard-crashes, but it still exits due to a NULL string</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it's maybe on a static</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.46</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>will have to debug more tomorrow.. because *somebody* thought defaulting to no debug symbol compilation was a good idea&nbsp;&nbsp;*ahem* :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.41</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, every place a std::string is instantiated, it needs to be initialized to be compatible with what it was assuming</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45629 10/brlcad/trunk/src/other/step/src/ (5 files in 2 dirs): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: apply sf patch 3377904 (fixed a bug with step-g and null strings) from Zach</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Easterbrook ( lainiwakurax ) which indeed fixes the step-g crash, but still</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: doesn't restore it to a functional status. aborts with a message about a NULL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: std::string.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.23</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I'm back</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.59</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: How can we test this if it's failing without...uh, any issues?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.09</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>I can't do a backtrace in gdb</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>for one, step-g produces a ton of output when it's working correctly ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:34.31</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>you can put a breakpoint on main (b main) and step forward ('n' command for "next instruction")</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:34.51</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>or "b whatever" to break on any arbitrary function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:35.08</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it'll take me a while to get a rebuild with debugging enabled myself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:36.43</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: Is it cool if we tackle this tomorrow then? It's 12:30a.m here and I have a few more things to do before bed =x</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:37.55</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>we're apparently on the same coast, sounds good to me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.50</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>k, see you then. I'm usually awake in the afternoon lol</tt></td></tr>
-<tr><td><tt>04:42.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:55.02</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>brlcad: build.log <a href="http://paste.pocoo.org/show/446487/">http://paste.pocoo.org/show/446487/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:56.03</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>er, you probably wanted me to use 'make -k'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:00.42</tt></td><td><font color="#b1b15d"><tt>bhinesley</tt></font></td><td width="100%"><tt>'make -k' build log: <a href="http://paste.pocoo.org/show/446495/">http://paste.pocoo.org/show/446495/</a></tt></td></tr>
-<tr><td><tt>05:34.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>06:26.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
-<tr><td><tt>07:10.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>08:47.51</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Abby Moss 07<a href="http://brlcad.org">http://brlcad.org</a> * r3037 10/wiki/Main_Page:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>08:47.59</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r45630 10/brlcad/trunk/src/libbu/CMakeLists.txt: Windows MSVC: because of GetMappedFileName() in fchmod.c link with psapi.lib</tt></td></tr>
-<tr><td><tt>08:50.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.229.132)</font></tt></td></tr>
-<tr><td><tt>08:50.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>09:33.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (DC@173.231.40.98)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:42.12</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: yeah, premature.&nbsp;&nbsp;Was going on your initial report that it worked</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:47.55</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>starseeker: I'll hold off until we have it working next time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:47.59</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>er brlcad rather</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:48.05</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is talking to himself</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:58.57</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>mm, you sent the message before I'd even started testing :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:01.07</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>2pm, didn't test and commit till 5pm .. but even if if it was golden, I'd suggest we send them revision numbers at stepping points</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:01.17</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>bhinesley: thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:20.58</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3038 10/wiki/Main_Page: Reverted edits by [[Special:Contributions/Abby Moss|Abby Moss]] ([[User talk:Abby Moss|Talk]]); changed back to last version by [[User:Sean|Sean]]</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:21.20</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/block: blocked [[User:Abby Moss]] with an expiry time of infinite (account creation disabled, e-mail blocked)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:27.48</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45631 10/brlcad/trunk/src/ (CMakeLists.txt libbu/CMakeLists.txt): set PSAPI_LIB variable so we can consolidate into the same since MSVC block</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.28</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>brlcad: setting of the MSVC libraries isn't very consistent in the cmake files, see e.g. librt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:34.54</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.57</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45632 10/brlcad/trunk/src/other/step/src/ (62 files in 7 dirs): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.57</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: eliminate all of the __OSTORE__ sections. considered dead code because there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.57</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: was no managed way to enable those code sections. appears to be a binding to a</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.57</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: commercial API (Progress Software Corp's ObjectStore product), so remove in</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.57</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: favor of simplified code maintenance and reduced complexity. removes almost 3k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.58</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: lines of code.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:36.08</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>d_rossberg: I know, the evils of letting a "platform" identifier in for a few things makes it really easy to abuse/reuse in more places than it should</tt></td></tr>
-<tr><td><tt>12:36.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@201.53.206.27)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:41.00</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45633 10/brlcad/trunk/src/ (CMakeLists.txt librt/CMakeLists.txt): similar to libbu, consolidate the msvc library settings into the same place where winsock gets set, consistently just use library names in ADDLIB</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:49.09</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm sure the intention was to go back one day, some day, and fix them proper when they were first written... ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:53.18</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45634 10/brlcad/trunk/CMakeLists.txt: typo?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:54.10</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>OK</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.31</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45635 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.31</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: consistently default all builds (particularly fresh svn checkouts) to a system</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.32</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: install into /usr/brlcad using rel- for releases and dev- for developer builds.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.32</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: could probably even just key off of the patch number but leave as-is for now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.32</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: this will probably require windows to set the install prefix given there usually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.32</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: is no /usr path but that is needed for windows anyways for release builds.</tt></td></tr>
-<tr><td><tt>13:01.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.46</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45636 10/brlcad/trunk/TODO: remove all of the MSVC platform sections in the CMakeLists.txt files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.49</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: application received!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:08.44</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45637 10/brlcad/trunk/TODO: demote a lot of tasks that won't likely be completed by next month. leave most of the build-related tasks since we're moving towards eventual autotools removal.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:09.37</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45638 10/brlcad/trunk/TODO: cp command now redraws once again, along with a slew of other ged commands. if one of the argv parameters is displayed, it gets redrawn.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:14.57</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45639 10/brlcad/trunk/BUGS: rt displays output once again, button bindings should be fixed, and rt after cd in mged on windows should work once again</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:34.45</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45640 10/brlcad/trunk/src/conv/step/step-g.cpp: ws style</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45641 10/brlcad/trunk/src/conv/step/ (6 files): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: got step-g to crash with a couple input test files, one crashing on Surface.h:48</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: implying some stack corruption or memory issue. so add protections all the way</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: up the stack to make sure we didn't run out of memory or dereference a null</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: pointer at some point. probably doesn't get to the heart of the crash, but</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: should help isolate it and help halt sooner (and hopefully more gracefully than</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.03</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: a crash).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:40.34</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45642 10/brlcad/trunk/src/other/libpng/depcomp: depcomp is generated, remove from checkin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:42.35</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45643 10/brlcad/trunk/src/other/libpng/config.h.in: autoheader made config.h.in, also remove</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:42.44</tt></td><td><font color="#d9d972"><tt>abhi2011</tt></font></td><td width="100%"><tt>thanks brlcad :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.51</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45644 10/brlcad/trunk/TODO: libpng needs backported fixes for autotools</tt></td></tr>
-<tr><td><tt>14:30.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.28</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: ah, right - I thought they might want to play with the patch at that point.&nbsp;&nbsp;Was hoping they might do some of the work for us :-P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:36.48</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: you really want to go into /usr/brlcad for dev builds by default?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:36.57</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">was very intentionally staying out of system dirs</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:47.00</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45645 10/brlcad/trunk/CMakeLists.txt: Wasn't a typo - to do what that previous edit looked like it wanted to do, ELSEIF (I think) is what is needed. Instead of that, just turn on DEBUG_BUILD for everything except Release</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:47.26</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">isn't even sure how to test for Microsoft system libraries...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:49.16</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45646 10/brlcad/trunk/misc/enigma/enigma.c: clang didn't like argc not having a type</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:52.13</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">isn't sure he agrees with making the MSVC specific stuff into tests - that'll just lengthen the configure process even further, and the probability is very high that those options will be useless everywhere else (or even worse, might mean something altogether different, given how foreign MSVC is to other environments)</font></tt></td></tr>
-<tr><td><tt>14:58.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad packrat (~packrator@99-67-225-40.lightspeed.livnmi.sbcglobal.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:04.02</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45647 10/brlcad/trunk/src/other/libpng/CMakeLists.txt: Add the new, improved libpng CMakeLists.txt macros from our 1.4.x build - this is what should go back to libpng as a proposed patch.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:21.22</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45648 10/brlcad/trunk/src/other/ (3 files in 2 dirs): OK, I think we've gotten rid of 'em now - try again to remove scl_string</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.24</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: having a default checkout that doesn't perform a system install breaks convention in itself, /usr/local is usually the default which is where our /usr/brlcad becomes preferred so we're protected</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:35.50</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>there's also a portability issue for some platforms (like aix, hpux, some linux, and few others) where binaries are not relocatable by default, so if you installed into your home directory, you can't just copy that (e.g., into /usr/brlcad) and have it work, have to set library paths and our brlcad root/data paths in the environment</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:36.57</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>right, but I had figured when doing a debug (e.g. development) build installing in /usr/brlcad was less likely to be important (I personally never install there while doing development)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:36.59</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>plus it matches our project history, we consistently install into /usr/brlcad by default -- others can set a prefix</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:37.40</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>to a user checking out from svn, there is a surprise that I just did a checkout, compile, install ... and it's not installed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:37.57</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>at least not where I'd expect it, not in a system location</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:38.26</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>well... I suppose I could go back to defaulting to /usr/brlcad if CMAKE_BUILD_TYPE is not set...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:38.38</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>and you should be installing into /usr/brlcad ... else we end up with mysterious path problems when mged is attempting to load :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:39.11</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;snort&gt; I would have thought installing somewhere other than /usr/brlcad would be MORE likely to highlight path problems, not less</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:39.31</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>release going to /usr/brlcad/rel-VERSION and non-release going to /usr/brlcad/dev-VERSION is actually a nice consistency</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:40.10</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it did highlight problems.. the /usr/brlcad one didn't work :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:40.16</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I can live with it, I just liked the idea of doing a checkout/build/install for development purposes without having to worry about system permissions</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:41.39</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>end-user convenience should always take priority over developer convenience</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:41.48</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm a stout believer in that stance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:42.03</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>end users use RPMs or package managers :-P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:42.05</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>users get the shaft WAY too often in open source</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:42.14</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>end users include anyone that's not a developer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:43.57</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>which includes users that checkout from the repository, or that would pick up a nightly source tarball...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:44.47</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>still, it's more just about not *intentionally* making things more difficult or compilicated when it's just a matter of convention or a few keystrokes more or a few more lines in build files to help make it easier</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.34</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shrugs.  OK, I can live with dev-VERSION.  </font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.29</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so next topic? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.41</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd expect microsoft system libs are tested for like any other library, no?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.49</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... idea.&nbsp;&nbsp;If I look for a BRL-CAD_build_settings.cmake file early in the CMakeLists.txt and load it if found, that would provide a way for a developer to customize things without disturbing end-users - would that be OK?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.35</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I suppose there might be a way to test for Microsoft librarys - I have no idea if the standard CMake mechanisms will do it though.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.12</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>Maybe we can wrap that set of tests in in MSVC conditional in the toplevel so we don't waste time with them on Mac/Linux at least?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.28</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>the issue is really what happens to a default user -- if someone actively sets up their config, that's akin to setting -Dvar=val or --prefix options and it's peachy keen</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.54</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>awesome - I mainly want a way to minimize the number of config options/flags I have to pass over and over</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.01</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.06</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>perfectly reasonable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.18</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>when was the last time you built the linux kernel (by hand)?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.24</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>the configure wrapper helps some there, but not really enough</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.46</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>they had a pretty neat setup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.46</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: define by hand - using their grapical config tool, or item-by-item?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.55</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>either really</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.00</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so you config the kernel, right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.07</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it ends up with a config file with all your settings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.16</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah - usually whenever I get a new machine, so the gentoo kernel has the right modules</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.20</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.23</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so even after config is done, you can go in, edit it, and run with those new settings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.37</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>something like that would be awesome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.58</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - CMakeCache.txt does some of that, but not "up front" before a configure is run</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.13</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>"cmake path" resulting in a .GLOBAL would be fun :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.43</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: in case I haven't mentioned it - you can hand edit the CMakeCache.txt file in the toplevel build to change options</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I think linux uses .CONFIG?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:55.20</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it's configurable iirc, but defaults to something like that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:55.23</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>for post configure settings caching, CMakeCache.txt should have everything you could want</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.03</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so common use case that comes to mind .. we have all these tests for opengl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.12</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>user runs cmake, it fails the test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.16</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>but they know they have it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.58</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>sure enough, "make" just skips our ogl code; so they go in and edit the build config file, turn ogl on, re-run make .. and it builds</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.04</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>something like that doable?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.21</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah - that's what I usually do if I forget to turn something on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so maybe just a better name than CMakeCache.txt :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.01</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>or is that literally every function/header/feature test?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.37</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: heh - hardwired, I think.&nbsp;&nbsp;But my point wasn't that I want that ability AFTER running cmake - I want to always pass (say) BRLCAD-ENABLE_ALL_LOCAL_LIBS=ON without having to type it every time, and without having to edit the cache file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.01</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>blocking the MSVC-only tests would be fine -- that's what I was thinking -- it's more that they should still be tested for like any other feature since they're just as ephemeral as any of the other libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.25</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>winsock2, for example, is one of several incarnations of the windows networking interface</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:00.41</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: right, I got that -- but I figured that should just be a matter of (re-)loading it during cmake for defaults as well as during make to drive compilation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.08</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>so if CMakeCache.txt is hardwired, maybe we could output just the high-level options we care about to a different config file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.15</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.16</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, the summary items</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.21</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>let me experiment a bit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.59</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">likes the .GLOBAL/_GLOBAL inside "joke"</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.02</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>this is over and above anything autotools ever provided (unless you count storing a configure line in a .sh file) so it's probably not a high priority - I'm just lazy about typing options :-P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.18</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>it is above it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.27</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>something I thought about adding a few times, though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.29</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces a little - maybe BRL-CAD_CONFIG.GLOBAL</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.15</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>users already know they're in a brl-cad checkout, no need to remind them in all the file names :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.38</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>even just CONFIG would probably be fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.59</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hadn't envisioned putting it in the checkout or even the build dir - this would be something that could be stored (optionally) in the parent directory</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.28</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I didn't mean put it in checkout</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.40</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>file generated by cmake, reused by cmake and make</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.00</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes his head - I want to be able to use this to set options before I ever run CMake at all</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.36</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>nothing I've said precludes that&nbsp;&nbsp;???</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.00</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>cmake can't generate a file in the parent directory - oh, wait</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.08</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm.&nbsp;&nbsp;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.30</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I presume by parent you mean user's home dir or something?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.35</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>basically</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.49</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>one config file to rule them all :-P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.14</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>I guess we can check for and read that in, then generate something in the build directory for subsequent use in that run</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.23</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, that's a little odd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.45</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: might be odd, but it would be completely harmless unless someone specifically sought it out and set it up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.08</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, but it can be turned into a proper feature and achieve the same result</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.48</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... I guess I'm not following</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.13</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>still thinking to the linux kernel as a model to follow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.44</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>I can craft up my own CONFIG file and specify it to the build (from wherever really)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.01</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>or I can run the interactive build (cmake .) and it'll dump out a CONFIG file for me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.15</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>which I can subsequently reuse if I wanted (from anywhere)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.21</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>edit to heart's content</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.32</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>or ignore and the build just uses it for settings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:11.12</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>familiar, time tested, pretty simple</tt></td></tr>
-<tr><td><tt>16:16.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>16:26.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
-<tr><td><tt>16:34.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@117.192.146.20)</font></tt></td></tr>
-<tr><td><tt>17:09.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.55</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45649 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.55</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Add a dirt-simple way to allow developers to inject their own default settings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.55</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: into the CMake process - eventually we may want to do something more</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.55</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: sophisticated, but this is a simple way to do things like enable all local</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.55</tt></td><td><font color="#7676e0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: libraries by default.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.40</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: what does it mean to be a release build?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:35.03</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>is that merely synonymous with non-debug? .. or what if I wanted a debuggable release build?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.47</tt></td><td><font color="#62bb62"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: so unexpected behavior .. cd brlcad ; mkdir .cmake ; cd .cmake ; cmake .. ; echo "why aren't there any build files output here?"</tt></td></tr>
-<tr><td><tt>19:56.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@201.53.206.27)</font></tt></td></tr>
-<tr><td><tt>20:08.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tharis20_ (~tharis@2.83.244.20)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.19</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>starseeker: right now it's mostly /usr/brlcad/rel* paths and turning on optimization by default</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.20</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">formally acknowledges not outputing build files in expected directory if there is a CMakeCache.txt file in the source dir is Not Good</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.33</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: right now it's mostly /usr/brlcad/rel* paths and turning on optimization by default</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.38</tt></td><td><font color="#6ccdcd"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is talking  to himself again</font></tt></td></tr>
-<tr><td><tt>23:29.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LainIwakuraX (~yuki@d24-57-80-191.home.cgocable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:32.42</tt></td><td><font color="#cc6bcc"><tt>LainIwakuraX</tt></font></td><td width="100%"><tt>brlcad: I see a lot of updates to step stuff in the latest rev. sorry I wasn't here in the afternoon to help =(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.28</tt></td><td><font color="#d1d16e"><tt>tharis20</tt></font></td><td width="100%"><tt>brlcad: in the expectations it is said that it is expected students to work 40 hours a week, the same as a full-time job</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.50</tt></td><td><font color="#d1d16e"><tt>tharis20</tt></font></td><td width="100%"><tt>but SOCIS extends until the end of October and classes begin in mid-September</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>00:46.55</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kunigami_
+(~kunigami@201.53.206.27)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:39.59</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>starseeker: I can build BRL-CAD as a whole, if
+you check my patch it's the environment</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:40.28</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: what behavior do you see if you
+try the above?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:40.43</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>1 sec</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:41.00</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>yeah I get that too</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:41.19</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hrm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:42.12</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>how do I track down that sort of thing?
+=/</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:42.26</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: gdb to start with</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:42.52</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>figure out which call is producing the error,
+examine the data being fed in and why it's wiping out</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:43.41</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>ah okay..first time working with gdb, I'll try
+to get this sorted</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:43.56</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it's a good skill to have :-)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:44.05</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bt (backtrace) is quite useful</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:44.44</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>ah I think I know what may be causing this
+bug, I can go fix it in source</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:59.29</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>It looks like somewhere a std::string is being
+assigned to NULL when it probably should be ""</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:59.43</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>this might take a few minutes to hunt
+down</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:00.00</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, I thought it might be something like
+this:  <a href=
+"http://stackoverflow.com/questions/2407711/avoiding-improper-stdstring-initialization-with-null-const-char-using-g">
+http://stackoverflow.com/questions/2407711/avoiding-improper-stdstring-initialization-with-null-const-char-using-g</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:00.15</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>possibly SCLstring tolerated NULL as an
+initialization input...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.13</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>mhm. I found a few spots where I said "new
+std::string" and I changed those to initialize with "" for
+sure...but that didn't fix it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.29</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I'll look around</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.33</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: I probably added a few of those
+myself...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.45</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>=x</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.12</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bhinesley * r45628
+10/brlcad/trunk/src/libged/edit.c:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.12</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Tracked down an issue where the last
+object wasn't being added, and the last</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.12</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: node in the linked list was empty.
+Added support for numeric args (as abs coord,</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.12</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: rel pos, or obj offset).
+Added/renamed constants for specifying coordinates, so</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.12</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: that significance goes from left to
+right:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.13</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD:
+'%s/EDIT\([[:upper:]]\)_COORD/EDIT_COORD_\1/g'. Several
+smaller,</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:06.14</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: formatting/comment
+corrections.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:20.07</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>starseeker: If you find the spot where it's
+being initialized to null let me know, I haven't found it yet
+=(</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:21.08</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: it might even be a function of
+what it's parsing... my C++ foo is a bit weak,
+unfortunately</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:21.38</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>probably very simple once we figure it
+out</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:22.43</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>yeah, I know that when I see it I'll know it
+lol it's just finding it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:23.04</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>gdb gives me some info..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:23.14</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>STEPWrapper::load(std::basic_string&lt;char,
+std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;&amp;)
+()</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:23.28</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I can't find STEPWrapper::load anywhere
+though</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:24.42</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">wonders if ddd might be
+helpful...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:25.51</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt><span class="c7">spent about a hour wrestling
+ddd crashes today</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:26.57</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: when in doubt: `find . -name
+"*.cpp" -exec grep "STEPWrapper::load" --with-filename {}
+\;`</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:28.26</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>or use ctags (even better)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:31.00</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>doesn't bring up anything =(</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:31.22</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I usually use: grep -H -r "&lt;thing to search
+for&gt;" . | grep -v svn | less</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:32.42</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>oho...may have found it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:33.17</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>ugh it was in a different directory! I forgot
+two were involved in my editing process...this should be easier
+now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:43.36</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>starseeker: I've found the offending code I'm
+in the process of debugging it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:45.27</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Registry::AddType,
+clstepcore/Registry.inline.cc:221 ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:45.33</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>No</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:45.44</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>nmm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:45.53</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>conv/step/STEPWrapper.cpp</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:45.56</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>the load function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:45.57</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:15.06</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>okay the "offending" code was sort of
+offending, after travelling to 4 different functions I found the
+real offending code =P working on it..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:36.04</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>starseeker: I fixed that bug, but now we get a
+segfault</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:36.13</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>Reading Data from
+../brlcad/src/other/step/data/ap203/cube1.p21...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:36.16</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>segfault</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:38.20</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker, probably a little premature on the
+cross-post, no? :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:39.00</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>best when collaborating to announce after
+we've fully vetted/tested ourselves</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:41.04</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>interesting that I didn't run into a failure
+on my test</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:41.27</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">tests that particular p21
+file</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:41.31</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>yes, it is curious but the bug I found would
+have indeed failed on something eventually =P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:41.35</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>the line said</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:41.43</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>std::string schmn = NULL</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:41.53</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>that won't work</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:44.16</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:44.22</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm, BAD cmake rebuild</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:48.55</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>Uhh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:49.05</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I got it to work without a segfault</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:49.20</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>it says Reading Data from
+../brlcad/src/other/step/data/ap203/cube1.p21...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:49.33</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>Then it says basic_string::_S_construct null
+not valid</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:49.38</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>then the program exits normally...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:49.45</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>(according to gdb)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:53.34</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>brlcad: what gcc do most devs use?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:53.51</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, my test of the patch was quite flawed,
+two build systems got in the way of each other</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:53.54</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>I figured I'd install a lower version so I can
+use strict</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.12</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bhinesley: a pretty wide variety,
+actually</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.20</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>just nobody on gcc 4.6 yet (except you
+;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.26</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.35</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">uses 4.2 (fbsd standard) and
+4.1 (apple standard) mostly</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.36</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's been out for about a month</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.54</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bhinesley: have you rebuilt lately?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.15</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>doing so now, but strict is off</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.20</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I fixed a slew of the ones abhit reported over
+the weekend, about a thousand issues</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.27</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>nice</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.28</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>save a full build log</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.46</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>make 2&gt;&amp;1 | tee build.log</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.02</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>okay, in just a bit</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.29</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>I just did a svn update... you guys were busy
+over the weekend :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.38</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'm sure I didn't get everything since I don't
+have the compiler warning if I missed anything, but it should be
+far better</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.51</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt><span class="c7">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.57</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>brlcad: I put gcc4.7 on crit if you get the
+urge to play</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.59</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>I saw the logs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:57.09</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>most oft he things it's warning about are
+really trivial to fix</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:57.26</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>vars not being used, print specifier
+consistency</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:57.37</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: good to know, thanks</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:57.51</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">reproduces the step-g
+failure</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:58.23</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: I have that fixed to not crash,
+cleaning up some things and submitting a patch</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:01.44</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: okay, great .. so I shouldn't go
+debugging</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:08.36</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: Patch is submitted...like I said in
+the notes though even though there isn't a crash I still don't know
+if it "works"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:08.54</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>If you could test that it'd be great =) I
+haven't used this program before, I don't know what to expect from
+it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:11.32</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>LainIwakuraX: what was the issue with
+STEPWrapper::load() ?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:12.06</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>changing from a std::string&amp; to a
+std::string merely makes it make a copy (alloc)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:12.27</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if that fixes a crash, some further
+investigating is probably warranted</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:12.35</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: Uh, that shouldn't have been changed-
+that was a test</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:12.46</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: debugging is not enabled by
+default?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:13.30</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>patch files are text, you should review them
+before posting .. just like you should review the diff before a
+commit too</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:13.42</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>svn revert will restore a file to an unedited
+state</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:14.09</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"svn diff | less" and you can manually inspect
+what changes are getting included</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:14.41</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: if you give me two seconds I'll upload
+a better patch file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:14.45</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:15.20</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also make sure you're up-to-date (svn up) so
+the line offsets are correct</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:17.20</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>hm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:17.36</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I put my &amp;'s on string, not the variable
+name..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:18.05</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>it was string &amp;step_file but now it's
+string&amp; step_file..that's fine though</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:18.20</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they are equivalent</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:18.24</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I know</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:18.31</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>that's why I said it's fine =P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:18.36</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:19.22</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>convention is usually to bind the type
+together with c++ but separate them for c</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:19.34</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so string&amp; is peachy for scl</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:19.39</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:19.48</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>k the better patch is up there</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:20.06</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">gets</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:21.54</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I'll brb in ~10 mins, let me know how it
+goes</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:22.25</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>testing now</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:23.18</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so it no longer hard-crashes, but it still
+exits due to a NULL string</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:24.06</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>looks like it's maybe on a static</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:25.46</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>will have to debug more tomorrow.. because
+*somebody* thought defaulting to no debug symbol compilation was a
+good idea  *ahem* :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:26.41</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>basically, every place a std::string is
+instantiated, it needs to be initialized to be compatible with what
+it was assuming</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45629
+10/brlcad/trunk/src/other/step/src/ (5 files in 2 dirs):</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: apply sf patch 3377904 (fixed a bug
+with step-g and null strings) from Zach</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Easterbrook ( lainiwakurax ) which
+indeed fixes the step-g crash, but still</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: doesn't restore it to a functional
+status. aborts with a message about a NULL</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: std::string.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.23</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I'm back</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.59</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: How can we test this if it's failing
+without...uh, any issues?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:33.09</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>I can't do a backtrace in gdb</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:33.51</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for one, step-g produces a ton of output when
+it's working correctly ;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:34.31</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can put a breakpoint on main (b main) and
+step forward ('n' command for "next instruction")</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:34.51</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or "b whatever" to break on any arbitrary
+function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:35.08</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it'll take me a while to get a rebuild with
+debugging enabled myself</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:36.43</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: Is it cool if we tackle this tomorrow
+then? It's 12:30a.m here and I have a few more things to do before
+bed =x</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:37.55</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we're apparently on the same coast, sounds
+good to me</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:38.50</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>k, see you then. I'm usually awake in the
+afternoon lol</tt></td>
+</tr>
+<tr>
+<td><tt>04:42.03</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:55.02</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>brlcad: build.log <a href=
+"http://paste.pocoo.org/show/446487/">http://paste.pocoo.org/show/446487/</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:56.03</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>er, you probably wanted me to use 'make
+-k'</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:00.42</tt></td>
+<td><span class="c8"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>'make -k' build log: <a href=
+"http://paste.pocoo.org/show/446495/">http://paste.pocoo.org/show/446495/</a></tt></td>
+</tr>
+<tr>
+<td><tt>05:34.01</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:26.18</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad d_rossberg
+(~rossberg@BZ.BZFLAG.BZ)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:10.26</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@193.254.217.44)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>08:47.51</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Abby Moss 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3037
+10/wiki/Main_Page:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>08:47.59</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03d_rossberg * r45630
+10/brlcad/trunk/src/libbu/CMakeLists.txt: Windows MSVC: because of
+GetMappedFileName() in fchmod.c link with psapi.lib</tt></td>
+</tr>
+<tr>
+<td><tt>08:50.13</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav
+(~Stattrav@122.167.229.132)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:50.13</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:33.19</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DarkCalf
+(DC@173.231.40.98)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:42.12</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: yeah, premature.  Was going on your
+initial report that it worked</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:47.55</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>starseeker: I'll hold off until we have it
+working next time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:47.59</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>er brlcad rather</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:48.05</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">is talking to
+himself</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>11:58.57</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mm, you sent the message before I'd even
+started testing :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:01.07</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>2pm, didn't test and commit till 5pm .. but
+even if if it was golden, I'd suggest we send them revision numbers
+at stepping points</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:01.17</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bhinesley: thanks</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:20.58</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Sean 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3038
+10/wiki/Main_Page: Reverted edits by [[Special:Contributions/Abby
+Moss|Abby Moss]] ([[User talk:Abby Moss|Talk]]); changed back to
+last version by [[User:Sean|Sean]]</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:21.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Sean 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r0
+10/wiki/Special:Log/block: blocked [[User:Abby Moss]] with an
+expiry time of infinite (account creation disabled, e-mail
+blocked)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:27.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45631
+10/brlcad/trunk/src/ (CMakeLists.txt libbu/CMakeLists.txt): set
+PSAPI_LIB variable so we can consolidate into the same since MSVC
+block</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:30.28</tt></td>
+<td><span class="c11"><tt>d_rossberg</tt></span></td>
+<td width="100%"><tt>brlcad: setting of the MSVC libraries isn't
+very consistent in the cmake files, see e.g. librt</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:34.54</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.57</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45632
+10/brlcad/trunk/src/other/step/src/ (62 files in 7 dirs):</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.57</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: eliminate all of the __OSTORE__
+sections. considered dead code because there</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.57</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: was no managed way to enable those
+code sections. appears to be a binding to a</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.57</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: commercial API (Progress Software
+Corp's ObjectStore product), so remove in</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.57</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: favor of simplified code maintenance
+and reduced complexity. removes almost 3k</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:35.58</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: lines of code.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:36.08</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>d_rossberg: I know, the evils of letting a
+"platform" identifier in for a few things makes it really easy to
+abuse/reuse in more places than it should</tt></td>
+</tr>
+<tr>
+<td><tt>12:36.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kunigami_
+(~kunigami@201.53.206.27)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:41.00</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45633
+10/brlcad/trunk/src/ (CMakeLists.txt librt/CMakeLists.txt): similar
+to libbu, consolidate the msvc library settings into the same place
+where winsock gets set, consistently just use library names in
+ADDLIB</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:49.09</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'm sure the intention was to go back one day,
+some day, and fix them proper when they were first written...
+;)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:53.18</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45634
+10/brlcad/trunk/CMakeLists.txt: typo?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:54.10</tt></td>
+<td><span class="c11"><tt>d_rossberg</tt></span></td>
+<td width="100%"><tt>OK</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:00.31</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45635
+10/brlcad/trunk/CMakeLists.txt:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:00.31</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: consistently default all builds
+(particularly fresh svn checkouts) to a system</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:00.32</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: install into /usr/brlcad using rel-
+for releases and dev- for developer builds.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:00.32</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: could probably even just key off of
+the patch number but leave as-is for now.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:00.32</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: this will probably require windows to
+set the install prefix given there usually</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:00.32</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: is no /usr path but that is needed
+for windows anyways for release builds.</tt></td>
+</tr>
+<tr>
+<td><tt>13:01.29</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:01.46</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45636
+10/brlcad/trunk/TODO: remove all of the MSVC platform sections in
+the CMakeLists.txt files</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:01.49</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>abhi2011: application received!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:08.44</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45637
+10/brlcad/trunk/TODO: demote a lot of tasks that won't likely be
+completed by next month. leave most of the build-related tasks
+since we're moving towards eventual autotools removal.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:09.37</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45638
+10/brlcad/trunk/TODO: cp command now redraws once again, along with
+a slew of other ged commands. if one of the argv parameters is
+displayed, it gets redrawn.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:14.57</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45639
+10/brlcad/trunk/BUGS: rt displays output once again, button
+bindings should be fixed, and rt after cd in mged on windows should
+work once again</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:34.45</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45640
+10/brlcad/trunk/src/conv/step/step-g.cpp: ws style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45641
+10/brlcad/trunk/src/conv/step/ (6 files):</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: got step-g to crash with a couple
+input test files, one crashing on Surface.h:48</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: implying some stack corruption or
+memory issue. so add protections all the way</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: up the stack to make sure we didn't
+run out of memory or dereference a null</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: pointer at some point. probably
+doesn't get to the heart of the crash, but</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: should help isolate it and help halt
+sooner (and hopefully more gracefully than</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:39.03</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: a crash).</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:40.34</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45642
+10/brlcad/trunk/src/other/libpng/depcomp: depcomp is generated,
+remove from checkin</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:42.35</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45643
+10/brlcad/trunk/src/other/libpng/config.h.in: autoheader made
+config.h.in, also remove</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:42.44</tt></td>
+<td><span class="c12"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>thanks brlcad :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:50.51</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r45644
+10/brlcad/trunk/TODO: libpng needs backported fixes for
+autotools</tt></td>
+</tr>
+<tr>
+<td><tt>14:30.38</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:35.28</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: ah, right - I thought they might want
+to play with the patch at that point.  Was hoping they might do
+some of the work for us :-P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:36.48</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: you really want to go into /usr/brlcad
+for dev builds by default?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:36.57</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">was very intentionally
+staying out of system dirs</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:47.00</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45645
+10/brlcad/trunk/CMakeLists.txt: Wasn't a typo - to do what that
+previous edit looked like it wanted to do, ELSEIF (I think) is what
+is needed. Instead of that, just turn on DEBUG_BUILD for everything
+except Release</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:47.26</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">isn't even sure how to test
+for Microsoft system libraries...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:49.16</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45646
+10/brlcad/trunk/misc/enigma/enigma.c: clang didn't like argc not
+having a type</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:52.13</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">isn't sure he agrees with
+making the MSVC specific stuff into tests - that'll just lengthen
+the configure process even further, and the probability is very
+high that those options will be useless everywhere else (or even
+worse, might mean something altogether different, given how foreign
+MSVC is to other environments)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:58.22</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad packrat
+(~packrator@99-67-225-40.lightspeed.livnmi.sbcglobal.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:04.02</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45647
+10/brlcad/trunk/src/other/libpng/CMakeLists.txt: Add the new,
+improved libpng CMakeLists.txt macros from our 1.4.x build - this
+is what should go back to libpng as a proposed patch.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:21.22</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45648
+10/brlcad/trunk/src/other/ (3 files in 2 dirs): OK, I think we've
+gotten rid of 'em now - try again to remove scl_string</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:33.24</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: having a default checkout that
+doesn't perform a system install breaks convention in itself,
+/usr/local is usually the default which is where our /usr/brlcad
+becomes preferred so we're protected</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:35.50</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there's also a portability issue for some
+platforms (like aix, hpux, some linux, and few others) where
+binaries are not relocatable by default, so if you installed into
+your home directory, you can't just copy that (e.g., into
+/usr/brlcad) and have it work, have to set library paths and our
+brlcad root/data paths in the environment</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:36.57</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>right, but I had figured when doing a debug
+(e.g. development) build installing in /usr/brlcad was less likely
+to be important (I personally never install there while doing
+development)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:36.59</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>plus it matches our project history, we
+consistently install into /usr/brlcad by default -- others can set
+a prefix</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:37.40</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>to a user checking out from svn, there is a
+surprise that I just did a checkout, compile, install ... and it's
+not installed</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:37.57</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at least not where I'd expect it, not in a
+system location</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:38.26</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>well... I suppose I could go back to
+defaulting to /usr/brlcad if CMAKE_BUILD_TYPE is not
+set...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:38.38</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and you should be installing into /usr/brlcad
+... else we end up with mysterious path problems when mged is
+attempting to load :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:39.11</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>&lt;snort&gt; I would have thought installing
+somewhere other than /usr/brlcad would be MORE likely to highlight
+path problems, not less</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:39.31</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>release going to /usr/brlcad/rel-VERSION and
+non-release going to /usr/brlcad/dev-VERSION is actually a nice
+consistency</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:40.10</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it did highlight problems.. the /usr/brlcad
+one didn't work :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:40.16</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">nods - I can live with it, I
+just liked the idea of doing a checkout/build/install for
+development purposes without having to worry about system
+permissions</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:41.39</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>end-user convenience should always take
+priority over developer convenience</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:41.48</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'm a stout believer in that stance</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:42.03</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>end users use RPMs or package managers
+:-P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:42.05</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>users get the shaft WAY too often in open
+source</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:42.14</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>end users include anyone that's not a
+developer</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:43.57</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which includes users that checkout from the
+repository, or that would pick up a nightly source
+tarball...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:44.47</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>still, it's more just about not
+*intentionally* making things more difficult or compilicated when
+it's just a matter of convention or a few keystrokes more or a few
+more lines in build files to help make it easier</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:48.34</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">shrugs. OK, I can live with
+dev-VERSION.</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:49.29</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so next topic? :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:49.41</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'd expect microsoft system libs are tested
+for like any other library, no?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:49.49</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm... idea.  If I look for a
+BRL-CAD_build_settings.cmake file early in the CMakeLists.txt and
+load it if found, that would provide a way for a developer to
+customize things without disturbing end-users - would that be
+OK?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:50.35</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I suppose there might be a way to test
+for Microsoft librarys - I have no idea if the standard CMake
+mechanisms will do it though.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:51.12</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Maybe we can wrap that set of tests in in MSVC
+conditional in the toplevel so we don't waste time with them on
+Mac/Linux at least?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:51.28</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the issue is really what happens to a default
+user -- if someone actively sets up their config, that's akin to
+setting -Dvar=val or --prefix options and it's peachy
+keen</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:51.54</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>awesome - I mainly want a way to minimize the
+number of config options/flags I have to pass over and
+over</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.01</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.06</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>perfectly reasonable</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.18</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>when was the last time you built the linux
+kernel (by hand)?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.24</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the configure wrapper helps some there, but
+not really enough</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.46</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they had a pretty neat setup</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.46</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: define by hand - using their grapical
+config tool, or item-by-item?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:52.55</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>either really</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.00</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you config the kernel, right?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.07</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it ends up with a config file with all your
+settings</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.16</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah - usually whenever I get a new machine,
+so the gentoo kernel has the right modules</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.20</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>right</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.23</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so even after config is done, you can go in,
+edit it, and run with those new settings</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.37</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>something like that would be awesome</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:53.58</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">nods - CMakeCache.txt does
+some of that, but not "up front" before a configure is
+run</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:54.13</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"cmake path" resulting in a .GLOBAL would be
+fun :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:54.43</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: in case I haven't mentioned it - you
+can hand edit the CMakeCache.txt file in the toplevel build to
+change options</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:54.44</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I think linux uses .CONFIG?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:55.20</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's configurable iirc, but defaults to
+something like that</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:55.23</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>for post configure settings caching,
+CMakeCache.txt should have everything you could want</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:56.03</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so common use case that comes to mind .. we
+have all these tests for opengl</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:56.12</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>user runs cmake, it fails the test</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:56.16</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but they know they have it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:56.58</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure enough, "make" just skips our ogl code;
+so they go in and edit the build config file, turn ogl on, re-run
+make .. and it builds</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:57.04</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>something like that doable?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:57.21</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah - that's what I usually do if I forget to
+turn something on</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:57.44</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so maybe just a better name than
+CMakeCache.txt :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:58.01</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or is that literally every
+function/header/feature test?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:58.37</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: heh - hardwired, I think.  But my
+point wasn't that I want that ability AFTER running cmake - I want
+to always pass (say) BRLCAD-ENABLE_ALL_LOCAL_LIBS=ON without having
+to type it every time, and without having to edit the cache
+file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:59.01</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>blocking the MSVC-only tests would be fine --
+that's what I was thinking -- it's more that they should still be
+tested for like any other feature since they're just as ephemeral
+as any of the other libs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:59.25</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>winsock2, for example, is one of several
+incarnations of the windows networking interface</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:00.41</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: right, I got that -- but I figured
+that should just be a matter of (re-)loading it during cmake for
+defaults as well as during make to drive compilation</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:01.08</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so if CMakeCache.txt is hardwired, maybe we
+could output just the high-level options we care about to a
+different config file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:01.15</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:01.16</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>basically, the summary items</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:01.21</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>let me experiment a bit</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:01.59</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">likes the .GLOBAL/_GLOBAL
+inside "joke"</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:02.02</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>this is over and above anything autotools ever
+provided (unless you count storing a configure line in a .sh file)
+so it's probably not a high priority - I'm just lazy about typing
+options :-P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:02.18</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it is above it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:02.27</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>something I thought about adding a few times,
+though</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:02.29</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">winces a little - maybe
+BRL-CAD_CONFIG.GLOBAL</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:03.15</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>users already know they're in a brl-cad
+checkout, no need to remind them in all the file names :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:03.38</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even just CONFIG would probably be
+fine</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:03.59</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">hadn't envisioned putting it
+in the checkout or even the build dir - this would be something
+that could be stored (optionally) in the parent
+directory</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:04.28</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I didn't mean put it in checkout</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:04.40</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>file generated by cmake, reused by cmake and
+make</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:05.00</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">shakes his head - I want to
+be able to use this to set options before I ever run CMake at
+all</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:05.36</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nothing I've said precludes that 
+???</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:06.00</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cmake can't generate a file in the parent
+directory - oh, wait</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:06.08</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm.  </tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:06.30</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I presume by parent you mean user's home dir
+or something?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:06.35</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>basically</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:06.49</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>one config file to rule them all :-P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:07.14</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I guess we can check for and read that in,
+then generate something in the build directory for subsequent use
+in that run</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:07.23</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm, that's a little odd</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:07.45</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: might be odd, but it would be
+completely harmless unless someone specifically sought it out and
+set it up</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:08.08</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure, but it can be turned into a proper
+feature and achieve the same result</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:08.48</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>uh... I guess I'm not following</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:09.13</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>still thinking to the linux kernel as a model
+to follow</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:09.44</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I can craft up my own CONFIG file and specify
+it to the build (from wherever really)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:10.01</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or I can run the interactive build (cmake .)
+and it'll dump out a CONFIG file for me</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:10.15</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which I can subsequently reuse if I wanted
+(from anywhere)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:10.21</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>edit to heart's content</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:10.32</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or ignore and the build just uses it for
+settings</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>16:11.12</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>familiar, time tested, pretty simple</tt></td>
+</tr>
+<tr>
+<td><tt>16:16.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:26.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav
+(~Stattrav@unaffiliated/stattrav)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:34.55</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Stattrav_
+(~Stattrav@117.192.146.20)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:09.59</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:34.55</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45649
+10/brlcad/trunk/CMakeLists.txt:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:34.55</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Add a dirt-simple way to allow
+developers to inject their own default settings</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:34.55</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: into the CMake process - eventually
+we may want to do something more</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:34.55</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: sophisticated, but this is a simple
+way to do things like enable all local</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>17:34.55</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: libraries by default.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:34.40</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: what does it mean to be a release
+build?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:35.03</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>is that merely synonymous with non-debug? ..
+or what if I wanted a debuggable release build?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:30.47</tt></td>
+<td><span class="c9"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: so unexpected behavior .. cd
+brlcad ; mkdir .cmake ; cd .cmake ; cmake .. ; echo "why aren't
+there any build files output here?"</tt></td>
+</tr>
+<tr>
+<td><tt>19:56.43</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kunigami_
+(~kunigami@201.53.206.27)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:08.40</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad tharis20_
+(~tharis@2.83.244.20)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:10.19</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>starseeker: right now it's mostly
+/usr/brlcad/rel* paths and turning on optimization by
+default</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:11.20</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">formally acknowledges not
+outputing build files in expected directory if there is a
+CMakeCache.txt file in the source dir is Not Good</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:11.33</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: right now it's mostly /usr/brlcad/rel*
+paths and turning on optimization by default</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:11.38</tt></td>
+<td><span class="c5"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">is talking to himself
+again</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:29.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad LainIwakuraX
+(~yuki@d24-57-80-191.home.cgocable.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:32.42</tt></td>
+<td><span class="c3"><tt>LainIwakuraX</tt></span></td>
+<td width="100%"><tt>brlcad: I see a lot of updates to step stuff
+in the latest rev. sorry I wasn't here in the afternoon to help
+=(</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:46.28</tt></td>
+<td><span class="c13"><tt>tharis20</tt></span></td>
+<td width="100%"><tt>brlcad: in the expectations it is said that it
+is expected students to work 40 hours a week, the same as a
+full-time job</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:46.50</tt></td>
+<td><span class="c13"><tt>tharis20</tt></span></td>
+<td width="100%"><tt>but SOCIS extends until the end of October and
+classes begin in mid-September</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

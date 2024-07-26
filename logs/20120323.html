@@ -1,376 +1,2000 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20120323</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20120323</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c17 {color: #6D6DD0}
+ span.c16 {color: #6969C7}
+ span.c15 {color: #C5C568}
+ span.c14 {color: #5CB05C}
+ span.c13 {color: #B05C5C}
+ span.c12 {color: #CC00CC}
+ span.c11 {color: #E27777}
+ span.c10 {color: #C56868}
+ span.c9 {color: #66C2C2}
+ span.c8 {color: #DE7575}
+ span.c7 {color: #6ACACA}
+ span.c6 {color: #009900}
+ span.c5 {color: #62BB62}
+ span.c4 {color: #9B519B}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #488888}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20120323</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:00.49</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>oh, I see, could you tell me what is the intention of this topic in GSoC? It's about refactoring thoose trees to use other one or look the same?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.05</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>the tree refactoring project is more about API design, trying to come up with a design that will encapsulate most if not all of them into one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.52</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>aaa, now I understand</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.04</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>and this thing should be done in classic C ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.12</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, definitely</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.13</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's sort of like you have a big application and some places call printf(), some call fprintf(stdout), some call puts(), ... and more across thousands of lines of code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.52</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>wow, sounds like a real mess</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.01</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>we want to consolidate them all into just one cad_log() function instead of the printf/fprintf/puts/... variety, so the task involves designing cad_log(), implementing it, then updating all of the printf/fprintf/puts/... places to call it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.18</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>except it's not at all as simple as printf/fprintf/puts ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.15</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>sounds a little bit like a challange</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.34</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>thank you, you realy interested me in this topic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.05</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>could you suggest me some </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.25</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>websites or documentations for </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.26</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>what?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.44</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, dude .. finish your sentence before hitting enter/return :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.49</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>General Tree Walkers? exept the things that I can google :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.04</tt></td><td><font color="#488888"><tt>tadbalcer_</tt></font></td><td width="100%"><tt>sorry :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.29</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>the only really relevant research would be about traversal ordering</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.54</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe <a href="http://en.wikipedia.org/wiki/Tree_traversal">http://en.wikipedia.org/wiki/Tree_traversal</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.06</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.45</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>haha</tt></td></tr>
-<tr><td><tt>00:08.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tadbalcer (51be7a6f@gateway/web/freenode/ip.81.190.122.111)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.23</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>by the way</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.39</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>the virtualbox saved me a lot of time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.54</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I tried today to get it working on my main distribution but it failed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.56</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>tadbalcer: another is <a href="http://en.wikipedia.org/wiki/Graph_traversal">http://en.wikipedia.org/wiki/Graph_traversal</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.05</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>will probably take a closer look in a few days</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.25</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: feel free to identify the cause of the failure, fixing that would be a valid useful patch too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.41</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>thanks brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.14</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad is expected to build out-of-the-box on most platforms, but sometimes doesn't depending on our current state of development</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.24</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>well the failure could be caused by my OS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.28</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>any build failure, even when it's just deficiencies or assumptions in our build system, have historically been viewed as high-priority defects worth accommodating on our end</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.56</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>very likely was caused by your OS, but the important question is whether it's something we could have detected and prevented failing on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.02</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>tadbalcer: you're quite welcome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.24</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>yes, you have a point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.36</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>tadbalcer: feel free to join the brlcad-devel mailing list to introduce yourself and your ideas if you've not done so already -- especially as your project ideas start to take shape</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.39</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>tadbalcer: also, if you are interested in the tree traversal problem, please do review the various implementations in brl-cad so you can begin to get an understanding of the complexity involved</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.21</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>your proposal would ideally itemize the various tree methods we provide and describe whether/how they would be part of a unified refactoring</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.13</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>brlcad: thanks, surely I join to the mailing list, and surely I would like to look for tree traversal implementations, it would be great if I could help in some way</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.31</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.06</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I have kept changing my mind over the rb_* unit test, between user_input driven test and hardcoded test</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.27</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I decided to leave it as a hardcoded test, I will&nbsp;&nbsp;create a sourceforge account and put it there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.40</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>just let me know if I should change it in some way </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.03</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>I would like to localize the files in project in which thoose algorithm are, but I think i would download the source tommorow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.35</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>because I can download the whole source, is it right ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.01</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>it's opensource, so yes:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.20</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: you're welcome to add a user-driven input portion, but those usually aren't nearly as useful unless you're looking for a bug or developing the interface</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.31</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>the default should be automated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.53</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:23.53</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>tadbalcer: yes, the whole source is available</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.03</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>now the only curent user-driven input</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.32</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>is a binary choice between the bu_rb_diagnose or walk to display the data</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:25.03</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>because I thought that could make some use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.29</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>tadbalcer: if you have any trouble or just want an easier path, we've prepared a virtual disk image this year:&nbsp;&nbsp;<a href="https://sourceforge.net/projects/brlcad/files/BRL-CAD%20for%20Virtual%20Machines/">https://sourceforge.net/projects/brlcad/files/BRL-CAD%20for%20Virtual%20Machines/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.58</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>okey :) sorry for stupid question</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.00</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>oh, great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.12</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>you'll need about 6GB of space and will need to install VirtualBox (free vm), but it's got everything already downloaded and installed with several code examples (including a link to one of the tree traversal methods)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.27</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>the only stupid questions are the ones you don't ask and don't get answered</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.04</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>brlcad: really thanks:) you helped me a lot. I surely study it when I download the pack, but now, if you excuse me, I would go for a sleep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:30.20</tt></td><td><font color="#6acaca"><tt>tadbalcer</tt></font></td><td width="100%"><tt>see you soon guys</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:45.40</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>here it is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:45.43</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt><a href="https://github.com/pandrei/BRL-CAD-related">https://github.com/pandrei/BRL-CAD-related</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:45.52</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>it will be on sourceforge aswell</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:45.57</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I just need to learn how to work with it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:51.13</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I have several typo's in that source ._.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:51.15</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>will fix them now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.32</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>will wait for an "official" submission to our patch tracker, but glad to see you are familiar with verion control </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.59</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>there are examples all over the web on how to make a proper unified diff patch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.14</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>"svn diff" will do most of what you need for you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:59.46</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I wouldn't really say familiar with svn control, but I m in the process of learning it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.16</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>git is version control too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.21</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I&nbsp;&nbsp;know :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.26</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>but I don t know git perfectly either</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:01.00</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>svn is slightly simpler imho, because it requires us all to work together in the same place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:01.30</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I agree about that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:06.15</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>it will probably take me an hour or so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:06.21</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>to figure out how should I do what you said:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:06.46</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, well feel free to ask questions or search the web... it's about as common as it gets for open source contributions ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:06.58</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>plus just about everyone in here knows it in and out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:07.35</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>well as a general matter</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:07.54</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>it s probably the best tool </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:07.58</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>programmers have</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:12.16</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I don't know if I asked before, I dont quite remember</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:12.31</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>what's your cet time? ( gmt thing..)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:23.16</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I found like a thousand windows svn tutorials</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:30.04</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>uhm , I believe I found a way to add it using a GUI from the site. It's called Add Artifact&nbsp;&nbsp;, is this what I should do?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:30.07</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I m quite confused</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.09</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>here is where I think I should uppload the file , please correct me if I m wrong</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.10</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt><a href="http://imgur.com/nuJK7">http://imgur.com/nuJK7</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:49.58</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>anyway, going to sleep. see you :)!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:46.42</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3340 10/wiki/Google_Summer_of_Code/2012: accepted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:48.15</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3341 10/wiki/Google_Summer_of_Code/2012: update dates</tt></td></tr>
-<tr><td><tt>04:11.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.210)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.27</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>hello witness123 </tt></td></tr>
-<tr><td><tt>05:00.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil___ (~chatzilla@117.229.52.249)</font></tt></td></tr>
-<tr><td><tt>05:29.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil____ (~chatzilla@117.229.90.156)</font></tt></td></tr>
-<tr><td><tt>07:05.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.210)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:08.56</tt></td><td><font color="#66c2c2"><tt>witness123</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:09.09</tt></td><td><font color="#66c2c2"><tt>witness123</tt></font></td><td width="100%"><tt>brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:10.49</tt></td><td><font color="#66c2c2"><tt>witness123</tt></font></td><td width="100%"><tt>I am interested in working with brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:11.04</tt></td><td><font color="#66c2c2"><tt>witness123</tt></font></td><td width="100%"><tt>and i am going through the ideas</tt></td></tr>
-<tr><td><tt>07:20.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@209.248.147.2.nw.nuvox.net)</font></tt></td></tr>
-<tr><td><tt>07:32.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
-<tr><td><tt>07:37.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
-<tr><td><tt>09:00.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.174.181)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:00.43</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>Hello!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:02.48</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad, are you around?</tt></td></tr>
-<tr><td><tt>09:57.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.210)</font></tt></td></tr>
-<tr><td><tt>10:10.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (~Al_Da_Bes@027e71f6.bb.sky.com)</font></tt></td></tr>
-<tr><td><tt>12:10.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil___ (~chatzilla@117.229.100.74)</font></tt></td></tr>
-<tr><td><tt>12:30.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.174.181)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.36</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>Hello!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:51.02</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>good morning andrei_ </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:51.17</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>how are you ?:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:51.45</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>doing great!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:52.01</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I m glad to hear that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:55.16</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>have you seen the image I uploaded?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:56.05</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, you'd left before I could respond</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:56.18</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>that is the right place to submit a patch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:56.49</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>alright, will submit it now then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:56.57</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>made some minor fixes to is aswell</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:57.31</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>you can keep making updates if needed, you just upload them with a different filename (like _v2, _v3, etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:57.43</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>so it's clear which is the "latest"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:58.41</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>except&nbsp;&nbsp;of telling me to specifically change something, from my point of view it seems to be alright now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:59.38</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>do note that the patch is a text file -- you should review the contents to make sure it's what you intended to change</tt></td></tr>
-<tr><td><tt>12:59.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil___ (~chatzilla@117.229.34.219)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.39</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>uhm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.45</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>if I would like to upload the output aswell</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.54</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>would "description" be a fit place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.55</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>to paste it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:02.35</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:10.58</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>done :)</tt></td></tr>
-<tr><td><tt>13:11.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.210)</font></tt></td></tr>
-<tr><td><tt>13:17.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (c1976930@gateway/web/freenode/ip.193.151.105.48)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:20.56</tt></td><td><font color="#c56868"><tt>ksuzee</tt></font></td><td width="100%"><tt>hello! Is anybody here?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:21.03</tt></td><td><font color="#c56868"><tt>ksuzee</tt></font></td><td width="100%"><tt>I need some help</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.16</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad, I have to go to some classes, I will probably submit the second one with the hashtable when I return , if tis one is ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.19</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>this*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:49.55</tt></td><td><font color="#c56868"><tt>ksuzee</tt></font></td><td width="100%"><tt>Hello! Could you help me, please. I've found some duplication code with 'Simian'. And, as I understood correctly, this code is supposed to be put in the separate file. Or not?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:20.57</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49802 10/brlcad/trunk/src/libged/select.c: Modified the select and rselect commands to optionally select components that are partially contained in the specified area.</tt></td></tr>
-<tr><td><tt>14:47.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil___ (~chatzilla@117.229.9.109)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.51</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>Al_Da_Best: I hope you're not procrastinating until the last minute again ... :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.18</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt><font color="#CC00CC">honestly wasn't just browsing Reddit.</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.25</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Working on a proposal at the moment actually :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.31</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>excellent :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.44</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>remember too that a strong patch makes for an even stronger proposal</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.48</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>talk is easy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.22</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>of course, both are good :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.29</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Yeah, I want to get one done today/tomorrow if I can. Just working out what to do :D There's some Todo's in some of the libged header files for moving a few things to librt, not entirely sure where to put them though.</tt></td></tr>
-<tr><td><tt>16:44.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei__ (~andrei@141.85.225.204)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:45.02</tt></td><td><font color="#b05c5c"><tt>andrei__</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:45.19</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:45.59</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>Hello, I am interested in the Web Development Projects of BRL-CAD. I have a sound knowledge of PHP and have worked on CMSs before</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:46.41</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>any patch that I can work on?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.19</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>Neil___: hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.33</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>web development patches are a bit tricky</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.38</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>ya</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.02</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>well, two questions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.20</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>what programming experience do you have and what web projectsare interesting you?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:49.34</tt></td><td><font color="#b05c5c"><tt>andrei__</tt></font></td><td width="100%"><tt>you said well too , brlcad :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:49.51</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>brlcad: well i'm interested in all 3. materials database more than the other 2</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:50.04</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: I think it's more the pause than the use ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:50.24</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>most any word is fine in moderation ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:50.35</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>i have worked with PHP, designed a CMS last year and am working on my website right now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:51.35</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>i also have a beginner's knowledge of Python.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:53.11</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>Neil___: so before focusing on a patch, I'd suggest getting a write-up in place first</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:54.16</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>extra time spent on an architecture diagram or even interface mock-ups would be more valuable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:54.24</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>i see</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:55.19</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>what would this site look like, how would it be implemented, does it flow and is easy to navigate, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:55.29</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>did you log into the existing materials database prototype</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:56.26</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>i am downloading the source. i couldn't find the existing database</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:56.33</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://mater.brlcad.org/">http://mater.brlcad.org/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:56.51</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>test|test .. just try not to delete an existing material that you didn't create ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:57.08</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>haha. ok thank you :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:57.40</tt></td><td><font color="#b05c5c"><tt>andrei__</tt></font></td><td width="100%"><tt>brlcad: any suggestiosn what patch should I try to fix? or want me to find out why build fails on my distribution when I get home&nbsp;&nbsp;?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:58.13</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei__: that'd be a perfect starting place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:58.53</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, anything on the Contributor_Quickies, our BUGS file, our TODO file, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:59.48</tt></td><td><font color="#b05c5c"><tt>andrei__</tt></font></td><td width="100%"><tt>right, will be home in roughly two hours :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:01.21</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49803 10/brlcad/trunk/src/tclscripts/lib/Ged.tcl: Mods to support selecting components even if only partially contained within the specified area.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:04.04</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49804 10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl): Added more selection modes (i.e. "List (Partial)", "Group Add (Partial)" and "Group Remove (Partial)".</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:06.05</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>brlcad: can I also get the current website of the benchmark performance database?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:10.18</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>no such beast exists</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:10.41</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>we do have a set of benchmark log files</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:10.54</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>but that's it, the rest is to-be-designed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.06</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>ah ok. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.10</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd start by running the "benchmark" tool yourself just to see what it gives you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.22</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>right right. i'll do that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.23</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>everything is centered around the log file it produces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:11.33</tt></td><td><font color="#5cb05c"><tt>Neil___</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:40.41</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49805 10/brlcad/trunk/src/libged/erase.c: Modified libged/erase.c/eraseAllSubpathsFromSolidList() to remove display lists only when the corresponding solid is removed from the display.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:49.20</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Trying to build on windows, getting a CMake error. It doesn't like "BRLCAD_LIB_INCLUDE_DIRS", line 11 in CMakeLists from libbu. Anyone here recently built on win7 x64?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:51.41</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>Al_Da_Best: any other week and we'd be all over investigating that build system failure.... ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:51.52</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>:P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:51.56</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>it could be a lot of things, that code has been in flux lately, and windows gets the least attention</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.02</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Yeah fair enough</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.10</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>so would be a great patch if you can figure it out, but make sure you're using the latest svn sources</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.32</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>I'll run an update, if not, will try to fix it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.39</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>also make sure you have the latest cmake installed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:52.46</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>older versions are nfg on windows</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:53.16</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>2.8.7, I think I'll uninstall any that are around and reinstall latest to make sure</tt></td></tr>
-<tr><td><tt>18:17.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas__ (~stas@5ED2BDA6.cm-7-3c.dynamic.ziggo.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.24</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49806 10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl): Use COMP_SELECT_MODE_NAMES throughout the GUI.</tt></td></tr>
-<tr><td><tt>20:31.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~cristina@79.114.175.172)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:31.06</tt></td><td><font color="#c5c568"><tt>cristina</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.02</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:35.21</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>hola cristina </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.41</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:40.57</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>the build fails due to various libraries missing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.19</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>and cmake failed to detect they were missing?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.24</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>or what?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:41.29</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>did cmake fail or make fail?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.00</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I believe the cmake works fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.05</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>but I don't understand something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.38</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>it claims that it didn't find</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.45</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>functions that I ve been using in C for a while</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.54</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>these 2 for example</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.57</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>-- Looking for strsep - found</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.59</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>-- Looking for strtok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.00</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>-- Looking for strtok - found</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.06</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I ll try to investigate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.12</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>where does the cmake search for them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.15</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>and if they really exist</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.18</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>it says found ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.29</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.36</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>my bad, linked something different</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:44.38</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>than wanted to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.10</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>-- Looking for strlcat - not found</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.11</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>-- Looking for strlcpy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.13</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>-- Looking for strlcpy - not found</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.03</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.16</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>you can look into CMakeFiles/CMakeOutput.txt and CMakeError.txt to see why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.22</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>but do you really have those?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.29</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I m doing a recurisve list now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.32</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>to find out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.34</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>strlcat() isn't strcat()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.38</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.42</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>it s the c90 version</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.46</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>with less error chance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.47</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I believe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.51</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>not c90</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:46.56</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>no?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.13</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's bsd api, secure version </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.56</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>many linux don't have it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:48.02</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty common on bsd-based systems</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.11</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>well </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.31</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I don't have those libraries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.40</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>so that would be a cause you can't prevent </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.44</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>however it also failed some tests</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.52</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>(c90 renamed it strncat() )</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:51.19</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>There are loads of&nbsp;&nbsp;missing binaries and libraries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.29</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>o.O .. strncat() != strlcat()...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.57</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>strncat </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.01</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>compares parts of two strings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.05</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I think</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.53</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, no it doesn't :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.02</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>concatenates one string onto another</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.07</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>ah </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.09</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>"man strncat" ftw</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.22</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I found out a few days ago</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.29</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>that I could man C comands in linux</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.33</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>tho it's obvious why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.35</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>._.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.51</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>you should use them heavily :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.56</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>indeed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.05</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>reading the code in /libbu/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.27</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>required me to remind/ learn loads of small code tricks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.37</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>especially since I m not very used to macro s</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.46</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>and they are used heavily as checkers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.12</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>libbu doesn't employ as many tricks like some of our other libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.48</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.03</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r49807 10/brlcad/trunk/src/tclscripts/mged/grouper.tcl: Updated to TCL script 'grouper.tcl' commands 'gr' and 'dg'. To improve performance, changed logic to use libged function 'ged_select'. Also script now highlights in yellow objects in the current group.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:59.35</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>what distribution do you use?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.41</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r49808 10/brlcad/trunk/src/mged/setup.c: Updated file 'setup.c' for mged. Added the ability to use the libged function 'ged_select' from mged.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.10</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: I intentionally use a variety of platforms on a regular basis</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.22</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>(ok, not strictly renamed it, some minor details are a little different, like what len means and what's returned)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:02.48</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>i tend to gravitate towards macosx for much development, and generally prefer the bsds, but it's all levels of gray</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.19</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>if the macros are too much, gcc -E will spit out the results of the c preprocessor to unwind it all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.21</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: i'm not sure I'd call that detail little -- it's the entire reason for the function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:03.55</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>plugs a big usability fail caused by the off-by-one behavior of strn*()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.13</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>both are length restrictions on strcat() *shrug* :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.40</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>(concatenate 'string a b) ; solved! :D *duck*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.49</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>haha</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.53</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>that's lisp I d take</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.55</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's like saying the emergency brake and foot brake are both just things that break the car</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.13</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>if you had to use one for breaking all the time, a lot more cars would be spinning on the road ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.27</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad: it just depends who's driving :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.40</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>what, it's not normal to stop by whipping the wheel and pulling the hand brake? :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.51</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, but there would *still* be more cars spinning as a society</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.53</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>no wonder my rear tires are bare</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.06</tt></td><td><font color="#6969c7"><tt>``Erik</tt></font></td><td width="100%"><tt>s/re/ldish/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.54</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's like a ghosttown here today</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.44</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>speaking of ghosts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.56</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I ve been in several irc channels</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.12</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>and for the number of people in this channel, it's by far the most active</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.15</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I have seen so far</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:09.31</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I mean , fortunately, I can find brlcad almost anytime</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.21</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>i meant where i'm physically at right this moment, but good to know ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.21</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I ll try to implement a primitive centroid function </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.04</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>do you&nbsp;&nbsp;happen to know if cline would be a good example</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.18</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.25</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>it'd be a terrible one to start with</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:13.14</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>then what should I start with?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:13.50</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>pick a shape you're familiar with that you can find a centroid definition for on mathworld or wikipedia</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:15.25</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>if the centroid function is already implemented, I should find it in the same file?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:17.31</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49809 10/brlcad/trunk/src/tclscripts/archer/ArcherCore.tcl: Tweak ArcherCore::compSelectGroupAdd, compSelectGroupRemove and compSelectGroupCommon a bit.</tt></td></tr>
-<tr><td><tt>21:20.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness123 (~witness@14.139.228.210)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:23.06</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: there are no centroid functions impemented</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:23.10</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>hellow witness123 </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:23.56</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>ah :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:27.08</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I was looking at the torus shape, first that came in mind</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.43</tt></td><td><font color="#c5c568"><tt>cristina</tt></font></td><td width="100%"><tt>brlcad, just wanted to let you know that I've replied to your post for the Visualization CSG project</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.05</tt></td><td><font color="#c5c568"><tt>cristina</tt></font></td><td width="100%"><tt>it's just that my reply started a new topic instead of being added to the already existing thread</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.33</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei_: torus would be good if you can find the equations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.52</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>cristina: no worries on the title</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.08</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>rather, the subject/thread</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:35.00</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>I found the surface area ecuations</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:35.15</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>so you could start with that one instead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:35.24</tt></td><td><font color="#62bb62"><tt>andrei_</tt></font></td><td width="100%"><tt>yes:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:12.09</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>new opennurbs available</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.48</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49810 10/brlcad/trunk/include/bselect.h: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.49</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: the __extension__ keyword does not exist in gcc 4.1 and given the FD_SET()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.49</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: warning (so far) only affects gcc 4.6, make the work-around very unfeature</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.49</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: specific. this is only kosher given this is a b*.h system header wrapper, which</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.49</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: aren't supposed to use cmake/configure feature test results. this fixes an</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.49</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: obscure build failure that was being observed on older systems that failed in</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.50</tt></td><td><font color="#de7575"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: backtrace.c with an error: expected expression before 'asm'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.22</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Is CMake meant to make files in misc? Because there's a file there that needs to be made (contains the "unknown command") but I don't see it being called in the /src/cmakelist.txt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:51.09</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>don't follow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:51.24</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>cmake builds the files in misc/ but has it's own misc/CMakeLists.txt file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:51.38</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>the build files in src/ have nothing to do with it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:51.53</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Oh. So misc needs to be built first, seperately?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:51.55</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>Al_Da_Best: did you check out the virtual machine image?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:51.58</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.09</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>I did yeah, wanted to try and build from svn though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.32</tt></td><td><font color="#9b519b"><tt>brlcad</tt></font></td><td width="100%"><tt>well it should have instructions for building still that may be helpful</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.41</tt></td><td><font color="#e27777"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Mmk, I'll go look.</tt></td></tr>
-<tr><td><tt>23:27.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mango_Man (957dd9e8@gateway/web/freenode/ip.149.125.217.232)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:28.13</tt></td><td><font color="#6d6dd0"><tt>Mango_Man</tt></font></td><td width="100%"><tt>what up guys</tt></td></tr>
-<tr><td><tt>23:34.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas__ (~stas@5ED2BDA6.cm-7-3c.dynamic.ziggo.nl)</font></tt></td></tr>
-<tr><td><tt>23:37.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinalB_GSOC (~diakatana@c-68-37-59-103.hsd1.nj.comcast.net)</font></tt></td></tr>
-<tr><td><tt>23:40.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinalB_GSOC (~diakatana@c-68-37-59-103.hsd1.nj.comcast.net)</font></tt></td></tr>
-<tr><td><tt>23:48.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinalB_GSOC (~diakatana@c-68-37-59-103.hsd1.nj.comcast.net)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:00.49</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>oh, I see, could you tell me what is the
+intention of this topic in GSoC? It's about refactoring thoose
+trees to use other one or look the same?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.05</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the tree refactoring project is more about API
+design, trying to come up with a design that will encapsulate most
+if not all of them into one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.52</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>aaa, now I understand</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.04</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>and this thing should be done in classic C
+?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.12</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, definitely</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's sort of like you have a big application
+and some places call printf(), some call fprintf(stdout), some call
+puts(), ... and more across thousands of lines of code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.52</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>wow, sounds like a real mess</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.01</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we want to consolidate them all into just one
+cad_log() function instead of the printf/fprintf/puts/... variety,
+so the task involves designing cad_log(), implementing it, then
+updating all of the printf/fprintf/puts/... places to call
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.18</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>except it's not at all as simple as
+printf/fprintf/puts ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.15</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>sounds a little bit like a challange</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.34</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>thank you, you realy interested me in this
+topic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.05</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>could you suggest me some</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.25</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>websites or documentations for</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.26</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.44</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oh, dude .. finish your sentence before
+hitting enter/return :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.49</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>General Tree Walkers? exept the things that I
+can google :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.04</tt></td>
+<td><span class="c2"><tt>tadbalcer_</tt></span></td>
+<td width="100%"><tt>sorry :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the only really relevant research would be
+about traversal ordering</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.54</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>maybe <a href=
+"http://en.wikipedia.org/wiki/Tree_traversal">http://en.wikipedia.org/wiki/Tree_traversal</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.06</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.45</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>haha</tt></td>
+</tr>
+<tr>
+<td><tt>00:08.56</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad tadbalcer
+(51be7a6f@gateway/web/freenode/ip.81.190.122.111)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.23</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>by the way</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.39</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>the virtualbox saved me a lot of
+time</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.54</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I tried today to get it working on my main
+distribution but it failed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.56</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tadbalcer: another is <a href=
+"http://en.wikipedia.org/wiki/Graph_traversal">http://en.wikipedia.org/wiki/Graph_traversal</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.05</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>will probably take a closer look in a few
+days</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.25</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: feel free to identify the cause of
+the failure, fixing that would be a valid useful patch
+too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.41</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>thanks brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>brl-cad is expected to build out-of-the-box on
+most platforms, but sometimes doesn't depending on our current
+state of development</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.24</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>well the failure could be caused by my
+OS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.28</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>any build failure, even when it's just
+deficiencies or assumptions in our build system, have historically
+been viewed as high-priority defects worth accommodating on our
+end</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.56</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>very likely was caused by your OS, but the
+important question is whether it's something we could have detected
+and prevented failing on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.02</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tadbalcer: you're quite welcome</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.24</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>yes, you have a point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.36</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tadbalcer: feel free to join the brlcad-devel
+mailing list to introduce yourself and your ideas if you've not
+done so already -- especially as your project ideas start to take
+shape</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.39</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tadbalcer: also, if you are interested in the
+tree traversal problem, please do review the various
+implementations in brl-cad so you can begin to get an understanding
+of the complexity involved</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.21</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>your proposal would ideally itemize the
+various tree methods we provide and describe whether/how they would
+be part of a unified refactoring</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.13</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>brlcad: thanks, surely I join to the mailing
+list, and surely I would like to look for tree traversal
+implementations, it would be great if I could help in some
+way</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.31</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.06</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I have kept changing my mind over the rb_*
+unit test, between user_input driven test and hardcoded
+test</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.27</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I decided to leave it as a hardcoded test, I
+will  create a sourceforge account and put it there</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.40</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>just let me know if I should change it in some
+way</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:21.03</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>I would like to localize the files in project
+in which thoose algorithm are, but I think i would download the
+source tommorow</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:21.35</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>because I can download the whole source, is it
+right ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.01</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it's opensource, so yes:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.20</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: you're welcome to add a user-driven
+input portion, but those usually aren't nearly as useful unless
+you're looking for a bug or developing the interface</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.31</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the default should be automated</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.53</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:23.53</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tadbalcer: yes, the whole source is
+available</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.03</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>now the only curent user-driven
+input</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.32</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>is a binary choice between the bu_rb_diagnose
+or walk to display the data</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:25.03</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>because I thought that could make some
+use</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tadbalcer: if you have any trouble or just
+want an easier path, we've prepared a virtual disk image this year:
+ <a href=
+"https://sourceforge.net/projects/brlcad/files/BRL-CAD%20for%20Virtual%20Machines/">
+https://sourceforge.net/projects/brlcad/files/BRL-CAD%20for%20Virtual%20Machines/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.58</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>okey :) sorry for stupid question</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.00</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>oh, great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.12</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you'll need about 6GB of space and will need
+to install VirtualBox (free vm), but it's got everything already
+downloaded and installed with several code examples (including a
+link to one of the tree traversal methods)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.27</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the only stupid questions are the ones you
+don't ask and don't get answered</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.04</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>brlcad: really thanks:) you helped me a lot. I
+surely study it when I download the pack, but now, if you excuse
+me, I would go for a sleep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:30.20</tt></td>
+<td><span class="c7"><tt>tadbalcer</tt></span></td>
+<td width="100%"><tt>see you soon guys</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:45.40</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>here it is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:45.43</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt><a href=
+"https://github.com/pandrei/BRL-CAD-related">https://github.com/pandrei/BRL-CAD-related</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:45.52</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it will be on sourceforge aswell</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:45.57</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I just need to learn how to work with
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:51.13</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I have several typo's in that source
+._.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:51.15</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>will fix them now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:58.32</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>will wait for an "official" submission to our
+patch tracker, but glad to see you are familiar with verion
+control</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:58.59</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are examples all over the web on how to
+make a proper unified diff patch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:59.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"svn diff" will do most of what you need for
+you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:59.46</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I wouldn't really say familiar with svn
+control, but I m in the process of learning it :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>git is version control too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.21</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I  know :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.26</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>but I don t know git perfectly
+either</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:01.00</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>svn is slightly simpler imho, because it
+requires us all to work together in the same place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:01.30</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I agree about that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:06.15</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it will probably take me an hour or
+so</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:06.21</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>to figure out how should I do what you
+said:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:06.46</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, well feel free to ask questions or search
+the web... it's about as common as it gets for open source
+contributions ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:06.58</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>plus just about everyone in here knows it in
+and out</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:07.35</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>well as a general matter</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:07.54</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it s probably the best tool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:07.58</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>programmers have</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:12.16</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I don't know if I asked before, I dont quite
+remember</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:12.31</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>what's your cet time? ( gmt thing..)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:23.16</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I found like a thousand windows svn
+tutorials</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:30.04</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>uhm , I believe I found a way to add it using
+a GUI from the site. It's called Add Artifact  , is this what I
+should do?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:30.07</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I m quite confused</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.09</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>here is where I think I should uppload the
+file , please correct me if I m wrong</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.10</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt><a href=
+"http://imgur.com/nuJK7">http://imgur.com/nuJK7</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:49.58</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>anyway, going to sleep. see you :)!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:46.42</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Sean 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3340
+10/wiki/Google_Summer_of_Code/2012: accepted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:48.15</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Sean 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r3341
+10/wiki/Google_Summer_of_Code/2012: update dates</tt></td>
+</tr>
+<tr>
+<td><tt>04:11.28</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad witness123
+(~witness@14.139.228.210)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:12.27</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hello witness123</tt></td>
+</tr>
+<tr>
+<td><tt>05:00.31</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Neil___
+(~chatzilla@117.229.52.249)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:29.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Neil____
+(~chatzilla@117.229.90.156)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:05.50</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad witness123
+(~witness@14.139.228.210)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:08.56</tt></td>
+<td><span class="c9"><tt>witness123</tt></span></td>
+<td width="100%"><tt>hi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:09.09</tt></td>
+<td><span class="c9"><tt>witness123</tt></span></td>
+<td width="100%"><tt>brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:10.49</tt></td>
+<td><span class="c9"><tt>witness123</tt></span></td>
+<td width="100%"><tt>I am interested in working with
+brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:11.04</tt></td>
+<td><span class="c9"><tt>witness123</tt></span></td>
+<td width="100%"><tt>and i am going through the ideas</tt></td>
+</tr>
+<tr>
+<td><tt>07:20.19</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad KimK
+(~Kim__@209.248.147.2.nw.nuvox.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:32.01</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad d_rossberg
+(~rossberg@BZ.BZFLAG.BZ)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:37.02</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad jordisayol
+(~jordisayo@unaffiliated/jordisayol)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:00.33</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad andrei_
+(~andrei@188.25.174.181)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:00.43</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>Hello!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:02.48</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad, are you around?</tt></td>
+</tr>
+<tr>
+<td><tt>09:57.57</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad witness123
+(~witness@14.139.228.210)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:10.07</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Al_Da_Best
+(~Al_Da_Bes@027e71f6.bb.sky.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:10.56</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Neil___
+(~chatzilla@117.229.100.74)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:30.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad andrei_
+(~andrei@188.25.174.181)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:30.36</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>Hello!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:51.02</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>good morning andrei_</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:51.17</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>how are you ?:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:51.45</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>doing great!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:52.01</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I m glad to hear that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:55.16</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>have you seen the image I uploaded?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:56.05</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, you'd left before I could
+respond</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:56.18</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that is the right place to submit a
+patch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:56.49</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>alright, will submit it now then</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:56.57</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>made some minor fixes to is aswell</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:57.31</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can keep making updates if needed, you
+just upload them with a different filename (like _v2, _v3,
+etc)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:57.43</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so it's clear which is the "latest"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:58.41</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>except  of telling me to specifically change
+something, from my point of view it seems to be alright
+now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:59.38</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>do note that the patch is a text file -- you
+should review the contents to make sure it's what you intended to
+change</tt></td>
+</tr>
+<tr>
+<td><tt>12:59.50</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Neil___
+(~chatzilla@117.229.34.219)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.39</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>uhm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.45</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>if I would like to upload the output
+aswell</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.54</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>would "description" be a fit place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.55</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>to paste it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:02.35</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:10.58</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>done :)</tt></td>
+</tr>
+<tr>
+<td><tt>13:11.54</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad witness123
+(~witness@14.139.228.210)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:17.44</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad ksuzee
+(c1976930@gateway/web/freenode/ip.193.151.105.48)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:20.56</tt></td>
+<td><span class="c10"><tt>ksuzee</tt></span></td>
+<td width="100%"><tt>hello! Is anybody here?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:21.03</tt></td>
+<td><span class="c10"><tt>ksuzee</tt></span></td>
+<td width="100%"><tt>I need some help</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:23.16</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad, I have to go to some classes, I will
+probably submit the second one with the hashtable when I return ,
+if tis one is ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:23.19</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>this*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:49.55</tt></td>
+<td><span class="c10"><tt>ksuzee</tt></span></td>
+<td width="100%"><tt>Hello! Could you help me, please. I've found
+some duplication code with 'Simian'. And, as I understood
+correctly, this code is supposed to be put in the separate file. Or
+not?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:20.57</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r49802
+10/brlcad/trunk/src/libged/select.c: Modified the select and
+rselect commands to optionally select components that are partially
+contained in the specified area.</tt></td>
+</tr>
+<tr>
+<td><tt>14:47.14</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Neil___
+(~chatzilla@117.229.9.109)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.51</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Al_Da_Best: I hope you're not procrastinating
+until the last minute again ... :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.18</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt><span class="c12">honestly wasn't just
+browsing Reddit.</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.25</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Working on a proposal at the moment actually
+:P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.31</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>excellent :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.44</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>remember too that a strong patch makes for an
+even stronger proposal</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.48</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>talk is easy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.22</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>of course, both are good :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.29</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Yeah, I want to get one done today/tomorrow if
+I can. Just working out what to do :D There's some Todo's in some
+of the libged header files for moving a few things to librt, not
+entirely sure where to put them though.</tt></td>
+</tr>
+<tr>
+<td><tt>16:44.32</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad andrei__
+(~andrei@141.85.225.204)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:45.02</tt></td>
+<td><span class="c13"><tt>andrei__</tt></span></td>
+<td width="100%"><tt>hi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:45.19</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Hi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:45.59</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>Hello, I am interested in the Web Development
+Projects of BRL-CAD. I have a sound knowledge of PHP and have
+worked on CMSs before</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:46.41</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>any patch that I can work on?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.19</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Neil___: hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.33</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>web development patches are a bit
+tricky</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.38</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>ya</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.02</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well, two questions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.20</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what programming experience do you have and
+what web projectsare interesting you?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:49.34</tt></td>
+<td><span class="c13"><tt>andrei__</tt></span></td>
+<td width="100%"><tt>you said well too , brlcad :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:49.51</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>brlcad: well i'm interested in all 3.
+materials database more than the other 2</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:50.04</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: I think it's more the pause than the
+use ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:50.24</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>most any word is fine in moderation
+;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:50.35</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>i have worked with PHP, designed a CMS last
+year and am working on my website right now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:51.35</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>i also have a beginner's knowledge of
+Python.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:53.11</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Neil___: so before focusing on a patch, I'd
+suggest getting a write-up in place first</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:54.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>extra time spent on an architecture diagram or
+even interface mock-ups would be more valuable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:54.24</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>i see</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:55.19</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what would this site look like, how would it
+be implemented, does it flow and is easy to navigate, etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:55.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>did you log into the existing materials
+database prototype</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:56.26</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>i am downloading the source. i couldn't find
+the existing database</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:56.33</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://mater.brlcad.org/">http://mater.brlcad.org/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:56.51</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>test|test .. just try not to delete an
+existing material that you didn't create ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:57.08</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>haha. ok thank you :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:57.40</tt></td>
+<td><span class="c13"><tt>andrei__</tt></span></td>
+<td width="100%"><tt>brlcad: any suggestiosn what patch should I
+try to fix? or want me to find out why build fails on my
+distribution when I get home  ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:58.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei__: that'd be a perfect starting
+place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:58.53</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>otherwise, anything on the
+Contributor_Quickies, our BUGS file, our TODO file, etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:59.48</tt></td>
+<td><span class="c13"><tt>andrei__</tt></span></td>
+<td width="100%"><tt>right, will be home in roughly two hours
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:01.21</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r49803
+10/brlcad/trunk/src/tclscripts/lib/Ged.tcl: Mods to support
+selecting components even if only partially contained within the
+specified area.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:04.04</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r49804
+10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl):
+Added more selection modes (i.e. "List (Partial)", "Group Add
+(Partial)" and "Group Remove (Partial)".</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:06.05</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>brlcad: can I also get the current website of
+the benchmark performance database?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:10.18</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no such beast exists</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:10.41</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we do have a set of benchmark log
+files</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:10.54</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but that's it, the rest is
+to-be-designed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:11.06</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>ah ok.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:11.10</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'd start by running the "benchmark" tool
+yourself just to see what it gives you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:11.22</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>right right. i'll do that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:11.23</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>everything is centered around the log file it
+produces</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:11.33</tt></td>
+<td><span class="c14"><tt>Neil___</tt></span></td>
+<td width="100%"><tt>hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:40.41</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r49805
+10/brlcad/trunk/src/libged/erase.c: Modified
+libged/erase.c/eraseAllSubpathsFromSolidList() to remove display
+lists only when the corresponding solid is removed from the
+display.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:49.20</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Trying to build on windows, getting a CMake
+error. It doesn't like "BRLCAD_LIB_INCLUDE_DIRS", line 11 in
+CMakeLists from libbu. Anyone here recently built on win7
+x64?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:51.41</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Al_Da_Best: any other week and we'd be all
+over investigating that build system failure.... ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:51.52</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>:P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:51.56</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it could be a lot of things, that code has
+been in flux lately, and windows gets the least attention</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.02</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Yeah fair enough</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.10</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so would be a great patch if you can figure it
+out, but make sure you're using the latest svn sources</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.32</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>I'll run an update, if not, will try to fix
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.39</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also make sure you have the latest cmake
+installed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:52.46</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>older versions are nfg on windows</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:53.16</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>2.8.7, I think I'll uninstall any that are
+around and reinstall latest to make sure</tt></td>
+</tr>
+<tr>
+<td><tt>18:17.51</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad stas__
+(~stas@5ED2BDA6.cm-7-3c.dynamic.ziggo.nl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:34.24</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r49806
+10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl):
+Use COMP_SELECT_MODE_NAMES throughout the GUI.</tt></td>
+</tr>
+<tr>
+<td><tt>20:31.00</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad cristina
+(~cristina@79.114.175.172)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:31.06</tt></td>
+<td><span class="c15"><tt>cristina</tt></span></td>
+<td width="100%"><tt>hello</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:34.02</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Hi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:35.21</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hola cristina</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.41</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:40.57</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>the build fails due to various libraries
+missing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.19</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and cmake failed to detect they were
+missing?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.24</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or what?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:41.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>did cmake fail or make fail?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.00</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I believe the cmake works fine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.05</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>but I don't understand something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.38</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it claims that it didn't find</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.45</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>functions that I ve been using in C for a
+while</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.54</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>these 2 for example</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.57</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>-- Looking for strsep - found</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:42.59</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>-- Looking for strtok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:43.00</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>-- Looking for strtok - found</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.06</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I ll try to investigate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.12</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>where does the cmake search for them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.15</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>and if they really exist</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.18</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it says found ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.29</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>oh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.36</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>my bad, linked something different</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:44.38</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>than wanted to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.10</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>-- Looking for strlcat - not found</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.11</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>-- Looking for strlcpy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:45.13</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>-- Looking for strlcpy - not found</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.03</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can look into CMakeFiles/CMakeOutput.txt
+and CMakeError.txt to see why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.22</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but do you really have those?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.29</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I m doing a recurisve list now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.32</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>to find out</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.34</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>strlcat() isn't strcat()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.38</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I know</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.42</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>it s the c90 version</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.46</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>with less error chance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.47</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I believe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.51</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>not c90</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:46.56</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>no?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:47.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's bsd api, secure version</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:47.56</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>many linux don't have it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:48.02</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pretty common on bsd-based systems</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.11</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>well</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.31</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I don't have those libraries</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.40</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>so that would be a cause you can't
+prevent</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.44</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>however it also failed some tests</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:49.52</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(c90 renamed it strncat() )</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:51.19</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>There are loads of  missing binaries and
+libraries</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>o.O .. strncat() != strlcat()...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.57</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>strncat</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:53.01</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>compares parts of two strings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:53.05</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I think</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:53.53</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh, no it doesn't :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.02</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>concatenates one string onto another</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.07</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.09</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"man strncat" ftw</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.22</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I found out a few days ago</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.29</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>that I could man C comands in linux</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.33</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>tho it's obvious why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.35</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>._.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.51</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you should use them heavily :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:54.56</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>indeed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:55.05</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>reading the code in /libbu/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:55.27</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>required me to remind/ learn loads of small
+code tricks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:55.37</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>especially since I m not very used to macro
+s</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:55.46</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>and they are used heavily as
+checkers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:56.12</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>libbu doesn't employ as many tricks like some
+of our other libs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:57.48</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>hehe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:58.03</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03r_weiss * r49807
+10/brlcad/trunk/src/tclscripts/mged/grouper.tcl: Updated to TCL
+script 'grouper.tcl' commands 'gr' and 'dg'. To improve
+performance, changed logic to use libged function 'ged_select'.
+Also script now highlights in yellow objects in the current
+group.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:59.35</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>what distribution do you use?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:00.41</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03r_weiss * r49808
+10/brlcad/trunk/src/mged/setup.c: Updated file 'setup.c' for mged.
+Added the ability to use the libged function 'ged_select' from
+mged.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.10</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: I intentionally use a variety of
+platforms on a regular basis</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.22</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(ok, not strictly renamed it, some minor
+details are a little different, like what len means and what's
+returned)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:02.48</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i tend to gravitate towards macosx for much
+development, and generally prefer the bsds, but it's all levels of
+gray</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.19</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if the macros are too much, gcc -E will spit
+out the results of the c preprocessor to unwind it all</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.21</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: i'm not sure I'd call that detail
+little -- it's the entire reason for the function</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:03.55</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>plugs a big usability fail caused by the
+off-by-one behavior of strn*()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:04.13</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>both are length restrictions on strcat()
+*shrug* :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:04.40</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(concatenate 'string a b) ; solved! :D
+*duck*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:04.49</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>haha</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:04.53</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>that's lisp I d take</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:04.55</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's like saying the emergency brake and
+foot brake are both just things that break the car</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you had to use one for breaking all the
+time, a lot more cars would be spinning on the road ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.27</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>brlcad: it just depends who's driving
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.40</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>what, it's not normal to stop by whipping the
+wheel and pulling the hand brake? :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.51</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure, but there would *still* be more cars
+spinning as a society</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:05.53</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>no wonder my rear tires are bare</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:06.06</tt></td>
+<td><span class="c16"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>s/re/ldish/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:06.54</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's like a ghosttown here today</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.44</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>speaking of ghosts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:08.56</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I ve been in several irc channels</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.12</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>and for the number of people in this channel,
+it's by far the most active</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.15</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I have seen so far</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:09.31</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I mean , fortunately, I can find brlcad almost
+anytime</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:10.21</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i meant where i'm physically at right this
+moment, but good to know ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:11.21</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I ll try to implement a primitive centroid
+function</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.04</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>do you  happen to know if cline would be a
+good example</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.18</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:12.25</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it'd be a terrible one to start with</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:13.14</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>then what should I start with?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:13.50</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pick a shape you're familiar with that you can
+find a centroid definition for on mathworld or wikipedia</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:15.25</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>if the centroid function is already
+implemented, I should find it in the same file?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:17.31</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r49809
+10/brlcad/trunk/src/tclscripts/archer/ArcherCore.tcl: Tweak
+ArcherCore::compSelectGroupAdd, compSelectGroupRemove and
+compSelectGroupCommon a bit.</tt></td>
+</tr>
+<tr>
+<td><tt>21:20.14</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad witness123
+(~witness@14.139.228.210)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:23.06</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: there are no centroid functions
+impemented</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:23.10</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hellow witness123</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:23.56</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>ah :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:27.08</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I was looking at the torus shape, first that
+came in mind</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.43</tt></td>
+<td><span class="c15"><tt>cristina</tt></span></td>
+<td width="100%"><tt>brlcad, just wanted to let you know that I've
+replied to your post for the Visualization CSG project</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:33.05</tt></td>
+<td><span class="c15"><tt>cristina</tt></span></td>
+<td width="100%"><tt>it's just that my reply started a new topic
+instead of being added to the already existing thread</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:33.33</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>andrei_: torus would be good if you can find
+the equations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:33.52</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cristina: no worries on the title</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:34.08</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rather, the subject/thread</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:35.00</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>I found the surface area ecuations</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:35.15</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you could start with that one
+instead</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:35.24</tt></td>
+<td><span class="c5"><tt>andrei_</tt></span></td>
+<td width="100%"><tt>yes:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:12.09</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>new opennurbs available</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.48</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r49810
+10/brlcad/trunk/include/bselect.h:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.49</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: the __extension__ keyword does not
+exist in gcc 4.1 and given the FD_SET()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.49</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: warning (so far) only affects gcc
+4.6, make the work-around very unfeature</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.49</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: specific. this is only kosher given
+this is a b*.h system header wrapper, which</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.49</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: aren't supposed to use
+cmake/configure feature test results. this fixes an</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.49</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: obscure build failure that was being
+observed on older systems that failed in</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.50</tt></td>
+<td><span class="c8"><tt>CIA-128</tt></span></td>
+<td width="100%"><tt>BRL-CAD: backtrace.c with an error: expected
+expression before 'asm'</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:50.22</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Is CMake meant to make files in misc? Because
+there's a file there that needs to be made (contains the "unknown
+command") but I don't see it being called in the
+/src/cmakelist.txt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:51.09</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't follow</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:51.24</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cmake builds the files in misc/ but has it's
+own misc/CMakeLists.txt file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:51.38</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the build files in src/ have nothing to do
+with it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:51.53</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Oh. So misc needs to be built first,
+seperately?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:51.55</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Al_Da_Best: did you check out the virtual
+machine image?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:51.58</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nope</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.09</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>I did yeah, wanted to try and build from svn
+though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.32</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>well it should have instructions for building
+still that may be helpful</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.41</tt></td>
+<td><span class="c11"><tt>Al_Da_Best</tt></span></td>
+<td width="100%"><tt>Mmk, I'll go look.</tt></td>
+</tr>
+<tr>
+<td><tt>23:27.56</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Mango_Man
+(957dd9e8@gateway/web/freenode/ip.149.125.217.232)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:28.13</tt></td>
+<td><span class="c17"><tt>Mango_Man</tt></span></td>
+<td width="100%"><tt>what up guys</tt></td>
+</tr>
+<tr>
+<td><tt>23:34.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad stas__
+(~stas@5ED2BDA6.cm-7-3c.dynamic.ziggo.nl)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:37.45</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad MinalB_GSOC
+(~diakatana@c-68-37-59-103.hsd1.nj.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:40.22</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad MinalB_GSOC
+(~diakatana@c-68-37-59-103.hsd1.nj.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:48.58</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad MinalB_GSOC
+(~diakatana@c-68-37-59-103.hsd1.nj.comcast.net)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

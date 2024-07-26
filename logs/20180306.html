@@ -1,121 +1,591 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20180306</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20180306</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c6 {color: #71D7D7}
+ span.c5 {color: #6E6ED1}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #B86161}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20180306</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>00:06.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>01:18.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>01:18.44</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD and open source CAx discussion ! Also @ <a href="http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> ! Logs @ <a href="http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:59.32</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>Hello guys. I wanted to talk about GSOC Appleseed integration project again.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:00.21</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>I have looked through GCI tasks as you adviced and currently I am experimenting with appleseed plugin system.&nbsp;&nbsp;So far, I have implemented two procedural objects, for sphere and ellipse. Basically I just assigned intersection/occlusion callbacks to BLR-CAD intersection functions (for sphere it's rt_sph_shot(...), for ellipse it's rt_ell_shot(...)) and it works fine. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.01</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>Here is the picture: boxes are rendered with appleseed traversal routines, and sphere/ellipse with brl-cad intersection functions.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:01.07</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>dropbox.com/s/13b0ch6fs4u6hay/sphere_ellipse.png?dl=0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:02.16</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>This plugin system is great by the way. I have been using Intel Embree in my renderer for some time already and it's got almost the same API with callbacks for custom geometry.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:03.40</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>As for mesh ray tracing, I am not sure yet how to integrate kdtree bulding/traversal into the procedural object and there's also an issue of effective parallelization and resources allocation (for me, at this point brl-cad's memory allocation system seems pretty much complicated). </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:04.36</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>So, I am not sure yet if this project is possible without rewriting appleseed's core (at least a little). But I think it's better to start with plugin approach anyway even if it may be a bit slower than with native rt_shootray mechanism.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:04.45</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>What do you think about it? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:05.50</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>Oh, by the way, I have been thinking about making some bugfixes and I liked this ticket: sourceforge.net/p/brlcad/bugs/368/ . Do you know if anyone is working on it right now? And also, is there a FAQ with all Archer commands or something like this?</tt></td></tr>
-<tr><td><tt>02:12.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP_ (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
-<tr><td><tt>02:49.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Radicarian (~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</font></tt></td></tr>
-<tr><td><tt>03:07.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>03:10.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@179-11-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:37.53</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP_: major props!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:47.59</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>that's certainly a way to get attention... awesome demonstration of progress</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:50.49</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>one major step during GSoC (or perhaps before at the rate you're going) is to implement just one procedural object type for "brl-cad" geometry, and call rt_shootray() for the intersection function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:51.08</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>that should then get full rendering of any brl-cad geometry, no matter the representation type</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.21</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>performance isn't even on the table at this point because the goal is high-end rendering features on brl-cad geometry, and production-quality integration with BRL-CAD</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.39</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>once basic intersection is working, next step would probably be displaying some material properties, color at a minimum</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.55</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>at that point, things get a bit more tricky but a bridge to be crossed later</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.17</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>as for integrating kdtree building/traversal, it's probably simpler than you realize -- you just need to call rt_dirbuild() and rt_prep_parallel() prior to all the rt_shootrays(), presumably during some procedural object load</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:00.39</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>you can rt_shootray() in parallel by initializing brl-cad API resource structures -- many examples of this: grep rt_init_resource src/*/*.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:00.49</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>that's also called during prep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:01.01</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>(prior to rt_prep_parallel())</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:04.39</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>Wait, isn't rt_shootray() working for the whole scene?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:06.11</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you mean exactly?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.35</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>Let's say we have a simple program like rtexample. First we load the scene and build the kd-tree. Then we call rt_shootray() which goes through the whole kd-tree and returns some data about the hit, right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.15</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>s/kd-tree/spatial partitioning/, but yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.51</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>the type of partitioning in brl-cad depends on the type of geometry being prep'd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.39</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>When we make procedural objects in appleseed we override functions for bbox construction around the object and intersection/occlusion. And when the appleseed casts a ray into the scene, depending on the bounding box the ray hits, it calls the correspoding intersection function. So, we kind of already know the object the ray is going to hit.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.42</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>so you only load the scene and build the spatial partitioning once, during some load or init function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.21</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>except you don't know :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.11</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad geometry can be (and often is) super complicated inside a given box, you don't know what's there until you shoot the ray and get hits</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.46</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>simple spheres and boxes are degenerate simple cases that we don't even really think about because they're kind of rare outside of testing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.48</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>Oh, okay, I get it. You want to load the whole scene inside one Procedural object instead of procedural objects for each kind of geometry.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.59</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>Yeah, that's probably will be even simpler</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:15.15</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>remember (or know) that there is intrinsic support for boolean operations, which by definition means you don't know where the hit is until after the boolean is processed which is after intersections are known</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.53</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>you might also be worrying about performance, but rt_shootray() tracing is generally millions of rays per second per cpu core, and you will need to support shooting in parallel</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.06</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>that material properties bridge will make things a bit more complicated, no longer one procedural object, but again that's a bridge to be crossed later</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.07</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>that requires a bit more in-depth understanding of how CAD geometry differs from content modeling (e.g., region hierarchy vs triangle mesh nodes)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:22.48</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>oh also, you can get at bounding boxes after calling rt_prep_parallel() for setting up the procedural bounding box</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.20</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>similar code to what you need in src/libged/bb.c -&gt; src/libged/get_obj_bounds.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.29</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>bb command in mged/archer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.56</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP_: can you tell me a bit about your background?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.52</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>Sure, one sec.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:39.29</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>I've got a bachelor degree in software engineering from Higher School of Economics, Moscow, Russia. Currently I am enrolled in master's program in computer science, also there at HSE. I am doing my thesis at&nbsp;&nbsp;Moscow State University's graphics lab. It's about Gradient-domain rendering. Overall, I have been doing computer graphics for about 3 years. First it was real-time rendering, physics engine and stuff, and since my bachelor's t</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:39.55</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>it's physically-based rendering. Regarding open-source, well. For a few years, during summer internships at ROSA lab, I have been contributing to ROSA Fresh linux distro. It's not really computer graphics related, but I have developed a small QT-based Bluetooth app for LXQT and have built a few dozens of Python packages :) I also have been writing some small stuff for the inhouse renderer at the graphics lab I do my thesis at.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:23.59</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP_: thanks, excellent intro</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:24.49</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>hadn't heard about gradient-domain rendering (or at least not something I've retained if I have come across it before)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.35</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds like an excellent background for this task, possibly a relevant extension into our performance rendering goals too (converting BRL-CAD's ray pipeline to being a more memory coherent and vectorizable)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.10</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>&gt;hadn't heard</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.11</tt></td><td><font color="#6e6ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>interesting that you're at an econ school studying graphics</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.12</tt></td><td><font color="#71d7d7"><tt>DenisP_</tt></font></td><td width="100%"><tt>Well, currently it's not really production-suitable. Though Gradient-domain Path Tracing / MLT gives pretty good results.</tt></td></tr>
-<tr><td><tt>05:54.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>05:54.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>05:55.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>05:55.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness (uid10044@gateway/web/irccloud.com/x-rgmcgjjevyxnumdy)</font></tt></td></tr>
-<tr><td><tt>07:41.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>07:53.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@239-0-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>08:40.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@24.70.185.109)</font></tt></td></tr>
-<tr><td><tt>11:34.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
-<tr><td><tt>12:53.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:5f78:290:f5ff:fedc:3bb2)</font></tt></td></tr>
-<tr><td><tt>12:57.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@185.39.197.205)</font></tt></td></tr>
-<tr><td><tt>14:07.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>15:06.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
-<tr><td><tt>15:59.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sreyansh (cb6ef205@gateway/web/freenode/ip.203.110.242.5)</font></tt></td></tr>
-<tr><td><tt>16:35.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>17:08.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>17:56.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gabbar1947 (uid205515@gateway/web/irccloud.com/x-hcnysufwkavsiydk)</font></tt></td></tr>
-<tr><td><tt>18:15.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>18:17.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>18:37.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f720:76fa:290:f5ff:fedc:3bb2)</font></tt></td></tr>
-<tr><td><tt>19:01.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>19:25.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@p578EC75F.dip0.t-ipconnect.de)</font></tt></td></tr>
-<tr><td><tt>19:31.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest53861 (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>19:34.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr><td><tt>20:27.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
-<tr><td><tt>20:29.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S01069050ca2cbf63.ok.shawcable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:42.29</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>Hi. I have been wondering if I can find somewhere examples of BRL-CAD projects (.g files)?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:43.11</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>I think I have got a working implementation of BRL-CAD procedural object, but I wanted to test it on complex scenes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:45.15</tt></td><td><font color="#b86161"><tt>DenisP</tt></font></td><td width="100%"><tt>dropbox.com/s/gsyb99e8o062dqb/brlcadobject.png?dl=0</tt></td></tr>
-<tr><td><tt>22:05.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
-<tr><td><tt>23:45.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DaRock (~Thunderbi@mail.unitedinsong.com.au)</font></tt></td></tr>
-<tr><td><tt>23:57.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DaRock1 (~Thunderbi@mail.unitedinsong.com.au)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>00:06.29</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:18.44</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad infobot
+(ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:18.44</tt></td>
+<td colspan="2"><tt><span class="c2">*** topic/#brlcad is BRL-CAD
+and open source CAx discussion ! Also @ <a href=
+"http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> !
+Logs @ <a href=
+"http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:59.32</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Hello guys. I wanted to talk about GSOC
+Appleseed integration project again.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:00.21</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>I have looked through GCI tasks as you adviced
+and currently I am experimenting with appleseed plugin system.  So
+far, I have implemented two procedural objects, for sphere and
+ellipse. Basically I just assigned intersection/occlusion callbacks
+to BLR-CAD intersection functions (for sphere it's
+rt_sph_shot(...), for ellipse it's rt_ell_shot(...)) and it works
+fine.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.01</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Here is the picture: boxes are rendered with
+appleseed traversal routines, and sphere/ellipse with brl-cad
+intersection functions.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:01.07</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%">
+<tt>dropbox.com/s/13b0ch6fs4u6hay/sphere_ellipse.png?dl=0</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:02.16</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>This plugin system is great by the way. I have
+been using Intel Embree in my renderer for some time already and
+it's got almost the same API with callbacks for custom
+geometry.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:03.40</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>As for mesh ray tracing, I am not sure yet how
+to integrate kdtree bulding/traversal into the procedural object
+and there's also an issue of effective parallelization and
+resources allocation (for me, at this point brl-cad's memory
+allocation system seems pretty much complicated).</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:04.36</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>So, I am not sure yet if this project is
+possible without rewriting appleseed's core (at least a little).
+But I think it's better to start with plugin approach anyway even
+if it may be a bit slower than with native rt_shootray
+mechanism.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:04.45</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>What do you think about it?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:05.50</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Oh, by the way, I have been thinking about
+making some bugfixes and I liked this ticket:
+sourceforge.net/p/brlcad/bugs/368/ . Do you know if anyone is
+working on it right now? And also, is there a FAQ with all Archer
+commands or something like this?</tt></td>
+</tr>
+<tr>
+<td><tt>02:12.12</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DenisP_
+(d40d70a2@gateway/web/freenode/ip.212.13.112.162)</span></tt></td>
+</tr>
+<tr>
+<td><tt>02:49.45</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Radicarian
+(~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>03:07.12</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>03:10.23</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@179-11-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:37.53</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP_: major props!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:47.59</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's certainly a way to get attention...
+awesome demonstration of progress</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:50.49</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one major step during GSoC (or perhaps before
+at the rate you're going) is to implement just one procedural
+object type for "brl-cad" geometry, and call rt_shootray() for the
+intersection function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:51.08</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that should then get full rendering of any
+brl-cad geometry, no matter the representation type</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:52.21</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>performance isn't even on the table at this
+point because the goal is high-end rendering features on brl-cad
+geometry, and production-quality integration with BRL-CAD</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:56.39</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>once basic intersection is working, next step
+would probably be displaying some material properties, color at a
+minimum</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:57.55</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at that point, things get a bit more tricky
+but a bridge to be crossed later</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:59.17</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>as for integrating kdtree building/traversal,
+it's probably simpler than you realize -- you just need to call
+rt_dirbuild() and rt_prep_parallel() prior to all the
+rt_shootrays(), presumably during some procedural object
+load</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:00.39</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can rt_shootray() in parallel by
+initializing brl-cad API resource structures -- many examples of
+this: grep rt_init_resource src/*/*.c</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:00.49</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's also called during prep</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:01.01</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(prior to rt_prep_parallel())</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:04.39</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Wait, isn't rt_shootray() working for the
+whole scene?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:06.11</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what do you mean exactly?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:09.35</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Let's say we have a simple program like
+rtexample. First we load the scene and build the kd-tree. Then we
+call rt_shootray() which goes through the whole kd-tree and returns
+some data about the hit, right?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:10.15</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>s/kd-tree/spatial partitioning/, but
+yes</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:10.51</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the type of partitioning in brl-cad depends on
+the type of geometry being prep'd</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:11.39</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>When we make procedural objects in appleseed
+we override functions for bbox construction around the object and
+intersection/occlusion. And when the appleseed casts a ray into the
+scene, depending on the bounding box the ray hits, it calls the
+correspoding intersection function. So, we kind of already know the
+object the ray is going to hit.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:11.42</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you only load the scene and build the
+spatial partitioning once, during some load or init
+function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:12.21</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>except you don't know :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:13.11</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>brl-cad geometry can be (and often is) super
+complicated inside a given box, you don't know what's there until
+you shoot the ray and get hits</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:13.46</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>simple spheres and boxes are degenerate simple
+cases that we don't even really think about because they're kind of
+rare outside of testing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:14.48</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Oh, okay, I get it. You want to load the whole
+scene inside one Procedural object instead of procedural objects
+for each kind of geometry.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:14.59</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Yeah, that's probably will be even
+simpler</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:15.15</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>remember (or know) that there is intrinsic
+support for boolean operations, which by definition means you don't
+know where the hit is until after the boolean is processed which is
+after intersections are known</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:17.53</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you might also be worrying about performance,
+but rt_shootray() tracing is generally millions of rays per second
+per cpu core, and you will need to support shooting in
+parallel</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:19.06</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that material properties bridge will make
+things a bit more complicated, no longer one procedural object, but
+again that's a bridge to be crossed later</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:20.07</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that requires a bit more in-depth
+understanding of how CAD geometry differs from content modeling
+(e.g., region hierarchy vs triangle mesh nodes)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:22.48</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oh also, you can get at bounding boxes after
+calling rt_prep_parallel() for setting up the procedural bounding
+box</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:23.20</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>similar code to what you need in
+src/libged/bb.c -&gt; src/libged/get_obj_bounds.c</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:23.29</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bb command in mged/archer</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:23.56</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP_: can you tell me a bit about your
+background?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:26.52</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Sure, one sec.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:39.29</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>I've got a bachelor degree in software
+engineering from Higher School of Economics, Moscow, Russia.
+Currently I am enrolled in master's program in computer science,
+also there at HSE. I am doing my thesis at  Moscow State
+University's graphics lab. It's about Gradient-domain rendering.
+Overall, I have been doing computer graphics for about 3 years.
+First it was real-time rendering, physics engine and stuff, and
+since my bachelor's t</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:39.55</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>it's physically-based rendering. Regarding
+open-source, well. For a few years, during summer internships at
+ROSA lab, I have been contributing to ROSA Fresh linux distro. It's
+not really computer graphics related, but I have developed a small
+QT-based Bluetooth app for LXQT and have built a few dozens of
+Python packages :) I also have been writing some small stuff for
+the inhouse renderer at the graphics lab I do my thesis
+at.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:23.59</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP_: thanks, excellent intro</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:24.49</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hadn't heard about gradient-domain rendering
+(or at least not something I've retained if I have come across it
+before)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:26.35</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sounds like an excellent background for this
+task, possibly a relevant extension into our performance rendering
+goals too (converting BRL-CAD's ray pipeline to being a more memory
+coherent and vectorizable)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:27.10</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>&gt;hadn't heard</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:27.11</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>interesting that you're at an econ school
+studying graphics</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:27.12</tt></td>
+<td><span class="c6"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Well, currently it's not really
+production-suitable. Though Gradient-domain Path Tracing / MLT
+gives pretty good results.</tt></td>
+</tr>
+<tr>
+<td><tt>05:54.04</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:54.58</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:55.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:55.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad witness
+(uid10044@gateway/web/irccloud.com/x-rgmcgjjevyxnumdy)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:41.48</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:53.37</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@239-0-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:40.00</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@24.70.185.109)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:34.50</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad teepee-
+(bc5c2133@gateway/web/freenode/ip.188.92.33.51)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:53.58</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yorik
+(~yorik@2804:431:f721:5f78:290:f5ff:fedc:3bb2)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:57.37</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@185.39.197.205)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:07.15</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:06.33</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DenisP
+(d40d70a2@gateway/web/freenode/ip.212.13.112.162)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:59.19</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad sreyansh
+(cb6ef205@gateway/web/freenode/ip.203.110.242.5)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:35.48</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:08.17</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:56.07</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad gabbar1947
+(uid205515@gateway/web/irccloud.com/x-hcnysufwkavsiydk)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:15.16</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:17.38</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:37.17</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yorik
+(~yorik@2804:431:f720:76fa:290:f5ff:fedc:3bb2)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:01.54</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:25.35</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad teepee
+(~teepee@p578EC75F.dip0.t-ipconnect.de)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:31.52</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Guest53861
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:34.21</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:27.18</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad teepee
+(~teepee@unaffiliated/teepee)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:29.07</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yukonbob
+(~bch@S01069050ca2cbf63.ok.shawcable.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:42.29</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>Hi. I have been wondering if I can find
+somewhere examples of BRL-CAD projects (.g files)?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:43.11</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%"><tt>I think I have got a working implementation of
+BRL-CAD procedural object, but I wanted to test it on complex
+scenes.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:45.15</tt></td>
+<td><span class="c3"><tt>DenisP</tt></span></td>
+<td width="100%">
+<tt>dropbox.com/s/gsyb99e8o062dqb/brlcadobject.png?dl=0</tt></td>
+</tr>
+<tr>
+<td><tt>22:05.13</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DenisP
+(d40d70a2@gateway/web/freenode/ip.212.13.112.162)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:45.29</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DaRock
+(~Thunderbi@mail.unitedinsong.com.au)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:57.34</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad DaRock1
+(~Thunderbi@mail.unitedinsong.com.au)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

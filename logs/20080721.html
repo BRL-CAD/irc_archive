@@ -1,282 +1,1502 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20080721</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20080721</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c15 {color: #B25E5E}
+ span.c14 {color: #D671D6}
+ span.c13 {color: #70D4D4}
+ span.c12 {color: #C467C4}
+ span.c11 {color: #B45F5F}
+ span.c10 {color: #AE5BAE}
+ span.c9 {color: #BD6363}
+ span.c8 {color: #73DC73}
+ span.c7 {color: #CC00CC}
+ span.c6 {color: #C86969}
+ span.c5 {color: #009900}
+ span.c4 {color: #CC6BCC}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #CE6C6C}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20080721</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:19.45</tt></td><td><font color="#ce6c6c"><tt>jonored</tt></font></td><td width="100%"><tt>hmm... what does "loop transits plane of shell/face" mean from g-stl? it keeps bailing with that message, and I didn't think my geometry was that odd...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.49</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>jonored: it's part of the solidity constraint checking as it evaluates geometry, going from one representation format to another (solid polygonal)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:39.39</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>more specifically, the topological 'loop' that defines a given face is non-planar (which shouldn't regularly be happening)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:40.33</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>it'll complain and even "bu_bomb" reporting errors -- that doesn't necessarily mean that it succeeded or failed though -- have to inspect the result</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:40.51</tt></td><td><font color="#ce6c6c"><tt>jonored</tt></font></td><td width="100%"><tt>Any idea why it'd do that? I've got a trc with a bunch of other trcs and spheres subtracted out, and intersected with an rpp... it's saying that it didn't write any triangles.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:44.40</tt></td><td><font color="#ce6c6c"><tt>jonored</tt></font></td><td width="100%"><tt>which is to say, what should I be looking for to figure out what's wrong?</tt></td></tr>
-<tr><td><tt>00:53.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>00:53.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurgi (i=janek@irc.cool.waw.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.58</tt></td><td><font color="#ce6c6c"><tt>jonored</tt></font></td><td width="100%"><tt>Found it. Using a sphere as an endcap to smooth between two cones, and having them all have the same radius was breaking things, even though they're unioned together. Wasn't expecting that.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#c86969"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">pheers code monkeys</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:58.29</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: Do you know what's up with the incomplete brep code in conv/iges?</tt></td></tr>
-<tr><td><tt>03:48.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker_ (n=CY@c-68-33-217-173.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:08.32</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: that was started as a means to test the new brep primitive</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:09.03</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>a separate iges importer, started from scratch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:11.57</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>ah k. It's incomplete, no? It looked like an almost already done snurb/cnurb -&gt; brep aside from a few missing (crucial) functions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:12.36</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, incomplete</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:13.55</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>The reliance of a cnurb on the associated snurb really messes up the structure of my NMG -&gt; brep code :\ </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:14.29</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>Is there a way (outside of openNURBS) to evaluate a snurb at a given (u,v) point?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:15.16</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>Ah d'oh. Found it in nurb_eval.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:15.45</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>oooh, you mean the old snurb/cnurb code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:16.09</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>src/conv/iges has two iges converters, one using new 'brep' and one using old 'nurb'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:16.59</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>the new brep stuff is looked at as mostly a full replacement for the old nurb code (when it's all working)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:17.46</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>the old iges converter was the one place old nurb was actually put to use (and mostly works actually) .. just that it doesn't do a few things, e.g. doesn't do trimmed nurbs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:17.47</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>So, I was going to more fully implement nmg -&gt; brep to supportthe old nurb code, this way I could use the existing tnurb callbacks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:18.10</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>Is that a bad idea? (are we trying to phase out all the old nurbs code?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:19.12</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>if brep fully works, the old nurb code will be deleted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:19.53</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>don't worry about old spline surface nmg's (i.e. nurb primitives)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:20.18</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>if you need it's code, you should probably convert it over as brep routines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:20.48</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>Ok. The thing was it looked easier to implement the NMG conversion then rewriting the tnurb callbacks to create a brep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:21.33</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>But it's not that bad to just rewrite the callbacks to create a brep instead...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:23.33</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>but what do you need the old tnurb callbacks for (what callbacks?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:25.07</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>So for example, in tgc.c, there is a rt_tgc_tnurb which creates an NMG to represent the tgc. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:25.17</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:25.47</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>creates a 'nurb' nmg .. specific subset</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.05</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>I was going to take the NMB that rt_tgc_tnurb created and convert from that NMG -&gt; brep as I already have working NMG code for planar faces, and I'd just need to add support for cnurb/snurb in the NMG -&gt; brep code and then all these rt_xxx_tnurb callbacks would work fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.16</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I wouldn't rely on that implentation, it needs to be converted to create an ON_Brep instead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.35</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>Alrighty, I'll take that path :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.07</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>might even end up being line for line identical with just different data structures</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.13</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>So just to confirm: reliance on rt_xxx_tess is OK? I'm guessing that's going to be around for ... a hell of a long time :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.40</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's just the _nurb() routines that are getting replaced with _brep() routines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.52</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>tess is fair game</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:35.03</tt></td><td><font color="#bd6363"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>"&lt;darkcrab&gt; question: one of the screws came out of my laptop and one of the sides of my laptop is coming open, what should I do?"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:35.06</tt></td><td><font color="#bd6363"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>priceless</tt></td></tr>
-<tr><td><tt>05:48.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
-<tr><td><tt>05:55.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@217-162-111-62.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>06:28.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (n=Matthew@whitecalf.net)</font></tt></td></tr>
-<tr><td><tt>07:13.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad esben (n=esben@0x573ff382.boanqu1.static.dsl.tele.dk)</font></tt></td></tr>
-<tr><td><tt>08:34.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elmom_ (n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</font></tt></td></tr>
-<tr><td><tt>08:39.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-91-240.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>09:11.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:12.42</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
-<tr><td><tt>09:21.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5B14CC2E.dip.t-dialin.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:24.42</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r31886 10/brlcad/trunk/src/libged/CMakeLists.txt: added some files to be consistent with Makefile.am</tt></td></tr>
-<tr><td><tt>10:43.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elmom (n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</font></tt></td></tr>
-<tr><td><tt>10:53.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist_emc (n=archivis@host81-149-119-172.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:09.39</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: any news from Ralith?</tt></td></tr>
-<tr><td><tt>11:22.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:00.13</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm, not that i'm aware of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:00.50</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I haven't received mails or anything, I wonder if he ever got to compile the project</tt></td></tr>
-<tr><td><tt>12:29.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elmom (n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</font></tt></td></tr>
-<tr><td><tt>12:47.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.133.97)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:55.45</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>hi homovulgaris</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:56.14</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>mater tua mala burra est :P</tt></td></tr>
-<tr><td><tt>13:02.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.192.57)</font></tt></td></tr>
-<tr><td><tt>13:13.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:20.04</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>hmm - for some reason trying to compile the other directory RBgui can't find OGRE</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:21.01</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>are you also checking it out starseeker_? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:21.38</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>what's the exact error? (rafb.net/paste or similar, please)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:21.53</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31887 10/rt^3/trunk/src/g3d/ (CameraModes.cxx CameraModes.h): Minor rearrangements to prepare for next changes, and to avoid warnings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:22.00</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>one sec - let me run ldconfig</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.41</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>btw - is there a required version of gcc?&nbsp;&nbsp;I'm using a pretty new one and OGRE is throwing out warnings left and right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:24.03</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>yes, but that's ogre's fault</tt></td></tr>
-<tr><td><tt>13:24.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@123.208.74.222)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:24.23</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I mean, it's normal, no especial version of gcc required</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:24.29</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I'm using 4.3.1 I think</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:25.01</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt><a href="http://paste.bzflag.bz/m34eb8859">http://paste.bzflag.bz/m34eb8859</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:26.29</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>I can try a clean checkout - I may have old incorrect stuff somewhere - but that'll take a while</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:32.55</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:33.06</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>do you build ogre and ois before?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:33.20</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>or call explicitly to build only mocha and rbgui?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:35.33</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>starseeker_: and also, do you have pkg-config installed?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:36.14</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>built them before</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:36.19</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>let me see if I have pkg-config</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:37.03</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>yes, I have it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:38.01</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>is Ogre installed, rather than only compiled?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:38.45</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you can find out if it's properly installed: pkg-config --cflags OGRE</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:39.18</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>it should spit some compiling flags</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:40.08</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>let's see...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:40.18</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>hmm, not found</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:40.23</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>let me re-check ogre</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.09</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>Oh, needed to manually point it to the src/other/ogre directory where `OGRE.pc' is located</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:43.27</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>let's see if that does anything...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:46.20</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>huh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:46.43</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>it should install it in /usr/local/lib/pkgconfig or similar</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.01</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>/usr/qt/3/lib/pkgconfig is what it had by default</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.07</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>If I manually point the PKG_CONFIG_PATH to the directories where the *.pc files are found, it seems to be doing OK.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.22</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>mafm:&nbsp;&nbsp;Arrgh, I set the video settings wrong</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.27</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>where's the config file?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:55.00</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>oh, nevermind - ogre.cfg</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:55.26</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>yick - doesn't like my fonts or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.10</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>Ah, well - got it working :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.12</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>sort of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.16</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt>thanks mafm!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.44</tt></td><td><font color="#c467c4"><tt>starseeker_</tt></font></td><td width="100%"><tt><font color="#CC00CC">heads in</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.04</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.39</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>well, default in unix systems should be /usr/lib/pkgconfig or with local, in the same spirits as includes and so on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.54</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I don't know why would you *only* had the one of qt</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.59</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>but well, it's OK :)</tt></td></tr>
-<tr><td><tt>14:27.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad saltan (n=lieven@d51530284.access.telenet.be)</font></tt></td></tr>
-<tr><td><tt>14:51.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad prasad_ (n=psilva@h-67-103-183-185.mclnva23.covad.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:30.06</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>mafm: might want to add a note in the INSTALL file about that and how to handle it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:30.46</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I'm think about adding some kind of pre-flight test with the makefile itself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:31.06</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>checking whether pkg-config is available, and yelling when not available</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:31.41</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>(it might be good to have workarounds when not having pkg-config, but I don't have time to fix it atm)</tt></td></tr>
-<tr><td><tt>15:36.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob_ (i=1000@s142-179-54-198.bc.hsia.telus.net)</font></tt></td></tr>
-<tr><td><tt>15:47.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.131.22)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:47.25</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>howdy mafm :) whats with the latin :P ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:47.40</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31888 10/rt^3/trunk/src/g3d/ (10 files): Separating camera modes (classes) in different files, as suggested by Sean.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.17</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>homovulgaris: I tried to said something that I recalled from high school</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.29</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.31</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>because your name is in latin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.50</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>tempus fugit!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:48.55</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:P just means common man :) but yeah latin is kind of a fun language i guess.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.12</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>personally i feel sanskrit is much more well structured ..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.36</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I speak several degenerate-latin languages, so... :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.20</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>latin is pretty neat foundation for learning all the romance languages i guess.. especially if you already have one as a mother tongue ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.38</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>and I my case I have two :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.47</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>I finally got my computer back :D 4.0 GHz dual core ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.50</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>but I don't remember almost anything from latin classes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.54</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>overclocked ofcourse :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.56</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>it's the age I guess :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.03</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>congrats!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.13</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>well compilation takes just around 12 minutes.. and planning to use distcc too :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.24</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>huge improvement from 200 minutes :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.06</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>compilation from whole brlcad?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.16</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>yeah :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.20</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>not bad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.36</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>hopefully I don't have to compile it often :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.10</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>g3d looks neat ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.18</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>what all stuff can i do in it now ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:55.45</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you can... compile it under 15s, I guess (OGRE aside :P)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.06</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I've been working in camera modes lately</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.17</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I'm trying to create MGED mode today</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.01</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>and next to it, start working in the last major part left: displaying geometry and operations, using the new libged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.22</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>yeah i already have the window up and running.. :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.31</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>whats the triangle in the middle ? test draw ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.48</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>it's a kind of tetrahedron</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.58</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>so you somehow can see the camera mode movements :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.44</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you can manipulate the default camera mode with: +,-,8-4-6-2,5 in the numpad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:00.16</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>it would help to see it better if the tetrahedron would have texture and proper shading</tt></td></tr>
-<tr><td><tt>16:01.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5B14CC2E.dip.t-dialin.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.42</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>tried it nice.. :) even drawing the edges would make it clearer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.22</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>(btw, the fist phrase in latin that I told before means "your mother eats red|mature apples", but for portuguese and italian and spanish and probably other it sounds as "your mother is a worthless donkey")</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.30</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you mean to set it in wireframe mode?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.21</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:P yeah that sentence is known to be pretty ambiguous :P wordplay or something :P : as per google :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.45</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>wireframe+shade. i mean show the edges as well as the faces</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.12</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>well, I didn't implement any of that, it would be done when displaying the rest of geometries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.53</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>probably I'll have to write code to translate brl-cad primitives as vertices and lists</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.17</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you can set wireframe mode in the meanwhile with "polygonmode wireframe"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.19</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>in the console</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.35</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>oh, and you can also click with middle mouse button and move around dragging the camera -- it's free rotation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.41</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>hmm.. is adding mouse support tought ? i mean like this view rotation for example.. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.58</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you have to inject input, the camera mode sets parameters depending on the position of the pointer (vertical or horizontal rotations, translations, etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:11.28</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>then when painting the next frame, the camera uses these data to position itself, seeing the scene from different angles</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:11.55</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>but getting to this "dettached" approarch took a few days and refinements :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.19</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt><font color="#CC00CC">hopes to not have to do big acommodations again for implementing MGED</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.15</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>the key parts are only a few dozens lines of code, but it takes a lot to get it right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.27</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>well</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.42</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>and what about your project? progressing steadily?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.52</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:) can imagine.. beautiful code is a nice read</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:18.32</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: one of the libged routines is effectively "give me a display list of vertices and edges"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.28</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>should be ged_e or ged_draw -- ged_E or ged_ev should give you evaluated polygonal (slow to call on complex objects)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.52</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>you mean that that part is translated directly?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.57</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>free rotation with the mouse works smooth and nice .. :) zoom with scroll coming up ;) ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.33</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>directly by libged I mean, so I don't have to do that myself :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.48</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: yeah, libged handles that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.03</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>homovulgaris: mmm, it tried to copy Blender mode, not sure if they have that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.11</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>with libged you really should be able to do just about everything that mged can presetntly do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.33</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>homovulgaris: &gt;:| you found a bug</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.37</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>and if there's something you can't do with it, bob's probably just not gotten to it yet or it's something that needs refactoring still</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.54</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>but basic geometry loading and wireframe is there now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.07</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks irssi is awesome</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.11</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>and the vertices list also takes into account "faces" of the triangle?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.17</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>screen+irssi ftw</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.25</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;Where does that example code of yours link from?&nbsp;&nbsp;the wiki home page doesn't seem to have a path to it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.30</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: there are different render modes -- for e/draw you don't have faces, you just have unevaluated wireframe so you'll just display what they give you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.36</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>brlcad: terminator+irssi .. i like screen.. but maybe will need more getting used to :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.59</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: for commands like ev/E, you get a polygonal display list -- plenty to do shaded displays and more</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.36</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>homovulgaris: what is terminator?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.02</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: mm, probably from nothing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.11</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">digs it up...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.13</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>confirmed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.14</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>try special pages, unreferenced</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.36</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>link it under the dev docs/tutorials</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.48</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31889 10/rt^3/trunk/src/g3d/Commands.h: Enhancing PolygonMode command so less typing is needed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.08</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>could use expanding too, explaining each section, didn't get to that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.12</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>brlcad: multiview terminal <a href="https://launchpad.net/terminator/">https://launchpad.net/terminator/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.38</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>not as useful as screen ..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.40</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: will do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.43</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>homovulgaris: oh, heh .. that's not a screen replacement :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.18</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>yeah not at all a screen replacement :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.27</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>screen is useful when run from a remote server so you can log in and keep (the same) sessions running</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.45</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>like keeping irssi running so you never detach from irc ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.46</tt></td><td><font color="#ce6c6c"><tt>jonored</tt></font></td><td width="100%"><tt><font color="#CC00CC">would rather have screen for when he remotes in/kills X because of occasionally glitchy wm.</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.31</tt></td><td><font color="#ce6c6c"><tt>jonored</tt></font></td><td width="100%"><tt><font color="#CC00CC">gets the tiling from the tiling window manager :)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.45</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt><font color="#CC00CC">rethinks why he runs X when most of the time all he has on are bash windows</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:29.10</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>ooh, terminator is a non-overlapper</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:29.23</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nudges mafm :)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.42</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>ala wmii/dwm/ion/awesome etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.46</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: what?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.54</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>anybody else getting foobarred fonts in the ogre gui?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.11</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>starseeker: never ran into that problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.13</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm just that homovulgaris' terminal program is .. related ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.33</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>tiling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.43</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>meh, just my luck</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.58</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will post a screenshot when he gets home</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.14</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>oh, the tiling thing... sorry but I was only reading my part of conversation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.16</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>probably not worth worrying about if I'm the only one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.31</tt></td><td><font color="#d671d6"><tt>homovulgaris</tt></font></td><td width="100%"><tt>what does foobarred look like :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.01</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>I had an epyphany because I'm tired and I don't feel like having to type too much today, and "polygonmode wireframe" is way too long...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.13</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>so I'm trying to substitute it for "p&lt;tab&gt; w"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.13</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.47</tt></td><td><font color="#70d4d4"><tt>starseeker</tt></font></td><td width="100%"><tt>homovulgaris:&nbsp;&nbsp;unintelligble blurred mess</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:41.03</tt></td><td><font color="#c86969"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">pets screen</font></tt></td></tr>
-<tr><td><tt>16:46.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr><td><tt>16:54.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:16.23</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31890 10/brlcad/trunk/src/librt/namegen.c: Thanks to Sean's example, switching over to using db_functree - identification is now working.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:24.11</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31891 10/brlcad/trunk/src/librt/namegen.c: break out object type detection into its own routine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:36.55</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31892 10/rt^3/trunk/src/g3d/ (4 files): Adding auto-completion functionality for the console and command overlay</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:57.45</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31893 10/rt^3/trunk/src/g3d/ (6 files): Adding missing functionality to Blender camera mode: zoom in/out with mouse scroll (discovered by Dawn Thomas &lt;homovulgaris&gt;)</tt></td></tr>
-<tr><td><tt>19:08.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:08.34</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>hi Ralith</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:08.45</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>unfortunately I have to go now to go to hypermarket</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:08.52</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt>hey</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:08.57</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt>kk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:09.04</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>but I'd like to know about your progress, so if you can send me a brief or something, I would appreciate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:09.09</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>(or to the mailing list also)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:09.52</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt>will be submitting my mocha patch to sourceforge</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:10.12</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>oki</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:10.14</tt></td><td><font color="#ae5bae"><tt>mafm</tt></font></td><td width="100%"><tt>bye</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.50</tt></td><td><font color="#73dc73"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: do you know how the ctl_points in the old nurbs system translates into (u,v), it's just a 1-d array and doesnt seem to be in any order</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:17.43</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt>kk, patch uploaded</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:19.44</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31894 10/brlcad/trunk/src/librt/namegen.c: More reworking - database opening and closing is no longer in the parsing routine, matching real world behavior.</tt></td></tr>
-<tr><td><tt>20:24.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulg1ris (n=d@117.196.128.26)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:26.02</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">submits Yet Another patch, this time improving the rt^3 src/other makefile</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.02</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:34.03</tt></td><td><font color="#b25e5e"><tt>Ralith</tt></font></td><td width="100%"><tt>so close :|</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:53.55</tt></td><td><font color="#b45f5f"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r31895 10/brlcad/trunk/src/librt/namegen.c: Starting to explore generating the strings. Some data structure evolution needed - this doesn't build right now, simply saving work - do NOT add to any build system yet.</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:19.45</tt></td>
+<td><span class="c2"><tt>jonored</tt></span></td>
+<td width="100%"><tt>hmm... what does "loop transits plane of
+shell/face" mean from g-stl? it keeps bailing with that message,
+and I didn't think my geometry was that odd...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.49</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>jonored: it's part of the solidity constraint
+checking as it evaluates geometry, going from one representation
+format to another (solid polygonal)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:39.39</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>more specifically, the topological 'loop' that
+defines a given face is non-planar (which shouldn't regularly be
+happening)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:40.33</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it'll complain and even "bu_bomb" reporting
+errors -- that doesn't necessarily mean that it succeeded or failed
+though -- have to inspect the result</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:40.51</tt></td>
+<td><span class="c2"><tt>jonored</tt></span></td>
+<td width="100%"><tt>Any idea why it'd do that? I've got a trc with
+a bunch of other trcs and spheres subtracted out, and intersected
+with an rpp... it's saying that it didn't write any
+triangles.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:44.40</tt></td>
+<td><span class="c2"><tt>jonored</tt></span></td>
+<td width="100%"><tt>which is to say, what should I be looking for
+to figure out what's wrong?</tt></td>
+</tr>
+<tr>
+<td><tt>00:53.23</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad yukonbob
+(i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>00:53.36</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad cosurgi
+(i=janek@irc.cool.waw.pl) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.58</tt></td>
+<td><span class="c2"><tt>jonored</tt></span></td>
+<td width="100%"><tt>Found it. Using a sphere as an endcap to
+smooth between two cones, and having them all have the same radius
+was breaking things, even though they're unioned together. Wasn't
+expecting that.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:06.12</tt></td>
+<td><span class="c6"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">pheers code
+monkeys</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:58.29</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: Do you know what's up with the
+incomplete brep code in conv/iges?</tt></td>
+</tr>
+<tr>
+<td><tt>03:48.20</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad starseeker_
+(n=CY@c-68-33-217-173.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:08.32</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: that was started as a means to test
+the new brep primitive</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:09.03</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>a separate iges importer, started from
+scratch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:11.57</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>ah k. It's incomplete, no? It looked like an
+almost already done snurb/cnurb -&gt; brep aside from a few missing
+(crucial) functions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:12.36</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, incomplete</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:13.55</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>The reliance of a cnurb on the associated
+snurb really messes up the structure of my NMG -&gt; brep code
+:\</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:14.29</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Is there a way (outside of openNURBS) to
+evaluate a snurb at a given (u,v) point?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:15.16</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Ah d'oh. Found it in nurb_eval.c</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:15.45</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oooh, you mean the old snurb/cnurb
+code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:16.09</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>src/conv/iges has two iges converters, one
+using new 'brep' and one using old 'nurb'</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:16.59</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the new brep stuff is looked at as mostly a
+full replacement for the old nurb code (when it's all
+working)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:17.46</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the old iges converter was the one place old
+nurb was actually put to use (and mostly works actually) .. just
+that it doesn't do a few things, e.g. doesn't do trimmed
+nurbs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:17.47</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>So, I was going to more fully implement nmg
+-&gt; brep to supportthe old nurb code, this way I could use the
+existing tnurb callbacks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:18.10</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Is that a bad idea? (are we trying to phase
+out all the old nurbs code?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:19.12</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if brep fully works, the old nurb code will be
+deleted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:19.53</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't worry about old spline surface nmg's
+(i.e. nurb primitives)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:20.18</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you need it's code, you should probably
+convert it over as brep routines</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:20.48</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Ok. The thing was it looked easier to
+implement the NMG conversion then rewriting the tnurb callbacks to
+create a brep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:21.33</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>But it's not that bad to just rewrite the
+callbacks to create a brep instead...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:23.33</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but what do you need the old tnurb callbacks
+for (what callbacks?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:25.07</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>So for example, in tgc.c, there is a
+rt_tgc_tnurb which creates an NMG to represent the tgc.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:25.17</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:25.47</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>creates a 'nurb' nmg .. specific
+subset</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:26.05</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I was going to take the NMB that rt_tgc_tnurb
+created and convert from that NMG -&gt; brep as I already have
+working NMG code for planar faces, and I'd just need to add support
+for cnurb/snurb in the NMG -&gt; brep code and then all these
+rt_xxx_tnurb callbacks would work fine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:26.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, I wouldn't rely on that implentation, it
+needs to be converted to create an ON_Brep instead</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:26.35</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Alrighty, I'll take that path :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:27.07</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>might even end up being line for line
+identical with just different data structures</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:27.13</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>So just to confirm: reliance on rt_xxx_tess is
+OK? I'm guessing that's going to be around for ... a hell of a long
+time :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:27.40</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, it's just the _nurb() routines that are
+getting replaced with _brep() routines</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:27.52</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tess is fair game</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:35.03</tt></td>
+<td><span class="c9"><tt>PrezKennedy</tt></span></td>
+<td width="100%"><tt>"&lt;darkcrab&gt; question: one of the screws
+came out of my laptop and one of the sides of my laptop is coming
+open, what should I do?"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:35.06</tt></td>
+<td><span class="c9"><tt>PrezKennedy</tt></span></td>
+<td width="100%"><tt>priceless</tt></td>
+</tr>
+<tr>
+<td><tt>05:48.29</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Axman6
+(n=Axman6@pdpc/supporter/student/Axman6)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:55.20</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad clock_
+(n=clock@217-162-111-62.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:28.47</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad PrezKennedy
+(n=Matthew@whitecalf.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:13.43</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad esben
+(n=esben@0x573ff382.boanqu1.static.dsl.tele.dk)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:34.07</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad elmom_
+(n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:39.55</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad clock_
+(n=clock@84-72-91-240.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:11.22</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad mafm
+(n=mafm@elnet-111.lip.pt)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:12.42</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hi</tt></td>
+</tr>
+<tr>
+<td><tt>09:21.31</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Elperion
+(n=Bary@p5B14CC2E.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:24.42</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03d_rossberg * r31886
+10/brlcad/trunk/src/libged/CMakeLists.txt: added some files to be
+consistent with Makefile.am</tt></td>
+</tr>
+<tr>
+<td><tt>10:43.08</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad elmom
+(n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:53.16</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad archivist_emc
+(n=archivis@host81-149-119-172.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:09.39</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>brlcad: any news from Ralith?</tt></td>
+</tr>
+<tr>
+<td><tt>11:22.43</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad elite01
+(n=elite01@unaffiliated/elite01)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:00.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm, not that i'm aware of</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:00.50</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I haven't received mails or anything, I wonder
+if he ever got to compile the project</tt></td>
+</tr>
+<tr>
+<td><tt>12:29.02</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad elmom
+(n=elmom@hoasnet-ff04dd00-187.dhcp.inet.fi)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:47.20</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad homovulgaris
+(n=d@117.196.133.97)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:55.45</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hi homovulgaris</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:56.14</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>mater tua mala burra est :P</tt></td>
+</tr>
+<tr>
+<td><tt>13:02.04</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad docelic
+(n=docelic@78.134.192.57)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:13.52</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad d_rossberg
+(n=rossberg@bz.bzflag.bz)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:20.04</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>hmm - for some reason trying to compile the
+other directory RBgui can't find OGRE</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:21.01</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>are you also checking it out starseeker_?
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:21.38</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>what's the exact error? (rafb.net/paste or
+similar, please)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:21.53</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31887
+10/rt^3/trunk/src/g3d/ (CameraModes.cxx CameraModes.h): Minor
+rearrangements to prepare for next changes, and to avoid
+warnings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:22.00</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>one sec - let me run ldconfig</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:23.41</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>btw - is there a required version of gcc?  I'm
+using a pretty new one and OGRE is throwing out warnings left and
+right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:24.03</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>yes, but that's ogre's fault</tt></td>
+</tr>
+<tr>
+<td><tt>13:24.20</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad thing0
+(n=ric@123.208.74.222)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:24.23</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I mean, it's normal, no especial version of
+gcc required</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:24.29</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I'm using 4.3.1 I think</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:25.01</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt><a href=
+"http://paste.bzflag.bz/m34eb8859">http://paste.bzflag.bz/m34eb8859</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:26.29</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>I can try a clean checkout - I may have old
+incorrect stuff somewhere - but that'll take a while</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:32.55</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:33.06</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>do you build ogre and ois before?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:33.20</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>or call explicitly to build only mocha and
+rbgui?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:35.33</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>starseeker_: and also, do you have pkg-config
+installed?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:36.14</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>built them before</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:36.19</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>let me see if I have pkg-config</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:37.03</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>yes, I have it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:38.01</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>is Ogre installed, rather than only
+compiled?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:38.45</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you can find out if it's properly installed:
+pkg-config --cflags OGRE</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:39.18</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it should spit some compiling flags</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:40.08</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>let's see...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:40.18</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>hmm, not found</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:40.23</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>let me re-check ogre</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:43.09</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>Oh, needed to manually point it to the
+src/other/ogre directory where `OGRE.pc' is located</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:43.27</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>let's see if that does anything...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:46.20</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>huh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:46.43</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it should install it in
+/usr/local/lib/pkgconfig or similar</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.01</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>/usr/qt/3/lib/pkgconfig is what it had by
+default</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.07</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>If I manually point the PKG_CONFIG_PATH to the
+directories where the *.pc files are found, it seems to be doing
+OK.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.22</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>mafm:  Arrgh, I set the video settings
+wrong</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.27</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>where's the config file?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:55.00</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>oh, nevermind - ogre.cfg</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:55.26</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>yick - doesn't like my fonts or
+something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.10</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>Ah, well - got it working :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.12</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>sort of</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.16</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt>thanks mafm!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.44</tt></td>
+<td><span class="c12"><tt>starseeker_</tt></span></td>
+<td width="100%"><tt><span class="c7">heads in</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.04</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.39</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>well, default in unix systems should be
+/usr/lib/pkgconfig or with local, in the same spirits as includes
+and so on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.54</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I don't know why would you *only* had the one
+of qt</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.59</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>but well, it's OK :)</tt></td>
+</tr>
+<tr>
+<td><tt>14:27.03</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad saltan
+(n=lieven@d51530284.access.telenet.be)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:51.19</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad prasad_
+(n=psilva@h-67-103-183-185.mclnva23.covad.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:30.06</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>mafm: might want to add a note in the INSTALL
+file about that and how to handle it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:30.46</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I'm think about adding some kind of pre-flight
+test with the makefile itself</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:31.06</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>checking whether pkg-config is available, and
+yelling when not available</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:31.41</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>(it might be good to have workarounds when not
+having pkg-config, but I don't have time to fix it atm)</tt></td>
+</tr>
+<tr>
+<td><tt>15:36.24</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad yukonbob_
+(i=1000@s142-179-54-198.bc.hsia.telus.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:47.00</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad homovulgaris
+(n=d@117.196.131.22)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:47.25</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>howdy mafm :) whats with the latin :P
+?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:47.40</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31888
+10/rt^3/trunk/src/g3d/ (10 files): Separating camera modes
+(classes) in different files, as suggested by Sean.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:48.17</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>homovulgaris: I tried to said something that I
+recalled from high school</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:48.29</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:48.31</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>because your name is in latin</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:48.50</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>tempus fugit!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:48.55</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>:P just means common man :) but yeah latin is
+kind of a fun language i guess.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:49.12</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>personally i feel sanskrit is much more well
+structured ..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:49.36</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I speak several degenerate-latin languages,
+so... :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.20</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>latin is pretty neat foundation for learning
+all the romance languages i guess.. especially if you already have
+one as a mother tongue ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.38</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>and I my case I have two :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.47</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>I finally got my computer back :D 4.0 GHz dual
+core ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.50</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>but I don't remember almost anything from
+latin classes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.54</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>overclocked ofcourse :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.56</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it's the age I guess :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.03</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>congrats!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.13</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>well compilation takes just around 12
+minutes.. and planning to use distcc too :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.24</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>huge improvement from 200 minutes :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.06</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>compilation from whole brlcad?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.16</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>yeah :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.20</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>not bad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.36</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hopefully I don't have to compile it often
+:P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:54.10</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>g3d looks neat ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:54.18</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>what all stuff can i do in it now ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:55.45</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you can... compile it under 15s, I guess (OGRE
+aside :P)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.06</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I've been working in camera modes
+lately</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.17</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I'm trying to create MGED mode today</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.01</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>and next to it, start working in the last
+major part left: displaying geometry and operations, using the new
+libged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.22</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>yeah i already have the window up and
+running.. :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.31</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>whats the triangle in the middle ? test draw
+?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.48</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it's a kind of tetrahedron</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.58</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>so you somehow can see the camera mode
+movements :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.44</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you can manipulate the default camera mode
+with: +,-,8-4-6-2,5 in the numpad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:00.16</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it would help to see it better if the
+tetrahedron would have texture and proper shading</tt></td>
+</tr>
+<tr>
+<td><tt>16:01.30</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Elperion
+(n=Bary@p5B14CC2E.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.42</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>tried it nice.. :) even drawing the edges
+would make it clearer</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.22</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>(btw, the fist phrase in latin that I told
+before means "your mother eats red|mature apples", but for
+portuguese and italian and spanish and probably other it sounds as
+"your mother is a worthless donkey")</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.30</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you mean to set it in wireframe
+mode?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.21</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>:P yeah that sentence is known to be pretty
+ambiguous :P wordplay or something :P : as per google :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.45</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>wireframe+shade. i mean show the edges as well
+as the faces</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.12</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>well, I didn't implement any of that, it would
+be done when displaying the rest of geometries</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.53</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>probably I'll have to write code to translate
+brl-cad primitives as vertices and lists</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:06.17</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you can set wireframe mode in the meanwhile
+with "polygonmode wireframe"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:06.19</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>in the console</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.35</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>oh, and you can also click with middle mouse
+button and move around dragging the camera -- it's free
+rotation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.41</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>hmm.. is adding mouse support tought ? i mean
+like this view rotation for example..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:10.58</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you have to inject input, the camera mode sets
+parameters depending on the position of the pointer (vertical or
+horizontal rotations, translations, etc)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:11.28</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>then when painting the next frame, the camera
+uses these data to position itself, seeing the scene from different
+angles</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:11.55</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>but getting to this "dettached" approarch took
+a few days and refinements :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.19</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt><span class="c7">hopes to not have to do big
+acommodations again for implementing MGED</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.15</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>the key parts are only a few dozens lines of
+code, but it takes a lot to get it right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.27</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>well</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.42</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>and what about your project? progressing
+steadily?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.52</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>:) can imagine.. beautiful code is a nice
+read</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:18.32</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm: one of the libged routines is
+effectively "give me a display list of vertices and
+edges"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.28</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>should be ged_e or ged_draw -- ged_E or ged_ev
+should give you evaluated polygonal (slow to call on complex
+objects)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.52</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you mean that that part is translated
+directly?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.57</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>free rotation with the mouse works smooth and
+nice .. :) zoom with scroll coming up ;) ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.33</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>directly by libged I mean, so I don't have to
+do that myself :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.48</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm: yeah, libged handles that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.03</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>homovulgaris: mmm, it tried to copy Blender
+mode, not sure if they have that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.11</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>with libged you really should be able to do
+just about everything that mged can presetntly do</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.33</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>homovulgaris: &gt;:| you found a bug</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.37</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and if there's something you can't do with it,
+bob's probably just not gotten to it yet or it's something that
+needs refactoring still</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.54</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but basic geometry loading and wireframe is
+there now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.07</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt><span class="c7">thinks irssi is
+awesome</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.11</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>and the vertices list also takes into account
+"faces" of the triangle?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.17</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>screen+irssi ftw</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.25</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad:  Where does that example code of yours
+link from?  the wiki home page doesn't seem to have a path to
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.30</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm: there are different render modes -- for
+e/draw you don't have faces, you just have unevaluated wireframe so
+you'll just display what they give you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.36</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>brlcad: terminator+irssi .. i like screen..
+but maybe will need more getting used to :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.59</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm: for commands like ev/E, you get a
+polygonal display list -- plenty to do shaded displays and
+more</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.36</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>homovulgaris: what is terminator?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.02</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: mm, probably from
+nothing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.11</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">digs it
+up...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.13</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>confirmed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>try special pages, unreferenced</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.36</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>link it under the dev docs/tutorials</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.48</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31889
+10/rt^3/trunk/src/g3d/Commands.h: Enhancing PolygonMode command so
+less typing is needed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.08</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>could use expanding too, explaining each
+section, didn't get to that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.12</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>brlcad: multiview terminal <a href=
+"https://launchpad.net/terminator/">https://launchpad.net/terminator/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.38</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>not as useful as screen ..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.40</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: will do</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.43</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>homovulgaris: oh, heh .. that's not a screen
+replacement :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.18</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>yeah not at all a screen replacement
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.27</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>screen is useful when run from a remote server
+so you can log in and keep (the same) sessions running</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.45</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>like keeping irssi running so you never detach
+from irc ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.46</tt></td>
+<td><span class="c2"><tt>jonored</tt></span></td>
+<td width="100%"><tt><span class="c7">would rather have screen for
+when he remotes in/kills X because of occasionally glitchy
+wm.</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.31</tt></td>
+<td><span class="c2"><tt>jonored</tt></span></td>
+<td width="100%"><tt><span class="c7">gets the tiling from the
+tiling window manager :)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.45</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt><span class="c7">rethinks why he runs X when
+most of the time all he has on are bash windows</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:29.10</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ooh, terminator is a non-overlapper</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:29.23</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">nudges mafm
+:)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.42</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ala wmii/dwm/ion/awesome etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.46</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>brlcad: what?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.54</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>anybody else getting foobarred fonts in the
+ogre gui?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.11</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>starseeker: never ran into that
+problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm just that homovulgaris' terminal program
+is .. related ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.33</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>tiling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.43</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>meh, just my luck</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.58</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">will post a screenshot when
+he gets home</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.14</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>oh, the tiling thing... sorry but I was only
+reading my part of conversation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.16</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>probably not worth worrying about if I'm the
+only one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.31</tt></td>
+<td><span class="c14"><tt>homovulgaris</tt></span></td>
+<td width="100%"><tt>what does foobarred look like :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.01</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I had an epyphany because I'm tired and I
+don't feel like having to type too much today, and "polygonmode
+wireframe" is way too long...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.13</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>so I'm trying to substitute it for
+"p&lt;tab&gt; w"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.13</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.47</tt></td>
+<td><span class="c13"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>homovulgaris:  unintelligble blurred
+mess</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:41.03</tt></td>
+<td><span class="c6"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">pets screen</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:46.49</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:54.57</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad pacman87
+(n=timothy@71.170.63.120)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:16.23</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31890
+10/brlcad/trunk/src/librt/namegen.c: Thanks to Sean's example,
+switching over to using db_functree - identification is now
+working.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:24.11</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31891
+10/brlcad/trunk/src/librt/namegen.c: break out object type
+detection into its own routine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:36.55</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31892
+10/rt^3/trunk/src/g3d/ (4 files): Adding auto-completion
+functionality for the console and command overlay</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:57.45</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03mafm * r31893
+10/rt^3/trunk/src/g3d/ (6 files): Adding missing functionality to
+Blender camera mode: zoom in/out with mouse scroll (discovered by
+Dawn Thomas &lt;homovulgaris&gt;)</tt></td>
+</tr>
+<tr>
+<td><tt>19:08.25</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:08.34</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hi Ralith</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:08.45</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>unfortunately I have to go now to go to
+hypermarket</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:08.52</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>hey</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:08.57</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>kk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:09.04</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>but I'd like to know about your progress, so
+if you can send me a brief or something, I would
+appreciate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:09.09</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>(or to the mailing list also)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:09.52</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>will be submitting my mocha patch to
+sourceforge</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:10.12</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>oki</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:10.14</tt></td>
+<td><span class="c10"><tt>mafm</tt></span></td>
+<td width="100%"><tt>bye</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.50</tt></td>
+<td><span class="c8"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: do you know how the ctl_points in the
+old nurbs system translates into (u,v), it's just a 1-d array and
+doesnt seem to be in any order</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:17.43</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>kk, patch uploaded</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:19.44</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31894
+10/brlcad/trunk/src/librt/namegen.c: More reworking - database
+opening and closing is no longer in the parsing routine, matching
+real world behavior.</tt></td>
+</tr>
+<tr>
+<td><tt>20:24.01</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad homovulg1ris
+(n=d@117.196.128.26)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:26.02</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt><span class="c7">submits Yet Another patch,
+this time improving the rt^3 src/other makefile</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:34.02</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>hm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:34.03</tt></td>
+<td><span class="c15"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>so close :|</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:53.55</tt></td>
+<td><span class="c11"><tt>CIA-22</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r31895
+10/brlcad/trunk/src/librt/namegen.c: Starting to explore generating
+the strings. Some data structure evolution needed - this doesn't
+build right now, simply saving work - do NOT add to any build
+system yet.</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

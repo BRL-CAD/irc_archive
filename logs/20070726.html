@@ -1,289 +1,1487 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20070726</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20070726</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c17 {color: #BB62BB}
+ span.c16 {color: #5E5EB2}
+ span.c15 {color: #AE5CAE}
+ span.c14 {color: #6BCCCC}
+ span.c13 {color: #CC6BCC}
+ span.c12 {color: #000099}
+ span.c11 {color: #6161BA}
+ span.c10 {color: #61B961}
+ span.c9 {color: #5C5CAF}
+ span.c8 {color: #5CAE5C}
+ span.c7 {color: #DADA72}
+ span.c6 {color: #009900}
+ span.c5 {color: #BD6363}
+ span.c4 {color: #C668C6}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #4D4D93}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20070726</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:00.43</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>haven't had a problem with that here, and the lib we load sucks in a lot of .so's</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:02.20</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>you're not trying to pass in the full name of the lib, are you?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.20</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>iiuc, System.loadLibrary() expands the name given to it, eg. 'vis' expands to libvis.so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.55</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>at least on Linux - all bets are off on OSX&nbsp;&nbsp;;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:03.58</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>I'll dig to make sure, but I'm pretty sure it's just the short name</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.25</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>OSX has some weird packaging schemes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.31</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>like I said, it works just fine if the .so is resolved, it's only when it's not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.02</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>resolved meaning it can find it in the LD_LIBRARY_PATH?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.32</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>no, meaning that it doesn't have to -- all symbols in the .so are resolved (none undefined if you do an nm)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.40</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.47</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>odd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.00</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's just: System.loadLibrary ("rtserver");</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.09</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>we have a librtserver in brl-cad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.14</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty straightforward</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.35</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>librtserver.so?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.49</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>on non-mac, yes :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.15</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>it works on non-macs?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.23</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>or n ot at all?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.29</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc, no -- not at all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.36</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>gotta be an libpath issue, then - any chance that LD_LIBRARY_PATH was getting reset/changed before java ran?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.53</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>like in a script, perhaps?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.02</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>jsut brainstorming here...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.36</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the ld path is set, it's set to a mass of paths that are otherwise required for other javanessy things it needs (and one of the paths includes the dir that has the .so's in question)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.07</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise even System.loadLibrary ("rtserver"); wouldn't work on the fully resolved library</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.13</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>very odd, then - it _ought_ to work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.44</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>and 'ldd' finds all the deps?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.14</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it does</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.50</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>makes no sense at all then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.11</tt></td><td><font color="#4d4d93"><tt>dtidrow</tt></font></td><td width="100%"><tt>anyway, gotta head home - 'nite all...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:14.34</tt></td><td><font color="#bd6363"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/ (407 files in 39 dirs): remove ephemeral data like phone numbers and addresses, including the misleading 'source' statements on code that is continually evolving and receiving contributions from many many sources</tt></td></tr>
-<tr><td><tt>02:08.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1177680011.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:09.39</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://www3.sympatico.ca/mario.dulisse2/ogl.jpg">http://www3.sympatico.ca/mario.dulisse2/ogl.jpg</a>&nbsp;&nbsp; &lt;---- got my ogl issues sorted out :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:15.16</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>can you quantify exactly what you needed to do?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:16.04</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>for some reason my glx header wasn't being detected im still trying to get configure to find it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:17.13</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>i don't speak configure very well :(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.17</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>didint have to touch the code if thats what you're after</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.43</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>i didn't think you would have had to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.50</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>aren't build issues fun sigh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.45</tt></td><td><font color="#5cae5c"><tt>Twingy</tt></font></td><td width="100%"><tt><a href="http://js.cx/~justin/images/board.png">http://js.cx/~justin/images/board.png</a> &lt;-- with my 30 degree conical</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:38.41</tt></td><td><font color="#5c5caf"><tt>louipc</tt></font></td><td width="100%"><tt>hm?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.10</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>cant find page</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.34</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://www.makezine.com/blog/archive/2007/07/make_your_own_printed_cir_1.html">http://www.makezine.com/blog/archive/2007/07/make_your_own_printed_cir_1.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.59</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>with a $10 flat iron ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.13</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>found it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:41.43</tt></td><td><font color="#dada72"><tt>IriX64</tt></font></td><td width="100%"><tt>i used to do things like that then programming lured me :)</tt></td></tr>
-<tr><td><tt>02:43.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64_ (n=mariodot@bas2-sudbury98-1177680011.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:06.48</tt></td><td><font color="#5cae5c"><tt>Twingy</tt></font></td><td width="100%"><tt>brlcad, I use a $20 griddle</tt></td></tr>
-<tr><td><tt>03:11.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=mariodot@bas2-sudbury98-1177680011.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.19</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://sympatico.ca/mario.dulisse2/Singular.jpg">http://sympatico.ca/mario.dulisse2/Singular.jpg</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.39</tt></td><td><font color="#5c5caf"><tt>louipc</tt></font></td><td width="100%"><tt>404</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.46</tt></td><td><font color="#6161ba"><tt>yukonbob</tt></font></td><td width="100%"><tt>The requested URL /mario.dulisse2/Singular.jpg was not found on this server.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.47</tt></td><td><font color="#6161ba"><tt>yukonbob</tt></font></td><td width="100%"><tt>Additionally, a 404 Not Found error was encountered while trying to use an ErrorDocument to handle the request. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.54</tt></td><td><font color="#6161ba"><tt>yukonbob</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:26.48</tt></td><td><font color="#5cae5c"><tt>Twingy</tt></font></td><td width="100%"><tt>brlcad, you can't do 10 mil traces with ferric chloride either</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:26.48</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://www3.sympatico.ca/mario.dulisse2/Singular.jpg">http://www3.sympatico.ca/mario.dulisse2/Singular.jpg</a> (blush)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:27.02</tt></td><td><font color="#5cae5c"><tt>Twingy</tt></font></td><td width="100%"><tt>I have a quart of it left from projects from years ago</tt></td></tr>
-<tr><td><tt>05:28.38</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad poolio (n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr><td><tt>07:01.16</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad akreal (n=ak@ll-81-222-164-251.awanti.ru)</font></tt></td></tr>
-<tr><td><tt>08:32.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslb-088-070-002-170.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>08:52.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n9986 (n=nandeep@203.88.11.6)</font></tt></td></tr>
-<tr><td><tt>09:01.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl245.esjtvtli.sover.net)</font></tt></td></tr>
-<tr><td><tt>09:43.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Laniakea (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
-<tr><td><tt>10:01.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016141081.customer.alfanett.no)</font></tt></td></tr>
-<tr><td><tt>13:26.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:33.09</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>*yawn*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:33.51</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>wow. I actually just yawned when I read that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:35.46</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>dork :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:36.44</tt></td><td><font color="#bd6363"><tt>CIA-29</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * 10brlcad/misc/Makefile.defs: pass make flags in depends targets</tt></td></tr>
-<tr><td><tt>15:49.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54874AC6.dip.t-dialin.net)</font></tt></td></tr>
-<tr><td><tt>16:48.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslb-088-070-002-170.pools.arcor-ip.net)</font></tt></td></tr>
-<tr><td><tt>16:55.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (i=tlstn6ce@gateway/web/cgi-irc/irc.net/x-ac3fb703067f8396)</font></tt></td></tr>
-<tr><td><tt>17:00.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LinuxMafia (n=awatt@CPE001346a4c4cb-CM00159a642d7e.cpe.net.cable.rogers.com)</font></tt></td></tr>
-<tr><td><tt>17:09.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:10.11</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>grargh.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:12.04</tt></td><td><font color="#ae5cae"><tt>MinuteElectron</tt></font></td><td width="100%"><tt>?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:15.24</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>internet went down</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:15.34</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>and i really needed to figure out what i broke in my local cvs </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:22.56</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>why'd you break the intarweb?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:23.35</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>my modem went down</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:23.38</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>and comcast doesn't respond to me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:23.58</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>because there are only 3 houses in our neighborhood, so if internet goes downt hey don't give a shit</tt></td></tr>
-<tr><td><tt>17:25.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AchiestDragon_ (n=david@whipy.demon.co.uk)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:26.43</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>sucky</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:28.59</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>luckily it came back on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:29.02</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>i was gonna go to an internet cafe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:29.11</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>well, a cafe with wifi internet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.23</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>so I tried to have one generic tree traversal function with lots of switch statements in it, but I feel like that may have been a bad decision...getting segfaults and debuggin it is a pain</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:32.39</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>and the code's probably clearer if I just seperate out the routines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.26</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>probably</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.40</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>I assume you have gdb style stabs compiled in and are using the debugger? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.50</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>no </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.55</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:33.58</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I nver learned the right way to debug</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.04</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>well gdb picks up the source code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.06</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>might be a good time?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.08</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>and tells me where it is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.31</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I just fail at figuring out why certain things are happening. Lik ewhere these null pointers keep popping up from</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.36</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>'backtrace' and 'print' are good commands</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.57</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>and you can navigate the frames, too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:35.01</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>yeah I know the basics, I should really take the time to learn more though, it'd help quite a bit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.16</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>'xxgdb' and 'ddd' provide gui frontends, might be easier than figuring out the syntax</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.33</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>maybe, although I've never been a big fan of GUIs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:36.42</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug* me either :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:37.07</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>um, efence, dmalloc, ccmalloc, valgrind, ... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:38.02</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>yeah valgrind doesnt play too nicely with multithreaded stuff though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:39.20</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>choke it back to 1 thread? (or does it go heisenbug when you do that?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:39.28</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>heh no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:39.29</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I could do that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:01.06</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>ah HAAAAAAA</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:01.40</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>he disabled the tclcad bezier canvas</tt></td></tr>
-<tr><td><tt>18:17.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=mariodot@bas2-sudbury98-1177871547.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:18.28</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>i can not run mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:18.59</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>it complains about itcltk/itk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.30</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>did you build it yourself or are you using binaries?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.59</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>i emerged it i used gentoo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:20.28</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>any compile time errors or link errors</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:20.33</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>or warnings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:20.54</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>Can't find a usable itk.tcl in the following directories:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.06</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>the question was ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.15</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>no </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.30</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>it would not installed otherwise</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.34</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>did you add /usr/brlcad/bin to your path?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.46</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:21.50</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>try</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:22.05</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>as make install tells you at end of run</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:23.41</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>i did </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:23.46</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>let me uptdate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:23.51</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>can also try setting the environment variable to point to itk lib (forget the name at the moment though, anybody)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.04</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>hum</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.34</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:25.58</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>theres an envronment variable you can set to pint to that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:26.04</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>point too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:26.18</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>so i put this</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:26.53</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>export&nbsp;&nbsp;ITK_LIBRARY=/usr/lib64/itk3.3/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:27.11</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>and</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:27.33</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>btw what version we talking about here?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:28.26</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>3.3-r1</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:28.38</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>of brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:28.46</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>7.10</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.23</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>wow</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.27</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>it worked now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.30</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>i think i need</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.32</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>heh good</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.32</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>also </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:29.44</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>do the same for TCL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:32.17</tt></td><td><font color="#5e5eb2"><tt>LinuxMafia</tt></font></td><td width="100%"><tt>thanks alot IriX64 </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:33.24</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>welcome</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:34.54</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>mc</tt></td></tr>
-<tr><td><tt>19:29.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl245.esjtvtli.sover.net)</font></tt></td></tr>
-<tr><td><tt>20:05.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@host131.objectsciences.com)</font></tt></td></tr>
-<tr><td><tt>20:23.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl245.esjtvtli.sover.net)</font></tt></td></tr>
-<tr><td><tt>20:39.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl245.esjtvtli.sover.net)</font></tt></td></tr>
-<tr><td><tt>20:42.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl245.esjtvtli.sover.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.23</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt>system issues, such fun... bleah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.26</tt></td><td><font color="#61b961"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://www3.sympatico.ca/mario.dulisse2/overlap">http://www3.sympatico.ca/mario.dulisse2/overlap</a>&nbsp;&nbsp;&lt;--- on the bright side your overlap tool works</tt></td></tr>
-<tr><td><tt>20:57.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl245.esjtvtli.sover.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:30.05</tt></td><td><font color="#bb62bb"><tt>Maloeran</tt></font></td><td width="100%"><tt>Woah, 1USD = 1.038CAD now. It's peculiar to lose 15% of one's income in an year due to the change rate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.03</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>well there isn't too much inflation internally so it's not that big of a deal</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:39.06</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>as long as you remain in the US</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.32</tt></td><td><font color="#bb62bb"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm not in the US! :) I'm in Canada and get paid in USDs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:44.22</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>eek</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:44.23</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>that sucks :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.01</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: is there a way to clip the depth of a raytrace? like limit the z-axis to some defined max?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:53.02</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: I remember in the past you told me not to modify the rt_i, (when it was clamping the bounding box) but if I need to shoot the same grid for each shape, won't I have to modify the variables inside of the application?</tt></td></tr>
-<tr><td><tt>21:53.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:53.48</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>it looks like I missed that and that could have been why it wasn't working well. the fitness seems pretty arbitrary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:55.18</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>well actually it was fine before, but that was because they were normalized to the z-depth, so scale was invariant along the z-axis, but I changed it assuming z-depth would be constant and that's where I ran into some problems. So I'm wondering if there's a way to clamp that value basically?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.09</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>although it does eliminate a dimension at the cost of having a distorted object</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:16.59</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: there is a_ray_length that will specify at what length the ray should terminate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.04</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>in the rti</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.05</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: alright thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.08</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I actually went back to scaling</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.11</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>results seem slightly better</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.17</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I now have the fixed-depth crossover working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.17</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>similar to a_onehit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.26</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>yeah alright, thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.31</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>the issue those is if it's offset, I'm screwed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.42</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>Oh wait nevermind..I control where the ray is shot from</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.44</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>thanks :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:18.54</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>how do you figure "results seem slightly better" ... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:19.23</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it simply introduces more variability, so it won't necessarily get stuck on a bad answer .. that doesn't mean it's better though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:19.51</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>slightly better with the crossover that makes sense (for now)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:20.03</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>and something is up with fitness, give me a minute and Ill have some data to show you</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:20.14</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it shouldn't have anything to do with crossover</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:20.23</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>the results shouldn't?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.13</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>using a scaled size in your fitness function shouldn't have anything to do with crossover</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.25</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>so yeah, the results shouldn't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.36</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>Correct, yes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.40</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>if they do, I'd think something else is suspect</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.51</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>The issue was that I had undid the scaling, taken the final difference, and divided that by the # of rays</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.02</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>the issue was that the rays fired at different lengths so I was getting odd answers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.31</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, that's a problem confined to the fitness function :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.56</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>scaling might make the math work out easier, but I don't think it's right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.18</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>well, I was moving the scaling out, because I was scaling each bit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.20</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>so I had like</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.35</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.51</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>so i was moving it so I stored the non-scaled rays, and then when I had calculated the comparison, then dividing that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.53</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>take the union of both bounding boxes, that's your absolute length, then compare % matching</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:24.11</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I could do that too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:27.01</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>alright I'm doing a larger run and then I'll show you the results. Hopefully it will be better :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:30.26</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: yeah something is wrong here. fitness is ... decreasing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.45</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:37.07</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>what a fugly graph</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:38.31</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: <a href="http://poolio.org/index.php?q=node/8">http://poolio.org/index.php?q=node/8</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:40.19</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: although wait, something has to be wrong with the fitness function. Look at the best individuals...they're different ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:40.47</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>Oh that was the other thing, can I raytrace those objects using 'rt' with a specified bounding box instead of an auto-generated one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:44.16</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>what are the three lines in the graph?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:44.33</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>wrost/average/best individuals for each generation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:44.38</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>read the description :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.29</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah ... that's not at all what it should look like :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.35</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>yeah I know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.40</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I'm guessing my fitness function is broken</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:45.47</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>juding from the output of the visual and the output of the graph</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.18</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>It was the first thing I did and I trusted it was right but maybe not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.04</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>the questionable code resides in compare_hit() in fitness.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.12</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you can almost ignore the visual for the time being .. average and best won't likely get that close that fast</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.50</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>also, did you implement the "bring best N forward" yet?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.56</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>no</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:47.59</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>if so, that 70% shouldn't have disappeartd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.00</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I can whip that up in a minute though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.30</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>i think you're right, though -- fitness function seems wrong</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.51</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>or some twisted crossover bug is killing off your population</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:49.01</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I have a family dinner to get to but I'll be back around 9. I'm guessing the isuse has to do with the compare_hit routine I've been trusting</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:49.16</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I might take that out and run some test cases to make sure it's working right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.00</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>have a good dinner ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.17</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>thanks for the help, hopefully I'll have something good to show you soon</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.06</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>:\</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.11</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.20</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you're not far off</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.27</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>in the timeline I am :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.31</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>once it starts working, I think it'll be a lot more encouraging ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.42</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, timeline is the only crunch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.51</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>I _need_ something working</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.05</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>Not just for you to show, but also to know I didn't waste away my summer on a broken hunk of code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.16</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>likewise</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.48</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>wow. pretty embarassing how little code there is too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.49</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>being able to demo your program to dozens of people you've never met ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.50</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>&lt;2k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.54</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>that control lots of money :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.10</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>even if it only works on simple test cases?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.15</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.27</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the technical aspects are pretty deep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.48</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>but the code and implementation isn't that difficult</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.49</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>probably a little more deep that you know yet, which is part why it's been a lil tricky to implement aside from the coding issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.56</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>If you had 5 days to spare you could have done it by now </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.08</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>i don't have 5 days to spare :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.14</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>contrary to the time I spend on IRC</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.32</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>just don't sleep. you'll do fine.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.56</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>your time is also much more valuable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.10</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>but seriously, if you took the time you've spent helping me out / trying to get me the job, it could've been done by now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.22</tt></td><td><font color="#6bcccc"><tt>poolio</tt></font></td><td width="100%"><tt>(i'm just slightly pessimistic :))</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:58.01</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>getting good people is often way more important than getting the work done</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:58.19</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>if the work was the #1 priority in your case, you wouldn't be working on this pariticular project</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:58.35</tt></td><td><font color="#c668c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it would have been one of the other tasks .. or worse ;)</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:00.43</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>haven't had a problem with that here, and the
+lib we load sucks in a lot of .so's</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:02.20</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>you're not trying to pass in the full name of
+the lib, are you?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.20</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>iiuc, System.loadLibrary() expands the name
+given to it, eg. 'vis' expands to libvis.so</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.55</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>at least on Linux - all bets are off on OSX 
+;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:03.58</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'll dig to make sure, but I'm pretty sure
+it's just the short name</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.25</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>OSX has some weird packaging schemes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.31</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>like I said, it works just fine if the .so is
+resolved, it's only when it's not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.02</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>resolved meaning it can find it in the
+LD_LIBRARY_PATH?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.32</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no, meaning that it doesn't have to -- all
+symbols in the .so are resolved (none undefined if you do an
+nm)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.40</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.47</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>odd</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.00</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, it's just: System.loadLibrary
+("rtserver");</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.09</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we have a librtserver in brl-cad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pretty straightforward</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.35</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>librtserver.so?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.49</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>on non-mac, yes :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.15</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>it works on non-macs?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.23</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>or n ot at all?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>iirc, no -- not at all</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.36</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>gotta be an libpath issue, then - any chance
+that LD_LIBRARY_PATH was getting reset/changed before java
+ran?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.53</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>like in a script, perhaps?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.02</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>jsut brainstorming here...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.36</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the ld path is set, it's set to a mass of
+paths that are otherwise required for other javanessy things it
+needs (and one of the paths includes the dir that has the .so's in
+question)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.07</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>otherwise even System.loadLibrary
+("rtserver"); wouldn't work on the fully resolved library</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.13</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>very odd, then - it _ought_ to work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.44</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>and 'ldd' finds all the deps?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, it does</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.50</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>makes no sense at all then</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.11</tt></td>
+<td><span class="c2"><tt>dtidrow</tt></span></td>
+<td width="100%"><tt>anyway, gotta head home - 'nite
+all...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:14.34</tt></td>
+<td><span class="c5"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/ (407 files in 39
+dirs): remove ephemeral data like phone numbers and addresses,
+including the misleading 'source' statements on code that is
+continually evolving and receiving contributions from many many
+sources</tt></td>
+</tr>
+<tr>
+<td><tt>02:08.35</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1177680011.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:09.39</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www3.sympatico.ca/mario.dulisse2/ogl.jpg">http://www3.sympatico.ca/mario.dulisse2/ogl.jpg</a>
+  &lt;---- got my ogl issues sorted out :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:15.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>can you quantify exactly what you needed to
+do?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:16.04</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>for some reason my glx header wasn't being
+detected im still trying to get configure to find it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:17.13</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>i don't speak configure very well :(</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.17</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>didint have to touch the code if thats what
+you're after</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.43</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i didn't think you would have had to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:18.50</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>aren't build issues fun sigh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.45</tt></td>
+<td><span class="c8"><tt>Twingy</tt></span></td>
+<td width="100%"><tt><a href=
+"http://js.cx/~justin/images/board.png">http://js.cx/~justin/images/board.png</a>
+&lt;-- with my 30 degree conical</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:38.41</tt></td>
+<td><span class="c9"><tt>louipc</tt></span></td>
+<td width="100%"><tt>hm?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.10</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>cant find page</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.34</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www.makezine.com/blog/archive/2007/07/make_your_own_printed_cir_1.html">
+http://www.makezine.com/blog/archive/2007/07/make_your_own_printed_cir_1.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.59</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>with a $10 flat iron ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.13</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>found it :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:41.43</tt></td>
+<td><span class="c7"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>i used to do things like that then programming
+lured me :)</tt></td>
+</tr>
+<tr>
+<td><tt>02:43.26</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad IriX64_
+(n=mariodot@bas2-sudbury98-1177680011.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:06.48</tt></td>
+<td><span class="c8"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>brlcad, I use a $20 griddle</tt></td>
+</tr>
+<tr>
+<td><tt>03:11.53</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad IriX64
+(n=mariodot@bas2-sudbury98-1177680011.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.19</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt><a href=
+"http://sympatico.ca/mario.dulisse2/Singular.jpg">http://sympatico.ca/mario.dulisse2/Singular.jpg</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.39</tt></td>
+<td><span class="c9"><tt>louipc</tt></span></td>
+<td width="100%"><tt>404</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.46</tt></td>
+<td><span class="c11"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>The requested URL /mario.dulisse2/Singular.jpg
+was not found on this server.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.47</tt></td>
+<td><span class="c11"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>Additionally, a 404 Not Found error was
+encountered while trying to use an ErrorDocument to handle the
+request.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.54</tt></td>
+<td><span class="c11"><tt>yukonbob</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:26.48</tt></td>
+<td><span class="c8"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>brlcad, you can't do 10 mil traces with ferric
+chloride either</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:26.48</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www3.sympatico.ca/mario.dulisse2/Singular.jpg">http://www3.sympatico.ca/mario.dulisse2/Singular.jpg</a>
+(blush)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:27.02</tt></td>
+<td><span class="c8"><tt>Twingy</tt></span></td>
+<td width="100%"><tt>I have a quart of it left from projects from
+years ago</tt></td>
+</tr>
+<tr>
+<td><tt>05:28.38</tt></td>
+<td colspan="2"><tt><span class="c12">*** part/#brlcad poolio
+(n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:01.16</tt></td>
+<td colspan="2"><tt><span class="c12">*** part/#brlcad akreal
+(n=ak@ll-81-222-164-251.awanti.ru)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:32.05</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elite01
+(n=elite01@dslb-088-070-002-170.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:52.19</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad n9986
+(n=nandeep@203.88.11.6)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:01.38</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad SWPadnos_
+(n=Me@dsl245.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:43.03</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Laniakea
+(n=clock@zux221-122-143.adsl.green.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:01.54</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad b0ef
+(n=b0ef@062016141081.customer.alfanett.no)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:26.18</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad poolio
+(n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:33.09</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*yawn*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:33.51</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>wow. I actually just yawned when I read
+that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:35.46</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>dork :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:36.44</tt></td>
+<td><span class="c5"><tt>CIA-29</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald *
+10brlcad/misc/Makefile.defs: pass make flags in depends
+targets</tt></td>
+</tr>
+<tr>
+<td><tt>15:49.04</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Elperion
+(n=Bary@p54874AC6.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:48.00</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad elite01
+(n=elite01@dslb-088-070-002-170.pools.arcor-ip.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:55.47</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad
+MinuteElectron
+(i=tlstn6ce@gateway/web/cgi-irc/irc.net/x-ac3fb703067f8396)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:00.44</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad LinuxMafia
+(n=awatt@CPE001346a4c4cb-CM00159a642d7e.cpe.net.cable.rogers.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:09.58</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad poolio
+(n=poolio@c-69-251-3-107.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:10.11</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>grargh.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:12.04</tt></td>
+<td><span class="c15"><tt>MinuteElectron</tt></span></td>
+<td width="100%"><tt>?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:15.24</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>internet went down</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:15.34</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>and i really needed to figure out what i broke
+in my local cvs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:22.56</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>why'd you break the intarweb?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:23.35</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>my modem went down</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:23.38</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>and comcast doesn't respond to me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:23.58</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>because there are only 3 houses in our
+neighborhood, so if internet goes downt hey don't give a
+shit</tt></td>
+</tr>
+<tr>
+<td><tt>17:25.50</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad
+AchiestDragon_ (n=david@whipy.demon.co.uk)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:26.43</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>sucky</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:28.59</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>luckily it came back on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:29.02</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>i was gonna go to an internet cafe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:29.11</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well, a cafe with wifi internet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:32.23</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>so I tried to have one generic tree traversal
+function with lots of switch statements in it, but I feel like that
+may have been a bad decision...getting segfaults and debuggin it is
+a pain</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:32.39</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>and the code's probably clearer if I just
+seperate out the routines</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.26</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>probably</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.40</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I assume you have gdb style stabs compiled in
+and are using the debugger? :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.50</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.55</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:33.58</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I nver learned the right way to
+debug</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.04</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well gdb picks up the source code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.06</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>might be a good time?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.08</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>and tells me where it is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.31</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I just fail at figuring out why certain things
+are happening. Lik ewhere these null pointers keep popping up
+from</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.36</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'backtrace' and 'print' are good
+commands</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.57</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and you can navigate the frames, too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:35.01</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah I know the basics, I should really take
+the time to learn more though, it'd help quite a bit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.16</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'xxgdb' and 'ddd' provide gui frontends, might
+be easier than figuring out the syntax</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.33</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>maybe, although I've never been a big fan of
+GUIs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:36.42</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*shrug* me either :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:37.07</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, efence, dmalloc, ccmalloc, valgrind,
+...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:38.02</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah valgrind doesnt play too nicely with
+multithreaded stuff though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:39.20</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>choke it back to 1 thread? (or does it go
+heisenbug when you do that?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:39.28</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>heh no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:39.29</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I could do that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:01.06</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ah HAAAAAAA</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:01.40</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>he disabled the tclcad bezier canvas</tt></td>
+</tr>
+<tr>
+<td><tt>18:17.57</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad IriX64
+(n=mariodot@bas2-sudbury98-1177871547.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:18.28</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>i can not run mged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:18.59</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>it complains about itcltk/itk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.30</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>did you build it yourself or are you using
+binaries?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.59</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>i emerged it i used gentoo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:20.28</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>any compile time errors or link
+errors</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:20.33</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>or warnings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:20.54</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>Can't find a usable itk.tcl in the following
+directories:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.06</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>the question was ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.15</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.30</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>it would not installed otherwise</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.34</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>did you add /usr/brlcad/bin to your
+path?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.46</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:21.50</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>try</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:22.05</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>as make install tells you at end of
+run</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:23.41</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>i did</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:23.46</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>let me uptdate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:23.51</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>can also try setting the environment variable
+to point to itk lib (forget the name at the moment though,
+anybody)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:25.04</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>hum</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:25.34</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:25.58</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>theres an envronment variable you can set to
+pint to that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:26.04</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>point too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:26.18</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>so i put this</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:26.53</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>export 
+ITK_LIBRARY=/usr/lib64/itk3.3/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:27.11</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>and</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:27.33</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>btw what version we talking about
+here?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:28.26</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>3.3-r1</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:28.38</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>of brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:28.46</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>7.10</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.23</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>wow</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.27</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>it worked now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.30</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>i think i need</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.32</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>heh good</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.32</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>also</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:29.44</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>do the same for TCL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:32.17</tt></td>
+<td><span class="c16"><tt>LinuxMafia</tt></span></td>
+<td width="100%"><tt>thanks alot IriX64</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:33.24</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>welcome</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:34.54</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>mc</tt></td>
+</tr>
+<tr>
+<td><tt>19:29.25</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad SWPadnos_
+(n=Me@dsl245.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:05.19</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad dtidrow
+(n=dtidrow@host131.objectsciences.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:23.10</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad SWPadnos_
+(n=Me@dsl245.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:39.18</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad SWPadnos_
+(n=Me@dsl245.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:42.20</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad SWPadnos_
+(n=Me@dsl245.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:47.23</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt>system issues, such fun... bleah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:52.26</tt></td>
+<td><span class="c10"><tt>IriX64</tt></span></td>
+<td width="100%"><tt><a href=
+"http://www3.sympatico.ca/mario.dulisse2/overlap">http://www3.sympatico.ca/mario.dulisse2/overlap</a>
+ &lt;--- on the bright side your overlap tool works</tt></td>
+</tr>
+<tr>
+<td><tt>20:57.27</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad SWPadnos_
+(n=Me@dsl245.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:30.05</tt></td>
+<td><span class="c17"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>Woah, 1USD = 1.038CAD now. It's peculiar to
+lose 15% of one's income in an year due to the change
+rate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:39.03</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well there isn't too much inflation internally
+so it's not that big of a deal</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:39.06</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>as long as you remain in the US</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.32</tt></td>
+<td><span class="c17"><tt>Maloeran</tt></span></td>
+<td width="100%"><tt>I'm not in the US! :) I'm in Canada and get
+paid in USDs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:44.22</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>eek</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:44.23</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>that sucks :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:50.01</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: is there a way to clip the depth of a
+raytrace? like limit the z-axis to some defined max?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:53.02</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: I remember in the past you told me not
+to modify the rt_i, (when it was clamping the bounding box) but if
+I need to shoot the same grid for each shape, won't I have to
+modify the variables inside of the application?</tt></td>
+</tr>
+<tr>
+<td><tt>21:53.16</tt></td>
+<td colspan="2"><tt><span class="c6">*** join/#brlcad Twingy
+(n=justin@74.92.144.217)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:53.48</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>it looks like I missed that and that could
+have been why it wasn't working well. the fitness seems pretty
+arbitrary</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:55.18</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well actually it was fine before, but that was
+because they were normalized to the z-depth, so scale was invariant
+along the z-axis, but I changed it assuming z-depth would be
+constant and that's where I ran into some problems. So I'm
+wondering if there's a way to clamp that value basically?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:57.09</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>although it does eliminate a dimension at the
+cost of having a distorted object</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:16.59</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: there is a_ray_length that will
+specify at what length the ray should terminate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.04</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in the rti</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.05</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: alright thanks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.08</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I actually went back to scaling</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.11</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>results seem slightly better</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.17</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I now have the fixed-depth crossover
+working</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.17</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>similar to a_onehit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.26</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah alright, thanks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.31</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>the issue those is if it's offset, I'm
+screwed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.42</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Oh wait nevermind..I control where the ray is
+shot from</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:17.44</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>thanks :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:18.54</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>how do you figure "results seem slightly
+better" ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:19.23</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it simply introduces more variability, so it
+won't necessarily get stuck on a bad answer .. that doesn't mean
+it's better though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:19.51</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>slightly better with the crossover that makes
+sense (for now)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:20.03</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>and something is up with fitness, give me a
+minute and Ill have some data to show you</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:20.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it shouldn't have anything to do with
+crossover</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:20.23</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>the results shouldn't?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.13</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>using a scaled size in your fitness function
+shouldn't have anything to do with crossover</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.25</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so yeah, the results shouldn't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.36</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Correct, yes.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.40</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if they do, I'd think something else is
+suspect</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.51</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>The issue was that I had undid the scaling,
+taken the final difference, and divided that by the # of
+rays</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:22.02</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>the issue was that the rays fired at different
+lengths so I was getting odd answers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:22.31</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes, that's a problem confined to the fitness
+function :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:22.56</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>scaling might make the math work out easier,
+but I don't think it's right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:23.18</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>well, I was moving the scaling out, because I
+was scaling each bit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:23.20</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>so I had like</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:23.35</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:23.51</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>so i was moving it so I stored the non-scaled
+rays, and then when I had calculated the comparison, then dividing
+that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:23.53</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>take the union of both bounding boxes, that's
+your absolute length, then compare % matching</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:24.11</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I could do that too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:27.01</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>alright I'm doing a larger run and then I'll
+show you the results. Hopefully it will be better :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:30.26</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: yeah something is wrong here. fitness
+is ... decreasing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.45</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hehe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:37.07</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>what a fugly graph</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:38.31</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://poolio.org/index.php?q=node/8">http://poolio.org/index.php?q=node/8</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:40.19</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>brlcad: although wait, something has to be
+wrong with the fitness function. Look at the best
+individuals...they're different ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:40.47</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Oh that was the other thing, can I raytrace
+those objects using 'rt' with a specified bounding box instead of
+an auto-generated one?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:44.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what are the three lines in the
+graph?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:44.33</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>wrost/average/best individuals for each
+generation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:44.38</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>read the description :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:45.29</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah ... that's not at all what it should look
+like :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:45.35</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>yeah I know</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:45.40</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I'm guessing my fitness function is
+broken</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:45.47</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>juding from the output of the visual and the
+output of the graph</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:46.18</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>It was the first thing I did and I trusted it
+was right but maybe not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:47.04</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>the questionable code resides in compare_hit()
+in fitness.c</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:47.12</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can almost ignore the visual for the time
+being .. average and best won't likely get that close that
+fast</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:47.50</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also, did you implement the "bring best N
+forward" yet?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:47.56</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>no</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:47.59</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if so, that 70% shouldn't have
+disappeartd</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.00</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I can whip that up in a minute
+though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.01</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ahh, k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.30</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i think you're right, though -- fitness
+function seems wrong</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:48.51</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or some twisted crossover bug is killing off
+your population</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:49.01</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I have a family dinner to get to but I'll be
+back around 9. I'm guessing the isuse has to do with the
+compare_hit routine I've been trusting</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:49.16</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I might take that out and run some test cases
+to make sure it's working right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:50.00</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>have a good dinner ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:50.17</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>thanks for the help, hopefully I'll have
+something good to show you soon</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.06</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>:\</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.11</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.20</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you're not far off</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.27</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>in the timeline I am :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.31</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>once it starts working, I think it'll be a lot
+more encouraging ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.42</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, timeline is the only crunch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:52.51</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>I _need_ something working</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:53.05</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Not just for you to show, but also to know I
+didn't waste away my summer on a broken hunk of code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:53.16</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>likewise</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:53.48</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>wow. pretty embarassing how little code there
+is too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:53.49</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>being able to demo your program to dozens of
+people you've never met ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:53.50</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>&lt;2k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:53.54</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that control lots of money :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:54.10</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>even if it only works on simple test
+cases?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:54.15</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:54.27</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the technical aspects are pretty
+deep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:54.48</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>but the code and implementation isn't that
+difficult</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:54.49</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably a little more deep that you know yet,
+which is part why it's been a lil tricky to implement aside from
+the coding issues</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:54.56</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>If you had 5 days to spare you could have done
+it by now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:55.08</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i don't have 5 days to spare :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:55.14</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>contrary to the time I spend on IRC</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:55.32</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>just don't sleep. you'll do fine.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:55.56</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>your time is also much more valuable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:56.10</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>but seriously, if you took the time you've
+spent helping me out / trying to get me the job, it could've been
+done by now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:56.22</tt></td>
+<td><span class="c14"><tt>poolio</tt></span></td>
+<td width="100%"><tt>(i'm just slightly pessimistic :))</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:58.01</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>getting good people is often way more
+important than getting the work done</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:58.19</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if the work was the #1 priority in your case,
+you wouldn't be working on this pariticular project</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:58.35</tt></td>
+<td><span class="c4"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it would have been one of the other tasks ..
+or worse ;)</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

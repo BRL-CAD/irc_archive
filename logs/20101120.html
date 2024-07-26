@@ -1,64 +1,226 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20101120</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20101120</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c7 {color: #B15DB1}
+ span.c6 {color: #B55FB5}
+ span.c5 {color: #009900}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #CC00CC}
+ span.c2 {color: #5DB2B2}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20101120</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>01:25.50</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">sighs - well, guess I know what to work on Monday then</font></tt></td></tr>
-<tr><td><tt>01:39.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.25</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.27</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>./.libs/libbu.so: undefined reference to `fnblank'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.32</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>when building with clang</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.42</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>and several others</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.04</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>error comes when trying to link htester</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:45.17</tt></td><td><font color="#b55fb5"><tt>brlcad</tt></font></td><td width="100%"><tt>fnblank is in fnmatch.c so it might be dropping the references since they are declared inline</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:46.15</tt></td><td><font color="#b55fb5"><tt>brlcad</tt></font></td><td width="100%"><tt>removing the inline declaration should make the undefined references go away, though I'd be curious to know exactly why it's failing</tt></td></tr>
-<tr><td><tt>06:57.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:40.53</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, removing inline did it - weird</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:41.53</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>maybe something about the way it's handing the charclasses array?</tt></td></tr>
-<tr><td><tt>14:57.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:14.04</tt></td><td><font color="#b15db1"><tt>``Erik</tt></font></td><td width="100%"><tt>probably assuming that inline and static are synonymous</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:14.25</tt></td><td><font color="#b15db1"><tt>``Erik</tt></font></td><td width="100%"><tt>or that inline insinuates static</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:15.34</tt></td><td><font color="#b15db1"><tt>``Erik</tt></font></td><td width="100%"><tt>(which is wrong, inline is a hint, static is a statement)</tt></td></tr>
-<tr><td><tt>16:23.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@64-136-219-55.dyn.everestkc.net)</font></tt></td></tr>
-<tr><td><tt>16:23.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
-<tr><td><tt>19:47.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:28.39</tt></td><td><font color="#b55fb5"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: can you dig in and figure out that cause, whether it's a compiler bug or linker issue?&nbsp;&nbsp;maybe ask their devs if the docs don't say</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:29.07</tt></td><td><font color="#b55fb5"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's a code problem, then we should edit for portability -- if it's a bug, they can fix it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.47</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: sure, I'll take a wack at it - I've been holding off bugging them til things stablized, but now that they're saying they've pretty much completed the current C++ standard features I guess it's time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:15.57</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>actually...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:17.00</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>when I replace /usr/bin/ld with llvm-ld it works...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:17.09</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries a clean build to make sure that's for real</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:30.03</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:30.28</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>so it's probably some sort of incompatibility between clang and ld</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:32.03</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>dingnabbit, it still doesn't like the bu_byteoffset stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:35.46</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I'm not sure what exactly to file as a bug report about that byteoffset issue, but it's been there for a looong time now so presumably it will stay there unless we file something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:37.45</tt></td><td><font color="#5db2b2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries the cfe-dev list</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c4">
+<td><tt>01:25.50</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c3">sighs - well, guess I know
+what to work on Monday then</span></tt></td>
+</tr>
+<tr>
+<td><tt>01:39.21</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.25</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>O.o</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.27</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>./.libs/libbu.so: undefined reference to
+`fnblank'</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.32</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>when building with clang</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:54.42</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>and several others</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.04</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>error comes when trying to link
+htester</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:45.17</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>fnblank is in fnmatch.c so it might be
+dropping the references since they are declared inline</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:46.15</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>removing the inline declaration should make
+the undefined references go away, though I'd be curious to know
+exactly why it's failing</tt></td>
+</tr>
+<tr>
+<td><tt>06:57.52</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Ralith
+(~ralith@S010600221561996a.vc.shawcable.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:40.53</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, removing inline did it - weird</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>14:41.53</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>maybe something about the way it's handing the
+charclasses array?</tt></td>
+</tr>
+<tr>
+<td><tt>14:57.13</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:14.04</tt></td>
+<td><span class="c7"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>probably assuming that inline and static are
+synonymous</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:14.25</tt></td>
+<td><span class="c7"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>or that inline insinuates static</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:15.34</tt></td>
+<td><span class="c7"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(which is wrong, inline is a hint, static is a
+statement)</tt></td>
+</tr>
+<tr>
+<td><tt>16:23.04</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad R0b0t1
+(~Enigma@64-136-219-55.dyn.everestkc.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:23.04</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad R0b0t1
+(~Enigma@unaffiliated/r0b0t1)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:47.14</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Ralith
+(~ralith@S010600221561996a.vc.shawcable.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:28.39</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: can you dig in and figure out that
+cause, whether it's a compiler bug or linker issue?  maybe ask
+their devs if the docs don't say</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:29.07</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's a code problem, then we should edit
+for portability -- if it's a bug, they can fix it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:03.47</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: sure, I'll take a wack at it - I've
+been holding off bugging them til things stablized, but now that
+they're saying they've pretty much completed the current C++
+standard features I guess it's time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:15.57</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>actually...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:17.00</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>when I replace /usr/bin/ld with llvm-ld it
+works...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:17.09</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c3">tries a clean build to make
+sure that's for real</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:30.03</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:30.28</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>so it's probably some sort of incompatibility
+between clang and ld</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:32.03</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>dingnabbit, it still doesn't like the
+bu_byteoffset stuff</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:35.46</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I'm not sure what exactly to file as a
+bug report about that byteoffset issue, but it's been there for a
+looong time now so presumably it will stay there unless we file
+something</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:37.45</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c3">tries the cfe-dev
+list</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

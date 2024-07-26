@@ -1,351 +1,1879 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20090723</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20090723</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c18 {color: #C16565}
+ span.c17 {color: #6565C0}
+ span.c16 {color: #64BFBF}
+ span.c15 {color: #BFBF64}
+ span.c14 {color: #62BA62}
+ span.c13 {color: #5FB55F}
+ span.c12 {color: #5FB5B5}
+ span.c11 {color: #000099}
+ span.c10 {color: #CF6DCF}
+ span.c9 {color: #AEAE5B}
+ span.c8 {color: #BBBB62}
+ span.c7 {color: #CC00CC}
+ span.c6 {color: #B86161}
+ span.c5 {color: #009900}
+ span.c4 {color: #B45FB4}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #B2B25E}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20090723</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:07.51</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>Ralith: it's warning worthy because you might try to use X as argument to Y, for example</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.16</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>okay, how do I get it to stfu? :P</tt></td></tr>
-<tr><td><tt>00:13.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:26.57</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>Ralith: if X is first in .h before, it should be initialized before in the constructor</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.12</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>ah, declaration order.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:27.26</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>there's probably a -Wno-something to quell it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:31.37</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>eh, I think -Wall is good practice.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.27</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>you can use -Wall and -Wno* after that, to omit specific warnings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.51</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>especially useful if the "fault" is on the libraries you use, not on your code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.46</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>-Wall doesn't include all warnings despite the appearance, it omits some really low importance ones</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:33.54</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>such as unused parameters in methods</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.09</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>actually, it includes that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:35.15</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>&gt;_&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:38.18</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r35254 10/brlcad/trunk/ (3 files in 3 dirs): Add some output options to bbsize, allow user to specify multiple objects and build the composite bounding box for all of them, add a man page</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:42.59</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">pokes starseeker </font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:43.27</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith: saw your message</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:43.31</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>odd</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:43.43</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>maybe something changed between when you and I checked out trunk?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:44.01</tt></td><td><font color="#b2b25e"><tt>mafm</tt></font></td><td width="100%"><tt>well, then there are others, enabled with -Wextra</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:44.12</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>more likely my box - I run gentoo unstable so there may be an argument between versions or some such</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:44.19</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">must run - gotta get home</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:47.10</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>seeya</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:47.16</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>&lt;3 gentoo</tt></td></tr>
-<tr><td><tt>01:28.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mike111 (n=mike@cadil21.kaist.ac.kr)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:28.56</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>Hi all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:31.44</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>I have a region. How do I find the area of the projection on the region on a plane, for example the x-y plane?.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:34.39</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>rtarea, maybe?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:35.30</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>mike111: yeah, I think rtarea is what you want.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:35.37</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rtarea - Calculate exposed and presented surface areas</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:35.57</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>Hi Ralith, I can't see the command in Vol.II (MGED)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:36.03</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>it's not a mged command</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:36.24</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>a raytracer?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:36.27</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>mged is the modeler.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:36.48</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>things like rt are available there mostly just as a convenience measure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:37.03</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>there are many, many BRL-CAD tools that are completely separate programs.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:37.06</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>rtarea is one of them.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:37.14</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>where is it documented? as a manpage?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:37.28</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>that's the docs I found, but there may be others</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:37.33</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>I always check for manpages first</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:39.20</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>Doing man area gives an `area' command in mged:&nbsp;&nbsp;Calculates an approximate presented area of one region in the mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:39.20</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.51</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>oh, cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:42.54</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>didn't know about that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.07</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>for rtarea, how do I specify which projection I want?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.13</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>dunno</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.25</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>I think `area' gives the surface area and not a projection. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.32</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>hang around, someone else probably knows</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:46.59</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>thanks for the rtarea tip</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:47.59</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>np</tt></td></tr>
-<tr><td><tt>02:21.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</font></tt></td></tr>
-<tr><td><tt>02:21.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.19</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith: where does g3d stash its temporary files?&nbsp;&nbsp;$HOME/.g3d?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.36</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm thinking of the Ogre config stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:25.48</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>/usr/local/share/g3d right now, as bad a choice as that is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.42</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nukes</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.55</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - now I get GLX backdrop image not found: Warning</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.55</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Warning: Missing charsets in String to FontSet conversion</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.56</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Error: Shell widget menu has zero width and/or height</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.04</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>when trying to pick a renderer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.30</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>uh, that may be related to no freeimage</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.34</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>lemme send you my ogre.cfg</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:27.37</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>that'll make it skip the dialog</tt></td></tr>
-<tr><td><tt>02:28.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:28.10</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>may as well put it on the wiki</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:28.18</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>other folks may want to give it a whirl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:28.56</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt><a href="http://isitloadedyet.com/~ralith/ogre.cfg">http://isitloadedyet.com/~ralith/ogre.cfg</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:29.09</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>I need to modify things such that it picks a sane default instead of popping that dialog up anyway</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:29.28</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>it'd probably break horribly if someone, say, set it to fullscreen or to use directx</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:30.14</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>stick that in /usr/local/share/g3d</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:31.59</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>any luck?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.10</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>grr - now it's back to </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.11</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Loading library ./RenderSystem_GL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.11</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>terminate called after throwing an instance of 'Ogre::InternalErrorException' what():&nbsp;&nbsp;OGRE EXCEPTION(7:InternalErrorException): Could not load dynamic library ./RenderSystem_GL.&nbsp;&nbsp;System Error: ./RenderSystem_GL.so: cannot open shared object file: No such file or directory in DynLib::load at /home/cyapp/cadtoplevel/brlcad/ogre/OgreMain/src/OgreDynLib.cpp (line 90)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.17</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Aborted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.27</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>./?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.35</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>dunno</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:32.51</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>is there an ogreplugins.cfg in the g3d dir?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.10</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.18</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>what's in it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.28</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt># Defines plugins to load</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.28</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>PluginFolder=</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.28</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Plugin=RenderSystem_GL</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.28</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Plugin=Plugin_OctreeSceneManager</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.28</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>PluginFolder should be set to /usr/local/lib/OGRE</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.30</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>ahah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:33.32</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>there's your problem.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:34.29</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>gets further now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:34.34</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>terminate called after throwing an instance of 'Ogre::FileNotFoundException' what():&nbsp;&nbsp;OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource sphere.mesh in resource group Autodetect or any other group. in ResourceGroupManager::openResource at /home/cyapp/cadtoplevel/brlcad/ogre/OgreMain/src/OgreResourceGroupManager.cpp (line 738)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.03</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>that's one of those 'make install not yet supported' issues.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.16</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>sphere.mesh should be somewhere in your ogre checkout</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:35.18</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>copy it into the g3d dir</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.06</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>/usr/local/share/g3d/sphere.mesh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.09</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.22</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>yup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.26</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>still can't find it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.39</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>is there a resources.cfg in there?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.44</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Mesh: Loading sphere.mesh.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.44</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>terminate called after throwing an instance of 'Ogre::FileNotFoundException' what():&nbsp;&nbsp;OGRE EXCEPTION(6:FileNotFoundException): Cannot locate resource sphere.mesh in resource group Autodetect or any other group. in ResourceGroupManager::openResource at /home/cyapp/cadtoplevel/brlcad/ogre/OgreMain/src/OgreResourceGroupManager.cpp (line 738)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.48</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>it should contain:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.49</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Aborted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.54</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>[General]</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.54</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>FileSystem=/usr/local/share/g3d/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:38.08</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - it's set to RBGui</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:38.32</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>scrap it, drop in what I pasted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:38.40</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>yep, bing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.16</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.20</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>works?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.23</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.27</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.37</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>might want to fix those defaults...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.49</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:39.51</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>just fixed two of them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.04</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>the plugindir thing and the resourcesdir thing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.05</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ralith * r35255 10/rt^3/trunk/src/g3d/CMakeLists.txt: More build system improvements; installations should be somewhat less broken now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.16</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>was there anything else that broke?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.34</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>don't think so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.46</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>kk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.48</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>might add the sphere.mesh to g3d install</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.50</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>oh, the config file thing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.54</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>since we need it for now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:40.57</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>easy to get rid of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:42.43</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ralith * r35256 10/rt^3/trunk/src/g3d/CMakeLists.txt: More build system cleanup, added autogenerate/install valid ogre.cfg.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:43.07</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>Hi all: mged hangs when I run `area' on a simple sphere region. any ideas?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:44.31</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - it's busted</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:45.23</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>toss it in here:&nbsp;&nbsp;<a href="http://sourceforge.net/tracker/?group_id=105292&amp;atid=640802">http://sourceforge.net/tracker/?group_id=105292&amp;atid=640802</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:49.15</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>starseeker: is the SF link for me?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:49.42</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>starseeker: okay, taken care of.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:49.51</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>also switched to something prettier.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:49.55</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ralith * r35257 10/rt^3/trunk/src/g3d/ (CMakeLists.txt OgreGLWidget.cxx knot.mesh): Changed test mesh to something more interesting, and added installation support for it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:50.21</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>in *theory* installation should be working now.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:51.08</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ralith * r35258 10/rt^3/trunk/src/g3d/INSTALL: Updated INSTALL.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:56.31</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>the installation test didn't actually quite work for me, but I think that was because I have a debug version of Ogre installed?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:57.29</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>OGRE_PLUGIN_DIR_REL was set to NOTFOUND for some reason.&nbsp;&nbsp;Will worry about that later.</tt></td></tr>
-<tr><td><tt>03:02.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KhadorMech (n=Adder@cpe-72-224-148-98.maine.res.rr.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:04.05</tt></td><td><font color="#cf6dcf"><tt>KhadorMech</tt></font></td><td width="100%"><tt>Hi I'm trying to get brl running on my leopard mac and I keep getting "bus error".&nbsp;&nbsp;Anyone know a work-around?</tt></td></tr>
-<tr><td><tt>03:11.27</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad KhadorMech (n=Adder@cpe-72-224-148-98.maine.res.rr.com)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.04</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith: got the same thing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.07</tt></td><td><font color="#bbbb62"><tt>starseeker</tt></font></td><td width="100%"><tt>NOTFOUND</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.15</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>hm, weird.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:36.34</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>lemme try updating the cmake module</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:40.40</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>didn't do any good :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.02</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>oh wel, committing anyway 'cuz presumably ogre's improved it by now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:41.53</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ralith * r35259 10/rt^3/trunk/cmake/ (FindOGRE.cmake FindPkgMacros.cmake): Updated OGRE's cmake module (and added some stuff from OGRE's impl. of FindPkgMacros) in the hopes of improving reliability across platforms.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:51.53</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>strictly this is an OGRE-side bug</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.16</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt>since it's their cmake module that's failing to find the stuff installed by their build system.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:26.26</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>I'm trying to run rtarea from the commandline using mged -c new.g "Z;E s1.r;top;rtarea" </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:27.16</tt></td><td><font color="#aeae5b"><tt>mike111</tt></font></td><td width="100%"><tt>but getting: bu_log: write error</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:50.28</tt></td><td><font color="#b45fb4"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders why he didn't just try running rtarea itself</font></tt></td></tr>
-<tr><td><tt>06:23.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mike111 (n=mike@cadil21.kaist.ac.kr)</font></tt></td></tr>
-<tr><td><tt>07:26.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _clock_ (n=_sushi_@80-218-244-105.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>10:13.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@74.Red-83-42-152.dynamicIP.rima-tde.net)</font></tt></td></tr>
-<tr><td><tt>12:02.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-27.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:11.40</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: c++ initializes in the order declared, so when your initialization list doesn't match, it warns since you might be making some assumption about the order you listed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:11.58</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't matter for simple types, but especially if they're objects, you can get into bad juju</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:13.06</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>the 'area' command gives projected/presented area, but just a rough approximation -- rtarea is the tool to use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:16.08</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>totally awesome, I've gotten, like, NO mail at bz, but this morning, I get spam there. yayyyy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:16.25</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>he gets the bu_log write error because rtarea is async and mged terminates before rtarea finishes, yet it can't display the results because mged is gone</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:18.06</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">personally thinks that mged -c needs some significant attention... fixing async issues, choosing appropriate streams, etc</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:19.02</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>or; mged as a pipe tool needs attention, rather</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:53.13</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>the rotate issues I've been seeing on osX.5 are not choppiness, they seem to be that it's reading a mouse down and up and doing a zoom instead of seeing a mouse down and move to rotate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:53.20</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>um, it zooms on mouse down</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:53.37</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>I imagine tk and apple X11.app are not playing nice</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:54.04</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>(this is on a macbook from november)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.24</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: my quick lookings seemed that it was some initialization problem on mged/libged's part</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:00.53</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>as it works just fine when you first e an object, you can spin it around freely ... then once you zoom in/out, it's hosed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.21</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>ok, what I was seeing, I think is related, so I'm sharing what little info I have so the people who will fix it are prepared</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:01.42</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks ``Erik is prepared to fix it ;)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:03.43</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>fuck that shit, I called in sick today (stomach is bugging me)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:04.25</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>felt awful green yesterday, went to a party on tuesday and wasn't used to the drinking and being around cigarettes and stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:04.35</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>I got old. *sob*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:05.02</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>Got used to no poison and cleaner air eh? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:05.25</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>well, different pollutions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:06.37</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>d-lo, if you see the slavedriver or her minion, I wasn't able to get either by phone, nor the mathematicion. I left a VM for the boss, but a "hey, didja check your vmail?" shout would make me feel better?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:07.05</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>righto.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:07.09</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>danke</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:08.20</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>iokit is a wreck :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:08.48</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">wants to write a little program with a similar interface to batch that throw sigstop and sigcont signals based on cpu temp and/or fan speed</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:09.17</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>keep my lappy from smoking up during a rebuild of BRL-CAD :D without burning my knees</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:11.29</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">has to figure out <a href="http://pastebin.bzflag.bz/d7958bdd">http://pastebin.bzflag.bz/d7958bdd</a> before he can even look at mouse events</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:12.40</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>(interesting, I put my name in as "``Erik" in the pastebin, and it reads it as "Erik".... wonder what happens if my name is "`rm -rf /`" O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:14.49</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>(and, uh, it has a spam problem now.)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:15.57</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>why are tyou trying to break the pastebin?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:17.09</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>because if I break it, then we know it's breakable and we can fix it. If someone else breaks it, it's a bad day</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:17.46</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">spent too much time as a sysadmin, thinks that's why he was pushed towards the "test developer" roll on "that project"</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:17.55</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>role</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:18.15</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>Sure.&nbsp;&nbsp;Right.&nbsp;&nbsp;I know you.&nbsp;&nbsp;Its pure Malice isn't it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:19.12</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>hey, man, at least I'm not so deviant that I'm cracking secured encyption keys and hijacking data streams for man-in-the-middle attacks on commercial proprietary software</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:19.15</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:20.15</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- stickin' to the clasic ethos, just had a "hm, thats... interesting" moment, that's it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:20.40</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>riiiiiight.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:20.51</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>and its not commercial anymore :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:22.38</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>you'll either have to find a group of artists willing to commit and obey a common vision (EXTREMELY difficult if you don't have $'s), or run the risk of being a rogue bandit skirting the grey areas of the law :(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:23.31</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- used and was mortified by the whole bnetd situation, is gunshy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:24.16</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>and the history of strategus...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:32.42</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks he meant <a href="http://pastebin.bzflag.bz/d7958fbdd">http://pastebin.bzflag.bz/d7958fbdd</a></font></tt></td></tr>
-<tr><td><tt>13:52.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ornitorrincos (n=ilcra198@archlinux/trusteduser/ornitorrincos)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:52.25</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>ho louipc </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:52.48</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>no, opengl support is not going to give you shaded displays or anything that X won't do.. and generally X will do it better</tt></td></tr>
-<tr><td><tt>13:53.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pro-rsoft (n=prorsoft@unaffiliated/pro-rsoft)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.19</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>oh crap, they're ALL coming here O.o :D *duck*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.28</tt></td><td><font color="#64bfbf"><tt>pro-rsoft</tt></font></td><td width="100%"><tt>Hehe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.38</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>(srry, been pimping)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:54.53</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>so, yeah, not detecting opengl is not all that bad of a thing, we can figure out how to make it work, but it's not a show stopper</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:55.30</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>just curious if it was normal or I had something broken</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:55.51</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>um, if you're using linux, it SHOULD be detected</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.07</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>do you have the mesa dev stuff on?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.14</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>then I probably have something broken</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.17</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>GL.h GLU.h etc?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.40</tt></td><td><font color="#64bfbf"><tt>pro-rsoft</tt></font></td><td width="100%"><tt>you mean GL/gl.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.49</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>er, yeah, it's been a while</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.09</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>we had ogl support back to when it was irisgl and a propritary sgi thang</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.23</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>proprietary</tt></td></tr>
-<tr><td><tt>13:57.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elena (n=elena@89.136.118.141)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.47</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>mornin' elena </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.54</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>hi.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.04</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>how are you?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.09</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>great!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.17</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>I was hopping to catch one of you around.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.30</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">is a square, sorry</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.30</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>i'm working on conversion.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.31</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>busy day and slow start to it at that, but starting to get the juices flowing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.03</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.06</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>``Erik, yes those headrs I ahve them, checked with louipc </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.43</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>are then any particular formats we want to support more than others.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.45</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:00.09</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>ok, our ogl check starts on configure.ac:1364</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:00.48</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>looking for libGL.so libGL2.so and libGL.dylib</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.18</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>elena: yeah, .g :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:01.23</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>with minor hackery around the mac tardedness</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.04</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>ok. but from what to g?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.12</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>dxf for example?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.32</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>followed by the more complex formats, namely iges and dxf for starters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.41</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>ok.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.42</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>thanks.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.46</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>are you looking for a prioritized list of import formats?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.54</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:02.57</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>if you want, you could just support anything we have a g-* for</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.18</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>*-g you mean</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.22</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>i did a list for that.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.23</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.24</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.40</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>but for now, only with *-g and g-*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.50</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>because i need sample files to test.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:04.07</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>but I don't think we have any document saying that "yes, we have alpha-g and beta-g, but if you have both, we'd prefer beta-g to carry geometry better"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:04.11</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>and I get those samples by converting from g to that format (offline)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:04.39</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>libGL.so is present</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:05.02</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>um, I made a csv in src/conv/ a while back, but it's not sorted... might be nice if someone sorted it by preference?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:05.28</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>orn: can you paste the ogl fail to a pastebin? we have pastebin.bzflag.bz :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:09.47</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>elena: you can also find samples of most formats pretty easily by using google with the file-type keyword</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:09.58</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>ACAD and EUCLID don't have a specific file extension?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.07</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>umn</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.12</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>i know about filetype:pdf, doc and stuff.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.12</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>ok, who has telekinesis</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.25</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>heheh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.25</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>yea, like "filetype:dxf sample"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.36</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>dxf is simple.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:10.42</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>how about euclid?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.08</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>louipc, now the damn opengl works</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.11</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>lesse.. there suffix doesn't match their name like the others iirc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.18</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>ornitorrincos: haha! ok cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.44</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>I preferred using openGL because X is too slow for me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.53</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>ogl uses hardware accel and stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:11.58</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>(modern euclid that is)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.06</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>but it seems to have refresh problems or something now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.26</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>thank you. for dxf, google search is a good idea.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.47</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>when i'm finished, i could it those to test some real examples.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:12.52</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>and the irc log finished a few lines after I posted the error in pastebin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:13.26</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>louipc: really? gl lines are awful slow, usually X is a lot faster :/ the whole bus transfer issue, y'know? do you have a smoking video card on a craptacular cpu?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.19</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>e.g like Erik's 8-core?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.29</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.36</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>``Erik: kind of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.43</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm home today, just a 2 core macbook here :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:15.02</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>I run a pIII 866 MHz</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:15.57</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>that is a bit behind the curve.. but *shrug* my first two machines were measured in khz</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:16.32</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>and one of these days, I'll get around to making a vax 780 with 43bsd available on a web interface so people can experience BRL-CAD 4.x in its glory</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:16.40</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>simh++</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:17.10</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>when things like clear or ls take a few seconds, that's nutty stuff :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:17.20</tt></td><td><font color="#c16565"><tt>louipc</tt></font></td><td width="100%"><tt>it's good to run old hardware, you can catch performance issues more easily ;D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:17.40</tt></td><td><font color="#bfbf64"><tt>ornitorrincos</tt></font></td><td width="100%"><tt>``Erik, for that you can do ssh over a slow connection ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:18.07</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, a few jobs ago, I was doing java code in a small shop, my choice hardware for development was a dual p133 with scsi's, the amd 450 was for video games :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:18.37</tt></td><td><font color="#6565c0"><tt>elena</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:19.16</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>DEC prioris, made an awesome coffee table... and it showed two penguins on boot O.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:22.32</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35260 10/brlcad/trunk/src/conv/g-egg.c: make the vertex id unique to the file. Eliminate trailing whitespace. Etc.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:24.08</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35261 10/brlcad/trunk/src/adrt/libtie/tie_kdtree.c: panic mode for silliness.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:24.37</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35262 10/brlcad/trunk/src/librt/prep.c: irrelevent slot.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:03.27</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>is it brlcad vs the servers again today?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:05.04</tt></td><td><font color="#5fb5b5"><tt>brlcad</tt></font></td><td width="100%"><tt>brlcad vs monthly reports and other business mail matters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:05.21</tt></td><td><font color="#62ba62"><tt>d-lo</tt></font></td><td width="100%"><tt>ah... the fun stuff :)</tt></td></tr>
-<tr><td><tt>15:09.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>15:10.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:16.30</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>if you don't get the release out in time, I can push it while ya'll are out throwing beads at the pretty girls, just make sure ya bring back pics</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:17.27</tt></td><td><font color="#5fb55f"><tt>``Erik</tt></font></td><td width="100%"><tt>(ya knew that, but I won't bitch any more than normal)</tt></td></tr>
-<tr><td><tt>16:27.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@ip-207-145-38-45.iad.megapath.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:00.14</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35263 10/brlcad/trunk/src/adrt/libtie/tie_kdtree.c: Fixed typo.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:16.58</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35264 10/brlcad/trunk/doc/docbook/system/man1/en/bbsize.xml: This is only a placeholder so that the build completes. The real file is coming.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:28.43</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r35265 10/brlcad/trunk/src/ (libdm/Makefile.am libdm/dm-rtgl.c tclscripts/mged/mview.tcl): turned z-clipping on by default for dm-rtgl</tt></td></tr>
-<tr><td><tt>17:40.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14E1B8.dip.t-dialin.net)</font></tt></td></tr>
-<tr><td><tt>17:48.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jdoliner (n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</font></tt></td></tr>
-<tr><td><tt>17:50.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@210.212.55.3)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.03</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03jdoliner * r35266 10/brlcad/trunk/ (include/vmath.h src/proc-db/surfaceintersect.cpp): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.05</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: adds the Jiggle get approximate intersection points closer to each other using</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.07</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: newtonesque methods also adds an additional macro in vmath.h Project which</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:19.13</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: decomposes a vector into components parallel and perpendiculur to a given vector</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:33.18</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35267 10/brlcad/trunk/src/libged/erase.c: Removed a few unused variables.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:38.48</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35268 10/brlcad/trunk/src/libged/draw.c: Mod ged_addToDisplay to check if name is already in the list. If so, return the associated gdlp.</tt></td></tr>
-<tr><td><tt>18:41.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@202.3.77.11)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:49.28</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r35269 10/brlcad/trunk/doc/docbook/system/man1/en/bbsize.xml: oops - add the bbsize man page content.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:06.32</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35270 10/brlcad/trunk/ (3 files in 3 dirs): Added code to redraw anything associated with the object being edited if it's currently being drawn.</tt></td></tr>
-<tr><td><tt>19:55.20</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jdoliner (n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:18.40</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ebautu * r35271 10/web/trunk/htdocs/more/sites/all/modules/brlcad/ (brlcad.inc brlcad.module): Moved PHP-BRLCAD interface in separate file (brlcad.inc) and implemented file conversions.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:28.10</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r35272 10/brlcad/trunk/ (include/dm-rtgl.h src/libdm/dm-rtgl.c): coloring with region material colors</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:55.04</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35273 10/brlcad/trunk/src/libged/expand.c: This is a follow-on from the previous commit (i.e. return only database entries that match the pattern(s)). This handles the case where the pattern has no wildcards.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.44</tt></td><td><font color="#b86161"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r35274 10/brlcad/trunk/src/tclscripts/lib/Command.tcl: Added tab completion to the Command widget.</tt></td></tr>
-<tr><td><tt>22:17.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Patmcc19_ (n=chatzill@71-223-63-203.phnx.qwest.net)</font></tt></td></tr>
-<tr><td><tt>22:24.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14E1B8.dip.t-dialin.net)</font></tt></td></tr>
-<tr><td><tt>23:35.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-27.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr><td><tt>23:35.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Patmcc19 (n=chatzill@71-223-38-122.phnx.qwest.net)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:07.51</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>Ralith: it's warning worthy because you might
+try to use X as argument to Y, for example</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.16</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>okay, how do I get it to stfu? :P</tt></td>
+</tr>
+<tr>
+<td><tt>00:13.52</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad samrose
+(n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:26.57</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>Ralith: if X is first in .h before, it should
+be initialized before in the constructor</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.12</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>ah, declaration order.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:27.26</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>there's probably a -Wno-something to quell
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:31.37</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>eh, I think -Wall is good practice.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:32.27</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you can use -Wall and -Wno* after that, to
+omit specific warnings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:32.51</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>especially useful if the "fault" is on the
+libraries you use, not on your code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.46</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>-Wall doesn't include all warnings despite the
+appearance, it omits some really low importance ones</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:33.54</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>such as unused parameters in methods</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:35.09</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>actually, it includes that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:35.15</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>&gt;_&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:38.18</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r35254
+10/brlcad/trunk/ (3 files in 3 dirs): Add some output options to
+bbsize, allow user to specify multiple objects and build the
+composite bounding box for all of them, add a man page</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:42.59</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt><span class="c7">pokes
+starseeker</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:43.27</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Ralith: saw your message</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:43.31</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>odd</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:43.43</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>maybe something changed between when you and I
+checked out trunk?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:44.01</tt></td>
+<td><span class="c2"><tt>mafm</tt></span></td>
+<td width="100%"><tt>well, then there are others, enabled with
+-Wextra</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:44.12</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>more likely my box - I run gentoo unstable so
+there may be an argument between versions or some such</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:44.19</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">must run - gotta get
+home</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:47.10</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>seeya</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:47.16</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>&lt;3 gentoo</tt></td>
+</tr>
+<tr>
+<td><tt>01:28.44</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad mike111
+(n=mike@cadil21.kaist.ac.kr)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:28.56</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>Hi all</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:31.44</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>I have a region. How do I find the area of the
+projection on the region on a plane, for example the x-y
+plane?.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:34.39</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>rtarea, maybe?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:35.30</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>mike111: yeah, I think rtarea is what you
+want.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:35.37</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>"       rtarea - Calculate exposed and
+presented surface areas</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:35.57</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>Hi Ralith, I can't see the command in Vol.II
+(MGED)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:36.03</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>it's not a mged command</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:36.24</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>a raytracer?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:36.27</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>mged is the modeler.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:36.48</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>things like rt are available there mostly just
+as a convenience measure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:37.03</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>there are many, many BRL-CAD tools that are
+completely separate programs.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:37.06</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>rtarea is one of them.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:37.14</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>where is it documented? as a
+manpage?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:37.28</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>that's the docs I found, but there may be
+others</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:37.33</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>I always check for manpages first</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:39.20</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>Doing man area gives an `area' command in
+mged:  Calculates an approximate presented area of one region in
+the mged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:39.20</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>&lt;PROTECTED&gt;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.51</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>oh, cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:42.54</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>didn't know about that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.07</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>for rtarea, how do I specify which projection
+I want?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.13</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>dunno</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.25</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>I think `area' gives the surface area and not
+a projection.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.32</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>hang around, someone else probably
+knows</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:46.59</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>thanks for the rtarea tip</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:47.59</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>np</tt></td>
+</tr>
+<tr>
+<td><tt>02:21.04</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad samrose
+(n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>02:21.30</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad samrose
+(n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:23.19</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Ralith: where does g3d stash its temporary
+files?  $HOME/.g3d?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:23.36</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I'm thinking of the Ogre config
+stuff</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:25.48</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>/usr/local/share/g3d right now, as bad a
+choice as that is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:26.42</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">nukes</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:26.55</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - now I get GLX backdrop image not found:
+Warning</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:26.55</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Warning: Missing charsets in String to FontSet
+conversion</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:26.56</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Error: Shell widget menu has zero width and/or
+height</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.04</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>when trying to pick a renderer</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.30</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>uh, that may be related to no
+freeimage</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.34</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>lemme send you my ogre.cfg</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:27.37</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>that'll make it skip the dialog</tt></td>
+</tr>
+<tr>
+<td><tt>02:28.08</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad samrose
+(n=samrose@c-24-11-185-57.hsd1.mi.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:28.10</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>may as well put it on the wiki</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:28.18</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>other folks may want to give it a
+whirl</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:28.56</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt><a href=
+"http://isitloadedyet.com/~ralith/ogre.cfg">http://isitloadedyet.com/~ralith/ogre.cfg</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:29.09</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>I need to modify things such that it picks a
+sane default instead of popping that dialog up anyway</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:29.28</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>it'd probably break horribly if someone, say,
+set it to fullscreen or to use directx</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:30.14</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>stick that in /usr/local/share/g3d</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:31.59</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>any luck?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.10</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>grr - now it's back to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.11</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Loading library ./RenderSystem_GL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.11</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>terminate called after throwing an instance of
+'Ogre::InternalErrorException' what():  OGRE
+EXCEPTION(7:InternalErrorException): Could not load dynamic library
+./RenderSystem_GL.  System Error: ./RenderSystem_GL.so: cannot open
+shared object file: No such file or directory in DynLib::load at
+/home/cyapp/cadtoplevel/brlcad/ogre/OgreMain/src/OgreDynLib.cpp
+(line 90)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.17</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Aborted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.27</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>./?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.35</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>dunno</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:32.51</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>is there an ogreplugins.cfg in the g3d
+dir?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.10</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.18</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>what's in it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.28</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt># Defines plugins to load</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.28</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>PluginFolder=</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.28</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Plugin=RenderSystem_GL</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.28</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Plugin=Plugin_OctreeSceneManager</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.28</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>PluginFolder should be set to
+/usr/local/lib/OGRE</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.30</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>ahah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:33.32</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>there's your problem.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:34.29</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>gets further now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:34.34</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>terminate called after throwing an instance of
+'Ogre::FileNotFoundException' what():  OGRE
+EXCEPTION(6:FileNotFoundException): Cannot locate resource
+sphere.mesh in resource group Autodetect or any other group. in
+ResourceGroupManager::openResource at
+/home/cyapp/cadtoplevel/brlcad/ogre/OgreMain/src/OgreResourceGroupManager.cpp
+(line 738)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.03</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>that's one of those 'make install not yet
+supported' issues.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.16</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>sphere.mesh should be somewhere in your ogre
+checkout</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:35.18</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>copy it into the g3d dir</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.06</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>/usr/local/share/g3d/sphere.mesh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.09</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>right?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.22</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>yup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.26</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>still can't find it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.39</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>is there a resources.cfg in there?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.44</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Mesh: Loading sphere.mesh.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.44</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>terminate called after throwing an instance of
+'Ogre::FileNotFoundException' what():  OGRE
+EXCEPTION(6:FileNotFoundException): Cannot locate resource
+sphere.mesh in resource group Autodetect or any other group. in
+ResourceGroupManager::openResource at
+/home/cyapp/cadtoplevel/brlcad/ogre/OgreMain/src/OgreResourceGroupManager.cpp
+(line 738)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.48</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>it should contain:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.49</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Aborted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.54</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>[General]</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.54</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>FileSystem=/usr/local/share/g3d/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:38.08</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - it's set to RBGui</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:38.32</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>scrap it, drop in what I pasted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:38.40</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yep, bing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.16</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.20</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>works?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.23</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.27</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.37</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>might want to fix those defaults...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.49</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:39.51</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>just fixed two of them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.04</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>the plugindir thing and the resourcesdir
+thing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.05</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03ralith * r35255
+10/rt^3/trunk/src/g3d/CMakeLists.txt: More build system
+improvements; installations should be somewhat less broken
+now.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.16</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>was there anything else that broke?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.34</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>don't think so</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.46</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>kk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.48</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>might add the sphere.mesh to g3d
+install</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.50</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>oh, the config file thing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.54</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>since we need it for now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:40.57</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>easy to get rid of</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:42.43</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03ralith * r35256
+10/rt^3/trunk/src/g3d/CMakeLists.txt: More build system cleanup,
+added autogenerate/install valid ogre.cfg.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:43.07</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>Hi all: mged hangs when I run `area' on a
+simple sphere region. any ideas?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:44.31</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - it's busted</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:45.23</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>toss it in here:  <a href=
+"http://sourceforge.net/tracker/?group_id=105292&amp;atid=640802">http://sourceforge.net/tracker/?group_id=105292&amp;atid=640802</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:49.15</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>starseeker: is the SF link for me?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:49.42</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>starseeker: okay, taken care of.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:49.51</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>also switched to something prettier.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:49.55</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03ralith * r35257
+10/rt^3/trunk/src/g3d/ (CMakeLists.txt OgreGLWidget.cxx knot.mesh):
+Changed test mesh to something more interesting, and added
+installation support for it.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:50.21</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>in *theory* installation should be working
+now.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:51.08</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03ralith * r35258
+10/rt^3/trunk/src/g3d/INSTALL: Updated INSTALL.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:56.31</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>the installation test didn't actually quite
+work for me, but I think that was because I have a debug version of
+Ogre installed?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:57.29</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>OGRE_PLUGIN_DIR_REL was set to NOTFOUND for
+some reason.  Will worry about that later.</tt></td>
+</tr>
+<tr>
+<td><tt>03:02.38</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad KhadorMech
+(n=Adder@cpe-72-224-148-98.maine.res.rr.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:04.05</tt></td>
+<td><span class="c10"><tt>KhadorMech</tt></span></td>
+<td width="100%"><tt>Hi I'm trying to get brl running on my leopard
+mac and I keep getting "bus error".  Anyone know a
+work-around?</tt></td>
+</tr>
+<tr>
+<td><tt>03:11.27</tt></td>
+<td colspan="2"><tt><span class="c11">*** part/#brlcad KhadorMech
+(n=Adder@cpe-72-224-148-98.maine.res.rr.com)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:36.04</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Ralith: got the same thing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:36.07</tt></td>
+<td><span class="c8"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>NOTFOUND</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:36.15</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>hm, weird.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:36.34</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>lemme try updating the cmake module</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:40.40</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>didn't do any good :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:41.02</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>oh wel, committing anyway 'cuz presumably
+ogre's improved it by now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:41.53</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03ralith * r35259
+10/rt^3/trunk/cmake/ (FindOGRE.cmake FindPkgMacros.cmake): Updated
+OGRE's cmake module (and added some stuff from OGRE's impl. of
+FindPkgMacros) in the hopes of improving reliability across
+platforms.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:51.53</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>strictly this is an OGRE-side bug</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:52.16</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>since it's their cmake module that's failing
+to find the stuff installed by their build system.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:26.26</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>I'm trying to run rtarea from the commandline
+using mged -c new.g "Z;E s1.r;top;rtarea"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:27.16</tt></td>
+<td><span class="c9"><tt>mike111</tt></span></td>
+<td width="100%"><tt>but getting: bu_log: write error</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:50.28</tt></td>
+<td><span class="c4"><tt>Ralith</tt></span></td>
+<td width="100%"><tt><span class="c7">wonders why he didn't just
+try running rtarea itself</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:23.27</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad mike111
+(n=mike@cadil21.kaist.ac.kr)</span></tt></td>
+</tr>
+<tr>
+<td><tt>07:26.56</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad _clock_
+(n=_sushi_@80-218-244-105.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:13.52</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad mafm
+(n=mafm@74.Red-83-42-152.dynamicIP.rima-tde.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:02.31</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-27.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:11.40</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ralith: c++ initializes in the order declared,
+so when your initialization list doesn't match, it warns since you
+might be making some assumption about the order you
+listed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:11.58</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>doesn't matter for simple types, but
+especially if they're objects, you can get into bad juju</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:13.06</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the 'area' command gives projected/presented
+area, but just a rough approximation -- rtarea is the tool to
+use</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:16.08</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>totally awesome, I've gotten, like, NO mail at
+bz, but this morning, I get spam there. yayyyy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:16.25</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>he gets the bu_log write error because rtarea
+is async and mged terminates before rtarea finishes, yet it can't
+display the results because mged is gone</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:18.06</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">personally thinks that mged
+-c needs some significant attention... fixing async issues,
+choosing appropriate streams, etc</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:19.02</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>or; mged as a pipe tool needs attention,
+rather</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:53.13</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the rotate issues I've been seeing on osX.5
+are not choppiness, they seem to be that it's reading a mouse down
+and up and doing a zoom instead of seeing a mouse down and move to
+rotate</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:53.20</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, it zooms on mouse down</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:53.37</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I imagine tk and apple X11.app are not playing
+nice</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:54.04</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(this is on a macbook from november)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:00.24</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: my quick lookings seemed that it was
+some initialization problem on mged/libged's part</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:00.53</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>as it works just fine when you first e an
+object, you can spin it around freely ... then once you zoom
+in/out, it's hosed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.21</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ok, what I was seeing, I think is related, so
+I'm sharing what little info I have so the people who will fix it
+are prepared</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:01.42</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">thinks ``Erik is prepared to
+fix it ;)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:03.43</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>fuck that shit, I called in sick today
+(stomach is bugging me)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:04.25</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>felt awful green yesterday, went to a party on
+tuesday and wasn't used to the drinking and being around cigarettes
+and stuff</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:04.35</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I got old. *sob*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:05.02</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Got used to no poison and cleaner air eh?
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:05.25</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>well, different pollutions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:06.37</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>d-lo, if you see the slavedriver or her
+minion, I wasn't able to get either by phone, nor the
+mathematicion. I left a VM for the boss, but a "hey, didja check
+your vmail?" shout would make me feel better?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:07.05</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>righto.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:07.09</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>danke</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:08.20</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>iokit is a wreck :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:08.48</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">wants to write a little
+program with a similar interface to batch that throw sigstop and
+sigcont signals based on cpu temp and/or fan speed</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:09.17</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>keep my lappy from smoking up during a rebuild
+of BRL-CAD :D without burning my knees</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:11.29</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">has to figure out <a href=
+"http://pastebin.bzflag.bz/d7958bdd">http://pastebin.bzflag.bz/d7958bdd</a>
+before he can even look at mouse events</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:12.40</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(interesting, I put my name in as "``Erik" in
+the pastebin, and it reads it as "Erik".... wonder what happens if
+my name is "`rm -rf /`" O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:14.49</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(and, uh, it has a spam problem
+now.)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:15.57</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>why are tyou trying to break the
+pastebin?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:17.09</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>because if I break it, then we know it's
+breakable and we can fix it. If someone else breaks it, it's a bad
+day</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:17.46</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">spent too much time as a
+sysadmin, thinks that's why he was pushed towards the "test
+developer" roll on "that project"</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:17.55</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>role</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:18.15</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Sure.  Right.  I know you.  Its pure Malice
+isn't it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:19.12</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hey, man, at least I'm not so deviant that I'm
+cracking secured encyption keys and hijacking data streams for
+man-in-the-middle attacks on commercial proprietary
+software</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:19.15</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:20.15</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- stickin' to the clasic ethos, just had
+a "hm, thats... interesting" moment, that's it :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:20.40</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>riiiiiight.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:20.51</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>and its not commercial anymore :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:22.38</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>you'll either have to find a group of artists
+willing to commit and obey a common vision (EXTREMELY difficult if
+you don't have $'s), or run the risk of being a rogue bandit
+skirting the grey areas of the law :(</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:23.31</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- used and was mortified by the whole
+bnetd situation, is gunshy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:24.16</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and the history of strategus...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:32.42</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c7">thinks he meant <a href=
+"http://pastebin.bzflag.bz/d7958fbdd">http://pastebin.bzflag.bz/d7958fbdd</a></span></tt></td>
+</tr>
+<tr>
+<td><tt>13:52.21</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad ornitorrincos
+(n=ilcra198@archlinux/trusteduser/ornitorrincos)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:52.25</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>ho louipc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:52.48</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>no, opengl support is not going to give you
+shaded displays or anything that X won't do.. and generally X will
+do it better</tt></td>
+</tr>
+<tr>
+<td><tt>13:53.05</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad pro-rsoft
+(n=prorsoft@unaffiliated/pro-rsoft)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.19</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>oh crap, they're ALL coming here O.o :D
+*duck*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.28</tt></td>
+<td><span class="c16"><tt>pro-rsoft</tt></span></td>
+<td width="100%"><tt>Hehe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.38</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(srry, been pimping)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:54.53</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>so, yeah, not detecting opengl is not all that
+bad of a thing, we can figure out how to make it work, but it's not
+a show stopper</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:55.30</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>just curious if it was normal or I had
+something broken</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:55.51</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, if you're using linux, it SHOULD be
+detected</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.07</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>do you have the mesa dev stuff on?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.14</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>then I probably have something
+broken</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.17</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>GL.h GLU.h etc?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.40</tt></td>
+<td><span class="c16"><tt>pro-rsoft</tt></span></td>
+<td width="100%"><tt>you mean GL/gl.h</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.49</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>er, yeah, it's been a while</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.09</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>we had ogl support back to when it was irisgl
+and a propritary sgi thang</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.23</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>proprietary</tt></td>
+</tr>
+<tr>
+<td><tt>13:57.33</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad elena
+(n=elena@89.136.118.141)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.47</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mornin' elena</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.54</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>hi.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.04</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>how are you?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.09</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>great!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.17</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>I was hopping to catch one of you
+around.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.30</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c7">is a square,
+sorry</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.30</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>i'm working on conversion.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.31</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>busy day and slow start to it at that, but
+starting to get the juices flowing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.03</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.06</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>``Erik, yes those headrs I ahve them, checked
+with louipc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.43</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>are then any particular formats we want to
+support more than others.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.45</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:00.09</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ok, our ogl check starts on
+configure.ac:1364</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:00.48</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>looking for libGL.so libGL2.so and
+libGL.dylib</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.18</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>elena: yeah, .g :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:01.23</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>with minor hackery around the mac
+tardedness</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.04</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>ok. but from what to g?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.12</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>dxf for example?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.32</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>followed by the more complex formats, namely
+iges and dxf for starters</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.41</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>ok.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.42</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>thanks.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.46</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>are you looking for a prioritized list of
+import formats?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.54</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>yes.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:02.57</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you want, you could just support anything
+we have a g-* for</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.18</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>*-g you mean</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.22</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>i did a list for that.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.23</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.24</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>yes.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.40</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>but for now, only with *-g and g-*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.50</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>because i need sample files to test.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:04.07</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>but I don't think we have any document saying
+that "yes, we have alpha-g and beta-g, but if you have both, we'd
+prefer beta-g to carry geometry better"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:04.11</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>and I get those samples by converting from g
+to that format (offline)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:04.39</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>libGL.so is present</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:05.02</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, I made a csv in src/conv/ a while back,
+but it's not sorted... might be nice if someone sorted it by
+preference?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:05.28</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>orn: can you paste the ogl fail to a pastebin?
+we have pastebin.bzflag.bz :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:09.47</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>elena: you can also find samples of most
+formats pretty easily by using google with the file-type
+keyword</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:09.58</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>ACAD and EUCLID don't have a specific file
+extension?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.07</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>umn</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.12</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>i know about filetype:pdf, doc and
+stuff.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.12</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>ok, who has telekinesis</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.25</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>heheh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.25</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yea, like "filetype:dxf sample"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.36</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>dxf is simple.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:10.42</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>how about euclid?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.08</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>louipc, now the damn opengl works</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.11</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>lesse.. there suffix doesn't match their name
+like the others iirc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.18</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>ornitorrincos: haha! ok cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.44</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I preferred using openGL because X is too slow
+for me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.53</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>ogl uses hardware accel and stuff</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:11.58</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(modern euclid that is)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.06</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>but it seems to have refresh problems or
+something now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.26</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>thank you. for dxf, google search is a good
+idea.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.47</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>when i'm finished, i could it those to test
+some real examples.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:12.52</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>and the irc log finished a few lines after I
+posted the error in pastebin</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:13.26</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>louipc: really? gl lines are awful slow,
+usually X is a lot faster :/ the whole bus transfer issue, y'know?
+do you have a smoking video card on a craptacular cpu?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.19</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>e.g like Erik's 8-core?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.29</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.36</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>``Erik: kind of</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.43</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm home today, just a 2 core macbook here
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:15.02</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I run a pIII 866 MHz</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:15.57</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that is a bit behind the curve.. but *shrug*
+my first two machines were measured in khz</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:16.32</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and one of these days, I'll get around to
+making a vax 780 with 43bsd available on a web interface so people
+can experience BRL-CAD 4.x in its glory</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:16.40</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>simh++</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:17.10</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>when things like clear or ls take a few
+seconds, that's nutty stuff :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:17.20</tt></td>
+<td><span class="c18"><tt>louipc</tt></span></td>
+<td width="100%"><tt>it's good to run old hardware, you can catch
+performance issues more easily ;D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:17.40</tt></td>
+<td><span class="c15"><tt>ornitorrincos</tt></span></td>
+<td width="100%"><tt>``Erik, for that you can do ssh over a slow
+connection ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:18.07</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, a few jobs ago, I was doing java code in
+a small shop, my choice hardware for development was a dual p133
+with scsi's, the amd 450 was for video games :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:18.37</tt></td>
+<td><span class="c17"><tt>elena</tt></span></td>
+<td width="100%"><tt>:-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:19.16</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>DEC prioris, made an awesome coffee table...
+and it showed two penguins on boot O.o</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:22.32</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35260
+10/brlcad/trunk/src/conv/g-egg.c: make the vertex id unique to the
+file. Eliminate trailing whitespace. Etc.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:24.08</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35261
+10/brlcad/trunk/src/adrt/libtie/tie_kdtree.c: panic mode for
+silliness.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:24.37</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35262
+10/brlcad/trunk/src/librt/prep.c: irrelevent slot.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:03.27</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>is it brlcad vs the servers again
+today?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:05.04</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>brlcad vs monthly reports and other business
+mail matters</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:05.21</tt></td>
+<td><span class="c14"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>ah... the fun stuff :)</tt></td>
+</tr>
+<tr>
+<td><tt>15:09.39</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad yukonbob
+(i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:10.18</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202) [NETSPLIT VICTIM]</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:16.30</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if you don't get the release out in time, I
+can push it while ya'll are out throwing beads at the pretty girls,
+just make sure ya bring back pics</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:17.27</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(ya knew that, but I won't bitch any more than
+normal)</tt></td>
+</tr>
+<tr>
+<td><tt>16:27.14</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad samrose
+(n=samrose@ip-207-145-38-45.iad.megapath.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:00.14</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35263
+10/brlcad/trunk/src/adrt/libtie/tie_kdtree.c: Fixed typo.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:16.58</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35264
+10/brlcad/trunk/doc/docbook/system/man1/en/bbsize.xml: This is only
+a placeholder so that the build completes. The real file is
+coming.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:28.43</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03n_reed * r35265
+10/brlcad/trunk/src/ (libdm/Makefile.am libdm/dm-rtgl.c
+tclscripts/mged/mview.tcl): turned z-clipping on by default for
+dm-rtgl</tt></td>
+</tr>
+<tr>
+<td><tt>17:40.32</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Elrohir
+(n=kvirc@p5B14E1B8.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:48.42</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad jdoliner
+(n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:50.28</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad
+hippieindamakin8 (n=hippiein@210.212.55.3)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.03</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03jdoliner * r35266 10/brlcad/trunk/
+(include/vmath.h src/proc-db/surfaceintersect.cpp):</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.05</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: adds the Jiggle get approximate
+intersection points closer to each other using</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.07</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: newtonesque methods also adds an
+additional macro in vmath.h Project which</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:19.13</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: decomposes a vector into components
+parallel and perpendiculur to a given vector</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:33.18</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35267
+10/brlcad/trunk/src/libged/erase.c: Removed a few unused
+variables.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:38.48</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35268
+10/brlcad/trunk/src/libged/draw.c: Mod ged_addToDisplay to check if
+name is already in the list. If so, return the associated
+gdlp.</tt></td>
+</tr>
+<tr>
+<td><tt>18:41.58</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad
+hippieindamakin8 (n=hippiein@202.3.77.11)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:49.28</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r35269
+10/brlcad/trunk/doc/docbook/system/man1/en/bbsize.xml: oops - add
+the bbsize man page content.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:06.32</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35270 10/brlcad/trunk/
+(3 files in 3 dirs): Added code to redraw anything associated with
+the object being edited if it's currently being drawn.</tt></td>
+</tr>
+<tr>
+<td><tt>19:55.20</tt></td>
+<td colspan="2"><tt><span class="c11">*** part/#brlcad jdoliner
+(n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:18.40</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03ebautu * r35271
+10/web/trunk/htdocs/more/sites/all/modules/brlcad/ (brlcad.inc
+brlcad.module): Moved PHP-BRLCAD interface in separate file
+(brlcad.inc) and implemented file conversions.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:28.10</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03n_reed * r35272 10/brlcad/trunk/
+(include/dm-rtgl.h src/libdm/dm-rtgl.c): coloring with region
+material colors</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:55.04</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35273
+10/brlcad/trunk/src/libged/expand.c: This is a follow-on from the
+previous commit (i.e. return only database entries that match the
+pattern(s)). This handles the case where the pattern has no
+wildcards.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:57.44</tt></td>
+<td><span class="c6"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r35274
+10/brlcad/trunk/src/tclscripts/lib/Command.tcl: Added tab
+completion to the Command widget.</tt></td>
+</tr>
+<tr>
+<td><tt>22:17.05</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Patmcc19_
+(n=chatzill@71-223-63-203.phnx.qwest.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:24.03</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Elrohir
+(n=kvirc@p5B14E1B8.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:35.22</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-27.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:35.43</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad Patmcc19
+(n=chatzill@71-223-38-122.phnx.qwest.net)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

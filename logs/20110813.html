@@ -1,106 +1,527 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20110813</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20110813</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c9 {color: #5F5FB5}
+ span.c8 {color: #009900}
+ span.c7 {color: #6FD46F}
+ span.c6 {color: #CE6C6C}
+ span.c5 {color: #CC00CC}
+ span.c4 {color: #B5B55F}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #6ED16E}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20110813</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:15.37</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: I have modifying the bb function to work on groups and regions : <a href="http://bin.cakephp.org/view/1394071764">http://bin.cakephp.org/view/1394071764</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.32</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>I am calling rt_gettree() before rt_bound_tree() to evaluate the tree first</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.59</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>I am testing with a region made as follows in mged&nbsp;&nbsp;r part1.r u rcc2.s - sph2.s </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.18</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>so when traversing the tree in the rt_bound_tree() call , the first call sees the subtraction operator in tp-&gt;tr_op and proceeds smoothly down to the left child</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.34</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>however in the left tree where it should find the primitive rcc2.s, it encounters an unknown op 12, I think it should have encountered a tr_op = OP_SOLID for the rcc.s primitive</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.05</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>this is probably related to the fact that the rt_gettree() calls reports missing primitives for the region : db_lookup(rcc2.s) failed in /dummy, db_lookup(sph2.s) failed in /dummy, </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:22.07</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>rt_gettrees(dummy) warning:&nbsp;&nbsp;no primitives found</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.31</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>so probably the missing primitives need to be added to the dbi , before the rt_gettree() call, so that the tree is evaluated properly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:53.16</tt></td><td><font color="#6ed16e"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok, 12 is a OP_DB_LEAF as defined in raytrace.h: line 1177, wonder why rt_bound_tree() cant interpret it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:23.29</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>hah, cool:&nbsp;&nbsp;<a href="http://www.pointclouds.org/">http://www.pointclouds.org/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:27.00</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if we can feed raytrace points into that and get NURBS back...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:43.08</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: curious - how close is your command to being fully functional?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:09.12</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45959 10/brlcad/trunk/CMakeLists.txt: Make sure BRLCAD_BUNDLED_LIBS is in the cache</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:31.17</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45960 10/brlcad/trunk/ (misc/CMake/ThirdParty_TCL.cmake src/other/CMakeLists.txt): Tweaks to get Tcl/Tk package testing going again.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:34.29</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: translate? Quite; I'd say that the "generic" subcommand processing plus the translate command is at 90% at worst. I'd planed on putting in some time this weekend, in the hopes that I will have translate completed, which would imply that generic subcommand processing is done as well. I'm aiming to have 'rotate' done by the end of GSoC; I'm not sure if I can, but that's what I'm shooting for. I highly doubt that I</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:37.13</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45961 10/brlcad/trunk/CMakeLists.txt: Constrain the CMake dropdown menu options for CMAKE_BUILD_TYPE to Debug and Release</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:48.15</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">recalculates: more like 95% at worst</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:52.44</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: cool.&nbsp;&nbsp;the "recommended" pencil's down date for coding is the 15th, with a week to document what has been done - I was thinking, given the complexity of the command(s) your working on, it might not be a bad idea to start a docbook man page for this sucker - brlcad, what do you think?&nbsp;&nbsp;should bhinesley keep chugging on the code?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:53.12</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can see arguments both ways, but I really hate to interrupt your momentum on the code</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:53.30</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>particularly when it's something like this where having it all "loaded" in your head is important</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:53.37</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>ou know, I was actually thinking the same thing earlier today. I would be fine with documenting translate/edit before moving on.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:53.55</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: do you have any experience with docbook?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:53.59</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>none</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:54.02</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:54.07</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>urm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:54.24</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>can't be that bad...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:54.57</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">posts that one on the "famous last words" hall of fame...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:55.11</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>the toplevel MGED command is "edit", correct?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:56.04</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>yes; but ged_edit recognizes the command name being used, and if it is a subcommand, uses it transparently</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:56.14</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:56.43</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: keep coding for now - I need to think about how to organize that doc wise</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:57.27</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>I don't know if the edit command itself all that necessary</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:58.10</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>we could hide it behind subcommands, or not hide it... I don't see that it makes any difference</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:58.28</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>unlikely that anyone is going to use "edit translate" when "translate" is available</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:58.36</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would have taken the approach of having a powerful "edit" command, and then have tcl level "wrappers" that translate "rotate" to "edit rotate"</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:58.50</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:00.32</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>we could still do that. Right now, there are edit/translate/rotate/scale commands all tied to ged_edit(). We could get rid of translate/rotate/scale, and do it at a TCL level.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:01.01</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would like to have brlcad's opinion on that one</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:02.07</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>not a big deal, I'm thinking - and I think you're right that the "man page" level is probably rotate/translate/scale - with perhaps a simpler one for edit showing the full syntax and referencing the individual man pages for each "subcommand" for more details</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:02.26</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>otherwise edit would be a true monster of a man page</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:02.37</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>that's basically the format I had for the "mock" manual pages in edit.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:02.59</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">was looking at those - nice work, and I think that will translate fairly cleanly to the docbook system</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:03.47</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: I guess the thing to do is first make sure translate is solid, and see what brlcad thinks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:05.37</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>alright. For the record, I tend to agree that translate should be documented before moving on.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:50.10</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45962 10/brlcad/trunk/src/other/CMakeLists.txt: Need to flag ITCL_LIBRARY as advanced here too.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45963 10/brlcad/trunk/ (CMakeLists.txt misc/CMake/CompilerFlags.cmake): (log message trimmed)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Use a variation on the three way option trick to get more sophisticated about</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: turning on/off the optimization flags as a function of CMAKE_BUILD_TYPE - if</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Auto, optimization flags are on for Release and off for Debug, but 'hard'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: setting BRLCAD_FLAGS_OPTIMIZATION to ON or OFF will override the build-type</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.48</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: based decision. Also, clear the compile flags before we do our thing to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.49</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: eliminate any flags CMake automatically adds for a given build type - that's why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.36</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45964 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.36</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Go with the most expected/convenient behavior - can't think of a valid case to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.36</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: install a rel into a dev dir or vice versa, complete and deceptive violation of</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.36</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: convention and more convenient/useful to have the install dir swapped as a</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.36</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: function of build type.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:14.31</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45965 10/brlcad/trunk/ (CMakeLists.txt misc/CMake/CompilerFlags.cmake): Just like the optimization flag, except with the opposite defaults, enable smart autosetting of the debug flags.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:29.49</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45966 10/brlcad/trunk/ (CMakeLists.txt misc/CMake/BRLCAD_Util.cmake): A pattern emerges, time for a macro. CMAKE_BUILD_TYPE aware options.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:33.26</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45967 10/brlcad/trunk/ (CMakeLists.txt misc/CMake/BRLCAD_Util.cmake): Don't really need the project name and it's limiting flexibility.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:54.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45968 10/brlcad/trunk/ (7 files in 7 dirs): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:54.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Key the static lib building on the build type. Exposed a problem with making</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:54.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: the trigger variable an OPTION in sub-builds - doing so forces the setting into</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:54.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: the cache and makes it impractical for the AUTO_OPTION macro to do its thing.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:54.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Fortunately, the only files doing that were the ones we wrote - corrected them,</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:54.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: and we're good to go.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:57.26</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45969 10/brlcad/trunk/CMakeLists.txt: Mark rtgl as advanced. Starting to look fairly clean now, at least on Linux.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:01.40</tt></td><td><font color="#b5b55f"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: hopefully that looks better, need to sleep now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:46.06</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45970 10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: do some validation on auto_options - probably should at least make these case insensitive, figure out best way to do that later.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:54.47</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45971 10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: Silly me - use tcl to ensure returning just the highest available package number, no need for bizarre regex foo in CMake.</tt></td></tr>
-<tr><td><tt>19:16.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.47</tt></td><td><font color="#5f5fb5"><tt>kunigami</tt></font></td><td width="100%"><tt>I used boost bcp to select the necessary headers to compile both osl and oiio. it copied a subset of the library into a separated directory. when building though, it does not generate lib's for libraries such as threads. does anyone have experience on doing this?</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:15.37</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>brlcad: I have modifying the bb function to
+work on groups and regions : <a href=
+"http://bin.cakephp.org/view/1394071764">http://bin.cakephp.org/view/1394071764</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.32</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>I am calling rt_gettree() before
+rt_bound_tree() to evaluate the tree first</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.59</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>I am testing with a region made as follows in
+mged  r part1.r u rcc2.s - sph2.s</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.18</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so when traversing the tree in the
+rt_bound_tree() call , the first call sees the subtraction operator
+in tp-&gt;tr_op and proceeds smoothly down to the left
+child</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.34</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>however in the left tree where it should find
+the primitive rcc2.s, it encounters an unknown op 12, I think it
+should have encountered a tr_op = OP_SOLID for the rcc.s
+primitive</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.05</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>this is probably related to the fact that the
+rt_gettree() calls reports missing primitives for the region :
+db_lookup(rcc2.s) failed in /dummy, db_lookup(sph2.s) failed in
+/dummy,</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:22.07</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>rt_gettrees(dummy) warning:  no primitives
+found</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.31</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so probably the missing primitives need to be
+added to the dbi , before the rt_gettree() call, so that the tree
+is evaluated properly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:53.16</tt></td>
+<td><span class="c2"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>ok, 12 is a OP_DB_LEAF as defined in
+raytrace.h: line 1177, wonder why rt_bound_tree() cant interpret
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:23.29</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hah, cool:  <a href=
+"http://www.pointclouds.org/">http://www.pointclouds.org/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:27.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">wonders if we can feed
+raytrace points into that and get NURBS back...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:43.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bhinesley: curious - how close is your command
+to being fully functional?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:09.12</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45959
+10/brlcad/trunk/CMakeLists.txt: Make sure BRLCAD_BUNDLED_LIBS is in
+the cache</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:31.17</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45960
+10/brlcad/trunk/ (misc/CMake/ThirdParty_TCL.cmake
+src/other/CMakeLists.txt): Tweaks to get Tcl/Tk package testing
+going again.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:34.29</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>starseeker: translate? Quite; I'd say that the
+"generic" subcommand processing plus the translate command is at
+90% at worst. I'd planed on putting in some time this weekend, in
+the hopes that I will have translate completed, which would imply
+that generic subcommand processing is done as well. I'm aiming to
+have 'rotate' done by the end of GSoC; I'm not sure if I can, but
+that's what I'm shooting for. I highly doubt that I</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:37.13</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45961
+10/brlcad/trunk/CMakeLists.txt: Constrain the CMake dropdown menu
+options for CMAKE_BUILD_TYPE to Debug and Release</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:48.15</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt><span class="c5">recalculates: more like 95%
+at worst</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:52.44</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bhinesley: cool.  the "recommended" pencil's
+down date for coding is the 15th, with a week to document what has
+been done - I was thinking, given the complexity of the command(s)
+your working on, it might not be a bad idea to start a docbook man
+page for this sucker - brlcad, what do you think?  should bhinesley
+keep chugging on the code?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:53.12</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">can see arguments both ways,
+but I really hate to interrupt your momentum on the
+code</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:53.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>particularly when it's something like this
+where having it all "loaded" in your head is important</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:53.37</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>ou know, I was actually thinking the same
+thing earlier today. I would be fine with documenting
+translate/edit before moving on.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:53.55</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bhinesley: do you have any experience with
+docbook?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:53.59</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>none</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:54.02</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">winces</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:54.07</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>urm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:54.24</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>can't be that bad...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:54.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">posts that one on the "famous
+last words" hall of fame...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:55.11</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the toplevel MGED command is "edit",
+correct?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:56.04</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>yes; but ged_edit recognizes the command name
+being used, and if it is a subcommand, uses it
+transparently</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:56.14</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>O.o hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:56.43</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bhinesley: keep coding for now - I need to
+think about how to organize that doc wise</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:57.27</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>I don't know if the edit command itself all
+that necessary</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:58.10</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>we could hide it behind subcommands, or not
+hide it... I don't see that it makes any difference</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:58.28</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>unlikely that anyone is going to use "edit
+translate" when "translate" is available</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:58.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">would have taken the approach
+of having a powerful "edit" command, and then have tcl level
+"wrappers" that translate "rotate" to "edit
+rotate"</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:58.50</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:00.32</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>we could still do that. Right now, there are
+edit/translate/rotate/scale commands all tied to ged_edit(). We
+could get rid of translate/rotate/scale, and do it at a TCL
+level.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:01.01</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">would like to have brlcad's
+opinion on that one</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:02.07</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>not a big deal, I'm thinking - and I think
+you're right that the "man page" level is probably
+rotate/translate/scale - with perhaps a simpler one for edit
+showing the full syntax and referencing the individual man pages
+for each "subcommand" for more details</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:02.26</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>otherwise edit would be a true monster of a
+man page</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:02.37</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>that's basically the format I had for the
+"mock" manual pages in edit.c</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:02.59</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">was looking at those - nice
+work, and I think that will translate fairly cleanly to the docbook
+system</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:03.47</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bhinesley: I guess the thing to do is first
+make sure translate is solid, and see what brlcad thinks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:05.37</tt></td>
+<td><span class="c7"><tt>bhinesley</tt></span></td>
+<td width="100%"><tt>alright. For the record, I tend to agree that
+translate should be documented before moving on.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:50.10</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45962
+10/brlcad/trunk/src/other/CMakeLists.txt: Need to flag ITCL_LIBRARY
+as advanced here too.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45963
+10/brlcad/trunk/ (CMakeLists.txt misc/CMake/CompilerFlags.cmake):
+(log message trimmed)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Use a variation on the three way
+option trick to get more sophisticated about</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: turning on/off the optimization flags
+as a function of CMAKE_BUILD_TYPE - if</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Auto, optimization flags are on for
+Release and off for Debug, but 'hard'</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: setting BRLCAD_FLAGS_OPTIMIZATION to
+ON or OFF will override the build-type</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: based decision. Also, clear the
+compile flags before we do our thing to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.49</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: eliminate any flags CMake
+automatically adds for a given build type - that's why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:24.36</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45964
+10/brlcad/trunk/CMakeLists.txt:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:24.36</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Go with the most expected/convenient
+behavior - can't think of a valid case to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:24.36</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: install a rel into a dev dir or vice
+versa, complete and deceptive violation of</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:24.36</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: convention and more convenient/useful
+to have the install dir swapped as a</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:24.36</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: function of build type.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:14.31</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45965
+10/brlcad/trunk/ (CMakeLists.txt misc/CMake/CompilerFlags.cmake):
+Just like the optimization flag, except with the opposite defaults,
+enable smart autosetting of the debug flags.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:29.49</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45966
+10/brlcad/trunk/ (CMakeLists.txt misc/CMake/BRLCAD_Util.cmake): A
+pattern emerges, time for a macro. CMAKE_BUILD_TYPE aware
+options.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:33.26</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45967
+10/brlcad/trunk/ (CMakeLists.txt misc/CMake/BRLCAD_Util.cmake):
+Don't really need the project name and it's limiting
+flexibility.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:54.43</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45968
+10/brlcad/trunk/ (7 files in 7 dirs):</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:54.43</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Key the static lib building on the
+build type. Exposed a problem with making</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:54.43</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: the trigger variable an OPTION in
+sub-builds - doing so forces the setting into</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:54.43</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: the cache and makes it impractical
+for the AUTO_OPTION macro to do its thing.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:54.43</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Fortunately, the only files doing
+that were the ones we wrote - corrected them,</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:54.43</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: and we're good to go.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:57.26</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45969
+10/brlcad/trunk/CMakeLists.txt: Mark rtgl as advanced. Starting to
+look fairly clean now, at least on Linux.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>07:01.40</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: hopefully that looks better, need to
+sleep now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:46.06</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45970
+10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: do some validation on
+auto_options - probably should at least make these case
+insensitive, figure out best way to do that later.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:54.47</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r45971
+10/brlcad/trunk/misc/CMake/ThirdParty_TCL.cmake: Silly me - use tcl
+to ensure returning just the highest available package number, no
+need for bizarre regex foo in CMake.</tt></td>
+</tr>
+<tr>
+<td><tt>19:16.34</tt></td>
+<td colspan="2"><tt><span class="c8">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:35.47</tt></td>
+<td><span class="c9"><tt>kunigami</tt></span></td>
+<td width="100%"><tt>I used boost bcp to select the necessary
+headers to compile both osl and oiio. it copied a subset of the
+library into a separated directory. when building though, it does
+not generate lib's for libraries such as threads. does anyone have
+experience on doing this?</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

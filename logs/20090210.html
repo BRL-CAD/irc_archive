@@ -1,495 +1,2713 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20090210</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20090210</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c16 {color: #BB6262}
+ span.c15 {color: #D77171}
+ span.c14 {color: #6FD36F}
+ span.c13 {color: #6E6ED1}
+ span.c12 {color: #6565C1}
+ span.c11 {color: #64BFBF}
+ span.c10 {color: #61B961}
+ span.c9 {color: #5DB15D}
+ span.c8 {color: #5BAD5B}
+ span.c7 {color: #009900}
+ span.c6 {color: #71D7D7}
+ span.c5 {color: #CC00CC}
+ span.c4 {color: #67C567}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #C36666}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20090210</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:04.36</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: just caught one of the first commits from today -- the *_LIBRARY_PATH foo you're using won't work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.53</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm. OK</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.56</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>those are read by the linker before/while a binary is being loaded</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.18</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">was basing it off the sh scripts</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>if you're running the tclsh that got you to those set env()'s then you're not on a platform/environment that needed them set in the first place</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.39</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, they set it *before* the binary is called</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.57</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>I thought I was too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.00</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks again</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.15</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm looking at tcl code..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.23</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's running tcl code, then it doesn't matter</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.32</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>because tclsh is running</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.36</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>k</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:06.44</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>ld is done with its job</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:07.09</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>there is an old hack you can use, though -- a script that doubles as both a shell and tcl script -- old trick</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.06</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>look at src/tclscripts/ami.tcl to see an example -- it's a shell script that can be invoked as either a shell script or a tcl script</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.27</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33724 10/brlcad/trunk/regress/mged/mged.tcl: Remove env logic - won't work inside tclsh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>actually better example</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>look at src/archer/archer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.42</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that even sets env vars and reinvokes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.40</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>the "trick" is because tcl and sh handle line-comments differently, with sh ignoring comment continuations and tcl not ignoring them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:10.54</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>blast - I was hoping staying completely within tcl land would avoid the need for shell scripting, and let us run these on Windows</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.37</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>it would run on windows</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:11.56</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>they work as tcl scripts -- and on windows you're not going to have an LD error</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.09</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:12.20</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>fed through tclsh, it'll ignore the shell lines</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.19</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>for the nix platforms, they can either be fed through sh (which will read the sh lines, set *_LIBRARY_PATH accordingly, and then reinvoke as tcl) or push the LD wrapping back up into make (like src/tclscripts/Makefile.am does for ami.tcl)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:13.46</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>Hmm.&nbsp;&nbsp;What's the preferred way?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.15</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>probably to push it up into the Makefile.am</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.22</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>keeps the scripts more simple like you have them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:14.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>rather, even more so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.12</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>if it really gets messier than the three lines it takes now, you could wrap the whole thing in a script anyways</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.42</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.54</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>I'll give the Makefile.am way a quick go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:16.43</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>see if mged works for you though .. don't have a clean build here, but if that's a prevalent bug, that'd require an emergency fix and release of 7.14.6</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:17.58</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>let me check</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.26</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>what command is it accepting?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>anything and everything</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.36</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>sdlfakjhsdlkj</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:18.53</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah - I don't know if it's doing anything with them but it is accepting them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.20</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>nope, nothing works afaict</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.22</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>I take it it should be flashing the error about no db being open?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.23</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>opendb test.g</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>every command fails</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.39</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>same here</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.40</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>rather .. does nothing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:19.51</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, that's pretty critical</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.04</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>hrm - libged related?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.23</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>don't know but highly possible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.30</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>oh great</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:20.44</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">starts digging in src/mged</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:21.08</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">pulls the source uploads</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:24.48</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>arf, have to do a 7.14.4 as soon as that's fixed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:32.42</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33725 10/brlcad/trunk/regress/mged/Makefile.am: Move the path logic to Makefile.am where it will actually work (thanks Sean)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:36.53</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - ged_refresh_handler calls refresh...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:40.53</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>OK, it never gets as far as calling f_quit when I type quit, so its messed up before that...</tt></td></tr>
-<tr><td><tt>00:48.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad oiteste (n=chatzill@189.71.4.20)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:51.26</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;Ick - this is one of those right on the border between Tcl and C</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:51.36</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>it's getting to refresh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:51.57</tt></td><td><font color="#5bad5b"><tt>andrecastelo</tt></font></td><td width="100%"><tt>howdy :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:52.19</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>howdy :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:22.08</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;right now, my best guess is that it has something to do with gedp-&gt;ged_gdp-&gt;gd_rtCmdNotify being set to mged_rtCmdNotify when a file is loaded, but not without a file loaded (since gedp doesn't point to a structure)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:31.59</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>If I do the naive thing and initialize a ged struct with a pointer to NULL, it starts up in classic mode and doesn't correctly handle anything.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:32.29</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>perhaps ged has some sort of built in assumption about a database being open before processing commands?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:34.01</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>in src/mged/mged.c lines 657-680 is where mged_rtCmdNotify is being assigned</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:34.16</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>or not assigned, as the case may be</tt></td></tr>
-<tr><td><tt>02:55.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mouette (n=chatzill@fw1.phys.sinica.edu.tw)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:57.45</tt></td><td><font color="#5db15d"><tt>Mouette</tt></font></td><td width="100%"><tt>so,these problems still haven't solution in solaris platform?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:06.43</tt></td><td><font color="#5db15d"><tt>Mouette</tt></font></td><td width="100%"><tt>7.14.2 sourcecode in sourceforge.net is disappear!!!! @@</tt></td></tr>
-<tr><td><tt>03:11.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.04</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>Mouette:&nbsp;&nbsp;We found a problem that needs fixing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:56.52</tt></td><td><font color="#5db15d"><tt>Mouette</tt></font></td><td width="100%"><tt>so you delete that sourcecode?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.04</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad took it down, I believe</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.20</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>you can still get the source code from svn, if you want it - but it's busted right now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:57.54</tt></td><td><font color="#5db15d"><tt>Mouette</tt></font></td><td width="100%"><tt>no, i like wait stable version</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:00.02</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>Mouette: I disabled it, though I believe the direct link is still valid if you had it -- there's a problem with it so it was disabled</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:02.35</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I've not looked, but the problem almost guaranteed has something to do with the ged command wrapper in mged</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:02.53</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>I emailed Bob </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:03.09</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to get some sleep tonight, but he may be able to spot it right off tomoroww morning</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:03.21</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can't spell</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:04.11</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">bets it's cmd.c:351</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.00</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>that could be it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.31</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders why he didn't notice that in the gdb back trace for the case with a file loaded</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.37</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.47</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>gedp is only set during f_opendb</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.51</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not right</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:41.31</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>now the other question is how classic mode works but graphical doesn't</tt></td></tr>
-<tr><td><tt>05:46.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:25.09</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">closes up gdb for the night only fixing the one bug but not very well</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:26.45</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33726 10/brlcad/trunk/src/mged/ (mged.c setup.c): gedp needs to be non-null. it should exist for the life of the caller making libged calls. move ged init into mged_setup but keep the wdbp association else all goes to hell.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:29.10</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that seemds to do the trick here, but I'm sure there's more to it</tt></td></tr>
-<tr><td><tt>06:54.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
-<tr><td><tt>08:21.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _sushi_ (n=_sushi_@84-72-93-63.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>09:22.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@65.Red-81-34-125.dynamicIP.rima-tde.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:05.58</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Morning all!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:06.21</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">yawns</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:07.45</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>just waking or getting ready to crash?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:07.55</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>or do I already know the answer :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:08.37</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>just FYI: /usr/bin/ld: skipping incompatible /usr/X11/lib/libX11.so when searching for -lX11</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:08.50</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>so I think I will talk with Brian today :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:09.06</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>what type is it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:09.31</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>What type is what?&nbsp;&nbsp;The X11 lib?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:09.35</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:09.54</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's incompatible, you can often make it compatible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:10.00</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>I get that linker error for both the .so and the .a</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:10.04</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:10.24</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>it's the 'why' it's incompatible that matters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:10.34</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>I am going to try a few more things.&nbsp;&nbsp;I just noticed the path is getting the libs from /lib/ and not /lib64/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:10.46</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>How can I find out the 'why' ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:11.04</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>don't guess, just run "file" on it -- it'll tell you its type, then run file on one of your .o files to see what type you're building</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:12.06</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>run file on one of the .o's generated during the brlcad build?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:12.19</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>you have others? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:12.34</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>:) Just verifying info when I am in uncharted waters :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:12.49</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">apologizes for abnoxious q's :)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:13.45</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">is usually sarcastic, bitter, and brief in the unintended early prelight hours</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:14.46</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>well, the build is hanging up in: brlcad/src/other/tk/unix/ and so i picked the last .o generated: tkUnixXId.o: ELF 64-bit LSB relocatable, AMD x86-64, version 1 (SYSV), not stripped</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:15.02</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>....and that tells me that I am building a 64-bit version?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:19.45</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>it tells you a lot of things, one being that it's building 64-bit version</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:20.18</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>more importantly, what is the .so's type</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:21.06</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>also important is whether it was incompatible, skipped, and it simply used something else (that was compatible) or whether it skipped and linked nothing/failed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:21.21</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>the message by itself could be innocuous</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:21.42</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>the .so files are not generated yet.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:21.51</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>or are you speaking of the .so of the X11 libs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:21.52</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:21.53</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>o.O</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:22.08</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm speaking of the .so that is supposedly .. incompatible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:23.04</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>the point is you compare types to see why it's incompatible</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:23.14</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's a simple 32/64, you can do something about that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:23.51</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Yeah, its saying its a 32bit lib.&nbsp;&nbsp;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:24.43</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Hrm, configure is showing both -L/usr/X11/lib and -L/usr/X11/lib64 for linker flags</tt></td></tr>
-<tr><td><tt>11:25.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016142244.customer.alfanett.no)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:26.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>hence my other point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:26.43</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>rather important is whether it was incompatible, skipped, and it simply used something else (that was compatible) or whether it skipped and linked nothing/failed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:27.25</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Well I have tried ./configure --with-x11=/usr/X11/lib64 (and a few other variants) with no change :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:28.35</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>but have you confirmed that you need to change it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:28.46</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Okay, more info:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:28.58</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>given both dirs are listed, the incompatible statement probably doesn't matter</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:29.11</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>When I simply ./configure, I get a LD error stating it cannot find -lX11</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:29.39</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>When I ./configure --with-x11=/usr/X11 then I get the incompatable error.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:29.59</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>So I know i need to point the configure to the 64 bit flavor of X11, but I am not succeeding.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:30.13</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>do you even *have* a 64-bit flavor of X11</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:30.57</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>yep: libX11.so: ELF 64-bit LSB shared object, AMD x86-64, version 1 (SYSV), stripped</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:31.21</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>after you tossed me the 'file' bone, I went and verified the files in the /usr/X11/lib64 dir</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:31.36</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>so its there, but the pathing is somehow messed up :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:31.47</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>so then it's just path foo missing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:32.13</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>try --enable-64bit, if that doesn't work try setting flags directly yourself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:32.28</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>i add that -- to the ./configure?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:32.29</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>./configure LDFLAGS="..." CPPFLAGS="..." CFLAGS=".."</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:32.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:32.52</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc, that may swap the search ordering</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:32.58</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>but no promises</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:33.05</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>heh.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:33.09</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>it's just as easy to force it manually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:33.18</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>make</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:33.24</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>damn, wrong window.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:34.33</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>nope same thing... lemme try setting the LDFLAGS manually.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:34.38</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Thanks for your help btw.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:36.03</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>fyi, if you have both, there's not much for brian to do -- you have everything you need</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:36.56</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>i figured.&nbsp;&nbsp;email not sent yet.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:39.41</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Hrm, well thats annoying.&nbsp;&nbsp;I used ./configure LDFLAGS="blahhblah" and it just appened all the previous flags to the end of what I supplied.... so /usr/X11/lib is still there :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:40.09</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>ordering matters</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:40.24</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't matter if there are extras if it finds the one you need first</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:40.56</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">is beginning to see what starseeker and others scream about sometimes :)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:41.22</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>newbies</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:41.35</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Hey!&nbsp;&nbsp;I resemble that remark.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:43.10</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>understanding linkage and search paths in detail is usually something hammered in hard in a first-year cs program</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:43.19</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>are there adverse effects to using make -j ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:43.22</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>at least it used to be</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:43.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>d-lo: yes, it compiles adversely faster</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:43.44</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>on smp hardware</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:44.55</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>:P&nbsp;&nbsp;I knew that, just wanted to know if it f-ed up the build in any way.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:45.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>wouldn't be a very useful option if it did</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:46.20</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>true, but there is enough nuainces to this whole 'make' thing that its a perfectly valid question/concern :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:46.47</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>only with your current uncertain state of reasoning</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:48.10</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>./configure LDFLAGS="-L/usr/X11/lib64" nor&nbsp;&nbsp;./configure LDFLAGS="-L/usr/X11/lib64" --with-x11=/usr/X11 works... still same errors :?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:48.13</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>there are certainly potential effects, as with any option, but nothing that matters right now that you'd run into</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:49.05</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>look at the actual test in the config.log and see why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:49.46</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>could be not using it or something else overriding it or wrong order or missing some other flag or ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:50.29</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>okay, one sec.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:51.06</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>could also move the 32bit lib out of the way</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:51.27</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>but wouldn't do that until you know what all usses it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:51.46</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">wanders off for a bit, have fun</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:52.06</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lata!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:05.16</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;I know you are away, but are we still using Doxygen?&nbsp;&nbsp;We moving to something else?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:12.07</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>I took first year CS 7yrs ago. We learned java. I made a tic tac toe game with the swing toolkit woo.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:15.08</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>d-lo:&nbsp;&nbsp;We're still set up to use Doxygen, but I don't know if anyone has played with it lately</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:15.30</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>we need to do a lot of work on "doxygenifying" things, IIRC</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:15.35</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>starseeker: Whats the code documentation of choice now?&nbsp;&nbsp;(Or is there?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:19.41</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>starseeker: Docbook is for.... the tutorials and such? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:21.35</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>docbook is for documenting libraries and such</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:21.59</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>errm not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:22.06</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>d-lo: you got it :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:22.29</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>I just woke up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:24.02</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>alrighty then, thanks :)</tt></td></tr>
-<tr><td><tt>12:35.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlquestions (n=user@56.Red-79-152-174.dynamicIP.rima-tde.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:35.58</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>Hi again !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:36.19</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:36.22</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>hi louipc </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:36.33</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>I have one question ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:36.50</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>the g-stl conversor is very slow ... is it normal ?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:37.15</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>I don't know</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:37.45</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>g-stl uses the facetiation/tessilation routines and, yes, can be *very slow*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:37.55</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>OK ... thank you d-lo </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:38.13</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>I was wondering if there was some pathological operation in my model ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:38.25</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>there have been times where I have fired off a tessilation just before I leave work for the day, so it would be done by the time I get in the next day.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:38.48</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>is it slower than raytracing?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:38.55</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>but these models I speak of are 75-100MB files with tens of thousands of primitives.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:39.23</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>louipc: all depends on the complexity of the object(s) you are facetizing.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:39.29</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>No ... I'm talking about 20 minutes for one bezier solid extrusion intersected with a spherical shell</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:39.36</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:39.39</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>gennerally though, raytracing is much much faster.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:40.43</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlcad: I have only delt with an extrusion *once* in the past 3 years of modeling and then it was for hobby purposes only.&nbsp;&nbsp;I never tried to shove it through a tessilator.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:41.00</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>OK ... thanks !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:41.05</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Oops, that was ment for brlquestions not brlcad ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:41.10</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlq</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:41.26</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlquestions: If it finishes succesfully, I would like to know the time it took!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:41.46</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>about 20 minutes with a cylindrical shell ... </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:42.00</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>pix or it didn't happen</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:42.00</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>the spherical one is running now !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:42.08</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>louipc: lol</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:42.37</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlquestions: how was the quality of the resulting BoT?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:43.10</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>I think it was good ... but anyway I need a spherical shell intersection prior</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:43.15</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>to laser sintering it ...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:45.33</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>my boss only wants to perform expensive experiments (sinterizing) only on models closer to final products.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:45.47</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>No cylinders ... spheres !!!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:46.24</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>sounds neat</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:48.23</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>OK ... the tesellation finished right now ! 24 minutes !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:48.28</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>good results !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:53.09</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>ah, its nice to see all 4 cores at 100% :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:54.29</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;I think I found an issue with the Makefiles.&nbsp;&nbsp;in at least two Make files, the LDFLAG of -L/usr/X11/lib64 is being changed to -L/usr/lib64 ... dunno why quite yet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:55.38</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>check your mail d-lo !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:55.48</tt></td><td><font color="#6565c1"><tt>brlquestions</tt></font></td><td width="100%"><tt>there's a screen capture of the BoT ..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:58.53</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lookin good!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:34.12</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r33727 10/rt^3/trunk/ (7 files in 6 dirs): Forgot to svn add the GeometryChunk.h file. Also includes a few minor fixes a new Exception subclass.</tt></td></tr>
-<tr><td><tt>13:39.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:40.04</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r33728 10/rt^3/trunk/src/GeometryService/netMsg/GeometryChunkMsg.cxx: Also forgot to include the source for GeometryChunkMsg.</tt></td></tr>
-<tr><td><tt>13:48.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik___ (i=erik@c-76-111-12-116.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:56.08</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>anyone:&nbsp;&nbsp;Shouldn't 'make install' copy the includes/ dir over?&nbsp;&nbsp;I am looking for bu.h and it just isn't there... libbu.so is, but not the header....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.50</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>yeah it should</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.11</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">glares at this evil machine.</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.33</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>More than likely operator error, but for now I blame the machine.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:00.10</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.51</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>a ha.&nbsp;&nbsp;workeded that time.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.56</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">glares at this evil machine.</font></tt></td></tr>
-<tr><td><tt>14:08.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14F782.dip.t-dialin.net)</font></tt></td></tr>
-<tr><td><tt>14:09.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:27.56</tt></td><td><font color="#6e6ed1"><tt>``Erik___</tt></font></td><td width="100%"><tt>yes, it should go ito $PREFIX/include/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:31.03</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>$prefix/include/brlcad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:31.20</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>for the brlcad headers and top-level include for the external dep headers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:31.59</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>something went foobar with the first time 'round.&nbsp;&nbsp;removed it and tried again and it worked.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:32.54</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Oddness is that in 2 Makefiles in the tk dirs, the LDFLAG for the X11 was changed from /usr/X11/lib64 to /usr/lib64 ....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:33.30</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>quick change back and it was compiling just fine..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:34.22</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>``Erik: How ya feelin?</tt></td></tr>
-<tr><td><tt>15:35.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-181.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:44.19</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>underground</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:46.16</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik:&nbsp;&nbsp;hiding?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:46.31</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Well I just got the call from my oldest's school... apperantly he blew chunks all over the playground..... Just when i thought we had this bug beat....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:46.44</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>arrgh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:46.56</tt></td><td><font color="#6fd36f"><tt>_sushi_</tt></font></td><td width="100%"><tt>blew chunks all over the playground?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:47.15</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>vomit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.27</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>I assume the whif is collecing thim?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:49.33</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>s/ t/ /</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.01</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>hope is recoups soon :(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.08</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>s/is/he/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.21</tt></td><td><font color="#6fd36f"><tt>_sushi_</tt></font></td><td width="100%"><tt>d-lo: what bug?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.22</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>keyboard is outsmarting me today</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.27</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Yuppers.&nbsp;&nbsp;just got a little concerned with that call and you not being here either.... might be a trend and I don't want to burn any more sick leave :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.46</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>_sushi_: Stomach flu probably.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:50.59</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>no, I drank myself fucktarded last night and am recouping</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.14</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- epic fail.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.27</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>what'd you do that for???</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.33</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>ah, okay, well then perhaps its not another epidemic :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.38</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>uh, same reason folk climb everest</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.56</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>one tequlia two tequila three tequila floor :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.06</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes head</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.13</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Playing MMOs while heavily intoxicated is a whole new level of entertainment.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.18</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>oh yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.32</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>punker recounted last nights mmo episode to me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.36</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>you might want to pick a somewhat less physically damaging pointless challenge ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.36</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>I was in rare form :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.10</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>there is nothing worse than an 'angry drunk' Dwarf at the bar.... man they can be A-holes.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.12</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>apparently, I am very giving and loving when fucked up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.30</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>wow, you WERE smashed ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:53.40</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>"no, I don't need loot, I'm happy with the experience... dude, you wanna go grab a beer? come on down to baltirmoe, man"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.05</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.42</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">loots a *glowing* Pint of Guiness + 4</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:54.56</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>so yeah, I felt the notion of driving this morning would have been ... bad :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:55.57</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>good call.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.09</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>amusingly, I've done some of my best coding either drunk off my arse, or right after my wisdom teeth, one shattered so they gave me a codeine cocktail, I was wobbling in my chair but knocked out a buttload of code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.19</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>gives you a chance to go farming and make up for the income loss that occurred last night :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.32</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>meh, I got money out the butt on that game</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.57</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>as usual, the upgrade are strictly from places I'm not geared to go.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.10</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">didn't need to know what ``Erik did with his money while drunk....</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.21</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>they went all donation and gave me luvin' last night, and I went and liquored myself up stupid to fuck shit up</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.41</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- pissed at himself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.06</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>No Leeroy then?&nbsp;&nbsp;More Erik Teresa that normal? :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.24</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, no, I don't leroy, I go all pussyfood</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.27</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>foot</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.41</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>"wait, what? did you guys pull? I LOVE YOU MANG"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.16</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Personnally, I think suicidal raids on zones with naked toons is funny. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.26</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>"I don't need loot, I'm just happy I'm here"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.34</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>Both to watch and participate in.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.47</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, that's become a tradition, everyone groups up at the instance start and the tank is standing there butt nekkid</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.50</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lol, just Lovin Life eh?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:00.46</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>once I get my lappy back to some resemblance of useful, I will install wine and see if I can get some games runnin :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:00.57</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>and I've participated in full group nekkid runs through instances (the notion being we die, we die a lot, we're trying to eliminate the repair cost)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.14</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>just buy yourself a mac, man :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.23</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">e-humps steve jobs leg</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.32</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">has a better idea:  You buy me a Mac!</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.41</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.43</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>down boy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.23</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>if'n yall want a long lunch, I'll come down to duclaws or festival or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.32</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>You don't happen to know if OSX has been sucessfully installed/ran on non Apple hardware... do ya?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.47</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03johnranderson * r33729 10/jbrlcad/trunk/src/org/brlcad/samples/GetRegionMap.java: Eliminated use of java 6 specifics, because this is now used in gomez (needs to be java 5 compatible)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.05</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>um, there was a system that apple sued out of existance that did it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.21</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>well, i was talking more 'hack' that legit.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.23</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>and um, there was just an article on how to do it on smackslot a couple days ago</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.56</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks running OSX on a Dell would be funny :)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.00</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>franky, apple puts out some damn nice hardware, I think it's worth the premium</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.12</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">agrees.</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.26</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>but worth it or not, new puter hardware is not in the budget.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:04.29</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm a bit pissed that I can't find teh white&amp;clear keyboard anymore</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.01</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lol.... Hackintosh OSX</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.56</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>the new style keyboard is awfully well built, but lacks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.27</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- hugs his macbook, but admits that it's not egonomeric</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.05</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>in the words of the unknown Apple FanBoi: "sure, its not ergonmic or cheap, but its an Apple!"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.22</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, pretty much</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.25</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt><font color="#CC00CC">can't remember where he heard that, but it made him ill.</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.34</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>i felt like smacking that guy.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.43</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>at least it still has nipples</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.21</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>though when they moved them from the middle fingers to the pointers, that pissed me off</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.35</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>they belong on d and k, not f and j, damnit</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.49</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes cane</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.00</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.13</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>so, where are these lunch places in which you speak?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.29</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>duclaws is kinda close to the harford mall</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.34</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>festival is down 24</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.52</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>they're generally considered "too far away" for lunch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.39</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>2+ hour dealies</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.48</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>ah, well never mind then :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:10.51</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>but I wont' drive an hour to go to lunch :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:11.31</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, I assumed *shrug*</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.26</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>duclaws is a microbrewery, so not up your alley anways</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.35</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>heh, I really do think I am going to try this Hackentosh approach ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.36</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>festival has a japanese place that isn't too bad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:13.15</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>totally, the killer is gonna be the bios crap, macs used to use openfirmware and are now like epi or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:13.41</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>so you'll need 10.5 and the right hw</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:14.43</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>... can be done with qemu... is a lot of work, and requires just the right hardware to avoid some /serious/ driver issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:15.40</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>need to aquire 10.5 for some testing ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:15.53</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>I would say not worth it in all but the most unique circumstances (must run x software on y hardware, cannot afford correct solution)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:16.19</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>convince someone to give you shell access to their machine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:16.37</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>you lost me...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.06</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>why would I need shell access to someone else's machine?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.08</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>find someont with 10.5 and get them to let you have some time on their HW</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:17.39</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>for what purpose?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:18.41</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>[20090210 08:15:42] &lt;d-lo&gt; need to aquire 10.5 for some testing ;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:18.58</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>heh, I mend the disc(s) for installation testing.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:19.06</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>s/mend/meant/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.22</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>why the need for installation testing? it will work on real HW, fail on most everything else (BIOS checksum, or other scheme to lock you out)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:20.56</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>I have a Dell lappy, and I want to see if i can get OS10.5 running on it :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.31</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>just grab fbsd :D or linux, y'know, if you're lame</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.48</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>clears throat</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:21.52</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>loudly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.13</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>then chants "gentoo, gentoo!"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.16</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>sorry, done too much kernel work, can't respect leenewx no mo'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.41</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>that's you, man</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:22.52</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, that is me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.02</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>i was wondering who that was...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.13</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>I have converted from winedo$e in 96, and never looked back</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.49</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>I went to linux in '95, fbsd in '97 or '98, after witnessing the horrors from kernel hacking</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:23.58</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>tried bsd in 98 or so, not impressed, went back to slackware</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.04</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>been a kernel hacker of some form or another since '86</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.28</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>well, back then, fbsd was a much better kernel</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.28</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>interrupt vectors on c64's, yo</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.33</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.43</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>I had one...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:24.59</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>You don't know the power of the Vic-20 ....</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.07</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>been watching, linux has spastic upgrades, but often throws them away and adopts what fbsd did 5 years before</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.16</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>sold it to that chick that reverse engineered it and made one in FPGAs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.29</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>they were popular in Germany, I am told</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.57</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>in the last decade, I've seen ONE significant linux accomplishment adopted into fbsd. One.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:25.59</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>no, i don't know the power of vic-20</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.07</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.29</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>the zero copy network shit, which was re-organized like mad due to security concerns :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.50</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>though ingo's scheduler got some attention</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.51</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>still not switching, too much infrastructure in place, time learning, also i like the performance i get</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:26.57</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>way out int he middle of the AZ desert.. I was l33t with my cassette drive... my parents pheared me.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.18</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>... until global warming melted your tape</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.21</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>hehehhe, I was buying the 120 minute cassettes to hold more data :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.33</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>... wait, that was just an ordinary day in may</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.37</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>I think I ended up taking the whole machine out for target practice one day...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:27.48</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, they failed sooner, and had a higher doa, but when they worked, it was sweet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.19</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>anyone ever use a 2.88 mB 3.5" floppy?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.27</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>WORM?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.40</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>yeah, the 'super-HD'floppies.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.54</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>or ls-120 super disk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.58</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>never messed with them much.... jumped straight to 'SuperDisk' !</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:28.58</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>from panasonic</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:29.09</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>nice</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:29.27</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>I was on the iOmega Zip Disk bandwagon for a while...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:30.02</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>until wheels fell off..."read error !@#$&amp;$%T#$..."</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:30.13</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>yeah, that was a waste of money.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:30.43</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>SD cards, that's the way to go. or CF</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:30.56</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>a great backup solution, they are</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:31.23</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>32 gig CF, get 2 of them to B/U system on rotating basis</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.05</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>heh, um, I have 2 500GB drives, 1 160 and a handfull of 80's.... won't work for me :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.22</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>that's all?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:32.42</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>I have lot's more, but everything else is on RAID</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:33.35</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>with (ahem) gentoo, all of my packages are tarred and bzipped in a certain dir, and that is not much data</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.08</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>add that to a tar file of my etc dir and boot dir, and that is a good backup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.29</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>crap! gotta go to class</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.34</tt></td><td><font color="#d77171"><tt>Dr_Phreakenstein</tt></font></td><td width="100%"><tt>have fun, kids</tt></td></tr>
-<tr><td><tt>16:34.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (i=erik@c-76-111-12-116.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:34.58</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33730 10/brlcad/trunk/regress/mged/ (run_test run_test.tcl): Take a stab at getting a run_test sh script/tcl script hybrid</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:35.47</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>and you can back 1.5TB+ up on 2 32Gig CF cards with Gentoo?&nbsp;&nbsp;Thats Frickin amazing!!!!!! :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:40.06</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>well, without furthing any HardDrive envy that is floating around here, the 1TB (ish) i have is a pain in the butt to back up to CDs as it is, so using CF cards would make me want to gouge my own eyes out.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:40.10</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>;)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:44.04</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33731 10/brlcad/trunk/regress/mged/run_test: Go for a system tclsh if the local btclsh isn't found - for this it won't matter.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:46.16</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: if you're not mid-stream, distcheck</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.44</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33732 10/brlcad/trunk/regress/mged/run_test: Allow user to supply source directory as second option</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:47.50</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;Ok, I'm sure I'm busted on that ;-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.07</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>you're happy with the mged fix for the no-db case?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.26</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlcad: In looking through libpkg, i am thinking it is posible to use libpkg with out passing a callback table to a pkg_conn .....that sound about right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:52.05</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlcad: Message from Ed:&nbsp;&nbsp;Call him at x6300.</tt></td></tr>
-<tr><td><tt>16:54.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _sushi_ (n=_sushi_@77-58-230-66.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>17:09.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (i=erik@c-76-111-12-116.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:20.37</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">prods CIA</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:23.22</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33733 10/brlcad/trunk/regress/mged/Makefile.am: It's run_test now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:34.41</tt></td><td><font color="#61b961"><tt>d-lo</tt></font></td><td width="100%"><tt>brlcad: I will need to sitdown and talk libpkg with you... I am just not seeing the light :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:38.12</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;make distcheck passed on the Mac</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:30.16</tt></td><td><font color="#67c567"><tt>starseeker</tt></font></td><td width="100%"><tt>and on linux</tt></td></tr>
-<tr><td><tt>19:33.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _sushi_ (n=_sushi_@77-58-230-66.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:55.09</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33734 10/brlcad/trunk/regress/mged/ (11 files): Add the geometry displaying commands to regress/mged/mged.tcl</tt></td></tr>
-<tr><td><tt>19:59.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1096600726.dsl.bell.ca)</font></tt></td></tr>
-<tr><td><tt>20:24.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-181.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.03</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33735 10/brlcad/trunk/ (NEWS src/gtools/g_diff.c): fixed g_diff crash reported by lee butler where g_diff crashed with a badmagic error bu_bomb'ing out due to an uninitialized vls. looks like it is possibly related to earlier changes.</tt></td></tr>
-<tr><td><tt>21:26.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1096600726.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.29</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33736 10/brlcad/trunk/TODO: need to fix two more critical bugs before release. File-&gt;Open in MGED crashes and the 'gets' command locks it up saying the variable is not defined (or it crashes/freezes).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.35</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33737 10/brlcad/trunk/TODO: see the gets example in its manpage</tt></td></tr>
-<tr><td><tt>21:50.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14F782.dip.t-dialin.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:21.17</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33738 10/brlcad/trunk/regress/mged/ (5 files): Start on editing commands.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:46.44</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33739 10/brlcad/trunk/regress/mged/ (Makefile.am oed.mged regression_resources.tcl): add oed testing</tt></td></tr>
-<tr><td><tt>23:02.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-158.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:04.11</tt></td><td><font color="#71d7d7"><tt>CIA-40</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r33740 10/brlcad/trunk/regress/mged/ (Makefile.am i.mged keypoint.mged rm.mged): add i, rm and keypoint testing</tt></td></tr>
-<tr><td><tt>23:17.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:22.12</tt></td><td><font color="#bb6262"><tt>poolio</tt></font></td><td width="100%"><tt>Howdy all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:22.15</tt></td><td><font color="#bb6262"><tt>poolio</tt></font></td><td width="100%"><tt>congrats on the release :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:37.25</tt></td><td><font color="#64bfbf"><tt>louipc</tt></font></td><td width="100%"><tt>oh! I missed that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:55.01</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: not worthy of congrats, escaped with a handful of critical bugs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:55.05</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>had to pull it shortly after</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:56.43</tt></td><td><font color="#bb6262"><tt>poolio</tt></font></td><td width="100%"><tt>ah sorry to hear that, is it all worked out yet or is that the reason for the flurry of commits?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:57.26</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>nope, just normal flurry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:57.39</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>though lot of flurry going into testing as there may be other isses</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:57.58</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>half of the known ones are worked out, couple to go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:58.31</tt></td><td><font color="#bb6262"><tt>poolio</tt></font></td><td width="100%"><tt>good luck! I've had a few bugs recently that took a few weeks to work out...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:58.53</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, these shouldn't be too complicated</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:59.02</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>it's only been a couple days</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:59.13</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>and three were just discovered today</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:59.25</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>one already fixed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:59.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>two to go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:59.57</tt></td><td><font color="#bb6262"><tt>poolio</tt></font></td><td width="100%"><tt>Were there issues in trunk or were these introduced while tagging and such?</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:04.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: just caught one of the first
+commits from today -- the *_LIBRARY_PATH foo you're using won't
+work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm. OK</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>those are read by the linker before/while a
+binary is being loaded</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">was basing it off the sh
+scripts</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if you're running the tclsh that got you to
+those set env()'s then you're not on a platform/environment that
+needed them set in the first place</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep, they set it *before* the binary is
+called</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I thought I was too</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">looks again</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'm looking at tcl code..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's running tcl code, then it doesn't
+matter</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.32</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>oh, point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>because tclsh is running</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>k</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:06.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ld is done with its job</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:07.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there is an old hack you can use, though -- a
+script that doubles as both a shell and tcl script -- old
+trick</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>look at src/tclscripts/ami.tcl to see an
+example -- it's a shell script that can be invoked as either a
+shell script or a tcl script</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.27</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33724
+10/brlcad/trunk/regress/mged/mged.tcl: Remove env logic - won't
+work inside tclsh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>actually better example</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>look at src/archer/archer</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.42</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that even sets env vars and
+reinvokes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the "trick" is because tcl and sh handle
+line-comments differently, with sh ignoring comment continuations
+and tcl not ignoring them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:10.54</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>blast - I was hoping staying completely within
+tcl land would avoid the need for shell scripting, and let us run
+these on Windows</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it would run on windows</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:11.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they work as tcl scripts -- and on windows
+you're not going to have an LD error</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.09</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:12.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>fed through tclsh, it'll ignore the shell
+lines</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for the nix platforms, they can either be fed
+through sh (which will read the sh lines, set *_LIBRARY_PATH
+accordingly, and then reinvoke as tcl) or push the LD wrapping back
+up into make (like src/tclscripts/Makefile.am does for
+ami.tcl)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:13.46</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Hmm.  What's the preferred way?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.15</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably to push it up into the
+Makefile.am</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>keeps the scripts more simple like you have
+them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:14.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rather, even more so</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it really gets messier than the three lines
+it takes now, you could wrap the whole thing in a script
+anyways</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.42</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">nods</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.54</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I'll give the Makefile.am way a quick
+go</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:16.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>see if mged works for you though .. don't have
+a clean build here, but if that's a prevalent bug, that'd require
+an emergency fix and release of 7.14.6</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:17.58</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>let me check</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.26</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>what command is it accepting?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>anything and everything</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sdlfakjhsdlkj</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:18.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah - I don't know if it's doing anything
+with them but it is accepting them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nope, nothing works afaict</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.22</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I take it it should be flashing the error
+about no db being open?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>opendb test.g</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>every command fails</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.39</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>same here</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rather .. does nothing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:19.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>okay, that's pretty critical</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.04</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hrm - libged related?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't know but highly possible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>oh great</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:20.44</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">starts digging in
+src/mged</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:21.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">pulls the source
+uploads</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:24.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>arf, have to do a 7.14.4 as soon as that's
+fixed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:32.42</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33725
+10/brlcad/trunk/regress/mged/Makefile.am: Move the path logic to
+Makefile.am where it will actually work (thanks Sean)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:36.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - ged_refresh_handler calls
+refresh...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:40.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>OK, it never gets as far as calling f_quit
+when I type quit, so its messed up before that...</tt></td>
+</tr>
+<tr>
+<td><tt>00:48.25</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad oiteste
+(n=chatzill@189.71.4.20)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:51.26</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad:  Ick - this is one of those right on
+the border between Tcl and C</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:51.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it's getting to refresh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:51.57</tt></td>
+<td><span class="c8"><tt>andrecastelo</tt></span></td>
+<td width="100%"><tt>howdy :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:52.19</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>howdy :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:22.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad:  right now, my best guess is that it
+has something to do with gedp-&gt;ged_gdp-&gt;gd_rtCmdNotify being
+set to mged_rtCmdNotify when a file is loaded, but not without a
+file loaded (since gedp doesn't point to a structure)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:31.59</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>If I do the naive thing and initialize a ged
+struct with a pointer to NULL, it starts up in classic mode and
+doesn't correctly handle anything.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:32.29</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>perhaps ged has some sort of built in
+assumption about a database being open before processing
+commands?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:34.01</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>in src/mged/mged.c lines 657-680 is where
+mged_rtCmdNotify is being assigned</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:34.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>or not assigned, as the case may be</tt></td>
+</tr>
+<tr>
+<td><tt>02:55.43</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Mouette
+(n=chatzill@fw1.phys.sinica.edu.tw)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:57.45</tt></td>
+<td><span class="c9"><tt>Mouette</tt></span></td>
+<td width="100%"><tt>so,these problems still haven't solution in
+solaris platform?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:06.43</tt></td>
+<td><span class="c9"><tt>Mouette</tt></span></td>
+<td width="100%"><tt>7.14.2 sourcecode in sourceforge.net is
+disappear!!!! @@</tt></td>
+</tr>
+<tr>
+<td><tt>03:11.21</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.04</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Mouette:  We found a problem that needs
+fixing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:56.52</tt></td>
+<td><span class="c9"><tt>Mouette</tt></span></td>
+<td width="100%"><tt>so you delete that sourcecode?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:57.04</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad took it down, I believe</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:57.20</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you can still get the source code from svn, if
+you want it - but it's busted right now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:57.54</tt></td>
+<td><span class="c9"><tt>Mouette</tt></span></td>
+<td width="100%"><tt>no, i like wait stable version</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:00.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Mouette: I disabled it, though I believe the
+direct link is still valid if you had it -- there's a problem with
+it so it was disabled</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:02.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: I've not looked, but the problem
+almost guaranteed has something to do with the ged command wrapper
+in mged</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:02.53</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I emailed Bob</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:03.09</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">needs to get some sleep
+tonight, but he may be able to spot it right off tomoroww
+morning</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:03.21</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">can't spell</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:04.11</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">bets it's
+cmd.c:351</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:05.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that could be it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:05.31</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">wonders why he didn't notice
+that in the gdb back trace for the case with a file
+loaded</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:05.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:05.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>gedp is only set during f_opendb</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:05.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's not right</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:41.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>now the other question is how classic mode
+works but graphical doesn't</tt></td>
+</tr>
+<tr>
+<td><tt>05:46.15</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad elite01
+(n=omg@unaffiliated/elite01)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:25.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">closes up gdb for the night
+only fixing the one bug but not very well</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:26.45</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r33726
+10/brlcad/trunk/src/mged/ (mged.c setup.c): gedp needs to be
+non-null. it should exist for the life of the caller making libged
+calls. move ged init into mged_setup but keep the wdbp association
+else all goes to hell.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:29.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that seemds to do the trick here, but I'm sure
+there's more to it</tt></td>
+</tr>
+<tr>
+<td><tt>06:54.20</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:21.41</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad _sushi_
+(n=_sushi_@84-72-93-63.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:22.11</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad mafm
+(n=mafm@65.Red-81-34-125.dynamicIP.rima-tde.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:05.58</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Morning all!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:06.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">yawns</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:07.45</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>just waking or getting ready to
+crash?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:07.55</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>or do I already know the answer :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:08.37</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>just FYI: /usr/bin/ld: skipping incompatible
+/usr/X11/lib/libX11.so when searching for -lX11</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:08.50</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>so I think I will talk with Brian today
+:/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:09.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what type is it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:09.31</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>What type is what?  The X11 lib?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:09.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:09.54</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's incompatible, you can often make it
+compatible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:10.00</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>I get that linker error for both the .so and
+the .a</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:10.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sure</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:10.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's the 'why' it's incompatible that
+matters</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:10.34</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>I am going to try a few more things.  I just
+noticed the path is getting the libs from /lib/ and not
+/lib64/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:10.46</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>How can I find out the 'why' ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:11.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>don't guess, just run "file" on it -- it'll
+tell you its type, then run file on one of your .o files to see
+what type you're building</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:12.06</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>run file on one of the .o's generated during
+the brlcad build?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:12.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you have others? :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:12.34</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>:) Just verifying info when I am in uncharted
+waters :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:12.49</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">apologizes for abnoxious q's
+:)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:13.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">is usually sarcastic, bitter,
+and brief in the unintended early prelight hours</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:14.46</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>well, the build is hanging up in:
+brlcad/src/other/tk/unix/ and so i picked the last .o generated:
+tkUnixXId.o: ELF 64-bit LSB relocatable, AMD x86-64, version 1
+(SYSV), not stripped</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:15.02</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>....and that tells me that I am building a
+64-bit version?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:19.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it tells you a lot of things, one being that
+it's building 64-bit version</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:20.18</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>more importantly, what is the .so's
+type</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:21.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also important is whether it was incompatible,
+skipped, and it simply used something else (that was compatible) or
+whether it skipped and linked nothing/failed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:21.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the message by itself could be
+innocuous</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:21.42</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>the .so files are not generated yet.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:21.51</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>or are you speaking of the .so of the X11
+libs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:21.52</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:21.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>o.O</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:22.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i'm speaking of the .so that is supposedly ..
+incompatible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:23.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the point is you compare types to see why it's
+incompatible</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:23.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's a simple 32/64, you can do something
+about that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:23.51</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Yeah, its saying its a 32bit lib.  </tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:24.43</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Hrm, configure is showing both -L/usr/X11/lib
+and -L/usr/X11/lib64 for linker flags</tt></td>
+</tr>
+<tr>
+<td><tt>11:25.39</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad b0ef
+(n=b0ef@062016142244.customer.alfanett.no)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:26.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hence my other point</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:26.43</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>rather important is whether it was
+incompatible, skipped, and it simply used something else (that was
+compatible) or whether it skipped and linked
+nothing/failed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:27.25</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Well I have tried ./configure
+--with-x11=/usr/X11/lib64 (and a few other variants) with no change
+:/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:28.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but have you confirmed that you need to change
+it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:28.46</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Okay, more info:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:28.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>given both dirs are listed, the incompatible
+statement probably doesn't matter</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:29.11</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>When I simply ./configure, I get a LD error
+stating it cannot find -lX11</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:29.39</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>When I ./configure --with-x11=/usr/X11 then I
+get the incompatable error.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:29.59</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>So I know i need to point the configure to the
+64 bit flavor of X11, but I am not succeeding.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:30.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>do you even *have* a 64-bit flavor of
+X11</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:30.57</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>yep: libX11.so: ELF 64-bit LSB shared object,
+AMD x86-64, version 1 (SYSV), stripped</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:31.21</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>after you tossed me the 'file' bone, I went
+and verified the files in the /usr/X11/lib64 dir</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:31.36</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>so its there, but the pathing is somehow
+messed up :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:31.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so then it's just path foo missing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:32.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>try --enable-64bit, if that doesn't work try
+setting flags directly yourself</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:32.28</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>i add that -- to the ./configure?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:32.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>./configure LDFLAGS="..." CPPFLAGS="..."
+CFLAGS=".."</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:32.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yep</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:32.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>iirc, that may swap the search
+ordering</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:32.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but no promises</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:33.05</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>heh.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:33.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's just as easy to force it
+manually</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:33.18</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>make</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:33.24</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>damn, wrong window.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:34.33</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>nope same thing... lemme try setting the
+LDFLAGS manually.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:34.38</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Thanks for your help btw.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:36.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>fyi, if you have both, there's not much for
+brian to do -- you have everything you need</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:36.56</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>i figured.  email not sent yet.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:39.41</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Hrm, well thats annoying.  I used ./configure
+LDFLAGS="blahhblah" and it just appened all the previous flags to
+the end of what I supplied.... so /usr/X11/lib is still there
+:/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:40.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ordering matters</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:40.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>doesn't matter if there are extras if it finds
+the one you need first</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:40.56</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">is beginning to see what
+starseeker and others scream about sometimes :)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:41.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>newbies</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:41.35</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Hey!  I resemble that remark.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:43.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>understanding linkage and search paths in
+detail is usually something hammered in hard in a first-year cs
+program</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:43.19</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>are there adverse effects to using make -j
+?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:43.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at least it used to be</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:43.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>d-lo: yes, it compiles adversely
+faster</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:43.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>on smp hardware</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:44.55</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>:P  I knew that, just wanted to know if it
+f-ed up the build in any way.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:45.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wouldn't be a very useful option if it
+did</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:46.20</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>true, but there is enough nuainces to this
+whole 'make' thing that its a perfectly valid question/concern
+:P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:46.47</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>only with your current uncertain state of
+reasoning</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:48.10</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>./configure LDFLAGS="-L/usr/X11/lib64" nor 
+./configure LDFLAGS="-L/usr/X11/lib64" --with-x11=/usr/X11 works...
+still same errors :?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:48.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are certainly potential effects, as with
+any option, but nothing that matters right now that you'd run
+into</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:49.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>look at the actual test in the config.log and
+see why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:49.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>could be not using it or something else
+overriding it or wrong order or missing some other flag or
+...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:50.29</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>okay, one sec.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:51.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>could also move the 32bit lib out of the
+way</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:51.27</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>but wouldn't do that until you know what all
+usses it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:51.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c5">wanders off for a bit, have
+fun</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:52.06</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lata!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:05.16</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlcad:  I know you are away, but are we still
+using Doxygen?  We moving to something else?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:12.07</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I took first year CS 7yrs ago. We learned
+java. I made a tic tac toe game with the swing toolkit
+woo.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:15.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>d-lo:  We're still set up to use Doxygen, but
+I don't know if anyone has played with it lately</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:15.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>we need to do a lot of work on "doxygenifying"
+things, IIRC</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:15.35</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>starseeker: Whats the code documentation of
+choice now?  (Or is there?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:19.41</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>starseeker: Docbook is for.... the tutorials
+and such?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:21.35</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>docbook is for documenting libraries and
+such</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:21.59</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>errm not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:22.06</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>d-lo: you got it :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:22.29</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I just woke up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:24.02</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>alrighty then, thanks :)</tt></td>
+</tr>
+<tr>
+<td><tt>12:35.53</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad brlquestions
+(n=user@56.Red-79-152-174.dynamicIP.rima-tde.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:35.58</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>Hi again !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:36.19</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>hi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:36.22</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>hi louipc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:36.33</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>I have one question ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:36.50</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>the g-stl conversor is very slow ... is it
+normal ?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:37.15</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>I don't know</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:37.45</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>g-stl uses the facetiation/tessilation
+routines and, yes, can be *very slow*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:37.55</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>OK ... thank you d-lo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:38.13</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>I was wondering if there was some pathological
+operation in my model ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:38.25</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>there have been times where I have fired off a
+tessilation just before I leave work for the day, so it would be
+done by the time I get in the next day.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:38.48</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>is it slower than raytracing?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:38.55</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>but these models I speak of are 75-100MB files
+with tens of thousands of primitives.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:39.23</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>louipc: all depends on the complexity of the
+object(s) you are facetizing.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:39.29</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>No ... I'm talking about 20 minutes for one
+bezier solid extrusion intersected with a spherical shell</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:39.36</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:39.39</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>gennerally though, raytracing is much much
+faster.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:40.43</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlcad: I have only delt with an extrusion
+*once* in the past 3 years of modeling and then it was for hobby
+purposes only.  I never tried to shove it through a
+tessilator.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:41.00</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>OK ... thanks !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:41.05</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Oops, that was ment for brlquestions not
+brlcad ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:41.10</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlq</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:41.26</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlquestions: If it finishes succesfully, I
+would like to know the time it took!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:41.46</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>about 20 minutes with a cylindrical shell
+...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:42.00</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>pix or it didn't happen</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:42.00</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>the spherical one is running now !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:42.08</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>louipc: lol</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:42.37</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlquestions: how was the quality of the
+resulting BoT?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:43.10</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>I think it was good ... but anyway I need a
+spherical shell intersection prior</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:43.15</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>to laser sintering it ...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:45.33</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>my boss only wants to perform expensive
+experiments (sinterizing) only on models closer to final
+products.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:45.47</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>No cylinders ... spheres !!!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:46.24</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>sounds neat</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:48.23</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>OK ... the tesellation finished right now ! 24
+minutes !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:48.28</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>good results !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:53.09</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>ah, its nice to see all 4 cores at 100%
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:54.29</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlcad:  I think I found an issue with the
+Makefiles.  in at least two Make files, the LDFLAG of
+-L/usr/X11/lib64 is being changed to -L/usr/lib64 ... dunno why
+quite yet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:55.38</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>check your mail d-lo !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:55.48</tt></td>
+<td><span class="c12"><tt>brlquestions</tt></span></td>
+<td width="100%"><tt>there's a screen capture of the BoT
+..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:58.53</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lookin good!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:34.12</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03davidloman * r33727 10/rt^3/trunk/
+(7 files in 6 dirs): Forgot to svn add the GeometryChunk.h file.
+Also includes a few minor fixes a new Exception subclass.</tt></td>
+</tr>
+<tr>
+<td><tt>13:39.34</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Axman6
+(n=Axman6@pdpc/supporter/student/Axman6)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:40.04</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03davidloman * r33728
+10/rt^3/trunk/src/GeometryService/netMsg/GeometryChunkMsg.cxx: Also
+forgot to include the source for GeometryChunkMsg.</tt></td>
+</tr>
+<tr>
+<td><tt>13:48.57</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad ``Erik___
+(i=erik@c-76-111-12-116.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:56.08</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>anyone:  Shouldn't 'make install' copy the
+includes/ dir over?  I am looking for bu.h and it just isn't
+there... libbu.so is, but not the header....</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.50</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>yeah it should</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.11</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">glares at this evil
+machine.</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.33</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>More than likely operator error, but for now I
+blame the machine.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:00.10</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.51</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>a ha.  workeded that time.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.56</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">glares at this evil
+machine.</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:08.42</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Elrohir
+(n=kvirc@p5B14F782.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:09.41</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Axman6
+(n=Axman6@pdpc/supporter/student/Axman6)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:27.56</tt></td>
+<td><span class="c13"><tt>``Erik___</tt></span></td>
+<td width="100%"><tt>yes, it should go ito
+$PREFIX/include/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:31.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>$prefix/include/brlcad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:31.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for the brlcad headers and top-level include
+for the external dep headers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:31.59</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>something went foobar with the first time
+'round.  removed it and tried again and it worked.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:32.54</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Oddness is that in 2 Makefiles in the tk dirs,
+the LDFLAG for the X11 was changed from /usr/X11/lib64 to
+/usr/lib64 ....</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:33.30</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>quick change back and it was compiling just
+fine..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:34.22</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>``Erik: How ya feelin?</tt></td>
+</tr>
+<tr>
+<td><tt>15:35.33</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-181.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:44.19</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>underground</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:46.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>``Erik:  hiding?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:46.31</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Well I just got the call from my oldest's
+school... apperantly he blew chunks all over the playground.....
+Just when i thought we had this bug beat....</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:46.44</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>arrgh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:46.56</tt></td>
+<td><span class="c14"><tt>_sushi_</tt></span></td>
+<td width="100%"><tt>blew chunks all over the playground?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:47.15</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>vomit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:49.27</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I assume the whif is collecing thim?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:49.33</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>s/ t/ /</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.01</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hope is recoups soon :(</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.08</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>s/is/he/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.21</tt></td>
+<td><span class="c14"><tt>_sushi_</tt></span></td>
+<td width="100%"><tt>d-lo: what bug?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.22</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>keyboard is outsmarting me today</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.27</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Yuppers.  just got a little concerned with
+that call and you not being here either.... might be a trend and I
+don't want to burn any more sick leave :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.46</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>_sushi_: Stomach flu probably.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:50.59</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>no, I drank myself fucktarded last night and
+am recouping</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.14</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- epic fail.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.27</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>what'd you do that for???</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.33</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>ah, okay, well then perhaps its not another
+epidemic :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.38</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>uh, same reason folk climb everest</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.56</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>one tequlia two tequila three tequila floor
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.06</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">shakes head</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.13</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Playing MMOs while heavily intoxicated is a
+whole new level of entertainment.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.18</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>oh yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.32</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>punker recounted last nights mmo episode to
+me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you might want to pick a somewhat less
+physically damaging pointless challenge ;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.36</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I was in rare form :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.10</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>there is nothing worse than an 'angry drunk'
+Dwarf at the bar.... man they can be A-holes.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.12</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>apparently, I am very giving and loving when
+fucked up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.30</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>wow, you WERE smashed ;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:53.40</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>"no, I don't need loot, I'm happy with the
+experience... dude, you wanna go grab a beer? come on down to
+baltirmoe, man"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:54.05</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lol</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:54.42</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">loots a *glowing* Pint of
+Guiness + 4</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:54.56</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>so yeah, I felt the notion of driving this
+morning would have been ... bad :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:55.57</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>good call.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.09</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>amusingly, I've done some of my best coding
+either drunk off my arse, or right after my wisdom teeth, one
+shattered so they gave me a codeine cocktail, I was wobbling in my
+chair but knocked out a buttload of code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.19</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>gives you a chance to go farming and make up
+for the income loss that occurred last night :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.32</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>meh, I got money out the butt on that
+game</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.57</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>as usual, the upgrade are strictly from places
+I'm not geared to go.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.10</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">didn't need to know what
+``Erik did with his money while drunk....</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.21</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>they went all donation and gave me luvin' last
+night, and I went and liquored myself up stupid to fuck shit
+up</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.41</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- pissed at himself</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.06</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>No Leeroy then?  More Erik Teresa that normal?
+:D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.24</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, no, I don't leroy, I go all
+pussyfood</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.27</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>foot</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.41</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>"wait, what? did you guys pull? I LOVE YOU
+MANG"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.16</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Personnally, I think suicidal raids on zones
+with naked toons is funny.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.26</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>"I don't need loot, I'm just happy I'm
+here"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.34</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>Both to watch and participate in.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.47</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh, that's become a tradition, everyone
+groups up at the instance start and the tank is standing there butt
+nekkid</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.50</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lol, just Lovin Life eh?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:00.46</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>once I get my lappy back to some resemblance
+of useful, I will install wine and see if I can get some games
+runnin :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:00.57</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and I've participated in full group nekkid
+runs through instances (the notion being we die, we die a lot,
+we're trying to eliminate the repair cost)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.14</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>just buy yourself a mac, man :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.23</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c5">e-humps steve jobs
+leg</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.32</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">has a better idea: You buy me
+a Mac!</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.41</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lol</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.43</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>down boy</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.23</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if'n yall want a long lunch, I'll come down to
+duclaws or festival or something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.32</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>You don't happen to know if OSX has been
+sucessfully installed/ran on non Apple hardware... do ya?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.47</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03johnranderson * r33729
+10/jbrlcad/trunk/src/org/brlcad/samples/GetRegionMap.java:
+Eliminated use of java 6 specifics, because this is now used in
+gomez (needs to be java 5 compatible)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.05</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, there was a system that apple sued out of
+existance that did it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.21</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>well, i was talking more 'hack' that
+legit.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.23</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and um, there was just an article on how to do
+it on smackslot a couple days ago</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.56</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">thinks running OSX on a Dell
+would be funny :)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:04.00</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>franky, apple puts out some damn nice
+hardware, I think it's worth the premium</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:04.12</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">agrees.</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:04.26</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>but worth it or not, new puter hardware is not
+in the budget.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:04.29</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm a bit pissed that I can't find teh
+white&amp;clear keyboard anymore</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.01</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lol.... Hackintosh OSX</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.56</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the new style keyboard is awfully well built,
+but lacks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:06.27</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- hugs his macbook, but admits that it's
+not egonomeric</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.05</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>in the words of the unknown Apple FanBoi:
+"sure, its not ergonmic or cheap, but its an Apple!"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.22</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yeah, pretty much</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.25</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt><span class="c5">can't remember where he heard
+that, but it made him ill.</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.34</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>i felt like smacking that guy.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.43</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>at least it still has nipples</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:08.21</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>though when they moved them from the middle
+fingers to the pointers, that pissed me off</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:08.35</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>they belong on d and k, not f and j,
+damnit</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:08.49</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c5">shakes cane</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.00</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>lol</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.13</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>so, where are these lunch places in which you
+speak?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.29</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>duclaws is kinda close to the harford
+mall</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.34</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>festival is down 24</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.52</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>they're generally considered "too far away"
+for lunch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:10.39</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>2+ hour dealies</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:10.48</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>ah, well never mind then :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:10.51</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>but I wont' drive an hour to go to lunch
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:11.31</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yeah, I assumed *shrug*</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.26</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>duclaws is a microbrewery, so not up your
+alley anways</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.35</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>heh, I really do think I am going to try this
+Hackentosh approach ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.36</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>festival has a japanese place that isn't too
+bad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:13.15</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>totally, the killer is gonna be the bios crap,
+macs used to use openfirmware and are now like epi or
+something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:13.41</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>so you'll need 10.5 and the right hw</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:14.43</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>... can be done with qemu... is a lot of work,
+and requires just the right hardware to avoid some /serious/ driver
+issues</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:15.40</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>need to aquire 10.5 for some testing
+;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:15.53</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>I would say not worth it in all but the most
+unique circumstances (must run x software on y hardware, cannot
+afford correct solution)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:16.19</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>convince someone to give you shell access to
+their machine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:16.37</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>you lost me...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.06</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>why would I need shell access to someone
+else's machine?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.08</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>find someont with 10.5 and get them to let you
+have some time on their HW</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:17.39</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>for what purpose?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:18.41</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>[20090210 08:15:42] &lt;d-lo&gt; need to
+aquire 10.5 for some testing ;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:18.58</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>heh, I mend the disc(s) for installation
+testing.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:19.06</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>s/mend/meant/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.22</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>why the need for installation testing? it will
+work on real HW, fail on most everything else (BIOS checksum, or
+other scheme to lock you out)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:20.56</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>I have a Dell lappy, and I want to see if i
+can get OS10.5 running on it :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.31</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>just grab fbsd :D or linux, y'know, if you're
+lame</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.48</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>clears throat</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:21.52</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>loudly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.13</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>then chants "gentoo, gentoo!"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.16</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>sorry, done too much kernel work, can't
+respect leenewx no mo'</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.41</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>that's you, man</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:22.52</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, that is me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.02</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>i was wondering who that was...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.13</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>I have converted from winedo$e in 96, and
+never looked back</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.49</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I went to linux in '95, fbsd in '97 or '98,
+after witnessing the horrors from kernel hacking</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:23.58</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>tried bsd in 98 or so, not impressed, went
+back to slackware</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.04</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>been a kernel hacker of some form or another
+since '86</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.28</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>well, back then, fbsd was a much better
+kernel</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.28</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>interrupt vectors on c64's, yo</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.33</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>!</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.43</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>I had one...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:24.59</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>You don't know the power of the Vic-20
+....</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.07</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>been watching, linux has spastic upgrades, but
+often throws them away and adopts what fbsd did 5 years
+before</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.16</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>sold it to that chick that reverse engineered
+it and made one in FPGAs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.29</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>they were popular in Germany, I am
+told</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.57</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>in the last decade, I've seen ONE significant
+linux accomplishment adopted into fbsd. One.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:25.59</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>no, i don't know the power of vic-20</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.07</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.29</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the zero copy network shit, which was
+re-organized like mad due to security concerns :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.50</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>though ingo's scheduler got some
+attention</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.51</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>still not switching, too much infrastructure
+in place, time learning, also i like the performance i
+get</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:26.57</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>way out int he middle of the AZ desert.. I was
+l33t with my cassette drive... my parents pheared me.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.18</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>... until global warming melted your
+tape</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.21</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hehehhe, I was buying the 120 minute cassettes
+to hold more data :D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.33</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>... wait, that was just an ordinary day in
+may</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.37</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>I think I ended up taking the whole machine
+out for target practice one day...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:27.48</tt></td>
+<td><span class="c13"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, they failed sooner, and had a higher doa,
+but when they worked, it was sweet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.19</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>anyone ever use a 2.88 mB 3.5"
+floppy?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.27</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>WORM?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.40</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>yeah, the 'super-HD'floppies.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.54</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>or ls-120 super disk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.58</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>never messed with them much.... jumped
+straight to 'SuperDisk' !</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:28.58</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>from panasonic</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:29.09</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>nice</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:29.27</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>I was on the iOmega Zip Disk bandwagon for a
+while...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:30.02</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>until wheels fell off..."read error
+!@#$&amp;$%T#$..."</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:30.13</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>yeah, that was a waste of money.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:30.43</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>SD cards, that's the way to go. or
+CF</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:30.56</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>a great backup solution, they are</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:31.23</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>32 gig CF, get 2 of them to B/U system on
+rotating basis</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.05</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>heh, um, I have 2 500GB drives, 1 160 and a
+handfull of 80's.... won't work for me :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.22</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>that's all?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:32.42</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>I have lot's more, but everything else is on
+RAID</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:33.35</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>with (ahem) gentoo, all of my packages are
+tarred and bzipped in a certain dir, and that is not much
+data</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.08</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>add that to a tar file of my etc dir and boot
+dir, and that is a good backup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.29</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>crap! gotta go to class</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.34</tt></td>
+<td><span class="c15"><tt>Dr_Phreakenstein</tt></span></td>
+<td width="100%"><tt>have fun, kids</tt></td>
+</tr>
+<tr>
+<td><tt>16:34.37</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad ``Erik_
+(i=erik@c-76-111-12-116.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:34.58</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33730
+10/brlcad/trunk/regress/mged/ (run_test run_test.tcl): Take a stab
+at getting a run_test sh script/tcl script hybrid</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:35.47</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>and you can back 1.5TB+ up on 2 32Gig CF cards
+with Gentoo?  Thats Frickin amazing!!!!!! :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:40.06</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>well, without furthing any HardDrive envy that
+is floating around here, the 1TB (ish) i have is a pain in the butt
+to back up to CDs as it is, so using CF cards would make me want to
+gouge my own eyes out.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:40.10</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>;)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:44.04</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33731
+10/brlcad/trunk/regress/mged/run_test: Go for a system tclsh if the
+local btclsh isn't found - for this it won't matter.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:46.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: if you're not mid-stream,
+distcheck</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.44</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33732
+10/brlcad/trunk/regress/mged/run_test: Allow user to supply source
+directory as second option</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:47.50</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad:  Ok, I'm sure I'm busted on that
+;-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.07</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you're happy with the mged fix for the no-db
+case?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.26</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlcad: In looking through libpkg, i am
+thinking it is posible to use libpkg with out passing a callback
+table to a pkg_conn .....that sound about right?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:52.05</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlcad: Message from Ed:  Call him at
+x6300.</tt></td>
+</tr>
+<tr>
+<td><tt>16:54.05</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad _sushi_
+(n=_sushi_@77-58-230-66.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:09.32</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad ``Erik_
+(i=erik@c-76-111-12-116.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:20.37</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c5">prods CIA</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:23.22</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33733
+10/brlcad/trunk/regress/mged/Makefile.am: It's run_test
+now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:34.41</tt></td>
+<td><span class="c10"><tt>d-lo</tt></span></td>
+<td width="100%"><tt>brlcad: I will need to sitdown and talk libpkg
+with you... I am just not seeing the light :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:38.12</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad:  make distcheck passed on the
+Mac</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:30.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>and on linux</tt></td>
+</tr>
+<tr>
+<td><tt>19:33.00</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad _sushi_
+(n=_sushi_@77-58-230-66.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:55.09</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33734
+10/brlcad/trunk/regress/mged/ (11 files): Add the geometry
+displaying commands to regress/mged/mged.tcl</tt></td>
+</tr>
+<tr>
+<td><tt>19:59.59</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1096600726.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:24.47</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-181.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:56.03</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r33735 10/brlcad/trunk/
+(NEWS src/gtools/g_diff.c): fixed g_diff crash reported by lee
+butler where g_diff crashed with a badmagic error bu_bomb'ing out
+due to an uninitialized vls. looks like it is possibly related to
+earlier changes.</tt></td>
+</tr>
+<tr>
+<td><tt>21:26.50</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1096600726.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:41.29</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r33736
+10/brlcad/trunk/TODO: need to fix two more critical bugs before
+release. File-&gt;Open in MGED crashes and the 'gets' command locks
+it up saying the variable is not defined (or it
+crashes/freezes).</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:42.35</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r33737
+10/brlcad/trunk/TODO: see the gets example in its manpage</tt></td>
+</tr>
+<tr>
+<td><tt>21:50.01</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Elrohir
+(n=kvirc@p5B14F782.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:21.17</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33738
+10/brlcad/trunk/regress/mged/ (5 files): Start on editing
+commands.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:46.44</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33739
+10/brlcad/trunk/regress/mged/ (Makefile.am oed.mged
+regression_resources.tcl): add oed testing</tt></td>
+</tr>
+<tr>
+<td><tt>23:02.30</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-158.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:04.11</tt></td>
+<td><span class="c6"><tt>CIA-40</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r33740
+10/brlcad/trunk/regress/mged/ (Makefile.am i.mged keypoint.mged
+rm.mged): add i, rm and keypoint testing</tt></td>
+</tr>
+<tr>
+<td><tt>23:17.45</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Ralith
+(n=ralith@216.162.199.202)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:22.12</tt></td>
+<td><span class="c16"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Howdy all</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:22.15</tt></td>
+<td><span class="c16"><tt>poolio</tt></span></td>
+<td width="100%"><tt>congrats on the release :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:37.25</tt></td>
+<td><span class="c11"><tt>louipc</tt></span></td>
+<td width="100%"><tt>oh! I missed that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:55.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>poolio: not worthy of congrats, escaped with a
+handful of critical bugs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:55.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>had to pull it shortly after</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:56.43</tt></td>
+<td><span class="c16"><tt>poolio</tt></span></td>
+<td width="100%"><tt>ah sorry to hear that, is it all worked out
+yet or is that the reason for the flurry of commits?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:57.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nope, just normal flurry</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:57.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>though lot of flurry going into testing as
+there may be other isses</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:57.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>half of the known ones are worked out, couple
+to go</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:58.31</tt></td>
+<td><span class="c16"><tt>poolio</tt></span></td>
+<td width="100%"><tt>good luck! I've had a few bugs recently that
+took a few weeks to work out...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:58.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, these shouldn't be too
+complicated</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:59.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's only been a couple days</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:59.13</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and three were just discovered today</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:59.25</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>one already fixed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:59.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>two to go</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:59.57</tt></td>
+<td><span class="c16"><tt>poolio</tt></span></td>
+<td width="100%"><tt>Were there issues in trunk or were these
+introduced while tagging and such?</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

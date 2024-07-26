@@ -1,292 +1,1628 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20110830</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20110830</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c10 {color: #BDBD63}
+ span.c9 {color: #000099}
+ span.c8 {color: #CF6D6D}
+ span.c7 {color: #CC00CC}
+ span.c6 {color: #B05C5C}
+ span.c5 {color: #009900}
+ span.c4 {color: #77E2E2}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #73DA73}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20110830</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:57.35</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>n_reed: MSVC doesn't need to support %zu for those functions, that's OUR function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:58.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>bu_log() implements support for %z along with the other bu_* vararg functions, so what was there before was correct</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.08</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>it didn't work though</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:00.38</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>on MSVC anyway</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:15.02</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>why</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:16.09</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's perfectly valid code, so if msvc is complaining, the complaint should be scrutinized as to why </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:16.53</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>either there was some *other* stdlib printf-style function it encountered with a %zu (in which case the "fix" should have been just for that instance)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:17.51</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>or it really is complaining just because it thinks it recognizes a varargs-style function with print specifiers (in which case if it's trying to be that clever, there should be options to turn the behavior off)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:18.39</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>given we have %zu's sprinkled in hundreds of places throughout the code, and have for several releases, I find it a little hard to believe that it's the latter...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:19.45</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>on a somewhat related note... msvc is an environment where we've not yet vetted "warnings mean error" because it reports too many false positives by default, if that's coming into play</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:23.35</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's just a warning being spit out, there are hundreds of other places so that'd be a good one to just ignore in the output or disable for that compiler</tt></td></tr>
-<tr><td><tt>01:44.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@24-13-133-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.25</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>it was incorrect behavior - printing "zu" instead of the number in question</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:57.40</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>dunno if it was one instance in the code or not though - have to ask n_reed </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:58.48</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>it compiles fine and runs, just getting the strings messed up somewhere along the line on WIN32</tt></td></tr>
-<tr><td><tt>02:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:43.21</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that sounds like a bonefide libbu bug then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:43.37</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>all printf-style printing is consolidated into just one or two functions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:44.26</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, src/libbu/vls.c:bu_vls_vprintf()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:44.58</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>ooh, I think I see the issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:57.00</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46460 10/brlcad/trunk/CMakeLists.txt: might help to actually test for size_t :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:59.38</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:59.41</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:01.46</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46461 10/brlcad/trunk/src/conv/obj-g_new.c: Put zu back - hopefully actually testing for size_t fixed it (oopsie).</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:02.05</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>not likely, working ona&nbsp;&nbsp;fix</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:13.37</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46462 10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: take a stab at implementing a new build test for c99 format specifiers. not all of them, though, only care about %z for now since it's the one currently causing havoc with msvc builds.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:18.21</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46463 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:18.21</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: arguable whether testing libc supports %z as a print width specifier is a</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:18.21</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: compiler characteristic or type testing but go with the latter. add the (new</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:18.21</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: and untested) BRLCAD_CHECK_C99_FORMAT_SPECIFIERS macro so we can toggle code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:18.21</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: logic based on HAVE_C99_FORMAT_SPECIFIERS</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:18.57</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: feel free to sanity check my feeble cmake foo there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:25.08</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46464 10/brlcad/trunk/src/libbu/vls.c: use bu_strlcpy() instead of strncpy() since it guarantees null-termination which we were doing manually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:33.16</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>main concern is that HAVE_STDINT_H may not be defined in that context without setting a flag...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.13</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46465 10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: This test succeeds on a platform where I would expect it to succeed - may need more tweaking, but I *think* this will do it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.32</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46466 10/brlcad/trunk/src/libbu/vls.c: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.33</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: add in initial logic to replace instances of %z in format specifiers for</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.33</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: platforms that don't support that c99 feature. since msvc is presently the only</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.33</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: known platform with this busted feature behavior, scan the format specifier and</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.33</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: replace instances of %z with %I which is presently more commonly found on</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:54.33</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: win32/win64 environments.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.20</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46467 10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: we definitely need stdio.h (for sprintf()) but it shouldn't be conditional (c89 is required)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:58.48</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: you were checking for 1 as a return from sprintf, but even on gentoo it returns 3 (I'm fairly sure my system is new enough to support zu...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:01.05</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.36</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>what about printing 1234 as a size_t and looking for 4 instead of 3?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:07.28</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46468 10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: in that same vein, we need string.h for strcmp</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.38</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: BRLCAD_HEADER_STDC looks somewhat useless as-is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.54</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: yeah, probably</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.00</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46469 10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: tweak so that number of chars in number doesn't match number of chars in specifer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.01</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc, the point of AC_HEADERS_STDC is to halt if they're available</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.02</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>IIRC it was marked as obsolete</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.14</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>er, not available</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.23</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>so we know not to even try proceeding</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.25</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>usually I just define it as 1...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.50</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:10.57</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>wasn't sure if any of our supported platforms wouldn't have STDC</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>we've had a minimum compilation requirement of c89 for a couple years now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.31</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>#define STDC_HEADERS 1</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:11.58</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that's useless to set unless it's used somewhere by a 3rd party relying on it getting set</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.03</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>if we rely on it, we shouldn't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.19</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>I think it's just tcl (where I'm hhandling it anyway)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:12.40</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>we shouldn't be testing anything c89 provides as a strict matter of principle (other than as a build environment sanity check like I mentioned, to halt)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.16</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>the only reason it was ever there was because I was going for full parity with the autotools build</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.37</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>then it should halt, not set a #define :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:13.59</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I was going to yank it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.44</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>*shrug*&nbsp;&nbsp;it's fine in that one place, but it should serve a purpose (sanity test)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:15.14</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that's particularly why configure.ac has that whole block that itemizes which headers are c89, which are c95, which are c99, etc ..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:15.22</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>doubt it's worth maintaining unless there's a realistic chance we'll need it - IIRC it was a bit of a poin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:15.25</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>pain even</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:15.46</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>absolutely shouldn't waste time testing for c89 headers, setting HAVE_*_H defines, nor wrapping them in #ifdef blocks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:16.36</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, looks like only tcl/tk really cares</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.06</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's just 16 lines of "code" ... if that's painful ... some threshold might need adjusting :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.28</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>more painful trying to figure out what the AC macro in question was doing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.38</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that macro by itself is inconsequential</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:17.40</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">still doubts he fully duplicated all of its testing</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.01</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's more making sure we don't check for c89 headers in other places like you'd just added to that new macro</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.53</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>undoubtedly, looks like you test for but never even use HAVE_STRING_H_MEMCHR</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.12</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>and HAVE_STDLIB_H_FREE</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:19.55</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>unless you make it halt, just yank it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.21</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46470 10/brlcad/trunk/ (CMakeLists.txt misc/CMake/BRLCAD_CheckFunctions.cmake): nevermind about STDC_HEADERS - we don't really need it, only tcl/tk really use it so let them deal with it.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:20.28</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>more effective would be a test for exactly all of the c89 headers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:21.33</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: where'd be a good place to replicate the header comment block from configure.ac to help prevent folks from adding unnecessary tests?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:22.10</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>probably stage 5 in the toplevel CMakeLists.txt file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:22.16</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, duh .. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:22.32</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>sprintf returns number of chars printed -- was thinking sscanf</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:22.42</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>most of the tests are there and should go there - CheckFunctions was for special stuff that needed something more complicated than just checking the include file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:23.37</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>again based on the autoconf tests - it may be that a lot of those could be reduced to header checks on modern hardware</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:24.43</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>(around line 1031 in CMakeLists.txt)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.04</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, already there .. got it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.39</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">mostly went with what was in configure.ac - "foreign" tests that crept in usually resulted from AC_* macros of one sort or another</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.49</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe worth a build system regression?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.09</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, checking for improper tests?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.41</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:27.10</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>probably fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:27.35</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shrugs - yeah, at some point that might be worth doing</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:27.51</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is hoping like heck that once this is done the build system will require only occasional tweaking</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:31.52</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>no chance</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.31</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>the only time the build system doesn't require changes is when the source code doesn't change</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:33.35</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>even for fully managed IDE environments like msvc, you want/need/have to change the build system all the time as the code evolves</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:34.39</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46471 10/brlcad/trunk/CMakeLists.txt: Hmm... it might be that platforms with multiple CFG types shouldn't share the same output directories... try this.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:35.28</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>growl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:35.31</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>the best you can aim for is make the build system logic simple enough to maintain and clean enough to be extended by a new/inexperienced developer easily</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:35.51</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why I kept saying "this is still code"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:36.35</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>all the same coding rules and guidelines still apply, dry principle, neat organized code, concise yet descriptive vars, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.08</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46472 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.08</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: checking order changed. update docs. need to check compiler characteristics</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.08</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: earlier within cmake so that flags are set properly. remember there was a</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.08</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: specific reason for delaying the compiler testing until after headers/libs/types</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.08</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: with the autotools build but don't remember what that reason was any longer (and</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.09</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: it's not documented) so go with the flow -- makes more sense to test the</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:38.10</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: compiler flags earlier anyways.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:42.11</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46473 10/brlcad/trunk/CMakeLists.txt: typo, wording tweak</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:47.52</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46474 10/brlcad/trunk/CMakeLists.txt: more rewording</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:50.45</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46475 10/brlcad/trunk/CMakeLists.txt: I suppose the date/timestamp code failing to generate a date should be fatal - that has to be fixed if it breaks.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:55.18</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - I may need to keey the #define DEBUG statement off of something other than CMAKE_BUILD_TYPE...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:55.38</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note to check what that's used for tomorrow...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:03.14</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46476 10/brlcad/trunk/CMakeLists.txt: don't need the math expression anymore</tt></td></tr>
-<tr><td><tt>07:27.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
-<tr><td><tt>08:08.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
-<tr><td><tt>08:35.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:32.48</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46477 10/brlcad/trunk/src/libbu/vls.c: Typo; statement with no effect.</tt></td></tr>
-<tr><td><tt>10:42.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed_ (44378e88@gateway/web/freenode/ip.68.55.142.136)</font></tt></td></tr>
-<tr><td><tt>11:30.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@wlan-145-94-186-249.wlan.tudelft.nl)</font></tt></td></tr>
-<tr><td><tt>11:53.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:24.28</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>thx n_reed, didn't get a chance to compile-test it yet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:05.45</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>phew finally the bb function works for all cases</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:06.38</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>seems the tree returned in a struct rt_db_internal&nbsp;&nbsp;by the function rt_db_lookup_internal(), has the wrong op codes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:07.15</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>even if I use the dbip got from a rtip : rt_db_lookup_internal(rtip-&gt;rti_dbip, dp-&gt;d_namep, &amp;dp, &amp;intern, LOOKUP_NOISY, &amp;rt_uniresource)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:07.59</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>had to resort to getting the region for a passed comb (if the comb is a region) : regp = _rt_getregion(rtip, dp-&gt;d_namep);</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:08.18</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>once I get the region, then rt_bound_tree(regp-&gt;reg_treetop, tree_min, tree_max) always works</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:09.34</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>cant understand why the tree returned in the struct rt_db_internal by the function rt_db_lookup_internal() should have the wrong op_code</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:16.29</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>its certainly not due to a lack of preparing the rtip by using rt_gettree() etc</tt></td></tr>
-<tr><td><tt>13:18.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:27.49</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: what do you mean by wrong op code?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:28.43</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>the code at the primitive node is set to OP_DB_LEAF (12) when it should be set to OP_SOLID (1)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:30.11</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>so by the code i mean tr_a.tu_op</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:30.29</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>in the union tree of combp-&gt;tree</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:31.57</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>so one would expect this to work : <a href="http://bin.cakephp.org/view/716816388">http://bin.cakephp.org/view/716816388</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:32.09</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>but it returns the bb for a region as 0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:33.41</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>because the tree could not be traversed completely due to the wrong code in tr_a.tu_op, which is used during the recursion in rt_bound_tree() as switch ( tp-&gt;tr_op)...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:38.49</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>all the other functions which use rt_bound_tree()&nbsp;&nbsp;find a matching a region by using for (BU_LIST_FOR(regp, region, &amp;(rtip-&gt;HeadRegion))) {...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:38.56</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>so they never encounter this problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.40</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46478 10/brlcad/trunk/src/libbu/ (10 files): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.40</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: rename all of the test programs to have a test_ prefix instead of a tester</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.40</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: suffix. makes them easier to identify and groups tests together. should help</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:42.40</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: keep things more organized moving forward as more unit tests are written.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:45.46</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46479 10/brlcad/trunk/src/libbu/ (test_basename.c test_htond.c test_progname.c test_timer.c): update file names in headers and usage</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:56.56</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: the code is fine</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:57.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that code just means that it's a leaf node (which it is) and that the node is still in db format (which it is)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:57.56</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem may just be that rt_bound_tree() needs to implement that switch case</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:58.51</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>very likely is the problem</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:00.58</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>nice work on the new rt_bound_internal() though, looking great in that paste -- only issue I see are the exact (== 0) floating point comparisons at the bottom, those should be NEAR_ZERO())</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:51.33</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: running cmake in debug mode and encountering some strange issues</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:52.37</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>variety of tests that fail but shouldn't, failures detecting 32bit/64bit, error about TEST_BIG_ENDIAN during debug but not during non-debug</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:56.49</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: ok then I ll add a OP_DB_LEAF case to rt_bound_internal</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:57.02</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:58.09</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>just hope its that simple :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.36</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>you can't just pretend an OP_DB_LEAF is an OP_SOLID if that's what you're thinking</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:59.41</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>you have to add the logic for that case</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:01.26</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes i understand that, however I do expect the solid pointer to be present in tp-&gt;tr_a.tu_stp;</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.24</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>because a OP_DB_LEAF is the end of the line for the tree , there should no more recursion needed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.32</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>actually I believe that is exactly what OP_DB_LEAF means is not done yet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:02.59</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's in db format, then a solid hasn't been loaded yet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.04</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.09</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.29</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>and rt_db_lookup_internal() always returns in db format</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.41</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>look around some other switch statements that use OP_DB_LEAF to see what they do</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:03.47</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:05.58</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>umm but a question, why would the logic work if I get the same region using a match from : for (BU_LIST_FOR(regp, region, &amp;(rtip-&gt;HeadRegion))) {...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.07</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>somehow that is not in db format</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:06.50</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>the regions got from the rtip-&gt;HeadRegion contains a "all solids loaded" format which works with rt_bound_tree()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:07.54</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>so something like this works : <a href="http://bin.cakephp.org/view/1320641560">http://bin.cakephp.org/view/1320641560</a></tt></td></tr>
-<tr><td><tt>16:08.23</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:08.26</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>not sure, but probably simply because it's just a different container -- gettrees happens to fill out a soltab because it needs it, yet the "other" one you get from lookup has not been loaded</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:09.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>the region search is a bit bogus, though .. not sure what that will do for models that have no regions defined</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:12.50</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes they would then have groups</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:13.21</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>but hmm, even for groups I search for regions that the group contains</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:13.36</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>it maybe that the group has just prims</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:41.06</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm most cases using the OP_DB_LEAF simply play around with the prim name in tp-&gt;tr_l.tl_name , moving it from x to y :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:41.23</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>or they exists at the lowest db_* function level</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:42.22</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>dont see any case of converting a union tree with a OP_DB_LEAF op to a solid with usable geometry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:45.35</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>I would have though that there would be a function which would accept a union tree with a OP_DB_LEAF in one of its leaves and look it up using the db_lookup() function, then fill it with the corresponding "all solids loaded" representation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:45.41</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>something like that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:46.39</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>maybe I can lookup the solid in the rtip using the tp-&gt;tr_l.tl_name, in the OP_DB_LEAF case</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.29</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>even if you can, that's pretty much self-defeating</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:48.36</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>yah :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:49.12</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>better question to ask is how the OP_SOLID was created </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:49.48</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>very deep inside rt_gettree()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:50.41</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>or rather rt_gettrees_muves()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>16:55.22</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm&nbsp;&nbsp;db_walk_tree() in the above function preps the leaves</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:02.21</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>struct soltab *_rt_find_identical_solid() seems interesting</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:05.58</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46480 10/brlcad/trunk/src/librt/primitives/metaball/metaball.c: Quiet potentially uninitialized warning.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:54.44</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46481 10/brlcad/trunk/src/libbu/ (CMakeLists.txt Makefile.am test_vls.c): </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:54.44</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: add a preliminary vls unit test to make sure our printing format specifier</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:54.44</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: behavior is consistent with stdio's behavior. particularly for non-standard</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>17:54.44</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: format specifier issues like %z and %ll, make sure something sane is happening.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:10.58</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46482 10/brlcad/trunk/ (CMakeLists.txt src/conv/obj-g_new.c): Ah, right - we include tcl headers, so we define STDC_HEADERS for them. Document that.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:28.11</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46483 10/brlcad/trunk/src/libbu/test_vls.c: expand to include more types, legths, and some precision tests.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:30.19</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46484 10/brlcad/trunk/src/libbu/vls.c: bu_strlcpy() size includes the null character, make sure len is adjusted accordingly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:44.49</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46485 10/brlcad/trunk/src/libbu/str.c: consistency in the &gt;= logic -- looks like it is/was right, but was misleading how it was using the operator</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:48.32</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46486 10/brlcad/trunk/src/libbu/vls.c: revert back to strncpy() until we can get a proper debug in.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:54.42</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r46487 10/brlcad/trunk/src/libbu/test_vls.c: mark unused variable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:59.20</tt></td><td><font color="#bdbd63"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, for all asc2g runs: db_dirbuild(/usr/tmp/brlcadbuild/share/brlcad/7.20.3/db/xmp.g): improper database, _GLOBAL object attribute 'units'= is invalid</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.19</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that's probably r46486 off-by-one</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:10.10</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46488 10/brlcad/trunk/src/libbu/vls.c: len is not -1</tt></td></tr>
-<tr><td><tt>19:15.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.09</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>there is some code supporting the 'E' command which involves case OP_DB_LEAF</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.30</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>seems the directory pointer is lookedup using dp=db_lookup()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:16.43</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>and then a solid is added using eptr = add_solid(dp, tp-&gt;tr_l.tl_mat, dgcdp);</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:18.28</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm nope, its seems libged related , struct _ged_client_data has to be passed to add_solid()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:18.38</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: does that fix it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:23.55</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: fixes it here</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:25.59</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: I think the only way to convert the OP_DB_LEAF would be to try and look it up using db_look()</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:26.16</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>prep.c uses that for example</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.04</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: sounds reasonable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.09</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>otherwise the only other way is to pick some code from rt_gettree() which is going to take quite a while</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:27.22</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>db_lookup() would be needed to get a handle on geometry anyways (at some point)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:28.16</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46489 10/brlcad/trunk/src/libbu/test_vls.c: put ac and av to good use</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:28.49</tt></td><td><font color="#cf6d6d"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:29.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>you just shouldn't need an rtip</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:29.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a db operation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:30.31</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>(rt_gettree() obviously uses an rtip, but that's because it's specificially "getting geometry trees ready for ray tracing")</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:32.52</tt></td><td><font color="#bdbd63"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: yup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:33.45</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>cool, thx</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:35.07</tt></td><td><font color="#bdbd63"><tt>``Erik</tt></font></td><td width="100%"><tt>(hopefully their eyes don't bleed too much from my cmake patch) O:-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:48.54</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46490 10/brlcad/trunk/src/libbu/test_vls.c: test more width, precision, and format specifier flags to make sure vls does what libc does</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:57.00</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: <a href="http://www.cmake.org/pipermail/cmake/2011-August/046044.html">http://www.cmake.org/pipermail/cmake/2011-August/046044.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:01.20</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>"or the stuff from the previous try-compile might affect the next one"&nbsp;&nbsp;&lt;-- shouldn't happen, imho</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:01.58</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that sounds like the bug to me or unexpected behavior at best</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:02.46</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>good to hear there's somewhat of a way to debug, but that's kinda beating around the bush</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:03.56</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I was going to ask if the behavior could be changed to saving the files of each test in its own subdirectory - did you want to respond yourself?&nbsp;&nbsp;You'll undoubtedly make a more compelling case than I'll be able to</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:08.19</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd just say what I said here save the bush part, maybe ask why reuse the same directory (particularly given it makes the build tests stateful) .. the tests should be stateless, shouldn't matter if there was already output</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:08.33</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>(it shouldn't read then write, it should write then read ...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:10.07</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, i'm not on that mailing list so I won't be responding anytime soon :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:10.25</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46491 10/brlcad/trunk/src/libbu/test_vls.c: couple more tests</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:15.03</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>urk <a href="https://sites.google.com/site/x32abi/">https://sites.google.com/site/x32abi/</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:15.15</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>just in case 32/64 bit wasn't complicated enough...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:29.01</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:29.27</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>sounded like that might be yet a third option to the 32/64 bit option matrix...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:29.35</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that's just describing the 64bit abi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:30.34</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>options on how to run a 32-bit app on 64-bit platform (and do so portably per the abi)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:31.00</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>it says it's a "32bit psABI for x86-64 with 32bit pointer size" - does that just mean a 32 bit API for 64 bit hardware?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:31.08</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:31.18</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>so no compiler flags needed (hopefully)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:31.56</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that's part of it, an implementation of part of the spec</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:32.48</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>so you can run a 32-bit app with it's 32-bit pointers and have it play nicely </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:33.08</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>not something we'll likely have to care about </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:33.15</tt></td><td><font color="#77e2e2"><tt>starseeker</tt></font></td><td width="100%"><tt>phew</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:45.36</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46492 10/brlcad/trunk/src/other/re2c.dist: add the new re2c file to the ignore list</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.20</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46493 10/brlcad/trunk/src/other/lemon/CMakeLists.txt: </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.20</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Lemon needs the template file in the same directory as the binary. On systems</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.20</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: using configurations, that means we need to copy this file into the</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.20</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: configuration binary directory, not just bin. May be more files where this is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.20</tt></td><td><font color="#b05c5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: true - TODO.</tt></td></tr>
-<tr><td><tt>22:54.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>22:54.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (~alex_joni@emc/board-of-directors/alexjoni)</font></tt></td></tr>
-<tr><td><tt>23:05.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>23:05.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (~alex_joni@emc/board-of-directors/alexjoni)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:57.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>n_reed: MSVC doesn't need to support %zu for
+those functions, that's OUR function</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:58.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>bu_log() implements support for %z along with
+the other bu_* vararg functions, so what was there before was
+correct</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it didn't work though</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:00.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>on MSVC anyway</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:15.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:16.09</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's perfectly valid code, so if msvc is
+complaining, the complaint should be scrutinized as to
+why</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:16.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>either there was some *other* stdlib
+printf-style function it encountered with a %zu (in which case the
+"fix" should have been just for that instance)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:17.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or it really is complaining just because it
+thinks it recognizes a varargs-style function with print specifiers
+(in which case if it's trying to be that clever, there should be
+options to turn the behavior off)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:18.39</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>given we have %zu's sprinkled in hundreds of
+places throughout the code, and have for several releases, I find
+it a little hard to believe that it's the latter...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:19.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>on a somewhat related note... msvc is an
+environment where we've not yet vetted "warnings mean error"
+because it reports too many false positives by default, if that's
+coming into play</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:23.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's just a warning being spit out, there
+are hundreds of other places so that'd be a good one to just ignore
+in the output or disable for that compiler</tt></td>
+</tr>
+<tr>
+<td><tt>01:44.30</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad merzo
+(~merzo@24-13-133-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.25</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it was incorrect behavior - printing "zu"
+instead of the number in question</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:57.40</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>dunno if it was one instance in the code or
+not though - have to ask n_reed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>01:58.48</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it compiles fine and runs, just getting the
+strings messed up somewhere along the line on WIN32</tt></td>
+</tr>
+<tr>
+<td><tt>02:36.46</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:43.21</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, that sounds like a bonefide libbu bug
+then</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:43.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>all printf-style printing is consolidated into
+just one or two functions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:44.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah,
+src/libbu/vls.c:bu_vls_vprintf()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:44.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ooh, I think I see the issue</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:57.00</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46460
+10/brlcad/trunk/CMakeLists.txt: might help to actually test for
+size_t :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:59.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">winces</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>02:59.41</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>thanks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:01.46</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46461
+10/brlcad/trunk/src/conv/obj-g_new.c: Put zu back - hopefully
+actually testing for size_t fixed it (oopsie).</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:02.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>not likely, working ona  fix</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:13.37</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46462
+10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: take a stab
+at implementing a new build test for c99 format specifiers. not all
+of them, though, only care about %z for now since it's the one
+currently causing havoc with msvc builds.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:18.21</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46463
+10/brlcad/trunk/CMakeLists.txt:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:18.21</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: arguable whether testing libc
+supports %z as a print width specifier is a</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:18.21</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: compiler characteristic or type
+testing but go with the latter. add the (new</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:18.21</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: and untested)
+BRLCAD_CHECK_C99_FORMAT_SPECIFIERS macro so we can toggle
+code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:18.21</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: logic based on
+HAVE_C99_FORMAT_SPECIFIERS</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:18.57</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: feel free to sanity check my
+feeble cmake foo there</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:25.08</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46464
+10/brlcad/trunk/src/libbu/vls.c: use bu_strlcpy() instead of
+strncpy() since it guarantees null-termination which we were doing
+manually</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:33.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>main concern is that HAVE_STDINT_H may not be
+defined in that context without setting a flag...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.13</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46465
+10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: This test
+succeeds on a platform where I would expect it to succeed - may
+need more tweaking, but I *think* this will do it.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.32</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46466
+10/brlcad/trunk/src/libbu/vls.c:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.33</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: add in initial logic to replace
+instances of %z in format specifiers for</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.33</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: platforms that don't support that c99
+feature. since msvc is presently the only</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.33</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: known platform with this busted
+feature behavior, scan the format specifier and</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.33</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: replace instances of %z with %I which
+is presently more commonly found on</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:54.33</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: win32/win64 environments.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:58.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46467
+10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: we
+definitely need stdio.h (for sprintf()) but it shouldn't be
+conditional (c89 is required)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>03:58.48</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: you were checking for 1 as a return
+from sprintf, but even on gentoo it returns 3 (I'm fairly sure my
+system is new enough to support zu...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:01.05</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>hm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:05.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>what about printing 1234 as a size_t and
+looking for 4 instead of 3?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:07.28</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46468
+10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: in that
+same vein, we need string.h for strcmp</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:09.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: BRLCAD_HEADER_STDC looks somewhat
+useless as-is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:09.54</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: yeah, probably</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.00</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46469
+10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: tweak so
+that number of chars in number doesn't match number of chars in
+specifer</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>iirc, the point of AC_HEADERS_STDC is to halt
+if they're available</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.02</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>IIRC it was marked as obsolete</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, not available</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.23</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so we know not to even try
+proceeding</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.25</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>usually I just define it as 1...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.50</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:10.57</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>wasn't sure if any of our supported platforms
+wouldn't have STDC</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:11.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we've had a minimum compilation requirement of
+c89 for a couple years now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:11.31</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>#define STDC_HEADERS 1</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:11.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, that's useless to set unless it's used
+somewhere by a 3rd party relying on it getting set</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:12.03</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if we rely on it, we shouldn't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:12.19</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>I think it's just tcl (where I'm hhandling it
+anyway)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:12.40</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we shouldn't be testing anything c89 provides
+as a strict matter of principle (other than as a build environment
+sanity check like I mentioned, to halt)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:13.16</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the only reason it was ever there was because
+I was going for full parity with the autotools build</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:13.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>then it should halt, not set a #define
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:13.59</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I was going to yank it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:14.44</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>*shrug*  it's fine in that one place, but it
+should serve a purpose (sanity test)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:15.14</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's particularly why configure.ac has that
+whole block that itemizes which headers are c89, which are c95,
+which are c99, etc ..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:15.22</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>doubt it's worth maintaining unless there's a
+realistic chance we'll need it - IIRC it was a bit of a
+poin</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:15.25</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>pain even</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:15.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>absolutely shouldn't waste time testing for
+c89 headers, setting HAVE_*_H defines, nor wrapping them in #ifdef
+blocks</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:16.36</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, looks like only tcl/tk really
+cares</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:17.06</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's just 16 lines of "code" ... if that's
+painful ... some threshold might need adjusting :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:17.28</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>more painful trying to figure out what the AC
+macro in question was doing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:17.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that macro by itself is
+inconsequential</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:17.40</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">still doubts he fully
+duplicated all of its testing</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:18.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's more making sure we don't check for c89
+headers in other places like you'd just added to that new
+macro</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:18.53</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>undoubtedly, looks like you test for but never
+even use HAVE_STRING_H_MEMCHR</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and HAVE_STDLIB_H_FREE</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:19.55</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>unless you make it halt, just yank
+it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:20.21</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46470
+10/brlcad/trunk/ (CMakeLists.txt
+misc/CMake/BRLCAD_CheckFunctions.cmake): nevermind about
+STDC_HEADERS - we don't really need it, only tcl/tk really use it
+so let them deal with it.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:20.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>more effective would be a test for exactly all
+of the c89 headers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:21.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: where'd be a good place to
+replicate the header comment block from configure.ac to help
+prevent folks from adding unnecessary tests?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:22.10</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>probably stage 5 in the toplevel
+CMakeLists.txt file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:22.16</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>oh, duh ..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:22.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>sprintf returns number of chars printed -- was
+thinking sscanf</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:22.42</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>most of the tests are there and should go
+there - CheckFunctions was for special stuff that needed something
+more complicated than just checking the include file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:23.37</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>again based on the autoconf tests - it may be
+that a lot of those could be reduced to header checks on modern
+hardware</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:24.43</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>(around line 1031 in CMakeLists.txt)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:25.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>ah, already there .. got it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:25.39</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">mostly went with what was in
+configure.ac - "foreign" tests that crept in usually resulted from
+AC_* macros of one sort or another</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:25.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>maybe worth a build system
+regression?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:26.09</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>oh, checking for improper tests?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:26.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:27.10</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably fine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:27.35</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">shrugs - yeah, at some point
+that might be worth doing</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:27.51</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">is hoping like heck that once
+this is done the build system will require only occasional
+tweaking</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:31.52</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>no chance</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:32.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the only time the build system doesn't require
+changes is when the source code doesn't change</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:33.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even for fully managed IDE environments like
+msvc, you want/need/have to change the build system all the time as
+the code evolves</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:34.39</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46471
+10/brlcad/trunk/CMakeLists.txt: Hmm... it might be that platforms
+with multiple CFG types shouldn't share the same output
+directories... try this.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:35.28</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>growl</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:35.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the best you can aim for is make the build
+system logic simple enough to maintain and clean enough to be
+extended by a new/inexperienced developer easily</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:35.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's why I kept saying "this is still
+code"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:36.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>all the same coding rules and guidelines still
+apply, dry principle, neat organized code, concise yet descriptive
+vars, etc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.08</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46472
+10/brlcad/trunk/CMakeLists.txt:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.08</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: checking order changed. update docs.
+need to check compiler characteristics</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.08</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: earlier within cmake so that flags
+are set properly. remember there was a</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.08</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: specific reason for delaying the
+compiler testing until after headers/libs/types</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.08</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: with the autotools build but don't
+remember what that reason was any longer (and</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.09</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: it's not documented) so go with the
+flow -- makes more sense to test the</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:38.10</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: compiler flags earlier
+anyways.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:42.11</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46473
+10/brlcad/trunk/CMakeLists.txt: typo, wording tweak</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:47.52</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46474
+10/brlcad/trunk/CMakeLists.txt: more rewording</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:50.45</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46475
+10/brlcad/trunk/CMakeLists.txt: I suppose the date/timestamp code
+failing to generate a date should be fatal - that has to be fixed
+if it breaks.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:55.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - I may need to keey the #define DEBUG
+statement off of something other than CMAKE_BUILD_TYPE...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>04:55.38</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c7">makes a note to check what
+that's used for tomorrow...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>05:03.14</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46476
+10/brlcad/trunk/CMakeLists.txt: don't need the math expression
+anymore</tt></td>
+</tr>
+<tr>
+<td><tt>07:27.29</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad betta_y_omega
+(~betta_y_o@90.166.231.220)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:08.14</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad merzo
+(~merzo@193.254.217.44)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:35.31</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad d_rossberg
+(~rossberg@BZ.BZFLAG.BZ)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>10:32.48</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03n_reed * r46477
+10/brlcad/trunk/src/libbu/vls.c: Typo; statement with no
+effect.</tt></td>
+</tr>
+<tr>
+<td><tt>10:42.18</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad n_reed_
+(44378e88@gateway/web/freenode/ip.68.55.142.136)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:30.51</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad abhi2011
+(~chatzilla@wlan-145-94-186-249.wlan.tudelft.nl)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:53.23</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:24.28</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>thx n_reed, didn't get a chance to
+compile-test it yet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:05.45</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>phew finally the bb function works for all
+cases</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:06.38</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>seems the tree returned in a struct
+rt_db_internal  by the function rt_db_lookup_internal(), has the
+wrong op codes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:07.15</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>even if I use the dbip got from a rtip :
+rt_db_lookup_internal(rtip-&gt;rti_dbip, dp-&gt;d_namep, &amp;dp,
+&amp;intern, LOOKUP_NOISY, &amp;rt_uniresource)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:07.59</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>had to resort to getting the region for a
+passed comb (if the comb is a region) : regp = _rt_getregion(rtip,
+dp-&gt;d_namep);</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:08.18</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>once I get the region, then
+rt_bound_tree(regp-&gt;reg_treetop, tree_min, tree_max) always
+works</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:09.34</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>cant understand why the tree returned in the
+struct rt_db_internal by the function rt_db_lookup_internal()
+should have the wrong op_code</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:16.29</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>its certainly not due to a lack of preparing
+the rtip by using rt_gettree() etc</tt></td>
+</tr>
+<tr>
+<td><tt>13:18.51</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:27.49</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>abhi2011: what do you mean by wrong op
+code?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:28.43</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>the code at the primitive node is set to
+OP_DB_LEAF (12) when it should be set to OP_SOLID (1)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:30.11</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so by the code i mean tr_a.tu_op</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:30.29</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>in the union tree of combp-&gt;tree</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:31.57</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so one would expect this to work : <a href=
+"http://bin.cakephp.org/view/716816388">http://bin.cakephp.org/view/716816388</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:32.09</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>but it returns the bb for a region as
+0</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:33.41</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>because the tree could not be traversed
+completely due to the wrong code in tr_a.tu_op, which is used
+during the recursion in rt_bound_tree() as switch (
+tp-&gt;tr_op)...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:38.49</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>all the other functions which use
+rt_bound_tree()  find a matching a region by using for
+(BU_LIST_FOR(regp, region, &amp;(rtip-&gt;HeadRegion)))
+{...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:38.56</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so they never encounter this problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.40</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46478
+10/brlcad/trunk/src/libbu/ (10 files):</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.40</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: rename all of the test programs to
+have a test_ prefix instead of a tester</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.40</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: suffix. makes them easier to identify
+and groups tests together. should help</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:42.40</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: keep things more organized moving
+forward as more unit tests are written.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:45.46</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46479
+10/brlcad/trunk/src/libbu/ (test_basename.c test_htond.c
+test_progname.c test_timer.c): update file names in headers and
+usage</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:56.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>abhi2011: the code is fine</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:57.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that code just means that it's a leaf node
+(which it is) and that the node is still in db format (which it
+is)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:57.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the problem may just be that rt_bound_tree()
+needs to implement that switch case</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:58.51</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>very likely is the problem</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:00.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nice work on the new rt_bound_internal()
+though, looking great in that paste -- only issue I see are the
+exact (== 0) floating point comparisons at the bottom, those should
+be NEAR_ZERO())</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:51.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: running cmake in debug mode and
+encountering some strange issues</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:52.37</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>variety of tests that fail but shouldn't,
+failures detecting 32bit/64bit, error about TEST_BIG_ENDIAN during
+debug but not during non-debug</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:56.49</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>brlcad: ok then I ll add a OP_DB_LEAF case to
+rt_bound_internal</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:57.02</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>abhi2011: cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:58.09</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>just hope its that simple :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.36</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you can't just pretend an OP_DB_LEAF is an
+OP_SOLID if that's what you're thinking</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>15:59.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you have to add the logic for that
+case</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:01.26</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yes i understand that, however I do expect the
+solid pointer to be present in tp-&gt;tr_a.tu_stp;</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.24</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>because a OP_DB_LEAF is the end of the line
+for the tree , there should no more recursion needed</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.32</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>actually I believe that is exactly what
+OP_DB_LEAF means is not done yet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:02.59</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it's in db format, then a solid hasn't been
+loaded yet</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.04</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.09</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>hmm</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.29</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>and rt_db_lookup_internal() always returns in
+db format</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.41</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>look around some other switch statements that
+use OP_DB_LEAF to see what they do</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:03.47</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:05.58</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>umm but a question, why would the logic work
+if I get the same region using a match from : for
+(BU_LIST_FOR(regp, region, &amp;(rtip-&gt;HeadRegion)))
+{...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:06.07</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>somehow that is not in db format</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:06.50</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>the regions got from the rtip-&gt;HeadRegion
+contains a "all solids loaded" format which works with
+rt_bound_tree()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:07.54</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>so something like this works : <a href=
+"http://bin.cakephp.org/view/1320641560">http://bin.cakephp.org/view/1320641560</a></tt></td>
+</tr>
+<tr>
+<td><tt>16:08.23</tt></td>
+<td colspan="2"><tt><span class="c9">*** part/#brlcad n_reed
+(~molto_cre@BZ.BZFLAG.BZ)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:08.26</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>not sure, but probably simply because it's
+just a different container -- gettrees happens to fill out a soltab
+because it needs it, yet the "other" one you get from lookup has
+not been loaded</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:09.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the region search is a bit bogus, though ..
+not sure what that will do for models that have no regions
+defined</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:12.50</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yes they would then have groups</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:13.21</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>but hmm, even for groups I search for regions
+that the group contains</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:13.36</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>it maybe that the group has just
+prims</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:41.06</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>hmm most cases using the OP_DB_LEAF simply
+play around with the prim name in tp-&gt;tr_l.tl_name , moving it
+from x to y :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:41.23</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>or they exists at the lowest db_* function
+level</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:42.22</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>dont see any case of converting a union tree
+with a OP_DB_LEAF op to a solid with usable geometry</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:45.35</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>I would have though that there would be a
+function which would accept a union tree with a OP_DB_LEAF in one
+of its leaves and look it up using the db_lookup() function, then
+fill it with the corresponding "all solids loaded"
+representation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:45.41</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>something like that</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:46.39</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>maybe I can lookup the solid in the rtip using
+the tp-&gt;tr_l.tl_name, in the OP_DB_LEAF case</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.29</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even if you can, that's pretty much
+self-defeating</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:48.36</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>yah :P</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:49.12</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>better question to ask is how the OP_SOLID was
+created</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:49.48</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>very deep inside rt_gettree()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:50.41</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>or rather rt_gettrees_muves()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>16:55.22</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>hmm  db_walk_tree() in the above function
+preps the leaves</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:02.21</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>struct soltab *_rt_find_identical_solid()
+seems interesting</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:05.58</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46480
+10/brlcad/trunk/src/librt/primitives/metaball/metaball.c: Quiet
+potentially uninitialized warning.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:54.44</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46481
+10/brlcad/trunk/src/libbu/ (CMakeLists.txt Makefile.am
+test_vls.c):</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:54.44</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: add a preliminary vls unit test to
+make sure our printing format specifier</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:54.44</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: behavior is consistent with stdio's
+behavior. particularly for non-standard</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>17:54.44</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: format specifier issues like %z and
+%ll, make sure something sane is happening.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:10.58</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46482
+10/brlcad/trunk/ (CMakeLists.txt src/conv/obj-g_new.c): Ah, right -
+we include tcl headers, so we define STDC_HEADERS for them.
+Document that.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:28.11</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46483
+10/brlcad/trunk/src/libbu/test_vls.c: expand to include more types,
+legths, and some precision tests.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:30.19</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46484
+10/brlcad/trunk/src/libbu/vls.c: bu_strlcpy() size includes the
+null character, make sure len is adjusted accordingly</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:44.49</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46485
+10/brlcad/trunk/src/libbu/str.c: consistency in the &gt;= logic --
+looks like it is/was right, but was misleading how it was using the
+operator</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:48.32</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46486
+10/brlcad/trunk/src/libbu/vls.c: revert back to strncpy() until we
+can get a proper debug in.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:54.42</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r46487
+10/brlcad/trunk/src/libbu/test_vls.c: mark unused
+variable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>18:59.20</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>huh, for all asc2g runs:
+db_dirbuild(/usr/tmp/brlcadbuild/share/brlcad/7.20.3/db/xmp.g):
+improper database, _GLOBAL object attribute 'units'= is
+invalid</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:05.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, that's probably r46486
+off-by-one</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:10.10</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46488
+10/brlcad/trunk/src/libbu/vls.c: len is not -1</tt></td>
+</tr>
+<tr>
+<td><tt>19:15.11</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad abhi2011
+(~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.09</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>there is some code supporting the 'E' command
+which involves case OP_DB_LEAF</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.30</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>seems the directory pointer is lookedup using
+dp=db_lookup()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:16.43</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>and then a solid is added using eptr =
+add_solid(dp, tp-&gt;tr_l.tl_mat, dgcdp);</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:18.28</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>hmm nope, its seems libged related , struct
+_ged_client_data has to be passed to add_solid()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:18.38</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: does that fix it?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:23.55</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: fixes it here</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:25.59</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>brlcad: I think the only way to convert the
+OP_DB_LEAF would be to try and look it up using db_look()</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:26.16</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>prep.c uses that for example</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.04</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>abhi2011: sounds reasonable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.09</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>otherwise the only other way is to pick some
+code from rt_gettree() which is going to take quite a
+while</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:27.22</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>db_lookup() would be needed to get a handle on
+geometry anyways (at some point)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:28.16</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46489
+10/brlcad/trunk/src/libbu/test_vls.c: put ac and av to good
+use</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:28.49</tt></td>
+<td><span class="c8"><tt>abhi2011</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:29.17</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you just shouldn't need an rtip</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:29.24</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's a db operation</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:30.31</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(rt_gettree() obviously uses an rtip, but
+that's because it's specificially "getting geometry trees ready for
+ray tracing")</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:32.52</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>brlcad: yup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:33.45</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cool, thx</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:35.07</tt></td>
+<td><span class="c10"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(hopefully their eyes don't bleed too much
+from my cmake patch) O:-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:48.54</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46490
+10/brlcad/trunk/src/libbu/test_vls.c: test more width, precision,
+and format specifier flags to make sure vls does what libc
+does</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>19:57.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: <a href=
+"http://www.cmake.org/pipermail/cmake/2011-August/046044.html">http://www.cmake.org/pipermail/cmake/2011-August/046044.html</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:01.20</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"or the stuff from the previous try-compile
+might affect the next one"  &lt;-- shouldn't happen, imho</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:01.58</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that sounds like the bug to me or unexpected
+behavior at best</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:02.46</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>good to hear there's somewhat of a way to
+debug, but that's kinda beating around the bush</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:03.56</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I was going to ask if the behavior
+could be changed to saving the files of each test in its own
+subdirectory - did you want to respond yourself?  You'll
+undoubtedly make a more compelling case than I'll be able
+to</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:08.19</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I'd just say what I said here save the bush
+part, maybe ask why reuse the same directory (particularly given it
+makes the build tests stateful) .. the tests should be stateless,
+shouldn't matter if there was already output</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:08.33</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(it shouldn't read then write, it should write
+then read ...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:10.07</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>otherwise, i'm not on that mailing list so I
+won't be responding anytime soon :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:10.25</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r46491
+10/brlcad/trunk/src/libbu/test_vls.c: couple more tests</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:15.03</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>urk <a href=
+"https://sites.google.com/site/x32abi/">https://sites.google.com/site/x32abi/</a></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:15.15</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>just in case 32/64 bit wasn't complicated
+enough...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:29.01</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:29.27</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>sounded like that might be yet a third option
+to the 32/64 bit option matrix...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:29.35</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's just describing the 64bit abi</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:30.34</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>options on how to run a 32-bit app on 64-bit
+platform (and do so portably per the abi)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:31.00</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it says it's a "32bit psABI for x86-64 with
+32bit pointer size" - does that just mean a 32 bit API for 64 bit
+hardware?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:31.08</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:31.18</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>so no compiler flags needed
+(hopefully)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:31.56</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's part of it, an implementation of part
+of the spec</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:32.48</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>so you can run a 32-bit app with it's 32-bit
+pointers and have it play nicely</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:33.08</tt></td>
+<td><span class="c2"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>not something we'll likely have to care
+about</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>20:33.15</tt></td>
+<td><span class="c4"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>phew</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:45.36</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r46492
+10/brlcad/trunk/src/other/re2c.dist: add the new re2c file to the
+ignore list</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03n_reed * r46493
+10/brlcad/trunk/src/other/lemon/CMakeLists.txt:</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: Lemon needs the template file in the
+same directory as the binary. On systems</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: using configurations, that means we
+need to copy this file into the</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: configuration binary directory, not
+just bin. May be more files where this is</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.20</tt></td>
+<td><span class="c6"><tt>CIA-62</tt></span></td>
+<td width="100%"><tt>BRL-CAD: true - TODO.</tt></td>
+</tr>
+<tr>
+<td><tt>22:54.49</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad archivist
+(~archivist@host81-149-189-98.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>22:54.49</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad alex_joni
+(~alex_joni@emc/board-of-directors/alexjoni)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:05.27</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad archivist
+(~archivist@host81-149-189-98.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:05.27</tt></td>
+<td colspan="2"><tt><span class="c5">*** join/#brlcad alex_joni
+(~alex_joni@emc/board-of-directors/alexjoni)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

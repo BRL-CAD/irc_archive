@@ -1,102 +1,504 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20180314</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20180314</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c10 {color: #6CCDCD}
+ span.c9 {color: #CC6BCC}
+ span.c8 {color: #CC00CC}
+ span.c7 {color: #6767C5}
+ span.c6 {color: #D97272}
+ span.c5 {color: #B86161}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #97974F}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20180314</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>00:19.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@rikers.org)</font></tt></td></tr>
-<tr><td><tt>00:19.26</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD and open source CAx discussion ! Also @ <a href="http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> ! Logs @ <a href="http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:25.03</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: fyi, nirt debug doesn't work in the new version -- you have it setting a var but it's never used.&nbsp;&nbsp;old code accesses a global.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>01:25.30</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>I got what I needed from --old, but thought you might like to know</tt></td></tr>
-<tr><td><tt>01:30.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad oawzvyyaexfqqgup (~armin@dslb-088-066-159-125.088.066.pools.vodafone-ip.de)</font></tt></td></tr>
-<tr><td><tt>03:28.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:48.15</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>brlcad: Before starting to write a gsoc proposal I'd like to discuss the implementation of material system.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:48.29</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>We are using Appleseed's materials, right (and not translating BRL-CAD's materials to Appleseed's ones)? So I will have to write a small comand-line routine for materials/lightsources/e.t.c. and rewrite writing/reading&nbsp;&nbsp;routines of databases (.g files)? Is that it?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:52.25</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>we're certainly using their materials, but the material definitions need to come from BRL-CAD geometry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:53.53</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>now there's lots of ways to go about that from where things are at now, but translating is probably the best starting point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:55.03</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>at a most basic level, it just means scanning geometry during prep to instantiate appleseed materials before shooting rays</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:59.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>currently materials are expressed as an rgb color and/or a simple keyword string (e.g., "light" and "plastic") followed by parameters (like how transparent/reflective/etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:05.03</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>now using that and making appleseed materials is pretty straightforward (e.g., most will probably simply default to the disney material, akin to our 'plastic') -- the complication later will be figuring out a good way to persist new shader settings in the .g file because we'll need to find a way that works across multiple different renderers (e.g., appleseed, ospray, optical, and osl)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:08.00</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the TODO file has some thoughts on this -- namely having a new entity type, material objects, stored in the .g file that objects could refer to by name instead of the built-in optical shader keywords</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:09.41</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP_: for gsoc, the first main goal will be to get awesome renderings of .g files without user intervention, so you'll want to use as much existing information as possible and treat the .g files as read-only (for starters)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:14.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I think I've figured out what's going on with the grazing cylinder.&nbsp;&nbsp;the ray isn't grazing the cylinder, it's grazing the bounding box and getting different behavior due to an inf inverse vector (which I still have to track down)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:18.42</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: unexpectedly, c90 mode is restoring behavior from 7.20 days so we'll have to figure out what the right behavior should be .. at my first glance, I would have said that the new c90 mode is right and the 7.26.* behavior is "wrong" except that spatial partitioning shouldn't eliminate hits</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:25.49</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>Okay, then I start with parsing brl-cad's materials and choosing somewhat similar by appearence BRDFs. And then expand it with some keywords/parameters for choosing different BRDFs?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:26.06</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>For example, let's say we have plastic material. In BRL-CAD it's rendered with Phong BRDF. When I parse .g file, I read the keyword, read diffuse/specular terms, color, then create in Appleseed, let's say Disney BRDF with our parameters(somehow tweaked). Okay, we will have a working renderer at this point. Next, should I add let's say a plastic material that's rendered with CookTorrance or any other BRDF? Should I cover all the stuf</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.15</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP_: we need to talk it over but I don't think you need to cover everything -- just the most commonly used ones (light, plastic, mirror, glass) just so there's some sensible defaults and a way to expand mappings later if we want to support others (e.g., checker, texture, bump, flat, camo, etc)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:32.54</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>frankly, pulling color and lights is probably the most important aspect</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:34.20</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>if it just did that or even just color, but then had sensible general default lighting (e.g., rt has lights behind the view frame and an ambient light by default)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:40.55</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>it doesn't have to be or behave the same, but conceptually I suggest a 3-stage effort where you work on making a command-line renderer like rt that goes through appleseed (maybe call it "art"), then sort through how to present and integrate it via GUI (we should talk about this more later), then how to persist and make appearance customizations (appleseed and/or other shader definitions)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:45.45</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>hmm, what does that mean exactly?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:45.46</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>&gt;how to present and integrate it via GUI</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>04:46.58</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>present what? some rendering parameters?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:13.21</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP_: it's TBD (or TBP) but basically some GUI integration of appleseed rendering and rendering options, ideally interactively and adaptively ala appleseed studio but more focused on CAD requirements and new GUI than exactly all the controls one might want for production rendering purposes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:19.00</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>Okay I got it, thanks. </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:19.18</tt></td><td><font color="#b86161"><tt>DenisP_</tt></font></td><td width="100%"><tt>I will post here a proposal as soon as I finish it.</tt></td></tr>
-<tr><td><tt>06:39.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@43-15-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:33.41</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>looking forward to reading it!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:33.51</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>(and seeing a patch)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:35.09</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Cool stuff :), physically based rendering of .g it is</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>07:35.35</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Ray tracing would have quite the advantage over rasterization for sub-surface scattering, but that's probably not a concern for typical .g models</tt></td></tr>
-<tr><td><tt>09:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~KimK@2001:579:d00c:800:4a5b:39ff:fe0b:57d2)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:18.13</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I vaguely remember tightening up the bboxes for some of the primitives a long while back - perhaps the tgc bbox is too tight under certain conditions?</tt></td></tr>
-<tr><td><tt>10:20.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~KimK@2001:579:d00c:800:4a5b:39ff:fe0b:57d2)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:20.09</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Ideally, the bounding box border would have to be proportional to its distance from the origin (okay) or the ray origin (darn it)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:24.58</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>it's been a long time since those changes, and I don't remember the motivation other than the generic "bboxes should be as tight as possible to skip as many ray tests as possible"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:25.32</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>but it may be that (especially for axis aligned situations) I overdid it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:26.40</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Right. I'm just saying that the loss of mantissa bits depends how far your ray origin from the box is, so it's a bit... annoying by design</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:26.49</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:27.06</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>the safe thing is of course increase by the maximum possible necessary delta</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:27.36</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>which may very well be why the original bbox logic was in place that I "improved"... wouldn't be the first time I did something like that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:27.57</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>While documenting the maximum magnitude of a ray origin ensuring robustness</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:28.16</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Kind of hard to trace rays from a source at 0,FLT_MAX,0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:28.21</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>(autotools -&gt; CMake could be characterized as a long continous series of toe stubbings in that regard...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:29.18</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: that's a point, actually... I'm not sure if we call out the limits of a valid ray origin explicitly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:29.48</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>If you can set limits, then you can precisely compute the border you need for your bounding boxes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:31.47</tt></td><td><font color="#6767c5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:33.12</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Besides the big_number_a - big_number_b accuracy, also assume a loss of 0.5 mantissa bits per FLOP while computing bbox-ray intersection, and you are good to go</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:48.51</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>that's a bummer, Hawking passed <a href="http://www.bbc.com/news/uk-43396008">http://www.bbc.com/news/uk-43396008</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:48.52</tt></td><td><font color="#6ccdcd"><tt>gcibot</tt></font></td><td width="100%"><tt>[ Stephen Hawking: Visionary physicist dies aged 76 - BBC News ]</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:53.44</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Ah crap :(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:54.52</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Erik, we haven't chatted in forever squared, but I'll probably travel to Maryland later in March if you want to meet and chat</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:57.56</tt></td><td><font color="#cc6bcc"><tt>``Erik</tt></font></td><td width="100%"><tt>Stragus: definitely, lemme know when you have the dates</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>10:58.26</tt></td><td><font color="#d97272"><tt>Stragus</tt></font></td><td width="100%"><tt>Sure, cool</tt></td></tr>
-<tr><td><tt>11:28.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@185.39.197.205)</font></tt></td></tr>
-<tr><td><tt>13:00.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
-<tr><td><tt>13:32.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@185.39.197.205)</font></tt></td></tr>
-<tr><td><tt>13:46.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:6f54:290:f5ff:fedc:3bb2)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.52</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that's exactly the case, the ray origin was about 10^4 units away, nearly perfectly slicing down through the side of the bbox -- deciding it was a miss of the bbox, but a hit on the enclosed cylinder face (perfectly aligned with the bbox face)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:48.02</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>"perfectly" of course</tt></td></tr>
-<tr><td><tt>13:53.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@185.39.197.205)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: cmake error linking src/librt/tests/rt_pattern.c .. missing tinycthread symbol during link</tt></td></tr>
-<tr><td><tt>22:00.57</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o brlcad] by ChanServ</font></tt></td></tr>
-<tr><td><tt>23:22.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@43-15-132-95.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>23:23.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>00:19.26</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad infobot
+(ibot@rikers.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>00:19.26</tt></td>
+<td colspan="2"><tt><span class="c2">*** topic/#brlcad is BRL-CAD
+and open source CAx discussion ! Also @ <a href=
+"http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> !
+Logs @ <a href=
+"http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:25.03</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: fyi, nirt debug doesn't work in
+the new version -- you have it setting a var but it's never used. 
+old code accesses a global.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>01:25.30</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>I got what I needed from --old, but thought
+you might like to know</tt></td>
+</tr>
+<tr>
+<td><tt>01:30.08</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad
+oawzvyyaexfqqgup
+(~armin@dslb-088-066-159-125.088.066.pools.vodafone-ip.de)</span></tt></td>
+</tr>
+<tr>
+<td><tt>03:28.48</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:48.15</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>brlcad: Before starting to write a gsoc
+proposal I'd like to discuss the implementation of material
+system.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:48.29</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>We are using Appleseed's materials, right (and
+not translating BRL-CAD's materials to Appleseed's ones)? So I will
+have to write a small comand-line routine for
+materials/lightsources/e.t.c. and rewrite writing/reading  routines
+of databases (.g files)? Is that it?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:52.25</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we're certainly using their materials, but the
+material definitions need to come from BRL-CAD geometry</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:53.53</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>now there's lots of ways to go about that from
+where things are at now, but translating is probably the best
+starting point</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:55.03</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>at a most basic level, it just means scanning
+geometry during prep to instantiate appleseed materials before
+shooting rays</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:59.22</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>currently materials are expressed as an rgb
+color and/or a simple keyword string (e.g., "light" and "plastic")
+followed by parameters (like how
+transparent/reflective/etc)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:05.03</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>now using that and making appleseed materials
+is pretty straightforward (e.g., most will probably simply default
+to the disney material, akin to our 'plastic') -- the complication
+later will be figuring out a good way to persist new shader
+settings in the .g file because we'll need to find a way that works
+across multiple different renderers (e.g., appleseed, ospray,
+optical, and osl)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:08.00</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the TODO file has some thoughts on this --
+namely having a new entity type, material objects, stored in the .g
+file that objects could refer to by name instead of the built-in
+optical shader keywords</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:09.41</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP_: for gsoc, the first main goal will be
+to get awesome renderings of .g files without user intervention, so
+you'll want to use as much existing information as possible and
+treat the .g files as read-only (for starters)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:14.26</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: I think I've figured out what's
+going on with the grazing cylinder.  the ray isn't grazing the
+cylinder, it's grazing the bounding box and getting different
+behavior due to an inf inverse vector (which I still have to track
+down)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:18.42</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: unexpectedly, c90 mode is
+restoring behavior from 7.20 days so we'll have to figure out what
+the right behavior should be .. at my first glance, I would have
+said that the new c90 mode is right and the 7.26.* behavior is
+"wrong" except that spatial partitioning shouldn't eliminate
+hits</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:25.49</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Okay, then I start with parsing brl-cad's
+materials and choosing somewhat similar by appearence BRDFs. And
+then expand it with some keywords/parameters for choosing different
+BRDFs?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:26.06</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>For example, let's say we have plastic
+material. In BRL-CAD it's rendered with Phong BRDF. When I parse .g
+file, I read the keyword, read diffuse/specular terms, color, then
+create in Appleseed, let's say Disney BRDF with our
+parameters(somehow tweaked). Okay, we will have a working renderer
+at this point. Next, should I add let's say a plastic material
+that's rendered with CookTorrance or any other BRDF? Should I cover
+all the stuf</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.15</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP_: we need to talk it over but I don't
+think you need to cover everything -- just the most commonly used
+ones (light, plastic, mirror, glass) just so there's some sensible
+defaults and a way to expand mappings later if we want to support
+others (e.g., checker, texture, bump, flat, camo, etc)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:32.54</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>frankly, pulling color and lights is probably
+the most important aspect</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:34.20</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>if it just did that or even just color, but
+then had sensible general default lighting (e.g., rt has lights
+behind the view frame and an ambient light by default)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:40.55</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it doesn't have to be or behave the same, but
+conceptually I suggest a 3-stage effort where you work on making a
+command-line renderer like rt that goes through appleseed (maybe
+call it "art"), then sort through how to present and integrate it
+via GUI (we should talk about this more later), then how to persist
+and make appearance customizations (appleseed and/or other shader
+definitions)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:45.45</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>hmm, what does that mean exactly?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:45.46</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>&gt;how to present and integrate it via
+GUI</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>04:46.58</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>present what? some rendering
+parameters?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:13.21</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>DenisP_: it's TBD (or TBP) but basically some
+GUI integration of appleseed rendering and rendering options,
+ideally interactively and adaptively ala appleseed studio but more
+focused on CAD requirements and new GUI than exactly all the
+controls one might want for production rendering purposes</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:19.00</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>Okay I got it, thanks.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>06:19.18</tt></td>
+<td><span class="c5"><tt>DenisP_</tt></span></td>
+<td width="100%"><tt>I will post here a proposal as soon as I
+finish it.</tt></td>
+</tr>
+<tr>
+<td><tt>06:39.36</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@43-15-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>07:33.41</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>looking forward to reading it!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>07:33.51</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>(and seeing a patch)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>07:35.09</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Cool stuff :), physically based rendering of
+.g it is</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>07:35.35</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Ray tracing would have quite the advantage
+over rasterization for sub-surface scattering, but that's probably
+not a concern for typical .g models</tt></td>
+</tr>
+<tr>
+<td><tt>09:18.35</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad KimK
+(~KimK@2001:579:d00c:800:4a5b:39ff:fe0b:57d2)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:18.13</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: I vaguely remember tightening up the
+bboxes for some of the primitives a long while back - perhaps the
+tgc bbox is too tight under certain conditions?</tt></td>
+</tr>
+<tr>
+<td><tt>10:20.07</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad KimK
+(~KimK@2001:579:d00c:800:4a5b:39ff:fe0b:57d2)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:20.09</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Ideally, the bounding box border would have to
+be proportional to its distance from the origin (okay) or the ray
+origin (darn it)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:24.58</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>it's been a long time since those changes, and
+I don't remember the motivation other than the generic "bboxes
+should be as tight as possible to skip as many ray tests as
+possible"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:25.32</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>but it may be that (especially for axis
+aligned situations) I overdid it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:26.40</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Right. I'm just saying that the loss of
+mantissa bits depends how far your ray origin from the box is, so
+it's a bit... annoying by design</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:26.49</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:27.06</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>the safe thing is of course increase by the
+maximum possible necessary delta</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:27.36</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>which may very well be why the original bbox
+logic was in place that I "improved"... wouldn't be the first time
+I did something like that</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:27.57</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>While documenting the maximum magnitude of a
+ray origin ensuring robustness</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:28.16</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Kind of hard to trace rays from a source at
+0,FLT_MAX,0</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:28.21</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>(autotools -&gt; CMake could be characterized
+as a long continous series of toe stubbings in that
+regard...)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:29.18</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>Stragus: that's a point, actually... I'm not
+sure if we call out the limits of a valid ray origin
+explicitly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:29.48</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>If you can set limits, then you can precisely
+compute the border you need for your bounding boxes</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:31.47</tt></td>
+<td><span class="c7"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c8">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:33.12</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Besides the big_number_a - big_number_b
+accuracy, also assume a loss of 0.5 mantissa bits per FLOP while
+computing bbox-ray intersection, and you are good to go</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:48.51</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>that's a bummer, Hawking passed <a href=
+"http://www.bbc.com/news/uk-43396008">http://www.bbc.com/news/uk-43396008</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:48.52</tt></td>
+<td><span class="c10"><tt>gcibot</tt></span></td>
+<td width="100%"><tt>[ Stephen Hawking: Visionary physicist dies
+aged 76 - BBC News ]</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:53.44</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Ah crap :(</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:54.52</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Erik, we haven't chatted in forever squared,
+but I'll probably travel to Maryland later in March if you want to
+meet and chat</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:57.56</tt></td>
+<td><span class="c9"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>Stragus: definitely, lemme know when you have
+the dates</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>10:58.26</tt></td>
+<td><span class="c6"><tt>Stragus</tt></span></td>
+<td width="100%"><tt>Sure, cool</tt></td>
+</tr>
+<tr>
+<td><tt>11:28.00</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@185.39.197.205)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:00.52</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad kintel
+(~kintel@unaffiliated/kintel)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:32.36</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@185.39.197.205)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:46.12</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad yorik
+(~yorik@2804:431:f721:6f54:290:f5ff:fedc:3bb2)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:47.52</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's exactly the case, the ray origin was
+about 10^4 units away, nearly perfectly slicing down through the
+side of the bbox -- deciding it was a miss of the bbox, but a hit
+on the enclosed cylinder face (perfectly aligned with the bbox
+face)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:48.02</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>"perfectly" of course</tt></td>
+</tr>
+<tr>
+<td><tt>13:53.24</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@185.39.197.205)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>13:57.05</tt></td>
+<td><span class="c3"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: cmake error linking
+src/librt/tests/rt_pattern.c .. missing tinycthread symbol during
+link</tt></td>
+</tr>
+<tr>
+<td><tt>22:00.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** mode/#brlcad [+o brlcad]
+by ChanServ</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:22.19</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@43-15-132-95.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:23.58</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Caterpillar
+(~caterpill@unaffiliated/caterpillar)</span></tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

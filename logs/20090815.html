@@ -1,189 +1,950 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20090815</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20090815</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c14 {color: #6BCC6B}
+ span.c13 {color: #CB6BCB}
+ span.c12 {color: #AF5CAF}
+ span.c11 {color: #E1E176}
+ span.c10 {color: #000099}
+ span.c9 {color: #B66060}
+ span.c8 {color: #B6B65F}
+ span.c7 {color: #009900}
+ span.c6 {color: #5959A9}
+ span.c5 {color: #C668C6}
+ span.c4 {color: #CC00CC}
+ tr.c3 {background-color: #EEEEEE}
+ span.c2 {color: #97974F}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20090815</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr bgcolor="#eeeeee"><td><tt>00:00.48</tt></td><td><font color="#97974f"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: ah, thanks :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:01.29</tt></td><td><font color="#97974f"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">actually got it to compile - it was C++ name mangling that (apparently) made the BU_EXTERN not work</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:04.21</tt></td><td><font color="#97974f"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.11</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, it compiled?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.21</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>nm made it look like a c++ name mangle issue to me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:05.38</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>the symbol had all sorts of signature goop on it in the library</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:08.23</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(the BU_EXTERN() macro shouldn't do anything weird wrt c++... *shrug*)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:09.22</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, might just be apple name mangling... not used to looking at the guts of dylib</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:15.01</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, anything g++ touches gets mangled like mad, gcc itself just puts a _ at the beginning :/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:49.14</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>BU_EXTERN is only valid inside an extern "C" block</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:49.24</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>in a c++ file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:52.48</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>ahhhh, epiphany, I grok now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:53.19</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>it tells c++ to not mangle, extern itself does not</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:53.48</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(ya'd think a C style definition would convince c++ to play by C's rules... apparently not.)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>00:55.34</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: didja email a ticket in for the hw check of crit?</tt></td></tr>
-<tr><td><tt>03:29.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic_ (n=docelic@78.134.199.152)</font></tt></td></tr>
-<tr><td><tt>04:28.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
-<tr><td><tt>06:31.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:48.58</tt></td><td><font color="#b6b65f"><tt>talcite_</tt></font></td><td width="100%"><tt>will our scripts in /usr/bin/brlcad always be suffixed with a .sh extension?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:49.15</tt></td><td><font color="#b6b65f"><tt>talcite_</tt></font></td><td width="100%"><tt>I need a way of identifying which are ELF executables and which aren't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:52.10</tt></td><td><font color="#b66060"><tt>jdoliner</tt></font></td><td width="100%"><tt>um According to hacking POSIX Bourne Style Scripts use the .sh extension</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:52.23</tt></td><td><font color="#b66060"><tt>jdoliner</tt></font></td><td width="100%"><tt>so it is indeed a rule</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>06:52.38</tt></td><td><font color="#b66060"><tt>jdoliner</tt></font></td><td width="100%"><tt>line 399</tt></td></tr>
-<tr><td><tt>06:58.57</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jdoliner (n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</font></tt></td></tr>
-<tr><td><tt>08:49.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@202.3.77.11)</font></tt></td></tr>
-<tr><td><tt>09:09.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14FCCF.dip.t-dialin.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:12.32</tt></td><td><font color="#b6b65f"><tt>talcite_</tt></font></td><td width="100%"><tt>holy crap. It finally built with all the rpaths removed =D </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>09:12.54</tt></td><td><font color="#b6b65f"><tt>talcite_</tt></font></td><td width="100%"><tt>This is going to be awesome. I'm throwing it into my VM to test as soon as the whole RPM finishes building =D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:45.27</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>almost always, there are three notable exceptions: benchmark, archer, and brlman</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>11:46.27</tt></td><td><font color="#5959a9"><tt>brlcad</tt></font></td><td width="100%"><tt>they live as .sh in the sources but are installed without suffix for end-users</tt></td></tr>
-<tr><td><tt>12:00.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu (n=sean@bz.bzflag.bz)</font></tt></td></tr>
-<tr><td><tt>12:03.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
-<tr><td><tt>12:04.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _sushi_ (n=_sushi_@84-73-206-51.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:51.10</tt></td><td><font color="#e1e176"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r35563 10/brlcad/trunk/src/util/ (Makefile.am rtwizard rtwizard.tcl): store rtwizard as rtwizard.tcl and merely install it as 'rtwizard' so that the file format is evident within the source hierarchy.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:28.28</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>what're the tcl commands for tree walking?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:29.34</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>facetall.sh and foreach reg $mybots { mv $reg $reg.csg; r $reg u $reg.bot } make me sad</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:30.52</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(using mged myfile.g tops 2&gt;&amp;1 | xargs -n 1 | grep '\.bot$' | xargs and pasting the result into set mybots {xxx})</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:32.24</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>optimally, I'd like to dup a specified tree, with a postfix modifier and a per region function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:34.47</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(dup-tree :postfix ".f" :region-callback (lambda (r) (facetize (string-append (name region) ".f") r) r)))</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:35.10</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>or, y'know... something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:44.07</tt></td><td><font color="#e1e176"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r35564 10/brlcad/trunk/src/util/rtwizard.tcl: cleanup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:45.23</tt></td><td><font color="#e1e176"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r35565 10/brlcad/trunk/ (4 files in 2 dirs): the other suffix outlier, store brlman.in as brlman.sh.in so that the file format is evident within the source hierarchy as brlman.sh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:46.40</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>tree walking in tcl is a manual process</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.00</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>'k, how? (lame)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.01</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>there are a couple helper procs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.25</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(and why was I unable to find this info on the web?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.49</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>get_regions shows a recursive traversal that looks for regions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:47.56</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>src/tclscripts/mged/get_regions.tcl</tt></td></tr>
-<tr><td><tt>13:48.06</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o brlcad] by ChanServ</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:48.52</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>also; btclsh help lists all the neato mged functions but cannot execute them</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.19</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that'd be because 'help' is a tcl proc, src/tclscripts/help.tcl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.33</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it shouldn't be - needs to be a libged func</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.57</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a chunk of refactoring I've had in mind for a while, but haven't gotten to it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:50.57</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- never digs into tcl shtuff, just pointing out surprises</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:51.28</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>was one of those "have a task, looks likeit should be easy in tcl, lets go learn tcl" deals</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:52.08</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>nah, it was part of an earlier refactoring that pushed more towards tcl</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:52.37</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>since half the commands are in tcl, half the help was there, the other half was in a c callback table</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:52.53</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the callback table was merged into the tcl table so that all help was in one plce</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.23</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>now with libged, though, the commands really should be self-contained and define their own help/docs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:53.37</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>even if it means a separate help table for the tcl procs still</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:54.30</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:54.35</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>if only C had docstrings</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.00</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>also; "foreach reg [get_regions tank] { echo $reg }" does't print anything, but other ops do shtuff... is echo not quite right? or am I doing something stupid (is this related to the "only the last command prints" bug?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.13</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>thinking to make it more like table.c style with sets of callbacks/info per command</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:57.30</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>puts</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.12</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>ermmmm, ok, that displays... well.... tank...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.54</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>heh...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.55</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>mged&gt; foreach reg [get_regions tank] { puts "$reg" }</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:58.55</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>tank</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.13</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>mged&gt; get_regions tank</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.13</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r21 r22 r204 r205 r15 r16 r17 r18 r19 r211 r215 r216 r217 r218 r219 r220 r221 r222 r223 r224 r225 r226 r227 r228 r229 r230 r231 r232 r233 r234 r235 r236 r237 r238 r239 r240 r241 r242 r243 r244 r210 r212 r32 r33 r34 r35 r36 r37 r38 r39 r40 r41 r42 r43 r44 r45 r245 r246 r247 r248 r249 r250 r251 r252 r253 r254 r23 r24 r25 r26</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.32</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>probably need something like [list [get_regions tank]] </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>13:59.52</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>it's too damn early and saturday, I'm calling my brain on vacation :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.17</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>'k, I'm gonna pull the doof card, show me the tcl fu to walk a given tree and facetize all the regions, I'm looking for each region to contain exactly one BoT (thus "isst-optimized") :) I think I'm close, but missing a couple details</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:03.35</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>and one of us can wiki an explaination I guess</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:05.15</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(why does puts work when echo does not?)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:13.59</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>heh proc fib {a} { if { $a &lt; 2} {return 1} {return [expr [fib [expr $a-1]] + [fib [expr $a - 2]]]}}</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:14.19</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>language bootcamp :(</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:17.03</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">favors (defun fib (a) (if (&lt; a 2) 1 (+ (fib (- a 1)) (fib (- a 2))))) O:-)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:25.10</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>er</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:25.24</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>what you wrote was write</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:25.45</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>you're probably forgetting you're in mged with globbing left on :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:25.49</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>set glob_compat_mode 0</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:26.41</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>er, and s/write/right/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:27.06</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>ahhh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:28.02</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>\[ works</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:28.24</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, you can escape all the globbing chars and it'll still work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:28.33</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>or just turn off globbing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:30.10</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>useful if you want globbing AND tcl, but it will tend to be very sensitive to writespace as the globber is pretty simple</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:30.19</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>whitespace even</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:30.30</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>foreach reg \[ get_regions *.g \] {puts $reg}</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:31.33</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>foreach reg \[get_regions tank] {puts $reg}&nbsp;&nbsp;seems to work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:32.02</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(no forth style space buffering, no escaping the closing bracket, ...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:32.39</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>I d'no, I should wait for tuesday :) and do some less worky shit for now</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:34.48</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>i mean you'll need the spaces if you also want globbing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:34.56</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the globber won't like *.g\]</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>14:35.08</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
-<tr><td><tt>14:54.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jdoliner (n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</font></tt></td></tr>
-<tr><td><tt>15:55.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr><td><tt>16:04.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mouette (n=chatzill@140.109.175.102)</font></tt></td></tr>
-<tr><td><tt>18:06.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr><td><tt>19:19.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
-<tr><td><tt>19:58.30</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jdoliner (n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</font></tt></td></tr>
-<tr><td><tt>20:57.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite (n=talcite@134.117.143.233)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:21.20</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>I just did an svn up. Is the head stable right now?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.37</tt></td><td><font color="#6bcc6b"><tt>Ralith</tt></font></td><td width="100%"><tt>theoretically.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.49</tt></td><td><font color="#6bcc6b"><tt>Ralith</tt></font></td><td width="100%"><tt>by definition, head is technically not stable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.55</tt></td><td><font color="#6bcc6b"><tt>Ralith</tt></font></td><td width="100%"><tt>but there's no particular reason it should be broken</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.50</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>Ralith, alright, sounds good</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.11</tt></td><td><font color="#6bcc6b"><tt>Ralith</tt></font></td><td width="100%"><tt>don't forget to rerun autogen.sh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.28</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>yup. Its in the %prep of the spec file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.37</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>hey guys. Why is there a .jnilib file in my build? </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.47</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>I'm building on fedora. Those libs shouldn't exist should they?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:18.39</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>oh, and when is the new release coming out? I'm thinking of submitting that one for review by the repo maintainers</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:18.57</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>it's been any day now for the past couple weeks =D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:29.21</tt></td><td><font color="#6bcc6b"><tt>Ralith</tt></font></td><td width="100%"><tt>When It's Done</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.34</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>oh... hey why isn't there a LICENSE file included? Doesn't LGPL require one?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:57.47</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>we have COPYING or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:59.07</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>.jnilib might be generated by src/librtserver which is a java interaface via RNI or something</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:59.18</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>new release is "any day now"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:00.25</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>heh. Alright. I'll submit the svn head for review and update to the new release when it comes</tt></td></tr>
-<tr><td><tt>23:00.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.28</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm letting the fbsd update kinda float</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.33</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>pending update</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.45</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>ahh. so you're the fbsd maintainer? Cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.59</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>I should let them know that the current pr is bunk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.12</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>had to fix a bunch of crap for update... tkhtml3 is a bitch</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.38</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>I think we could probably get SUSE and debian maintainers soon. I don't think the packaging guidelines are that different between the major distros</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:02.50</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, doing packaging duty gives me a gardener hat to help keep things sane..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.19</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>but then ya get fools who think that it needs to be installed /usr/ and it goes back to hell... damn linux weenies :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:03.49</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>debian was cool with us having our own dir iirc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:04.34</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>we have debian inclusion?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:04.56</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>misc/debian/</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:05.09</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>we have had the ability...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:05.15</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:05.51</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>I lost my debian machine like 4 years ago so I quit mucking with them folk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:06.11</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>(note misc/brlcad.spec...)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:06.56</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>I find it hard to believe that someone else hasn't picked up package maintainership in that while</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:07.06</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>plus, don't they have remote build systems?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:07.37</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>they probably do... but I can't generate a .deb file myself</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.00</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>oh yeah </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.01</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.10</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>and my .rpm files would be enterprise specific *shrug* fbsd is one of the few "common" archs I can do :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.23</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>enterprise specific?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.27</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>doesn't ubuntu pull from debian?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.33</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, I have access to RHEL, not fedora</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.40</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:08.53</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>ubuntu is a descendant of debian, yes...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:09.25</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>but the only linux boxen I have access to are redhat enterprise</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:09.36</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>even brlcad.org is fbsd these days :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:09.38</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>what's the inclusion path for RHEL repos anyways?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:10.00</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't know and doesn't care...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:11.08</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>well yeah I guess it's probably a pretty closed process</tt></td></tr>
-<tr><td><tt>23:13.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurgi (n=cosurgi@atak.bl.pg.gda.pl)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:16.39</tt></td><td><font color="#cb6bcb"><tt>talcite</tt></font></td><td width="100%"><tt>do we have a standard icon for brlcad?</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr class="c3">
+<td><tt>00:00.48</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>brlcad: ah, thanks :-)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:01.29</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c4">actually got it to compile -
+it was C++ name mangling that (apparently) made the BU_EXTERN not
+work</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:04.21</tt></td>
+<td><span class="c2"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>``Erik: right?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.11</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>oh, it compiled?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.21</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>nm made it look like a c++ name mangle issue
+to me</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:05.38</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>the symbol had all sorts of signature goop on
+it in the library</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:08.23</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(the BU_EXTERN() macro shouldn't do anything
+weird wrt c++... *shrug*)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:09.22</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hm, might just be apple name mangling... not
+used to looking at the guts of dylib</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:15.01</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hm, anything g++ touches gets mangled like
+mad, gcc itself just puts a _ at the beginning :/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:49.14</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>BU_EXTERN is only valid inside an extern "C"
+block</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:49.24</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>in a c++ file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:52.48</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ahhhh, epiphany, I grok now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:53.19</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>it tells c++ to not mangle, extern itself does
+not</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:53.48</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(ya'd think a C style definition would
+convince c++ to play by C's rules... apparently not.)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>00:55.34</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>brlcad: didja email a ticket in for the hw
+check of crit?</tt></td>
+</tr>
+<tr>
+<td><tt>03:29.39</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad docelic_
+(n=docelic@78.134.199.152)</span></tt></td>
+</tr>
+<tr>
+<td><tt>04:28.24</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad akafubu
+(n=akafubu@unaffiliated/akafubu)</span></tt></td>
+</tr>
+<tr>
+<td><tt>06:31.39</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad PrezKennedy
+(i=Matthew@whitecalf.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:48.58</tt></td>
+<td><span class="c8"><tt>talcite_</tt></span></td>
+<td width="100%"><tt>will our scripts in /usr/bin/brlcad always be
+suffixed with a .sh extension?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:49.15</tt></td>
+<td><span class="c8"><tt>talcite_</tt></span></td>
+<td width="100%"><tt>I need a way of identifying which are ELF
+executables and which aren't</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:52.10</tt></td>
+<td><span class="c9"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>um According to hacking POSIX Bourne Style
+Scripts use the .sh extension</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:52.23</tt></td>
+<td><span class="c9"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>so it is indeed a rule</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>06:52.38</tt></td>
+<td><span class="c9"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>line 399</tt></td>
+</tr>
+<tr>
+<td><tt>06:58.57</tt></td>
+<td colspan="2"><tt><span class="c10">*** part/#brlcad jdoliner
+(n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>08:49.38</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad
+hippieindamakin8 (n=hippiein@202.3.77.11)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:09.27</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Elrohir
+(n=kvirc@p5B14FCCF.dip.t-dialin.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:12.32</tt></td>
+<td><span class="c8"><tt>talcite_</tt></span></td>
+<td width="100%"><tt>holy crap. It finally built with all the
+rpaths removed =D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>09:12.54</tt></td>
+<td><span class="c8"><tt>talcite_</tt></span></td>
+<td width="100%"><tt>This is going to be awesome. I'm throwing it
+into my VM to test as soon as the whole RPM finishes building
+=D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:45.27</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>almost always, there are three notable
+exceptions: benchmark, archer, and brlman</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>11:46.27</tt></td>
+<td><span class="c6"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they live as .sh in the sources but are
+installed without suffix for end-users</tt></td>
+</tr>
+<tr>
+<td><tt>12:00.52</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad tofu
+(n=sean@bz.bzflag.bz)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:03.21</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad yukonbob
+(i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT
+VICTIM]</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:04.00</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad _sushi_
+(n=_sushi_@84-73-206-51.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>12:51.10</tt></td>
+<td><span class="c11"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r35563
+10/brlcad/trunk/src/util/ (Makefile.am rtwizard rtwizard.tcl):
+store rtwizard as rtwizard.tcl and merely install it as 'rtwizard'
+so that the file format is evident within the source
+hierarchy.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:28.28</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>what're the tcl commands for tree
+walking?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:29.34</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>facetall.sh and foreach reg $mybots { mv $reg
+$reg.csg; r $reg u $reg.bot } make me sad</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:30.52</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(using mged myfile.g tops 2&gt;&amp;1 | xargs
+-n 1 | grep '\.bot$' | xargs and pasting the result into set mybots
+{xxx})</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:32.24</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>optimally, I'd like to dup a specified tree,
+with a postfix modifier and a per region function</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:34.47</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(dup-tree :postfix ".f" :region-callback
+(lambda (r) (facetize (string-append (name region) ".f") r)
+r)))</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:35.10</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>or, y'know... something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:44.07</tt></td>
+<td><span class="c11"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r35564
+10/brlcad/trunk/src/util/rtwizard.tcl: cleanup</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:45.23</tt></td>
+<td><span class="c11"><tt>CIA-38</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r35565 10/brlcad/trunk/ (4
+files in 2 dirs): the other suffix outlier, store brlman.in as
+brlman.sh.in so that the file format is evident within the source
+hierarchy as brlman.sh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:46.40</tt></td>
+<td><span class="c12"><tt>tofu</tt></span></td>
+<td width="100%"><tt>tree walking in tcl is a manual
+process</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.00</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'k, how? (lame)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.01</tt></td>
+<td><span class="c12"><tt>tofu</tt></span></td>
+<td width="100%"><tt>there are a couple helper procs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.25</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(and why was I unable to find this info on the
+web?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.49</tt></td>
+<td><span class="c12"><tt>tofu</tt></span></td>
+<td width="100%"><tt>get_regions shows a recursive traversal that
+looks for regions</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:47.56</tt></td>
+<td><span class="c12"><tt>tofu</tt></span></td>
+<td width="100%"><tt>src/tclscripts/mged/get_regions.tcl</tt></td>
+</tr>
+<tr>
+<td><tt>13:48.06</tt></td>
+<td colspan="2"><tt><span class="c7">*** mode/#brlcad [+o brlcad]
+by ChanServ</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:48.52</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>also; btclsh help lists all the neato mged
+functions but cannot execute them</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.19</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, that'd be because 'help' is a tcl proc,
+src/tclscripts/help.tcl</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.33</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it shouldn't be - needs to be a libged
+func</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.57</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>that's a chunk of refactoring I've had in mind
+for a while, but haven't gotten to it</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:50.57</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- never digs into tcl shtuff, just
+pointing out surprises</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:51.28</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>was one of those "have a task, looks likeit
+should be easy in tcl, lets go learn tcl" deals</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:52.08</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>nah, it was part of an earlier refactoring
+that pushed more towards tcl</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:52.37</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>since half the commands are in tcl, half the
+help was there, the other half was in a c callback table</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:52.53</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the callback table was merged into the tcl
+table so that all help was in one plce</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.23</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>now with libged, though, the commands really
+should be self-contained and define their own help/docs</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:53.37</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>even if it means a separate help table for the
+tcl procs still</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:54.30</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:54.35</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>if only C had docstrings</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.00</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>also; "foreach reg [get_regions tank] { echo
+$reg }" does't print anything, but other ops do shtuff... is echo
+not quite right? or am I doing something stupid (is this related to
+the "only the last command prints" bug?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.13</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>thinking to make it more like table.c style
+with sets of callbacks/info per command</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:57.30</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>puts</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.12</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ermmmm, ok, that displays... well....
+tank...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.54</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.55</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>mged&gt; foreach reg [get_regions tank] { puts
+"$reg" }</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:58.55</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>tank</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.13</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>mged&gt; get_regions tank</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.13</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>r1 r2 r3 r4 r5 r6 r7 r8 r9 r10 r21 r22 r204
+r205 r15 r16 r17 r18 r19 r211 r215 r216 r217 r218 r219 r220 r221
+r222 r223 r224 r225 r226 r227 r228 r229 r230 r231 r232 r233 r234
+r235 r236 r237 r238 r239 r240 r241 r242 r243 r244 r210 r212 r32 r33
+r34 r35 r36 r37 r38 r39 r40 r41 r42 r43 r44 r45 r245 r246 r247 r248
+r249 r250 r251 r252 r253 r254 r23 r24 r25 r26</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.32</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>probably need something like [list
+[get_regions tank]]</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>13:59.52</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>it's too damn early and saturday, I'm calling
+my brain on vacation :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.17</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>'k, I'm gonna pull the doof card, show me the
+tcl fu to walk a given tree and facetize all the regions, I'm
+looking for each region to contain exactly one BoT (thus
+"isst-optimized") :) I think I'm close, but missing a couple
+details</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:03.35</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and one of us can wiki an explaination I
+guess</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:05.15</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(why does puts work when echo does
+not?)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:13.59</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>heh proc fib {a} { if { $a &lt; 2} {return 1}
+{return [expr [fib [expr $a-1]] + [fib [expr $a - 2]]]}}</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:14.19</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>language bootcamp :(</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:17.03</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c4">favors (defun fib (a) (if
+(&lt; a 2) 1 (+ (fib (- a 1)) (fib (- a 2)))))
+O:-)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:25.10</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:25.24</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>what you wrote was write</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:25.45</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you're probably forgetting you're in mged with
+globbing left on :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:25.49</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>set glob_compat_mode 0</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:26.41</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, and s/write/right/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:27.06</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ahhh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:28.02</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>\[ works</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:28.24</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, you can escape all the globbing chars
+and it'll still work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:28.33</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or just turn off globbing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:30.10</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>useful if you want globbing AND tcl, but it
+will tend to be very sensitive to writespace as the globber is
+pretty simple</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:30.19</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>whitespace even</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:30.30</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>foreach reg \[ get_regions *.g \] {puts
+$reg}</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:31.33</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>foreach reg \[get_regions tank] {puts $reg} 
+seems to work</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:32.02</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(no forth style space buffering, no escaping
+the closing bracket, ...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:32.39</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I d'no, I should wait for tuesday :) and do
+some less worky shit for now</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:34.48</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>i mean you'll need the spaces if you also want
+globbing</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:34.56</tt></td>
+<td><span class="c12"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>the globber won't like *.g\]</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>14:35.08</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ah</tt></td>
+</tr>
+<tr>
+<td><tt>14:54.53</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad jdoliner
+(n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>15:55.44</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:04.20</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad Mouette
+(n=chatzill@140.109.175.102)</span></tt></td>
+</tr>
+<tr>
+<td><tt>18:06.19</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:19.44</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad louipc
+(n=louipc@archlinux/trusteduser/louipc)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:58.30</tt></td>
+<td colspan="2"><tt><span class="c10">*** part/#brlcad jdoliner
+(n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:57.57</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad talcite
+(n=talcite@134.117.143.233)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:21.20</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>I just did an svn up. Is the head stable right
+now?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:31.37</tt></td>
+<td><span class="c14"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>theoretically.</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:31.49</tt></td>
+<td><span class="c14"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>by definition, head is technically not
+stable</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:31.55</tt></td>
+<td><span class="c14"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>but there's no particular reason it should be
+broken</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:32.50</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>Ralith, alright, sounds good</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:33.11</tt></td>
+<td><span class="c14"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>don't forget to rerun autogen.sh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:33.28</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>yup. Its in the %prep of the spec
+file</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:57.37</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>hey guys. Why is there a .jnilib file in my
+build?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>21:57.47</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>I'm building on fedora. Those libs shouldn't
+exist should they?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:18.39</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>oh, and when is the new release coming out?
+I'm thinking of submitting that one for review by the repo
+maintainers</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:18.57</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>it's been any day now for the past couple
+weeks =D</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:29.21</tt></td>
+<td><span class="c14"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>When It's Done</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:50.34</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>oh... hey why isn't there a LICENSE file
+included? Doesn't LGPL require one?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:57.47</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>we have COPYING or something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:59.07</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>.jnilib might be generated by src/librtserver
+which is a java interaface via RNI or something</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>22:59.18</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>new release is "any day now"</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:00.25</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>heh. Alright. I'll submit the svn head for
+review and update to the new release when it comes</tt></td>
+</tr>
+<tr>
+<td><tt>23:00.46</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad SWPadnos_
+(n=Me@dsl107.esjtvtli.sover.net)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:01.28</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'm letting the fbsd update kinda
+float</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:01.33</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>pending update</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:01.45</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>ahh. so you're the fbsd maintainer?
+Cool</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:01.59</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I should let them know that the current pr is
+bunk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:02.12</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>had to fix a bunch of crap for update...
+tkhtml3 is a bitch</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:02.38</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>I think we could probably get SUSE and debian
+maintainers soon. I don't think the packaging guidelines are that
+different between the major distros</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:02.50</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yeh, doing packaging duty gives me a gardener
+hat to help keep things sane..</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:03.19</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>but then ya get fools who think that it needs
+to be installed /usr/ and it goes back to hell... damn linux
+weenies :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:03.49</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>debian was cool with us having our own dir
+iirc</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:04.34</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>we have debian inclusion?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:04.56</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>misc/debian/</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:05.09</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>we have had the ability...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:05.15</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>oh ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:05.51</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I lost my debian machine like 4 years ago so I
+quit mucking with them folk</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:06.11</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(note misc/brlcad.spec...)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:06.56</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>I find it hard to believe that someone else
+hasn't picked up package maintainership in that while</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:07.06</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>plus, don't they have remote build
+systems?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:07.37</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>they probably do... but I can't generate a
+.deb file myself</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.00</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>oh yeah</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.01</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.10</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and my .rpm files would be enterprise specific
+*shrug* fbsd is one of the few "common" archs I can do :)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.23</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>enterprise specific?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.27</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>doesn't ubuntu pull from debian?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.33</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yeah, I have access to RHEL, not
+fedora</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.40</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>oh ok</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:08.53</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ubuntu is a descendant of debian,
+yes...</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:09.25</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>but the only linux boxen I have access to are
+redhat enterprise</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:09.36</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>even brlcad.org is fbsd these days
+:)</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:09.38</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>what's the inclusion path for RHEL repos
+anyways?</tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:10.00</tt></td>
+<td><span class="c5"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c4">doesn't know and doesn't
+care...</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:11.08</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>well yeah I guess it's probably a pretty
+closed process</tt></td>
+</tr>
+<tr>
+<td><tt>23:13.56</tt></td>
+<td colspan="2"><tt><span class="c7">*** join/#brlcad cosurgi
+(n=cosurgi@atak.bl.pg.gda.pl)</span></tt></td>
+</tr>
+<tr class="c3">
+<td><tt>23:16.39</tt></td>
+<td><span class="c13"><tt>talcite</tt></span></td>
+<td width="100%"><tt>do we have a standard icon for
+brlcad?</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

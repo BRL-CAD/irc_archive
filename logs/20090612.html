@@ -1,255 +1,1355 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20090612</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20090612</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c15 {color: #AFAF5C}
+ span.c14 {color: #62BABA}
+ span.c13 {color: #AE5BAE}
+ span.c12 {color: #AE5B5B}
+ span.c11 {color: #73DBDB}
+ span.c10 {color: #BC63BC}
+ span.c9 {color: #CC00CC}
+ span.c8 {color: #E076E0}
+ span.c7 {color: #75E075}
+ span.c6 {color: #70D5D5}
+ span.c5 {color: #B660B6}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #5EB35E}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20090612</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>00:01.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:18.51</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>indianlarry: Idea on handling of the raytracing of NURBS.&nbsp;&nbsp;Expanding the boxes is killing our performance by forcing more interative solutions of intersected bounding boxes (which are not needed in most cases but are in a few).&nbsp;&nbsp;What if, for each bounding box leaf we propose to search for intersections in, we see if the xy coordinates of any of the previously found intersection points are within the bounding uv square of the leaf BB about to be consider</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:21.43</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>taking that one step further, when we build the surface tree we could actually store two trees in parallel, one with the minimal bounding boxes that give good raytrace performance, and one with the BB growth factor turned on.&nbsp;&nbsp;Then we can raytrace using the default bounding boxes, and for shots that return either an odd hit count or zero intersection boxes we repeat the hierarchy test with that same ray, only this time instructing it to use the grown bb</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:23.29</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>compare the list of leaves obtained from the grown hierarcy test to the original list - any new boxes, test them for hits.&nbsp;&nbsp;If hits are found that aren't already in the hit list, add them and resort the list</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:24.12</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>so in essence, each BBnode in the surface tree would store two sets of bounding box dimensions rather than one - otherwise, it's the same tree build</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>02:26.31</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>we don't even have to walk the surface list twice</tt></td></tr>
-<tr><td><tt>02:27.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</font></tt></td></tr>
-<tr><td><tt>04:39.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-203.sbndin.btas.verizon.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:49.46</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>hm, I sent in my tax forms a couple days ago, still hasn't been confirmed as received</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>05:49.53</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>:/</tt></td></tr>
-<tr><td><tt>05:50.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</font></tt></td></tr>
-<tr><td><tt>05:57.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</font></tt></td></tr>
-<tr><td><tt>09:01.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _clock_ (n=_sushi_@84-72-91-14.dclient.hispeed.ch)</font></tt></td></tr>
-<tr><td><tt>12:02.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic_ (n=docelic@78.134.203.126)</font></tt></td></tr>
-<tr><td><tt>12:56.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant_ (n=d@117.196.131.212)</font></tt></td></tr>
-<tr><td><tt>14:54.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@h134-215-226-37.lnngmi.dedicated.static.tds.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:38.10</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>indianlarry: Question:&nbsp;&nbsp;If we allow uv hit points outside uv boxes, but when performing the trimming test actually find (via a "2d" IntersectHierarchy test, I suppose) the uv box that contains the "out of box" hit point and use that to do the trimming test, would we actually get rid of the jagged edges on the trims while still allowing out of box hits?</tt></td></tr>
-<tr><td><tt>17:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (n=erik@ftp.brlcad.org)</font></tt></td></tr>
-<tr><td><tt>17:18.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-69-140-109-104.hsd1.md.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:54.57</tt></td><td><font color="#70d5d5"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r34722 10/brlcad/trunk/misc/win32-msvc8/opennurbs/opennurbs.vcproj: mods to get things building again on windows</tt></td></tr>
-<tr><td><tt>18:55.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.129.38)</font></tt></td></tr>
-<tr><td><tt>19:57.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (n=erik@ftp.brlcad.org)</font></tt></td></tr>
-<tr><td><tt>20:32.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@h134-215-226-37.lnngmi.dedicated.static.tds.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.13</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: You still workin</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:47.53</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: think i found an easy solution to our box growth issue</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:49.33</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: erik also mentioned his ideas about keeping neighbor links for his work that may play into the out of box hits we get</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:51.44</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>still here</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.00</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry, chatting with Bob about Archer stuff</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.05</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>what's the easy solution?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:52.13</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">foiled their productivity mwahahhaa</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.02</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: think i can grow only those boxes that need it just need to check if the corner normal pass the x,y,z normals </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.41</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: since we bound be x,y,z min/max those are the only ones that would stick out</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:53.54</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: that's why we were seeing patterns</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.08</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: should actually be easy</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.26</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>famous last words? :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.28</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>so you're saying check the normals at the corners in 3 space and see if they indicate "bad" behavior somehow?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:54.51</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: see id they change quadrants</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.02</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: octants</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.12</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, hmm</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.31</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>that might work, actually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.46</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: i think we can use the knots to ensure no more then two hits as well</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:55.54</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:56.19</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>that might make my ideas overkill then...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.11</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: if we use knots during initial subdivision may make flatness resolve quicker</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.46</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">ponders... yes, that might be true</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.51</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: then again i've had a few too many already</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:57.59</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>are you suggesting breaking into quadrants ON the knots?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:58.43</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: check flatness if not flat find median knot closest to center u,v and split there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:59.09</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: looks like openNURBS has a closest knot index function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>20:59.21</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm.&nbsp;&nbsp;sounds promising</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.18</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: guit there today?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.31</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>quiet</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.37</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: yes aorry</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.40</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>'cept Bob says "get a life!"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:00.45</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>indianlarry: for what?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.07</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>indianlarry: you've been doing and continue to do awesome work!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.17</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: for the typing</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:01.26</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>pfft.&nbsp;&nbsp;I was trained on slashdot</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.06</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: i'll try and hit it later but busy weekend (graduation parties to attend)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:04.33</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>don't worry about it - that's way more important!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:05.01</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">scowls at the single odd hit report still coming from shape1.s at high res...</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.02</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: I'll try and put that fuzz check in there, also need to see how they handle intersect closeness between surfaces problem could be there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.25</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - yeah, kinda looks like that</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.29</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>who's graduating?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:06.56</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: mothers cousins kin way down the line</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.14</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>heh - well, it's a good drink excuse :-)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.31</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>starseeker: that's what i thought</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:07.44</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>have a good weekend all</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.05</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>is brlcad in the channel</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.16</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>you too</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.20</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>haven't seen him today</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:08.39</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>catch up with him later</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:10.20</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>need to make sue GSoC joeDee has commit access to SVN</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.24</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods :-)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:11.28</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, that helps</tt></td></tr>
-<tr><td><tt>21:11.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _sushi_ (n=_sushi_@80-218-234-36.dclient.hispeed.ch)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:12.14</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>just in case this helps, xyz 4.315565 -2.942501 15.995774 dir -0.742404 -0.519837 -0.422618 with backout on is the shape1 test case</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:30.54</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>indianlarry: I can set it but his commits will have to be watched carefully -- his patch indicated he needs more instruction on patches, commits, svn, our HACKING guidelines, style/ws, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.47</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>might want to have him simply start submitting patches (to the tracker for his work) and iterate with him on the patches until they commit unmodified</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:32.21</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't take more than a day or two to get anyone up to speed</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:33.09</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i'll touch base with him</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:34.02</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise he does need to get kicking really soon now or there's no way he'll pass midterms</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:35.32</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: looks like he's beeen writing some test code for some simple brep primitive so i think he's starting to get into it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:36.31</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: he emailed me some code to look at and he was re-writing dot,cross product macros and i pointed him at vmath.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:37.15</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i know it can be a little hard finding things</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.27</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i think he's also finding out that some of the opennurbs functions he needs are limited and sometimes replaced with stubs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.34</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>indianlarry: yeah, it's completely understandable -- just part of the process for "commit access"</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:38.46</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:41.54</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>he should work on showing he understands the dev guidelines before getting deep into the code regardless, which covers making patches, frequent commits, not breaking things, what his responsibilities are when he does break something, etc</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:42.08</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>particularly for the gsoc kids, it's part of their <a href="http://brlcad.org/wiki/Google_Summer_of_Code/Checklist">http://brlcad.org/wiki/Google_Summer_of_Code/Checklist</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:43.20</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>indianlarry: did he send you patch files or whole files or snippets?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:45.11</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: just a single file snippet just to look at overall style </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:45.13</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>either way, that's the "tendancy to default to private conversations" I mentioned months back -- you shouldn't allow that or at least should respond to their message to the dev list (with a note to keep dev chatter public)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:45.43</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>many students do that, it's natural but really should be nipped in the bud early</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:45.55</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i mentioned that to him i think he need just a little push</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:46.16</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i think he tried to commit some stuff and couldn't</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:46.50</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i'll try and work it out with him</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:47.08</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>it's multiple issues -- not being able to commit isn't an excuse</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:47.10</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>he has to communicate</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:47.40</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>he's certainly not said anything here yet has been joining, so it's even worse</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:48.36</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: he was the one that had late finals so hopefully he'll start to get involved</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:48.42</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.02</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>~gsoctimeline</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:49.03</tt></td><td><font color="#73dbdb"><tt>ibot</tt></font></td><td width="100%"><tt>gsoctimeline is, like, <a href="http://socghop.appspot.com/document/show/program/google/gsoc2009/timeline">http://socghop.appspot.com/document/show/program/google/gsoc2009/timeline</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.31</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, three weeks to his midterm evaluation, two or three of the students are going to have to seriously kick it in or they'll have to be dropped</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.58</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">will have to send a note this weekend, didn't realize that much time had passed already</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:50.58</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: i'll mention it to him</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>tell me about it</tt></td></tr>
-<tr><td><tt>21:51.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@199.Red-88-26-141.staticIP.rima-tde.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:51.49</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>they're on a tight schedule and it's supposed to be a full-time job -- that's three weeks of no-show</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:52.21</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>brlcad: acts like he has a gov't job ;^)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:52.29</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:53.23</tt></td><td><font color="#75e075"><tt>indianlarry</tt></font></td><td width="100%"><tt>i'm out for a while i'll try to push things along have a good weekend</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:53.29</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>cya!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.07</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.10</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: nice to see you getting started, lemme know if you have any problems</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.13</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: howdy!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.19</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>pacman87: how's it going?.... :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:54.57</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: I shall.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:55.29</tt></td><td><font color="#70d5d5"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r34723 10/brlcad/trunk/src/librt/primitives/brep/brep.cpp: When an odd nurbs hit point shows up, print out the nirt commands that will fire just that ray (make debugging 'em simpler)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:56.36</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: remember to keep a daily note for any days you work, a single brief sentance suffices -- like a commit message -- to say what you got done</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.01</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>oh, wups</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.08</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>on my wiki page?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.13</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>roberthl: wow, no longer living in obscurity? :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.19</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>er, anonymity</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.29</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, wiki page work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.32</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>*works</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:57.51</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>or blog or tweets, just someplace convenient (and ideally rss-able)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:58.22</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>pacman did a pretty good job last year: <a href="http://brlcad.org/wiki/User:Pacman87">http://brlcad.org/wiki/User:Pacman87</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.00</tt></td><td><font color="#ae5bae"><tt>roberthl</tt></font></td><td width="100%"><tt>brlcad: Yeah, I kind of gave up that when I started being payed to do stuff. :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.20</tt></td><td><font color="#ae5bae"><tt>roberthl</tt></font></td><td width="100%"><tt>(development)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.28</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:59.50</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>tweets are the root of evil, just say no! :P</tt></td></tr>
-<tr><td><tt>22:04.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bz8z7 (n=543ebaea@bz.bzflag.bz)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:07.18</tt></td><td><font color="#70d5d5"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03Ralith 07<a href="http://brlcad.org">http://brlcad.org</a> * r1478 10/wiki/User:Ralith: Added first log entries</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:15.12</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>hey, c'mon now, indianlarry, some of us gov't foke are only no-show for 2 weeks :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.43</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>it's been rather hectic at my house with relatives visiting for little bro</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:22.46</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>'s graduation</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.31</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>and i got recruited to move my brother in this week</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:23.46</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>so now there's no more distractions</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:24.28</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>which place?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:24.31</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>the speech?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:24.54</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>ww</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.24</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>now everything's back to normal</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.29</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>and i can get back to coding full-time</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:25.50</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>speaking of which, is there a good sample sketch i can use to test my revolve?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:26.25</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>just examples of syntax for the two spline types, carcs, and lsegs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:36.23</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>could try the sketch in <a href="http://brlcad.org/tmp/sketch.g">http://brlcad.org/tmp/sketch.g</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:36.43</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>includes each entity type except the unimplemented nurbs type</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:48.43</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>pacman87: if you were to draw a half circle, then revolve around a line that touch both ends of that arc like 30 degrees or so, would the resultant geometry be something like an orange slice? am I gettin' the purpose right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.27</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:50.42</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>``Erik: ^^</tt></td></tr>
-<tr><td><tt>22:51.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jdoliner (n=jdoliner@c-98-227-157-38.hsd1.il.comcast.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:52.42</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>sean, can you explain to me how I should submit code?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:53.06</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>brlcad?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:54.42</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>jdoliner: are you starting new files, or modifying existing ones?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.18</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>I started a new file in proc-db</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.38</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>and I've also modified a file</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.38</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>do you have commit access yet?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:55.44</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>no I don't believe so</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.20</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>go to the brlcad sourceforge site</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.27</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>under 'tracker' click 'patches'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.48</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>then click 'add new'</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:56.59</tt></td><td><font color="#62baba"><tt>pacman87</tt></font></td><td width="100%"><tt>and there's some instructions there</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:57.50</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>k thanks</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:58.09</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, your first few patches will be via the sourceforge patch submission page so we can know that you understand the HACKING file and can produce correct and consistent code :)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.38</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>hah, trying to install cmake and accidently typed cake, got a rush of bad memories off of that</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:01.59</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>(cake was the archaic fugly build system BRL-CAD used before I hacked it up for automake :D )</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:14.50</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>fair enough I could use some criticism</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:16.08</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>would you guys call brep on brep intersection geometry editing, or modeling?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:19.35</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>probably geometry editing, but that field isn't really important</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:20.46</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>jdoliner: yeah, the main issue with commit access is spelled out in the HACKING file (which you've read right?) :) as well as <a href="http://brlcad.org/wiki/Google_Summer_of_Code/Checklist">http://brlcad.org/wiki/Google_Summer_of_Code/Checklist</a> (which you've read right?) :) just to make sure you understand your responsibilities</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:21.53</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>is rt^3 wanting dev or stable ogre3d?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:22.29</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yes of course</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:22.32</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>it shouldn't take you more than a day really to get commit access sorted out, so you can commit in good faith, but you aren't just given it before showing some basic understanding (and your gsoc patch didn't show that.. can talk about that if you like)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:22.55</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>no that's fine I just submitted my work up to this point</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:23.12</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>keep in mind that you absolutely should not be coding away quietly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:23.20</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>it's now using vmath macros instead</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:23.32</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>you manually reviewed your patch file, yes? :) I always do an svn diff before commiting just to make sure</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:23.32</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>I swear I haven't been</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:23.33</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>getting commit sorted out is priority #1, should have happened before gsoc started really</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.01</tt></td><td><font color="#afaf5c"><tt>jdoliner</tt></font></td><td width="100%"><tt>k let's do that immediately then</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.13</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>also shouldn't be communicating in private -- here or on mailing list if it has anything to do with code/project/progress</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.17</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">finds a pointy stick to jab brlcad with until he gets his ogre question answered O:-)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.30</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: ask the Ralith guy, beats me!</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.36</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.40</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">asks ralith and beats brlcad</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.40</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>or mafm </tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.45</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:24.57</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>what about Ogre?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.04</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>dev or stable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.06</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>``Erik: g3d you mean?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.08</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>ralith removed it yesterday with consent from starseeker</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.10</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>Ogre stable should work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.14</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>it's &gt;=1.6 right?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.21</tt></td><td><font color="#70d5d5"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03Jdoliner 07<a href="http://brlcad.org">http://brlcad.org</a> * r1479 10/wiki/User:Jdoliner:</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.25</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>I noted that I had put it there last year to have all dependencies inside</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.26</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>um, 1.6 is stable</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.32</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>then that'll work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.43</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>mafm: iirc, the reason it was there last year was because 1.6 wasn't stable yet and we needed some 1.6 features</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.45</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>I'll grab dev anyways, there may be some future-proofing opportunities</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.55</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>(and damnit, brlcad, you're supposed to know EVERYTHING)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:25.57</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>but I don't know which version Qt (or Ralith) needs</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:26.15</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>it only needed a simple patch for RBGui</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:26.20</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>well, the Qt-in-Ogre-in-Qt thing I think I'm going with depends on a 1.6 feature</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:26.29</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>but now that RBGui is gone, no problem for me</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:26.31</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">reiterates <a href="http://brlcad.org/wiki/Google_Summer_of_Code/Expectations">http://brlcad.org/wiki/Google_Summer_of_Code/Expectations</a> for all students</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:26.34</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>mafm: works fine unpatched with RBGui, too.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:27.18</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>probably because they include the patch in newer versions -- it was only a new function</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:27.37</tt></td><td><font color="#b660b6"><tt>Ralith</tt></font></td><td width="100%"><tt>yeah, I think I remember debugging that when I first tried a system ogre actually</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:27.51</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>Frequent communication with mentor -- ouch, I failed in that :P</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:28.28</tt></td><td><font color="#bc63bc"><tt>brlcad</tt></font></td><td width="100%"><tt>we'll probably rebundle it later -- there's no problem either way until we go to press a source release and have to consider dependency management from non-developer compiling users</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:34.43</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>current stable version is 1.6.2 (and recent, 2 months old), so if it's enough, I'd go with it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:37.10</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- did an svn checkout of ogre3d's trunk</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:42.17</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>yay, dependancy hell :D</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.15</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>such a big library (needing in turn other libraries) is indeed not fun</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:46.49</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>isn't there some concept in SVN about virtual repositories?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:47.26</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>you have a separate module (with ogre and the like) and then attach it to some point in other directories (g3d and maybe others)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:47.43</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>it could help in maintenance if several parts depend on it</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:48.16</tt></td><td><font color="#ae5b5b"><tt>mafm</tt></font></td><td width="100%"><tt>because OGRE needs about a dozen other libraries...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:49.14</tt></td><td><font color="#e076e0"><tt>``Erik</tt></font></td><td width="100%"><tt>and zziplib doesn't wanna build clean, neato</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>00:01.41</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:18.51</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>indianlarry: Idea on handling of the
+raytracing of NURBS.  Expanding the boxes is killing our
+performance by forcing more interative solutions of intersected
+bounding boxes (which are not needed in most cases but are in a
+few).  What if, for each bounding box leaf we propose to search for
+intersections in, we see if the xy coordinates of any of the
+previously found intersection points are within the bounding uv
+square of the leaf BB about to be consider</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:21.43</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>taking that one step further, when we build
+the surface tree we could actually store two trees in parallel, one
+with the minimal bounding boxes that give good raytrace
+performance, and one with the BB growth factor turned on.  Then we
+can raytrace using the default bounding boxes, and for shots that
+return either an odd hit count or zero intersection boxes we repeat
+the hierarchy test with that same ray, only this time instructing
+it to use the grown bb</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:23.29</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>compare the list of leaves obtained from the
+grown hierarcy test to the original list - any new boxes, test them
+for hits.  If hits are found that aren't already in the hit list,
+add them and resort the list</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:24.12</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>so in essence, each BBnode in the surface tree
+would store two sets of bounding box dimensions rather than one -
+otherwise, it's the same tree build</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>02:26.31</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>we don't even have to walk the surface list
+twice</tt></td>
+</tr>
+<tr>
+<td><tt>02:27.32</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>04:39.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad BigAToo
+(n=BigAToo@pool-96-230-124-203.sbndin.btas.verizon.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:49.46</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>hm, I sent in my tax forms a couple days ago,
+still hasn't been confirmed as received</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>05:49.53</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>:/</tt></td>
+</tr>
+<tr>
+<td><tt>05:50.56</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>05:57.39</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad IriX64
+(n=IriX64@bas2-sudbury98-1128564968.dsl.bell.ca)</span></tt></td>
+</tr>
+<tr>
+<td><tt>09:01.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad _clock_
+(n=_sushi_@84-72-91-14.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:02.39</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad docelic_
+(n=docelic@78.134.203.126)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:56.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad madant_
+(n=d@117.196.131.212)</span></tt></td>
+</tr>
+<tr>
+<td><tt>14:54.30</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad samrose
+(n=samrose@h134-215-226-37.lnngmi.dedicated.static.tds.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:38.10</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>indianlarry: Question:  If we allow uv hit
+points outside uv boxes, but when performing the trimming test
+actually find (via a "2d" IntersectHierarchy test, I suppose) the
+uv box that contains the "out of box" hit point and use that to do
+the trimming test, would we actually get rid of the jagged edges on
+the trims while still allowing out of box hits?</tt></td>
+</tr>
+<tr>
+<td><tt>17:16.23</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ``Erik_
+(n=erik@ftp.brlcad.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:18.50</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ``Erik
+(i=erik@c-69-140-109-104.hsd1.md.comcast.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:54.57</tt></td>
+<td><span class="c6"><tt>CIA-28</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r34722
+10/brlcad/trunk/misc/win32-msvc8/opennurbs/opennurbs.vcproj: mods
+to get things building again on windows</tt></td>
+</tr>
+<tr>
+<td><tt>18:55.38</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad madant
+(n=d@117.196.129.38)</span></tt></td>
+</tr>
+<tr>
+<td><tt>19:57.15</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad ``Erik_
+(n=erik@ftp.brlcad.org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>20:32.14</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad samrose
+(n=samrose@h134-215-226-37.lnngmi.dedicated.static.tds.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:47.13</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: You still workin</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:47.53</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: think i found an easy solution to
+our box growth issue</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:49.33</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: erik also mentioned his ideas
+about keeping neighbor links for his work that may play into the
+out of box hits we get</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:51.44</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>still here</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:52.00</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>sorry, chatting with Bob about Archer
+stuff</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:52.05</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>what's the easy solution?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:52.13</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c9">foiled their productivity
+mwahahhaa</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:53.02</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: think i can grow only those boxes
+that need it just need to check if the corner normal pass the x,y,z
+normals</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:53.41</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: since we bound be x,y,z min/max
+those are the only ones that would stick out</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:53.54</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: that's why we were seeing
+patterns</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.08</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: should actually be easy</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.26</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>famous last words? :D</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.28</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>so you're saying check the normals at the
+corners in 3 space and see if they indicate "bad" behavior
+somehow?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:54.51</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: see id they change
+quadrants</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.02</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: octants</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.12</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>oh, hmm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.31</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that might work, actually</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.46</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: i think we can use the knots to
+ensure no more then two hits as well</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:55.54</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>cool</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:56.19</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>that might make my ideas overkill
+then...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:57.11</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: if we use knots during initial
+subdivision may make flatness resolve quicker</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:57.46</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c9">ponders... yes, that might be
+true</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:57.51</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: then again i've had a few too many
+already</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:57.59</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>are you suggesting breaking into quadrants ON
+the knots?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:58.43</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: check flatness if not flat find
+median knot closest to center u,v and split there</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:59.09</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: looks like openNURBS has a closest
+knot index function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>20:59.21</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm.  sounds promising</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:00.18</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: guit there today?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:00.31</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>quiet</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:00.37</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: yes aorry</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:00.40</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>'cept Bob says "get a life!"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:00.45</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>indianlarry: for what?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:01.07</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>indianlarry: you've been doing and continue to
+do awesome work!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:01.17</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: for the typing</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:01.26</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>pfft.  I was trained on slashdot</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:04.06</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: i'll try and hit it later but busy
+weekend (graduation parties to attend)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:04.33</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>don't worry about it - that's way more
+important!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:05.01</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c9">scowls at the single odd hit
+report still coming from shape1.s at high res...</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.02</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: I'll try and put that fuzz check
+in there, also need to see how they handle intersect closeness
+between surfaces problem could be there</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.25</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c9">nods - yeah, kinda looks like
+that</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.29</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>who's graduating?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:06.56</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: mothers cousins kin way down the
+line</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.14</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>heh - well, it's a good drink excuse
+:-)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.31</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>starseeker: that's what i thought</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:07.44</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>have a good weekend all</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.05</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>is brlcad in the channel</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.16</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>you too</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.20</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>haven't seen him today</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:08.39</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>catch up with him later</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:10.20</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>need to make sue GSoC joeDee has commit access
+to SVN</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:11.24</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt><span class="c9">nods :-)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:11.28</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>yeah, that helps</tt></td>
+</tr>
+<tr>
+<td><tt>21:11.53</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad _sushi_
+(n=_sushi_@80-218-234-36.dclient.hispeed.ch)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:12.14</tt></td>
+<td><span class="c3"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>just in case this helps, xyz 4.315565
+-2.942501 15.995774 dir -0.742404 -0.519837 -0.422618 with backout
+on is the shape1 test case</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:30.54</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>indianlarry: I can set it but his commits will
+have to be watched carefully -- his patch indicated he needs more
+instruction on patches, commits, svn, our HACKING guidelines,
+style/ws, etc</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.47</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>might want to have him simply start submitting
+patches (to the tracker for his work) and iterate with him on the
+patches until they commit unmodified</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:32.21</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>shouldn't take more than a day or two to get
+anyone up to speed</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:33.09</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i'll touch base with him</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:34.02</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>otherwise he does need to get kicking really
+soon now or there's no way he'll pass midterms</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:35.32</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: looks like he's beeen writing some
+test code for some simple brep primitive so i think he's starting
+to get into it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:36.31</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: he emailed me some code to look at and
+he was re-writing dot,cross product macros and i pointed him at
+vmath.h</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:37.15</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i know it can be a little hard finding
+things</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:38.27</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i think he's also finding out that
+some of the opennurbs functions he needs are limited and sometimes
+replaced with stubs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:38.34</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>indianlarry: yeah, it's completely
+understandable -- just part of the process for "commit
+access"</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:38.46</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: thanks</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:41.54</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>he should work on showing he understands the
+dev guidelines before getting deep into the code regardless, which
+covers making patches, frequent commits, not breaking things, what
+his responsibilities are when he does break something,
+etc</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:42.08</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>particularly for the gsoc kids, it's part of
+their <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code/Checklist">http://brlcad.org/wiki/Google_Summer_of_Code/Checklist</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:43.20</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>indianlarry: did he send you patch files or
+whole files or snippets?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:45.11</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: just a single file snippet just to
+look at overall style</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:45.13</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>either way, that's the "tendancy to default to
+private conversations" I mentioned months back -- you shouldn't
+allow that or at least should respond to their message to the dev
+list (with a note to keep dev chatter public)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:45.43</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>many students do that, it's natural but really
+should be nipped in the bud early</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:45.55</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i mentioned that to him i think he
+need just a little push</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:46.16</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i think he tried to commit some stuff
+and couldn't</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:46.50</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i'll try and work it out with
+him</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:47.08</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it's multiple issues -- not being able to
+commit isn't an excuse</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:47.10</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>he has to communicate</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:47.40</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>he's certainly not said anything here yet has
+been joining, so it's even worse</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:48.36</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: he was the one that had late finals so
+hopefully he'll start to get involved</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:48.42</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c9">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:49.02</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>~gsoctimeline</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:49.03</tt></td>
+<td><span class="c11"><tt>ibot</tt></span></td>
+<td width="100%"><tt>gsoctimeline is, like, <a href=
+"http://socghop.appspot.com/document/show/program/google/gsoc2009/timeline">
+http://socghop.appspot.com/document/show/program/google/gsoc2009/timeline</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:50.31</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, three weeks to his midterm evaluation,
+two or three of the students are going to have to seriously kick it
+in or they'll have to be dropped</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:50.58</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c9">will have to send a note this
+weekend, didn't realize that much time had passed
+already</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:50.58</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: i'll mention it to him</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:51.12</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>tell me about it</tt></td>
+</tr>
+<tr>
+<td><tt>21:51.39</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad mafm
+(n=mafm@199.Red-88-26-141.staticIP.rima-tde.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:51.49</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>they're on a tight schedule and it's supposed
+to be a full-time job -- that's three weeks of no-show</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:52.21</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>brlcad: acts like he has a gov't job
+;^)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:52.29</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:53.23</tt></td>
+<td><span class="c7"><tt>indianlarry</tt></span></td>
+<td width="100%"><tt>i'm out for a while i'll try to push things
+along have a good weekend</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:53.29</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>cya!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:54.07</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>hi</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:54.10</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ralith: nice to see you getting started, lemme
+know if you have any problems</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:54.13</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>mafm: howdy!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:54.19</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pacman87: how's it going?.... :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:54.57</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>brlcad: I shall.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:55.29</tt></td>
+<td><span class="c6"><tt>CIA-28</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r34723
+10/brlcad/trunk/src/librt/primitives/brep/brep.cpp: When an odd
+nurbs hit point shows up, print out the nirt commands that will
+fire just that ray (make debugging 'em simpler)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:56.36</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>Ralith: remember to keep a daily note for any
+days you work, a single brief sentance suffices -- like a commit
+message -- to say what you got done</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.01</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>oh, wups</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.08</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>on my wiki page?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.13</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>roberthl: wow, no longer living in obscurity?
+:)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.19</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>er, anonymity</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.29</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>yeah, wiki page work</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.32</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>*works</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:57.51</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or blog or tweets, just someplace convenient
+(and ideally rss-able)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:58.22</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>pacman did a pretty good job last year:
+<a href=
+"http://brlcad.org/wiki/User:Pacman87">http://brlcad.org/wiki/User:Pacman87</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:59.00</tt></td>
+<td><span class="c13"><tt>roberthl</tt></span></td>
+<td width="100%"><tt>brlcad: Yeah, I kind of gave up that when I
+started being payed to do stuff. :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:59.20</tt></td>
+<td><span class="c13"><tt>roberthl</tt></span></td>
+<td width="100%"><tt>(development)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:59.28</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c9">nods</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:59.50</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>tweets are the root of evil, just say no!
+:P</tt></td>
+</tr>
+<tr>
+<td><tt>22:04.05</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad bz8z7
+(n=543ebaea@bz.bzflag.bz)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:07.18</tt></td>
+<td><span class="c6"><tt>CIA-28</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Ralith 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r1478
+10/wiki/User:Ralith: Added first log entries</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:15.12</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hey, c'mon now, indianlarry, some of us gov't
+foke are only no-show for 2 weeks :D</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:22.43</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>it's been rather hectic at my house with
+relatives visiting for little bro</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:22.46</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>'s graduation</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:23.31</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>and i got recruited to move my brother in this
+week</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:23.46</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>so now there's no more distractions</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:24.28</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>which place?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:24.31</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>the speech?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:24.54</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>ww</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:25.24</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>now everything's back to normal</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:25.29</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>and i can get back to coding
+full-time</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:25.50</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>speaking of which, is there a good sample
+sketch i can use to test my revolve?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:26.25</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>just examples of syntax for the two spline
+types, carcs, and lsegs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:36.23</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>could try the sketch in <a href=
+"http://brlcad.org/tmp/sketch.g">http://brlcad.org/tmp/sketch.g</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:36.43</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>includes each entity type except the
+unimplemented nurbs type</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:48.43</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>pacman87: if you were to draw a half circle,
+then revolve around a line that touch both ends of that arc like 30
+degrees or so, would the resultant geometry be something like an
+orange slice? am I gettin' the purpose right?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:50.27</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>yes</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:50.42</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>``Erik: ^^</tt></td>
+</tr>
+<tr>
+<td><tt>22:51.41</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad jdoliner
+(n=jdoliner@c-98-227-157-38.hsd1.il.comcast.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:52.42</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>sean, can you explain to me how I should
+submit code?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:53.06</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>brlcad?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:54.42</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>jdoliner: are you starting new files, or
+modifying existing ones?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:55.18</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>I started a new file in proc-db</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:55.38</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>and I've also modified a file</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:55.38</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>do you have commit access yet?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:55.44</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>no I don't believe so</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:56.20</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>go to the brlcad sourceforge site</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:56.27</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>under 'tracker' click 'patches'</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:56.48</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>then click 'add new'</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:56.59</tt></td>
+<td><span class="c14"><tt>pacman87</tt></span></td>
+<td width="100%"><tt>and there's some instructions there</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:57.50</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>k thanks</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:58.09</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, your first few patches will be via the
+sourceforge patch submission page so we can know that you
+understand the HACKING file and can produce correct and consistent
+code :)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:01.38</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>hah, trying to install cmake and accidently
+typed cake, got a rush of bad memories off of that</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:01.59</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(cake was the archaic fugly build system
+BRL-CAD used before I hacked it up for automake :D )</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:14.50</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>fair enough I could use some
+criticism</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:16.08</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>would you guys call brep on brep intersection
+geometry editing, or modeling?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:19.35</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>probably geometry editing, but that field
+isn't really important</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:20.46</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>jdoliner: yeah, the main issue with commit
+access is spelled out in the HACKING file (which you've read
+right?) :) as well as <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code/Checklist">http://brlcad.org/wiki/Google_Summer_of_Code/Checklist</a>
+(which you've read right?) :) just to make sure you understand your
+responsibilities</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:21.53</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>is rt^3 wanting dev or stable
+ogre3d?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:22.29</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>yes of course</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:22.32</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>it shouldn't take you more than a day really
+to get commit access sorted out, so you can commit in good faith,
+but you aren't just given it before showing some basic
+understanding (and your gsoc patch didn't show that.. can talk
+about that if you like)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:22.55</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>no that's fine I just submitted my work up to
+this point</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:23.12</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>keep in mind that you absolutely should not be
+coding away quietly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:23.20</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>it's now using vmath macros instead</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:23.32</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>you manually reviewed your patch file, yes? :)
+I always do an svn diff before commiting just to make
+sure</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:23.32</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>I swear I haven't been</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:23.33</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>getting commit sorted out is priority #1,
+should have happened before gsoc started really</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.01</tt></td>
+<td><span class="c15"><tt>jdoliner</tt></span></td>
+<td width="100%"><tt>k let's do that immediately then</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.13</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>also shouldn't be communicating in private --
+here or on mailing list if it has anything to do with
+code/project/progress</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.17</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c9">finds a pointy stick to jab
+brlcad with until he gets his ogre question answered
+O:-)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.30</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>``Erik: ask the Ralith guy, beats
+me!</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.36</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>ok</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.40</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><span class="c9">asks ralith and beats
+brlcad</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.40</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>or mafm</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.45</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>heh</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:24.57</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>what about Ogre?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.04</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>dev or stable</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.06</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>``Erik: g3d you mean?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.08</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>ralith removed it yesterday with consent from
+starseeker</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.10</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>Ogre stable should work</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.14</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>it's &gt;=1.6 right?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.21</tt></td>
+<td><span class="c6"><tt>CIA-28</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Jdoliner 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r1479
+10/wiki/User:Jdoliner:</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.25</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>I noted that I had put it there last year to
+have all dependencies inside</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.26</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>um, 1.6 is stable</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.32</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>then that'll work</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.43</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>mafm: iirc, the reason it was there last year
+was because 1.6 wasn't stable yet and we needed some 1.6
+features</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.45</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>I'll grab dev anyways, there may be some
+future-proofing opportunities</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.55</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>(and damnit, brlcad, you're supposed to know
+EVERYTHING)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:25.57</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>but I don't know which version Qt (or Ralith)
+needs</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:26.15</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it only needed a simple patch for
+RBGui</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:26.20</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>well, the Qt-in-Ogre-in-Qt thing I think I'm
+going with depends on a 1.6 feature</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:26.29</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>but now that RBGui is gone, no problem for
+me</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:26.31</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt><span class="c9">reiterates <a href=
+"http://brlcad.org/wiki/Google_Summer_of_Code/Expectations">http://brlcad.org/wiki/Google_Summer_of_Code/Expectations</a>
+for all students</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:26.34</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>mafm: works fine unpatched with RBGui,
+too.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:27.18</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>probably because they include the patch in
+newer versions -- it was only a new function</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:27.37</tt></td>
+<td><span class="c5"><tt>Ralith</tt></span></td>
+<td width="100%"><tt>yeah, I think I remember debugging that when I
+first tried a system ogre actually</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:27.51</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>Frequent communication with mentor -- ouch, I
+failed in that :P</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:28.28</tt></td>
+<td><span class="c10"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>we'll probably rebundle it later -- there's no
+problem either way until we go to press a source release and have
+to consider dependency management from non-developer compiling
+users</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:34.43</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>current stable version is 1.6.2 (and recent, 2
+months old), so if it's enough, I'd go with it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:37.10</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>&lt;-- did an svn checkout of ogre3d's
+trunk</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:42.17</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yay, dependancy hell :D</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:46.15</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>such a big library (needing in turn other
+libraries) is indeed not fun</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:46.49</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>isn't there some concept in SVN about virtual
+repositories?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:47.26</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>you have a separate module (with ogre and the
+like) and then attach it to some point in other directories (g3d
+and maybe others)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:47.43</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>it could help in maintenance if several parts
+depend on it</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:48.16</tt></td>
+<td><span class="c12"><tt>mafm</tt></span></td>
+<td width="100%"><tt>because OGRE needs about a dozen other
+libraries...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:49.14</tt></td>
+<td><span class="c8"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>and zziplib doesn't wanna build clean,
+neato</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>

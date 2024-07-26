@@ -1,84 +1,372 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>IRC log for #brlcad on 20101115</title>
- <meta name="generator" content="irclog2html.pl">
- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content=
+"HTML Tidy for HTML5 for Linux version 5.6.0" />
+<title>IRC log for #brlcad on 20101115</title>
+<meta name="generator" content="irclog2html.pl" />
+<meta http-equiv="Content-Type" content=
+"text/html; charset=utf-8" />
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: #FFFFFF;
+  color: #000000;
+ }
+ span.c7 {color: #6D6DD0}
+ span.c6 {color: #6CCE6C}
+ span.c5 {color: #E076E0}
+ tr.c4 {background-color: #EEEEEE}
+ span.c3 {color: #66C366}
+ span.c2 {color: #009900}
+ ins.c1 {display:inline-block;width:728px;height:90px}
+/*]]>*/
+</style>
 </head>
-<body text="#000000" bgcolor="#ffffff">
+<body>
 <h1>IRC log for #brlcad on 20101115</h1>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script async="async" src=
+"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Default -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1563266826402652"
-     data-ad-slot="5026919875"></ins>
+<ins class="adsbygoogle c1" data-ad-client=
+"ca-pub-1563266826402652" data-ad-slot="5026919875"></ins> 
 <script>
+<![CDATA[
+
 (adsbygoogle = window.adsbygoogle || []).push({});
+]]>
 </script>
 <form action="http://www.google.com" id="cse-search-box">
-  <div>
-    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" size="55" />
-    <input type="submit" name="sa" value="Search" />
-  </div>
+<div><input type="hidden" name="cx" value=
+"partner-pub-1563266826402652:3301963896" /> <input type="hidden"
+name="ie" value="UTF-8" /> <input type="text" name="q" size="55" />
+<input type="submit" name="sa" value="Search" /></div>
 </form>
-<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
-<table cellspacing=3 cellpadding=2 border=0>
-<tr><td><tt>02:14.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>03:17.35</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/block: blocked [[User:Uziqyjahiq]] with an expiry time of infinite (account creation disabled, e-mail blocked): Spamming links to external sites</tt></td></tr>
-<tr><td><tt>08:12.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@smartbussiness.mobicom.net.ua)</font></tt></td></tr>
-<tr><td><tt>10:24.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@smartbussiness.mobicom.net.ua)</font></tt></td></tr>
-<tr><td><tt>11:52.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist_emc (~archivist@host217-34-113-62.in-addr.btopenworld.com)</font></tt></td></tr>
-<tr><td><tt>12:22.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:27.47</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: you have to read into what the code is trying to do for most of those errors if you're going to make any progress making it work</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:29.09</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>for example, line 282 is defining a wchar_t type .. but if you even just read into the immediate preprocessor logic, you see that they DON'T declare the type for gcc or windows ..</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:29.42</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>and since they are listing out platforms instead of features, and you're on a different platform, it probably just needs to be not gcc, not windows, and not sun.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:30.41</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>which means you'd need to create an ON_COMPILER_SUN or something similar and sprinkle around the code accordingly</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:31.19</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>there are going to be LOTS of issues like that, not just in opennurbs -- nothing hard, but you have to figure out the context and intent of that bit of code, not just the error on the line</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:33.37</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>you'd get that particular line 282 error, for example, if sun handled wchar_t's by simply #defining them to a built-in type (like opennurbs is trying to do for some platforms that need it and didn't have it declared/defined)</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>12:34.30</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>wow, sphflake has the paint_face bug... cool</tt></td></tr>
-<tr><td><tt>13:00.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@smartbussiness.mobicom.net.ua)</font></tt></td></tr>
-<tr><td><tt>13:24.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
-<tr><td><tt>13:40.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juan_man (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:06.56</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r41349 10/brlcad/branches/bottie/ (465 files in 94 dirs): MFC 41333</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>15:42.57</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r41350 10/brlcad/trunk/src/tclscripts/archer/CombEditFrame.tcl: Fixed a typo in CombEditFrame::validateTableEntry.</tt></td></tr>
-<tr><td><tt>16:00.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
-<tr><td><tt>16:30.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo_ (~merzo@smartbussiness.mobicom.net.ua)</font></tt></td></tr>
-<tr><td><tt>17:39.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Zaebos (~irc@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:33.07</tt></td><td><font color="#6cce6c"><tt>starseeker</tt></font></td><td width="100%"><tt>anybody else getting a build failure on killtree.c in libged?&nbsp;&nbsp;looks like it's MAXARGS related</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>18:58.40</tt></td><td><font color="#6d6dd0"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://kitblog.com/2010/11/stars_wars_weather.html">http://kitblog.com/2010/11/stars_wars_weather.html</a></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:04.26</tt></td><td><font color="#6d6dd0"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, 4 files in libged still try to reference MAXARGS: killtree.c preview.c rtcheck.c solids_on_ray.c</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.22</tt></td><td><font color="#6d6dd0"><tt>``Erik</tt></font></td><td width="100%"><tt>in the cmake branch, itk freaks out about not finding X11/Xlib.h</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:05.32</tt></td><td><font color="#6cce6c"><tt>starseeker</tt></font></td><td width="100%"><tt>on BSD?</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:06.15</tt></td><td><font color="#6cce6c"><tt>starseeker</tt></font></td><td width="100%"><tt>one sec...</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:09.29</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41351 10/brlcad/branches/cmake/src/other/incrTcl/itk/ (CMake/FindX11.cmake CMakeLists.txt): Itk is also gonna need enhanced FindX11.cmake - let's try this.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:15.33</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41352 10/brlcad/branches/cmake/src/other/incrTcl/itk/CMakeLists.txt: Oh yeah, might want to actually include the dir.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:25.23</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41353 10/brlcad/branches/cmake/src/other/CMakeLists.txt: Flag this on the local ITCL var, not the TCL var.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:35.30</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41354 10/brlcad/branches/cmake/src/other/CMakeLists.txt: Grr - thanks to itcl/itk needing private headers, need to add local dirs to include paths even if using system installs.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:36.54</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r41355 10/brlcad/trunk/src/libged/combmem.c: Modified combmem_vls_print_member_info by putting braces around object member names to accommodate possible whitespace in the member names.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:45.22</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41356 10/brlcad/trunk/include/cmd.h: Not quite ready to remove MAXARGS yet.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:52.17</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41357 10/brlcad/branches/cmake/src/other/CMakeLists.txt: Reorder the definition of the Tcl/tk paths</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.39</tt></td><td><font color="#6cce6c"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - undefined symbols in rtserver.o</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:53.57</tt></td><td><font color="#6cce6c"><tt>starseeker</tt></font></td><td width="100%"><tt>bu_vlb_getBufferLength and bu_vlb_getBuffer</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>19:56.52</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41358 10/brlcad/branches/cmake/src/other/CMakeLists.txt: Add unix dir - this will need to be more generic in the future.</tt></td></tr>
-<tr><td><tt>20:10.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@183-125-94-178.pool.ukrtel.net)</font></tt></td></tr>
-<tr><td><tt>21:04.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@64-136-219-55.dyn.everestkc.net)</font></tt></td></tr>
-<tr><td><tt>21:04.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
-<tr><td><tt>21:22.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>21:31.00</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41359 10/brlcad/trunk/src/librtserver/rtserver.c: Rename routines in accordance with r41328</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:07.56</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r41360 10/brlcad/trunk/src/libged/solids_on_ray.c: rename rt_cmd_vec* to solids_on_ray_cmd_vec* and change the static array into a dynamic one.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:10.03</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r41361 10/brlcad/trunk/src/libged/solids_on_ray.c: style, comment, consistency cleanup</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:13.29</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r41362 10/brlcad/trunk/src/libged/solids_on_ray.c: move the statics variables out of file scope and into the function that uses them. reorder functions to avoid forward declarations.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:17.39</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r41363 10/brlcad/trunk/src/libged/solids_on_ray.c: check args to quell warnings, perform NEAR_ZERO test instead of exactly testing for == 0 on a double.</tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>22:35.31</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r41364 10/brlcad/trunk/src/libged/wcodes.c: make 'path' directory array be dynamically allocated so we're not using RT_MAXARGS. untested of course.</tt></td></tr>
-<tr><td><tt>22:43.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stevegt_1 (~stevegt@cislunar.TerraLuna.Org)</font></tt></td></tr>
-<tr><td><tt>23:19.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
-<tr bgcolor="#eeeeee"><td><tt>23:28.15</tt></td><td><font color="#66c366"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41365 10/brlcad/branches/STABLE/ (40 files in 19 dirs): Update STABLE to r41359 (I think, need to diff to confirm)</tt></td></tr>
+<script type="text/javascript" src=
+"http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing="3" cellpadding="2" border="0">
+<tr>
+<td><tt>02:14.19</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>03:17.35</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03Sean 07<a href=
+"http://brlcad.org">http://brlcad.org</a> * r0
+10/wiki/Special:Log/block: blocked [[User:Uziqyjahiq]] with an
+expiry time of infinite (account creation disabled, e-mail
+blocked): Spamming links to external sites</tt></td>
+</tr>
+<tr>
+<td><tt>08:12.52</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@smartbussiness.mobicom.net.ua)</span></tt></td>
+</tr>
+<tr>
+<td><tt>10:24.48</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@smartbussiness.mobicom.net.ua)</span></tt></td>
+</tr>
+<tr>
+<td><tt>11:52.50</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad archivist_emc
+(~archivist@host217-34-113-62.in-addr.btopenworld.com)</span></tt></td>
+</tr>
+<tr>
+<td><tt>12:22.42</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:27.47</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>starseeker: you have to read into what the
+code is trying to do for most of those errors if you're going to
+make any progress making it work</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:29.09</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>for example, line 282 is defining a wchar_t
+type .. but if you even just read into the immediate preprocessor
+logic, you see that they DON'T declare the type for gcc or windows
+..</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:29.42</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>and since they are listing out platforms
+instead of features, and you're on a different platform, it
+probably just needs to be not gcc, not windows, and not
+sun.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:30.41</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>which means you'd need to create an
+ON_COMPILER_SUN or something similar and sprinkle around the code
+accordingly</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:31.19</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>there are going to be LOTS of issues like
+that, not just in opennurbs -- nothing hard, but you have to figure
+out the context and intent of that bit of code, not just the error
+on the line</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:33.37</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>you'd get that particular line 282 error, for
+example, if sun handled wchar_t's by simply #defining them to a
+built-in type (like opennurbs is trying to do for some platforms
+that need it and didn't have it declared/defined)</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>12:34.30</tt></td>
+<td><span class="c5"><tt>brlcad</tt></span></td>
+<td width="100%"><tt>wow, sphflake has the paint_face bug...
+cool</tt></td>
+</tr>
+<tr>
+<td><tt>13:00.38</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@smartbussiness.mobicom.net.ua)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:24.56</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad R0b0t1
+(~Enigma@unaffiliated/r0b0t1)</span></tt></td>
+</tr>
+<tr>
+<td><tt>13:40.35</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad juan_man
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:06.56</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03erikgreenwald * r41349
+10/brlcad/branches/bottie/ (465 files in 94 dirs): MFC
+41333</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>15:42.57</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r41350
+10/brlcad/trunk/src/tclscripts/archer/CombEditFrame.tcl: Fixed a
+typo in CombEditFrame::validateTableEntry.</tt></td>
+</tr>
+<tr>
+<td><tt>16:00.40</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@193.254.217.44)</span></tt></td>
+</tr>
+<tr>
+<td><tt>16:30.50</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo_
+(~merzo@smartbussiness.mobicom.net.ua)</span></tt></td>
+</tr>
+<tr>
+<td><tt>17:39.59</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Zaebos
+(~irc@pd95b7f5e.dip0.t-ipconnect.de)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:33.07</tt></td>
+<td><span class="c6"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>anybody else getting a build failure on
+killtree.c in libged?  looks like it's MAXARGS related</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>18:58.40</tt></td>
+<td><span class="c7"><tt>``Erik</tt></span></td>
+<td width="100%"><tt><a href=
+"http://kitblog.com/2010/11/stars_wars_weather.html">http://kitblog.com/2010/11/stars_wars_weather.html</a></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:04.26</tt></td>
+<td><span class="c7"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>yes, 4 files in libged still try to reference
+MAXARGS: killtree.c preview.c rtcheck.c solids_on_ray.c</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:05.22</tt></td>
+<td><span class="c7"><tt>``Erik</tt></span></td>
+<td width="100%"><tt>in the cmake branch, itk freaks out about not
+finding X11/Xlib.h</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:05.32</tt></td>
+<td><span class="c6"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>on BSD?</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:06.15</tt></td>
+<td><span class="c6"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>one sec...</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:09.29</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41351
+10/brlcad/branches/cmake/src/other/incrTcl/itk/
+(CMake/FindX11.cmake CMakeLists.txt): Itk is also gonna need
+enhanced FindX11.cmake - let's try this.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:15.33</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41352
+10/brlcad/branches/cmake/src/other/incrTcl/itk/CMakeLists.txt: Oh
+yeah, might want to actually include the dir.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:25.23</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41353
+10/brlcad/branches/cmake/src/other/CMakeLists.txt: Flag this on the
+local ITCL var, not the TCL var.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:35.30</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41354
+10/brlcad/branches/cmake/src/other/CMakeLists.txt: Grr - thanks to
+itcl/itk needing private headers, need to add local dirs to include
+paths even if using system installs.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:36.54</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03bob1961 * r41355
+10/brlcad/trunk/src/libged/combmem.c: Modified
+combmem_vls_print_member_info by putting braces around object
+member names to accommodate possible whitespace in the member
+names.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:45.22</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41356
+10/brlcad/trunk/include/cmd.h: Not quite ready to remove MAXARGS
+yet.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:52.17</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41357
+10/brlcad/branches/cmake/src/other/CMakeLists.txt: Reorder the
+definition of the Tcl/tk paths</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:53.39</tt></td>
+<td><span class="c6"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>hmm - undefined symbols in
+rtserver.o</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:53.57</tt></td>
+<td><span class="c6"><tt>starseeker</tt></span></td>
+<td width="100%"><tt>bu_vlb_getBufferLength and
+bu_vlb_getBuffer</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>19:56.52</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41358
+10/brlcad/branches/cmake/src/other/CMakeLists.txt: Add unix dir -
+this will need to be more generic in the future.</tt></td>
+</tr>
+<tr>
+<td><tt>20:10.07</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad merzo
+(~merzo@183-125-94-178.pool.ukrtel.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:04.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad R0b0t1
+(~Enigma@64-136-219-55.dyn.everestkc.net)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:04.57</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad R0b0t1
+(~Enigma@unaffiliated/r0b0t1)</span></tt></td>
+</tr>
+<tr>
+<td><tt>21:22.51</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad Ralith
+(~ralith@S010600221561996a.vc.shawcable.net)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>21:31.00</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41359
+10/brlcad/trunk/src/librtserver/rtserver.c: Rename routines in
+accordance with r41328</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:07.56</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r41360
+10/brlcad/trunk/src/libged/solids_on_ray.c: rename rt_cmd_vec* to
+solids_on_ray_cmd_vec* and change the static array into a dynamic
+one.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:10.03</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r41361
+10/brlcad/trunk/src/libged/solids_on_ray.c: style, comment,
+consistency cleanup</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:13.29</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r41362
+10/brlcad/trunk/src/libged/solids_on_ray.c: move the statics
+variables out of file scope and into the function that uses them.
+reorder functions to avoid forward declarations.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:17.39</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r41363
+10/brlcad/trunk/src/libged/solids_on_ray.c: check args to quell
+warnings, perform NEAR_ZERO test instead of exactly testing for ==
+0 on a double.</tt></td>
+</tr>
+<tr class="c4">
+<td><tt>22:35.31</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03brlcad * r41364
+10/brlcad/trunk/src/libged/wcodes.c: make 'path' directory array be
+dynamically allocated so we're not using RT_MAXARGS. untested of
+course.</tt></td>
+</tr>
+<tr>
+<td><tt>22:43.33</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad stevegt_1
+(~stevegt@cislunar.TerraLuna.Org)</span></tt></td>
+</tr>
+<tr>
+<td><tt>23:19.55</tt></td>
+<td colspan="2"><tt><span class="c2">*** join/#brlcad juanman
+(~quassel@unaffiliated/juanman)</span></tt></td>
+</tr>
+<tr class="c4">
+<td><tt>23:28.15</tt></td>
+<td><span class="c3"><tt>CIA-55</tt></span></td>
+<td width="100%"><tt>BRL-CAD: 03starseeker * r41365
+10/brlcad/branches/STABLE/ (40 files in 19 dirs): Update STABLE to
+r41359 (I think, need to diff to confirm)</tt></td>
+</tr>
 </table>
-
-<br>Generated by irclog2html.pl
-Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
-<a href="http://infobot.sourceforge.net/">infobot</a>.
-</body></html>
+<br />
+Generated by irclog2html.pl Modified by <a href=
+"http://Rikers.org">Tim Riker</a> to work with <a href=
+"http://infobot.sourceforge.net/">infobot</a>.
+</body>
+</html>
