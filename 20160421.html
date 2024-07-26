@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20160421</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20160421</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:31.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bubbmpwhvwsaehnq (~armin@dslb-178-010-185-155.178.010.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>00:38.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stragus (~alexis@modemcable090.29-19-135.mc.videotron.ca)</font></tt></td></tr>
+<tr><td><tt>00:43.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>00:46.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>02:16.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (b64b2de1@gateway/web/freenode/ip.182.75.45.225)</font></tt></td></tr>
+<tr><td><tt>03:41.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (a5e1683b@gateway/web/freenode/ip.165.225.104.59)</font></tt></td></tr>
+<tr><td><tt>03:56.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.12</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: er, I was seeing extraneous and missplaced line segments with both planes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.16</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>with a fresh build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.10</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>andromeda-galaxy: there's beta.brlcad.org and the main site, the prior being a staging and testing ground for the latter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.52</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">pets Notify </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.57</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>ugh, nearly 150 lines just to stub in a single command that has gone through years of maintenance</tt></td></tr>
+<tr><td><tt>04:36.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>04:46.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.20</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: fyi,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start 782: regress-rtwizard-rtwiz_m35_A</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.42</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>seems to be stuck .. no cpu activity, several minutes passed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:04.08</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it's stuck talking to the fbserv in rem_open(), pkg_waitfor().., pkg_suckin()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:04.18</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>it == rt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:05.33</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>there is an fbserv running and it's waiting for a connection, so something is probably awry with how fbserv is invoked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:06.00</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>it's clearly been detached, so I suspect a race condition where rt tries to talk to it before it's had a chance to start listening</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:08.14</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, yeah, something awry with the fbserv .. even fbclear -F 1 stalls in the same place</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:08.31</tt></td><td><font color="#67c467"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">detaches for the night</font></tt></td></tr>
+<tr><td><tt>07:14.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>07:42.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@63.10-64-87.adsl-dyn.isp.belgacom.be)</font></tt></td></tr>
+<tr><td><tt>08:28.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee` (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>08:56.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (a5e16837@gateway/web/freenode/ip.165.225.104.55)</font></tt></td></tr>
+<tr><td><tt>09:24.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo_ (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>10:09.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (a5e16832@gateway/web/freenode/ip.165.225.104.50)</font></tt></td></tr>
+<tr><td><tt>12:57.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:22.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (71c18862@gateway/web/freenode/ip.113.193.136.98)</font></tt></td></tr>
+<tr><td><tt>15:28.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mathnerd314 (~quassel@supertux/Mathnerd314)</font></tt></td></tr>
+<tr><td><tt>16:03.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mandeep_Singh (~Mandeep@117.199.103.122)</font></tt></td></tr>
+<tr><td><tt>17:02.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d8450b2.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>17:06.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>17:10.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@bryan.fairlystable.org)</font></tt></td></tr>
+<tr><td><tt>17:10.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure_ (~kanzure@bryan.fairlystable.org)</font></tt></td></tr>
+<tr><td><tt>17:12.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@unaffiliated/kanzure)</font></tt></td></tr>
+<tr><td><tt>17:12.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad iibjdszvmqlezjdf (~armin@dslb-178-010-185-155.178.010.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>17:13.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ejno_ (~ejno@unaffiliated/kazaik)</font></tt></td></tr>
+<tr><td><tt>17:15.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@87.64.10.63)</font></tt></td></tr>
+<tr><td><tt>17:16.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel_ (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>17:23.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d8450b2.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>17:29.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d8450b2.dyn.telefonica.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.05</tt></td><td><font color="#b660b6"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: ah okay, that makes sense.&nbsp;&nbsp;Is beta.brlcad.org always running the latest git master branch?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.28</tt></td><td><font color="#b660b6"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>also, what's the process for agreeing to push a beta. version out to the main site?&nbsp;&nbsp;As it is, the main site still has a number of usability/responsiveness issues that look much better on beta.</tt></td></tr>
+<tr><td><tt>18:11.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (71c18862@gateway/web/freenode/ip.113.193.136.98)</font></tt></td></tr>
+<tr><td><tt>18:31.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d8450b2.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>18:39.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Zitara (~vsvs@149.147.165.170)</font></tt></td></tr>
+<tr><td><tt>18:41.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d8450b2.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>19:09.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d8450b2.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>19:11.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:28.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo_ (~merzo@150-55-201-46.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>19:49.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@63.10-64-87.adsl-dyn.isp.belgacom.be)</font></tt></td></tr>
+<tr><td><tt>21:31.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:16.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:35.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>23:07.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>23:07.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

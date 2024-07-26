@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20061225</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20061225</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>03:46.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@bas3-sudbury98-1168048487.dsl.bell.ca)</font></tt></td></tr>
+<tr><td><tt>09:06.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@084202024060.customer.alfanett.no)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:35.43</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Merry monday and a happy new week!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.51</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>On this special day, let's hope and rationalize on dreams of harmony between managers and programmers in the troubled regions of our world</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and happy hellidays and all that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.20</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, btw, from some quick&amp;dirty testing, you're in the neighborhood of 40x faster (I haven't done a REAL benchmark comparison, just pulled some quick numbers... different geometry, but I think it's reasonably similar in occlusion and complexity)... bear in mind, you'll slow down once you put in hooks for distributed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.43</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>40 times faster than the old libRT?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.51</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm rigging up a fbsd box with a funny compiler and X in a funny place, just to see what happens when I try to build all the ports</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.52</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>adrt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.02</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>40 times faster than adrt? What the...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>librt gets 30krps on a good day, heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.50</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm writing state synchronisation at the moment, for distributed processing. Distributed processing shouldn't be too much of a hit with (very) good bandwidth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.50</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>quick and dirty numbers.. may be a whole order of magnitude off ;) I was looking at some old scalability graph info</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.16</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>how good is "(very) good"? gigE? ib? myri?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.24</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>or does 100base count?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.47</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>It all depends of the task, how much data there is to send back to the master node ; just raw pixels, or intersection coordinates and so on?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.04</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Raw pixels shouldn't scale too bad with some compression</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.49</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm still working on state synchronisation, so that all operations on the state of the master node is propagated to the other nodes ; any new node can connect to the master at any time too, and its state is sync'ed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.50</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>ummmm, I'm not sure... the end application kinda needs in and out coordinates, with their component</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.17</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>But what for? Can't it use these coordinates on the remote node, and just send back the result?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.53</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Sending results of computations based on the raytracing is clearly _much_ lighter, usually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.54</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it's supposed to be integrated easily with another app... which expects a segment list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.05</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>obviously, but it has to talk with a brain dead app</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.10</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Can't this other app run its "shader" code remotely?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.23</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.30</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:/ it's retarded</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.32</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Transfering raw raytracing results will kill performance badly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.38</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Gah! Rewrite that :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.40</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it tries to be the center of the universe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.44</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>not mine to rewrite... heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.57</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>the, uh, horror project was an attempt to rewrite it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.04</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Oh, I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.05</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad isn't dumb enough to touch it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.29</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>we did put some of the, um, application into adrt and got really good results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.00</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>naturally, that'll be something to try down the road with rayforce... but the way we got the pointy hairs to sign off and throw money was by talking the retarded language of the retarded... people...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.01</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.20</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Eh, typical :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.33</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>that's the real world for ya, dude :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.37</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>The code lying on top of rayforce must be fixed to be distributed too, seriously</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.50</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>um</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.54</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it, uhhh, sorta kinda is...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.56</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>You can't distribute half of the processing and expect good results, transfering all half-way results back to the master node</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>but it was done by the same dude who did the distributed processing for the hell project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.23</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>so the scalability goes to about 2 nodes... 3 nodes costs more th an 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.24</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That's what I'm writing state sync'ing for in mind, intelligent use of the library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.29</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>from what I'm told</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.46</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ah, sounds like my model prep threads :), I'll fix that though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.50</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>(and the hell project... 2 nodes costs more than 1)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.55</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ahahahaha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.59</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>except the app is almost totally distributable...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.14</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That is so wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.25</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>the "hard part" that he couldn't figure out was ordering the results for the output... and, y'know... dir... catch 'em out of order and bin them in a tree or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.08</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it's a sad state of affairs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.13</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>but, y'know, fuck it, I'm on vacation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.25</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I have no idea what the horror project is actually meant to do, but it really has to be properly re-written, in real programming languages by competent people</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.27</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, doesn't even need to be properly re-written, or in a real programming language... I did a day hack on librt that was outrunning the original C version and the new java version by several orders of&nbsp;&nbsp;magnitude...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>using... librt... the slow csg one... :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.37</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Seriously, I'm writing state synchronisation for intelligent use of the library, where the user will run "shaders" remotely and return packed high-level results ; this is not low-level distributed processing, where rays are traced remotely and results returned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.46</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That would use soooo much bandwidth, it's unthinkable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.32</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm thinking when I get back to the office, I'll have to write a lame 'workalike' to the retarded app and wire rf and adrt into it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.48</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>something I can give you so you can see what data needs moved around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.37</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- doesn't go back until the 9th though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.19</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I see, okay. "Vacation" or "work" are pretty much the same to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.00</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>used to be for me... *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.19</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I went and got old... I have personal projects to do in my 'vacation' time :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.58</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ah such pretexes, I'm sure it's just that the work projects aren't interesting enough :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.58</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>generally not little "tweak it for a few % gain" stuff, but good old forward thinking stuff... gotta keep it very seperate, so if I decide to try to make some $'s, there's no issues ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.45</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and, yeah, I steer towards very high level languages... harder to tweak, but hard problems become easy and impossible ones become tractable O:-D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.28</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Pfft :), assembly gets so easy to debug with some practice *cough*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.07</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I look forward to writing assembly pipelines, eventually, I want my extra 20-30%</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.18</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, but take a skilled person in asm vs a skilled person in, say, scheme or lithp... or smalltalk... or erlang... or ml...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.30</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>give a task, see who has a working solution first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.07</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>if I can do in a few weeks what'd take a decade in asm, fuck, I'll do it in a few weeks... and the problems that interest me tend NOT to be cpu bound</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.09</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.35</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>:) Sure, I know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.51</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- exploring huge scheduling stuff with hierarchal notions and dependancies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.01</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Even for "high-level" tasks, I hardly move away from C though, it's just too fluent in comparison to my Lisp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.13</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and adequate graph reduction to keep the working set tiny</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.30</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>obviously you know that fluency can only be gained and retained by exercise :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.58</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I know :), but C has the upper hand in performance, and I'm not sure Lisp would be that much faster to write</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.10</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>in that case, you should write fortran code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.15</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Since I already got so much C code I reuse for everyhing related to memory management, and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.22</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.41</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>lithp does its own memory management... your C is superfluous.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.52</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I would bet mine is faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.59</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>mebbe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.12</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>lisp compilers tend to make pretty tight memory pools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.38</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I wouldn't be surprised if your memory stuff was fairly similar to a lot of memory stuff in lisp, scheme, perl, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>you might have an advantage by JUST pooling and not doing gc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.07</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Perhaps so, but the memory management part is solved either way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.31</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>well, actually, you do reference counting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.42</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>so technically, you do have gc... you just blow up if you go cyclic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.48</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>blow up or permanently l eak</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.14</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That's a code flaw easily tracked and fixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.01</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Understood, hence why C performs better and why I use it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.13</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>If we had Lisp chips, I might well switch over</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.24</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>be interesting to see a high level language designed by someone with intimate knowledge of modern hw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.38</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>C is very tightly bound to the pdp11 chip, dude</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.55</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Personally, I use whatever language maps to the underlying hardware well, delivering proper performance and control</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.11</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>lisp was pretty rocking on certain pdp's where "complex" operations were single clock</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.18</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>like, car/cdr pairs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.22</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>just a register access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.27</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>car/cdr?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.31</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>cons? one load</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.44</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>umm, yeah?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.54</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>uhhhhhhhh, "head" and "tail"?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.08</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>(car '(a b c))&nbsp;&nbsp;-&gt;&nbsp;&nbsp;a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.13</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ah yes, as in Lisp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.16</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>(cdr '(a b c))&nbsp;&nbsp;-&gt; '(b c)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.21</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I was thinking of assembly instruction names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.26</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>they, uh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.27</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>are</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.31</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>assembly instruction names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.32</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>on the pdp1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.39</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>*nods* Not on the archs I know :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.41</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>or was it 8</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.22</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Really, your position is that Lisp would be great if the chips were meant for it, and I don't contest that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.22</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>basically addressing like ah and al out of an ax, if you can stomach my archaic 16b 386 terminology</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.33</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>But reality is a bit different these days...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.42</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>my position is ALSO that C would be great if the chips were meant for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.47</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and I don't think the chips are meant for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.01</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Chips are a lot closer to C than Lisp, at least</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.16</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm not so sure about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.21</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>C with GCC's built-in pseudo-functions, C extensions and intrinsics is fairly decent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.35</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>naive implementations of lisp and C, the c will probably come out a fair bit better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.11</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>but it's a translation problem, one that is unfortunately being worked on by more C people than other language people</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.11</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Compilers aren't known to ever do a great job, no matter the language</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.13</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.34</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and cpu run time is kinda a fairly minor aspect of the cost of computing, anyways</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.11</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That's highly variable, but I always played with cpu intensive code, personally</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.28</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>so you're in an odd niche :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.44</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm fine with that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.12</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>most code these days sits around with its thumb up its ass waiting for the stupid human to respond</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.27</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and another large bulk of code is ran very infrequently, maybe once ever...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.53</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>spending developer time doing petty bookkeeping with C or asm is... illogical in those situations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.03</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Agreed, of course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.35</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>use something that gets a working product to the machine as quickly as possible... unfortunately, too many people lock themselves into a certain tract of programming and don't explore adequately...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.03</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>too many java programmers don't know jack shit about C, so they don't understand how to use the machine in funny ways to make things easy and simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.10</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm interested by computers for doing intense processing for simulations or other number crunching, pretty bookkeeping does not interest me the slightest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.37</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and too many C programmers never gain a strong fluency in something like lithp, so they never understand the fu of real macros or full number towers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.12</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>dude, you write a memory mgmt library... you're trying to work to abstract the petty bookkeeping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.13</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.22</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>This elegance can get in the way of efficiency too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.26</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and walking right into greenspuns 10th law in the process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.32</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.47</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I'd rather write a program really quickly in a high level language...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.55</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>figure out how I can make the algorithms better to make it faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.05</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and THEN start reducing the 'expensive' parts to lower languages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.11</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>like portabe pdp assembly, er, uh, I mean, C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.11</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>It isn't always about processor time efficiency, there are Java programs eating gigabytes of ram</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.23</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, true... that's just... wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.38</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>java is an excellent example of how to do everything wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.45</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Eheh, exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.46</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>almost as bad as c#</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.43</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- notes that lisp lived in a land where 4k of ram was considered huge, with heavy computation theory background... calling java up as a counter argument is just a low blow and wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.10</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ahah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>but as justin likes to point out, I'm very much on the 'computer science' aspect and not so much on the engineering side... I dig reading up on algorithms, and I know some about church, gödel, turing, ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.56</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ew.. Yes I noticed that. You'll find me weird, but I'm not comfortable with any language where I can't be sure what assembly the compiler will spit out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.26</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I like writing C, look at any chunk of assembly and know exactly where I am in the software</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.37</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>you can see the output of lithp in asm or machine code if you want</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.51</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Sure, I don't think I'm neglecting algorithmic optimisations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.54</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>lithp is primarily a compiled language, if all else fails, hit it with a decompiler</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.05</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and I use some scheme compilers that output C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.14</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>don't confuse the language with the evaluation mechanism :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.07</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>(of course, chicken's C output is eye bleeding horrible, heh... good&amp;naive... gcc doesn't seem too upset about it, though)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.07</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Eh now, the output of properly written C isn't that bad :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.37</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Compilers remain stupid, but considering the amount of work that has been put in GCC, I don't expect other non-gcc languages to perform better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.19</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, but I could put a trivial amount of effort into an assembler</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.28</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and it could perform better, provided a competent assembly programmer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.30</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.47</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and I still view assembyl as fairly compiled, I used to do mnems on the c64 o.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.23</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Indeed, but Lisp is farther than C from assembly considering the current hardware ; more work for the compiler = poorer code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.37</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I don't know about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.03</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>So much work put in GCC, yet it just seems to stupid sometimes... I really have the impression I could write better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.17</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>It isnt the optimisation that bothers me, it's all the higher-level parsing and stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.38</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>so* stupid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.42</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm not big on common lisp... but lisp 1.5 has almost every single language component being a single fast opcode, I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.03</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>scheme has a good deal of that... but the way it's all written these days... :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.29</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>a compiler to bytecode and a biteocde interpreter... written in C... usually not very well..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>which doesn't map cleanly to the machine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.58</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>mebbe if I get time, I'll try to write a tight scheme-&gt;ml compiler for amd64 or something :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.07</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>ml as in machine language, not sml or ocaml</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.33</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm secretly pleased that processor speeds are hitting a ceiling, perhaps people will rediscovere the value of efficient languages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.40</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>rediscover*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.11</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>nah, the notion of vectorization is coming back into fad...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.17</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>can't make 'em faster, so mkae more of 'em...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.25</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>pentium6 now with 1024 cores!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.38</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>There's a big problem with that : it doesn't scale</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.49</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>vector computers in the 70's could do 4x4 matrix mults in one clock :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.06</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>The more cores you have, the more in-cache synchronisation you require, it gets messy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.14</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it doesn't scale because: hw sucks. and programmers suck.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.14</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.26</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Yes, instruction-level vectorization is great, but that's fairly low-level</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.37</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Hence the added value to all low-level languages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.53</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>only cuz the compiler writers... well... suck :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.10</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Pfft, C has got all I need on that aspect :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.55</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Our current x86/amd64 architectures are soo not meant to scale by adding new cores/processors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.25</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>definitely not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.54</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I d'no much about amd64, but the x86 is a grotesque pile of shit with hacks built on it, shoulda died in the 70's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.07</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Which isn't a bad thing : we will be forced to leave x86 behind definitely, I hope!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.33</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>ppc even has cruft and lameness built on, but it's *SO* much nicer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.46</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I want my arrays of 256 processors at 400mhz with a proper architecture to scale</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.05</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I enjoyed the 6510 monitor/mnems... hated 386 asm... but really really liked r2k asm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.25</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>'proper arch' like numa?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.33</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hypercube?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.39</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>or something 'new'?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.48</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Numa works somewhat, but I don't think it scales too well at a point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.49</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>smp seems awful coarse</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.09</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and if we have a metric assload of cores, why not go assymetric?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.14</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>For each processor, the cache synchronisation circuitry keeps growing with the total count of processors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.23</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.27</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, I dedicated one of my 128 procs to manage the data motion... but... y'know? so what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.25</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Personally, I would be an advocate of software-based memory and cache synchronisation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.53</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Let the programmer, the software manage memory ; it's too much complex circuitry for the hardware, it can't scale</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.00</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I d'no.. hw mmu's made vm pracical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.03</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>practical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.31</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and in the 60's, ibm's cpu's were microcode vm beasties, and amdhal made custom chips that smoked teh ibm things bigtime</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.00</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>(and yes. I really really dig computer history. A lot. I don't think you can really move forward until you REALLY understand the past.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.45</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I agree with MMU, I'm just saying the software should explicitgely do "put X into that large shared memory bank so other processors will access it"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.03</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Rather than have the other processors ask "Hey, has anyone got that in their cache? Is that copy up-to-date?"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.16</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>explicitely*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.52</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Each processor with its own memory, one or several shared memory banks, perhaps different levels</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.40</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Software would have to be written differently in all aspects related to memory management, but that would scale as well as it can get</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.26</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Dumb example : 256 processors, each got its memory bank X, each group of 16 processors has a shared bank Y, and a bank Z on top of all Y. All processors can DMA to/from the shared memory banks asynchroneously</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.13</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm, y and z seem... silly... ever built hw?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.41</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>How else would you scale shared memory?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.10</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>(actually,if you look at an mmu on an smp system... each alu has its cache... if the data it needs isn't in its cache... it asks the next level... whihc, y'know, migh be l2 or might be main memory... or might by disk drive... so I guess it already does that, heh)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.18</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>but every time you write to memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.23</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it has to tell the l1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.25</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and then the l2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.28</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and then main memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.33</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>until there's a shared universal vm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.58</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>But what if the up-to-date cache line isn't in main memory but in another processor cache?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>um</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.07</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>That's a big issue on the non-scalability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.10</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>if...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.13</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>you write... memory...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.19</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it has to... IMMEDIATELY to all the way out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and the 'all the way out' (universal vm) cant' have other things dicking with it at the time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.00</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>which is why you need a machine with multiple cores, so you can feel the pain firsthand :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.26</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Got 2 cores with shared cache, eh well. I'll get something soon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.53</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it'd be rare that two cores with shared cache stomp on eachother TOO much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.57</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Trying to get SURVICE to switch over to direct deposit to avoid the 1 month delay for U.S. check deposit, then I could get it in a few days</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.20</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>something with multiple cores... something SLOW with multiple cores would help exasperate the issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.28</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>They still have to ensure coherency, due to the hardware rather than software synchronisation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.50</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>mmu has such a notion :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.56</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it's the gatekeeper of memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.56</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>If the hardware was to expect the software to explicitely state when something must imperatively be shared, we wouldn't have that problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.05</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>And a big memory bank with too many cores playing in it can't please any memory controller</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.20</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Hence the idea of a bank per processor, plus shared banks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.48</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Hardware synchronisation makes it easy for the programmers, but it isn't friendly to hardware scalability at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:13.11</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hw isn't magic, dude.. fo rthe most part, it just does what the os says</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:13.46</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Hardware synchronisation between cpu caches isn't up to the OS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:13.54</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I mean, yeah, throw a lock, it goes down to the mmu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:13.57</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>and it's reserved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>uhmmm, no, it's facilitated by the os</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.28</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it's up to the threading capability... pthreads in your case :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.46</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>if it was all up tto the hw, you'd never have locking issues or funky multi-threading bugs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.02</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>throw the mmu lock by grabbing a mutex or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.08</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>dick with the memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.30</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>reads might be short, but iirc, writes are long</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.04</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.12</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>I'd have to re-read the material to remember</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.08</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>been too long :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.14</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Perhaps so should I, but from my current knowledge, the current cache synchronisation between processors is a huge problem for scalability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.01</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>The more total processors and memory banks you have in a Numa design, the more hypertransport links _each_ processor requires</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.15</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>ok, hypertransport is newer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>but in old smp, the main memory was the primary information bridge... (the universal vm, actually... might be in swap)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.05</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>so when you write, it has to fall all the way through to main memory...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.15</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.18</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>now I'm confusing myself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.19</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>o.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.53</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>We should write some raytracing hardware to clear things up, and accidentally design the future's memory model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.26</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.36</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>ingo et al may've beaten you to that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.37</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.11</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>dr ingo wald... has a co iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.39</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>openrt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.49</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Ah, doesn't mean we can't do better :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.08</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.14</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>one thing I learned a while back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.20</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>ther'es always someone there to do better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.06</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Is that an excuse not to do anythingy? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.11</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>anything, rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.40</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>of course not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.52</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>it's a reason to always do the best you can quickly, and always look for new horizons</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.06</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>stagnation will finish you :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.17</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>always strive to learn more, do more, be more...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.17</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.19</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Or just strive to enjoy life, hoping these will naturally come as side-effects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.39</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>perhaps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.40</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.47</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>honestly, that may be the path I'm more o n</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.50</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>more on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.53</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- moron o.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.14</tt></td><td><font color="#b35eb3"><tt>``Erik</tt></font></td><td width="100%"><tt>or perhaps my goals are slightly less grandiose</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:30.04</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>To me, raytracing hardware would be really fun and new, any other objectives are a pretext</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:30.33</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Pretexes that management might prefer to "It looks fun!"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.39</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>Plus, we would have abundant time to argue about scalable memory models</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.48</tt></td><td><font color="#bb62bb"><tt>Twingy</tt></font></td><td width="100%"><tt>I want an Official Red Ryder Carbine-Action Two-Hundred-Shot Range Model Air Rifle!</tt></td></tr>
+<tr><td><tt>19:52.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DanielFalck (n=dan@pool-71-111-98-172.ptldor.dsl-w.verizon.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:25.19</tt></td><td><font color="#5eb3b3"><tt>Maloeran</tt></font></td><td width="100%"><tt>I think it's the first time I can ride a bicycle wearing just a shirt to attend christmas social gatherings</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

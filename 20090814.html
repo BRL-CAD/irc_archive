@@ -1,0 +1,429 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20090814</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20090814</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:02.01</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, so I think I see how it's tied in yet .. don't think anything else is using ged_reopen just yet so it very well could be incomplete</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>mged does it's own thing (see f_opendb() in src/mged/mged.c) and archer goes through the old display object interface (src/libged/dg_obj.c)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.35</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so might want to reconcile what f_opendb() is doing with what ged_reopen() is doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.50</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>s/might want/you need/ :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite: pongish</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite: what rpath "problem"?&nbsp;&nbsp;rpaths are set by libtool, which are managed primarily by automake built-in macro expansions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>you shouldn't be mucking with the rpaths else you will likely encounter dragons</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.50</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: you can register a bu_bomb handler to tell it to keep going (if you haven't figured that out by now)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.02</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm? whu?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.06</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>(related to earlier tessellation talkage)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.32</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- doesn't recall which tessellation talkage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.59</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>tk+libfb ftw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.06</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.03</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>tk is making me a sad panda</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.27</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>I can't rotate objects in mged anymore, it executes on mouse down instead of mouse up, so it reads it as a zoom in command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.13</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if jdoliner wins when he defends himself to his goldfish</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.37</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>obviously you haven't talked to joe much ;&gt; *duck*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.06</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>it is gettin' to be wrapup time, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.40</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>there aren't any release stoppers that I know of, so we should be good to release .. it has just been coma/sinus recouping .. *ship it!*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.30</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">ughs at the automatic search paths being added for X content instead of specifying or detecting</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">finishes spewing from recent backlog</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: you're on 10.5 right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.36</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, but I'm seeing the behavior on both .5 and .4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.53</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>(if you're asking about the mouse rotate issue)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.04</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>also; opendb /path/to/castle.g ; E all.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.07</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.10</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>nick found a way to hit keys before/during the mouse events that lets him rotate smooth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.13</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>tricking it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.30</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>eh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.35</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>or there's hitting the xyzXYZ keys</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.20</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>and yeah, just a couple more days before pens down</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.27</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>I don't fire up mged often enough to worry, and almost never e anything up... was just something I kinda noticed, not sure if it's due to something funky on my stuff or an actual issue</tt></td></tr>
+<tr><td><tt>00:21.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Patmcc19_ (n=chatzill@174-17-172-168.phnx.qwest.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.53</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I had a regress test that took each of our example .g files and would tessellate each one .. it was too painful to commit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.06</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the crash is new</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.07</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>hehehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.37</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i think that input problem is probably a release stopper for mac binaries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.51</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i fixed all the other mac problems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.59</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>but hadn't got to that one before siggraph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>not enough to stop a source release though, nothing new</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.16</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, the null hack for linux finally got on smacksnot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.10</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, a retrograde orbiting exoplanet (amazing how little we know about exoplanets... we only know the orbit direction for a dozen or so?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.01</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03johnranderson * r35543 10/brlcad/trunk/src/libged/bigE.c: "E" command was always failing because it was not adding solids to the "ged_display_list". Now adds the solids.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.14</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>hah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.18</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>that'd be the castle crash, I bet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.48</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>go go gadget anderson</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.10</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>they're making a game... knocking off a movie... knocking off an 80's cartoon...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.20</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>knocking off a 50's toy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.47</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>60's, sorry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.24</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>(knocking off a 60's tv show I'd never heard of)</tt></td></tr>
+<tr><td><tt>01:17.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.22</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>ls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.25</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>doh</tt></td></tr>
+<tr><td><tt>04:24.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>06:31.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>06:37.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite_ (n=matthew@75-119-230-162.dsl.teksavvy.com)</font></tt></td></tr>
+<tr><td><tt>06:57.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elena (n=elena@89.136.118.141)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:58.46</tt></td><td><font color="#c8c869"><tt>elena</tt></font></td><td width="100%"><tt>~log</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:12.54</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>~logs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:12.55</tt></td><td><font color="#6aca6a"><tt>ibot</tt></font></td><td width="100%"><tt>All conversations are logged to <a href="http://ibot.rikers.org/channel,">http://ibot.rikers.org/channel,</a> where "channel" is replaced by the URL-encoded channel name, such as %23freenode for #freenode. Lines starting with spaces are not logged.</tt></td></tr>
+<tr><td><tt>07:52.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite__ (n=matthew@76-10-171-69.dsl.teksavvy.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:44.01</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ebautu * r35544 10/web/trunk/htdocs/more/sites/all/ (30 files in 3 dirs): Implemented links for sharing services.</tt></td></tr>
+<tr><td><tt>09:08.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite_ (n=matthew@69-165-133-209.dsl.teksavvy.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:10.09</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r21 10Model repository/: Axis example (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:10.21</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r22 10Model repository/: Boolean operations (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:10.24</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r23 10Model repository/: bldg391 (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:10.37</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r24 10Model repository/: Havoc (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:10.44</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r25 10Model repository/: Tank car (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:12.15</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03ebautu * r35545 10/web/trunk/htdocs/more/sites/all/themes/fireflystreamcom/node-model.tpl.php: Fix links themeing for anonymous users.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:13.24</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r25 10Model repository/: Tank car (update model: )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:14.09</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r24 10Model repository/: Havoc (update model: )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:14.18</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r23 10Model repository/: bldg391 (update model: )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:14.29</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r22 10Model repository/: Boolean operations (update model: )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:14.38</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r21 10Model repository/: Axis example (update model: )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:15.18</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r25 10Model repository/: Tank car (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:15.53</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r21 10Model repository/: Axis example (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:16.02</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r22 10Model repository/: Boolean operations (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:16.11</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r23 10Model repository/: bldg391 (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:16.21</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03admin 07<a href="http://more.brlcad.org">http://more.brlcad.org</a> * r24 10Model repository/: Havoc (update model: BRLCAD processing completed.)</tt></td></tr>
+<tr><td><tt>09:47.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ornitorrincos (n=ilcra198@archlinux/trusteduser/ornitorrincos)</font></tt></td></tr>
+<tr><td><tt>10:53.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</font></tt></td></tr>
+<tr><td><tt>12:27.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-48.sbndin.btas.verizon.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>oh that's cool</tt></td></tr>
+<tr><td><tt>13:11.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14FACE.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:13.04</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr><td><tt>14:23.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _clock_ (n=_sushi_@80-218-244-105.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the model notifications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.59</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>noficiations when it's added and when processing is completed .. which looks like was about 5 minues for those tiny models&nbsp;&nbsp;:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.09</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r35546 10/brlcad/trunk/src/rt/viewedge.c: minor tweaks for syncing antialias work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.08</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35547 10/isst/trunk/src/ (gui.c isst.h load_g.c main.c): specify db/regions from command line.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.59</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>haha</tt></td></tr>
+<tr><td><tt>16:42.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jdoliner (n=jdoliner@c-68-51-75-169.hsd1.il.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.11</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy joe!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.16</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.30</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>I haven't seen you in a while sean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.35</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>was just going through some of your commits yesterday</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.40</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, was away on travel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.47</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>been a busy couple weeks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.48</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yes, thoughts plz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.58</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>seen the chatter in here and commits, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.25</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>well, how're things going?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.39</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i noticed you were working on curve/face crossings for the face-face intersections</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.02</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.22</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>you mean in the FindStartPoints_Internal?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.53</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>sry that function is actualy GetStartPointsInternal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.59</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>mm, i'd have to dig back through the commits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.50</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>Curve_X_Profile() is what I had in mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.56</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>don't bother</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.58</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>and FaceFaceIntersect()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.07</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yeah, Curve_X_Profile was actually an idea that I never wound up using</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.11</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>I'll remove that soon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.21</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>but facface intersect is the workhorse</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.50</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>FaceFaceIntersect does all the work of creating the Face_X_Events</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.07</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.15</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>which are basically ON_X_Events but for two faces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that does sound like the most important piece :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.29</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yeah :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.44</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>it uses the numeric method of walking the intersection curve</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.54</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>were talking yesterday about evaluating a given CSG operation as just the resulting surface intersections, finding those curves, attaching them as trims, and just feeding the result to opengl for visualization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>as a 'first step' of sorts, for visualization of arbitrary objects via shaded displays/opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.12</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>I see,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.37</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>ultimately would we like to just 'freeze' faces to have only 1 external trim?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.58</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you mean?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.00</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>multiple trimming curves are normal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.07</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>or do you mean one trimming loop?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.09</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>well at the end we're going to end up with faces with a whole bunch of trims</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.22</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yeah i mean loops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.58</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, ideally minimal loops but even that shouldn't be a problem to have multiple ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.22</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.49</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>will probably want some means to simplify, though -- if a loop is fully contained within another, eliminate it; if it intersects, weave it in, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.19</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>yes, I actually already have it setup to weave intersecting loops in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.21</tt></td><td><font color="#6cce6c"><tt>jdoliner</tt></font></td><td width="100%"><tt>also if it has 2 distinct external loops that should be an easy simplification</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.43</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35548 10/isst/trunk/src/ (Makefile.am gui.c isst.h load_g.c main.c): break worker functions out into their own files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.47</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35549 10/isst/trunk/src/test.c: rm dead file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.01</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35550 10/isst/trunk/src/ (local_worker.c net_worker.c): break worker functions out into their own files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.28</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35551 10/isst/trunk/src/poo.g: rm dead file</tt></td></tr>
+<tr><td><tt>17:39.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite_ (n=matthew@69-165-133-209.dsl.teksavvy.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.19</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35552 10/isst/trunk/src/net_worker.c: bcopy-&gt;memcpy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.55</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>hey brlcad, can I get your help in changing the configure script from using libtool runpaths to convenience libraries?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.21</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35553 10/isst/trunk/src/ (gui.c isst.h local_worker.c net_worker.c): remove gtk requirement from local_worker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: not sure what you mean by that exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.27</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: the convenience libraries aren't installed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.56</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: yeah. I'm just trying to remove all of the libtool runpaths and create partially linked executables so they're compliant with fedora guidelines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.17</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: I'm not sure what you mean by the convenience libraries aren't installed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>libtool "convenience libraries" are, by definition, not installed&nbsp;&nbsp;:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.21</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://sources.redhat.com/autobook/autobook/autobook_92.html">http://sources.redhat.com/autobook/autobook/autobook_92.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.31</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>note the "noinst" </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:12.52</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>can you give a reference to those fedora guidelines?&nbsp;&nbsp;'partially linked executables' can mean a lot of things or nothing at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.01</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the default build is shared libraries with dynamic linkage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.09</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>all i've ever heard fedora guideline-wise was that they (rightfully) prefer non-static compilation/linkage so dependencies can be properly updated and managed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.11</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://fedoraproject.org/wiki/Packaging:Guidelines#Beware_of_Rpath">http://fedoraproject.org/wiki/Packaging:Guidelines#Beware_of_Rpath</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, just found that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.49</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>sorry for the slow reply, I was just reading over the autotools book page you sent me. I haven't seen that one before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.55</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not what I'd consider having much to do with "partially linked executables" ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.13</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>ahh, sorry for the confusing terminology</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.19</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I think you're just calling them the wrong thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.36</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>I think you just mean our installed libraries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.46</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so did you try --disable-rpath?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.56</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>yup, it didn't do anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.19</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>did you already have a libtool script generated?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.30</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>also, removing the hardcode_libdir_flag_spec didn't do anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.50</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: libtool script generated? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.06</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>no used gnu autotools much I take it? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.32</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>I'm just running everything from sh autogen.sh to make install in the spec file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.40</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: no, I haven't heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.56</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>when you run our configure, it spits out a script called 'libtool'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.23</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that script is wired into the Makefiles automatically by automake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.53</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so during make, the build invokes that libtool script for all linkage</tt></td></tr>
+<tr><td><tt>18:22.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.200.109)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.20</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>yeah, I've seen that script being used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.36</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>I haven't done anything like generate my own though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.48</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that script encapsulates all logic on how to build libraries and link binaries (static and dynamic), and is otherwise mostly a "black box" that you just run .. minus a few knobs you can manually tweak to override what the gnu folks think is best</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.03</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the "sh autogen.sh" step turns the configure.ac file into the venerable configure script and all the Makefile.am automake template files into Makefile.in autoconf template files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.20</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.44</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>when you run "./configure --whatever..." that turns all the Makefile.in files into Makefile files and generates the libtool script if it's a libtool-enabled project (which we obviously are)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.06</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so back to the problem at hand.. post up your libtool script somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.30</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>their guideline are either out of date with the latest libtool, or ya did something wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.22</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://fpaste.org/NZS3/">http://fpaste.org/NZS3/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.27</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: well going through the build logs shows the -rpath argument being passed to libtool several times</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:29.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>well the good news is the libtool script doesn't force it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.16</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: would the configure script help?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>note yet</tt></td></tr>
+<tr><td><tt>18:32.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.49</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>did you verify that it's actually generating installed binaries with an rpath set?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.18</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: yeah. Fedora has a check_rpaths tool built into rpmbuild</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.51</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>I know, I'm saying you've checked them explicitly since having ran those regex's on the libtool script, not just noticed the --rpath cmdline option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.00</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>more specifically, noticed post-install</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.10</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>libtool is a multiphase interface, it knows the difference between compilation, preinstall, and postinstall</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.51</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>not saying that'll do it, but worth checking before going further down the rabbit hole</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.52</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: yeah. check-rpaths runs after the rpm is generated, then it goes over the binaries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.31</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: grep -A1 "checking how to hardcode library paths into programs" brlcad/config.log | grep result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.21</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>configure:20803: result: immediate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.21</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>configure:24617: result: immediate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.04</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.04</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>lets try some more aggressive libtool mods..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.14</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>try this:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.46</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>sed -e s/^hardcode_direct.*$/hardcode_direct=yes/g libtool || sed -e s/^hardcode_minus_L.*$/hardcode_minus_L=yes/g || sed -e s/^hardcode_shlibpath_var.*$/hardcode_shlibpath_var=no/g &gt; libtool.new</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.04</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>mv libtool libtool.old &amp;&amp; mv libtool.new libtool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.23</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>diff libtool libtool.old .. should see at least three lines changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.54</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>can either add that sed and mv to configure.ac after BC_PATCH_LIBTOOL (after making sure it works manually first), or make it a step after ./configure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.36</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>man that sed was huge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.11</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r35554 10/brlcad/trunk/src/proc-db/ (Makefile.am csgbrep.cpp): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.11</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: Add the skeleton for a csgbrep proc-db - eventually this will be used to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.11</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: examples of all of the primitives going from an implicit to a NURBS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.11</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: representation. At the moment it looks like the ability to do this is not yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.11</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: set up, so need to wire in the rt_*_brep ability to some sort of public API.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.25</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: your i/o redirection isn't working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.31</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, might want to add one more, sed -e 's/(hardcode_into_libs)=.*$/\1=no/'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.58</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that was three seds</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.04</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so four with the last one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.36</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: I'm not really sure what you did with the || , but the sed stuff just outputs to stdout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.39</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>and the ||'s should be just |'s .. typo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.43</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>it isn't getting redirected to libtool.new</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.47</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.07</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>they were pre-escaped for m4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.12</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>oh...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.17</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>might just make that last/fourth one be like the rest: s/^hardcode_into_libs.*$/hardcode_into_libs=no/g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.04</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: lots of changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.18</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>I can try building now if you'd like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>no, paste the diff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.30</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.31</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>diff -u</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.07</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt><a href="http://fpaste.org/h4EL/">http://fpaste.org/h4EL/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, almost</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.44</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>make the first one, s/^hardcode_direct=.*$/hardcode_direct=yes/g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.50</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>repaste</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.19</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt><a href="http://fpaste.org/ENoS/">http://fpaste.org/ENoS/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.10</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I'm slightly twisted up - the rt_sph_brep and rt_ell_brep functions aren't accessible directly, and upon reflection should probably be called through rt_functab like all the other primitive functions.&nbsp;&nbsp;But what about situations like wdb where we have (say) the sphere parameters and want to generate the resulting nurbs without detouring through creating the implicit version of the primitive?&nbsp;&nbsp;(We could, of course, but that would mean a write AND </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:13.04</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03jdoliner * r35555 10/brlcad/trunk/src/proc-db/surfaceintersect.cpp: BrepBrepIntersect now cycles through all the pairings of faces and gets their intersections accurately</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.14</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: that looks great, give that a test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.19</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>with a clean build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.31</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.43</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>it'll still pass --rpath on the command line, but it should think that it doesn't need to do anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.12</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>if that doesn't work, we can probably just trick up the --rpath option in the script</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.02</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: they weren't added to the functab just because it's woefully incomplete -- but they are directly accessible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.39</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>and your message was too long, cut off after AND</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.28</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: sounds good. I've started the build process. It'll be 17 minutes or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.44</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>you can just call rt_*_brep() for testing purposes to make sure things are working .. once they're working or as they're working, can add them to functab </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.49</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.21</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I also wouldn't want to double-up the API just for a representation type -- the idea would probably be to create an in-memory-only object and then make the functab call on it for a given representation type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.48</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>or they create a nurbs object via opennurbs and write out using mk_brep()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.56</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: looks like we're getting somewhere. It's calling ld now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.04</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: but we have a make error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.29</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://fpaste.org/3jXm/">http://fpaste.org/3jXm/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.20</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, well it certainly seems to have worked :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.52</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cd /home/matthew/rpmbuild/BUILD/brlcad-SVN_010809/src/other/URToolkit/cnv/rletoabA62</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>/bin/sh ../../../../../libtool --tag=CC --mode=link gcc -I../../../../../src/other/libutahrle/include -O2 -g -pipe -fno-strict-aliasing -fno-common -fexceptions -m64 -g -O3&nbsp;&nbsp;-L/usr/local/lib64 -L/usr/local/lib -pipe -fno-strict-aliasing -fno-common -fexceptions -m64 -g -O3 -o rletoabA62 rletoabA62-rle.o rletoabA62-rletoabA62.o ../../../../../src/other/libutahrle/libutahrle.la </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.11</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>(run that)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>paste the really long gcc line that it spits back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.39</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>libtool: link: LD_LIBRARY_PATH="../../../../../src/other/libutahrle/.libs:" gcc -I../../../../../src/other/libutahrle/include -O2 -g -pipe -fno-strict-aliasing -fno-common -fexceptions -m64 -g -O3 -pipe -fno-strict-aliasing -fno-common -fexceptions -m64 -g -O3 -o .libs/rletoabA62 rletoabA62-rle.o rletoabA62-rletoabA62.o&nbsp;&nbsp;-L/usr/local/lib64 -L/usr/local/lib -lutahrle -lm -Wl,-rpath -Wl,/usr/lib64/brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.39</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>/usr/bin/ld: cannot find -lutahrle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.39</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>collect2: ld returned 1 exit status</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.20</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>huh, odd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.33</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>ls -la ../../../../../src/other/libutahrle/.libs/lib*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.17</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt><a href="http://fpaste.org/61p6/">http://fpaste.org/61p6/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.11</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>well that's stumpworthy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.30</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>there's libutahrle.so right there, and LD_LIBRARY_PATH points there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.44</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, but no -L for it, hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.26</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>think we need to remove one of the sed's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.46</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the hardcode_minus_L one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.27</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: what do I #include to get them in directly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.21</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: they're not in a public header yet, you just have to declare them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.28</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.36</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>see table.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.43</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>there is a declaration macro there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.55</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>excellent, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.22</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>should the rt_functab for tnurbs morph into the brep one?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.02</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>that'd wig out import/export</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't need to use the macro, but shows the basic form (or just declare them simple) .. it's temporary either way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.25</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.19</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is figuring the rt_functab stuff for brep should be handled Sometime Soon Now...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.42</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>until it's obsoleted, I wouldn't touch the functab entries -- the guts to those functions need to change </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.38</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, you can add them now if you like -- just have to be careful you don't blow a loop somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.04</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i've been working on hiding the functab</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.12</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, OK</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.17</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>that's different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>right now it's the only way in the api to get at primitives and their callbacks </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.31</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.53</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>without calling the primitive-specific function directly, of course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.23</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i started with mirror, and it just turned out to be a lot to chew on, still at it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.47</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>am I right that we're basically looking at needing most of the facetize type logic for "nurbize" as well?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.27</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>idea will be to have a corresponding rt_*() api call for each of the functab entries -- the rt_*() calls into the functab</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.53</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>que?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.53</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>not necessarily</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.53</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>given CSG primitives, we can currently run facetize, big E, etc. to get mesh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.04</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>don't we want the same to "get" nurbs?</tt></td></tr>
+<tr><td><tt>19:44.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bobbens (i=bobbens@saw4ever.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.34</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, at the command level .. yeah, probably</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.47</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>probably an option for some commands, default for others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.55</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.18</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>bigE/ev's purpose is visualization, so they could just be updated to be nurbs-only if ogl is available</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.42</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>evaluated visualization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.59</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>maybe - might want to have a bot fallback if someone's ogl isn't up to NURBS though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.09</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>nurbize is kinda funky, don't see a direct need like there was for facetize outside of debugging yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.35</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>for that matter, do we really need facetize?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.47</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>E/ev are rarely used these days on real geometry because of the robustness problems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.27</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>In the new GUI I'm assuming it will be hidden behind view modes rather than specific command line things like that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.47</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>it being?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.23</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: build was successful, make install failed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.27</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>the functionality of switching between wireframe, shaded, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.44</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, those are just viewing options in the gui</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.14</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt><a href="http://fpaste.org/ttBy/">http://fpaste.org/ttBy/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>lots of potential viewing options that can be exposed through a panel or buttons or keys or what-have-you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.42</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: what's the best way to create a bn_tol to toss into rt_*_brep?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.00</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>cd /home/matthew/rpmbuild/BUILD/brlcad-SVN_010809/src/libbn &amp;&amp; /bin/sh ../../libtool --mode=install /usr/bin/install -c libbn.la '/home/matthew/rpmbuild/BUILDROOT/brlcad-SVN_010809-0.fc11.x86_64/usr/lib64/brlcad'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.43</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: <a href="http://fpaste.org/1RJZ/">http://fpaste.org/1RJZ/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: er, create a tol struct and pass a ref to it? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.14</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>init it with some values..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.55</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>ok, so it won't much care whether it's the same as the database being written to?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.55</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: hrm, now we're fighting libtool .. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.19</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: databases don't have a tolerance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.52</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, OK</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.55</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>they're working tolerances</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.18</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>you're telling it what computation tolerances it needs to use .. which is kinda odd for *brep()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.46</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>probably just from being started as a copy of tess() or the old tnurb() interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.53</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.01</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>shall I clean it up?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.05</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>not harmful, though .. maybe important for some primitives where it will be some sort of approximation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.49</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>could see tol being important for dsp, ebm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.14</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm, point. ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.25</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>brlcad: I'm going to switch locations. I'll be back in 20 minutes ok?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.29</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>aha, talcite .. one more sed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.33</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.29</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>s/^hardcode_automatic=.*$/hardcode_automatic=yes/g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.52</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that should prevent that relink rule from kicking off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:07.45</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>i'll be somewhat impressed if this actually works :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:07.45</tt></td><td><font color="#d6d670"><tt>talcite_</tt></font></td><td width="100%"><tt>alright, rebuild started. I'm switching locations now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:07.54</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>kcya</tt></td></tr>
+<tr><td><tt>20:08.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.53</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">growls as he sees the brep.cpp files are all extradisted....</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.25</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: do I link in just sph_brep.o or whatever to avoid depending on librt in a procdb?</tt></td></tr>
+<tr><td><tt>20:14.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.38</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt>grrrrowlll.&nbsp;&nbsp;Oh, lovely - sph_brep.cpp doesn't build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.41</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r35556 10/brlcad/trunk/ (include/dm-rtgl.h src/libdm/dm-rtgl.c): grouping jobs for decent job shuffling</tt></td></tr>
+<tr><td><tt>20:27.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
+<tr><td><tt>20:29.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.06</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>brlcad, argh. It's still failing the check-rpaths test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.39</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>brlcad, this tool has been known to give false positives in some cases though. Do you know of another method to check for rpaths?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite: well if you don't set rpaths and haven't added the path to /etc, the binaries shouldn't work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.35</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>ldd /usr/bin/rt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:51.20</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>brlcad, <a href="http://fpaste.org/Chsp/">http://fpaste.org/Chsp/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.30</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that looks like a lack of rpaths</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.56</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>assuming that is your installation prefix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.14</tt></td><td><font color="#dc7474"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">thanks ``Erik for noticing that rt_sph_brep is mangled and decides linking can wait 'til Monday...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.16</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's chrooted, you'll have to try it again in the root</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.58</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>hmm it's just an installation prefix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.06</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>well maybe seeing the check-rpaths output would help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:59.29</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:59.40</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt><a href="http://fpaste.org/MoSZ/">http://fpaste.org/MoSZ/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.24</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r35557 10/brlcad/trunk/src/librt/primitives/sph/sph_brep.cpp: unpooch it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:04.58</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite: ah, so they do have an rpath, they have a preinstallation rpath so you can run them without installing them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.22</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>which is exactly why it tried to relink them earlier</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.29</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>to get rid of that path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.37</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: compiles now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:06.28</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>brlcad, I see. So what are our options?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.13</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite: i'm really liking the bail-out option :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.25</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r35558 10/brlcad/trunk/ (3 files in 2 dirs): enable sph_brep.cpp compilation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.28</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>brlcad, bail out? =S</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.54</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>BuildRequires: chrpath</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.36</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>haha yeah, we could do that. I'm not sure what it actually does though. If you delete the files with rpaths in it, doesn't it break other stuff?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.43</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>my feeling is even if we get something hacking.. it's going to be fragile to libtool updates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.14</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite: that tool simply strips out the rpath</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.21</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't delete files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.24</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>oh I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.54</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>sure, I wouldn't mind doing that. the libtool stuff is really finicky</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.13</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>so you'd let it build and install, then set up a massive chrpath --delete on all 400+ binaries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.42</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>brlcad, and after the rpaths are deleted, it would turn to ld to find the libs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.20</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>fwiw, the claim that "the Linux dynamic linker is usually smarter than a hardcoded path" is a boatload of crap :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.36</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>they're both flimsy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.56</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>heh. Well I think there was one specific reason that distros avoided rpaths. I was reading about it on the debian mailing lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.03</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>to insist on one over the other is a bit silly, but hey their system their rules</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.18</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>it was massively breaking some upgrades I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.34</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that usually indicates some other stupidity on someone's part</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.51</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>debian and fedora are similarly managed *ahem*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.55</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>anyways, debian also bans rpaths, so if the chrpaths method works, we can probably push to package this into debian as well =D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.57</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.27</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>ports, fink, portage, and others all get along just fine not getting involved in whether they're set or not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.42</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>I suspect it just makes package management easier for the package management *system* developers, pushing the work onto the porters to customize most packages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.14</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>oh... =/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.21</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>the debian devs also insist of screwing with libtool directly to impose one of their requirements, which actually outright breaks packages that include public libraries with binaries </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.49</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>that's the BC_PATCH_LIBTOOL I mentioned earlier .. reverts damage they make to the libtool script that causes failures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.52</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>oh...yeah I think fedora also has patches applied to libtool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.26</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35559 10/isst/trunk/src/gui.c: thread monkeying. pass args to gtk_init()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.55</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35560 10/isst/trunk/src/ (isst.h load_g.c): disable "fast" loading for now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.39</tt></td><td><font color="#5badad"><tt>talcite</tt></font></td><td width="100%"><tt>alright, hopefully that build will work out. I need to head out for a bit. I will be back later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.03</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35561 10/isst/trunk/src/gui.c: get shotline working again.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.43</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.25</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>damn linux weenies, screwing up build systems and thinking it's a good thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.28</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.25</tt></td><td><font color="#6868c6"><tt>CIA-38</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r35562 10/isst/trunk/src/ (local_worker.c net_worker.c): updates for osX.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:04.19</tt></td><td><font color="#97974f"><tt>brlcad</tt></font></td><td width="100%"><tt>talcite_: thanks again for your efforts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:07.30</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks he'll put in a loader dialog then try to cook a winderz binary of isst O.o</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:07.37</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>and chuck it over the fence</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:08.52</tt></td><td><font color="#b2b25e"><tt>``Erik</tt></font></td><td width="100%"><tt>(btw, facetize_all_regions or facetall.sh ... needs to be unsucked.)</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

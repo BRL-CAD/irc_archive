@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110305</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110305</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:02.30</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I can't get it to enter the bad state again, but I just managed to see that that variable was on before I lost the other debug session</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.44</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>pretty sure that's it - it would make sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.57</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>what variable?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.03</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>db_search_isoutput</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.14</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>static?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.27</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.49</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't really be anything static in the code pushed up into librt, or even the code in libged really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.49</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.01</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>as that implies statefulness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.12</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>search.c in librt, line 103</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.44</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>it does control state during the building of the plan, iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.12</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, worse!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.13</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>global</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.18</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>that's statefulness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.21</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.29</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>that's been thre</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.33</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>s/thre/there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.36</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>from the get-go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.05</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>so probably we never stressed the other search implementation enough to spot it, or we got lucky and avoided any badness accidentally</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.24</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>you have full controll of the calling params, should be easy to eliminate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.39</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>you mean pass it around?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.48</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>better than a global</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.00</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>especially in a lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.01</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can do that, but it means changing a lot of function arg lists to match a new template</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.08</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.44</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>I can do it, but not tonight - I'm a half hour late now :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.57</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>at a minimum, the global could be changed to be a static scope global, so it's only accessible via those functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.01</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.11</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>no worries, we have at least a couple days of debugging</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.23</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>gqa blew up too... augh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.55</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>making sure the formation of the plan starts with it at zero should do for now, and next week I'll eliminate the global</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.03</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>suspect gqa will be easy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.35</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>at least the pipe fix was kinda nifty - nice work on that (you and d_rossberg)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.59</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>(and ``Erik for suggesting clamp)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.48</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>while I'm at it, I'll try to get search . and search / to work - could cheat and just supply -name * by default if no plan is available</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.21</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>or probably just -print</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.01</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>actually, come to think of it that should be the result of calling db_search_formplan with an empty argv list - will have to confirm that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.15</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">heads out</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.39</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I suspect it'll just happen if you specify no plan</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.04</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43714 10/brlcad/trunk/src/librt/db5_types.c: put bu_vls_true() to use so that we can more robustly detect true/false string values for standard attributes. note that the bu_str_true() will match 'R' as true too since only clearly negative values constitute false.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.48</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r43715 10/brlcad/trunk/src/libged/nirt.c: Fixed a bug in libged/nirt.c that was tripping in the /* skip commands */ section of the windows specific code when an object being passed to nirt contained -e in its name.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.29</tt></td><td><font color="#bdbd63"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty awesome: <a href="http://www.engineeringtv.com/video/Opposed-Piston-Opposed-Cylinder">http://www.engineeringtv.com/video/Opposed-Piston-Opposed-Cylinder</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.06</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43716 10/brlcad/trunk/src/librt/db5_types.c: ws cleanup</tt></td></tr>
+<tr><td><tt>00:50.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>01:57.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dloman_ (~claymore@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>01:58.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>02:30.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.09</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>tofu: looks like the pipe fix is confirmed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.43</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43717 10/brlcad/branches/cmake/ (10 files in 5 dirs): MFC r43716</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.47</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>aaaand libredwg doesn't get to first base</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.28</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>growl... <a href="http://www.opendesign.com/teigha_viewer">http://www.opendesign.com/teigha_viewer</a> can view 'em but not export 'em</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.29</tt></td><td><font color="#da73da"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: those are prime for import into autocad or proe then export as iges, step, and dxf</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.42</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - proe can read them and export them as a number of things (including pdf, which is probably most immediately useful since they aren't solid) but it'll be a long slog to do 180 one by one (especially into multiple formats)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.08</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">installed rpm on gentoo just to get that viewer, too... grumble</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.18</tt></td><td><font color="#da73da"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc, proe on the linux side can be scripted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.14</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43718 10/brlcad/trunk/src/libbu/booleanize.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.14</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: expand on bu_str_true() so that we can distinguish more strongly between values</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.14</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: that seem to be false or true and 'everything else'. Unrecognized responses</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.14</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: still return as true, but should return as &gt;1 so callers can distinguish yes/no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.14</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: from possible input exceptions. return the first character as the exception</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.15</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: value for posterity.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.49</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43719 10/brlcad/trunk/include/bu.h: document that callers can distinguish potential exceptions with return values &gt;1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:24.33</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43720 10/brlcad/trunk/src/mged/cmd.c: even with the plain wrapper, if the ged func returns GED_MORE, respect its authoritah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.56</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43721 10/brlcad/trunk/src/mged/cmd.c: (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.56</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: implement some nifty redraw code that looks at what objects are displayed and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.56</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: what command-line arguments were specified. if displayed objects are being</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.56</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: listed on the command line, then they are potentially being edited so go ahead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.57</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: and redraw them. while this might cause redraw lag for huge models on commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.57</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: that are merely read-only, the more common problem is the display not being</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.58</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: refreshed when it should for commands that DO edit the geometry, leading to user</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.10</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43722 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.10</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: with the automatic redraw code now in the base wrapper, about 120 mged commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.10</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: will potentially refresh the display that would have otherwise including dozens</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.10</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: that modify geometry. display updates on changes should improve usability,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.11</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: reduce confusion, and help mged be more consistent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.25</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43723 10/brlcad/trunk/src/libged/mater.c: (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.25</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: restore incremental prompting functionality to the mater command. even better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.25</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: than before. leverage GED_MORE for additional prompting for any unspecified</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.25</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: arguments. also takes advantage of bu_str_true()'s ability to detect input</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.25</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: exceptions. this feature was prompted by discussions with ezzieyguywuf via IRC</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.25</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: and having run into the problem myself several times, where mater</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.26</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: unintentionally stopped prompting for missing arguments when it was migrated to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.41</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43724 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.41</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: restored interactive prompting for mged's 'mater' command, which was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.41</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: functionality lost during the migration to libged.this feature was prompted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.41</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: after discussions with ezzieyguywuf via IRC and after having run into the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.41</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: problem myself several times while modeling. tutorial documentation was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.41</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: inconsistent as it relied on the interactive prompting for instruction.</tt></td></tr>
+<tr><td><tt>06:24.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.249.60)</font></tt></td></tr>
+<tr><td><tt>06:24.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:52.55</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43725 10/brlcad/trunk/src/libged/mater.c: restore the previous mater command behavior to report the current values being set when prompting the user for new values. approximate the old text not worry too much about getting a perfect match.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:59.31</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43726 10/brlcad/trunk/src/libged/mater.c: go ahead and expand the green and blue component values. also make it clear that the values being shown are the current values.</tt></td></tr>
+<tr><td><tt>07:04.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.168.51)</font></tt></td></tr>
+<tr><td><tt>07:04.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:59.27</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43727 10/brlcad/trunk/src/libged/mater.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:59.28</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: further efforts to mime the old behavior or better. make the g and b color</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:59.28</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: components optional once again if the color is being deleted. add back support</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:59.28</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: for deleting the shader string and color setting. use '.' to skip parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:59.28</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: (here we deviate from original since we can't yet set default more parameters.</tt></td></tr>
+<tr><td><tt>08:00.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:02.00</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43728 10/brlcad/trunk/src/libged/mater.c: fix the prompt if we're skipping/deleting the color, account for an offset of two.</tt></td></tr>
+<tr><td><tt>08:02.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>08:10.22</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad cjdevlin (~devlin@d118-75-252-178.try.wideopenwest.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:17.43</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43729 10/brlcad/trunk/src/libged/mater.c: offset pushing towards the wrong direction, be positive. also catch the error case where color has been deleted but then later is 'skipped'.</tt></td></tr>
+<tr><td><tt>08:25.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cjdevlin (~devlin@d118-75-252-178.try.wideopenwest.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:29.56</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43730 10/brlcad/trunk/src/libged/mater.c: tweak the usage, let user know which channel is teh suck</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:30.36</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43731 10/brlcad/trunk/doc/docbook/lessons/en/mged11_refining_mug.xml: update tutorial example interactive output for the mater command to reflect new form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:32.15</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43732 10/brlcad/trunk/TODO: mater now properly prompts for missing parameters interactively</tt></td></tr>
+<tr><td><tt>08:35.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.172.15.235)</font></tt></td></tr>
+<tr><td><tt>08:35.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:37.26</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43733 10/brlcad/trunk/ (NEWS TODO): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:37.26</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: bob reportedly fixed the bug causing nirt to not work on windows. user reported</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:37.26</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: that nirt on windows was failing if run in a command window. bob found a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:37.26</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: problem where it was getting tripped up on objects with '-e' in their name.</tt></td></tr>
+<tr><td><tt>09:22.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (~alex_joni@emc/board-of-directors/alexjoni)</font></tt></td></tr>
+<tr><td><tt>09:57.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith_ (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:13.16</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03jordisayol * r43734 10/brlcad/trunk/sh/ (make_deb.sh make_rpm.sh): update copyright to 2011</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:11.14</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note to check into Pro/Batch</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:30.42</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah... the Tegiha file convertor worked under wine, and librecad can open the dxf files (so can we with dxf-g) but there aren't any good ways I can find to get decent pdf output - gonna have to use Pro/Batch or something like it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.46</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o freecad is in main portage now?&nbsp;&nbsp;(wrong category, media-gfx, but still...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.16</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries it... haven't had great luck with the sci overlay builds to date...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.06</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43735 10/brlcad/branches/cmake/src/librt/ (search.c search.h): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.06</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: Globals are evil - need to pass db_search_isoutput around as a parameter during</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.06</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: the process of forming the plan. As a side benefit, it shouldn't be necessary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.06</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: for f_print to reset the value anymore, since the scope of the variable is now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.06</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: limited to the plan forming process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.30</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I think that's got it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.44</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>still need to fix behavior for search . and friends</tt></td></tr>
+<tr><td><tt>14:50.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr><td><tt>15:01.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr><td><tt>15:03.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr><td><tt>15:03.46</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:40.28</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>wow, brlcad you've been busy.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:40.36</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I&nbsp;&nbsp;still need to submit that bug report...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.03</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah, another discrepency I noticed in the tutorials is when it tells you to cp certain shapes, it never tells you that you have to draw them first before you can do anything to them.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.30</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>those hessi dwg files may be even more extensive than simplesat...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.35</tt></td><td><font color="#7070d5"><tt>starseeker</tt></font></td><td width="100%"><tt>sweet</tt></td></tr>
+<tr><td><tt>16:48.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.17</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>heh, I'm running mged vers 7.16.8 which is &gt; vers 6.0 so according to the tute the order of inside should be botto-top-rear-front-right-left but instead I got front-rear-right-left-bottom-top</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.50</tt></td><td><font color="#61b9b9"><tt>vtts</tt></font></td><td width="100%"><tt>are all menu actions executable from command line? e.g. is it possible to enter multi pane mode, set active pane, show model axes on it and so on?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.44</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>vtts: pretty sure you can. checkout the quick reference card.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.11</tt></td><td><font color="#61b9b9"><tt>vtts</tt></font></td><td width="100%"><tt>didn't find it there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.14</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.42</tt></td><td><font color="#61b9b9"><tt>vtts</tt></font></td><td width="100%"><tt>i can change view options of an active pane, but don't know how tu change mode or switch to other pane</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.30</tt></td><td><font color="#61b9b9"><tt>vtts</tt></font></td><td width="100%"><tt>found a few functions in the source, but don't know where to get id from (e.g. setmv id)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.43</tt></td><td><font color="#61b9b9"><tt>vtts</tt></font></td><td width="100%"><tt>eh... silly me... id is on the title bar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.59</tt></td><td><font color="#61b9b9"><tt>vtts</tt></font></td><td width="100%"><tt><font color="#CC00CC">does a face-palm action</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.24</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>:-D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.20</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm, still no dotted lines for me....</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.23</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so man, its taking a while for the raytracer to raytrace this toy truck. sometimes it even fails. Could it be I'm doing something wrong?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.38</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I would expect perfermance for something of this simple geometry to be pretty good.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.08</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt><a href="http://ompldr.org/vN29hYw">http://ompldr.org/vN29hYw</a> screenshot of raytrace after ~1min</tt></td></tr>
+<tr><td><tt>19:40.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.192.133.151)</font></tt></td></tr>
+<tr><td><tt>19:40.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.05</tt></td><td><font color="#b1b15d"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so....what are my chances of modelling an airfoil using brl-cad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.24</tt></td><td><font color="#5c5caf"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03jordisayol * r43736 10/brlcad/trunk/ (10 files in 3 dirs): add new GNU/Linux mime-type icons for geometry db file v.4 and v.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:13.39</tt></td><td><font color="#cccc6b"><tt>Ralith</tt></font></td><td width="100%"><tt>Would there be any interest in an effort to add GPU accelereation to the raytracer?</tt></td></tr>
+<tr><td><tt>23:58.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

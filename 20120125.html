@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120125</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120125</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>16:20.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>16:20.39</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release 7.22.0 is forthcoming || fixing all our Coverity Scan Initiative defects</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.23</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>your compiler isn't liking the __extension__ bit, which version of gcc is that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.59</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>gcc version 4.5.1 </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.19</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>and your libc headers are the most recent?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.45</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I think so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.58</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I've system up to date</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.24</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>glibc 2.11.3-12.21.1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.29</tt></td><td><font color="#6868c6"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.46</tt></td><td><font color="#6868c6"><tt>starseeker</tt></font></td><td width="100%"><tt>hope they produce it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:28.47</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">lacks much in the way of linux machines, is going to try compiling with a new gcc on fbsd to see if its' a change in gcc O.o</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:29.50</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>but this is looking like an opensuse issue to me, your gcc doesn't like your system headers :/ any program that uses FD_SET() would be throwing this issue (might be some flags we use triggering it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.10</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ok. I've compiled all previous rpm packages on this system so, is new the use of this function on brlcad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:33.11</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>if not, then is a new bug on opensuse glibc, isn't it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:33.49</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, it's an old use of that macro in BRL-CAD, only a couple changes in that file in the last few months</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.11</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>one on dec 15, the other on nov 29</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.29</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>built fine using gcc 4.7 on fbsd 8.2, ia32</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:35.05</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>no no, it build fine on same opensuse 64-bit!!!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:35.49</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, it's an assembly macro, so it's platform specific... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:36.13</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>it's coming from /usr/include/asm-*/posix_types.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:36.35</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>so on 64, you get asm-x86_64, on 32 you get asm-i386... different files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.09</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>can i do something to override it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.29</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>not to my knowledge, but I'm not a linux guy and have never logged into an opensuse box</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.52</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>or better, when will be released the next brlcad version?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:39.03</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>sorry, dude, I'm out of ideas, maybe the opensuse guys can help? the __extension__ on line 53 of your paste is the bit causing the issue, and that's from /usr/include/asm-i386/posix_types.h *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:39.56</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>next BRL-CAD release should be fairly soon, but I don't think it'll fix stuff or ya :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:40.10</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>s/ or/ for/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.03</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I ask you just to know if there is enough time to opensuse crew correct this </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.19</tt></td><td><font color="#6868c6"><tt>starseeker</tt></font></td><td width="100%"><tt>how much time would they need?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.29</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>no idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.35</tt></td><td><font color="#6868c6"><tt>starseeker</tt></font></td><td width="100%"><tt>we won't be putting a release out in the next few days - there's too much to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.07</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I'm not an opensuse user. I just use it in a virtualbox machine to build brlcad rpm packages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.39</tt></td><td><font color="#6868c6"><tt>starseeker</tt></font></td><td width="100%"><tt>my advice would be to contact them and see what they say</tt></td></tr>
+<tr><td><tt>16:43.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad packrat (~packrator@c-98-209-146-133.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.56</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ok, i'll try, many thanks! </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.22</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>they may need to see your compile line, it might be something funky like -msse3 or something causing it to trigger</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.32</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49068 10/brlcad/trunk/src/ (13 files in 3 dirs): (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.32</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: Can't take it any longer. Doggy bag all the gcc vomit about SCL's qualified type errors. Reduces the build log by about 16MB, 78k warning lines, approx 765 unique instances.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.32</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: Quell them all with a teeny little one-liner bit of scripting based on the build log output:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.32</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: for match in `grep qualifiers build.log | sort | uniq | cut -d: -f1,2` ; do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: export file="`echo $match | cut -d: -f1`" ; export line="`echo $match | cut -d:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: -f2`" ; export pline="`expr $line - 1`" ; if test "x`sed -n ${pline}p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.34</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: $file |grep const`" = "x" ; then sed -n ${line}p $file ; sed</tt></td></tr>
+<tr><td><tt>17:08.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@248-93-200-46.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49069 10/brlcad/trunk/src/other/step/src/clstepcore/ExpDict.h: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: more warning quellage. shouldn't pass string constants to char* parameters as</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: they should be considered immutable/const. make SelectTypeDescriptor()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: constructor take a const char* instead, fortunately TypeDescriptor's constructor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.33</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: is correct.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.12</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49070 10/brlcad/trunk/src/mged/polyif.c: Variable declarations need to be at the top of the code block.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.41</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49071 10/brlcad/trunk/src/other/step/src/clstepcore/ (8 files): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.41</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: might make merging a bit more difficult or (more likely) repeats work already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.41</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: done in the github tree, but helps ease our sanity in the meantime. eliminate a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.41</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: slew of gcc warnings about string literals being passed as char* parameters when</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.41</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: they should be treated immutable. mark them all const.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.02</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>that takes care of the majority of the step vomit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.20</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>the remaining warnings look like they're other valid step-g issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.58</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>now the warning log has but 520 or so lines in it (instead of 78k lines)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.06</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>jordisayol: what does man FD_SET list for headers?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.21</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>brlcad: sorry, I don't understand you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.45</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>if you run "man FD_SET" it should give a usage man page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.59</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>it should list one or more #include headers near the top</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.00</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.01</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>#include &lt;sys/select.h&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.03</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>nop, no man pacge for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.11</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, okay, what about man select</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.38</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>not too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.01</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>no man page for select?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.25</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds like you're missing manual pages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.40</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>just a moment, i just use opensuse to build brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.51</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>maybe it's not installed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.17</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>no matter, found it online <a href="http://manpages.unixforum.co.uk/man-pages/linux/opensuse-10.2/0p/select.h-man-page.html">http://manpages.unixforum.co.uk/man-pages/linux/opensuse-10.2/0p/select.h-man-page.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.29</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>now i got man FD_SET</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.56</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>grep HAVE_SYS_SELECT_H include/*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.03</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>from your build directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.56</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>include/brlcad_config.h:#define HAVE_SYS_SELECT_H 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.56</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>include/brlcad_config.h.in:#cmakedefine HAVE_SYS_SELECT_H 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.56</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>include/bselect.h:#ifdef HAVE_SYS_SELECT_H</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.07</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, okay that's good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.41</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>jordisayol: try this .. edit include/bselect.h and add this line before the #ifdef HAVE_SYS_SELECT_H line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.06</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>#include &lt;sys/types.h&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.13</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>#include &lt;signal.h&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.17</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>#include &lt;time.h&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.26</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>those three lines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.40</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>see if that makes any difference at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.51</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr><td><tt>17:38.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@61.12.114.82)</font></tt></td></tr>
+<tr><td><tt>17:38.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.37</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>brlcad: it appears that pass the error point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.58</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>still compiling...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.56</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>it will take a wile (compiling in a virtualbox machine with just one cpu)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.13</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>wow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.26</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that's a busted system header then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.43</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>remove the signal.h and time.h lines and retry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.56</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.24</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ohhh, sorry, the error still there :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.25</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>then assuming that works, remove the sys/types.h line just to verify that's what makes it work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.31</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.03</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: nifty -E -o trick, handy thx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.18</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>jordisayol: you could try a newer version of gcc, one of the 4.6 line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.51</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I'll try, I'm not comfortable on opensuse...</tt></td></tr>
+<tr><td><tt>17:55.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juan_man (~quassel@186.136.169.88)</font></tt></td></tr>
+<tr><td><tt>17:55.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juan_man (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.52</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>brlcad: anyway, on opensuse 11.4 64-bit with gcc 4.5.1 , properly compiles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.20</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49072 10/brlcad/trunk/src/other/libpng/CMakeLists.txt: If we're conditionalizing the non-WIN32 files on generation, need to also conditionalize the related install rules.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.17</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49073 10/brlcad/trunk/src/other/libpng/CMakeLists.txt: ws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.29</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r49074 10/brlcad/trunk/src/libbu/test_sscanf.c: Using macros to condense numeric conversion tests, now in their own routine. Moving on to more exotic conversions.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.39</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>brlcad: I've upgraded to gcc 4.6.2 (from opensuse 12.1) and it appears to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.46</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>still compiling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.39</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ok, successfully compiled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.32</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49075 10/brlcad/trunk/src/nirt/command.c: Send the default coordinate printouts to stdout - really should be handled like 'normal' nirt reporting...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.54</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>jordisayol: awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.17</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>did you see the forum message about the opensuse rpm not working?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.45</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>nop :-(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.57</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="https://sourceforge.net/projects/brlcad/forums/forum/362510/topic/4972540">https://sourceforge.net/projects/brlcad/forums/forum/362510/topic/4972540</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.11</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>thought that might be why you were looking into opensuse :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.09</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49076 10/brlcad/trunk/src/nirt/command.c: another stdout fprintf change...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.17</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>no no :-) just test to create deb/rpm packages randomly </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.59</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>any idea what that error might be?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.25</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.05</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>I know ogl_interface is a symbol in our libfb library, only compiled if you enable opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.27</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>is the rpm he's using supposed to have opengl on or off?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.46</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.15</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>so then the fact that there is a reference to ogl_interface somewhere is correct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.25</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>why it can't find it becomes the issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.47</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe he has another library on his system named libfb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.49</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>so probably is a problem with his opengl. do you remember that some other person got problems on opensuse too?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.27</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.17</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>well, this guy got problems running mged/archer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.46</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>and finally he wasn't able to run&nbsp;&nbsp;glxgears on his system</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.05</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>right, so that one sounds like an opengl issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.16</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>not finding ogl_interface isn't, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.28</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>missing dependencies on rpm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.02</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't specify object files in the rpm, so not likely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.19</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>that's just a specific symbol inside libfb that is referenced by libdm and mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.47</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>what I'm betting is happening is that it's loading mged, begins loading libs, loads libfb but finds *another* system libfb instead of ours, loads libdm, see's the ogl_interface symbol, gets through loading all the of rest of the libs and has no way to resolve it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.05</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>aha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.39</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe even another compile of BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.20</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>aha</tt></td></tr>
+<tr><td><tt>19:11.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@61.12.114.82)</font></tt></td></tr>
+<tr><td><tt>19:11.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.12</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>brlcad: if there is a /usr/lib/libdm.so and a /usr/brlcad/lib/libdm.so, which one is used by mged?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.41</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>'ldd' will tell you. "ldd /path/to/mged"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.31</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I've installed libdm0 (installs /liblibdm.so.0.0.4) and ldd /usr/brlcad/mged returns:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.31</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.31</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>libdm.so.19 =&gt; /usr/brlcad/lib/libdm.so.19 (0x00007f38e9ac9000)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.31</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.45</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>s:/liblibdm.so.0.0.4:/lib/libdm.so.0.0.4:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.55</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>binaries are usually compiled with linker information pointing to where the library is expected to be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.44</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>so if you don't install where it was compiled, LD_LIBRARY_PATH becomes necessary or modifications to ld.config</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.08</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>if you do install where it was compiled for, you don't generally need anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.24</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>rpm package always installs libs at /usr/brlcad/lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.02</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>so then it's back to him having a libfb just somewhere else on his system and LD_LIBRARY_PATH is pointing to it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.49</tt></td><td><font color="#b15db1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I've to go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.53</tt></td><td><font color="#539e9e"><tt>``Erik</tt></font></td><td width="100%"><tt>ô/cl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.34</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>cya jordisayol </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.37</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>thanks!</tt></td></tr>
+<tr><td><tt>19:47.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pawleeq (~pawleeq@core1.humlnet.cz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.30</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.55</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>here is another czech article about brlcad: <a href="http://www.abclinuxu.cz/clanky/brl-cad-pokrocile-techniky-modelovani">http://www.abclinuxu.cz/clanky/brl-cad-pokrocile-techniky-modelovani</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.45</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>pawleeq: that is awesome!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.58</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>and you even figured out how to work that terrible pattern tool gui :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.24</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>yeah and it made me to think about few improvements ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.33</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>i will write a hot report soon a let you know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.41</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>the "clone" command is a lot better, at least easier to use</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.42</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>* a &gt; and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.51</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>though it doesn't do the spherical/cylindrical patterns</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.58</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.19</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>it'd be great to have those tutorials in docbook format :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.38</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>one of the readers asked specially about cylindrical patterns so I did it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.40</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>then we could get some english translations going and get them up into our docs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.36</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>I can translate it, i even think about real book, but these articles are fortunately keeping my feet on the ground :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.33</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>pawleeq: do you know docbook/xml?&nbsp;&nbsp;or html?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.36</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>I know html</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.49</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>docbook/xml is very very similar -- if you're interested, I could pull together a template example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.09</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>from docbook, we can autogenerate html, pdf, rtf, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.52</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>when was your first article published?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.53</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>November 11th</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.32</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>ok send me a template and I will fill it with english translation of those articles (or just the articles you want)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.07</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>both english and czech would be best :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.14</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.18</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>we can track translations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.47</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>that way, we might get others willing to help translate your articles to other languages as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.44</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>ok :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.47</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49077 10/brlcad/trunk/AUTHORS: credit pavel jansa (pawleeq) with his numerous brl-cad tutorial articles (in czech): <a href="http://www.abclinuxu.cz/autori/pavel-jansa">http://www.abclinuxu.cz/autori/pavel-jansa</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.47</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49078 10/brlcad/trunk/src/libbn/noise.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.47</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: clean up the magic number handling to be consistent with our uint32_t magic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.47</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: type. expand the size of the hash table from shorts to that as well and do some</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.47</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: minor refactoring so that the table size (4096) is defined in just one place and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.47</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: everything keys off of it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.06</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49079 10/brlcad/trunk/src/libbu/badmagic.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.06</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: not clear what is exactly being checked but the magic number alignment checking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.06</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: looks to be incorrect now that we're using uint32_t's everywhere. getting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.06</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: misalignment on big-endian 64-bit system in shaders regression, fixed by</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.06</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: checking our magic type.</tt></td></tr>
+<tr><td><tt>20:42.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@61.12.114.82)</font></tt></td></tr>
+<tr><td><tt>20:42.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.17</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r49080 10/brlcad/trunk/src/libbu/sscanf.c: Forgot that we need to search for closing brace of character classes. Was causing truncated conversion specification.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:01.04</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49081 10/brlcad/trunk/src/nirt/sfiles/csv-gap.nrt: Stray commas in csv-gap formatting were causing error when specifying -f csv-gap in a nirt run.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.10</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r49082 10/brlcad/trunk/src/libbu/sscanf.c: Doh! Accidently overwrote conversion type var before switching on it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.38</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49083 10/brlcad/trunk/ (NEWS src/nirt/if.c): Attribute printing was haywire in nirt, printing ALL attributes and ignoring the list. Now printing only specified attributes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.44</tt></td><td><font color="#d16ed1"><tt>n_reed</tt></font></td><td width="100%"><tt>hah, accidentally used accidently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.34</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49084 10/brlcad/trunk/src/nirt/command.c: err -&gt; stdout for nirt default units reporting.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.37</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r49085 10/brlcad/trunk/src/libbu/test_sscanf.c: Add some string-type tests now that character-class conversion is debugged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.01</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49086 10/brlcad/trunk/ (NEWS src/nirt/nirt.c src/nirt/nirt.h): Add -h option to nirt to suppress header, couple other tweaks.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.31</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49087 10/brlcad/trunk/ (TODO regress/CMakeLists.txt regress/nirt.sh): Add regression testing for nirt based on the nirt DocBook manual.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.57</tt></td><td><font color="#de7575"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49088 10/brlcad/trunk/doc/docbook/articles/en/ (CMakeLists.txt TEMPLATE.xml): add an initial template that demonstrates some of the basic docbook/xml elements for adding new articles.</tt></td></tr>
+<tr><td><tt>22:57.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pawleeq (~pawleeq@core1.humlnet.cz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.25</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>pawleeq: <a href="http://brlcad.svn.sourceforge.net/viewvc/brlcad/brlcad/trunk/doc/docbook/articles/en/TEMPLATE.xml?view=log">http://brlcad.svn.sourceforge.net/viewvc/brlcad/brlcad/trunk/doc/docbook/articles/en/TEMPLATE.xml?view=log</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.42</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a template you can use, it'll generate something like this: <a href="http://brlcad.org/~sean/tmp/TEMPLATE.html">http://brlcad.org/~sean/tmp/TEMPLATE.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.14</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>ok thank you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.34</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>it's in svn, so you can copy that file, update the doc/docbook/articles/en/CMakeLists.txt file with your article(s)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.49</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>and when you run "make", it'll generate the html</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.14</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>don't worry about how the html looks exactly, it's more that it's structurally all there described and easy enough to read</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.23</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>if that wasn'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.36</tt></td><td><font color="#61b861"><tt>brlcad</tt></font></td><td width="100%"><tt>if that wasn't clear, folks in here can easily help ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:24.40</tt></td><td><font color="#b8b861"><tt>pawleeq</tt></font></td><td width="100%"><tt>ok I will ask if I get unsure about something, and there always is google :) I am going to bed, so good bye everybody</tt></td></tr>
+<tr><td><tt>23:55.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>23:57.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr><td><tt>23:58.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>23:58.41</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by pratchett.freenode.net</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

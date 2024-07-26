@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080924</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080924</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:01.35</tt></td><td><font color="#7070d5"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>hm... long time ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.17</tt></td><td><font color="#b2b25e"><tt>louipc</tt></font></td><td width="100%"><tt>wowzas</tt></td></tr>
+<tr><td><tt>00:15.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic_ (n=docelic@78.134.195.14)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.07</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>hey folks I'm following mged tutorial.. When I run "in spkr.s tor 16 16 16 1 0 0 12 1", mged crashes with "Illegal instruction".. It's a 7.12.4 release compiled on Debian.. have any ideas? Btw, mged crashes but object is in the db, I see it with ls.. If I try to draw it, it also crashes... (But other objects like rpp, rec, etc. work correctly).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.32</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>docelic_: yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.58</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>there was a thread on the mailing list where an ingenious fellow traced down that problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.37</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>quite obscure and insideous, amounts to a compilation/configuration problem with SSE instructions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.36</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>you apparently have hardware that doesn't support sse instructions, yet a compiler happy to generate binaries with sse instructiongs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the fix it to either obtain the latest from svn or edit configure.ac and disable our SSE tests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.21</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>well, the system is Amd Athlon, and cat /proc/cpuinfo lists sse under flags</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.31</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>could be sse2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.50</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>that could be, yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.16</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>edit configure.ac, look for a section that says BC_COMPILER_AND_LINKER_RECOGNIZES([-msse2], [msse2], [nokeep])</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.41</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>comment out that entire block and then run "sh autogen.sh" to regenerate a new configure script</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.56</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>from there you should be able to rebuild as before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.59</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>sure... ok thanks, it'll be recompiling while I continue without speaker element..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.08</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>sorry you had to run into that, we're trying to get another release out so it doesn't bite others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.53</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>but we're also in the middle a big restructuring so it'll still be a week or two</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.59</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>no probs,.. I'll get onto the ML later too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.19</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>btw, is TAB supposed to autocomplete or not in mged's tk window? I get bgerror failed to handle background error.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.19</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>, Original error: bad text index "--"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.19</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>, Error in bgerror: invalid command name "::swidgets::togglearrow"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.04</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it should autocomplete, works like a charm here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.20</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">blinks in confusion at that error</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.47</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>another error from TAB is:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.52</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>Error in bgerror: window name "_secErrorDialog" already exists in parent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.55</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>mged doesn't even use swidgets</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.46</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>you're using mged and not archer, yes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.14</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>yes, I run mged from cmdline and in the window title it says MGED 7.4.12 command window id_0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.38</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>hrm, never heard of that happening before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.51</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>so you just hit tab and it pops up a dialog with that error?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.57</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>or it displays in the command window?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.57</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.31</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>(hit tab and it inserts that in cmdwindow)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.39</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>do you have tab bound to something/anything in your window manager?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.52</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>nope, works normally in i.e. xterm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>can you upload that .g somewhere?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.42</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>actually first, does it happen with any/all .g files?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.49</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>or just the one you're working on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.58</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>yes, I was about to say -- it happens on empty .g too </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.46</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>first time it pops up it says about ::swidgets::togglearrow like I pasted above, then on all futher TABs it prints about _secErrorDialog ... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.58</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>s/pops up/displays/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.29</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>try running: mged -c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.38</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>press enter (for nu)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.51</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>works there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.54</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>then etab]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>sry, e[tab]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.28</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>should display something like: e e_muves eac echo edcodes edcolor edcomb edgedir edmater em eqn erase erase_all ev exit expand extrude eye_pt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.39</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>yes, it works there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.51</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>so try again without the -c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.56</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>and no database open</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.36</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>doesn't work (same 2 errors -- swidgets and _secErrorDialog)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.31</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>does it depend on what libs mged links to during compile?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.54</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>btw, is there a 'draw all' command?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.00</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it "shouldn't", at least nothing that I can think of that would cause that problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>only if there is an 'all' object in the database</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.22</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the 'tops' command will list the top-level objects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.31</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>you usually want to draw one of those</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.31</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>no I mean something that would draw all objects at once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.39</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>ah, :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.42</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>got it draw *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.50</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>draw * is very evil... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.09</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">check in from c++ land</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.10</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>sure but not for a radio that's missing a tor element :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>that's drawing every primitive, every combination that uses those primitives, every assembly of every combination, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.29</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e. drawing everything many many times over</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.43</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>hardly ever what you really want</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.19</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a geometry browser on the tools menu for pointy-clickedness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.30</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise the usual command-line way is like on the unix cmd line with 'tops' and 'l' letting you traverse a hierarchy listing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.45</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the tree command often helps too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.55</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>there's an mged quick reference sheet that spells a lot of this out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.05</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy starseeker </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.10</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>how's it been so far?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.19</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.26</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>fairly basic, but already some good stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.48</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>commute is murder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.43</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;From an html documentation standpoint - what's your take on the table column width?&nbsp;&nbsp;Is it ok to leave it free floating?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.43</tt></td><td><font color="#b15db1"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">thought "meat is murder"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.43</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r32744 10/brlcad/trunk/BUGS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.44</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: docelic reported that mged (on debian) displays an swidgets error when tab is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.44</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: pressed. The problem was noticed on 7.12.4 and happens regardless of there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.44</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: being a db opened or not. The problem does not occur in classic mode.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.46</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: in general, I abhore fixed width layouts that don't utilize available space</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.58</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>so free floating sounds fine with me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.05</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>unless I misunderstand you of course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.22</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>Possibly.&nbsp;&nbsp;Did you take a look at the html version of search.html on bz?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.35</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.50</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>If you look at the tables, you'll notice the column widths aren't uniform</tt></td></tr>
+<tr><td><tt>00:51.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.59</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>they match the widest text in each row</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.02</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>er column</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.06</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, that kind of alignment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.29</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>Oddly enough, I think the fo-&gt;pdf conversion does handle it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.31</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>ambivalent for that kind of plain conversion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.51</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>that could be set up with a single css file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.56</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>it apparently needs an xslt processor with support for some kind of extension</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.01</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>ah :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.05</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hadn't considered that</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.08</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>nah, I bet they just leave it to css</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.33</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>you're just seeing a default html4 table style</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.41</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.10</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>docbook supports a colspec attribute for tables which is somewhat annoying but can be used to set the relative (or absolute) width of the columns</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.24</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, looking at the sources, it's fully span/divified, just no css to format anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.31</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>apparently saxon and xalan can translate that into html table output, although I've yet to test it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.03</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods.  I hadn't considered the css route - that might make more sense if it can be slipped into the template</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.41</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is afraid he's picking up brlcad's taste for perfectionism in quality ;-)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>tis a painful disease</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.42</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>you can specify html.stylesheet parameter for auto-including a reference to css.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.54</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>(works with xml only, sgml requires manual hack to put that in)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.10</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>ah right, docelic_ you're a regular on #docbook aren't you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.46</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>docelic_:&nbsp;&nbsp;That's a good idea.&nbsp;&nbsp;I know I'm eventually going to have to start making custom xsl overlays (the nirt docs ALREADY require it) but I've yet to sort out the mechanisms of doing that with basic xsltproc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.48</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>ay ay </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.54</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>thought your name was familiar, more than just being a lurker in here :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.22</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">sighs in relief - that leaves fop/pdf support as the only other thing needing configure support, and that should be quite simple now that I understand the basics </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.51</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;evil grin&gt; maybe I can even start building pdf vol II and vol III tonight yet :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.54</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;Oh - is it ok to build html and man by default without providing a user option to turn off one or the other?&nbsp;&nbsp;I wouldn't worry except the time factor is significant and then some</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.16</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>build time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.34</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that would be awesomeness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.57</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>(that is, being able to build them tonight) :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.05</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.42</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>as for building them by default, it has to be all smooth and auto-detecting to be on by default, regardless of having a switch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.45</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>Oh, that part's OK (I think) already - the trick is there isn't really a way to detect that the user only wants html or man format ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.03</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>i'd like to do a release with default off first, unless it really is cross-platform tested everywhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.08</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>oh you mean together</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.11</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.14</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>hell, sure -- </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.36</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't think there needs to be anything more than --enable-docs and --disable-docs </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.44</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>OK :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.53</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>if they want more granular than than, they can rm the files they don't want</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.04</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>s/than than/than that/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.27</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods.  I just figured saving ~20 mintes of build time (for the full set) of an unwanted format might be appreciated</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.43</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>nah, they asked for docs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.45</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>they get docs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.52</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.08</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd like txt, man, html-single, html-multi, and pdf by default myself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.18</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;grin&gt; I'll see what I can do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.23</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>30</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.35</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>30?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.56</tt></td><td><font color="#b0b05c"><tt>docelic_</tt></font></td><td width="100%"><tt>that should've been an input for mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.09</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.09</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>31!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.54</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: heh, you can see an example of what happens if I just drop in that crazy orange css template I use on the ideas page </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.58</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/~sean/tmp/search/">http://brlcad.org/~sean/tmp/search/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.19</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>eeeeeep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.33</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>It's the Halloween man page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.58</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>neat, the links actually work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.23</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>though the a.hover is a bit annoying :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.36</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.18</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">heads out</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.27</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>can automake handle nested ifs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.35</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, sorry - nevermind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.38</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not pretty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.01</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>see src/Makefile.am for an example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.26</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it's very duplicative and can be confusing given we support 1.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.02</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>what about something like if BUILD_DOCBOOK &amp;&amp; !BUILD_DOCBOOK_PDF ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.41</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>libirc: 03JeffM2501 * r372 10/trunk/libirc/ (6 files in 2 dirs): add invite event</tt></td></tr>
+<tr><td><tt>01:42.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennnedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
+<tr><td><tt>01:53.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad35 (n=42f95a88@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.02</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik:&nbsp;&nbsp;What was the trick again about using something like .fop.pdf: .xml.fo to get an automatic calling of dependency in a Makefile.am?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.10</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>I can't even get fop to RUN</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.05</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>grrrrrr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.07</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik:&nbsp;&nbsp;Help.&nbsp;&nbsp;Apparently the previous success at building html was a fluke, since I can't duplicate it for html + pdf.&nbsp;&nbsp;The current Makefile.am I'm trying is here:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/Makefile.am">http://bzflag.bz/~starseeker/Makefile.am</a> and the ONLY thing it builds right now are the man pages.&nbsp;&nbsp;What am I doing wrong?</tt></td></tr>
+<tr><td><tt>04:09.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.30</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: nope, only supports simple single-symbol syntax</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.27</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: looks like there's several things wrong with that Makefile.am</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:26.22</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>including some basic typos (e.g., mac1DOCBOOK)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.48</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>you should test each of your build rules one at a time, individually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:59.10</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r32745 10/brlcad/trunk/NEWS: improved DSP tessellation now also honors cut type and handles zero values</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:01.58</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r32746 10/brlcad/trunk/BUGS: Mouse cursor turns into a huge yellow-translucent arrow when running MGED through remote X11</tt></td></tr>
+<tr><td><tt>09:10.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (i=ibot@pdpc/supporter/active/TimRiker/bot/apt)</font></tt></td></tr>
+<tr><td><tt>09:10.40</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || Channel logs at <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || The 2008 Google Summer of Code is complete! -- Thanks deserved to all of our students! || (Source) Release 7.12.6 posted 2008-08-19 || Mailing lists are now reply-to-list instead of reply-to-sender by default</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:45.26</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">turns bright red</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:45.46</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;thanks - that mac1DOCBOOK was most of the problem, evidently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:08.18</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;That yellow-translucent arrow happens on Netscape too, IIRC.&nbsp;&nbsp;I looked that up - it has something to do with X11 on MacOSX, if I remember right - I don't think it's MGED's fault specifically</tt></td></tr>
+<tr><td><tt>11:10.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist_emc (n=archivis@host81-149-119-172.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:13.44</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r32747 10/brlcad/trunk/ (configure.ac doc/docbook/system/man1/Makefile.am): Add support for building pdf versions of Docbook files via Apache FOP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:15.13</tt></td><td><font color="#e277e2"><tt>starseeker</tt></font></td><td width="100%"><tt>note to self - do not attempt makefile logic when too tired to keep eyes open</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:18.05</tt></td><td><font color="#5db2b2"><tt>CIA-4</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r32748 10/brlcad/trunk/doc/docbook/system/man1/Makefile.am: Use proper variables instead of hardcoding the extensions.</tt></td></tr>
+<tr><td><tt>11:44.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>11:50.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.34</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: it's not, but there's a simple fix for mged that works around the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.57</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it ends up sending the cursor over with the wrong byte encoding, making it look fugly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:56.21</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>so if you set it to something, the local X server you're connecting through gets to display it (correctly)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:56.32</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>jim hunt somehow figured that out for mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:03.03</tt></td><td><font color="#61b961"><tt>clock_</tt></font></td><td width="100%"><tt>what's going on with these 700 billion dollars in the US?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:05.45</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>clock_: the gov't is buying everyone new ipods</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:06.36</tt></td><td><font color="#61b961"><tt>clock_</tt></font></td><td width="100%"><tt>I was like surfing for 3 weeks so it went past me</tt></td></tr>
+<tr><td><tt>12:34.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.195.14)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:35.01</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>hey folks is brlterm still an active thing or it's been removed in recent versions?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:36.29</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>brlterm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.59</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>ah I see.. that thing exists but it's not related to brlcad...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.57</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>in any case, someone made debian package for brlcad, and it installs those hundreds of executables into /usr/bin.. I was thinking if a shell wrapper could be made which adds a non-system bin path to your PATH when you enter it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:39.15</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>similar to how grass does it.. when you run it, you have tools from /usr/lib/grass/.../scripts/ in your path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:39.59</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, the debian wrapper thing..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.29</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that would be great actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.40</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>having a brl-cad terminal is actually on our todo list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.41</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the idea being an actual double-clickable terminal app that would provide the same posix environment cross-platform (so I can get a goddamn decent console on Windows g'dammit)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:42.34</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>and it'd set up the PATH, MANPATH, LD_LIBRARY_PATH and whatever else is needed to allow for relocation (if it's a system like Mac OS X where that becomes trivial)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:43.18</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>right.. are there some notes written about it? (besides just todo item)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:46.22</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>mm, somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:46.33</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>you interested in working on it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:47.18</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not terribly complicated, the hardest part is how to get a tty on systems that don't have one :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:47.18</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:48.42</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>i'll see if I can get some notes up into the wiki later today (in about 4-6 hours)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:49.02</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:49.17</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it is pretty simple, though (intentionally), and could easily be done without any notes ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:49.54</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it'd sort of be a way to provide a command-line and a graphical launcher all in one "app" </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:50.40</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>could even call the thing "BRL-CAD" and it'd be the one double-clickable application that gets installed (maybe one of two)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:51.16</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>with a means to launch mged or start issuing command-line commands right there in the console</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:53.30</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>yes.. well as I see it, what could be done is just find a shell that compiles on all platforms supported by brlcad.. compile it together with brlcad and provide a default shell config file which sets all the things needed.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.11</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>and ideally the shell would be just a tar.gz from upstream which can be replaced by user with newer/older version before compile, and the build system wouldn't care</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.52</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>or even better,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:55.51</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>for platforms that do have good shells on their own, just create config files, and user or install procedure can make a shortcut&nbsp;&nbsp;brlcad -&gt; this_shell -config brlcad.cfg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:55.58</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>docelic: have you tried looking for such a shell? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:56.44</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>harder than you'd think, at least without pulling in a massive dependency chain like kde or cygwin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:57.17</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>you wouldn't like cygwin for windows? what if a person could download binary build of the cygwin-based shell?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:57.31</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>(unrelated to brlcad)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:57.50</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it's alright if you're going to do everything through them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:58.22</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>i wouldn't mix msvc compilation in along with a cygwin-built terminal though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:58.51</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>and most windows devs I know aren't too fond of having anything to do with cygwin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:59.05</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>unless they're unix devs just using windows because they have to :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:59.08</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>I believe that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:59.15</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>k bb later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:59.20</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>cya</tt></td></tr>
+<tr><td><tt>13:22.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:22.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-91-240.dclient.hispeed.ch) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:22.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist_ub (n=archivis@host81-149-119-172.in-addr.btopenworld.com) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:23.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-4 (n=CIA@208.69.182.149)</font></tt></td></tr>
+<tr><td><tt>14:17.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
+<tr><td><tt>14:50.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ciaooo (n=a0dc9731@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.35</tt></td><td><font color="#b15db1"><tt>yukonbob</tt></font></td><td width="100%"><tt>morning, cadheads</tt></td></tr>
+<tr><td><tt>15:33.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.51</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>oi yb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.25</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy yukonbob </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.35</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>gut en tag</tt></td></tr>
+<tr><td><tt>16:00.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad i (n=asus@217.8.236.185)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:02.41</tt></td><td><font color="#d47070"><tt>i</tt></font></td><td width="100%"><tt>What if i want to revolve a line, which represents a shaft's half-symmetry? I think i have two choices: 1 sketch mode and 2 solid modeling. Am I right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:03.46</tt></td><td><font color="#d47070"><tt>i</tt></font></td><td width="100%"><tt>!brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.18</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>hi i</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.29</tt></td><td><font color="#d47070"><tt>i</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.57</tt></td><td><font color="#d47070"><tt>i</tt></font></td><td width="100%"><tt>Am i right that solid modelling shall be used in this case, in BRLCAD?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:05.12</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>i: solid modeling approach is used throughout brl-cad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:05.46</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>i: hold on a sec (on phone)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.22</tt></td><td><font color="#d47070"><tt>i</tt></font></td><td width="100%"><tt>and i can not e.g. revolve relatively precise lines around an axis as in e.g. AutoCAD? Well, i do't really need it...</tt></td></tr>
+<tr><td><tt>16:08.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-87-82.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>16:12.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.35</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>brlcad do not support export into different file formats as e.g. iges... I need to build it with Open Cascade support. Is it much to download? Is it a separate source tarball?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:35.29</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>how are binary builds for sourceforge.net downloads done? is there a makefile command that comes up with the ready-made tarball or?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:36.44</tt></td><td><font color="#7272d8"><tt>prasad_1</tt></font></td><td width="100%"><tt><a href="http://bigpicture.typepad.com/comments/2008/09/request-for-urg.html">http://bigpicture.typepad.com/comments/2008/09/request-for-urg.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:38.38</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>is it hard to build brlcad with open.cascade support? Is there much to download? or only few megabytes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:39.32</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt><a href="http://www.j-walk.com/other/conf/">http://www.j-walk.com/other/conf/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.48</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>docelic: tarball, ./configure, make, make install, ubuntu needs m4, bison, flex and xorg-dev with its dependencies.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.13</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>and more or less... e.g. open cascade to support iges...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.45</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>iandaletter, no, I'm asking how are the tarballs are made, not how to compile source from them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.01</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>.tar, which is bzipped, extract it in home directory, cd into it, in terminal, write './configure', then 'make', then 'sudo make install'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.22</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>www.ansysed.narod.ru/linux.htm </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.06</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>iandaletter, and then what? bzip the resulting installation from /usr/local?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.51</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>no, it installs by default into /usr/brlcad after 'sudo make install' - and all u need is to edit .bashrc into your home folder, as 'cd', then 'gedit .bashrc', addinto the end of the file: 'export PATH=$PATH:/usr/brlcad/bin', and then e.g. reboot to let system to read that changed .bashrc and tipe in terminal 'mged'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.15</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>dude, iandaletter , you completely do not understand what I am asking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.48</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>oh! yeah! wait...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.43</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>well... i'd just downloaded some old 32-bits source tarball...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.49</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>though, i'm able to add the path /usr/brlcad/bin contains over 400 programs, where oone is mged - it is a multidesktop graphical editing</tt></td></tr>
+<tr><td><tt>16:58.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-87-82.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.25</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>in brlcad 7.10 for irix , how do I get the geometry window to show up? I can add solids and call draw, but there's no window in which it draws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.27</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>when you start mged, you can "put a database to disk" thru 'mged -n new01.g' - why do you need it? it would ask you to chose between nu | X | gl, where e.g. X is an x window system's "private Rayan" Well, this operation shows you wheter you're able to chose between "nu" option (which means no graphics at all) and at least anything else...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.39</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>aha, ok.. well then must be that this thing is compiled with 'nu' option only, cause that's the only option I get.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.29</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>i bet, e.g. Ubuntu needs xorg-dev with its dependencies, totally about 5 mb to download... Probably, GL in ubuntu needs flgrx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.33</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>!flgrx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.59</tt></td><td><font color="#bc63bc"><tt>docelic</tt></font></td><td width="100%"><tt>i'm about sure you spelled it wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.00</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>uh... don't know anything about both irix and GL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.54</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>yes, ask 'ubuntu' at irc.freenode.net - he's a bot, he answers qestions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.40</tt></td><td><font color="#d47070"><tt>iandaletter</tt></font></td><td width="100%"><tt>i meant ubottu</tt></td></tr>
+<tr><td><tt>17:41.43</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad iandaletter (n=asus@217.8.236.185)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.45</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">wows at the previous chatter</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.52</tt></td><td><font color="#b2b25e"><tt>louipc</tt></font></td><td width="100%"><tt>fglrx</tt></td></tr>
+<tr><td><tt>19:03.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>20:33.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos_ (n=Me@dsl107.esjtvtli.sover.net)</font></tt></td></tr>
+<tr><td><tt>21:46.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jjsimon (n=18ecbe80@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.54</tt></td><td><font color="#62bb62"><tt>jjsimon</tt></font></td><td width="100%"><tt>Hello, I was wondering if anyone could point me to documentation on writing a plugin for BRL-CAD?&nbsp;&nbsp;I'm working with a group of students on a sound modelling addon/program to/using BRL-CAD.&nbsp;&nbsp;Any advice is appreciated.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.45</tt></td><td><font color="#62bb62"><tt>jjsimon</tt></font></td><td width="100%"><tt>I guess I should ask if writing a plugin is even viable...I see a plugins option in Archer, but not in MGED</tt></td></tr>
+<tr><td><tt>22:06.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.19</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>jjsimon: howdy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.24</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>jjsimon: mged plugins are more straightforward for mged, though it depends on what sort of extension you want to write (compiled vs scripted vs hybrid)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.59</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>jjsimon: the basic first-level "plugin"/extension for mged is just a tcl script -- you can see an example of one such extension in mged under the Tools -&gt; Geometry Browser menu item</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.24</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>compiled extensions are a little more involved but either amount to making new commands or run-time loadable extensions via a pkg binding interface (which are also tcl-loadable modules)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.25</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>for your sound modeling project, I would expect that to involve a bit of a hybrid approach where you'd have an external program that does some work and a tcl interface in mged to present the results</tt></td></tr>
+<tr><td><tt>22:42.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jjsimon-mtu (n=18ecbe80@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.21</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>sorry, got DC'd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.36</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>also lost the reply :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.47</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>if you could copy/paste it, I'd appreciate it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.06</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>18:34 &lt;@brlcad&gt; jjsimon: mged plugins are more straightforward for mged, though it depends on what sort of extension you want to write (compiled vs scripted vs hybrid)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.09</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>18:37 &lt;@brlcad&gt; jjsimon: the basic first-level "plugin"/extension for mged is just a tcl script -- you can see an example of one such extension in mged under the Tools -&gt; Geometry Browser menu item</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.13</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>18:39 &lt;@brlcad&gt; compiled extensions are a little more involved but either amount to making new commands or run-time loadable extensions via a pkg binding interface (which are also tcl-loadable modules)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.17</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>18:40 &lt;@brlcad&gt; for your sound modeling project, I would expect that to involve a bit of a hybrid approach where you'd have an external program that does some work and a tcl interface in mged to present the results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.10</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>hm...well, we're starting out simple.&nbsp;&nbsp;The idea is to model a simple room with multiple sound sources...use ray tracing to model the reflections and analyze the interference</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.30</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.23</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>examples of codes that do similar tasks are in src/rt (the various view*.c files are all separate programs) as well as src/rttherm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.38</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>excellent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.45</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>thanks a lot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.47</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>one more question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.49</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>src/rt/rtexample.c is a simple starting point for writing a ray-trace application </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.07</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>I saw jbrlcad in the SVN, how stable/usable is that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.17</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>assuming it's a Java port)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.18</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the src/rt/view*.c programs utilize the "RT" application interface </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.40</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's the start of a java port of the core ray-trace library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.49</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it was more a proof of concept</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.49</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>it just implements a couple primitives, nothing complex, and uses a much simpler boolean evaluation method that is a couple orders of magnitude slower than what librt does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.01</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>ah ok, so stick to the C version...I noticed, on the wiki, mention C++ wrapper for the core libs, is that under development or actually usable?&nbsp;&nbsp;If usable, where can I find more info about it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.14</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>*mention of a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.14</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>there is a JNI interface to some of librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.43</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>see src/java</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.18</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>but yeah, I would recommend sticking to c/c++ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.36</tt></td><td><font color="#b2b25e"><tt>louipc</tt></font></td><td width="100%"><tt>oh wow I thought jbrlcad was just java bindings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.37</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the c++ wrapper is bleeding-edge active development so I wouldn't recommend trying it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.12</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>Alright, thanks a ton, I'll poke around the wiki for more info</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.30</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, the C++ interface does already exist and is being used by a couple 3rd party projects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.44</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>if you do want to give it a go, it's in the rt^3 module</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.16</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>which also has two other development activities (new modeler interface and geometry service interface), so consider yourself forewarned :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.47</tt></td><td><font color="#bd63bd"><tt>jjsimon-mtu</tt></font></td><td width="100%"><tt>:) thanks, I'm sure I'll be around here quite a bit over the next few months</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.50</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>jjsimon-mtu: sure, I'm usually here as are several others than can answer the coding questions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.55</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.26</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: yeah, it's a complete transposition by one of the core devs from C into Java</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.04</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>no, jbrlcad doesn't touch brlcad at all, the only link is the toplevel repo and some overlap in file format and role O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.15</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>our C api is already very naturally designed into categories of data processing routines which translates very well into an object-oriented layout with encapsulation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.27</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>he implemented most of our low-level database I/O and proceeded on to ray-tracing and started implementing primitives, translating the code into Java along the way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.38</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc, he stopped when he got to the torus..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.56</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>jim's dorked with it some since, but nothing of serious consequence</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.39</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>the torus is one of the first primitives that requires a polynomial root solver for evaluating the ray intersection, that was another 10k chunk of code in its own right so he stopped :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.50</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>as far as plugins, that's not a special category since our core isn't closed source, code is code :) where it comes from isn't particularly relevant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.59</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>(though I do plan on making plugins in the adrt shtuff so C stuff can be added and removed from a running instance)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.21</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>how's the rippage going?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:08.50</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>ripwhathuh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.43</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>on adrt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.49</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>derippage?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.55</tt></td><td><font color="#6acaca"><tt>brlcad</tt></font></td><td width="100%"><tt>reparage?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.52</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>ah, I had a brain off day today, the current state is what's in the repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:17.29</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>all forks are re-merged, split and shot don't work yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:17.44</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>(I think it's protocol mismatch)</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

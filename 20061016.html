@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20061016</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20061016</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:01.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.13</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Big rayforce commit, Erik, feel free to inform me if I broke anything... Performance should be more acceptable ( SSE and other goodies, still no quad volume tracing, etc. )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.29</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Would it be possible for autoconf to put -msse -msse -m3dnow -m3dnowext -fomit-frame-pointer -ffast-math in CFLAGS by itself?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.01</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>And it detects a missing log2() function systematically since it checks without -std=c99</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.18</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>Maloeran: it is possible to add those flags, easiest is to probably just set CFLAGS="$CFLAGS -msse -msse -m3dnow -m3dnowext -fomit-frame-pointer -ffast-math" somewhere in the configure.ac file somewhere after AM_INIT_AUTOMAKE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.41</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>ideally, you'd save your cflags (PRECFLAGS="$CFLAGS"), set a new cflags (CFLAGS="$CFLAGS ..."), and then try a compilation test to make sure they actually work and if not restoring the saved cflags (CFLAGS="$PRECFLAGS") as those options are certainly not universal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.41</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>I see, thanks. Though, the flags should only be present if presently supported</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.01</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>The compiled test will have to be executed, running SSE instructions... and wait for a SIGILL. I have much to read about autoconf, unless Erik wants to commit that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.35</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>that's pretty easy to add, plenty such examples in brl-cad's .ac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.53</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>look for AC_TRY_RUN</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.09</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>or AC_TRY_LINK if you just want to test compilation and not runnability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.23</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Oh? I see, nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.26</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>AC_TRY_RUN([ source here ], [what to do if succeeded], [what to do if failed])</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.18</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>usually set a variable for the if succeeded/failed part and then handle the result outside the AC_TRY_RUN</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.13</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>*nod* I'll experiment with that, thanks</tt></td></tr>
+<tr><td><tt>14:07.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad danfalck (n=dan@pool-71-111-76-8.ptldor.dsl-w.verizon.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:26.36</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Erik, another quick note if you happen to try it out : delete any old cache file lying around, or you won't get proper performance</tt></td></tr>
+<tr><td><tt>17:05.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Amir (i=AMiR@h170n1-t-gr100.ias.bredband.telia.com)</font></tt></td></tr>
+<tr><td><tt>17:06.08</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Amir (i=AMiR@h170n1-t-gr100.ias.bredband.telia.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.12</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Hey Erik, did you see my note about reorganizing milestones?..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.49</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>On the truck_bots file Lee uploaded, I also get a flood of errors such as&nbsp;&nbsp;db_walk_subtree() FAIL on '/all/fuel_pump.rc.bot&nbsp;&nbsp;from his framework for read .g files, investigating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.56</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Nevermind, it still works despites the flood on stderr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.43</tt></td><td><font color="#7777e3"><tt>CIA-5</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/NEWS: prepare for release, numbering it 7.8.4 as planned even though it's borderline 7.10 feature-wise. last news item, doug howard added (via bob) support for handling larger hierarchies in archer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:51.49</tt></td><td><font color="#7777e3"><tt>CIA-5</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/ (configure.ac ChangeLog include/config_win.h): prepare for release 7.8.4, standard updates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:00.39</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Raytracer detects sectors of 86 and 93 triangles which aren't possible to split up. I located the sectors and there's nothing out of the ordinary visible, any possibility of overlapping triangle mess?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:01.00</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>That came out of the CSG-&gt;triangle converter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.33</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>I'm asking since this kind of situation would have been very apparent in ADRT as well, I don't suppose it was noticed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.55</tt></td><td><font color="#5bae5b"><tt>``Erik</tt></font></td><td width="100%"><tt>the truck was never done in adrt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.05</tt></td><td><font color="#5bae5b"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- doesn't know about the tesselation stuff...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.43</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not supposed to output overlapping triangles, but it's certainly possible if there was a degenerate case of some sort I bet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.56</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Okay I got it in play sight, very long thin triangles going from an edge of the sector to the opposite edge of the other sector</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.18</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>The not yet written permutation pass of the prep will take care of that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.21</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>It's a fairly bad case, performance collapse by 70% there, down to 1m/s. on slow laptop</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.52</tt></td><td><font color="#5bae5b"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, the geometry was a better test case than expected :&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.32</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Did you quickly test the new code? Performance is getting decent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.57</tt></td><td><font color="#5bae5b"><tt>``Erik</tt></font></td><td width="100%"><tt>nope, was installing openbsd on a machine at work, and my time ended at 3, so now I'm home cleaning house</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.44</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Gah. I can't spend weeks to complete the prep as planned, with the milestones coming up.&nbsp;&nbsp;I suppose that will wait until the end of the project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.20</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Erik, are all these questions and statements welcome or are you occupied with other matters these days?&nbsp;&nbsp;I could use your thoughts on certain matters related to features, milestones and the work to be done. It can wait though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.03</tt></td><td><font color="#5e5eb3"><tt>Twingy</tt></font></td><td width="100%"><tt>Like Suicide</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.23</tt></td><td><font color="#5bae5b"><tt>``Erik</tt></font></td><td width="100%"><tt>mal: your timing is off :) I like to leave work at work... talk to me tomorrow before, oh, say, 5pm, when I have access to all the files and people</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:41.20</tt></td><td><font color="#6dcf6d"><tt>Maloeran</tt></font></td><td width="100%"><tt>Right. So noted, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.43</tt></td><td><font color="#5e5eb3"><tt>Twingy</tt></font></td><td width="100%"><tt>das goot!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.50</tt></td><td><font color="#5e5eb3"><tt>Twingy</tt></font></td><td width="100%"><tt>pan done, not for ruler</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.53</tt></td><td><font color="#5e5eb3"><tt>Twingy</tt></font></td><td width="100%"><tt>*now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.36</tt></td><td><font color="#5bae5b"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://img.photobucket.com/albums/v350/Pinecone/Cavalier2.jpg">http://img.photobucket.com/albums/v350/Pinecone/Cavalier2.jpg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.02</tt></td><td><font color="#5e5eb3"><tt>Twingy</tt></font></td><td width="100%"><tt>your new car?</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

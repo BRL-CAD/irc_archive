@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20140619</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20140619</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:01.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hcurtis (b82d1964@gateway/web/freenode/ip.184.45.25.100)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.19</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I have been trying to re-write my dynamic allocation code for fast4-g.c so that it will be good enough to turn into a patch. I am rereading my notes and identifying their most important and helpful pieces of information so that I can accomplish this task.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.14</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>One thing that is holding me back as I work on this task is that I don't have a fully clear picture of how fast4-g.c converts fastgen4 format to BRL-CAD format. Likewise, I don't see how we determine how large the allocated memory is supposed to grow when it needs to grow.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.38</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I have tried to research this (for example, one helpful resource I found was the BRL-CAD glossary, which explained to me what groups and regions in BRL-CAD are), but I am having a hard time knowing what new code to write to solve fast4-g's problems.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.38</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>How do we know how large the allocated memory is supposed to grow to when it does need to grow?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.23</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>Well, now that you've heard the bad news, some good news is that I think that the following line of code might be the right foundation for where I need to go:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.57</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>static struct wmember *group_head = (struct wmember *) bu_malloc(sizeof(struct wmember), "alloc heap memory for wmembers"); /* Lists of regions for groups */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.06</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>so is that mk_metaball function broken?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.49</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 61351 brlcad/trunk/src/other/CMakeLists.txt: Get rid of hv3 and sqlite - we're not currently using them, and svn has the history if we need it someday.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.07</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 61352 (brlcad/trunk/misc/tools/CMakeLists.txt brlcad/trunk/src/other/CMakeLists.txt): dom2dox probably fits better in misc/tools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.52</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I understand that to reallocate memory in the corrected fast4-g.c, there needs to be code whose logic is this:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.21</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>if (you don't have all of the memory you need for the wmembers)&nbsp;&nbsp;static struct wmember* newMemorySpace = (struct wmember *) bu_realloc (group_head, someNumberWhoseOriginWeDontKnow, “a string”)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.51</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I just have to figure out how to code the if statement and determine what someNumberWhoseOriginWeDontKnow is. How do I do that?</tt></td></tr>
+<tr><td><tt>02:03.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.49</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>Fast4g.c uses bu_malloc to allocate memory for the region name, faces, thickness, facemode, and gridpoints. This means that the program will need to be able to bu_realloc memory for some or all of these.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.47</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>All of these elements that I just mentioned are pointers, of course.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.08</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>Likewise, fast4g.c uses bu_calloc to allocate memory for the region list, bot_ip.vertices, bot_ip.thickness, and bot_ip.faces. This means that the program will need to be able to bu_realloc memory for some or all of these pointers.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.25</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>brlcad: Am I getting warmer? ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.44</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I have been fixated on repairing the fast4-g.c element called group_head because that was the stack-allocated item that the last person who attempted this task tried to make dynamic. However, it is possible that to improve fast4-g correctly, I need to convert some other thing to dynamic allocation. What do you (anyone who would like to comment) think?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.10</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>Oops. I take back what I wrote about how it might be incorrect to focus on group_head. I re-read Sean's comments in commit 60592, and in them he said that fast4-g should not be manually recreating the wmember list. Apparently, that wmember list is group_head.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.22</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>Why does the original group_head array in fast4-g.c hold 11 elements? Why 11 in particular and not some other number?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.50</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>Here are two things I need to answer to complete this fast4g task but have not been able to:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.43</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>1. How do we know when we need to resize the heap memory allocated for the group_head?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.21</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>2. Once we've determined that, how do we know what new size it needs to be?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.05</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>By the way, the bu_realloc argument called someNumberWhoseOriginWeDontKnow that I referred to earlier is the new size (in bytes) of the heap memory for group_head.</tt></td></tr>
+<tr><td><tt>04:31.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bakom (75d430b0@gateway/web/freenode/ip.117.212.48.176)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.05</tt></td><td><font color="#6ed2d2"><tt>bakom</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr><td><tt>04:32.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.46</tt></td><td><font color="#6ed2d2"><tt>bakom</tt></font></td><td width="100%"><tt>i have some problem, </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.42</tt></td><td><font color="#6ed2d2"><tt>bakom</tt></font></td><td width="100%"><tt>i want to convert g file into vrml format using g-vrml but file is not converting properly</tt></td></tr>
+<tr><td><tt>04:34.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (~khalsa@117.212.48.176)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.15</tt></td><td><font color="#6fd46f"><tt>gurwinder</tt></font></td><td width="100%"><tt>hello brlcad</tt></td></tr>
+<tr><td><tt>04:43.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder_ (~khalsa@117.212.48.176)</font></tt></td></tr>
+<tr><td><tt>04:44.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hcurtis (b82d1964@gateway/web/freenode/ip.184.45.25.100)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:54.21</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I have written a new draft of my code to convert elements of BRL-CAD's fast4-g.c from stack allocated to dynamic. Any feedback is welcome. <a href="http://paste.lisp.org/+32AH">http://paste.lisp.org/+32AH</a></tt></td></tr>
+<tr><td><tt>04:56.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>05:07.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (~khalsa@117.212.48.176)</font></tt></td></tr>
+<tr><td><tt>05:21.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.71.171)</font></tt></td></tr>
+<tr><td><tt>05:39.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>06:03.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad chick_ (~chick_@41.205.22.41)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:21.07</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>kanzure: I think yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:21.25</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>I have added a patch at <a href="https://sourceforge.net/p/brlcad/patches/278/">https://sourceforge.net/p/brlcad/patches/278/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:22.13</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>I have explained the same on the mailing list.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.12</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Waiting for the response.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.15</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Its been long though.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:24.42</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>hello raj12lnm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:24.55</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Hi kanzure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:26.56</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>The issue is the following.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:26.59</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>i merged your branch into master, haven't done a pypi release yet <a href="https://github.com/kanzure/python-brlcad/commits/master">https://github.com/kanzure/python-brlcad/commits/master</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:31.00</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Ok. .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:31.15</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>In metaball the issue is the following</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:31.22</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>int *a[5] and int (*a)[5] are two different things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:31.49</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>And metaball arguments require the later.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:32.18</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>But the former is written which indeed is a bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:32.46</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>kanzure: thanks for the merge.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:32.47</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>so nobody has used metaball?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:32.58</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>why is it important to test for metaball? i noticed the failing test in python-brlcad. otherwise i wouldn't mind.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:32.58</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>I think yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.45</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Because the code I have written. Assumes that the change gas been made in the brlcad c repository.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:34.08</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>ah, my question is more like, why test for things that nobody uses</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:34.25</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>OK.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:34.49</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>But the primitive is used. and not mk_metaball(..)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:34.55</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:35.07</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Like it is created using the in command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:35.33</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>i am sleeping in a few minutes, but one of my goals is to switch away from file-based wdb and only use in-memory wdb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:35.57</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>so that modeling does not require file storage until the user calls a save routine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:36.33</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>and so that multiple wdb scenes can be modified simultaneously (at the moment, python-brlcad is using globals...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:36.50</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Can you elaborate that further.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.50</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>example: when you execute the unit tests, it generates files on the file system. whereas with the in-memory wdb functions in brlcad, it wouldn't have to generate files.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:54.35</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Hcurtis0010 * 7310 /wiki/User:Hcurtis0010/GSoC2014/logs: /* Week 5 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:56.08</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Hcurtis0010 * 7311 /wiki/User:Hcurtis0010/GSoC2014/logs: /* Week 5 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:59.30</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Hcurtis0010 * 7312 /wiki/User:Hcurtis0010/GSoC2014/logs: /* Week 5 */</tt></td></tr>
+<tr><td><tt>07:04.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu_ (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>07:04.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>07:04.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>07:04.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>07:04.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>07:21.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.71.171)</font></tt></td></tr>
+<tr><td><tt>07:21.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (~erik@pool-74-103-94-19.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>07:44.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ambarpal (~ambarpal@120.59.168.177)</font></tt></td></tr>
+<tr><td><tt>08:00.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vlad@195.216.218.10)</font></tt></td></tr>
+<tr><td><tt>08:02.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pandrei (~pandrei@188.25.158.68)</font></tt></td></tr>
+<tr><td><tt>08:46.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.166.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:49.55</tt></td><td><font color="#bf64bf"><tt>pandrei</tt></font></td><td width="100%"><tt>there's something I don't understand regarding bezier segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:50.21</tt></td><td><font color="#bf64bf"><tt>pandrei</tt></font></td><td width="100%"><tt>specifically bezier_seg which has a *ctl_points array</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:50.41</tt></td><td><font color="#bf64bf"><tt>pandrei</tt></font></td><td width="100%"><tt>that struct has no size param, how do you know when you've filled it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:50.54</tt></td><td><font color="#bf64bf"><tt>pandrei</tt></font></td><td width="100%"><tt>as far as I know C sizeof() doesn't work on pointer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:51.04</tt></td><td><font color="#bf64bf"><tt>pandrei</tt></font></td><td width="100%"><tt>since gibberish can be valid array content </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:51.20</tt></td><td><font color="#bf64bf"><tt>pandrei</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr><td><tt>09:01.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~jasleen@117.253.225.236)</font></tt></td></tr>
+<tr><td><tt>09:08.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>09:20.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>09:40.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>09:59.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>10:07.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.71.171)</font></tt></td></tr>
+<tr><td><tt>10:18.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>10:27.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~IceChat77@188.25.158.68)</font></tt></td></tr>
+<tr><td><tt>10:54.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@117.234.243.142)</font></tt></td></tr>
+<tr><td><tt>11:01.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (~khalsa@117.199.104.73)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:02.20</tt></td><td><font color="#6fd46f"><tt>gurwinder</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:02.44</tt></td><td><font color="#bf64bf"><tt>andrei_</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:02.44</tt></td><td><font color="#6fd46f"><tt>gurwinder</tt></font></td><td width="100%"><tt>i want to convert .g file into some another format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:03.17</tt></td><td><font color="#6fd46f"><tt>gurwinder</tt></font></td><td width="100%"><tt>which format is more accurat so that i can render it in POV-ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:05.46</tt></td><td><font color="#6fd46f"><tt>gurwinder</tt></font></td><td width="100%"><tt>hello andrei, I want to convert .g file into some another format.&nbsp;&nbsp;Which format is more accurate? So that i can render it in POV-ray</tt></td></tr>
+<tr><td><tt>11:40.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>11:53.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~ishwerdas@59.91.113.216)</font></tt></td></tr>
+<tr><td><tt>11:55.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@117.234.186.45)</font></tt></td></tr>
+<tr><td><tt>11:58.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad devinder (~chatzilla@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>12:20.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad devinder (~chatzilla@117.255.188.210)</font></tt></td></tr>
+<tr><td><tt>12:57.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad devinder (~chatzilla@117.255.188.210)</font></tt></td></tr>
+<tr><td><tt>12:58.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:20.12</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Pulkit Mittal * 7313 /wiki/User:Pulkit_Mittal/GSOC2014/logs: /* GSOC Period */</tt></td></tr>
+<tr><td><tt>13:42.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@190.9.171.121)</font></tt></td></tr>
+<tr><td><tt>14:05.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:17.06</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Pulkit Mittal * 7314 /wiki/User:Pulkit_Mittal/GSOC2014/logs: /* Week 4 */</tt></td></tr>
+<tr><td><tt>14:43.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>14:54.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:04.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>15:24.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~rvt@190.9.171.121)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.35</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 61353 brlcad/trunk/src/conv/3dm/3dm-g.cpp: cleanups in 3dm-g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.37</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 61354 brlcad/trunk/src/conv/3dm/3dm-g.cpp: use bool in 3dm-g</tt></td></tr>
+<tr><td><tt>15:40.36</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad ishwerdas (~ishwerdas@59.91.113.216)</font></tt></td></tr>
+<tr><td><tt>15:47.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.71.171)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.23</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 61355 brlcad/trunk/src/conv/3dm/3dm-g.cpp: remove unnecessary code</tt></td></tr>
+<tr><td><tt>16:25.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>16:37.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@101.215.50.252)</font></tt></td></tr>
+<tr><td><tt>16:38.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.166.162)</font></tt></td></tr>
+<tr><td><tt>16:46.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>16:53.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hcurtis (b82d19d9@gateway/web/freenode/ip.184.45.25.217)</font></tt></td></tr>
+<tr><td><tt>16:54.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~ishwerdas@59.91.113.216)</font></tt></td></tr>
+<tr><td><tt>17:12.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cwstirk (~charlie@c-24-9-78-79.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:11.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:11.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest32125 (~Ch3ck@66.118.151.70)</font></tt></td></tr>
+<tr><td><tt>18:11.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cwstirk (~charlie@c-24-9-78-79.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:11.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~ishwerdas@59.91.113.216)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hcurtis (b82d19d9@gateway/web/freenode/ip.184.45.25.217)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.166.162)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@101.215.50.252)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (~erik@pool-74-103-94-19.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu_ (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest48861 (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad fenn (~fenn@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ankesh11 (uid8015@gateway/web/irccloud.com/x-npcokdntikhhjpbb)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yiyus (1242712427@je.je.je)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zxq9 (~ceverett@FL9-125-199-207-150.okn.mesh.ad.jp)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (uid35020@gateway/web/irccloud.com/x-gtyofukgykgusznl)</font></tt></td></tr>
+<tr><td><tt>18:11.17</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by morgan.freenode.net</font></tt></td></tr>
+<tr><td><tt>18:14.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22_ (~maths22@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22_ (~maths22@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest32125 (~Ch3ck@66.118.151.70)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cwstirk (~charlie@c-24-9-78-79.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~ishwerdas@59.91.113.216)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hcurtis (b82d19d9@gateway/web/freenode/ip.184.45.25.217)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.166.162)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad albertcoder (~albertcod@101.215.50.252)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (~erik@pool-74-103-94-19.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu_ (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest48861 (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad fenn (~fenn@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ankesh11 (uid8015@gateway/web/irccloud.com/x-npcokdntikhhjpbb)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yiyus (1242712427@je.je.je)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zxq9 (~ceverett@FL9-125-199-207-150.okn.mesh.ad.jp)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (uid35020@gateway/web/irccloud.com/x-gtyofukgykgusznl)</font></tt></td></tr>
+<tr><td><tt>18:17.17</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by morgan.freenode.net</font></tt></td></tr>
+<tr><td><tt>18:19.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>18:20.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (~infobot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>18:20.21</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GCI winners: Jacob Burroughs and Peter Amidon! || GSoC 2014 selections are announced! Thank you to all we got to work with. Remember that SOCIS is coming up right around the corner and you don't need a summer of code to get involved with open source.</font></tt></td></tr>
+<tr><td><tt>18:23.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.71.171)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.48</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>kanzure: I have made metaball independent of mk_metaball function.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.56</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.09</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>The test will run.</tt></td></tr>
+<tr><td><tt>18:32.38</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad ishwerdas (~ishwerdas@59.91.113.216)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.57</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>The earlier version of metaball primitive worked with my local repository.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.15</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Because the mk_metaball bug was corrected in my local repo.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.16</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>brlcad : your kind attention is required.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.04</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Mk_metaball function has a bug and it requires changes as per ticket no 278 on sf.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.43</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>The reason being int *a[5] and int (*a)[5] are two different things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.14</tt></td><td><font color="#d97272"><tt>raj12lnm</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr><td><tt>19:00.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.53</tt></td><td><font color="#76e0e0"><tt>kanzure</tt></font></td><td width="100%"><tt>spam on this page: <a href="http://brlcad.org/wiki/ARL_Technical_Reports">http://brlcad.org/wiki/ARL_Technical_Reports</a></tt></td></tr>
+<tr><td><tt>19:29.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~IceChat77@188.26.187.205)</font></tt></td></tr>
+<tr><td><tt>20:01.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.70.158)</font></tt></td></tr>
+<tr><td><tt>20:15.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~rvt@190.9.171.121)</font></tt></td></tr>
+<tr><td><tt>20:45.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~rvt@190.9.171.121)</font></tt></td></tr>
+<tr><td><tt>21:32.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:57.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piyushparkash (~piyushpar@117.205.70.158)</font></tt></td></tr>
+<tr><td><tt>22:08.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hcurtis (b82d1b9d@gateway/web/freenode/ip.184.45.27.157)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.00</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I am working some more on my fast4g.c task. Understanding the way pointers work is an important part of this endeavor. I thought my familiarity with them was solid, but I have come to realize that there still are gaps. Before continuing to code, I am reading a good article on pointers (one that is appropriate for my skill level) in order to improve my understanding of them.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.13</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>By the way, I have written a new draft of my code; I am trying to convert elements of fast4-g.c from stack allocated to heap allocated. Any feedback is welcome. <a href="http://paste.lisp.org/+32AH">http://paste.lisp.org/+32AH</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.34</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>I have tried hard to answer the following important questions for my task, but I have not been successful. I will continue researching them, but I need to ask for help. Do any of you know the answers to these?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.12</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>1. How do I know when the heap memory allocated for the group_head needs to be resized?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.30</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>2. Once I have determined that, how do I know what new size it needs to be?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.13</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>3. Why does the group_head array in fast4-g's commit 56495 hold 11 elements in particular and not some other number of them?</tt></td></tr>
+<tr><td><tt>22:34.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cwstirk (~charlie@c-24-9-78-79.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>22:55.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.03</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Inderpreet * 7315 /wiki/User:Inderpreet/GSoC14/logs: /* Week 5 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.17</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Krajkreddy * 7316 /wiki/User:Krajkreddy/GSOC14/summary: /* Week 4 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.28</tt></td><td><font color="#b45fb4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Albertcoder * 7317 /wiki/User:Albertcoder/GSoC2014/logs: /* Week 5 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:13.02</tt></td><td><font color="#4d4d93"><tt>hcurtis</tt></font></td><td width="100%"><tt>It turns out that dereferencing was one of the concepts that I referred to earlier.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

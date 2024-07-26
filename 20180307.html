@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20180307</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20180307</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:19.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>01:19.13</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD and open source CAx discussion ! Also @ <a href="http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> ! Logs @ <a href="http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.25</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>DenisP: there are examples in share/db in the BRL-CAD build directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.53</tt></td><td><font color="#5caf5c"><tt>DenisP</tt></font></td><td width="100%"><tt>Okay, thanks, I will check it out.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.50</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>they run from simple to complex, although there aren't any that are really big by modern cad standards</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.35</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>DenisP: that looks like a fantastic scattering of random primitives!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:27.32</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>try havoc.g&nbsp;&nbsp;(havoc object) or tank_car.g (tank_car and track objects together)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.06</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: yeah, r70782 removed the CMAKEFILES(${public_hdrs}) call - that was the call that let the CMake build know about the header files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.14</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: it's probably my fault - I was trying to reduce the dependency on the _&lt;command&gt; overriding mechanism in our build after I found out it wasn't originally intended to be a supported feature, so the raw CMake commands no longer append automatically to the cmakefiles list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.47</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: most of the time it is handled either by our target function wrappers or by the src/other file lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.19</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>the headers are one of a few cases where that change necessitated an explicit call to CMAKEFILES</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.11</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>IIRC, it's functionally similar to the autotools EXTRA_DIST feature...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.11</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>probably silly to worry about that mechanism, since we do still fundamentally need it for several things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.19</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, yeah I recall the header change but didn't associate cmakefiles with doing that (or needing to do that)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.35</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>may have been accidentally removed - looks like I stuck it after the list, and if it's the cmake version of EXTRA_DIST it should probably go at the bottom of the CMakeLists.txt file...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.50</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>diff with extra_dist being you never had to extra_dist something the build knew something about -- it there no way to get a list of install() files?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.29</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>something with the install manifest file maybe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.55</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>obviously CMake knows about it internally, but I don't recall it being exposed to the user in CMake script land</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.28</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>it was related to the discussions a few years ago triggered by their wondering why we were overriding with the _&lt;function&gt; mechanism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.50</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>I did get one patch in, but by itself it wasn't enough and the other changes stalled out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.17</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>definitely mistakenly removed -- now seeing the patch, I remember thinking that was probably even a mistake since we only CMAKEFILES() in other dirs things that don't get installed/built, at least that was the notion </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.51</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - that was a reasonable though given our past behavior</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.43</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is open to revisiting those changes - there's no point in moving away from that mechanism unless in preparation to be fully "clean" of the _function mechanism, and we can't without some work on the CMake side</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.20</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>among other things, our comprehensive logging and target lists still need it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.44</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would like to make the CMake changes, but that's about ~306 on the TODO list...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.18</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>we directly call install() in surprisingly few places </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.20</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>not to mention the subsequent wait for the necessary version to become standard or bundling CMake...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.44</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I think that was what decided me to go ahead and remove the CMAKEFILES call from the function override</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.20</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>but should have been discussed - your expectation with r70782 was completely reasonable given past behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.32</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>it's relatively rare for us to call raw install because usually things going into the install dir also need to go into the build dir (to get the "build dir matches install dir layout" effect)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.02</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>what about using the install_manifest.txt file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.22</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>that's managed by our wrappers - in principle we should also put the headers in the appropriate locations in the build dir, but since there aren't any runtime requirements we don't bother currently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.46</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>(it is a problem if an external program wants to target a build dir for compilation, but I think that's rare...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.23</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>I think install_manifest.txt only gets generated at the end of the CMake run, which is too late</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.29</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>we need to know in time to define the scripts for the distcheck logic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.15</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>but the scripts could just read the file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.41</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>that's a possibility</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.10</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>I hadn't considered that in the original design</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.03</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>that would eliminate the need for any cmakefiles() on anything installed -- only on things not built and not installed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.21</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - which would match the EXTRA_DIST behavior?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.51</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm not seeing an install_manifest.txt file...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.13</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>looks like cmake_install.cmake files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.06</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>ah ha! - there's the magic bit I was talking about earlier - file(RPATH_CHANGE ...) !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.17</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>and that's probably why that trick can't be worked on 3rd party libs - it looks like the OLD_RPATH has to match the string length of the new one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.06</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>so any build we did of an ExternalProject where we wanted to suck in the output and manage it we'd have to make sure their build did the same thing as CMake for rpath</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.28</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like install_manifest.txt is not written until after install</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:05.11</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>might be able to suck up all the cmake_install.cmake files and hunt up the paths, but that could be a bit of a messy parsing job...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:06.11</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>the rpath failures I run into happen on our own libs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:06.56</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>so "/usr/brlcad/dev-7.27.0/lib:$ORIGIN/../lib" must not be the right form somehow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.07</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>(for Linux anyway - I know Mac is different)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.16</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>agua:.build morrison$ bin/mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.17</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>dyld: Library not loaded: @rpath/libtermio.20.dylib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.30</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>not the best example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.44</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>so @rpath isn't the right choice?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:09.30</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... that wouldn't work regardless - it either needs to know about the lib subpath from that location, or ../lib if it's treating ./bin as the rpath</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.33</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: in misc/CMake/RPath_Setup.cmake we set CMAKE_INSTALL_RPATH for APPLE - is that wrong?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.58</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes we're using a semicolon isntead of a colon for a path separator in the APPLE case...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.19</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm not familiar with what exactly is conventional, only that there are several possible ways it can be set up </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.28</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>lots of ways for it to not work ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.52</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;snort&gt; - sounds like opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.24</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>from what little I know, if @rpath is going to be used, then the rpath has to be set the right way to find the resource</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.57</tt></td><td><font color="#b86161"><tt>brlcad</tt></font></td><td width="100%"><tt>typically setting something like @executable_path/../lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.20</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I think that's why we tried @loader_path</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:19.03</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>but your binary showed @rpath - surprising </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:19.21</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>unless that's from the build dir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.02</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>fwiw: <a href="https://cmake.org/Wiki/CMake_RPATH_handling">https://cmake.org/Wiki/CMake_RPATH_handling</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.02</tt></td><td><font color="#c36666"><tt>gcibot</tt></font></td><td width="100%"><tt>[ CMake RPATH handling - KitwarePublic ]</tt></td></tr>
+<tr><td><tt>05:00.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gabbar1947 (uid205515@gateway/web/irccloud.com/x-zjxnvizrlcgajpdb)</font></tt></td></tr>
+<tr><td><tt>06:57.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>08:35.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~KimK@2001:579:d00c:800:4509:5129:54cd:48d0)</font></tt></td></tr>
+<tr><td><tt>08:40.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@165-43-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>13:33.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>13:45.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:47.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f720:76fa:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr><td><tt>14:06.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>16:38.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gabbar1947 (uid205515@gateway/web/irccloud.com/x-gyoymffsqdqwtyzp)</font></tt></td></tr>
+<tr><td><tt>16:53.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
+<tr><td><tt>20:37.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-088-066-130-164.088.066.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>22:57.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Lletfrix (96f417fc@gateway/web/freenode/ip.150.244.23.252)</font></tt></td></tr>
+<tr><td><tt>23:01.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Radicarian (~Radicaria@cpe-72-231-246-183.buffalo.res.rr.com)</font></tt></td></tr>
+<tr><td><tt>23:30.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@104.225.5.10)</font></tt></td></tr>
+<tr><td><tt>23:33.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@104.225.5.10)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.37</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70716 brlcad/trunk/src/nirt/main.cxx: Ah, that's right - we need to help bu_brlcad_root out explicitly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.16</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70710 brlcad/trunk/regress/CMakeLists.txt: Add depends_list not just to overall regress target but to the specific regression target in question as well.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.26</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70713 brlcad/trunk/src/nirt/main.cxx: right, jumps don't like crossing initializations...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:40.17</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70712 brlcad/trunk/src/nirt/main.cxx: initialize</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.42</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70719 brlcad/trunk/src/libanalyze/nirt.cxx: don't report gaps with gap_los &lt;= 0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.52</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70720 brlcad/trunk/regress/nirt.sh: Ah, that's what the GAP bits were in the regression diff - zero length reporting.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.23</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70721 brlcad/trunk/src/libanalyze/nirt.cxx: start stubbing in nirt diff command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.27</tt></td><td><font color="#d570d5"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70722 brlcad/trunk/src/libanalyze/nirt.cxx: allow comments</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20130621</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20130621</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.03</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>188 should be 4 patches, and you even list out exactly what 4 seperate patches they should be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.23</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>ok :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.51</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>as brlcad mentioned, you can have patches depend on other patches as long as you put the dependancy in the description</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.56</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>consider commit 55808 and simply creating a load_pix() function to satisfy it... that could be one patch. Another could be loading bw. Yet another as load_png... these would be properly sized patches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.57</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>would u mind if i mix pix load and bw load ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.06</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>in one patch ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.31</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>you can do that, I think it'd be easier and better to have them as seperate patches...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.38</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.20</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>btw, the patches don't have to link them to the icv_image_load() function... you can just do a patch to make pix_load() in a way that can eventually be used by the function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.35</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.08</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">pokes notify</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.10</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 55809 brlcad/trunk/src/libicv/fileformat.c: some noise on splitting the load out to seperate funcs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.21</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>there ya go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.04</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>I guess the man reason for that was to remove code redundancy of opening the file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.16</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>also we have this guess_file_format </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.22</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>which is very handy </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.49</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>so we may not need the fileformat in the icv_load</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.42</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>since the guess stuff is heuristic (and currently merely based on the filename string), I'd be more comfortable being able to override it..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.08</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>(also; changing 'unsigned char *data' to 'struct pixel_s { float r, g, b, a; }; ... struct pixel_s *data;' would be nifty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.11</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.01</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad, starseeker, n_reed, anyone else: RFC: splitting libicv/fileformat.c, break into format files (png.c bw.c pix.c ppm.c etc), or functionality files (load.c save.c etc)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.59</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>functionality files will be better ``Erik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.30</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>because most of the load, save have common features</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.44</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>that was my gut feeling, but I'm a functional coder and generally unimpressed by object oriented stuff... so I'm hoping to get a little bit of discussion going when people wake up and read backlog *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.02</tt></td><td><font color="#407a40"><tt>``Erik</tt></font></td><td width="100%"><tt>(it's irc, discussions can be staggered over several days)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.56</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik see patch 197</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.41</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik also patch 198 (added new) is split version of crop.patch</tt></td></tr>
+<tr><td><tt>02:38.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.19.214)</font></tt></td></tr>
+<tr><td><tt>03:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.19.214)</font></tt></td></tr>
+<tr><td><tt>03:44.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23_ (~caen23@92.81.178.41)</font></tt></td></tr>
+<tr><td><tt>04:53.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.1.90)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:14.41</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5458 /wiki/Google_Summer_of_Code/2013: /* Added STEP libraries project */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.54</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5459 /wiki/Google_Summer_of_Code/2013: /* STEP libraries */</tt></td></tr>
+<tr><td><tt>05:33.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.220.10.102)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:36.12</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5460 /wiki/User:KeshaSShah/GSoC13/Reports: /* June 20 */</tt></td></tr>
+<tr><td><tt>06:00.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.19.237)</font></tt></td></tr>
+<tr><td><tt>06:38.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.220.11.41)</font></tt></td></tr>
+<tr><td><tt>06:56.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.220.10.200)</font></tt></td></tr>
+<tr><td><tt>07:19.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.212.31.85)</font></tt></td></tr>
+<tr><td><tt>07:44.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.1.67)</font></tt></td></tr>
+<tr><td><tt>07:46.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.220.15.86)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:46.26</tt></td><td><font color="#6868c6"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: I'd opt for format files, so if there's some new snazzy format that requires funky header or implementation logic, it's all isolated in one place</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:47.03</tt></td><td><font color="#6868c6"><tt>brlcad</tt></font></td><td width="100%"><tt>if you wanted to use a c++ lib, the entire impl would become cpp files, instead of being isolted to just that format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:47.36</tt></td><td><font color="#6868c6"><tt>brlcad</tt></font></td><td width="100%"><tt>and since you were disconnected zero_level, I just responded that I'd opt for format files, so if there's some new snazzy format that requires funky header or implementation logic, it's all isolated in one place</tt></td></tr>
+<tr><td><tt>08:18.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.27.115)</font></tt></td></tr>
+<tr><td><tt>08:44.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.199.244)</font></tt></td></tr>
+<tr><td><tt>09:29.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.18.150)</font></tt></td></tr>
+<tr><td><tt>09:52.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.1.76)</font></tt></td></tr>
+<tr><td><tt>10:02.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.1.175)</font></tt></td></tr>
+<tr><td><tt>10:13.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.1.175)</font></tt></td></tr>
+<tr><td><tt>10:24.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.220.13.46)</font></tt></td></tr>
+<tr><td><tt>10:25.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@49.249.1.175)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:28.17</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>hi can us send me the logs of today</tt></td></tr>
+<tr><td><tt>10:36.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@49.249.1.175)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:37.48</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 55810 brlcad/trunk/src/libbrep/intersect.cpp: Add Newton-Raphson iteration in PCI to improve accuracy (use the one from subdivision and linear approximation as a starting point)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:38.51</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5461 /wiki/User:Phoenix/GSoc2013/Reports: /* Week 1 */</tt></td></tr>
+<tr><td><tt>10:49.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@49.249.19.73)</font></tt></td></tr>
+<tr><td><tt>10:55.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@49.249.19.73)</font></tt></td></tr>
+<tr><td><tt>11:14.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@49.249.1.56)</font></tt></td></tr>
+<tr><td><tt>11:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.212.24.96)</font></tt></td></tr>
+<tr><td><tt>11:36.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.29.64)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:56.03</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5462 /wiki/Google_Summer_of_Code/2013: /* Consolidating and Adding the Image Processing Functions to LIBICV */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:56.36</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5463 /wiki/Google_Summer_of_Code/2013: /* Consolidating and Adding the Image Processing Functions to LIBICV */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:56.45</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5464 /wiki/Google_Summer_of_Code/2013: /* NURBS Intersections */</tt></td></tr>
+<tr><td><tt>11:59.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.25.31)</font></tt></td></tr>
+<tr><td><tt>12:18.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.212.26.106)</font></tt></td></tr>
+<tr><td><tt>12:31.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (295cd317@gateway/web/freenode/ip.41.92.211.23)</font></tt></td></tr>
+<tr><td><tt>12:40.02</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Ch3ck (295cd317@gateway/web/freenode/ip.41.92.211.23)</font></tt></td></tr>
+<tr><td><tt>12:46.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.30.27)</font></tt></td></tr>
+<tr><td><tt>13:06.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.212.25.96)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:11.06</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>Hi ``Erik also see patch 200 for Doxygen comments for icv.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:16.19</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad: I found identifier searcher <a href="http://brlcad.org/xref/ident">http://brlcad.org/xref/ident</a> . This is very helpful in Code Hacking. Do we have this on the latest version ? Can i do something to assist in updating the identifer search tool for the latest version?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:21.28</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Level zero * 5465 /wiki/User:Level_zero/patches: /* Updates in Patch Information */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:22.17</tt></td><td><font color="#42427e"><tt>zero_level</tt></font></td><td width="100%"><tt>hI ``Erik this page has all the patch information <a href="http://brlcad.org/wiki/User:Level_zero/patches">http://brlcad.org/wiki/User:Level_zero/patches</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.50</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 55811 brlcad/trunk/src/librt/primitives/bot/bot_wireframe.cpp: Nick had a good idea to use the pair map as a way to make an indexed array of edges up front, and then work with arrays after that. This is a stab at creating the arrays from the map, which is not further hooked into the code - seems to about double the time as compared to the vertex approach.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.25</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5466 /wiki/Google_Summer_of_Code/2013: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.18</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5467 /wiki/User:Vladbogolin: Created page with "=Personal Information= {| class="wikitable" |- |'''Student Name'''|| Bogolin Simion Vlad |- |'''IRC nick'''|| vladbogo |- |'''Email'''|| vladbogolin@gmail.com |}"</tt></td></tr>
+<tr><td><tt>14:22.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vlad@86.121.102.20)</font></tt></td></tr>
+<tr><td><tt>14:25.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk (~quassel@96.255.19.39)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:28.08</tt></td><td><font color="#b86161"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5468 /wiki/Google_Summer_of_Code/2013: </tt></td></tr>
+<tr><td><tt>14:34.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.26.6)</font></tt></td></tr>
+<tr><td><tt>15:30.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.17.121)</font></tt></td></tr>
+<tr><td><tt>15:43.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@wsip-184-176-200-171.ks.ks.cox.net)</font></tt></td></tr>
+<tr><td><tt>15:46.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vlad__ (~vlad@86.121.101.186)</font></tt></td></tr>
+<tr><td><tt>15:56.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vlad__ (~vlad@86.121.102.87)</font></tt></td></tr>
+<tr><td><tt>16:03.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~zero_leve@117.205.17.52)</font></tt></td></tr>
+<tr><td><tt>16:43.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.81.178.184)</font></tt></td></tr>
+<tr><td><tt>17:03.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (~DarkCalf@173.231.40.99)</font></tt></td></tr>
+<tr><td><tt>17:18.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@49.249.18.101)</font></tt></td></tr>
+<tr><td><tt>17:56.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@107.24.15.137)</font></tt></td></tr>
+<tr><td><tt>17:56.26</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GSoC 2013! <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></font></tt></td></tr>
+<tr><td><tt>18:46.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@184.232.247.220)</font></tt></td></tr>
+<tr><td><tt>18:46.59</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GSoC 2013! <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></font></tt></td></tr>
+<tr><td><tt>21:56.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@174-27-225-67.slkc.qwest.net)</font></tt></td></tr>
+<tr><td><tt>21:56.31</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GSoC 2013! <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a></font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

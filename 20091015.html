@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20091015</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20091015</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.27</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the accessors will definitely need to know the type completely, but they are by design all private</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.50</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>they're defined with the EXPORT stuff?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's okay if the struct itself ends up being publicly declared -- you just leave a comment saying "don't access this directly"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.08</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the EXPORT stuff is just windows foo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.19</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, BU_EXTERN then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.24</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>same thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.38</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">raises eyebrow</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.47</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, I hadn't realized that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's just a wrapper for windows and for supporting older k&amp;r compilers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.18</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>pre ansi-C, you would declare functions just by name, no arguments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.40</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>Oh, OK.&nbsp;&nbsp;(yech)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.45</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., extern void *malloc(); </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.08</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>that must have made for some entertaining debugging</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>having the params just gives it more things it can test for when looking for type mismatches, can abort earlier during compilation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.21</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>did you ever get to writing any regex code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.44</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>erm.&nbsp;&nbsp;A little during the search work perhaps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.21</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>well if you recall, struct regex aka regex_t is a lot like how I see our struct ged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.33</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>OK :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.40</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">pulls up the regex header...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.57</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>you pass it into regcomp() and regexec() pretty much without any care in the world</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.39</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">chuckles - looks like regex could use some enum work :-P</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.09</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">eyes ged.h and decides to start transcribing it into a new ged.h, attempting things like enum defs and de-Tclifying as he goes, then make the C code match the header...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.56</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, wouldn't mix de-tcling at the same time.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.02</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that can cascade changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.45</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>each type/signature change is probably a good commit-state in itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.13</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>ah.&nbsp;&nbsp;OK, I was pondering a branch to do the testing in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.58</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>fwiw, enums vs defs isn't nearly as an important issue as, say, getting rid of tcl and having clear private/public separation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>branch?&nbsp;&nbsp;what's risky?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.33</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>mucking with the headers and ged structs and proceeding to break everything using libged ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.54</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;insert bull in china shop metaphor here&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.16</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not very risky -- that'll break compilation up front for most changes if you do something wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.22</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>and all the more reason to go at it incremental</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.40</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>OK, so subtle breakage is less likely?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.49</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, not very</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.59</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>right :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.40</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I can't even think of something subtle that could happen that won't get caught during compilation so long as you're not forcing casts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.51</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would LOVE to start by converting the results string to something more useful for search exec, but knows that's going to be a LOT of code to change...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>so focus on just that though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.31</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>separate the private/public so you can have a place to make the private accessor func for the resulst string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.48</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>update the code to use the new accessor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.21</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>there is a ged_private.h - is that where such things should go?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.34</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>update the accessor implementation to store in a list container instead of a string under the hood</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.50</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>then add an iterator for results, all done ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.46</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, ged_private.h is a start .. could use some cleanup but it's got a lot of the existing private funcs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.15</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: is there an example of a private accessor function I can use for a template?&nbsp;&nbsp;(maybe some of libbu's stuff?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.25</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there really needs to be a common naming convention to separate public from private -- they can't all be ged_* prefixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.33</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.46</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>right now, they're all ged_ GED_ etc..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.59</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>so, should ged_init (called by GED_INIT) be private?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.11</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>(for example)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.31</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>ged_open_dbip() sounds like a pretty private func</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.47</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>not sure it's a good "example", it's more just thinking about whether a function is something an external developer would code to directly when using libged as a library, like libpng</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.33</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>in that vein, even our "testing" macros that are used extensively in our implementation, like GED_CHECK_DATABASE_OPEN() become questionable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.52</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>should that be exposed?&nbsp;&nbsp;maybe, maybe not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.00</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>OK.&nbsp;&nbsp;Do I take it correctly that functions called in #define GED_**** macros do need to be public?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.33</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>inclination would be to just expose the primary command ged_*() functions for starters, then see what's actually needed/used by mged .. and if it's something that shouldn't be migrated to libged, then it's something that needs to be public</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.44</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>Oh, so the question is whether GED_CHECK_DATABASE_OPEN would ever be needed outside of libged itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.48</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>no, not necessary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.55</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.29</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>no to the macros, right to whether it needs to be used outside libged :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.43</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>so first step is to rename according to private convention the stuff already in ged_private, and then start migrating things to it as it appears they are used only in libged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.25</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>is the naming convention for structs as well as functions, or just functions?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.38</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you mean?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.07</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>well, there's a struct in ged_private.h named ged_id_names - should that be _ged_id_names instead since it's private?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.52</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>if the convention for private names is to prefix _ged_ then sure :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.03</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>should be consistent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.37</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods.  Is there a de-facto standard in BRL-CAD or C generally?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.37</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>ged_ and GED_ are public, so if it's not public.. they obviously shouldn't use that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.44</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.53</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>could be as simple as _ged_ and _GED_ if it's private, not sure if that's good enough or not without more thought</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.12</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>that is the de-facto standard, is it not?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.35</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will start there - search/replace will fix it later if need be :-P</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.04</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith: meh - no response to the Qt-in-Ogre posting in the Ogre forums</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.21</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>apparently we're still up with the state of the art ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.13</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>starseeker: that's rather dissapointing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.24</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>we should replace it with a real Ogre or Qt rendering backend at some point, anyway.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.52</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith: did you see the link I posted?&nbsp;&nbsp;Not sure if Qt embedded relates to what we need, but interesting none the lest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.59</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>less even</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.12</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>don't think I did</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.48</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><a href="http://labs.trolltech.com/blogs/2009/10/02/introducing-new-port-of-qt-to-your-favourite-platform/">http://labs.trolltech.com/blogs/2009/10/02/introducing-new-port-of-qt-to-your-favourite-platform/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.51</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>underscore is as close as anything to "common convention" -- the problem is the C preprocessor and names in caps as it technically claims a set for compiler mangling iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.44</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: erm.&nbsp;&nbsp;~ged and ~GED ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.01</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, invalid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>go with _ged_ that should be fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.27</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>matches the little bit of consistency with libbu and friends</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.37</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>k.&nbsp;&nbsp;what about all caps - P_GED maybe?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.59</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>case is already conventioned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.34</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>?&nbsp;&nbsp;there are all capital defines in both ged.h and ged_private.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.34</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>_ged_lowercase_private_function() and _GED_PRIVATE_MACRO_OR_DEFINE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.39</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>Oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.50</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>that won't break the preprocessor?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.18</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there are some bastard hybrids from the *_obj funcs that should die, mixed underscore camelCasers..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.28</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>no, it doesn't break it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.12</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: the ones reserved by the C standard are __foo only, I believe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.35</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">starts on ged_private.h</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.36</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it just means that they might use the same name .. which is so highly unlikely regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.46</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>I think _foo is actually reserved, or at least recommended, for private use within programs, conveniently.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.40</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>starseeker: ooh: "Letâs look at the âminimalâ backend, which is a complete example showing how to use a QImage as a display device:"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.49</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>this could be useful.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.15</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>in fact this could make a real Qt-in-Ogre solution pretty easy to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.20</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to study up on how the relevant type of texture overlay is done in Ogre</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.13</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>here's the relevant section, from the standard regarding names in the global namespace: "Each name that contains a double underscore __ or begins with an underscore followed by an uppercase letter (2.11) is reserved to the implementation for any use."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.58</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>OK, so if we end up conflicting on the caps cases we're in the wrong and need to rename</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.16</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>basically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.27</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>given those are actually preprocessor defines, even arguable that they're not in the global namespace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.55</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>the spec is probably clear on whether that's not the case somewhere.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.01</tt></td><td><font color="#66c2c2"><tt>Ralith</tt></font></td><td width="100%"><tt>definition of namespace perhaps?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.48</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I'm just not that worried to read it all up in detail .. and given there is a separate section on macro name restrictions, more an indication that we're taking a gamble like everyone else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.37</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>that other clause was actually in any namespace -- all names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.19</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the global namespace restriction is even more broad, "Each&nbsp;&nbsp;name&nbsp;&nbsp;that begins with an underscore is reserved to the implementation for use as a name in the global namespace."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.42</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r36188 10/brlcad/trunk/src/libged/ (62 files): Start converting private ged structures, defines and functions to using an underscore prefix. Done through _ged_getspace.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.57</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: how would a public macro make use of a private function without including the private header?&nbsp;&nbsp;Doesn't the preprocessor expand out the code of the macro everywhere it is used (and thus any code that uses it will need to know about functions it uses?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.20</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it wouldn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.27</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's either a private macro or should be a function instead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:31.34</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>haven't seen a compelling reason why the various existing macros are macros and not functions other than it was conceived they'd just be very short functions (in which case they could have just been inline functions instead)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.20</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>they were also merely the start at capturing code patterns internal to the ged func implementations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.26</tt></td><td><font color="#6e6ed1"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">boogies to duke spirit</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.07</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r36189 10/brlcad/branches/dmtogl-branch/src/other/togl/Makefile.in: Meh. togl_ws.h gets generated in the build directory not the source directory - handle it differently.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.52</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes fist at configuring the second IP address</font></tt></td></tr>
+<tr><td><tt>08:04.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.49.189)</font></tt></td></tr>
+<tr><td><tt>10:28.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (n=quassel@217.91.127.94)</font></tt></td></tr>
+<tr><td><tt>11:29.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (n=quassel@217.91.127.94)</font></tt></td></tr>
+<tr><td><tt>11:40.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@host81-149-119-172.in-addr.btopenworld.com) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>11:42.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (n=quassel@217.91.127.94)</font></tt></td></tr>
+<tr><td><tt>12:10.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:10.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@157.26.202.84.customer.cdi.no) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:28.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@42.Red-83-40-127.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.55</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r36190 10/brlcad/trunk/src/librt/primitives/brep/brep.cpp: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.55</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: added code to make sure UV pullback solver keeps within</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.55</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: current node bounding UV</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.00</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r36191 10/brlcad/trunk/src/other/openNURBS/opennurbs_brep.cpp: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.00</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: changed trim error tolerance to be relative to UV size not trim point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.00</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: distance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:33.01</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r36192 10/brlcad/trunk/src/other/step/src/ (4 files in 2 dirs): Cleaned up some memory freeing calls reported by valgrind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.20</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r36193 10/brlcad/trunk/src/conv/ (358 files in 2 dirs): Commit initial upload of Keith's step-g code. Makefile.am is updated, but still some issues so disable it in src/other/Makefile.am for the time being.</tt></td></tr>
+<tr><td><tt>17:25.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@210.9.142.242)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.41</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r36194 10/brlcad/trunk/src/libged/ (blast.c clip.c erase.c loadview.c open.c preview.c zap.c): Revert function names for _ged_zap and _ged_clip.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.32</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r36195 10/brlcad/trunk/src/libdm/dm-ogl.c: Get rid of a call to bu_log.</tt></td></tr>
+<tr><td><tt>19:06.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cpc26 (n=cpc26@72.170.156.242)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.03</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r36196 10/brlcad/trunk/src/libged/ (9 files): Rename a few more things in ged_private, remove clip and vclip as they're public - still a ways to go.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.56</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>anytime the function is not the basic gedp/argc/argv signature, the header should probably document why it's a public function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.19</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>and it's a candidate to get refactored, scrutinized as to why/if it needs to be public</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.09</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>as it's more likely maldesigned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.12</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I'm just hitting ged_private in a general sweep right now - once that is done can get more thoughtful</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.54</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>probably want to involve Bob in those discussions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.54</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r36197 10/brlcad/trunk/src/conv/step/Makefile.am: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.54</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: Added fedex_src and fedex_hdrs directly to build, currently builds from</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.54</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: a static copy of the SCL sources.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.43</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r36198 10/brlcad/trunk/src/libged/ (27 files): More ged_private renaming.</tt></td></tr>
+<tr><td><tt>20:29.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:29.32</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>hey Ben</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.01</tt></td><td><font color="#dcdc73"><tt>poolio</tt></font></td><td width="100%"><tt>howdy starseeker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.07</tt></td><td><font color="#dcdc73"><tt>poolio</tt></font></td><td width="100%"><tt>how goes the brep?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.12</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>well, actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.22</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>you've probably seen the progress?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.18</tt></td><td><font color="#dcdc73"><tt>poolio</tt></font></td><td width="100%"><tt>actually no, I've been insanely busy with midterms. do you have pretty pictures?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.50</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>not to hand, but try running the proc-db csgbrep and raytracing the results :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.48</tt></td><td><font color="#dcdc73"><tt>poolio</tt></font></td><td width="100%"><tt>ooo, I'll try it in an hour or so once I'm done recompiling :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.36</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>more work to do for full robustness, but pretty good progress</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.01</tt></td><td><font color="#dcdc73"><tt>poolio</tt></font></td><td width="100%"><tt>sweet!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.51</tt></td><td><font color="#dcdc73"><tt>poolio</tt></font></td><td width="100%"><tt>ah shoot, I was going back through the versions of the brep files, and I managed to not commit a ton of code &gt;_&lt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:06.04</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:06.14</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>poolio: you mean there was duplicated effort?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.05</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>auuugh...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.47</tt></td><td><font color="#c567c5"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r36199 10/brlcad/trunk/src/libged/ (42 files): OK, the remainder of ged_private is now prefixed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.18</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>arrrrgh -&nbsp;&nbsp;../../../../brlcad/src/conv/step/RepresentationItem.h:45: error: 'SCLP23' has not been declared</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.25</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: some shots of the raytracing in action here: <a href="http://brlcad.org/tmp/nurbs2brep/">http://brlcad.org/tmp/nurbs2brep/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.36</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>some before and after images of the wireframe and render</tt></td></tr>
+<tr><td><tt>23:03.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.49.189)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

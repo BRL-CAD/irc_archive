@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120406</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120406</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:01.18</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad bjorkintosh (~bjork@ip70-189-66-194.ok.ok.cox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.46</tt></td><td><font color="#dede75"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr><td><tt>00:55.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Thetawaves (~Thetawave@7-139-42-72.gci.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.04</tt></td><td><font color="#d97272"><tt>Thetawaves</tt></font></td><td width="100%"><tt>who wants to talk about google summer of code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.14</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: trying to make repository.sh in the regression directory robust to pathnames with spaces in them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.20</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i think i have a working patch for repository.sh, this time quoting variables correctly instead of using IFS.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.25</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>simply quoting them isn't enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.28</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>or wasn't...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.38</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i'll just upload the patch to pastie instead of the tracker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.53</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>because i dont know if i've tested it thoroughly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.59</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>if it does work, you'll want to update the previous patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.00</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.36</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt><a href="http://pastie.org/3736342">http://pastie.org/3736342</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.49</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i will update the patch on the tracker if it works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.56</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">starts testing...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.17</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>crdueck: for something like this, brlcad will be the best reviewer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.12</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>its still not failing the header tests because the FOUND variable gets overwritten for each file in INCFILES</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.47</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>so unless the last file in INCFILES has one of the offending private headers it'll always pass</tt></td></tr>
+<tr><td><tt>01:36.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@129-97-210-60.uwaterloo.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.18</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>you know, I might be able to work around this...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.38</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>okay, i'm not sure if i'm understanding the tests correctly. i made a dummy file "bad_include.h" in include/ with the contents "#include "bio.h""</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.07</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>and backed up my changes to repository.sh, reverted it to the svn original and the tests still pass</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.16</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>um</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.12</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>can you confirm that? it could very well be just me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.33</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm not set up to right now crdueck </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.45</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.50</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>hopefully brlcad will come on later and straighten us both out :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.02</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>hopefully :)</tt></td></tr>
+<tr><td><tt>02:07.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (~erik@pool-108-3-159-149.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>02:44.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thiago_ (~thiago@187.106.50.132)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.20</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">blinks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.18</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49930 10/brlcad/trunk/regress/CMakeLists.txt: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.18</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: Well, flawfinder is running now alright. Complaining about chmod use in libbu's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.18</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: fchmod.c, but we're already using fchmod whenever we can - chmod is for Windows</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.18</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: situations where nothing better(?) is available. Don't want to hault regression</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.18</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: on that, so remove flawfinder regression from the overall list but leave the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.19</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: target defined in case it's needed.</tt></td></tr>
+<tr><td><tt>03:06.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thiago_ (~thiago@187.106.50.132)</font></tt></td></tr>
+<tr><td><tt>03:48.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil__ (~chatzilla@117.229.121.144)</font></tt></td></tr>
+<tr><td><tt>03:49.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil__ (~chatzilla@117.229.121.144)</font></tt></td></tr>
+<tr><td><tt>05:19.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thiago (~thiago@187.106.50.132)</font></tt></td></tr>
+<tr><td><tt>05:38.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.163.22)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.13</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49931 10/brlcad/trunk/ (7 files in 3 dirs): Checkpoint - working to make odd pathname case functional again, probably still more to do.</tt></td></tr>
+<tr><td><tt>06:08.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~cristina@188.24.64.167)</font></tt></td></tr>
+<tr><td><tt>06:47.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
+<tr><td><tt>08:18.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>08:18.19</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release 7.22.0 is forthcoming (eta: end of March) || BRL-CAD has applied to participate in GSoC 2012!</font></tt></td></tr>
+<tr><td><tt>08:42.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@82.208.133.12)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:56.28</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>flawfinder was never enabled (hence all the minor syntax bugs in the script) because it has numerous false positive and (more importantly) intentional "flaws" being used in our code that would need to be accounted for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:56.53</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>similar to src/libbu/test_vls.c accounting for passes and known/intentional failures</tt></td></tr>
+<tr><td><tt>10:18.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tuxilina (~tuxilina@141.85.252.190)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:18.23</tt></td><td><font color="#6464bf"><tt>tuxilina</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr><td><tt>11:07.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~cristina@188.24.64.167)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:07.05</tt></td><td><font color="#67c4c4"><tt>cristina</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:41.17</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49932 10/brlcad/trunk/src/conv/Makefile.am: add missing continuation backslash</tt></td></tr>
+<tr><td><tt>12:31.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad npcdoom (~npcdoom@190.39.142.150)</font></tt></td></tr>
+<tr><td><tt>12:31.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad npcdoom (~npcdoom@gugve/developer/npcdoom)</font></tt></td></tr>
+<tr><td><tt>12:39.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~tuxilina@141.85.252.190)</font></tt></td></tr>
+<tr><td><tt>12:45.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Thetawaves (~Thetawave@7-139-42-72.gci.net)</font></tt></td></tr>
+<tr><td><tt>12:56.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thiago (~thiago@201.82.135.121)</font></tt></td></tr>
+<tr><td><tt>13:01.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (2e9552a6@gateway/web/freenode/ip.46.149.82.166)</font></tt></td></tr>
+<tr><td><tt>13:21.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (~b0ef@175.134.202.84.customer.cdi.no)</font></tt></td></tr>
+<tr><td><tt>13:56.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (2e9552a6@gateway/web/freenode/ip.46.149.82.166)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:17.50</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49933 10/brlcad/trunk/ (configure.ac src/Makefile.am src/conv/Makefile.am): modify autotools build system for vdeck move; build and install confirmed vdeck bin and man page installed and working</tt></td></tr>
+<tr><td><tt>14:57.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (~Al_Da_Bes@027e71f6.bb.sky.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.30</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Phoenix 07<a href="http://brlcad.org">http://brlcad.org</a> * r3500 10/wiki/User:Phoenix: /* Contact */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.59</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Phoenix 07<a href="http://brlcad.org">http://brlcad.org</a> * r3501 10/wiki/User:Phoenix: /* Contact */</tt></td></tr>
+<tr><td><tt>15:39.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad atneik (~atneik@59.178.61.82)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:42.11</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.49</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Hallo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.31</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: is it worth keeping flawfinder logic in there then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.51</tt></td><td><font color="#72d972"><tt>starseeker</tt></font></td><td width="100%"><tt>what with Coverity and strict flags and whatnot?</tt></td></tr>
+<tr><td><tt>16:00.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad atneik (~atneik@59.178.57.139)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:07.58</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, it detects more than strict flags and coverity is inaccessible to some -- it just needs a few exceptions added to the script and probably a few options enabled/disabled so it can be used like strictness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.37</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it'd be nice to develop it into yet another tool in our belt of V&amp;V efforts</tt></td></tr>
+<tr><td><tt>16:17.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei_ (~andrei@188.25.163.130)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:17.24</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:17.55</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Evening</tt></td></tr>
+<tr><td><tt>16:36.14</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad atneik (~atneik@59.178.57.139)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.49</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy andrei_ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.56</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>just provided feedback on your second proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.19</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>just give me a moment to read it then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.47</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you have a preference between your first and second proposal, that would be good to note in the proposal itself (not just first/second, but main interest)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.10</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>unless you don't have a preference, in which case it's fine as it is or you can say that too ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.33</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>sure , I will add it in both my proposals</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.44</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>Thank you very much for the feedback on such a short notice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.18</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>happy to do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.33</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>a question regarding the second project, as I have stated in it I have a primitive messaging multi-client - server program that works on sockets</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.46</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>right now I m trying to put it on github and add a link to it in my second proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.02</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I hope that isn't percieved as a negative point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.24</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>how would that be negative?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.42</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm not a huge fan of github, but I don't really have anything against it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.52</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I didn't want to post homeworks or various things developed at school</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.06</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>because open source is totally different, in a good way:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.31</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>still not seeing how that's a negative (or a positive)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.37</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>ah, then it's alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.09</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>frankly, code you've written isn't nearly as interesting as code you've read and written</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.18</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>but reading code is much harder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.20</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>just about any first year CS student can write code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.26</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>at least for me :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.30</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>that's the point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.49</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it is much harder to read and update existing code, that's why we ask for patches instead of code samples</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:48.12</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>however, reading code really expands your understanding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:48.53</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>you could have implemented your own raytracer and CAD system since you were 7 years old, half in assembly with an awesome gui .. and still TOTALLY suck at working on BRL-CAD :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.54</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I started looking for organizations for GsoC a lot earlier than the time when they listed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.08</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I looked up the ones I knew like debian, gnome , opensuse etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.25</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that's a problem every year</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.42</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I do believe that brl-cad has one of the most challenging projects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.50</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't know who will be participating until it's time to apply :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.07</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't try to be challenging ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.13</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.13</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it's just a complex domain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.17</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>that's what I meant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.23</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>it s strong liked with math, geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.40</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>but honestly that's what made me come here</tt></td></tr>
+<tr><td><tt>16:51.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@129-97-210-60.uwaterloo.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.03</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>at first I chose some project that it seemed interesting to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.11</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>now I realised I had no clue how to do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.18</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>which was that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.31</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>just a second</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.14</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it's funny really .. some of the most interesting ones are some of the hardest .. yet new non-CS devs will still apply for those topics</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.45</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>Geometry Conversion Library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.47</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>lots of physics students are interested in the non-vaccuum gravity simulation, but THAT is some hard code to write well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.23</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>yes, those that can code are good engineers are very rare</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.35</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, libgcv would be a little difficult .. lots of API to figure out in advance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.19</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>but as I said</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.52</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>the fact that brl-cad is challenging and different </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.57</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>is what made me come here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.27</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I believe you only properly learn difficult matters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.30</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>when you have to face them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.19</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>most people learn by doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.49</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Best way to learn is to teach. Next best way is to just do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.04</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I believe that in order to proper teach something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.12</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>you have to know in depth of what you speak.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.13</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>can't properly teach if you don't know what you're doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.46</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>andrei_++</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.06</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>there is no clue of what will happen and I don t want to speculate over it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.10</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Well within reason yeah, you need some faint idea of what to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.30</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>but for example, if I will get accepted and finish my proposed project on time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.45</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>I will probably try something more difficult, even if it requires me to learn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.48</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>math for example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.18</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>Al_Da_Best: nah you need better than a faint idea. otherwise you get thrown offguard by a question you wouldn't have considered if you had not in depth knowledge of the subject</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.36</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Sure, but to get to that depth of knowledge it would be better for you to start by teaching others relatively simple things and move up, and you would learn more along the way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.49</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>well, I'm not convinced of that method</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.04</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>Al_Da_Best,&nbsp;&nbsp;I do understand where you re trying to get</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.05</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>I've had teachers 10 yrs in the ... academic side of the field</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.11</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>that had no clue what they were doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.19</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>could not answer questions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.21</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>horrible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.41</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>sadly this is also the sittuation here with hardware-oriented classes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.59</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>at least for me, a teacher plays a key role in how much I like the respective course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.34</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Yeah an un-enthusiastic teacher is pretty bad. Most of my teachers have been pretty good so far</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.46</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>this is what I like about GsoC</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.52</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>I think teaching is more of a test of what you know, rather than a method of learning what you should know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.59</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>agree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.46</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Yea. But for example, doing a presentation to the rest of your class will help you a lot as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.02</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>if you really know what you're talking about, and you can speak in reasonably comprehensible terms, than you can teach most people</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.18</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>sure, you will learn where you're lacking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.27</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>when those questions pop up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.49</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>hey brlcad, did you get a chance to look at the issues starseeker and I were having with regress/repository.sh last night?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.00</tt></td><td><font color="#bbbb62"><tt>louipc</tt></font></td><td width="100%"><tt>anyways... I'd prefer that aspiring teachers learn by doing, then teach, rather than learn by teaching while spoiling many young minds :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.33</tt></td><td><font color="#5f5fb5"><tt>Al_Da_Best</tt></font></td><td width="100%"><tt>Doing is more fun too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.16</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad, I have tried to fix what you mentioned in the feedback as good as possible .&nbsp;&nbsp;Thanks again&nbsp;&nbsp;:)</tt></td></tr>
+<tr><td><tt>17:28.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad xth1 (~thiago@201.82.135.121)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.19</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>crdueck: can you be more specific?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.19</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it worked for me when I originally added the script, and that was the only goal ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.31</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it wasn't meant to be hooked into the nightly regress just yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.42</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>script would need support for marking false positives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.17</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>as for the path issues, that's better debugged with a case example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.21</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>brlcad: okay sure, starseeker had brought up an issue with the script when you tried to feed it filepaths with spaces. I had made some changes (mostly just quoting variables) so that it could handle whitespace properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.58</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>but then when i was testing the private/public headers, i was getting false positives even when i reverted my changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.54</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, you said repository.sh .. I was thinking flawfinder.sh for some reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.55</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>no worries, my changes produced correct behaviour with filepaths with whitespaces. I can pastie them for you to take a look at if you'd like because its not ready for the patch tracker quite yet.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.45</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>crdueck: private/public headers, I presume you mean the bio.h, bin.h, bselect.h header checks?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.09</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>or the common.h check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.23</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>yes, the bio.h, bin.h... header checks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.04</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i tested it with "echo '#include "bio.h"' &gt; include/bad.h"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.09</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>and got a false positive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.39</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>how's that a false positive?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.50</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if it matched it, that's what it was supposed to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.23</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if it didn't find it, then it wasn't a false positive .. it was a false negative ;)</tt></td></tr>
+<tr><td><tt>17:37.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Neil__ (~chatzilla@117.228.214.71)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.16</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>ahh okay, false negative then. it didnt find it and all the checks passed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.55</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>grep '[^f]bio.h' include/*.h /dev/null</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.21</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>in this case grep finds the bad includes in bad.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.01</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so next</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.41</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>INCFILES="`find ${TOPSRC}/include -type f \( -name \*.c -o -name \*.cpp -o -name \*.cxx -o -name \*.h -o -name \*.y -o -name \*.l \) -not -regex '.*src/other.*' -not -regex '.*~' -not -regex '.*\.log' -not -regex '.*Makefile.*' -not -regex '.*cache.*' -not -regex '.*\.svn.*' -not -regex '.*pkg.h'`"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.50</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>echo $INCFILES | grep bad.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.00</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>then: FOUND="`grep '[^f]bio.h' $INCFILES /dev/null | grep -v 'include/bio.h'`"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.12</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>echo "FOUND is $FOUND"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.47</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>nothing is found. i'll get the other output to a txt file in a sec</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.36</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, sorry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.50</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>INCFILES="`find include -type f \( -name \*.c -o -name \*.cpp -o -name \*.cxx -o -name \*.h -o -name \*.y -o -name \*.l \) -not -regex '.*src/other.*' -not -regex '.*~' -not -regex '.*\.log' -not -regex '.*Makefile.*' -not -regex '.*cache.*' -not -regex '.*\.svn.*' -not -regex '.*pkg.h'`"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.00</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>from the top level source dir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.10</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>then the rest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.58</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i had set TOPSRC to the toplevel source dir like it does in the script. i'll try it again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.53</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>still nothing at the end: <a href="http://pastie.org/pastes/3740315">http://pastie.org/pastes/3740315</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.01</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Phoenix 07<a href="http://brlcad.org">http://brlcad.org</a> * r3502 10/wiki/User:Phoenix/GSoc2012/Proposal: /* Works already done in BRL-CAD */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.35</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>line 79 doesn't make sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.12</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03Phoenix 07<a href="http://brlcad.org">http://brlcad.org</a> * r3503 10/wiki/User:Phoenix/GSoc2012/Proposal: /* Works already done in BRL-CAD */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.56</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i think echo is treating "$INCFILES | grep bad.h" as one string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.02</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>its not piping it to grep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.49</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>what is the actual command you typed/ran</tt></td></tr>
+<tr><td><tt>18:22.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest53071 (~chatzilla@106.78.60.229)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.08</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>echo $INCFILES | grep bad.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.10</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it looks like you have something aliased to echo or it's a script</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.01</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>something is expanding the grep command too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.48</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>grep is aliased to case insensitive and colored. It still doesnt work even with /bin/echo, if it was being aliased</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.56</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>okay, my usual shell is zsh. I tried the whole thing over in sh and it worked. I should have tried that first, apologies.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.22</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>works in zsh for me just the same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.38</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>i dont have any strange aliases for zsh though, so thats strange</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.37</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you run "alias", doesn't list anything for echo?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.58</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>zsh 4.3.17</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.19</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>nothing</tt></td></tr>
+<tr><td><tt>18:43.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@61.12.114.82)</font></tt></td></tr>
+<tr><td><tt>19:04.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@55-201-200-46.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.37</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49934 10/brlcad/trunk/misc/CMake/multiconfig_path_read.cmake.in: Reworking of tclscript copying seems to have broken multiconfig - try a simple fix.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.16</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49935 10/brlcad/trunk/regress/ (bots.sh fastgen.sh library.sh mged.sh repository.sh): bunch of script file missing their invocation line to ensure we get /bin/sh instead of the user's shell</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.17</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, well can't efficiently diagnose/fix it like this, but see if that does the trick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.49</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>okay, but the original issue was that if i put a bad header file in include/, the public header private header checks still passed, when my understanding is that they shouldnt be. This could just be a problem on my end, so i'd like someone else to confirm/deny it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.34</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>sh-4.2$ cat include/bad.h </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.34</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>#include "bio.h"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.34</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>sh-4.2$ FOUND="`grep '[^f]bio.h' include/*.h | grep -v 'include/bio.h'`"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.34</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>sh-4.2$ echo "FOUND is $FOUND"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.37</tt></td><td><font color="#7373da"><tt>crdueck</tt></font></td><td width="100%"><tt>FOUND is include/bad.h:#include "bio.h"</tt></td></tr>
+<tr><td><tt>20:21.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kane__ (5ce737c0@gateway/web/freenode/ip.92.231.55.192)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.33</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>hello kane__ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.49</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>crdueck: the fix I applied in r49935 should "fix" it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.07</tt></td><td><font color="#d16ed1"><tt>kane__</tt></font></td><td width="100%"><tt>Hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.07</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49936 10/brlcad/trunk/misc/CMake/multiconfig_path_read.cmake.in: Need to run this, regardless of the install path, for all multiconfig setups now since we need fully qualified build paths in the install scripts for copying generated files.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.13</tt></td><td><font color="#d16ed1"><tt>kane__</tt></font></td><td width="100%"><tt>Sean, you have asked me about my thesis, what my plan is if i am been late. Shall i answer here, or it is better to send a mail?</tt></td></tr>
+<tr><td><tt>21:08.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stevegt_ (~stevegt@cislunar.TerraLuna.Org)</font></tt></td></tr>
+<tr><td><tt>21:26.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@129-97-210-60.uwaterloo.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.42</tt></td><td><font color="#b760b7"><tt>brlcad</tt></font></td><td width="100%"><tt>kane__: better to reply as a comment to your proposal at this point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.26</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad, just out of curiosity. Is google playing any role in the student ranking ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.47</tt></td><td><font color="#6464bf"><tt>andrei_</tt></font></td><td width="100%"><tt>In other words do they check who gets accepted and their proposal / activity or stuff like that</tt></td></tr>
+<tr><td><tt>22:08.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.35.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.23</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49937 10/brlcad/trunk/src/conv/comgeom/region.c: fix typo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.41</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49938 10/brlcad/trunk/misc/CMake/multiconfig_path_read.cmake.in: Simplify this logic a bit, since we don't care about comparing the old path to the new one in an if statement</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:42.29</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r49939 10/brlcad/trunk/src/conv/comgeom/region.c: ws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.22</tt></td><td><font color="#c266c2"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49940 10/brlcad/trunk/misc/CMake/ (3 files): Needs more verification, but this seems to fix the issues the distclean and distcheck targets were having with the odd pathnames test. As a bonus, distclean is now portable, simpler, and faster than the old approach.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

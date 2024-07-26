@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20160504</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20160504</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:36.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad fgmwbcwkyxfdqobw (~armin@dslb-088-064-046-039.088.064.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.44</tt></td><td><font color="#76e0e0"><tt>starseeker</tt></font></td><td width="100%"><tt>huh, interesting: <a href="https://github.com/arrayfire/arrayfire">https://github.com/arrayfire/arrayfire</a></tt></td></tr>
+<tr><td><tt>01:59.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.216.63.182)</font></tt></td></tr>
+<tr><td><tt>02:13.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.30</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: Nice!&nbsp;&nbsp;arrayfire looks really interesting actually, definitely something to try on the cl branch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.54</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>would allow some nice cl vs cuda vs cpu comparisons/debugging</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.53</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>brlcad, for the mesh decimation, it seems the only extra check still missing would be to make sure that no two triangles share the same edge in the same direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.00</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>(unless that's included somewhere in that last)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.03</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>that list*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.37</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>sync does that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.03</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>And CUDA is only significantly faster than CL if you use the extra CUDA-only capabilities, like warp shuffles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.12</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>it just doesn't know if it's inverted the whole thing or not, and of course only works if the geometry is actually syncable with no degenerate faces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.00</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>And I believe any "framework" to run code on both CPUs and GPUs can't be usable, optimization for one is totally different from the other...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.37</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>And proper code makes a huge difference on GPUs (like 10x), such as pulling "work" coherently into the on-chip shared memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.45</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like they provide their own library of operations you perform on the data containers, which they also define</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.08</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>how to pack and process the data is still up to you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.46</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like you can compile lock your code to a particular backend, or you can make it bind at runtime to one of the three</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.42</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>So it's still bound and targeted to a backend, if you want performance. Can't really see the advantage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.06</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>it can be bound, doesn't have to be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.58</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>Well, if it's 10 times slower because it doesn't use shared memory, that's not really usable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.00</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>who said it's 10x slower? they actually claim to be faster than most people's gpu code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.36</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like they make that claim based on their specific function kernels they provide for specific common operations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.54</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>which they presumably have tailored for each backend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.05</tt></td><td><font color="#c36666"><tt>Stragus</tt></font></td><td width="100%"><tt>Depends on the problem, obviously. But I know very well that if you don't target GPU specifically and write CPU-style code, it can easily be 20 times slower than it could be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.23</tt></td><td><font color="#65c1c1"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr><td><tt>03:23.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>06:45.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>07:50.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.2.135)</font></tt></td></tr>
+<tr><td><tt>08:57.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee` (bc5c2134@gateway/web/freenode/ip.188.92.33.52)</font></tt></td></tr>
+<tr><td><tt>11:21.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:23.13</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67823 brlcad/trunk/src/nirt/parse_fmt.c: plug a tiny leak. we're done with the filename.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:23.15</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67824 brlcad/trunk/src/nirt/nirt.c: make nirt report the current output style as well as a listing of the available output formats, with hints on what command line options change the setting or give more info. this is implemented specifically in response to user requests (e.g., ajem scr 1942) where several people have asked to have gaps or exit hitpoints reported, which are features of the other</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:23.17</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>output formats.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:23.19</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:23.28</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 67825 brlcad/trunk/NEWS: nirt now reports the current output format setting, itemizes the available formats, and provides parenthetical help for what options pertain to output formatting. this was implemented in regards to prior mailing list discussion and ajem scr 1942 requesting gaps be reported (which is already one of the available output formats.</tt></td></tr>
+<tr><td><tt>12:11.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>12:25.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>12:46.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@177.189.140.33)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.14</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67826 brlcad/trunk/src/tclscripts/rtwizard/CMakeLists.txt: remove rtwizard.bat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.54</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 67827 brlcad/trunk/misc/CMake/NSIS.template.in: Tell NSIS to go for the .exe files, not the bat files - MGED is the only bat launcher left.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:09.20</tt></td><td><font color="#5f5fb6"><tt>``Erik</tt></font></td><td width="100%"><tt>is it wwdc yet? O.o</tt></td></tr>
+<tr><td><tt>15:29.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mathnerd314 (~quassel@supertux/Mathnerd314)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.37</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 67828 brlcad/branches/brep-debug/doc/docbook/system/implementation/en/bool_eval_development.xml: add descriptions of remaining dplot subcommands</tt></td></tr>
+<tr><td><tt>16:37.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.2.135)</font></tt></td></tr>
+<tr><td><tt>17:01.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>17:06.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:02.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.216.73.71)</font></tt></td></tr>
+<tr><td><tt>19:07.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@101.216.73.71)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.18</tt></td><td><font color="#da73da"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 67829 brlcad/branches/brep-debug/doc/docbook/system/implementation/en/bool_eval_development.xml: document how to plot evaluation curves not automatically recorded by dplot</tt></td></tr>
+<tr><td><tt>19:22.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@177.189.140.33)</font></tt></td></tr>
+<tr><td><tt>19:48.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.216.73.71)</font></tt></td></tr>
+<tr><td><tt>20:05.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@HSI-KBW-046-005-253-113.hsi8.kabel-badenwuerttemberg.de)</font></tt></td></tr>
+<tr><td><tt>20:27.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@HSI-KBW-046-005-253-113.hsi8.kabel-badenwuerttemberg.de)</font></tt></td></tr>
+<tr><td><tt>20:38.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@HSI-KBW-046-005-253-113.hsi8.kabel-badenwuerttemberg.de)</font></tt></td></tr>
+<tr><td><tt>20:41.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>23:26.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>23:58.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

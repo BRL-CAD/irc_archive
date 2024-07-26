@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110203</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110203</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:28.45</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I just finished a clean recompile to test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.48</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it's working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.01</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem is running tcl applications without having installed BRL-CAD first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.21</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>have to make install BEFORE make test or it'll fail on OS X .. haven't figured out how to fix that yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.17</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it finds the system-installed Tcl at runtime</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.37</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.21</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, I'll usually test in CMake if I'm doing a non-installed trial..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.03</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it should fail in cmake just the same actually unless they modify the LD paths accordingly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.33</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>I've got some RPATH settings enabled that seem to do wonders</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.24</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>you should give it a try sometime :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.08</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, I believe ya -- another plus if they have better rpath management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.12</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42934 10/brlcad/trunk/m4/patch.m4: (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.13</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: sigh, no response from the libtool mailing list on this issue so restore the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.13</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: hack that makes libtool binary wrapper scripts work on Mac OS X. we sneak in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.13</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: paths to the Tcl/Tk compile-time lib directories so that they'll get</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.13</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: automatically added to DYLD_LIBRARY_PATH. due to suck in the way temp_rpath is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.13</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: handled, the trailing ':' is required otherwise the path will get munged with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.14</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: the next pathlist incorrectly. document why this oddity is even in here, why</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.50</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: about the --enable-only-benchmark option... does that actively squash other options and turn on just what's needed for the benchmark build?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.04</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>(also, what's the advantage of that over a normal configure and make benchmark?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.09</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it only enables and builds exactly enough to run the benchmark</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.06</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>greatly shortens the build time (by less than a 10th iirc)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.52</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>reduces the configure tests and reduces compilation to approximately the minimum</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.37</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>so the configure time is the difference between that and just doing a normal configure + make benchmark?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.55</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>make benchmark still builds everything, then runs cd bench &amp;&amp; make bench</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.15</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>"everything" for an --enable-only-benchmark build is the bare minimum</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.26</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>mged, asc2g, pixcmp, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.26</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>ah.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.00</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>The CMake build is set up so that a normal configure + make benchmark will build just what is needed for the benchmark and run it - is this an acceptable alternative?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.13</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>in theory, with cmake you should be able to describe a new benchmark rule that has the proper minimal dependencies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.22</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">did :-)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.29</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, that's fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.34</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>sweet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.12</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>the only difference is probably that "make install" would only install the benchmark too :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.19</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>less than 1/10th... before opennurbs? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.54</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, don't know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.13</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is betting yes - librt needs opennurbs, which is a large percentage of time</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.40</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>still gets to avoid step dir, half of src/other, hundreds of other utils</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.58</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.00</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>um, it blindly does src/conv which has the step stuff, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.13</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>don't recall</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.18</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it might</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.33</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>well, make benchmark is pretty quick in CMake - that does avoid step</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.44</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>but there's no escaping opennurbs :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.57</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>easy enough for someone to test the difference if it mattered</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.20</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: you have rough idea of how long a full build and benchmark-only build take?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.32</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>with cmake or autotools?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.55</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>also, benchmark skips all the static libs which makes a big difference</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.21</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>either</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.23</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.29</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.29</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.52</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>ouch.. that's a sad v4 flip case </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.18</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>1 plithy object that failed to validate whether flipped or not causing trouble for everything else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.24</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: let me do some tests...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.31</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>ouch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.43</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>that reminds me - does the flip routine handle ars primitives?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.02</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>I talked to D, that's what I'm looking into</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.09</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, cool</tt></td></tr>
+<tr><td><tt>01:03.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S010600235a187d92.ok.shawcable.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.14</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>CMake make -j3 benchmark, from beginning to start of actually running the benchmarks, not including configure time - ~2 minutes, maybe a bit less</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:18.33</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - pulled in libpc on autotools...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.57</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>little over 4 minutes for the same thing with autotools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.24</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>appears it did not pull in step in either case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.04</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>both of those times used system libs instead of building local copies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.46</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: technically, librt needs libpc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.13</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>8.5 minutes for an autotools build, no docbook</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.44</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>full cmake build takes how long?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.44</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: ah - I haven't set up that dependency in CMake yet - not a problem, just haven't done so yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.51</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>trying that next</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.00</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>(usually leave docbook on, messes with numbers)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.10</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.57</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42935 10/brlcad/trunk/regress/fastgen.sh: add diagnostic 'command prompts' to let you know what the important steps being taken are</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.06</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>again, using system libs for all builds (not enable-all)</tt></td></tr>
+<tr><td><tt>01:36.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.34</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>about 6.5 minutes for the cmake build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.15</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>so about half the time for a benchmark build (once I throw libpc into the CMake build)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.02</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>maybe a bit less</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.35</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>actually, the autotools build reports exact time - 8 min, 33 seconds</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.49</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks at CMake build...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.02</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>ah right, only got it going for configure...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.05</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't calculate compilation time?! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.26</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>perhaps ironic, but I actually think cleanly and clearly reporting build time is very important for a variety of reasons</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.55</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>passive vs active metrics, interface feedback, completion confirmation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.28</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: it's a little tricky... working on it now</tt></td></tr>
+<tr><td><tt>02:28.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@S0106002129e399fc.ok.shawcable.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.43</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42936 10/brlcad/trunk/include/raytrace.h: note the three unused debug bits remaining</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.31</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42937 10/brlcad/trunk/src/lgt/lgt.h: lgt should not replicate raytrace.h debug values</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.42</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42938 10/brlcad/trunk/ (include/raytrace.h src/librt/cut.c src/librt/prep.c): rename DEBUG_PLOTSOLIDS and DEBUG_PLOTBOX to DEBUG_PL_SOLIDS and DEBUG_PL_BOX respectively just because it's 1-char shorter and matches nmg.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42939 10/brlcad/trunk/src/librt/ (db_corrupt.c librt.3): (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: the user needs SOME mechansim to override automatic behavior in case there is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: some pressing need, so provide for a LIBRT_V4FLIP boolean environment variable.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: if set, the value will be interpreted as an override to enable or disable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: flipping so you can flip a file irrespective of the automatic detection.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: setting the flag to false will revert to old behavior. setting to true will</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.57</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: flip even if the application provided no override and automatic detection would</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.39</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42940 10/brlcad/branches/cmake/CMakeLists.txt: Remove the benchmark and rtserver-only options - benchmark is handled by proper dependencies for make benchmark. rtserver will also build minimally due to dependencies.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.09</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42941 10/brlcad/branches/cmake/src/CMakeLists.txt: Without the build options for benchmark and framework, the src/CMakeLists.txt logic simplifies down nicely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.58</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42942 10/brlcad/branches/cmake/ (4 files in 2 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.58</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: Add a mechanism to print out the compilation time for CMake build. Works only</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.58</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: for make (e.g. make all) which appears to be consistent with autotools. Summary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.58</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: information isn't as elaborate as the autotools output, but that can be added if</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.58</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: it's needed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.07</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: there we go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.56</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>example output?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.25</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>omg, this is delicious .. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.42</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>spam musubi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.53</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>"hawaiian sushi"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.06</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42943 10/brlcad/trunk/configure.ac: still having woes with debugging, perhaps the flip was to gstabs+ for 10.4+?</tt></td></tr>
+<tr><td><tt>04:52.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>05:21.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.172.33.253)</font></tt></td></tr>
+<tr><td><tt>05:21.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:51.29</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r2458 10/wiki/Backstaff: backstaff beginnings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:58.41</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42944 10/brlcad/trunk/src/librt/db_open.c: past tense on endianness flippage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.35</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42945 10/brlcad/trunk/src/librt/db_corrupt.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.35</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: be a lot more eager to flip the endian interpretation of v4 files now that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.35</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: there's an environment variable override. if we merely detect that it'll help a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.35</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: majority of objects, let the flip occur. Moreover, report all objects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.35</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: containing matrices that are invalid regardless of flipping since they may just</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.35</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: actually be invalid. summarize how many objects are like that.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:13.07</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42946 10/brlcad/trunk/TODO: confirmed that ARS has a problem importing because it manages its own b-record serialization of dbfloat_t data. looks like old POLY objects will have a similar problem too. opendb is now fixed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:18.59</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42947 10/brlcad/trunk/src/librt/primitives/ars/ars.c: there is no reason for rt_ars_rd_curve() to be public api. rename sans rt_ prefix and mark HIDDEN.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:30.54</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42948 10/brlcad/trunk/include/db.h: B_solid records don't actually seem to be used anywhere anymore. should be safe to remove from the union.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:36.57</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42949 10/brlcad/trunk/include/db.h: apparently not true. nothing refers to struct B_solid, but the bspline primitive does refer to and use the B union record. revert.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:41.20</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42950 10/brlcad/trunk/include/db.h: rename the B_resolution confusion starting point as it doesn't look to be actually used (at least by bspline). update comment and name, however, instead of changing the struct size just in case that matters.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:43.41</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42951 10/brlcad/trunk/TODO: that means bsplines won't auto-flip either</tt></td></tr>
+<tr><td><tt>08:01.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>08:14.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:22.05</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>starseeker: because of the CMake build: i set BRLCAD_PREFIX to something (in the GUI) but "Prefix:" is empty in the configuration summary</tt></td></tr>
+<tr><td><tt>09:07.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (~mafm@193.153.53.189)</font></tt></td></tr>
+<tr><td><tt>13:06.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:21.28</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>d_rossberg: you shouldn't need to use BRLCAD_PREFIX for anything anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:21.44</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>CMAKE_INSTALL_PREFIX should be respected now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.03</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: <a href="http://pastebin.mozilla.org/1018272">http://pastebin.mozilla.org/1018272</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.09</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>very simple right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.43</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>there is no CMAKE_INSTALL_PREFIX declared, i can't access it via the CMake GUI</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.03</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>um</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.11</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>this is on Windows?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.58</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">updates his copy on windows to the latest...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:30.31</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r42952 10/brlcad/trunk/include/common.h: there are unused parameters which are asserted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:30.45</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the cmake gui should be similar on all systems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:31.08</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>yes, it should</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:31.28</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>but there is conditional logic for path setup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:31.49</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is checking</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.05</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>I usually run from the command line, so it's possible I missed something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.45</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>following my documentation CMAKE_INSTALL_PREFIX isn't a standard variable but CMAKE_ROOT is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.28</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... <a href="http://www.cmake.org/cmake/help/cmake-2-8-docs.html#variable:CMAKE_INSTALL_PREFIX">http://www.cmake.org/cmake/help/cmake-2-8-docs.html#variable:CMAKE_INSTALL_PREFIX</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.11</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>am I missing something?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.58</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm seeing CMAKE_INSTALL_PREFIX as the last entry in my gui here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.54</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r42953 10/brlcad/trunk/src/conv/asc/g2asc.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.54</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: B_resolution (now B_unused) seams to be unused</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.54</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: removed it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.13</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i'm removing all my cache, build etc. files ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.50</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is trying on Windows to see if CMAKE_INSTALL_PREFIX perhaps isn't coming up there</font></tt></td></tr>
+<tr><td><tt>13:49.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (~mafm@193.153.53.189)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.40</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r42954 10/brlcad/trunk/misc/win32-msvc/Dll/BrlcadCore.def: removed disappeared function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.04</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>CMAKE_INSTALL_PREFIX is visible in my Windows setup too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.58</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>now here too, it was probable a problem with an outdated configuration</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:00.36</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods.  Yeah, a lot has changed over the past week</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.23</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: did you take crit offline?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.09</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42955 10/brlcad/trunk/src/conv/asc/g2asc.c: fix formatting string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.21</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r42956 10/brlcad/trunk/TODO: The 'freebsd' (actually NDEBUG) strict issues are fixed. The metaball "shelling" bug is, as well.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.17</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42957 10/brlcad/branches/cmake/misc/CMake/BRLCAD_Util.cmake: Don't assume -Wno-error will always work, check for it first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.31</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42958 10/brlcad/trunk/src/liboptical/sh_toyota.c: Hmm - gamma shadows something in math.h on OSX 10.5, apparently...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.23</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42959 10/brlcad/trunk/src/librt/primitives/brep/brep.cpp: These ARE used, at least on Windows...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.54</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42960 10/brlcad/branches/cmake/ (18 files in 11 dirs): MFC r42959</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.45</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42961 10/brlcad/branches/cmake/src/util/CMakeLists.txt: Can't do libpc on MSVC yet, so can't very well test it...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.05</tt></td><td><font color="#6060b7"><tt>d_rossberg</tt></font></td><td width="100%"><tt>starseeker * r42955: ups :{</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.21</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>np, happens</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.10</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: nope, they did</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.19</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>new server is now online</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:54.07</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>mounting the drive and working on restoring passwd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:54.14</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>aight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:54.27</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>new IP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:59.54</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>going to give it a new name and remove the old one, or update?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:08.04</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r42962 10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl): Remember whether or not to show things like the view axes, model axes, view params, scale etc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.46</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>yes :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.15</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>just got the drives mounted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.25</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>letting /home copy now</tt></td></tr>
+<tr><td><tt>16:26.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob_ (~bch@20-144.wireless.kamloops.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.42</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42963 10/brlcad/trunk/src/librt/primitives/ars/ars.c: this brings the ARS online with automatic v4 detection, though not a final solution since htons() will do nothing on other endian.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.59</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42964 10/brlcad/branches/cmake/misc/CMake/FindTCL.cmake: Do a better job of generalizing the exec search options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.33</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42965 10/brlcad/branches/cmake/ (misc/CMake/FindTCL.cmake src/other/togl/CMake/FindTCL.cmake): ws, update togl copy of FindTCL.cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.04</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: that did the trick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.21</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.26</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is building now</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.07</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, more failures on fbsd, linux, and osX.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.23</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>'src/other/tcl/unix/tclUnixPort.h:91:5: error: "TIME_WITH_SYS_TIME" is not defined' seems common</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.38</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>CMake build or autotools?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.51</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>cmkae</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.19</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>weeee, osX.6 GL.h has // style comments, so ogl fb craps itself with strict flags</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.28</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>/System/Library/Frameworks/OpenGL.framework/Headers/gl.h:37:1: error: C++ style comments are not allowed in ISO C90</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.20</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42966 10/brlcad/trunk/src/libbu/xdr.c: group pairings together. makes it more obvious that bu_glonglong() was never implemented (though there is a macro) but doesn't matter since this is all getting deprecated.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.40</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42967 10/brlcad/branches/cmake/misc/CMake/FindGL.cmake: We're not doing aqua based GL in these searches, so let's stay out of the opt/graphics directory and try /usr/X11</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.16</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42968 10/brlcad/trunk/ (doc/deprecation.txt include/bu.h): deprecate the old eXternal Data Representation (xdr) API. the byteorder libc functions became IEEE Std POSIX.1-200x (with the exception of the long long pairing?) so set up the migration path.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.14</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42969 10/brlcad/trunk/src/librt/primitives/ars/ars.c: note the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.38</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: yeah, that sucks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.11</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>where are you seeing it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.29</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>I updated all of the places that gl.h gets included with ${STD_C99_FLAGS}</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.57</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>that should squash that error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.10</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>libfb, libdm, and I think mged already have it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.31</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, if you're testing cmake build -- starseeker, you'll have to add similar logic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.32</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>you could actually just set c99 project-wide for cmake build since I'm close to doing that for autotools -- was waiting to squash the few remaining warnings after this release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.01</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>osX.6 using cmake, grabbing OpenGL.framework instead of /usr/X11R6/include/GL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.58</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>always amusing hearing starseeker use words you never think he'd use :&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.25</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42970 10/brlcad/branches/cmake/misc/CMake/FindGL.cmake: Try the CMAKE_FIND_FRAMEWORK variable in FindGL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.17</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: using htons in ars.c will require winderz to link winsock.dll to librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.41</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>and include Winsock2.h apparently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.45</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42971 10/brlcad/branches/cmake/misc/CMake/FindTCL.cmake: Need to reset variables if results aren't valid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.50</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>(and arpa/inet.h on *nix)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.52</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: here's why it's crashing:&nbsp;&nbsp;0x00000001004ea2bb in _X11TransWritev ()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:29.09</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, there's no escape - /usr/X11R6/include/GL/gl.h includes the framework gl.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.06</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>that's trying to display mac to mac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.20</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>mac to Linux, wish itself gives up with a bad atom</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.35</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: that htons is not going to stay there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.59</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>working on replacing that with something that'll actually work on big endian systems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.22</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42972 10/brlcad/trunk/src/librt/primitives/ars/ars.c: switch over to the xdr functions while the FIXME is being fixed so that we don't have windows build fail. don't want to hook up winsock for windows.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:14.08</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: odd... runs on Windows for me here (VC++2010)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.50</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: loads of reallocated sectors on the old filesystem .. apparently a bad or failing drive?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.58</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>they're attempting a clone/recovery now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.38</tt></td><td><font color="#77e2e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it stalled hard 22GB into the restore earlier today and had to go diagnosing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.07</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>old fs? on crit or bz? bz was falling apart hardcore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.08</tt></td><td><font color="#c5c568"><tt>``Erik</tt></font></td><td width="100%"><tt>is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.17</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r42973 10/brlcad/branches/cmake/src/other/tcl/ (5 files in 2 dirs): regex.h -&gt; regextcl.h to avoid fighting with /usr/include/regex.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.59</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42974 10/brlcad/trunk/src/libbu/convert.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.59</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: address FIXME, make cv() be public API, so rename to bu_cv(). provides a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.59</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: simplified API means for converting between two specified formats, e.g. htons()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.59</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: would be something like bu_cv(outbuf, "nss", sizeof(short), val, "hss", 1);</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.17</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42975 10/brlcad/trunk/include/bu.h: expose the new bu_cv() function.</tt></td></tr>
+<tr><td><tt>22:15.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.33</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42976 10/brlcad/trunk/src/libbu/convert.c: no longer vert.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.42</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42977 10/brlcad/branches/cmake/src/other/togl/src/CMakeLists.txt: Install the headers as well</tt></td></tr>
+<tr><td><tt>22:45.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (~mafm@203.Red-88-22-160.staticIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:04.38</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42978 10/brlcad/trunk/src/librt/db_float.c: implement a simple flip_short() routine for flipping the bytes of a short. htons() isn't suitable because it won't flip bytes if host endain is network (i.e. big endian). this is private API.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:05.44</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42979 10/brlcad/trunk/src/librt/ (Makefile.am librt_private.h): add a new private header, librt_private.h, so we can have a common header for providing functions that can be used within librt but that shouldn't be public API.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:09.04</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42980 10/brlcad/trunk/src/librt/db_float.c: prepare for a rename to db_flip.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.50</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42981 10/brlcad/trunk/ (5 files in 2 dirs): rename from db_float.c to db_flip.c since the file is being expanded with a few more flip functions that have nothing to do with floats</tt></td></tr>
+<tr><td><tt>23:16.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (MK@whitecalf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:25.34</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42982 10/brlcad/branches/cmake/src/other/togl/ (12 files in 5 dirs): Let's see if glew can handle some of the cross platform annoyances</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:28.51</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r42983 10/brlcad/branches/cmake/CMakeLists.txt: Turn Tk X11 requirement on if appropriate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:41.43</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: hmm:&nbsp;&nbsp;<a href="http://www.geodynamics.org/pipermail/cig-commits/2010-March/011594.html">http://www.geodynamics.org/pipermail/cig-commits/2010-March/011594.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.19</tt></td><td><font color="#5f5fb4"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: here's a backtrace, if that helps:&nbsp;&nbsp;<a href="http://pastebin.mozilla.org/1020171">http://pastebin.mozilla.org/1020171</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.06</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r42984 10/brlcad/trunk/src/librt/primitives/ars/ars.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.06</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: this should fix interpretation for both big and little endian platforms. if</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.06</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: flipping is requested, we need to flip the bytes regardless of host/network</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.06</tt></td><td><font color="#bbbb62"><tt>CIA-53</tt></font></td><td width="100%"><tt>BRL-CAD: endianness. call the new private flip_short() function from db_flip.c</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

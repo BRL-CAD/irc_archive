@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080811</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080811</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:41.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.53</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>Derevko: howdy</tt></td></tr>
+<tr><td><tt>02:02.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jonored (n=jonored@dsl092-076-134.bos1.dsl.speakeasy.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.42</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>Derevko: if you're working on an updated .deb for Debian, I have several suggestions/comments relavent to your build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.28</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>Derevko: namely 1) for a package-management system, you want --disable-all instead of all the --disable-*-build options you're using; 2) there is no reason for you to use --enable-warnings or --enable-progress (those are dev-team options); 3) you don't need or want java as a dependency, let it autodetect or force it off using --without-java (unnecessary but explicit); 4) there is a BIG ALERT warning about installing with --prefix=/usr .. there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.35</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>lemme know if that cut off :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.25</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>6) use --without-opengl for now as well (buggy nvidia drivers will crash X hard on some configurations); 7) .. the crash log is interesting, looking into it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.40</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r32372 10/brlcad/trunk/src/adrt/librender/Makefile.am: contrary to libtool tweakage, debian is apparently bitching about LIBADD symbol dependencies in adrt's librender.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.17</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>Derevko: 8) that last commit should kick start the build for you, or you can manually remove the 'adrt \' line from src/Makefile.am</tt></td></tr>
+<tr><td><tt>02:53.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.131.215)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.32</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>brlcad: can you have a look at r32371. I changed made libpc a dependency of librt. I am not very sure about my configure.ac modifications.. especially where i added LIBSTDCXX</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.04</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>homovulgaris: I did</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:23.29</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.03</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>homovulgaris: they looked alright -- whether LIBSTDCXX needs to go there or with $PC instead depends on a few other things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.20</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>which won't really know without building across a few other platforms</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.54</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>the header removal of raytrace.h was right, rt uses pc -- not the other way around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.58</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>so that was good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.06</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.22</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>also right now constraint.c in librt depends on wdb ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.45</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>should i remove that dependency ? I mean should i be using wdb from rt ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.48</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>in general .. "no" -- libwdb sits on top of librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.56</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>sorry, it is just a blank header include i guess, not using any wdb stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:27.15</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>but it's not fully consistent at the moment either, so it's understandable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:27.44</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>so basically, i can shift my mk_constraint code with modifications into libwdb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.01</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>you had an mk_constraint in libwdb already didn't you?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.04</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>that you removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.14</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>well it was in libpc </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.20</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.24</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">blinks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.24</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>i should have shifted it to WDB long back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.34</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.27</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>it either belongs in librt as an rt_constraint or some similar librt "creator"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.58</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>but primarily in libwdb as mk_constraint (which could call this hypothetical rt_constraint or not)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.34</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>sean, now tests will depend on both pc,wdb and rt when i do actual constraint writing geometry updation etc, so the pc_test files should be shifted somewhere so that it gets built after librt and libwdb is built</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.54</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>misspoke, s/rt_constraint/wdb_export/ .. which would call the librt export routine for a constraint object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.22</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>okay, sounds reasonable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.36</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>yeah, the export functionality is in rt/constraint.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:33.58</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>so libwdb should probably just call that, but still provide the mk_ interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.34</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>mk_ is the easy 'public interface' for creation, default constructor of sorts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.07</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>yeah, sort of hardcoded parametrics ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.32</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>ok, i will get back to finishing up the read-solve-update-write cycle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.39</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>how's that goin? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.48</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>oh question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.32</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>well parameter passing is done, I need to work with constraint passing now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.17</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>The problem with passing just a function pointer is that I have to pass the signature type information in some way as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.55</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>noticed in pc_main that it nicely sorts out the data types, but then pcVCSet uses different structures on the type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.10</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>e.g. PC_DB_VECTOR_T being a vect_t and a Vector class</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.26</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>like istangent() expects two arrays/2 vectps , ispositive() expects 1 array/vectp and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.39</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.05</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>could do something like what opengl does with the format encoded in the name</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.54</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>e.g. isPositive3f()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.12</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>not really elegant, but a thought</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.23</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>hmm.. I was thinking of something like that in MathVM, add##2 for add expecting two inputs... but that was just for double check.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.30</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>hmm.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.40</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>or could make the signature simply be a vararg ..., and let the function typecheck itself (yikes)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.02</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>i only like varargs when all the types are the same :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.34</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>you mean like printf? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.42</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>hmm.. i think i could do something similar to what i am doing for passing parameter by structure.. pass a void * and a type variable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.43</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>if the types are the same, there's not much point to using varargs :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.55</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>could just use an array :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.07</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:P yeah.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.10</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>exactly :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.54</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>yeah, data-driven is pretty straightforward</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.21</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>though there are some problems with that with strict c99</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.53</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>I forget the rules off the top of my head at the moment, but there's some issue there iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.02</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.27</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>something to do with void*'s and casting to function pointers not being allowed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.37</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>I'd have to dig, it's come up before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.21</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>ok.. i'll check too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.47</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>might be C++ or c99, might be confusing my languages, but it'd still be relevant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.25</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>so think you're going to make implicit constraint checking by next week? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.32</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>confident :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.47</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>{ hopefully :) }</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.16</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>heh, { great :) }</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.50</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>because once this constraint passing is done, the actual implementation of constraints , most cases being simple, is really not time-consuming</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.57</tt></td><td><font color="#b86161"><tt>pacman87</tt></font></td><td width="100%"><tt>are you two proposing an extension to lolcode, where semicolons are replaced by ':)'?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.37</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt><font color="#CC00CC">uses {} as equivalent of clouds in cartoons</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.59</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>howdy pacman</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.24</tt></td><td><font color="#b86161"><tt>pacman87</tt></font></td><td width="100%"><tt>hi homovulgaris</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.25</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>:D i should change that nick, i like madant much more anyways :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.40</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>something vulgar about latin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.31</tt></td><td><font color="#7777e2"><tt>homovulgaris</tt></font></td><td width="100%"><tt>sean, on a scale of 1 to 10 how much trouble would one face when trying to make a .deb package for brlcad ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.01</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">likes "madant" more too .. fewer vulgar connotations ;)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>homovulgaris: "it depends" .. on a lot of things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.06</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>their familiarity with making deb's being the biggest, followed by autotool build familiarity, followed by knowledge of what our options mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>otherwise, if you know all three of those then it's like a 2 .. if you don't then it's like an 8</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.26</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>howdy andrecastelo </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.34</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>how goes the hemispheres?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.06</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>howdy siggraph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.37</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i see you are excited about the event :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.46</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>of course!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:06.21</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>alrighty, about time to /away ... blasted interweb lackage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.38</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>when is your flight?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.09</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>i'm already there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.22</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>twas two/three days ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:10.24</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>oh, my bad :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:10.31</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>how's the weather? :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.03</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>already slightly sunburnt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.17</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>that daystar is viscious when you don't see it very often</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.19</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;snort&gt; from lunch, probably</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.46</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">misses the golden tan he used to keep</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.48</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">still wants to know who's bright idea (no pun intended) the white tablecloth was</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.12</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>sunglasses ftw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.29</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">really detaches now</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.45</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>good night, cya tomorrow :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.16</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">signs off too, sleep ftw</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:14.13</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>'night starseeker </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.33</tt></td><td><font color="#6464bf"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves in -- hello cadheads</font></tt></td></tr>
+<tr><td><tt>04:33.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=d@117.196.131.215)</font></tt></td></tr>
+<tr><td><tt>04:44.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.131.215)</font></tt></td></tr>
+<tr><td><tt>04:47.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.131.215)</font></tt></td></tr>
+<tr><td><tt>04:47.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.131.215)</font></tt></td></tr>
+<tr><td><tt>04:49.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.131.215)</font></tt></td></tr>
+<tr><td><tt>04:57.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.131.215)</font></tt></td></tr>
+<tr><td><tt>06:23.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-92-232.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:07.38</tt></td><td><font color="#6ed2d2"><tt>Derevko</tt></font></td><td width="100%"><tt>siggraph: thanks a lot. Just a question, why should I force java off?</tt></td></tr>
+<tr><td><tt>07:29.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-91-240.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>08:47.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>09:04.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad geocalc (n=geocalc@91-171-198-67.rev.libertysurf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:09.27</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03homovulgaris * r32373 10/brlcad/trunk/src/ (6 files in 2 dirs): shifting test to outside libpc since it depends on pc,rt,wdb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:15.52</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>siggraph: are you brlcad? :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:09.11</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32374 10/rt^3/trunk/src/geometryService/cpp/boost_1_35_0/libs/graph/ (. LICENSE index.html):</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:15.54</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32375 10/rt^3/trunk/src/geometryService/cpp/boost_1_35_0/libs/graph/test/ (65 files): Library addition for GeometryService</tt></td></tr>
+<tr><td><tt>11:33.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>12:13.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5B14FE9A.dip.t-dialin.net)</font></tt></td></tr>
+<tr><td><tt>12:19.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.197.71)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:34.25</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>anybody with linux amd64 around?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:34.40</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>I'd like somebody to test my package</tt></td></tr>
+<tr><td><tt>12:38.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>12:45.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@58.171.227.151)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:53.01</tt></td><td><font color="#c568c5"><tt>archivist_ub</tt></font></td><td width="100%"><tt><font color="#CC00CC">starts an svn checkout</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:13.07</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32376 10/rt^3/trunk/src/geometryService/cpp/boost_1_35_0/libs/graph/test/planar_input_graphs/ (30 files): Library addition for GeometryService</tt></td></tr>
+<tr><td><tt>13:13.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>13:13.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01_ (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>13:33.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.202.151)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.44</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>EVERYBODY DANCE!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.18</tt></td><td><font color="#c568c5"><tt>archivist_ub</tt></font></td><td width="100%"><tt>ugh, dancing is too much like hard work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.38</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>I dance incredibly white, so it's pretty easy for me *shrug* :)</tt></td></tr>
+<tr><td><tt>14:08.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stustev1 (n=stustev@209.248.147.2.nw.nuvox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.00</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03homovulgaris * r32379 10/brlcad/trunk/src/util/pc_test.c: include headers, uncomment code, test compilation &amp; execution</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:23.53</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>hello world</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:28.21</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>return 0;</tt></td></tr>
+<tr><td><tt>14:55.05</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad pacman87 (n=Timothy@71.170.63.120)</font></tt></td></tr>
+<tr><td><tt>15:00.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
+<tr><td><tt>15:07.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.57</tt></td><td><font color="#b86161"><tt>pacman87</tt></font></td><td width="100%"><tt>/* User has no tolerance for this kind of drink */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.13</tt></td><td><font color="#b86161"><tt>pacman87</tt></font></td><td width="100%"><tt>(tor.c, 1043)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.19</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32380 10/rt^3/trunk/src/geometryService/cpp/boost_1_35_0/libs/ (26 files in 26 dirs): Major svn connection issues, reworking the Boost library</tt></td></tr>
+<tr><td><tt>15:30.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad prasad_ (n=psilva@static-70-108-244-218.res.east.verizon.net)</font></tt></td></tr>
+<tr><td><tt>15:46.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo (n=chatzill@189.71.37.142)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.09</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>oi, andre, how goeth the mlt?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.25</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey ``Erik </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.54</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>had exams last week plus one wednesday and one monday</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:48.17</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>didn't have much time to put in mlt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.18</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i'm still stuck.. when the secondary rays hit anything, *everything* shades</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.32</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>'everything'?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.42</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.00</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>currently, if it's supposed to be shadowed, it paints a dark blue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.12</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>if not, gray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.17</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm, dark blue like 0,0,1 ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.25</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>do you have a screenie of this?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.45</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>yes i can set recreate it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:51.11</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>it paints a specified color, in ray hit, just to note what's supposed to look like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.04</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>ok, so still flat shading</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.48</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks at the calendar O.o</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.09</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>screens taken, uploading</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:02.20</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>rtmlt cornell.g floor.r right_wall.r -&gt; <a href="http://img98.imageshack.us/img98/916/withoutbluexv2.jpg">http://img98.imageshack.us/img98/916/withoutbluexv2.jpg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:02.40</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>rtmlt cornell.g floor.r right_wall.r short_box.r -&gt; <a href="http://img144.imageshack.us/img144/1246/withbluevd8.jpg">http://img144.imageshack.us/img144/1246/withbluevd8.jpg</a></tt></td></tr>
+<tr><td><tt>16:06.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kcorbitt (i=d12559a6@gateway/web/ajax/mibbit.com/x-c36774134f51b03a)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:07.10</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>ping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:08.08</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>anyone there?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:08.58</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:08.59</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>'sup?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.22</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>interesting, andre, um, material information isn't being grabbed correctly... are you fully committed right now?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.26</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.43</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I read about the GSoC projects on the wiki</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.53</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>is there anywhere where the progress on those is being tracked?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.01</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>they look like super useful improvements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.05</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>their individual blogs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.32</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>each project should be linking to the appropriate place for status if not on the wiki... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.54</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32381 10/rt^3/trunk/src/geometryService/cpp/boost_1_35_0/ (more/ people/ regression/ status/ tools/): Major svn connection issues, reworking the Boost library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.54</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32382 10/rt^3/trunk/src/geometryService/cpp/boost_1_35_0/wiki/: Major svn connection issues, reworking the Boost library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.58</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>I have brlcad on two machines. One at home and one at work. The home machine is svn. The work machine is a binary download. They behave differently.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.53</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>howso? (the latest source release has significant differences from svn trunk, and binaries are all quite a bit older...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.24</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>so I should load the svn on my work box. thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.49</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>I will do so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.37</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>the clone works different and the mirror. This tells me what I need to do to make the systems the same.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.17</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>I am unable to use the extrude command. It asks for a K value. nothing seems to work for the K value.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.53</tt></td><td><font color="#b86161"><tt>pacman87</tt></font></td><td width="100%"><tt>the K value isn't used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.11</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>``Erik: i'll have to leave in about 20 minutes, have classes this afternoon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.51</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>and won't be back for another 8 hours o.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.54</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32388 10/rt^3/trunk/src/geometryService/cpp/ (107 files in 3 dirs): svn:mime-type &amp; svn:eol-style fixes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.58</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>what you have in mind?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.10</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>i understood that from a previous answer but the prompt asks for one and no answer works. leaving it blank doesn't seem to work either.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.50</tt></td><td><font color="#b86161"><tt>pacman87</tt></font></td><td width="100%"><tt>i just use 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:17.02</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>I will try that - thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:18.38</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03andrecastelo * r32389 10/brlcad/trunk/src/rt/viewmlt.c: Minor updates.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.18</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>clone changes have been merged into the latest stable, so the source tarball on the webpage should work for you. svn trunk can be hit or miss, there's a&nbsp;&nbsp;big code migration happening right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.35</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>andre, I'll take a peek and see if there's anything blatant *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.41</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>have fun at class O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.57</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>I will download the tarball and see what happens - thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.31</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I read the project log for mafm's GUI project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.47</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>looks like there's still a lot of coding going on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.10</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I assume that won't be ready for use for a while yet then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:38.37</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>cya ``Erik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:38.51</tt></td><td><font color="#62baba"><tt>andrecastelo</tt></font></td><td width="100%"><tt>if you need me, andrecastelo@gmail.com</tt></td></tr>
+<tr><td><tt>16:51.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5B14FE9A.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.58</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r32390 10/brlcad/trunk/src/mged/edsol.c: Fixed a typo.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.51</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r32391 10/brlcad/trunk/src/adrt/Makefile.am: librender relies upon libutil so build it later. patch from Giuseppe Iuculano (derevko) via sf bug report 640802.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.45</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>mafm: yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.49</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>kcorbitt: for real use, it needs a while, yep :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.15</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>stustev1: clone and mirror have been under active development/improvements lately, so it's to be expected that they'd be different for you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.01</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>ah yeah, what erik said</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.20</tt></td><td><font color="#cdcd6c"><tt>stustev1</tt></font></td><td width="100%"><tt>very good - I am configuring a tarball download now - thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.57</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>mafm: thanks. this is a GSoC project, but is anyone out there planning on actively continuing dev work after summer ends?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.13</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>kcorbitt: hopefully he is ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.41</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>but even if he's not, it's one of our top-priorities .. most paths of development relate to it in some way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.49</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>how was the irt thing, brlcad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.58</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>it was pretty good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.18</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>not as immediately useful as solid modeling was, but still pretty good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.22</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- hopes to thumb through materials when ya'll get back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.49</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>``Erik: if you can get ahold of the low man .. he just set a hell of a lot of files with the wrong mime types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.09</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>eh? who? whu?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.11</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>yeah, they should actually have all the presentations on-line too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.18</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.18</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>dave</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.24</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>yeppers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.37</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>test/plain isn't exactly .. right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.13</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>they were text/plain .. oddly changed them to test/plain saying he was fixing them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.21</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>.. fix'd em real good ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.36</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>he seems... confused, but is looking now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.53</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>"oops, hehehehe"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.00</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>thanks for the heads up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.02</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>specifically r32388</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.10</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>but the one(s) preceeding too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.51</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>he says it's all fixed now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.56</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>also should set the svn:eol-style</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.16</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>on the text files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.26</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>he says he did, it won't let him commit if he doesn't set that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.58</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>if only halts on mime-types, and then "suggests" eol-style</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.01</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/wiki/Mime-types">http://brlcad.org/wiki/Mime-types</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.09</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>he might want the sample config file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.52</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>ok, got him on that page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.12</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>danka sir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.27</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>how's the land of mary doing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.08</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>still seems to be here *shrug* looking like I might need to bring my lunch this week, or go hungry and eat bigger dinners :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.47</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, btw, I'm pillaging desks of people who're at siggraph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.49</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>mwahahaha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.52</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.59</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>RAPE THE VILLAGE AND PLUNDER THE WOMEN!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.22</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>leave my stash of porn and booze alone!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.26</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>(nah, I left my kbd at home, so I'm borrowing starseekers for today)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.45</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>um, what booze? *burp* and I think nick beat me to the pr0n</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.21</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>speaking of nick, he may need some svn skooling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.37</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>supposed to be committing his stuff soon, pointed him in your general direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.45</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>yuh oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.14</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>and he's never used svn or any other vcs before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.32</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>sent him instructions via e-mail, but he might need some poking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.02</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>aight, if he wanders my way, I'll show him out to irreperable thrash the repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.11</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.13</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders what "stract" means .. dave picked an odd name there..</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.25</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>kcorbitt: "but is anyone out there planning on actively continuing dev work after summer ends?" -- ,e</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.27</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>me*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.45</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>ab-stract, dis-stract, .. ex-stract</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.46</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>w00t</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.01</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>~mafm++</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.04</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>there's some other people interested and who started commiting some changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.17</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>kcorbitt: maybe you want to work in that too? :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.34</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>yeah, that mess needs to all come together at some point :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.34</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>abstract</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.59</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>(sorry for the delay, but it seems that notifications don't work properly with this IRC client, or this channel)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.19</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>cool, that's good to hear</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>channel doesn't have anything to do with highlights :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.45</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r32392 10/rt^3/trunk/src/geometryService/cpp/ (149 files in 7 dirs): svn:mime-type &amp; svn:eol-style fixes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.45</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>unless you told your client to do something per channel of course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.48</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>found out about brl-cad some months ago and have been wanting to teach myself it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.20</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>but haven't found the time to really spend a day going over the mged tutorials</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.46</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>that's why I found mafm's project and got very excited!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.03</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.09</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>what's your platform kcorbitt?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.34</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I use vista or ubuntu at home and CentOS at work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.06</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>siggraph: I think that it doesn't highlight or show smalls windows when I leave this channel as the active one, and it happens often since it's the more active amongst the ones I join :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.24</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>kcorbitt: 32/64 bits?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.32</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>actually main reason I use vista still is because there's no decent CAD package for linux</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.36</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>32</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.51</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>but hoping brl-cad will change that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.57</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>erm, pro/E and unisys were available for linux last I heard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.21</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>meh, I just prepared a package for amd64 and wanted to find some vict^H^H^H^Hbrave volunteers to test it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.22</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>oh, I hadn't heard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.25</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm under the impression that they're considered "decent", just expensive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.35</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>yeah they're good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.35</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>kcorbitt: even with an easier to use interface, there's no production CAD system that doesn't require some level of training to be useful :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.40</tt></td><td><font color="#5d5db1"><tt>jonored</tt></font></td><td width="100%"><tt>That doesn't mean that an organization keeps the license, though... so might be expensive for a person to get the linux version.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.48</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.56</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I'm no professional engineer, just a student/hobbyist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.22</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>managed to get an edu license of Autodesk Inventor which I've used a lot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.43</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>but this project is very intriguing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:53.10</tt></td><td><font color="#5d5db1"><tt>jonored</tt></font></td><td width="100%"><tt>Happily, my school does... worth checking. Won't do anything on my machine, but it's there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.33</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I write C code for my day job though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.47</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>woot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.51</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.59</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>kcorbitt: we need devs more than we need users at this point ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.04</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>I attend meetings, read email, and attend more meetings for my day job</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.08</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>though users are always welcom ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.26</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>and I want to look into doing some dev work if it won't suck away my life</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.37</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>like some other open source projects I've involved myself in in the past ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.00</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>admittedly, that is my own fault</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.10</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>this sort of thing is so darn cool!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.15</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>indeed!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.24</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>lots of stuffs to be done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.27</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>abstracting away from society? sure, it is :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.07</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>sociewho?what? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.14</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.37</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>out of curiousity, any kind of estimate for the current userbase of brl-cad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.49</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>(if any?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.58</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>not anything reliable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.12</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>we used to have 2k registered site licenses before we were open source</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.42</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>but now we're seeing about 10k downloads per month, so it's really hard to say</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.05</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>good stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.13</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>i'm sure a lot of folks checking things out and learning/using brl-cad that never interact, other users that try it once and never again, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.20</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>even if you sum all that up, some people just download it, look, and throw it away... others redistribute it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.21</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.49</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>can say that our rate has been increasing year over year, so if anything .. more people are noticing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.01</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>(I was one of the download-once-and-never-actually-use-it crowd for the month of July ;))</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.38</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>is there a centralized list of feature requests/bugs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.48</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>siggraph: I PM'ed you, I don't know if it's a convenient time for you :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.01</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>kcorbitt: <a href="http://sourceforge.net/projects/brlcad/?abmode=1#item3rd-3">http://sourceforge.net/projects/brlcad/?abmode=1#item3rd-3</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.28</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>(I just noticed new SF interface, not very convenient for direct links it seems :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.41</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>tab "Public"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.43</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.38</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>for history, why was it decided to go open source?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.46</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>if anyone is still around from when that happened</tt></td></tr>
+<tr><td><tt>18:09.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic_ (n=docelic@78.134.204.86)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.24</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>kcorbitt: for brl-cad, it was more why *not* go open source?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.57</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>brl-cad has always been developed in a relatively open manner, as open as the team could get away with at the time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:12.56</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>there are many benefits and potential benefits that were obtained when we were allowed to go open source</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:13.32</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>note "allowed" != "decided" .. wanted to a long time ago, but it took over a half-decade to get it approved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:13.44</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.17</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>sounds like you've been a developer for quite some time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.41</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>does the project have paid/full time devs, or is it solely volunteer?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.13</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>it just makes sense .. the gov isn't into the business of making money on brl-cad (and they shouldn't be imho) .. and it's not in the public's interest for such an extensive code to NOT be in the public's hands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.18</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>from reading the history page it sounds like it was first designed by the military, so I assume there were paid developers at some point at least</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.38</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>both, some paid/full some not, some via ARL, some other orgs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.27</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.57</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>ARL still funds, develops, and monitors/reviews brl-cad development, though the project is a 'complete' open source project with its own community around it where those that participate are the ones that direct development</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.09</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>that's reassuring - projects with even a few full-time developers seem to be much healthier in general than volunteer only ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.18</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>siggraph: so about the private message?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>i.e. a development meritocracy with just some basic peer review to make sure we have a consistent vision</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.38</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>mafm: sorry, on a roll :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.01</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>heh, sorry for taking your time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.12</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>just trying to get a better handle on the structure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.14</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>some of that is covered in the HACKING file in our distribution</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>some in the README</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.53</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r32393 10/brlcad/trunk/src/mged/ (buttons.c dodraw.c muves.c qray.c rtif.c setup.c): Getting rid of a few warning.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.39</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>so I'll repeat myself now that the channel is a bit more active...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.10</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;mafm&gt; anybody with linux amd64 around?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.15</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;mafm&gt; I'd like somebody to test my package</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:30.25</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>mm.. have an amd64 back at the office somewhere, but I'm of course nowhere near that right now :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.16</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>I think that I should compile for i386, it's more popular :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.57</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>is there a reason you need amd64?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>if it's for the gsoc 'goal' of making a dev/test binary -- anything should suffice really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.15</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>yes, it is -- both computers are with amd64</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.30</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>and I would like somebody to test :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.44</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>if it's not to be tested, what's the point of making it? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.05</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r32394 10/brlcad/trunk/ (6 files in 4 dirs): Added the following commands to libged and libtclcad: idents, regions, solids, loadview, saveview and solids_on_ray.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.41</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>ah, you mean both of yours are amd64</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.52</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>yeah, just compile for i386 to hit a wider audience</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.15</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>the point is exposure/availability, otherwise you're right -- it'd be a waste of time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.08</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.33</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>my next laptop would be i386 I guess, I didn't like being an early adopter :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.15</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>(not that early, it had been commercialized for years, but there are still some things missing at this point)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.43</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>but I think that it would be a Dell and would only arrive by the end of august, at the very least</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.23</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>you can compile for i386 on amd64 no?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.50</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>I think so, but I never did for big projects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.06</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>and Debian has only native distros, not mixed ones like fedora</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.39</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>g3d and the libraries are not much of a problem, but I think that OGRE is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.05</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>you'll probably just have one file, one staticly compiled binary file -- probably easiest to make and get into hands for testing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.30</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks for food</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.29</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>hmm, I'm doing it with dynamic libs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.19</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>ok, I leave this cross-compiling ... going home now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.37</tt></td><td><font color="#5fb65f"><tt>mafm</tt></font></td><td width="100%"><tt>kcorbitt: hopefully tomorrow I'll have a binary package for you :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.10</tt></td><td><font color="#7474dc"><tt>kcorbitt</tt></font></td><td width="100%"><tt>nice!</tt></td></tr>
+<tr><td><tt>19:38.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andre|away_ (n=chatzill@189.71.27.15)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.11</tt></td><td><font color="#c969c9"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: low-man says thanks for the config</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.24</tt></td><td><font color="#61b9b9"><tt>prasad_</tt></font></td><td width="100%"><tt>sean, did the expo start?</tt></td></tr>
+<tr><td><tt>21:05.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5B14FE9A.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:03.53</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>prasad_: not yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:03.59</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>``Erik: okies dokies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:04.05</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt>thanks for relaying</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:04.46</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">sips his cognac whilest listening to the advances in real-time rendering session</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:05.15</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">praises this glorious new "Geek Bar"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.53</tt></td><td><font color="#db7373"><tt>CIA-23</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r32396 10/brlcad/trunk/NEWS: bob and andre have added procedural geometry tools to the Windows build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.50</tt></td><td><font color="#ce6c6c"><tt>siggraph</tt></font></td><td width="100%"><tt><font color="#CC00CC">hopes starseeker is watching the data structures for computer graphics class</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

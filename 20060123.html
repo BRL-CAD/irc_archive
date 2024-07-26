@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20060123</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20060123</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:03.40</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libfb/tcl.c: use bu_malloc and bu_free instead of malloc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.10</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libfb/fbserv_obj.c: use bu_malloc and bu_free instead of malloc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.09</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libfb/fb_obj.c: use bu_calloc and bu_free instead of calloc</tt></td></tr>
+<tr><td><tt>00:22.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@DHCP-170-143.caltech.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.32</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>pra5ad: yeah, you'll want to make a dirtree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.40</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/liboptical/ (27 files): include stddef.h for bu_offset's usage of offset</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.52</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>there are several different ways to walk a geometry graph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.29</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>db_functree() is probably the most simple, with a callback for leaf nodes (primitives) and for non-leaf nodes (combinations)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.58</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>src/gtools/g_transfer.c has a simple example using that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.23</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>db_walk_tree() is a little more powerful, with a region start and end callback in addition to the leaf callback</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.38</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>most of the converters in src/conv use that routine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.23</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you only want to walk over the leaf nodes, db_tree_funcleaf() exists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.51</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>the iges converter and mged have examples that use that one</tt></td></tr>
+<tr><td><tt>01:02.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@DHCP-170-143.caltech.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.19</tt></td><td><font color="#6161b9"><tt>pra5ad</tt></font></td><td width="100%"><tt>how do u determine if a primitive is a bot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.35</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/conv/comgeom/solid.c: convert to libbu memory management, removing the need for the memory allocation failure checking/handling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.27</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you have an internal pointer you can check if ip-&gt;idb_type == ID_BOT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.36</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you have a raw internal pointer, you can check ip-&gt;idb_minor_type != ID_BOT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.29</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>here, an easier way:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.45</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>FOR_ALL_DIRECTORY_START(dp, rtip-&gt;rti_dbip) {</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.48</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.59</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.12</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.14</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.15</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>}</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.29</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>FOR_ALL_DIRECTORY_END</tt></td></tr>
+<tr><td><tt>02:52.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@DHCP-170-143.caltech.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.30</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/conv/jack/jack-g.c: convert to libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.35</tt></td><td><font color="#b8b861"><tt>``Erik</tt></font></td><td width="100%"><tt>have you fixed the tesselator so if it tries to tesselate a bot, it just hands the geometry back?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.52</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/conv/ (g-vrml.c g-x3d.c): include stddef.h for bu_offset's usage of offset</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.22</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/conv/ (asc-nmg.c asc2g.c dxf-g.c euclid-g.c g-adrt.c): convert to libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.39</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/conv/g-adrt.c: how in the world did struct "vu_vls" compile?</tt></td></tr>
+<tr><td><tt>03:45.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@DHCP-170-143.caltech.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.35</tt></td><td><font color="#69c7c7"><tt>brlcad</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:06.30</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/rt/ (rtshot.c sh_tcl.c viewweight.c worker.c): convert to libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.24</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/librtserver/rtserver.c: convert to libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.17</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libdm/clip.c: don't use INFINITY as it's a publicly defined macro usually, regardless, it's used as a clipping plane distance so call it that. increase it one order to a billion while we're at it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.04</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libdm/ (dm-X.c dm-glx.c dm-ogl.c dm-ogl_win.c dm-pex.c): need stdlib.h for getenv()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.31</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libdm/dm_obj.c: convert to bu_malloc for all but one section so that it may fail gracefully</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.51</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libmultispectral/sh_temp.c: include stddef.h for bu_offsetof</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.34</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/fb/pl-fb.c: stdlib.h for malloc and friends, not using libbu management as there is failure recovery code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.14</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/fb/cat-fb.c: convert to libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.30</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/halftone/ (main.c tone_floyd.c): convert to libbu memory management</tt></td></tr>
+<tr><td><tt>05:40.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (n=Apathy@pcp010175pcs.dover01.de.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:05.08</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/libdm/clip.c: update to use GED_MIN and GED_MAX</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:20.59</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/mged/cad_boundp.c: stdlib.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:32.42</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/mged/ (Makefile.am clip.c): clip.c removed, being used from libdm like it should be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.09</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/mged/ (dm-X.c dm-ogl.c setup.c tedit.c): stdlib.h for alloc/getenv funcs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:06.22</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/proc-db/ (molecule.c pipe.c rawbot.c torii.c vegitation.c): use libbu memory allocation management, get rid of null checks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:07.01</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/nirt/parse_fmt.c: s/rt_malloc/bu_malloc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:07.13</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/nirt/if.c: ws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:07.46</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/nirt/command.c: stdlib.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:08.54</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/anim/ (anim_fly.c anim_track.c): libbu for memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:09.39</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/lgt/trie.c: stdlib.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:10.30</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/lgt/ (texture.c reflect.c mat_db.c lgt_db.c): libbu for memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:11.34</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/lgt/ (ir.c octree.c execshell.c): stdlib.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:11.44</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/lgt/hmenu.c: use bu_malloc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:13.51</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/irprep/showtherm.c: use M_PI instead of PI, VUNITIZE_TOL instead of TOL, and libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:15.20</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/irprep/ (secpass.c firpass.c): libbu memory allocation management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:16.25</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/irprep/all_sf.c: use M_PI instead of PI, VDIVIDE_TOL instead of ZTOL, and libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:18.09</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/librtserver/rtserver.c: quell some warnings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:21.25</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/anim/anim_track.c: s/nmu/num/ transpose</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:24.09</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/fb/pl-fb.c: STATIC to static</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:26.44</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/irprep/firpass.c: missing arg to bu_free</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:29.35</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/nirt/parse_fmt.c: stdlib.h for getenv</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:31.57</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/remrt/protocol.h: header protection, use bu_offsetof</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:32.21</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/remrt/remrt.c: add stddef.h for bu_offsetof</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:35.37</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/rttherm/ssampview.c: stdlib.h for atoi()</tt></td></tr>
+<tr><td><tt>07:36.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-63-231.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:38.09</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pix-ppm.c: libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:39.10</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pix-yuv.c: libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:42.22</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pixbgstrip.c: libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:43.27</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pixborder.c: libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:44.36</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pixcut.c: libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:46.15</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pixpaste.c: libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:48.31</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/ (terrain.c texturescale.c yuv-pix.c): libbu for allocations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:52.11</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/util/pix-ppm.c: missing end quote</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:54.35</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * 10brlcad/src/rttherm/ssampview.c: use atol instaed of atoi</tt></td></tr>
+<tr><td><tt>10:53.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>11:30.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad phcoder (n=phcoder@pcp0011650294pcs.aberdn01.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>14:58.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@pcp0011649600pcs.aberdn01.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>15:17.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pra5ad_work (n=803f2049@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.21</tt></td><td><font color="#6f6fd3"><tt>pra5ad_work</tt></font></td><td width="100%"><tt>brlcad</tt></td></tr>
+<tr><td><tt>15:21.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kaol (n=kari@sammakko.yok.utu.fi)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.52</tt></td><td><font color="#6f6fd3"><tt>pra5ad_work</tt></font></td><td width="100%"><tt>if gcc -DHAVE_CONFIG_H -I. -I. -I../../include&nbsp;&nbsp; -I/usr/X11R6/include -I/usr/local/include -I../../include -DBEHIND_ME_TOL=0.05 -pipe -fno-strict-aliasing -fno-common -g -O3 -MT lgt-texture.o -MD -MP -MF ".deps/lgt-texture.Tpo" -c -o lgt-texture.o `test -f 'texture.c' || echo './'`texture.c; \then mv -f ".deps/lgt-texture.Tpo" ".deps/lgt-texture.Po"; else rm -f ".deps/lgt-texture.Tpo"; exit 1; fitexture.c: In function `init_Icon_Texture':texture.c:133:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.59</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/misc/win32-msvc7/librt/librt.vcproj: Added the following new files: db_flags.c and db_inmem.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.10</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/misc/win32-msvc7/fbserv/fbserv.vcproj: Added server.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.47</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/misc/win32-msvc7/libfb/libfb.vcproj: Removed server.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.56</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/src/fbserv/fbserv_win.c: Include fbmsg.h instead of libfb/pkgtypes.h. Provide declarations for routines that live in server.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.19</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/src/fbserv/fbserv.c: Provide declarations for variables that live in server.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.46</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/include/fb.h: Removed declaration of variables from server.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.02</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * 10brlcad/src/librt/db_inmem.c: Declare db5_export_attributes().</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.53</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03lbutler * 10brlcad/src/lgt/texture.c: call to malloc() had the signature of a call to bu_malloc(). Fixed to call bu_malloc().</tt></td></tr>
+<tr><td><tt>20:28.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@DHCP-170-143.caltech.edu)</font></tt></td></tr>
+<tr><td><tt>20:28.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-60-74.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>20:44.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pier (n=pier@151.56.213.202)</font></tt></td></tr>
+<tr><td><tt>21:05.59</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad pier (n=pier@151.56.213.202)</font></tt></td></tr>
+<tr><td><tt>21:48.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (n=Apathy@pcp010175pcs.dover01.de.comcast.net)</font></tt></td></tr>
+<tr><td><tt>22:01.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-60-74.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.38</tt></td><td><font color="#b15db1"><tt>CIA-13</tt></font></td><td width="100%"><tt>BRL-CAD: 03lbutler * 10brlcad/src/mged/typein.c: include stdlib.h so that atof is known to return a double</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

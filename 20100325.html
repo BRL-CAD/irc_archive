@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20100325</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20100325</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:20.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~jesica@190.178.94.95)</font></tt></td></tr>
+<tr><td><tt>01:29.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>01:29.03</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD is now available on Gentoo! (20100225)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.55</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>glanced again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.28</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>you realloc when count == max - 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.32</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38161 10/brlcad/trunk/src/libgcv/obj/obj_parser.c: Something about that use of array doesn't work with realloc - just use switch (succeeds).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.50</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>that should probably be count &gt;= max - 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.54</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>and you never increment count</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.20</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>count is incremented using *curr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.39</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>are you only testing add_vertex?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.43</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>was referring to the others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.55</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, yeah - add vertex is the only working one at the moment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.14</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>was just stubbing out the others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.16</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.04</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>got some thinking to do about group handling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.28</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>that nice little twist of allowing multiple groups on one g line makes for some complications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.18</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>did you understand why the previous array didn't work?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.38</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>kinda unfortunate that the id/id_list mechanism for matching is generic - I see why that is but it means conditional handling of an ID based on what line it appears with either has to be called from the lexer code or some funky fu is needed in yacc land...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.43</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: not entirely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.04</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>your previous organization is much better than the version that works now :0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.07</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.14</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>the bug was minor :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.15</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, I know...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.21</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>aaaaaa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>think of the pointer values</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.06</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>you set array's value to the value of the container</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.20</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>right...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.22</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>then told realloc to give you a bigger one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.26</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>which it does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.40</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>which is set as the new array value</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.56</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>do I need to reset the container value to the array value now?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.59</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>the original container pointer still points to the old colntainer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.27</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>you probably want the address of that container, not the container itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.34</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">restrains some colorful words and makes use of svn merge..</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.03</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>so when you set array to a new allocation, you're modifying the original pointer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.12</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>(i.e., a pointer to a pointer)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>point_t **array;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.23</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, reallocs? yuh oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.23</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>realloc has performance implications on various platforms, linux does some really ugly page remapping to make it fast at the cost of opening up some possible attack vectors, phkmalloc is... significantly slower but builds physically cohesive pages iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.24</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>also block-size allocations would probably work better, and a bigger step size</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.28</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: plus getting cute about using the same array logic for multiple structures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.05</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>(names, phkmalloc() will allocate a full new buffer, copy the data, then free the old buffer)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.23</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>think how many vertices there might be "on average", go up to the next power of two</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.39</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>justin was using realloc for every triangle or something in early adrt's and it'd take frrrrreverrr on fbsd :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.05</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>(also; try to allocate in page multiples)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.10</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I can get the address of the container (point_t **) but then what?&nbsp;&nbsp;If I (point_t **)bu_malloc to that I get a bus error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.07</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>here's something cheap...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.30</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38162 10/brlcad/trunk/src/libbu/units.c: unbreak compilation, no exactly floating point comparisons</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.46</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38163 10/brlcad/trunk/src/libgcv/obj/obj_parser.c: Try this for array realloc...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.47</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>that new string function seems wholly wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.56</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>not only does it malloc up a new vls instead of using one passed to it .. it's just generating a comma-separated list of all values, which seems to defeat the purpose of unit management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.26</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: you don't bu_malloc/realloc to the **</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.36</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>you alloc to the same thing as before, to the *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.06</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">committed something that seems to work...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.23</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>he assigns the ** using a &amp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.32</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: uh... define page multiples?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.37</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks starseeker needs to work through the classic towers of hanoi CS homework assignment ;)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.24</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>page size is typically 4k, sometimes 1k... a sub-page alloc has extra overhead to try to pack it into an existing page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.26</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: better, now get rid of newarray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.57</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>a page is the smallest chunk of 'real' memory the machine can do anything with... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.04</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38164 10/brlcad/trunk/src/libgcv/obj/obj_parser.c: get rid of unneeded variable.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.31</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: does C offer some sort of sizeof variation to report the current machine's page size?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.33</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>make sense now?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.43</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.47</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.52</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>um, there's usually a #define in one of the headers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.59</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>make sense why the previous didn't work?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.18</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>I believe so - when I was working directly on the "array" and not its pointer, I wasn't actually getting the new memory location </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.38</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>you were getting the new memory from realloc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.49</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>you were just never changing the struct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.04</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>OK.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.56</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>so the struct wasn't getting the word, as it were, and kept treating the array as if it was the original size?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.31</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>ah, getpagesize() :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.52</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note to look at the towers of hanoi problem...  I'll get this down someday, doggone it...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.02</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>array = A ; vertices.geometric = G;&nbsp;&nbsp;initially A-&gt;0 and G-&gt;B ; then A-&gt;B ; realloc makes A-&gt;C .. but is still G-&gt;B</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.57</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>(see, starseeker might do it lispy and just go recursive, just evading the thing you're trying to point out... *cough* :D )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.38</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>so array is actually a copy of the original value of the pointer value of G (B), and changing the contents of A has no implication&nbsp;&nbsp;as far as the contents of G are concerned</tt></td></tr>
+<tr><td><tt>03:00.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>03:00.39</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD is now available on Gentoo! (20100225)</font></tt></td></tr>
+<tr><td><tt>04:00.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedyII (Matthew@whitecalf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.04</tt></td><td><font color="#bc63bc"><tt>jack</tt></font></td><td width="100%"><tt>wtf :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.18</tt></td><td><font color="#bc63bc"><tt>jack</tt></font></td><td width="100%"><tt>there are so many different kinds of cancer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.32</tt></td><td><font color="#bc63bc"><tt>jack</tt></font></td><td width="100%"><tt>i doubt they'll really have it under control in 10 years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.47</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>which is why it's mind-boggling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.56</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>conceivable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:26.17</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if it works as well as it's seeming, it's targeted protein suppression in cells</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.08</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>and as complex of a problem of variants as there is, there could just as easily be an explosion of industry behind it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.00</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>catering to the variants and even other disease types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.03</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>consider the marget that exploded (no pun intended) behind erectile disfunction medication .. and that wasn't life threatening or as costly with major funded foundations hunting for cures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.36</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>if it can make it past phase III for any cancer, it's going to be huge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.18</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>s/marget/market/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.29</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>average approal and testing cycle for products going to market is 7 to 8 years, and can be fast-tracked in about half that time </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.34</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>leaves a good bit of time for industry to diversify and expand if proven successful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.35</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: wow, seriously?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.37</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>got a link?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:38.19</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://gizmodo.com/5501103/this-is-the-future-of-the-fight-against-cancer">http://gizmodo.com/5501103/this-is-the-future-of-the-fight-against-cancer</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:38.27</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>I'm under the impression that cancer is along the lines of the ultimate "if nothing else kills you, this thing will"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:38.40</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>making this a major step towards massively extended lifespan</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.27</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>and here I thought that nanotech healing magic was science fiction.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.08</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>not massively extended beyond current lifespan limits, but certainly would have the potential to raise the mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.36</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>it's a start, anyway.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.52</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>we're still heavily bound by about 7 fundamental factors that lead to cell death</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.59</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>only 7?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.15</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>7 nobel prizes in wait? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.20</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>I'm hoping so.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.23</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>they're non-all non-trivial</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.40</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>er, yeah, what I meant not what I wrote ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.43</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>^^</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.05</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>a nontrivial problem is solved with every thesis.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.11</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>(well, in theory anyway)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.17</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>cure any one of those and average lifespan only increases a few years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.34</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>cure them all and we don't really know what will happen</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.07</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>probably we'll hit another wall moderately further down the line.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.07</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>conceivably unbounded (not unlike a few organisms already on the planet)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.44</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>it seems optimistic that the human body would just happen to be perfectly capable of maintaining itself indefinitely, once the immediate barriers are broken down (those are the programmed ones, right?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.14</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>but, if we can get that far, it seems perfectly reasonable to believe that anything of that nature too would be surmountable.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.52</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>I wonder if this cancer thing has applications in gene therapy.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.03</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>it seems to be functionally related, though I'm no biologist.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>to employ the classic car analogy, some of the factors are like running out of oil, running tires to blowout, and rust</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.27</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>the research this builds on is Ribonucleic acid interference (research from about 10 years ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.31</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>RNAi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.55</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>which won a nobel prize a few years ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.33</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>which is a form of gene theragpy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.44</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>or at least applicable ot it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:59.11</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>fun</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:59.19</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>well, here's to hoping everything goes as planned!</tt></td></tr>
+<tr><td><tt>07:43.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~jesica@190.178.66.21)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:22.13</tt></td><td><font color="#bc63bc"><tt>jack</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:22.46</tt></td><td><font color="#bc63bc"><tt>jack</tt></font></td><td width="100%"><tt>we knew already that the nanobots industry will grab for cancer patients first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:22.55</tt></td><td><font color="#bc63bc"><tt>jack</tt></font></td><td width="100%"><tt>too much money to get there</tt></td></tr>
+<tr><td><tt>08:50.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@83.45.253.170)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:31.18</tt></td><td><font color="#c266c2"><tt>Ralith</tt></font></td><td width="100%"><tt>I didn't know it was likely to be applicable.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:08.22</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38165 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: start "point gluing" for when a cube vertex is exactly on the surface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.58</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03Term Papers 07<a href="http://brlcad.org">http://brlcad.org</a> * r2206 10/wiki/Talk:Main_Page: New section: [[Talk:Main Page#Term Papers|Term Papers]]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.10</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03Term Papers 07<a href="http://brlcad.org">http://brlcad.org</a> * r2207 10/wiki/Talk:Main_Page: /* Term Papers */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.52</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38166 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: woops, pointerized that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.44</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>the article indicates that the nanobots have to be pretty specifically programmed and are one shot things, still need to catch it, diagnose it correctly, then go through a whole treatment series... O.o mebbe some day we'll get an annual preventative slurry though *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:25.41</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38167 10/brlcad/trunk/src/libgcv/Makefile.am: need the .in for distcheck</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.22</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38168 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: comment out exact floating point comparison</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.58</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>heh.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:06.14</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>got a problem with bit encoding in a floating point number? O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.02</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38169 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: use near zero, even though it might introduce errors. should be ok for the current test case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.30</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>not particularly, got a problem with a halted strict build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.05</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38170 10/brlcad/trunk/src/libgcv/Makefile.am: clean up the Makefile since we're not yet traversing into that directory.</tt></td></tr>
+<tr><td><tt>16:45.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.57</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r38171 10/brlcad/trunk/src/libged/edcodes.c: Added HIDDEN definition back on edcodes_collect_regnames() for 'static' function declaration consistency.</tt></td></tr>
+<tr><td><tt>17:26.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (Matthew@whitecalf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.24</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r38172 10/brlcad/trunk/src/conv/ (Makefile.am obj-g_new.c): Experimental code for new obj-g conversion based on lex/yacc obj parsing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.07</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>woot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.01</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>(with much effort from starseeker)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.19</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>I bet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.44</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38173 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: remove one of the many magic #'s</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.25</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries converting a sphere into nmg and bot to see what happens...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.40</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm? using whick?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.41</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>which?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.11</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>the, uh, natural way of the code right now is for simple midpoint use... it'll work right but be blocky</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.19</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>the existing routines, not marching cubes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.20</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>the 'neat' stuff requires code modification to exercise</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.27</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, that works well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.32</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.51</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad was mentioning regressions, and we do need to stablize ahead of release...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.56</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>it's nmg_bool.c that causes... issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.04</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>(converting to a bot is just cnverting to nmg, then printing out the faces as triangles...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.06</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r2208 10/wiki/Talk:Main_Page: Reverted edits by [[Special:Contributions/Term Papers|Term Papers]] ([[User talk:Term Papers|Talk]]); changed back to last version by [[User:Ssd|Ssd]]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.57</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/block: blocked [[User:Term Papers]] with an expiry time of infinite (account creation disabled): Spamming links to external sites</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.40</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r2209 10/wiki/Talk:Main_Page: /* BRL-CAD Primitives */ reference tmp/primitives/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.59</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>looks like 7.16.2 is OK</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.25</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>only breaks in head with the BoT option to facetize - nmg succeeds</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.43</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks 7.16.4...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.08</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r38174 10/brlcad/branches/STABLE/src/libged/edcodes.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.08</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: Merge changes to 'edcodes.c' from main trunk that fixes a forward function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.08</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: declaration needed to compile brlcad with debug disabled. This merge represents</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.08</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: two small related revisions to the main trunk, 37579 and 38171, since release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.08</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 7.16.6.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.51</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>O.O</tt></td></tr>
+<tr><td><tt>19:28.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~jesica@201.255.254.170)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.25</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>unless I bungled the test, 7.16.6 succeeds</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.29</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38175 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: de-macro the hit function. Move primary ray stepping up to detection and use edges array for "current" intersection. Add more tolerancing. Step cross-rays back a bit.</tt></td></tr>
+<tr><td><tt>20:16.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.11</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>OK up through 37632</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.17</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r38176 10/brlcad/trunk/src/conv/obj-g_new.c: reworking to remove redundant vertices</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.16</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>yay, distcheck all passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.25</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>with all configurations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.51</tt></td><td><font color="#6a6aca"><tt>brlcad</tt></font></td><td width="100%"><tt>four configurations:&nbsp;&nbsp;all+warnings, warnings, all+optimized+warnings, optimized+warnings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.03</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>sweeet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.56</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>OK through 37768</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.29</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38177 10/brlcad/trunk/configure.ac: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.30</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: remove the -gstabs+ option since it's causing problems on 64-bit systems,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.30</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: including an internal compiler error with gcc 4.1.3; instead use -ggdb3 and will</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.30</tt></td><td><font color="#cbcb6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: have to revist debugging into mac dylibs (as they were the original motivator)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.06</tt></td><td><font color="#d16ed1"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, was sitting here jabbing at the home theater remote wondering why it wasn't turning on... one of the cats unplugged it O.o</tt></td></tr>
+<tr><td><tt>23:33.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@69.90.48.97)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

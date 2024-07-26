@@ -1,0 +1,766 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110304</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110304</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:36.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.15</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: <a href="http://pastebin.mozilla.org/1124576">http://pastebin.mozilla.org/1124576</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.32</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.37</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>try with that fix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43680 10/brlcad/trunk/src/librt/primitives/extrude/extrude.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: pull the declaration of center2d (and his friends) up to the top scope to make</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: sure the warning reflects the current file state. preprocessor directive in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: that function was missing a semicolon, so perhaps that was confusing gcc? see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: if we still get an uninitialized use warning now that it's outside of the loop.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.52</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>I think I understand what it's detecting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.29</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>it is really obscure and apparently not without bugs if those line numbers are to be believed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:46.30</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>but the center2d var was declared inside a loop, which I believe is only initialized once, but not per iteration like one might expect so it's possibly warning based on the future use.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.08</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>the only thing unique about that function, however, was an inconsistent macro call, so still a little bit of a mystery</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.26</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>that'd be a good one to see the post-preprocessor output being fed to gcc</tt></td></tr>
+<tr><td><tt>05:45.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl_ (~robert@v001.rhl.me.uk)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:52.40</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>outstanding spelunking on the red failure, great to know exactly why it was failing but working with HEAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:53.12</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: so do you know which regex feature wasn't supported?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:54.02</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>curious how our regex worked and theirs didn't, because theirs is actually a never derivative</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:54.16</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>unless if it's something like the regex enums don't match, hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:54.52</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>aha, yep that's it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.22</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>REG_NEWLINE is 300 for Tcl and 10 for ours</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.28</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>REG_EXTENDED matches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.12</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>so that mystery is solved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.15</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>one take-home lesson to keep in mind for cmake is that it will have to make sure include directories are NOT listed if a src/other dep is not going to be compiled, otherwise that same type of problem can happen with any of them (png, libz, ..)</tt></td></tr>
+<tr><td><tt>06:54.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>06:58.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Robert___ (~robert@v001.rhl.me.uk)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:06.46</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>any way to fix this? <a href="http://pastebin.com/rFeVqwHG">http://pastebin.com/rFeVqwHG</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:07.51</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>happens when I click on Edit -&gt; Combination Editor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:09.12</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>same goes for "Attribute Editor" and similar oneline error in command window for geometree command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:09.36</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>(mac os x)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:12.33</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>version from svn r43679</tt></td></tr>
+<tr><td><tt>08:04.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.172.12.71)</font></tt></td></tr>
+<tr><td><tt>08:04.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>08:14.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:52.07</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: is this what you need?&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/extrude.preprocess">http://bzflag.bz/~starseeker/extrude.preprocess</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:52.24</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>(that's without applying you're latest fix)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:53.16</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: as a rule, the include directory variables should do the right thing when a src/other dep is turned on or off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:53.20</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>(for cmake)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:53.46</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>that one is a particular problem because we can have the situation where regex is off and tcl is on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.20</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>(or was until the rename anyway)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:58.58</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>bah s/you're/your/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:00.52</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>sweet - that last tweak to extrude looks like it got it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:00.56</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>@anyone:&nbsp;&nbsp;How are tcl scripts 'automatically' loaded when mged launches?&nbsp;&nbsp;Aka, if I have a tcl script or two I'd like to put in a few of my scripts i've written and make them load whenever mged launches....</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:01.07</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>thanks for following that up brlcad - that was waaay out of my depth :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:01.35</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... I think you can do that by putting source statements in .mgedrc?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:01.46</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>righto, got that part</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:02.03</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>just with no user configging, aka 'its part of mged'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:02.49</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... you'd have to stick them in one of the directories that libtclcad's autopath logic (or the system tcl/tk) know about and alter the pkgIndex.tcl file (I think?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:03.07</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>take a look at what src/tclscripts files do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:03.36</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>awesome, thanks.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:06.28</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">eyes the failure of toyjeep.g to convert with release flags turned on... <a href="http://pastebin.mozilla.org/1126164">http://pastebin.mozilla.org/1126164</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:06.51</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>that seems to happen ONLY when I turn on release build flags - with debug flags it succeeds</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:09.01</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>is that another one specific to my system or has someone else seen it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:14.13</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>this is the problem child:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/pipeproblem.asc">http://bzflag.bz/~starseeker/pipeproblem.asc</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:20.45</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>starseeker: what do you mean with "convert"?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.25</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>asc2g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.37</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>d_rossberg: oh - have you had any chance to see if your particular cmake logic can work with the new cmake build?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.49</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>no, haven't tested yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.17</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - maybe I'm wrong, asc2g failed with both builpes...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.07</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>d_rossberg: k.&nbsp;&nbsp;I'll try to take a look myself if I get a chance - that's the main hurdle for being able to move the CMake logic to trunk (even if we don't use it as the "default" build logic)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.54</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>s/builpes/both build configs/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.31</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>here's a little more detail on the pipe failure: <a href="http://pastebin.mozilla.org/1126269">http://pastebin.mozilla.org/1126269</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.32</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>looks like VDOT is coming back with -1, which acos doesn't like...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.43</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>maybe it's -1.0000000..0001 ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.19</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>btw, i'll update may brlcad cmake branch for a short code review ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.43</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>wow, 35 mins to svn up.&nbsp;&nbsp;that's just painful :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.52</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43681 10/brlcad/branches/cmake/misc/CMake/test_srcs/timedelta_end.c.in: check fscanf here too to make compiler happy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.07</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, good - just needed a clean build - still avoids erroring out with debug and does with release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.24</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>this is as much as I know currently:&nbsp;&nbsp;<a href="http://pastebin.mozilla.org/1126326">http://pastebin.mozilla.org/1126326</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:02.26</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>why is acos(-1) not happy...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.57</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>d_rossberg: you may be right... let's see...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.21</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.27</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>d_rossberg: thanks :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.33</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>now, what to do...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43682 10/brlcad/trunk/src/librt/primitives/pipe/pipe.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: acos isn't happy if we go outside the domain -1,1 and it looks like floating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: point fuzz is taking us inside in some cases and out in others - peg it to -1 or</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 1 if we're within VUNITIZE_TOL to avoid uncertainty principle effects in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.44</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: conversion behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.58</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>actually, that may not be enough...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:18.36</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>starseeker: how about "angle = bn_pi - acos(min(1., max(-1., VDOT(v1, v2))));"?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.49</tt></td><td><font color="#5fb6b6"><tt>``Erik</tt></font></td><td width="100%"><tt>or vmath's CLAMP()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:22.20</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>it's tricky, because we DO want pipes to fail the check if they really do define a pipe that's not within floating point fuzz of sane limits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:22.46</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm just worried that borderline cases will still crop up...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:24.24</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>if the value is less than -1.0 + fuzz it should fail... but whether a particular value hits that threshold will vary from system to system...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:24.36</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>-1.0 - fuzz rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:25.53</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>it's almost like if it starts straying into bad (fuzzy) territory we need to clamp not the VDOT result but the input geometry values themselves to keep them out of the danger zone</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:27.21</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>but how do we do that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:28.19</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>first you have to put meaningful values to acos() and tan()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.10</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>only if this was the case you may evaluate new_bend_dist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.03</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and in my opinion the VDOT() problem is a double precision problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.19</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>there you have to "help" a little bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.22</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm betting what happened was a modeler in mged pushed the pipe right to its limits, which worked on that system but not on another.&nbsp;&nbsp;We need another category of return value from the check which says "valid but dangerous" to keep the modeler in MGED from setting to that value but to allow existing geometry that already has the borderline values to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.29</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: yeah, that's what I would have needed wrt extrude.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.48</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... has somebody been monkeying with MGED mouse bindings?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.30</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>both left and right mouse buttons zoom in, and perspective is on whether I ask for it or not...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.53</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to head in here...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.49</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: yeah, I messed with mouse bindings recently because of that problem, but maybe didn't get it right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.07</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>let me know when you're stable to test a change</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:45.39</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43683 10/brlcad/trunk/TODO: report that comb editor isn't working and jeep conversion failure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:46.33</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: go ahead - I'm done monkeying for the moment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.07</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>uh, pipe not torus (or are you seeing torus failures?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.19</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>ups, right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.31</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>"torus bend" failure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.45</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>that change I made to pipe.c does work, but I don't know if it's "right"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.43</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>we need an "editing" check I think that is tighter than the import check, but will allow movement of settings towards safer directions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.55</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>in the case of an import that has settings meeting import tolerance (i.e. "this was valid on some system but is fuzzy/dodgy here") but not editing tolerance "on this system we don't want this value, but since we already have it don't fail"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.41</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hits the road</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.53</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>starseeker: you may move the cmake logic to trunk, the brlcad.dll won't work but it looks like it can be fixed with reasonable effort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.40</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and don't bother the user with your numerical problems ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.16</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>prefer to solve the numerics to writing a dialog</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.33</tt></td><td><font color="#cb6b6b"><tt>starseeker</tt></font></td><td width="100%"><tt>one last note - I dunno how reproducible it is, but perspective was on with the jeep in release build and off in debug build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.23</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>on my system (MSVC) acos() accepts invalid values, the result is a nan</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.28</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>anyway, this kind of problem may arise always</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.30</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>if you can not be sure that the result of VDOT() is between -1 and 1 (as the theory would say) _and_ acos() has a problem with it you have to test it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.29</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>btw, your test isn't optimal: e.g. local_vdot = -1.5 would still crash</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.09</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>oops, there he goes :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.19</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r43684 10/brlcad/trunk/src/libtclcad/ged_obj.c: Fixed a problem with rect_mode that was causing an offset rectangle to be drawn.</tt></td></tr>
+<tr><td><tt>15:26.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (~poolio@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>15:26.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseek1r (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>15:28.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.27</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43685 10/brlcad/trunk/src/librt/primitives/pipe/pipe.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.27</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: why there are custom blocks of code to unitize the vector instead of calling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.27</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: VUNITIZE() is curious and potentially related to the fuzzy instability.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.27</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: regardless, tweak the dot product result if it just barely over/under-shoots due</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.27</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: to precision problems. using NEAR_ZERO/NEAR_EQUAL here isn't optimal since</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.28</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: it'll clamp values already within the valid [1.0,-1.0] range to the limit of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.29</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: that range.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:40.26</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>d_rossberg: good point about the range, but the dot should be between 1,-1 since they're both unit vectors .. code just wasn't obvious that they were being unitized</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:45.01</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43686 10/brlcad/trunk/src/librt/primitives/pipe/pipe.c: still need the lengths of v1/v2 for subsequent input validation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:55.43</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>brlcad: if vdot &gt; 1.0 =&gt; vdot = 1.0 and if vdot &lt; -1.0 =&gt; vdot = -1.0 otherwise acos() may crash the program!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.04</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>they're already unit vectors so vdot shouldn't be more than fuzz, or you saying check it anyways because it may crash (e.g., if there is REALLY bad fuzz)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.21</tt></td><td><font color="#77e3e3"><tt>brlcad</tt></font></td><td width="100%"><tt>works for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.46</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>check it the simple way, you do not know for sure what "small" is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.13</tt></td><td><font color="#b15db1"><tt>d_rossberg</tt></font></td><td width="100%"><tt>otherwhise the code is hard to understand (why he checks for 1.0+VUNITIZE_TOL? what happens if vdot is &gt;= 1.0+VUNITIZE_TOL?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:01.20</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43687 10/brlcad/trunk/src/librt/primitives/pipe/pipe.c: daniel has a good point, they're already unit so no harm saying anything outside of range is clamped to the range limit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.37</tt></td><td><font color="#ad5b5b"><tt>CIA-77</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43688 10/brlcad/trunk/src/librt/primitives/pipe/pipe.c: um, call CLAMP() dummy</tt></td></tr>
+<tr><td><tt>16:09.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob_ (~bch@20-144.wireless.kamloops.net)</font></tt></td></tr>
+<tr><td><tt>16:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (Here@c-69-140-109-104.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>16:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>16:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (~poolio@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vtts (~vytautas@diz.ktu.lt)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (MK@whitecalf.net)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (~alex_joni@emc/board-of-directors/alexjoni)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure_ (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (~b0ef@157.26.202.84.customer.cdi.no)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow_ (~dtidrow@c-68-60-96-218.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cjdevlin (~devlin@d118-75-252-178.try.wideopenwest.com)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad willdye (~willdye@fern.dsndata.com)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _psilva (~psilva@static-96-255-52-7.washdc.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dloman (~claymore@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure__ (~kanzure@bioinformatics.org)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>16:18.36</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by verne.freenode.net</font></tt></td></tr>
+<tr><td><tt>16:19.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad WhiteCalf (MK@2607:f0d0:3001:68::2)</font></tt></td></tr>
+<tr><td><tt>16:20.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-14 (~CIA@208.69.182.149)</font></tt></td></tr>
+<tr><td><tt>16:22.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith_ (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>16:22.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseek1r (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith_ (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-14 (~CIA@208.69.182.149)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad WhiteCalf (MK@2607:f0d0:3001:68::2)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (Here@c-69-140-109-104.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (~poolio@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vtts (~vytautas@diz.ktu.lt)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (~alex_joni@emc/board-of-directors/alexjoni)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (~b0ef@157.26.202.84.customer.cdi.no)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow_ (~dtidrow@c-68-60-96-218.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cjdevlin (~devlin@d118-75-252-178.try.wideopenwest.com)</font></tt></td></tr>
+<tr><td><tt>16:30.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad willdye (~willdye@fern.dsndata.com)</font></tt></td></tr>
+<tr><td><tt>16:30.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _psilva (~psilva@static-96-255-52-7.washdc.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>16:30.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dloman (~claymore@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:30.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure__ (~kanzure@bioinformatics.org)</font></tt></td></tr>
+<tr><td><tt>16:30.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>16:30.02</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by verne.freenode.net</font></tt></td></tr>
+<tr><td><tt>16:42.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>16:45.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianlarry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>16:55.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.01</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43689 10/brlcad/trunk/TODO: torus bend pipe failure should be working now, needs one final test on the platform that had the float fail.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.21</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>question about the tclIndex file:&nbsp;&nbsp;is that generated by something or do we/can we manually edit that (to add tcl scripts) ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.29</tt></td><td><font color="#68c6c6"><tt>tofu</tt></font></td><td width="100%"><tt>it's autogenerated</tt></td></tr>
+<tr><td><tt>17:38.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ezzieyguywuf (~wolfie@cpe-071-070-255-232.nc.res.rr.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.25</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>how do I delete a shape after I have made it with in? I know I can remove it from the framebuffer thing with erase, but I want to get rid of it completely.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>dloman: if you delete the file, it'll get regenerated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>same for pkgIndex.tcl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.31</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>kk, so how do i add a new tcl script then... just put the .tcl file into the src/tclscripts dir?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.52</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>depends on what the script is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.07</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>somewhere in the src/tclscripts hierarchy, but the routines are organized by purpose</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.27</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>i fixed the 'grouper' script (by request) so it now works with 7.18</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.52</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>figured id finally put it in the repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.13</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>that'd be the mged subdir then, or a subdir under there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.00</tt></td><td><font color="#b05c5c"><tt>dloman</tt></font></td><td width="100%"><tt>kk. danke</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.01</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>suggest reading a few of the other tcl files in here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>*there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.14</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>to make sure that it'll self-validate and load correctly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>src/tclscripts/mged/reid.tcl is a simple example of mged-command validation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.15</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt><font color="#CC00CC">waits</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.34</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>solclick.tcl is another</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.00</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: kill</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.12</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: excellent thanks.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.16</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the mged quick reference sheet lists all of the basic commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.23</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>avail on the website under docs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.40</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>bah, I should look at that. I was going through the docs in order, and I'm still on the tutorial thing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.44</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>Making a mug as we speak :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.00</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>excellent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.47</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>incidentally, I have a sort of general question about brl-cad: is it a good replacement for, say, SolidWorks or Pro/E. i.e. will I be able to make solid model represenations of parts, put assemblies together, and generate drawings in a relatively quick manner (once I'm proficient of course)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.10</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: you will be able to make solid model representations of parts, put assemblies together, and do so in a relatively quick manner once you ar proficient, but it does take some time and practice to become proficient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>wouldn't say any worse than sw or proe, but definitely different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.37</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>now drawing, though, are a different matter.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you can generate drawings, but not with dimensioning information</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.02</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>at least not yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.08</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: is there perhaps a third-party program you would recommend for doing drawings? with dimensioning and tolerances etc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.44</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>open source options are pretty limited, qcad comes to mind for 2D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.11</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hm, but in that case I'd have build the part from scratch anew?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.19</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>we're the next closest, but then annotations and dimensioning are still under development (my task for the upcoming month actually)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.58</tt></td><td><font color="#c769c7"><tt>yukonbob_</tt></font></td><td width="100%"><tt>annotations ++ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:53.11</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>interesting. Well, I plan on spending some time getting familiar and proficient with brl-cad (or whichever open source CAD package I settle on) before I try using it for any big projects. That will probably be a year + out.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:53.18</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: example of what you can get now:&nbsp;&nbsp;<a href="http://brlcad.org/gallery/s/renderings/havoc_rtedge.png.html">http://brlcad.org/gallery/s/renderings/havoc_rtedge.png.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:53.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>run "rtedge" in mged (or outside of mged) and you'll get a hidden-line rendering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.23</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>nice. But say I wanted to get that rapid-prototyped: could I export it into an appropriate file format for doing so?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.18</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>obviously if it was a part I wanted to have machined, I would need a drawing. but if it was going to be machined on a C&amp;C machine, I think those just take solid-model files as well.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.28</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: <a href="http://brlcad.org/tmp/converters_page23.jpg">http://brlcad.org/tmp/converters_page23.jpg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.49</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>we've had things rapid-prototyped from our files before with relative ease</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it depends how well modeled the object is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>most of the rapid prototypers handle STL (or iges for some of the better ones)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.16</tt></td><td><font color="#69c8c8"><tt>starseek1r</tt></font></td><td width="100%"><tt>ezzieyguywuf: if you can't run qcad (I don't think the free version ever got updated to Qt4) you might try the fork librecad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>facetizing a model is REALLY tricky business, only working without assistance about 85-95% of the time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.41</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>(most exporters require facetization)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.55</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hm, I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.17</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>note even packages like proe aren't 100%, they're around 90-95%</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.23</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I use gnome as my graphical environment, and gentoo just pulls in w/e qt libs it needs when I install stuff, so I don't think qcad will be a problem.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.30</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>are you familiar with free-cad? how does that stack up?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>decent project, leverages opencascade for nearly everything is actually useful .. but not something I'd consider useful for production work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.09</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hm I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.21</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>really depends on your specific use case and data, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.30</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>they might have just enough to do what you need</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.32</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>well thank you for your time. I'll keep working through the tutorials, and see where that takes me as far as long-term brl-cad use.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.35</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>they're just really in their infanccy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.48</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.01</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>feedback is definitely welcome as you work your way through</tt></td></tr>
+<tr><td><tt>18:04.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ezzieyguywuf (~wolfie@unaffiliated/ezzieyguywuf)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>if you run into a problem, folks are usually here to help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.42</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>yea, well first bit of feedback would be that I've found some very minor discrepencies between the tutorial and the prog, i.e. the first time it tells you to do 'Edit &gt;&gt; Set H' it says "Hit Accept when you're done" but doesn't tell you that Accept is in the Edit menu :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>good point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.36</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the "accept" command will also work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.00</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah, good to know.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.56</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I'm kinda beating myself up for not taking notes on these discrepencies. Also when it mentions colors in the Combination Editor, you have to first click on Show Shader to get that option.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.24</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43690 10/brlcad/trunk/doc/docbook/lessons/en/ (mged06_creating_a_goblet.xml mged09_globe_in_display_box.xml): apply suggestion from ezzieyguywuf to make sure we refer to the Edit *Menu* when telling then to select Accept.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:12.16</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: the menu itself is actually mentioned, but on about the third accept, two lessons later (I think. just for clarity)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.42</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43691 10/brlcad/trunk/doc/docbook/lessons/en/ (2 files): update other references to Accept on the edit menu, change click to select</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.08</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>:-D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.13</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so BRL-CAD was originally written and used by the 'ballistics research laborator' right? And one of the selling points (that I read on the site) is that its more than just 'skin deep'. What does all this mean though? I mean, does it mean I can design a mug and then drop a rock on it and see what happens?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.44</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the "Ballistic Research Laboratory" (BRL), yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.17</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>more than just skin deep is a reference to our solid modeling underpinnings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.37</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>as well as complete modeling of object interiors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.23</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>so if I'm modeling a vehicle, we're geared to represent every little bit of detail, do so with incredible efficiency, and still be able to analytically evaluate the model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.06</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>every nut, bolt, wire, interior and exterior, and have it actually be volumetrically accurate and mathematically well-defined</tt></td></tr>
+<tr><td><tt>18:23.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ezzieyguywuf (~wolfie@unaffiliated/ezzieyguywuf)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.50</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>wow, irssi just froze for the first time in...years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.57</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>welcome back ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.05</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>thanks :-)</tt></td></tr>
+<tr><td><tt>18:27.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (~robert@mediawiki/RobertL)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>so don't know when you got cut off there, but hopefully answered your question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.34</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>awesome - DOJ is starting an antitrust investigation of MPEG-LA</tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (~robert@mediawiki/RobertL)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianlarry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith_ (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-14 (~CIA@208.69.182.149)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad WhiteCalf (MK@2607:f0d0:3001:68::2)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (Here@c-69-140-109-104.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (~poolio@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vtts (~vytautas@diz.ktu.lt)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (~alex_joni@emc/board-of-directors/alexjoni)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (~b0ef@157.26.202.84.customer.cdi.no)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow_ (~dtidrow@c-68-60-96-218.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cjdevlin (~devlin@d118-75-252-178.try.wideopenwest.com)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad willdye (~willdye@fern.dsndata.com)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad _psilva (~psilva@static-96-255-52-7.washdc.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dloman (~claymore@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure__ (~kanzure@bioinformatics.org)</font></tt></td></tr>
+<tr><td><tt>18:38.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>18:38.25</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by verne.freenode.net</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.25</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I don't know where we got cut off either, let me check my logs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.52</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.32</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah yea, another quirk of the tutorial (and this is the second case of this, lesson 11. can't recall the frist): tute says to run mater mug.r&lt;ENTER&gt; but the mater command expects Usage: mater region_name shader r g b inherit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.10</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>just two lines missed then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.15</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>13:20 &lt; brlcad&gt; so if I'm modeling a vehicle, we're geared to represent every little bit of detail, do so with incredible efficiency, and still be able to analytically evaluate the model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.19</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>13:21 &lt; brlcad&gt; every nut, bolt, wire, interior and exterior, and have it actually be volumetrically accurate and mathematically well-defined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.49</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: but the actual analytical evaluation is done outside of brl-cad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.51</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: yeah, that's a relatively recent change to 'mater' that I'm not happy with -- it's not supposed to require all usage parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>basically a bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.20</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: ah. I thought maybe I (read gentoo) compiled it wrong, and this it wasn't interactive as it should have been.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.37</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad performs _geometric_ evaluation quite robustly, more complex analytic evaluation is performed outside</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.39</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I agree: why take away the interactive option of the tool? leave it in.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it wasn't intentional</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.57</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>just an oversight during a code change a while back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.53</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>these complex analytic evaluations that are performed outside, they'd have to be done reading the brl-cad database though, right? or does brl-cad provide an api to easily access the data that the external program would be? also, what are some examples of external programs for performing these analyses? ansys?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.17</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.22</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43694 10/brlcad/trunk/TODO: mater command lost interactive functionality, need to restore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.42</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>there are literally dozens</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.08</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>we provide a ray query interface which allows you to sample geometry in any matter you need for an analysis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.27</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>so lots of codes use that interface for a whole range of advanced purposes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.48</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>medical dosage analysis, vulnerability/lethality analysis, signal analysis, heat studies, structural</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.14</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm, interesting. very interesting.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.16</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>our closest link is V/L, the code's name is MUVES -- a closed code developed by the usgov</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.14</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the geometric analyses we directly perform are presented and exposed area calculations, volume, weight/mass, moments of inertia, centroids, and aforementioned shotline queries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.43</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, also overlap/interference detection</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe a couple others, but those immediately come to mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.10</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so I can do a lot with a solid-model mode in BRL-CAD.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.19</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>our weakness is converting to a surface model (polygonal) and direct design</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.49</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/Industry_Diagram.png">http://brlcad.org/Industry_Diagram.png</a> might give you an idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>still mostly accurate though we have expanded to right a little bit with NURBS and STEP support</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.17</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm, I can't make heads or tails of that diagram :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.30</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>lots of layers of information to digest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.47</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah, I see tha BRL-CAD shaded region now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.03</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so, I'm most familiar with SolidWorks: where would that fall on that diagram?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.33</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>or, more importantly, I'm starting work as a Mechanical Engineer soon: which aspects of that diagram would you think would be most useful to me professionaly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.36</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>for design work.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>might help to read it this way: CADD is basically AutoCAD industry, MCAD is systems like GibbsCAM, the center 'CAD' domain is where you'd place Solidworks, ProE, NX, CATIA</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>CAID is rather specialized systems, but that'd be systems like Rhino3D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.54</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah hah. the diagram is now making more sense.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the dotted domains are different purposes that those domains tend to cater to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.47</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>what is NURBS and STEP?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.08</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>and can BRL-CAD produce a mesh to use in, say, OpenFOAM?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>STEP is a file exchange format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.13</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>similar to IGES, successor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.16</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>NURBS is a boundary representation format -- what a lot of commercial CAD systems use to represent surfaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.27</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>(Non-Uniform Rational BSplines)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.33</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah, I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.41</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: <a href="http://brlcad.org/d/node/82">http://brlcad.org/d/node/82</a>&nbsp;&nbsp;&lt;-- talks about converters in a bit more depth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.55</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ok, question about the tutorial (sorry to keep shifting the convo back and forth): I'm still working on the mug, and when I do tree mug.r it shows that body.c is composed of u bodyout.s - bodyin.s, but a) the inner rcc is not dotted and b) when I raytrace the inner rcc is not cut out from the outer one. rather they seem to be merged into one.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.06</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>is it maybe that I have more things drawn on the screen than I want?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.14</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>is there a way to ls everything that is currently active?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.29</tt></td><td><font color="#cfcf6d"><tt>``Erik_</tt></font></td><td width="100%"><tt>heh, pixdiff of regular vs -c "set rt_bot_mintie=1" ... <a href="http://brlcad.org/~erik/bot20110304.png">http://brlcad.org/~erik/bot20110304.png</a>&nbsp;&nbsp;(vs a while back with <a href="http://brlcad.org/~erik/bot20101229.png)">http://brlcad.org/~erik/bot20101229.png)</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.44</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: type "who" .. you might have multiple objects displayed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.35</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: not too shabby!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.42</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>who lists bodyout.s, bodyin.s, handle.s</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.45</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>(only on 64b, crashes on 32b still)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.48</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: mirrors fail to convert?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.05</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>same source model, not sure why they're off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.27</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like you fixed all of the original failures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.52</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, backing off a tiny bit did that... more concerned about the 32b issue, then I need to get back to geomcore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: so when you raytrace, you're raytracing those three primitives, not mug.r</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.34</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.41</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>B mug.r will erase those three you're viewing and draw mug.r, then it should go to dotted for the subtracted objects and raytrace as you're expecting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.48</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>B mug.r...you beat me to it :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.09</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.28</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ok. mug looks proper, and yet the inner rcc is still not dotted.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.49</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I guess its a 'minor' thing but it bugs me because the dots would make things easier to visualize pre-raytrace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>can you post up your .g file somewhere?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.32</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>howdy, r43679 gives <a href="http://pastebin.com/BmmDXE2u">http://pastebin.com/BmmDXE2u</a> when selectin Edit-&gt;Combination Editor (and few others), does anybody know how to fix it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.36</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>anon ftp to brlcad.org if you don't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.39</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>yea, one sec. wait, I can't exactly pastebin it...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.53</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: saw your report last night, it's on our list to verify</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.12</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ok, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>thanks for reporting it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.37</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt><a href="http://ompldr.org/vN25zOQ">http://ompldr.org/vN25zOQ</a> &lt;--- mug.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: is this your own compile?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.12</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: if it is, retry with an --enable-all build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.28</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>brlcad, it is with --enable-all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.38</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, good to know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.18</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>to be precise: --enable-optimized --enable-threads --enable-all --with-agl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:13.50</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>is there a way to define a custom phong based custom shader (like plastic but with custom defaults)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.24</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>does brl-cad have a facility by which I can say, for example, "insert an rcc with its center at the same location as rcc1, a diameter that is 0.2 less, and a height that is 2 more (than that rcc1)" or do I have to manually check the dims of the first in order to make the second?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.27</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>'define' like write your own C evaluator, or just set different defaults?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.02</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>i'd just like to assign my_plastic to a region</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.17</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>multiple regions that is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.53</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>or any other way to change properties for multiple objects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.22</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>i'm thinking about custom shader and change'ing it's default settings, but not sure if it is possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: yes there is, you can customize any of the phong parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.57</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43695 10/brlcad/trunk/src/librt/primitives/bot/bot.c: we actually trigger this correctly now, so remove the extra debugging info</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.28</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts:&nbsp;&nbsp;the combination editor has a shader button, select it, enter your object name, hit enter, and you should see all of the parameters available</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.42</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>yeah i'm using it now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: does your wireframe look like this:&nbsp;&nbsp;<a href="http://brlcad.org/tmp/mug.png">http://brlcad.org/tmp/mug.png</a></tt></td></tr>
+<tr><td><tt>19:18.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (~robert@v001.rhl.me.uk)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.42</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>(besides the line thickness) the inner rcc looks dashed here</tt></td></tr>
+<tr><td><tt>19:18.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (~robert@mediawiki/RobertL)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.54</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>but have few objects and was thinking if it would be possible to define custom shader, assign it to regions, and modify its parameters (instead of settings for every object)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.37</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: it does not. let me take a screenshot.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.06</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: ah, that'd be "shader objects" which we don't yet implement but is on our wish list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.17</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ok then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.23</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: you can copy shaders from objects to objects without too much difficulty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.54</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: <a href="http://ompldr.org/vN25zYw">http://ompldr.org/vN25zYw</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.54</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ok, i guess i'll catch up with that with tutorials</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.19</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>vtts: which tutorial are you on? I'm on the mug :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.27</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: huh, that is bizzare</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.29</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ezzieyguywuf, i guess the same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.46</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: crazy huh? Maybe I have an odd version? how can I check my vers?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.47</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: try "Z"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.01</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>then redraw the mug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.00</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>your version is on the window titlebar, 7.16.8 -- wireframe code hasn't really changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.16</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: <a href="http://ompldr.org/vN25zZg">http://ompldr.org/vN25zZg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.20</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you can try opening one of the example geometry database files, havoc.g for example, </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.32</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>what could you recommend to generate something like first/third-angle projections (with measurements if possible)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: yeah, at a glance I would say we didn't have the same .g so apparently a bug of some sort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: hate to say it, but try restarting mged, redraw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.18</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I'll try, though this has persisted across multiple sessions of mged with different databases</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.20</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>note that the raytrace rendering not changing underneath is correct, not a bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: first/third-angle projections?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.55</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: yea I know, I zoomed into the wireframe to make it easier to see, but left the raytrace so you could see it really was hollowed out.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.09</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts, do you mean a perspective view?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.20</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: k, just making sure :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>some are confused by that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.30</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's intentional</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.33</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>brlcad, yes, but for printing with measurements and so on.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: Misc -&gt; Perspective will turn on perspective viewing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.32</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt><a href="http://ompldr.org/vN25zZw">http://ompldr.org/vN25zZw</a> brlcad: also, I sometimes get a garbled mged screen, as seen in this screenshot. if I shift-translate the object, though, it draws appropriately.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you can set the exact angle on the command line with "set perspective [value]" or "set perspective" to see the current value</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.59</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: yea, restarted, still not dashed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.03</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I'm doing 'draw mug.r'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.49</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: that's probably with the framebuffer enabled and you resize the window, yes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.50</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>brlcad, view'ing is not the problem, multiplane is quite good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.05</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>but i'd like to generate some specs. with measurements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: you're seeing uninitialized framebuffer memory -- can either turn the framebuffer off, or (as you found out) refresh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.42</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>not the best, but has been low priority to address since data isn't affected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.03</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: ah ok. is framebuffer something that is brl-cad specific, or is it the same framebuffer that is referred it in my linux kernel etc?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.09</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: it's the same concept as referred to in the kernel, but different construct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.10</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43696 10/brlcad/trunk/TODO: resizing embedded framebuffer sucks, fix it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.11</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>=== load framebuffer; +++ refresh framebuffer; === &lt;rest of code&gt; :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.08</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: ezzieyguywuf just asked about that earlier today (as do many) .. annotations and dimensions are currently being worked on but not yet ready</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.39</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you can get the model rendered as a hidden line rendering but annotations would have to be added manually in another tool unfortunately until that support is complete</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.08</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ok, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.24</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>what does 'mater' stand for? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.00</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>physical substance :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.19</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>:-P and how are the mater and shade commands different?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.28</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>until then, this is about as close as you'll get <a href="http://brlcad.org/gallery/s/renderings/havoc_rtedge.png.html">http://brlcad.org/gallery/s/renderings/havoc_rtedge.png.html</a>&nbsp;&nbsp;and&nbsp;&nbsp;<a href="http://brlcad.org/gallery/s/screenshots/extractor.png.html">http://brlcad.org/gallery/s/screenshots/extractor.png.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.46</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>easily scripted for a series of views, but still no annotations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.02</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ok, np</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.11</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43697 10/brlcad/trunk/TODO: Got a report of nirt not working correctly on Windows - Bob has reproduced this and is working on it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.46</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>'help mater'&nbsp;&nbsp;.. mater is short for material</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.52</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.29</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>which is a bit of a misnomer in that context, because it's technically just the shader for visualization -- the actual material code is set/used elsewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.57</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>yea, I was getting confused. "Where's the density? Material properties? Etc?"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.41</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: should we add a rename of mater-&gt;shader to the deprecation.txt file?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>oof</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.13</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>probably, but that's hard even for me to swallow .. because it's been 'mater' forever :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.37</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>lol. its cool, I'll just keep thinking of that character from the Cars (tm) movie :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>mater is still better way to set the other combination properties, object color and inheritance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.12</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>shader only sets the shader</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.18</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>so would have to resolve the other two </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.42</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: probably best to just hit up the lower hanging fruit first, that one requires figuring out new command(s) and options to cover mater's existing commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>s/commands/settings/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.05</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.11</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>just a thought while it came up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.47</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I think you're right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.51</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>just maybe "not now"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.20</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so is there a way to print out the geometry of a given object? i.e. if I create an rcc and later want to see what its vertex, height and radius are?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.07</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>'l'</tt></td></tr>
+<tr><td><tt>19:48.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.12</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>for list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.16</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: oh, and to answer your question from earlier, there are a few custom commands for creating objects based on cylinder end points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.31</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>rcc[tab][tab] should show them, help should describe them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.18</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: sweeeeet.&nbsp;&nbsp;The head of the old simplesat project sent me about 180 autocad dwg files detailing the simplesat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.30</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I was asking more for in general though. For example, in SolidWorks I usually create an object, draw some costruction lines, and then place things 'tangen' or in the 'middle' or 'coincident' etc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.43</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>s/tangen/tangent/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.47</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: AWESOME!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.55</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>are they solid or drawings only?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.01</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I wonder if I can build things relative to other things in brl-cad as well.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.12</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>drawings only, but he says it was all him so they should be public domain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.21</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>awesome material for a modeling project :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.22</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: well, I guess drawings. but then I can 'mate' solid things in an assembly using similar relations.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.36</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>oh, nwm you were asking him.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.05</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>ezzieyguywuf: heh, sorry - irc conversations are often kinda jumbled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.06</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: there are ways, but they're fairly manual ways and they won't (yet) stay constrained</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.22</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.40</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I can see that being an issue if I make a part and end up wanting to scale it, for whatever reason.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.48</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>how would you approach that in brl-cad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.00</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>edit the database directly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.04</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>they'll scale up just fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.35</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>because you'll have combined associated objects together into common regions or groups, and the scale would apply to all members</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.44</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>well, in the mug example: if I wanted a mug twice as big, I'd have to double the size of the inner rcc, the outer rcc, and resize the handle appropriately.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.55</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, no you woudln't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.06</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you'd just apply a matrix edit to the mug, and scale it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.32</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm i see. the subject of a later lesson in the tutorial maybe?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.08</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>if you select Edit -&gt; Matrix Edit, then select mug.r, then select any one of your primitives in the next window, you'll be able to select Scale on the Edit menu among a whole other range of edit options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.12</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.31</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>cool cool, I'll keep trudging along then.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it starts out really basic just because there are so many foreign concepts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.40</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>yea I gotcha.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.49</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>even for people with CAD experience, we deviate in some respects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.53</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>s/some/many/ :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.55</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>its like learning to walk again, except its learning te solid model again :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.09</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>lol.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.42</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods, I hear ya</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.12</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>working on improving our usability is a bigger-picture area we're working on, but that's major long-term complicated work :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>developing a new easier-to-use gui while not alienating existing expert modelers is pretty tricky..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.10</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>meh, I'm not afraid to spend a week or two learning a new software.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.19</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>kinda got used to it working with linux :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.51</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: I kind of like that I can do everything from a command-line if I want</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>with the exception of two of them, all the models on <a href="http://brlcad.org/gallery/s/renderings/">http://brlcad.org/gallery/s/renderings/</a> were completely designed within BRL-CAD in anywhere from a couple days to a couple months for the more complex models (which some of the experts have down to just a couple weeks for even the most complex)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.11</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>one of the reasons I stuck around: I was mucking about in SolidWorks last week and had to do some repetitive stuff and thought to myself, "hey, this would be so easy to script"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.39</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>now scripting is actually one of our strengths! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.50</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>we do that better, more flexibly, than most</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.15</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you just have to know the command layer basics first :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.16</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>yea! that's why I want to learn brl-cad.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.18</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the goliath is a pretty good example of what's possible in a short amount of time -- that was modeled by a summer student from scratch (starting with a ruler and pad of paper, and the mged tutorials) in about 6 weeks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.33</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/gallery/s/renderings/goliath/">http://brlcad.org/gallery/s/renderings/goliath/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.08</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so theoretically, I could take that goliath model and run it through an FEA program do a heat-transfer analysis on it somehow?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.22</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>i.e. the project is useful for than just pretty pictures?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.07</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43698 10/brlcad/branches/cmake/ (20 files in 6 dirs): MFC r43697</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.31</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the actual one they measured: <a href="http://armor.callihan.cc/gallery/goliath/06-Aberdeen_0165.JPG">http://armor.callihan.cc/gallery/goliath/06-Aberdeen_0165.JPG</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.42</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.48</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the bridge to FEA is a pain because most require conversion from solid model to polygonal, but we do have a stable export path through Sandia National Lab's Cubit tool, which is one of the best at finite element meshing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.49</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>mulitpane mode = awesome.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.11</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>it would be even better if there was a way to make secondary planes react to view changes of the primary one :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.54</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>vtts: ah hah, that would be sweet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.06</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I like how its un-coupled though, that comes in handy too.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.14</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>but I see how coupling two or more views would be nice.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.37</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>vtts: how would they react?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.58</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>well they all have a center point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.14</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>it would be nice to see changes relative to it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.46</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>e.g. moving view, or changing azimuth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.52</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>I'm not used to it, so shortly after starting using it got confused about orientation of the object in secondary panes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.00</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>but thats just me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.17</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>if I am in edit mode, how do I shift the screet without resizing the object I'm editing?</tt></td></tr>
+<tr><td><tt>20:16.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>20:16.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dloman (~claymore@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.28</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>I can zoom it/out with left/right click, but I want to pan too</tt></td></tr>
+<tr><td><tt>20:16.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.09</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ezzieyguywuf, try using "x", "y", "z" keys</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.14</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>ezzieyguywuf, or ae command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.36</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: there are a slew of bindings (including pan)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.51</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>shift grips document lists them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.34</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks tonight would be a good time to see how the libredwg project is coming... I can convert these to something else on-by-one if I have to, but scripting it would be so much nicer/easier...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.42</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>by the way, ctrl+alt+mouse-click doesn't work as it's supposed to on mac :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.16</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43699 10/brlcad/trunk/ (5 files in 2 dirs): more tfloat-&gt;fastf_t/TIE_3-&gt;vect_t|point_t conversion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.46</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so the diff between combinations and regions is that a combination is a combination of primitave objects to make a particular, more complex geometry, whereas a region is a combination of combinations and/or primitative objects to create a complex object with material props right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.36</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>ezzieyguywuf: a region is regarded as a solid object - if two regions overlap, it is a modeling error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.52</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>combinations under a region can overlap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.38</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>but how come I go to the combination editor to edit shading etc, and not the 'region editor'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.03</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>because the same editor can edit both regions and combinations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.08</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>regions are just combinations with a flag set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.09</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm, I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.50</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>in hindsight it would probably have been better to make the user interface respect the whole "regions are special" mantra a bit more, but it currently reflects the implementation reality (regions are combs with a flag)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.24</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>also: is sloppy focus hard coded into mged? I have my window-manager set up so that focus does NOT follow the mouse, only mouse clicks. but between my framebuffer and mged command-line I see sloppy focus.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.40</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>starseeker: good to know.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.50</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>not sure about the focus</tt></td></tr>
+<tr><td><tt>20:35.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.17</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ok question: how come when I change the color via the combination editor, I have to blash the respective region/combination in order to see the new color?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.53</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>you mean why isn't the color update reflected in the wireframe?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.53</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43700 10/isst/trunk/configure.ac: libtie is no more, just librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.57</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>starseeker: yea.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.26</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>if we're drawing a model with a LOT of lines (BoT models can have huge numbers) a wireframe view update is non-trivial from a resource perspective</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.35</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>that'd be my guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.39</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>hrm, I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.44</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>what is BoT?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.50</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>bag of triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.50</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43701 10/isst/trunk/gtk/ (gui.c isst.h local_worker.c main.c net_worker.c): update to compile against latest BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: in brl-cad language groups are assemblies, regions are parts, and combinations are the mechanism for structuring regions and groups</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.55</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>starseeker, is there a command to check if regions overlap?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.55</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so combinations are like drawings.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.08</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>in SolidWorks that is (I caught the assemblies and parts reference)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.14</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>vtts: rtcheck</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.20</tt></td><td><font color="#baba62"><tt>vtts</tt></font></td><td width="100%"><tt>superb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.45</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>man, lot of irc network issues today</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.56</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>silly irc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.15</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: sort of like "drawings", but since we're strictly 3D-only, we refer to them more as "shapes"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.36</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>gotcha gotcha.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.38</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>a shape becomes solid and occupies space when you put it in a region</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.11</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>so it makes sense to use a 'region editor' then, and not a 'combination editor' yea?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.31</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>since strictly speaking combinations are just representations of what will eventually be a solid object.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it really should just be an "object editor" and show you parameters accordingly based on the object you're editing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the next generation interface eliminates that distinction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>just shows a panel of parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.37</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>ah hah. b/c I can change the color of the wireframe which represents the combination.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.43</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>cool.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.49</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43702 10/isst/trunk/sdl/ (Makefile.am event.c isst.h main.c myplugin.c): disable texture fonts, make compile with current BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes our release TODO is getting LONGER faster than it's getting shorter.. urg!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.31</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>lol.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.39</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43703 10/geomcore/trunk/tests/svntest/main.c: Got lists of assemblies and regions, but a deep keep of the region is not quite so simple. This seems like it might be another case where librt functionality is in order, but might already be there... need to check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.52</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: sorry to say it but search is nfg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.44</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>actually seems royally busted, all three tests failed on a simple model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.58</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>you're kidding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.08</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>what tests?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.40</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>tried:&nbsp;&nbsp;search . -name mug.g&nbsp;&nbsp;(returned error about failing to make a plan)&nbsp;&nbsp;search / -name mug.g&nbsp;&nbsp;(returned nothing)&nbsp;&nbsp;search .&nbsp;&nbsp; (crashed mged)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.41</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">debates between screaming and crying...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.20</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>probably best to just revert trunk to prior state for release, get it into the next release .. assuming tie bot raytracing works; if it doesn't then we have more time still</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.48</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>s/mug.g/mug.r/ .. was using the .g ezzie posted earlier</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.00</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://ompldr.org/vN25zOQ">http://ompldr.org/vN25zOQ</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.48</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like "search /" has plan problems, returns unknown option passed to find_create()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>then Error: Failed to build find plan.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.22</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>I don't believe it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.30</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>how did it go south so fast?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.38</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>or maybe I was dreaming...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.41</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will revert</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the librt code can probably stay, doesn't have to be full revert</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.03</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>will need to revert raytrace.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.14</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">grinds teeth...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.09</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43704 10/geomcore/trunk/tests/svntest/main.c: something not right here... keep isn't creating much of anything in the way of geometry...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.28</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>not good... can't afford this right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.07</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>you're in good company, lots of hard show-stoppers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.23</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>see if bob can fix the combination editor while's he's in there working on nirt :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.57</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: real quick - does search in its current form work on the command line?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.07</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43705 10/brlcad/trunk/src/librt/primitives/bot/tie_kdtree.c: clean up #if 0 stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.10</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>e.g. mged mug.g search . -name mug.r</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.18</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>. works, / doesn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.25</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>interesting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.45</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>search . also still crashes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.41</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">sees one error right off</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.57</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: before I revert, can you give r43706 a go?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.09</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43706 10/brlcad/trunk/src/ (libged/search.c librt/search.c): Variety of fixes to both libged and librt search logic.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.59</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.57</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43707 10/brlcad/trunk/ (5 files in 2 dirs): revert to 43698, caused weird errors in output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.03</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43708 10/brlcad/trunk/src/libged/search.c: Catch another odd input case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.18</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>wow, isn't that like all of your changes ``Erik </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.55</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, this was a really weird one, bunches of misses showing up even on cubes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.02</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>bastage O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.51</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">waits in suspense...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.24</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>how can I do a primitive selection from the command-line?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.26</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: rebuilding now, testing in a few</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.35</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: sed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.35</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43709 10/brlcad/trunk/TODO: combination editor bug confirmed, mged init on mac DISPLAY issue wasn't specific to mged so not a show-stopper (mged stall if started from Terminal, restarting X11 fixed it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.57</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>sed and oed are the two ways to go into an edit mode from the command line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.17</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>the latter being pretty powerful, but a bit obtuse to use -- there is a tutorial dedicated to it on the website</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.40</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's how you'd scale up, translate, rotate groups of geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.00</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: ah, thanks.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.20</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>heh, funny how so many of mged commands are the same as unix commands.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.21</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r43710 10/brlcad/trunk/ (4 files in 2 dirs): shift tie min/max to point_t</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.28</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that's looking MUCH better already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>'search .' and 'search /' don't do the right thing, but quick test with -name and -type seem to work as expected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.16</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>globbing doesn't seem to be working right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.38</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g.: search . -name *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.31</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>try search . -name \* maybe?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.36</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>hm. same test that worked on the simple model is returning nothing for havoc for both "search . -type c" and "search / -type c" .. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.39</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>or from the command line search . -name \\*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.40</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>tried that, nothing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.02</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, variety of regression failures even for /</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.06</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>odd, works here...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.22</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>oh wait, type...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.37</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>no, that works too...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>worked on the mug model, but not havoc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.35</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries havoc</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.10</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>seems to work...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.32</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>uh...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.36</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>what platform?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.03</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>10.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.39</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43711 10/geomcore/trunk/tests/svntest/main.c: Woot - that was it, ignore nref in node write and we get content</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.56</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, worked if I restarted mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.10</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>hope you're not using static variables somewhere...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.42</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>not intentionally...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.59</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>there we go, got it to repeat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.59</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>not sure how it's caused, but eventually, I can get it into a state where it stops working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.04</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.11</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">starts reverting...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.32</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds like it's really close, but just not very stable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.55</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>it just returns nothing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.01</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.11</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>opened havoc, everything I tried worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.13</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>and you just did searches for a while?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.14</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>including globbing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.40</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>then swapped to mug.r, repeated random -type -name searches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.07</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>some intentionally working but some not working (that should, like "search ." and "search /")</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>then switched back to havoc (via opendb), and it was dead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.43</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>uh... what do you expect for search . and search / - there's no plan there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>plan is optional</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.17</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>according to usage at least, which is how 'find' is too -- should return everything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>no plan</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.15</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>I doubt that has ever been true - if it was, it was accidental</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.15</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>search . becomes very similar to "ls *", search / becomes like "tree [tops]"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.15</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>I remember trying it earlier at one point and you had it working :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.19</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>not intentionally</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>subpath searching seemed to have issues too, search /havoc -type c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.36</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>search /havoc/. -type c was fun</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.51</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>fun as in didn't do anything :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.30</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>it's a pretty good bet the option parsing for the strings isn't up to all those options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.22</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.57</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>I had to be getting lucky on how things fell through earlier, 'cause I sure didn't have anything sophisticated in place</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.08</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>that last one would have been fine, heck could even limit usage to just "search [.|] [plan]" but having it stop outright after a bit is disconcerting :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.09</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>the "do nothing" thing worries me more</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.24</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.35</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>you can't hook a debugger up and track it somehow?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.45</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will try to reproduce...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.04</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>not at the moment, have build working on the other issue, but can poke on it some more in a bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.34</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>cool - I'll lay off reverting for now then.&nbsp;&nbsp;From what ``Erik was saying, it sounds like he's got a bit more to go there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.05</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: think it'll be this weekend or you'll need more time?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:03.01</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>think he's on his way home</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.23</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>k, sending an update to the list then</tt></td></tr>
+<tr><td><tt>23:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianlarry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.19</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>you know, I start mged from a terminal. unless I explicitly type exit into mged, though, the process stays alive. i.e. I can X out the framebuffer window (which destroys the mged prompt window as well) and kill the term that I launched mged from and the process persists. I feel like this is a serious issue.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.38</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: the iteration over dbip-&gt;dbi_Head is failing - all the directory pointers are coming back null</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.49</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>how could that happen?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.20</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: maybe something is freeing memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.10</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>it's not that... I checked ls, it's working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.19</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>most are null, but clearly not all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.22</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>it works for 64b, 32 gets off... I think there may be a rogue ptr += sizeof(bah*) that's not quite right or something... feel free to take a look if ya want, there's not that much code... the optimized split routine is a major portion, and it's not used with the default path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.26</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">forgot it's a hash table</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.41</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>(mebbe I'm too deep in it, fresh eyes might spot something obvious)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.43</tt></td><td><font color="#cfcf6d"><tt>``Erik</tt></font></td><td width="100%"><tt>(my only 32b box is fbsd, which might align things different than other platforms, too...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.34</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is down in the pattern matching in the back trace now, which is scary scary turf...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.49</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>ezzieyguywuf: if you can characterize exact steps to reproduce the problem and what you're expecting it to do (even if it's exactly the steps you just mentioned), please report it as a bug to the bug tracker:&nbsp;&nbsp;<a href="https://sourceforge.net/tracker/?func=add&amp;group_id=105292&amp;atid=640802">https://sourceforge.net/tracker/?func=add&amp;group_id=105292&amp;atid=640802</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.09</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>brlcad: sure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.12</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>closing the graphics window is supposed to shut down mged (whereas closing the command window is not)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.30</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>I known issue on Mac OS X makes it not close there, but should work for linux</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.47</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>and windows, don't know that it's been tested there in a while</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.50</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>maybe its cuz I'm running it in gnome and not a qt-based DE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.07</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't matter, but can describe your setup in the report</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.37</tt></td><td><font color="#68c668"><tt>ezzieyguywuf</tt></font></td><td width="100%"><tt>you sure that link you gave me is right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.11</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r43712 10/brlcad/trunk/TODO: yet another, gqa gets in line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.53</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc, it's actually the job of the terminal program to decide whether to kill or detact processes that are still running if a terminal session is closed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>so that might be a gnome-terminal issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>but closing the graphics window should have exited mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's right if you already have an sf account, otherwise, can go here:&nbsp;&nbsp;<a href="https://sourceforge.net/tracker/?group_id=105292&amp;atid=640802">https://sourceforge.net/tracker/?group_id=105292&amp;atid=640802</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.54</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt>bug reports require an sf account so we can interact with the submitter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.39</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>aaand I wiped out the process that reproduced it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.40</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>lovely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.31</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>ah ha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.58</tt></td><td><font color="#68c6c6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs a good shader example</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.30</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r43713 10/brlcad/trunk/src/librt/search.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.31</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: Looks like that doggone global was stuck in 'on', and because it started that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.31</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: way the plans never formed properly - they assumed no output command was needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.31</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: when it was. The global was inherited from the design of find, and I never</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.31</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: cared for it, but it'll be a bit of work to do it any other way so for now just</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.31</tt></td><td><font color="#c36666"><tt>CIA-14</tt></font></td><td width="100%"><tt>BRL-CAD: make sure it's zero before we start forming plans.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

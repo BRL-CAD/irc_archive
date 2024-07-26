@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20140606</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20140606</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:04.44</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei__: I didn't just say "investigate dbl_epsilon" ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.47</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei__: I said "look for other uses of NEAR_ZERO and IF you cannot find any, use dbl_epsilon" </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.18</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>I know, but I don't understand what to use NEAR_ZERO for?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.36</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>I assume NEAR_ZERO is a macro that checks if a value is very close to zero</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.24</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: fft is actually a good example of a succinct set of routines that stand on their own ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.29</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>I also don't think it's a good idea to end up with monolithic libraries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.35</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>if something is organized enough that it could very well live on it's own, especially dependency-wise (it does not depend on libbu or libbn structures) we should let it ... it's a move towards library modularity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.54</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>I was looking in librt/primitives/ell/ell.c&nbsp;&nbsp;on how NEAR_ZERO it's used, but I would need to subtract and then compare to zero with that. I'm probably missing the point, but this way doesn't make any sense to me</tt></td></tr>
+<tr><td><tt>00:17.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries_ (~ries@190.9.171.121)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.42</tt></td><td><font color="#b45fb4"><tt>raj12lnm</tt></font></td><td width="100%"><tt>hi brlcad !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.07</tt></td><td><font color="#b45fb4"><tt>raj12lnm</tt></font></td><td width="100%"><tt>do you think that email which I sent on the group. Is that a bug ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.52</tt></td><td><font color="#b45fb4"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Also, When I change that on my local machine and run the build. And then try to run the python code. (it works :))</tt></td></tr>
+<tr><td><tt>00:41.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries_ (~ries@190.9.171.121)</font></tt></td></tr>
+<tr><td><tt>00:57.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Zhao_Anqing (~clouddrif@183.157.160.27)</font></tt></td></tr>
+<tr><td><tt>01:05.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Zhao_Anqing (~clouddrif@183.157.160.9)</font></tt></td></tr>
+<tr><td><tt>01:14.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.18</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:zhaoanqing * 61152 brlcad/branches/nmgreorg/src/libged/nmg_simplify.c: change simplify routines to fit new nmg structure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.43</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:zhaoanqing * 61153 brlcad/branches/nmgreorg/src/libged/shells.c: change routines about shells to fit new nmg structure.</tt></td></tr>
+<tr><td><tt>02:15.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.08</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>hcurtis: you must build before you can link against and use BRL-CAD functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.40</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>hcurtis: don't bother with creating a cmakelists.txt file, it's important to build by hand first so you understand how compilation and linking work and what the options mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.15</tt></td><td><font color="#c0c065"><tt>hcurtis</tt></font></td><td width="100%"><tt>brlcad: Ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.39</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>raj12lnm: ignore mk_constraint for now, that's new API that will likely change</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.09</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>hcurtis: you don't need to install, but you do need to build and know where/how to link against the libs you built</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.29</tt></td><td><font color="#c0c065"><tt>hcurtis</tt></font></td><td width="100%"><tt>The good news is that I started the build quite a while ago. The bad news is that it's still going. It takes hours.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.33</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>raj12lnm: haven't gotten a chance to look into whether it's a bug yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.50</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>it will take a while</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.00</tt></td><td><font color="#c0c065"><tt>hcurtis</tt></font></td><td width="100%"><tt>brlcad: It is still building. To find and use bu.h for my program, I considered using the gcc -I option, but my research seemed to say that it wouldn't be "clean" enough of a technique. A lot of information sources named the use of a cmakelists.txt file as a good alternative.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.08</tt></td><td><font color="#c0c065"><tt>hcurtis</tt></font></td><td width="100%"><tt>To tell the compiler where to find bu.h for use with my program, should I use the command gcc -I? If not, would any of you be willing to steer me in the right direction?</tt></td></tr>
+<tr><td><tt>03:34.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.49</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>hcurtis: i'm not sure I understand what is unclean about using the -I option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.19</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>you only need gcc, stick to using the compiler</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.28</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>tell it what to compile and how to compile it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.15</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 61154 brlcad/trunk/TODO: update for release, g_ tools were renamed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.18</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 61155 brlcad/trunk/sh/enumerate.sh: remove authorship</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.47</tt></td><td><font color="#c0c065"><tt>hcurtis</tt></font></td><td width="100%"><tt>brlcad: Ok</tt></td></tr>
+<tr><td><tt>04:09.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mihaineacsu (~mihaineac@92.85.193.175)</font></tt></td></tr>
+<tr><td><tt>04:42.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>04:48.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alisha (~alishajai@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>05:02.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu_ (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:04.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Zhao_Anqing (clouddrift@210.32.187.203)</font></tt></td></tr>
+<tr><td><tt>05:12.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad devinder (~chatzilla@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>05:16.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ejno (~ejno@unaffiliated/kazaik)</font></tt></td></tr>
+<tr><td><tt>05:17.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22 (~maths22@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:17.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:24.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck__ (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu__ (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed_ (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mihaineacsu (~mihaineac@92.85.193.175)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ankesh11 (sid8015@gateway/web/irccloud.com/x-osqeyjxstnjlphoz)</font></tt></td></tr>
+<tr><td><tt>05:27.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck__ (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tofu__ (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed_ (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mihaineacsu (~mihaineac@92.85.193.175)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr><td><tt>05:33.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ankesh11 (sid8015@gateway/web/irccloud.com/x-osqeyjxstnjlphoz)</font></tt></td></tr>
+<tr><td><tt>05:41.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>06:59.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alisha (~alishajai@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:00.06</tt></td><td><font color="#5b5bae"><tt>alisha</tt></font></td><td width="100%"><tt>#freecad</tt></td></tr>
+<tr><td><tt>07:49.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad devinder (~chatzilla@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>08:08.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pandrei (~pandrei@86.121.194.210)</font></tt></td></tr>
+<tr><td><tt>08:09.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad oana_ (~elf11@109.97.151.101)</font></tt></td></tr>
+<tr><td><tt>08:36.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>09:02.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>09:12.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:15.18</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>!seen brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:15.57</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>meh, can't remember infobot command</tt></td></tr>
+<tr><td><tt>09:16.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@84-72-11-5.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:18.36</tt></td><td><font color="#bc63bc"><tt>oana_</tt></font></td><td width="100%"><tt>~seen brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:18.39</tt></td><td><font color="#bdbd63"><tt>infobot</tt></font></td><td width="100%"><tt>brlcad &lt;~sean@66-118-151-70.static.sagonet.net&gt; was last seen on IRC in channel #brlcad, 5h 38m 11s ago, saying: 'tell it what to compile and how to compile it'.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:18.55</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>ah, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:19.00</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>it's with ~</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:19.07</tt></td><td><font color="#bc63bc"><tt>oana_</tt></font></td><td width="100%"><tt>you're welcome :)</tt></td></tr>
+<tr><td><tt>09:47.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@84-72-11-5.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>09:50.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei__ (~IceChat77@86.121.194.210)</font></tt></td></tr>
+<tr><td><tt>10:27.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@84-72-11-5.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>10:29.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22 (~maths22@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:29.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ejno (~ejno@unaffiliated/kazaik)</font></tt></td></tr>
+<tr><td><tt>10:31.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:32.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:33.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:33.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:33.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:33.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:35.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad oana_ (~elf11@109.97.151.101)</font></tt></td></tr>
+<tr><td><tt>10:42.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>10:49.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad devinder (~chatzilla@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:50.11</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>andrei__: to find out where rtip-&gt;rti_tol.dist_sq you could try: grep -R "\.dist_sq =" *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:50.54</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>in brlcad or rt^3?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:51.23</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>in src/librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:53.50</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>you'll see it's a product, then what is your next grep search?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:54.06</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>src/librt/tol.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:54.08</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>it's here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:55.06</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>I am very confused at this point. I don't understand if the tolerance is something hardcoded of a certain value(in Arb8 it's 0.0001) in tol.c it's 0.0005</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:55.24</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>or if it s something I have to get from the database, something that the database functions set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:55.36</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>cause you have that Object parameters that are inherited </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:55.40</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>like m_internalp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:56.30</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>it's really hardcoded, and the bad news is the result of "grep -R rt_tol_default *"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:57.19</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>then it's much, much simpler than I imagined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:58.04</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>rt_tol_default is in the&nbsp;&nbsp;same file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:58.06</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>in tol.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:59.04</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>it's the function defined in tol.c, and this file is the only hit for the search, this means ...?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:59.11</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 61161 (brlcad/branches/d-binding/misc/d-bindings/D.g4.txt =================================================================== and 1377 others): add D grammar in BNF form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:59.13</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:d_rossberg * 61159 rt^3/trunk/src/coreInterface/FileDatabase.cpp: no db_dirbuild() after db_create()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:59.59</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>that the epsilon I should use is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:00.10</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>rt_tol_default(my_tol_var)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:00.23</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>so that if the hardcoded value changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:00.29</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>my code still fits to it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:01.53</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>no, the functionality defined in tol.c is nowhere used ==&gt; you have to look again for the right place in the code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:02.52</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>I tend to consider brlcad(collection of sources) and rt^3 two separate entities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:03.45</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>in rt^3, there were two places I found anything connected to that tolerance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:03.48</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>this is not the question, you want to find out what the value of dist_sq is in sphere.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:03.48</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>the ConstDatabase</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:04.09</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>so you serch with grep for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:04.25</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>you found one promising place in tol.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:04.41</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>but this is dead code, nowhere used in librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:04.53</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>so, how to prceed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:05.28</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>you already know that dist_sq = dist * dist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:05.44</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>therefore lets look for dist:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:05.46</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>so I need to look for dist?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:05.55</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>cause there's no other result for dist_sq</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:06.18</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>"grep -R "\.dist =" *" or "grep -R "&gt;dist =" *"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:06.59</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>most of the hits are special settings for primitives, one is in tol.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:07.18</tt></td><td><font color="#5fb4b4"><tt>andrei__</tt></font></td><td width="100%"><tt>ok,&nbsp;&nbsp;1 min, I'll reboot,got an kernel oops</tt></td></tr>
+<tr><td><tt>11:09.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pandrei (~pandrei@86.121.194.210)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:09.23</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>there, ok, let me see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:10.22</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>ok, that grep returned a few primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:10.30</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>but not the one I'm looking for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:11.45</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>yes, you are looking for the one in prep.c</tt></td></tr>
+<tr><td><tt>11:12.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (31cd6b50@gateway/web/freenode/ip.49.205.107.80)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:12.22</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>sorry for asking but, why?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:12.48</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>I mean, how could I have figured this on my own</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:14.15</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>nevermind, I'll note it down somewhere and ask you when there's more time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:14.40</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>at the end you had only two choises: prep.c and wdb.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:15.36</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>there is a nmg/nmg_* </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:16.04</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>yes, but this is only relevant for the nmg primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:17.09</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and in prep.c you have the rt_new_rti() function which gives you exactly the stucture you handle with in rt_sph_prep()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:17.42</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>well, thanks. I doubt I would've figured without you </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:18.02</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>:) it's called lerning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:18.13</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the solution for your code is simple: 0.0005 * 0.0005</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:18.22</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>yes, I was updating the patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:18.25</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>just now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:18.29</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the way to get the solution isn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:19.25</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>well, now I know not to look necessarily for a direct connection when searching for an answer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:19.39</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>maybe that'll help at some point</tt></td></tr>
+<tr><td><tt>11:21.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad oana_ (~elf11@109.97.151.101)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:30.02</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:zhaoanqing * 61162 (brlcad/branches/nmgreorg/include/raytrace.h brlcad/branches/nmgreorg/src/librt/primitives/nmg/nmg_mk.c): reorder the routines in nmg_mk.c to fit declaration.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:30.04</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:zhaoanqing * 61156 (brlcad/branches/nmgreorg/include/raytrace.h brlcad/branches/nmgreorg/src/libged/bev.c and 8 others): change rest routines in libged to fit new nmg structure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:31.39</tt></td><td><font color="#6fd3d3"><tt>clock</tt></font></td><td width="100%"><tt><font color="#CC00CC">read first "change chest routines"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:31.45</tt></td><td><font color="#6fd3d3"><tt>clock</tt></font></td><td width="100%"><tt><font color="#CC00CC">maybe does too much gym</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:31.59</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>hahaha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:32.14</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 61163 (brlcad/branches/d-binding/misc/d-bindings/extract-grammar.pl =================================================================== and 378 others): rename file to relect its purpose; add capability to handle on of two grammars: C or D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:32.16</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:zhaoanqing * 61157 brlcad/branches/nmgreorg/src/mged/edsol.c: change mged routines to fit new nmg structure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:32.18</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:d_rossberg * 61160 rt^3/trunk/include/brlcad/Combination.h: for convenience's sake: a simple test for NULL, public default constructors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:32.57</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>d_rossberg: hi, daniel. I find some warning C4251, should I try to fix them?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:33.12</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>in librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:33.35</tt></td><td><font color="#6fd3d3"><tt>clock</tt></font></td><td width="100%"><tt>I was wondering about writing an article about modeling in BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:38.40</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>Zhao_Anqing: it looks like it's a cmake thing which is changing frequently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:39.12</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 61164 brlcad/branches/d-binding/misc/d-bindings/convert-grammar.pl: update the comment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:39.14</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>something with dll-interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:42.25</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>Yes, It appears when dll-export class using stl classes, e.g. list&lt;&gt;, queue&lt;&gt;.. I search the solution from the webpage which suggest just disable the warning C4251.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:45.39</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>you should ignore this warning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:46.04</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>Ok. I see.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:48.21</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>stl via dll can rally be a problem, but with a c-runtime dll and sam version of the stl on both sides as in BRL-CAD it should be ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:51.20</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>Fine.</tt></td></tr>
+<tr><td><tt>11:52.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:53.37</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>d_rossberg: Then, I hope to consult you about how to change the function nmg_merge_regions(nmgregion*, nmgregion*, const struct bn_tol *)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:54.03</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>now, there is no nmgregion struct.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:54.15</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>so should I replace it by struct tree*?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.14</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>It become nmg_merge_regions(union tree*, union tree*, const struct bn_tol *)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.01</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:zhaoanqing * 61158 (brlcad/branches/nmgreorg/include/raytrace.h brlcad/branches/nmgreorg/src/librt/primitives/nmg/nmg_fuse.c and 2 others): routine 'nmg_isect_ray_shell's input parameter list needn't second one. it can be replaced by the shell in 'ray data'.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:11.39</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>as far as i can see nmg_merge_regions() isn't an nmg-shell function, it's simply the union of two combinations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:13.03</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>if you need it as a function it would be something for the comb/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:13.21</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>with tho rt_comb_internal as parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:15.42</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i.e. rt_comb_merge(r1, r2)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:18.09</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>OK. So is it true that I can use the method you taught me yesterday to deal with this function?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:18.57</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>and where should this function located at? still in nmg_mod.c or any other place?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:20.12</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the place would be src/librt/comb because it operates on combinations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:22.02</tt></td><td><font color="#cd6ccd"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and yes, the function would have to be similar to _ged_combadd2(), but with adding a whole boolean tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.13</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>OK. Thank you. Now I understand and will try it.</tt></td></tr>
+<tr><td><tt>12:58.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries_ (~ries@190.9.171.121)</font></tt></td></tr>
+<tr><td><tt>13:23.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>14:14.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>14:18.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alisha (~alishajai@115.245.166.88)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:46.36</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Krajkreddy * 7215 /wiki/User:Krajkreddy/GSOC14/summary: /* Week3 */</tt></td></tr>
+<tr><td><tt>14:46.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.33</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 61165 brlcad/branches/d-binding/misc/d-bindings/convert-grammar.pl: continue making mods to handle C or D grammar</tt></td></tr>
+<tr><td><tt>14:57.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alisha (~alishajai@115.184.32.42)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.22</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 61166 (svn:ignore ## -3,6 +3,8 ## and 18 others): update ignored filesProperty Changed:----------------brlcad/branches/d-binding/misc/d-bindings/</tt></td></tr>
+<tr><td><tt>15:06.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.10</tt></td><td><font color="#5eb3b3"><tt>mihaineacsu</tt></font></td><td width="100%"><tt>~seen brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.14</tt></td><td><font color="#bdbd63"><tt>infobot</tt></font></td><td width="100%"><tt>brlcad is currently on #brlcad (4h 36m 8s) #bzflag (4h 36m 8s) #stepcode (4h 36m 8s) #gsoc (4h 36m 8s), last said: 'tell it what to compile and how to compile it'.</tt></td></tr>
+<tr><td><tt>15:14.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr><td><tt>15:34.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad oana_ (~elf11@109.97.151.101)</font></tt></td></tr>
+<tr><td><tt>15:35.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr><td><tt>15:47.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cwstirk (~charlie@c-107-2-138-189.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.36</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 61167 (brlcad/branches/openscenegraph/BUGS brlcad/branches/openscenegraph/CHANGES and 1067 others): Update openscenegraph with trunk changes through r61164</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.41</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>hi, I want to ask the description of a routine should be writen in *.h file, not at *.c. Am I right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.50</tt></td><td><font color="#6fd3d3"><tt>clock</tt></font></td><td width="100%"><tt>ThI would guess so, in h is where the using programmer looks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.09</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>clock: thank you. I ask this because I find most descriptin about nmg part is at *.c, not *.h.</tt></td></tr>
+<tr><td><tt>17:12.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~ishwerdas@117.220.147.238)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.32</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>interface should be in the .h file, implementation documentation can live in the .c files where it makes sense... (and nmg is not exactly a golden example. Check out libbu for a better "how to do it" for those kinds of questions)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.21</tt></td><td><font color="#6fd3d3"><tt>clock</tt></font></td><td width="100%"><tt>Zhao_Anqing, to be 100% sure, write two mutually contradictory descriptions, place one into *.c and another into *.h :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.36</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>/* that jackass in nmg.h doesn't know what he's talking about, the REAL deal is ... */ O:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.25</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>@@</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.39</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>OK. So should I take some time to move the comments about nmg from .c to .h?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.25</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>clock: I don't understand, you mean write two mutually contradictory description...should be avoid?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.38</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>if the comments are about the exposed interface, yes... the .h is where you go to see how to use it, the .c is where you go to see how it works inside</tt></td></tr>
+<tr><td><tt>17:25.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.46</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>Yes, that's my point.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.40</tt></td><td><font color="#6fd3d3"><tt>clock</tt></font></td><td width="100%"><tt>Zhao_Anqing, I meant it as a joke... of course contradition in descriptions is wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.35</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>Aha~, I guess that's a joke, but not quite sure. I am not good at English enough. you know that's not my mother tongue. however, thanks for your help. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.06</tt></td><td><font color="#6fd46f"><tt>Zhao_Anqing</tt></font></td><td width="100%"><tt>I understand this question completely now. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.33</tt></td><td><font color="#64bebe"><tt>``Erik</tt></font></td><td width="100%"><tt>sorry if my 'jackass' joke contributed to the confusion.. libbu would be the example to look at if you need to see 'the right way', a lot of attention was paid to making it 'right' as far as style, documentation, convention, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.32</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:14.98.156.234 * 7216 /wiki/User:Shainasabarwal/GSoC14/logs: /* Week 3 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.16</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 7217 /wiki/User:Vladbogolin/GSoC2014/Logs: /* Week 3 */</tt></td></tr>
+<tr><td><tt>19:44.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alisha (~alishajai@115.244.165.92)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.43</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Popescu.andrei1991 * 7218 /wiki/User:Popescu.andrei1991/devlogs2014: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.30</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Popescu.andrei1991 * 7219 /wiki/User:Popescu.andrei1991/devlogs2014: /* Week 3 */</tt></td></tr>
+<tr><td><tt>19:58.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>20:04.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip68-102-30-143.ks.ok.cox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.46</tt></td><td><font color="#6262bb"><tt>pandrei</tt></font></td><td width="100%"><tt>anyone else familiar with the coreinterface? Except Daniel?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.51</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 61168 (brlcad/trunk/doc/docbook/system/mann/en/search.xml brlcad/trunk/src/librt/db_diff.c and 3 others): Add a -param option to search (needs more testing.) This will allow searching based on internal parameters of an object (as opposed to general attributes) provided those internal attributes have a tcl list representation. It has so far successfully used 'mode' as a filter for listing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.53</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>volume and plate BoT primitives, and a couple other parameters. Probably will need to add a table listing the valid parameters available for the various primitives to the search man page, since it's not immediately obvious what the possibilities are.</tt></td></tr>
+<tr><td><tt>20:24.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22_ (~maths22@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>20:24.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseek1r (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>20:25.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>20:28.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (31cd6b50@gateway/web/freenode/ip.49.205.107.80)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.44</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 61169 brlcad/trunk/src/librt/search.c: Refactor part of the avs checking code common to both param and attr functions.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:00.18</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:49.205.107.80 * 7220 /wiki/User:Krajkreddy/GSOC14/summary: /* Week3 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.00</tt></td><td><font color="#5c5caf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 61170 (brlcad/trunk/doc/docbook/system/man1/en/hex.xml brlcad/trunk/doc/docbook/system/man1/en/imgdims.xml): use different style for command name at start of sentence</tt></td></tr>
+<tr><td><tt>22:00.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>22:06.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@gateway/tor-sasl/teepee)</font></tt></td></tr>
+<tr><td><tt>22:39.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>23:06.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>23:36.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

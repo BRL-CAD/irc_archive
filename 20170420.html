@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20170420</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20170420</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:19.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>00:19.54</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is GSoC students: if you have a question, ask and wait for an answer ... responses may take minutes or hours. Ask and WAIT. ;)</font></tt></td></tr>
+<tr><td><tt>00:32.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad edpetmxmrjwmfzrj (~armin@dslb-088-067-249-032.088.067.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>02:01.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:19.25</tt></td><td><font color="#7474dc"><tt>DaRock</tt></font></td><td width="100%"><tt>starseeker: how does it find TERMLIB_LIBRARY? What is it looking for exactly?</tt></td></tr>
+<tr><td><tt>06:54.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>06:55.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DaRock1 (~Thunderbi@mail.unitedinsong.com.au)</font></tt></td></tr>
+<tr><td><tt>07:27.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elpea (~chatzilla@dsl-hkibrasgw5-58c04d-211.dhcp.inet.fi)</font></tt></td></tr>
+<tr><td><tt>08:17.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee] (bc5c2134@gateway/web/freenode/ip.188.92.33.52)</font></tt></td></tr>
+<tr><td><tt>09:26.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-139.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>11:13.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@104.225.5.10)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:29.37</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>starseeker: I'm spinning here, can't quite get my head around it. FindTERMLIB has some real quirks in it - I don't get the cmake stuff enough yet, but what appears to be happening is I get successes and finally a fail on a missing LIBTERM_INCLUDE_DIR. What I don't get is where the fail is happening exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:33.24</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>starseeker: and here's why - firstly, the variable is set (correctly); and secondly, the logs indicate yet a different issue entirely. When it runs a test compile to see all is well, it still looks for libterm! And it succeeds as far as I can tell. I ran the compile manually myself to see - couldn't do the cmake particular stuff though so maybe thats the failure. BSD has libtermlib.so so thats probably why</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:35.08</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>starseeker: so if its in the system already, there'd be no need for the builtin anyway - except it can't seem to find it. But I'll buggered if I can figure out a patch yet :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:41.26</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>starseeker: actually one thing has struck me - I don't see anywhere that the automation can even be overridden. It looks like it ignores any input in that area and _only_ tries to determine it itself. Which might explain why it finds the system termlib and goes with it - but doesn't check the others - and then failure means it fallsback to the builtin. But why the fail when everything seems to succeed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:42.53</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>starseeker: last piece of info, that I'm not sure about and have little to go on with, is in the logs after the last test compile it states a return value of 1, not succeed or anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:43.25</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>DaRock: but does the libtermlib.so in BSD come with the development (aka header) files?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:44.08</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>any chance you could quickly tell me the header file for it? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:44.30</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>to enable the termlib which comes with brl-cad you have to set BRLCAD_TERMLIB to BOUNDLED</tt></td></tr>
+<tr><td><tt>11:44.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elpea (~chatzilla@dsl-hkibrasgw5-58c04d-211.dhcp.inet.fi)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:44.57</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>not the aim atm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:44.57</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>sorry BUNDLED</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:45.43</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>is the termlib in the base system or a package?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:45.56</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I have term.h, termios.h, termcap.h, ncurses.h, curses.h, ....</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:46.01</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>base</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:48.01</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>but if it has the lib, it usually has the header - just not sure which that is right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:48.26</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and ncurses-curses are the same here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:49.58</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>d_rossberg: I'll also point out that building tests works fine for termlib according to the logs and my own compilation btw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:50.14</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>so the headers must be found</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:50.47</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt><font color="#CC00CC">is just looking in the BRL-CAD sources for a termlib header, couldn't fine one yet</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:50.58</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:51.09</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>what do you know of cmake, then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.14</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>it looks like you need termcap.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.50</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>can you see if there's any reference to user set variables having any effect here? ie I should be able to set TERMLIB_LIBRARY or TERMLIB_INCLUDE_DIR and it should honor those</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.59</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>sorry - file is misc/CMake/FindTERMLIB.cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:58.33</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>it also doesn't appear to set any variables (particularly those 2 mentioned) once found - so when it runs that final check... failure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:59.30</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>no include is set, so it may as well play pong for a bit, then continue with the builtin anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:00.07</tt></td><td><font color="#dc74dc"><tt>``Erik</tt></font></td><td width="100%"><tt>DaRock: a lot of cmake info is shoved to stdout and never saved anywhere, it might offer a clue if you rm -rf'd your build dir and ran cmake &gt;&gt; logfile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:00.43</tt></td><td><font color="#dc74dc"><tt>``Erik</tt></font></td><td width="100%"><tt>(I think termlib might only be used in a couple weird places, like nirt and burst... not sure on that, though)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.26</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>``Erik: and a lot is not output, and is only found in the logs - I'm reading both. But that misc/CMake/FindTERMLIB.cmake file is _definitely_ faulty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>``Erik: stdout - -- Found ZLIB: /usr/include&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Found LEMON: /usr/local/brlcad/bin/lemon&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Found RE2C: /usr/local/brlcad/bin/re2c&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Found XSLTPROC: /usr/local/bin/xsltproc&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Looking for tputs in termlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Looking for tputs in termlib - found</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Performing Test LIBTERM_RESULT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.53</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Performing Test LIBTERM_RESULT - Success</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.53</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Could NOT find TERMLIB (missing:&nbsp;&nbsp;TERMLIB_INCLUDE_DIR) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.54</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>CMake Warning at CMakeLists.txt:480 (_message):</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.54</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.55</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.55</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>Call Stack (most recent call first):</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:04.56</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:05.00</tt></td><td><font color="#dc74dc"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, yeah, it's using bundled on one of my bsd boxen, :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:05.36</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>probably all. same port after all - same here :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:05.55</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>this all began from a png fault...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:06.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>then a conflict with tk/tcl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:07.19</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>the bandaid fix is to allow all bundled... but that just increases dist size, increased chance of conflicts (ie tk)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:08.11</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>apparently its simply going to fail unless you use bundled - which is ok for average user who wants it to work out the box, but if you're a porter or packager... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:09.35</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>``Erik: btw - urt is not a dependency afaict. There is no need to deprecate the port because urt is builtin - and in fact probably been ignoring the dependent port anyway :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:10.45</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>but that gets us back to this builtin issue - we should be able to choose system if wanted and add builtins only if needed (like urt)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:12.27</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>``Erik: can you run a test for me? Comment out the urt under LIB_DEPENDS and see if it builds&nbsp;&nbsp;- you might be quicker on the resolve there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:12.40</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and runs, mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:19.39</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>so does anyone know enough about the cmake system to see what needs to change? Honoring overrides, whether the variables are properly set, etc?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:23.36</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i'm using the cmake-gui, there i see all the parameters and can play with them (e.g. trying to set TERMLIB_INCLUDE_DIR to /usr/include)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.07</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>does that let you see them during build? Or only prior?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.03</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I don't see anywhere in FindTERMLIB.cmake where that variable is set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.26</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>before and after the cmake run, the log messages of the runs are shown in the gui too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.30</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I see it says it can be set, but doesn't check it or set it itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.46</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>sounds useful :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:27.03</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>FIND_PACKAGE_HANDLE_STANDARD_ARGS() should set TERMLIB_INCLUDE_DIR</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:27.41</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>How? I thought it only checked it was valid?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:28.00</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>afaict thats the fail point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:28.15</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>it isn't set, so that macro fails</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.24</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>or have I misread the docs on that one?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.09</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>that macro fails, then the build fallsback to builtin termlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.26</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'm installing cmake-gui now :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:32.24</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt><font color="#CC00CC">is just checking the FIND_PACKAGE_HANDLE_STANDARD_ARGS()</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.24</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'm a newb at cmake, so tell me if I'm wrong. I read the logic as include some macros, create a new macro that checks header files for a func and validates the include dir and sets the link opts, then runs a series of checks of different terminal/cursor libraries for tputs. (does absolutely nothing with this info) It then starts to setup a test env, and backs up the required libs variable, then sets it to the termlib_Library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.07</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>runs a quick compile test, and grabs the result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.20</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>can't figure out the mark_as_advanced yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:39.15</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>then runs Find_Package_Handle_Standard_Args which determines if the library exists, and if the include dir exists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:42.29</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>d_rossberg: so how does cmake-gui work then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:45.12</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>just call cmake-gui, set the build directory there (the souce directory should be automatically set then), and hit configure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.30</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>as far as i can see the THIRD_PARTY macro (defined in misc/CMake/ThirdParty.cmake) in src/other/CMakeLists.txt line 211 should find and set the TERMLIB_INCLUDE_DIR</tt></td></tr>
+<tr><td><tt>13:03.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.57</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>DaRock: the bug seams to be in THIRD_PARTY() it doesnt set the _INCLUDE_DIR for system libraries at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:13.56</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>actually yeah, now that you mention it I didn't see anything either. I'm still trying to process it myself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:14.49</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>That's one bug. I'm wondering if the FORCE is making it only use termlib as well.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:15.46</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>but shouldn't that be something that can be overridden anyway?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:16.03</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>so why not honor it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:17.17</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>or is it only ever going to do things automatically?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:23.22</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>so would I be right in saying that set(TERMLIB_INCLUDE_DIR "/usr/include") should be used after/in the if(BRLCAD_TERMLIB_BUILD) statement?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:23.36</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the FORCE shouldn't be the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.03</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>TERMLIB_INCLUDE_DIR should be an empty string, i.e. no special directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.14</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>why?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.17</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>if that's valid ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.51</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>/usr/include will always be recognized</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.56</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>actually, that is practically forcing the use of termcap - why bother checking ncurses then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:25.09</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>not atm...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:25.25</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and that's why I'm having trouble I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:26.31</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>there is no honoring cli input or env vars - its not even checking. The it simply sets its own&nbsp;&nbsp;- /and/ fails</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.02</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>finally falling back to the bundled for no good reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.22</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>is there anyway to test the FIND_PACKAGE_HANDLE_STANDARD_ARGS separately?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.46</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>THIRD_PARTY() is the one which should be fixed, i think; just looking at it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.20</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>ok, just ran the build with an adjustment to FIND_PACKAGE_.... blah blah (tired of typing that out :) ) by using an empty string instead of the include dirs and it succeeded</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.57</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>it fails on /usr/include. Weird... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.23</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>d_rossberg: so how do we fix it then? use a set()? Check for user set variables?</tt></td></tr>
+<tr><td><tt>13:39.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:afd0:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.26</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>as i've said: i'm just looking at it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.33</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>why all the redundant checks btw? It looks like it checks basically the same thing at least 3 ways...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.12</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>LOL! I just checked and unless you have an empty string as the last arg it will always fail!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.34</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and again, why is that check needed anyway? It only checks if the include dir exists, and that has already been checked at least twice before!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.02</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>fwiw I think FORCE shouldn't be in the set() there already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.12</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and if the test always fails anyway, I'm not sure TERMLIB_INCLUDE_DIR should even be set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.00</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>lol indeed, the macro in FindTERMLIB.cmake is called from THIRD_PARTY() before it's able to set TERMLIB_INCLUDE_DIR to any meaningful value</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.17</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>FORCE and CACHE together in a set command are depricated, that's true, but not forbidden</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.12</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>however, there are mor obvious issues here than the FORCE (which prevents you from hacking it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.48</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>FORCE overrides any user set vars, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.48</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>for starters TERMLIB_INCLUDE_DIR is never set AFAICT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:13.08</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>secondly, any value in the last arg will cause a failure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:13.22</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and why is it needed at all anyway? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:13.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>other than that, whats the more obvious issues? lol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.01</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>DaRock: include the line "find_path(TERMLIB_INCLUDE_DIR NAMES termcap.h PATH_SUFFIXES include)" somewhere in FindTERMLIB.cmake before the FIND_PACKAGE_HANDLE_STANDARD_ARGS() and test it again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.15</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>using the standard FindZLIB.cmake as reference it looks like it is in the responsibility of the find macro to set the include directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.47</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>theres a find_path(TERMLIB_INCLUDE_DIR ${lname}.h) in the macro found there already. I didn't realise that set anything though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.34</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>but that of course doesn't include the PATH_SUFFIXES include</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.55</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>should I simply change the current find_path line?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.42</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>? where did you found the find_path?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.03</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>in FindTERMLIB.cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.15</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>around 41</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.35</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and which revision? i can't find it here: <a href="https://sourceforge.net/p/brlcad/code/HEAD/tree/brlcad/trunk/misc/CMake/FindTERMLIB.cmake">https://sourceforge.net/p/brlcad/code/HEAD/tree/brlcad/trunk/misc/CMake/FindTERMLIB.cmake</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.35</tt></td><td><font color="#ba61ba"><tt>gcibot_</tt></font></td><td width="100%"><tt>[&nbsp;&nbsp; BRL-CAD / Code /&nbsp;&nbsp;[r69674]&nbsp;&nbsp;/brlcad/trunk/misc/CMake/FindTERMLIB.cmake ]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:45.55</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>however, find_path(TERMLIB_INCLUDE_DIR termcap.h) could be sufficient as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.18</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>in 2013 the find_path() was removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.38</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>lname should be the library name shouldn't it? and so expand?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>where do I find the rev?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.59</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the point here is that the header file's name isn't termlib.h but termcap.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.24</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>do you work with subversion?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.30</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.48</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>but?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.50</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'd say the point is that FindTERMLIB goes through a series of checks to find a working solution, but only uses the first one - termlib. Why the checks? Why override any user input? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.38</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'm using the ports system on FreeBSD, so I believe it grabs the releases</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.46</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'll run a check though...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:53.47</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>all I have is 7.24.0 in the Makefile in the ports tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.07</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>ncurses etc. are possible replacements for termlib?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.26</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>according to FindTERMLIB.cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.10</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>so, </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.12</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>it runs through a series of checks - and takes the first working one afaict</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.38</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>FindTERMLIB.cmake looks for possible replacements of termlib as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.31</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'm not 100% sure of its effectiveness though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.10</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>but none of that fixes the final issue of the Find_Package_.... last arg failure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.42</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>some find_path() is definitely missing, it must set TERMLIB_INCLUDE_DIR too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.06</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>well if find_path() sets the TERMLIB_INCLUDE_DIR then its is doing that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.21</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i.e. in the 7.24.0 sources you could try to replace find_path(TERMLIB_INCLUDE_DIR ${lname}.h) by find_path(TERMLIB_INCLUDE_DIR termcap.h)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.43</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I don't believe that is the main issue though - the last line (macro) fails because any string aside from an empty one causes it to spit out missing include</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.00</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I thought that if TERMLIB_INCLUDE_DIR wasn't set it would cause the fail as well, but if it is actually setting it, then it will definitely go boom - tested that already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.05</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I've set it to "", "/usr/include", "/usr/local/include" and it failed on the final 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.11</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>"" worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.41</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>removing the last arg entirely fixes it too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.11</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>so FIND_PACKAGE_HANDLE_STANDARD_ARGS(TERMLIB DEFAULT_MSG TERMLIB_LIBRARY) works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.35</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>line 79</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.43</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>really? i tried it and the compile (make) failed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.01</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>maybe it works with the 7.24.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.38</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>not sure about the compile, but the macro doesn't come back with a failure at least. Compilation is another issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.46</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>however, FindTERMLIB is reposible for setting TERMLIB_INCLUDE_DIR</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.04</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>yes but that macro is in FindTERMLIB</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.32</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and regardless of whether that variable is set it will fail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.44</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>unless it is an empty string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.18</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>alright - this getting very confusing....</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.04</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I'm going through sources of output - CMakeError.log, CMakeOutput.log, and stdout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>They all disagree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.31</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>CMakeOutput.log says STATUS: Performing Test LIBTERM_RESULT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.31</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>STATUS: Performing Test LIBTERM_RESULT - Success STATUS: Found TERMLIB: /usr/lib/libtermlib.so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>Stdout says -- Looking for tputs in termlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Looking for tputs in termlib - found</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Performing Test LIBTERM_RESULT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Performing Test LIBTERM_RESULT - Success</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.16</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>-- Found TERMLIB: /usr/lib/libtermlib.so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and it finally says CMake Error: The following variables are used in this project, but they are set to NOTFOUND.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>Please set them or make sure they are set and tested correctly in the CMake files:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.52</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>TERMLIB_INCLUDE_DIR (ADVANCED)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.27</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>CMakeError.log says include files terminfo.h, termio.h, termlib.h, tinfo.h not found</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.50</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and thats with the last arg removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.15</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>if the last arg is TERMLIB_INCLUDE_DIR then I don't see -- Found TERMLIB: /usr/lib/libtermlib.so or STATUS: Found TERMLIB: /usr/lib/libtermlib.so, I get NOT FOUND</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.27</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>3 tests for the basically the same thing, the can all succeed, it it will still fail - why?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.29</tt></td><td><font color="#6767c4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 69675 brlcad/trunk/src/external/CREO/CMakeLists.txt: MSVC isn't happy when linking - see if we can throw it some stubs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.38</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>DaRock: i fixed the system termlib issue in the current development branch (trunk)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.38</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>what is missing in the 7.24.0 is mainly the test if the find_path() was successful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.50</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>ok. I'll have a look later... brain's fried :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.08</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>how does that go?</tt></td></tr>
+<tr><td><tt>17:01.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gabbar1947 (uid205515@gateway/web/irccloud.com/x-eiyyrpuqhseukfjm)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.45</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>look at the current <a href="https://sourceforge.net/p/brlcad/code/HEAD/tree/brlcad/trunk/misc/CMake/FindTERMLIB.cmake">https://sourceforge.net/p/brlcad/code/HEAD/tree/brlcad/trunk/misc/CMake/FindTERMLIB.cmake</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.46</tt></td><td><font color="#ba61ba"><tt>gcibot_</tt></font></td><td width="100%"><tt>[&nbsp;&nbsp; BRL-CAD / Code /&nbsp;&nbsp;[r69676]&nbsp;&nbsp;/brlcad/trunk/misc/CMake/FindTERMLIB.cmake ]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.53</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>look at <a href="https://sourceforge.net/p/brlcad/code/HEAD/tree/brlcad/trunk/misc/CMake/FindTERMLIB.cmake">https://sourceforge.net/p/brlcad/code/HEAD/tree/brlcad/trunk/misc/CMake/FindTERMLIB.cmake</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.54</tt></td><td><font color="#ba61ba"><tt>gcibot_</tt></font></td><td width="100%"><tt>[&nbsp;&nbsp; BRL-CAD / Code /&nbsp;&nbsp;[r69676]&nbsp;&nbsp;/brlcad/trunk/misc/CMake/FindTERMLIB.cmake ]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.45</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>(sorry) after the find_path() there is an if statement which checks if it was successful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.37</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>whith a similat statement in the 7.24.0 version of the file it should work too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.19</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>ok, I see that. But why was the last macro failing with the TERMLIB_INCLUDE_DIR then? and why did it fail with manually setting it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.31</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>and what happens with the RESOLVE_LIBRARIES() and LINKOPTS?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.20</tt></td><td><font color="#6767c4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:d_rossberg * 69676 brlcad/trunk/misc/CMake/FindTERMLIB.cmake: the macro was unable to detect a system termlib because of not setting TERMLIB_INCLUDE_DIR which causes FIND_PACKAGE_HANDLE_STANDARD_ARGS() to fail (and maybe something more)the necessary find_path() was removed in 2013 =&gt; integrated find_path() again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.23</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>manually: because of the FORCE (all variables are FORCED initialized with invalid values)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.12</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and the macro was failing because it found the libtremlib.so but not the termlib.h header file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.54</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>but this generally ok because libtermlib.so is only a symbolic link</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.28</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the macro finds the real library later on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.47</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>which is ncurses in FreeBSD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.29</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>RESOLVE_LIBRARIES() and LINKOPTS seem to be not necessary (any more?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.31</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>SOB!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.45</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>I should have picked that up!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.40</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i don't think this was a trivial issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.48</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>there are some links all over though - usually between .so and .a files though, so it slipped through... damn! I should have got that though - sorry about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.57</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>righto... I might have a crack on those later then - try remove and see if it doesn't like it. Should work later too if it works on 7.24.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.20</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>libtermcap.so is a link too but there is a termcap.h header file - which has ncurses maros</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.47</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>thanks for the help through it - I'll post back my results later once the brain's/body's had a chance to recover</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.07</tt></td><td><font color="#dbdb73"><tt>d_rossberg</tt></font></td><td width="100%"><tt>it was a bug in BRL-CAD nevertheless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.29</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>it does make it confusing - there probably should be a link to the header for libtermlib as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.43</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>in BSD that is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.02</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>if there's one for termcap it makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.14</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>probably a lack of interest...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.22</tt></td><td><font color="#d771d7"><tt>DaRock</tt></font></td><td width="100%"><tt>thanks for the fix btw</tt></td></tr>
+<tr><td><tt>17:48.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LoH|Work (cdafe260@gateway/web/freenode/ip.205.175.226.96)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.01</tt></td><td><font color="#6767c4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 69677 brlcad/trunk/src/tclscripts/checker/check.tcl: Change meaning of -F option. Instead of subtracting first unioned solid from every unioned solid of the other tree, subtract from only the first unioned solid. Less likely to resolve the overlap, but more symmetrical and intuitive.</tt></td></tr>
+<tr><td><tt>17:54.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>18:05.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.07</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>I recently installed BRL-CAD on a 128GB SATA3 SSD with a clean Windows 10 (64bit), and when I try to start the application I get this:&nbsp;&nbsp;he application was unable to start correctly (0xc0000142)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.57</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>by "the application" I mean MGED.&nbsp;&nbsp;it eventually starts up but last time I counted 33 failed attempts with the aforementioned error popping up before it launched.&nbsp;&nbsp;any ideas?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.03</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>I don't get this behavior on my other machine, a laptop with similar sized SSD running Windows 10 (64bit)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.24</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>DaRock: Ah, I see d_rossberg got it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.57</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>DaRock: sorry I didn't get to it sooner - having to juggle other stuff atm...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.15</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>elpea: I'm more surprised it started after failing to start, actually...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.13</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>elpea: if you google 0xc0000142 you might get some ideas...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.29</tt></td><td><font color="#e2e277"><tt>Stragus</tt></font></td><td width="100%"><tt>"The problem is that the ddl that launches the application is unsigned or digitally no longer valid."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.47</tt></td><td><font color="#e2e277"><tt>Stragus</tt></font></td><td width="100%"><tt>So that's Microsoft not wanting you to run non-signed software</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.42</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>erm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.53</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: anything we can do about that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.23</tt></td><td><font color="#e2e277"><tt>Stragus</tt></font></td><td width="100%"><tt>I love how helpful the error message is to understand the problem, without googling it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.51</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>Stragus:&nbsp;&nbsp;if so, I don't understand why the application starts up fine on my other machine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.14</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>elpea: it may be that the check to prevent running unsigned binaries is turned off there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.00</tt></td><td><font color="#7777e2"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... I don't see any cost-free way to sign open source code - it looks like the only previously cost-free option is no longer free</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.43</tt></td><td><font color="#e2e277"><tt>Stragus</tt></font></td><td width="100%"><tt>Screw signing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.05</tt></td><td><font color="#e2e277"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">just lets the Windows and OSX users of his software fight against their OS signing policies</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.50</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>starseeker:&nbsp;&nbsp;I'll have to check... couldn't find anything in the AppLocker on the second machine (if that is even the correct place to look)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.34</tt></td><td><font color="#e2e277"><tt>Stragus</tt></font></td><td width="100%"><tt>Last I checked Google, you had to edit the registry to disable that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.52</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>I'm pretty sure I haven't done that.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.53</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>oh well.&nbsp;&nbsp;need to get my magician hat on to conjure free disk space for linux.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.34</tt></td><td><font color="#7474dc"><tt>elpea</tt></font></td><td width="100%"><tt>is this channel logged?&nbsp;&nbsp;I asked some questions here earlier but shut down my computer and found out my client wasn't logging... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.30</tt></td><td><font color="#6767c4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 69678 brlcad/trunk/src/external/CREO/CMakeLists.txt: Tweaks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.48</tt></td><td><font color="#6767c4"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 69679 (brlcad/trunk/src/external/CREO/CMakeLists.txt brlcad/trunk/src/external/CREO/shim.cpp brlcad/trunk/src/external/CREO/shim.h): Get the "test" build working with MSVC</tt></td></tr>
+<tr><td><tt>21:58.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@150-36-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>22:11.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>23:16.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>23:59.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stragus (~alexis@modemcable090.29-19-135.mc.videotron.ca)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

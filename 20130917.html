@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20130917</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20130917</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:52.44</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: looks like you introduced a bug in r57663, changed the loop meaning</tt></td></tr>
+<tr><td><tt>00:53.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@49.249.16.137)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.28</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck: bn_mat_is_equal()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.50</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57680 brlcad/trunk/src/libicv/ppm.c: revert 57663</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.05</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: reverted until a proper fix is made</tt></td></tr>
+<tr><td><tt>03:18.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@49.249.16.137)</font></tt></td></tr>
+<tr><td><tt>03:26.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@49.249.16.137)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.51</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: cool, I think it just needed to be do { c = getc(); } while (c != '\n'); so that the loop wasn't empty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.24</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that's all it was complaining about the while () ;&nbsp;&nbsp;where that semi is "do nothing" which was intended</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.46</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the perils of having an expression that does more than evaluate to a value, but performs some work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.24</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>why I prefer to separate them whenever possible even if it means a couple more lines of code, it's explicitly clear what each line does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.38</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: been thinking about the directly ** return as well and I think the way to handle it closer to how you originally had it ... basically we need an alternative to NULL for both the dpv and argv when they are set/returned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:33.42</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>hi brlcad.. For the previous compilation error, I ran it from the main directory and here's the paste- <a href="http://paste.kde.org/pe1a69e09/">http://paste.kde.org/pe1a69e09/</a> . It gives error #69</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: and I think there's already a pattern there, we can and should always return a struct directory for each argv .. they just may be RT_DIR_PHONY_ADDR with zero len, but even that is still incredibly useful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.43</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>kesha__: and?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.50</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you've shown that error before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>nothing has changed about how you were told to handle it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.26</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>brlcad: and its not fixing .. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.41</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>how would it get fixed, you didn't change anything... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.04</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>change what ? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>going back over a week when you first showed that lib.exp error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.26</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>compiling dependencies in other ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.35</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I said you can either investigate and fix the cause of that build error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.45</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>or note that version as a failed compile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.01</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>hoping that there are huge important sections that result like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.29</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>Thats not the only version that failed compile with this error. there are about 2 dozens which give same compiling error.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.37</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't have a quick fix answer for that bug, it has to be inspected by someone and diagnosed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.01</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>bug isn't even the right word, it's some peculiar mix of old sources and newer tools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.20</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>right, not the only one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.36</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>so then what are you telling me by having me look at a pastebin of it ??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.59</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>How do I go about investigating make ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.22</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that's almost as generic as asking how you might go about writing code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.26</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you investigate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.45</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>read the sources, read the makefile that you're running</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.53</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>understand the error for starters, go from there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.52</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>still, I think we're hitting diminishing returns on this path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.12</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you've at least not been able to thusfar confirm any version working better than current head</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.57</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>7.21 is somewhat 1% better .. But thats not sufficient .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>where are you coming up with that number?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.43</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>I searched for lib.exp in Makefile and other directories, but its not called from there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it is somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.33</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe not as "lib.exp" directly, as is often the case with code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.00</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>some revision abt 50k ,I tested and in the current head the lines like structure( like falling rain has been converted to an ellipse)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.05</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>for example, it could be"${something}.exp"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.23</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>diminishing returns</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>lets change the focus these last remaining days to either improving current trunk head step-g importer (make some entity that is failing not fail) or improve/complete the step regression test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.35</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>In regression test, next is find area, volume and other quantities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.48</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>and check if &gt;0 </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>no we don't need to find a bunch of quantities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.18</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>we need A quantity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.24</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>just to make sure it made something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.44</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>just Volume.. fine ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.46</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>and to make sure that something is valid for some marginal notion of valid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.10</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>*marginal notion of valid* as in ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.46</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you tell me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.18</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>something boundary related ? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.27</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>re-read my e-mail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.31</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm not sure what you mean by that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.42</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>being sure of its geometry </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.14</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: r57657 .. smells bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.19</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>" Make sure the conversion worked (zero return code, .g file exists, &gt;0 file size, etc).&nbsp;&nbsp;Then you'll need to perform some sort of validation.&nbsp;&nbsp;Maybe calculate a volume (gqa -Av) and make sure the volume is &gt;0 for each file. "</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.12</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>kesha__: and?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.39</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>all that tells me is that you received what I wrote and you know how to copy-paste</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.43</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not useful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.50</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>show me you understand what that meant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.45</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you were on the right track, you just missing my original point perhaps -- it was very specific</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.09</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>1. checking for step-g and the existance of both files and then checking geometry of .g file&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you said "next is find area, volume and other quantities" .. i said ... "no ..."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.54</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>well, your script that you sent also runs "touch file.g" so checking existence with that seems meaningless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.48</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>if the file is not there, then it creates, but eventually we are seeing if something is there in file or it was made by touch..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.22</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57681 brlcad/trunk/src/libicv/ppm.c: make no-statement while loops more obvious</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.51</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>why create it (empty)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:10.47</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>I had used touch script earlier, so I thought that strategy can be used over here also. I will try to modify directly if it exists or not without creating empty file.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.00</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: re:r57657 I'm open to suggestions or just not supporting that at all...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.16</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>Btw is there any issue in creating it ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.46</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">had to get something working to move forward...  Even the feature I was working on today may have to get shelved, if I can't get it working in a few more hours</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.28</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can probably do what he needs for g-step now, so replacing dbfind get's shoved back again...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.01</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57682 brlcad/trunk/src/libicv/ppm.c: handle ppm files a little more gracefully, supporting mac, unix, windows line ending headers just in case. since we don't do anything with them, just add a function that skips to the next line.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.12</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>kesha__: the issue is it begs the question why a file is being touched.&nbsp;&nbsp;must a .g file exist for something, even if it is completely invalid.&nbsp;&nbsp;if it serves no purpose, the code becomes unnecessary unhelpful distracting complexity that obfuscates what really matters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.28</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>so again I ask you, "why are you making the script touch the file"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.55</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>this isn't a question of can or can't, it's should or shouldn't .. i.e., it needs for some reason or it does not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.51</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>if you cannot answer that (and you wrote the script), then the answer is probably that it doesn't do anything useful and this is just bloat to make it seem like more is going on than really is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.10</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: yeah, my inclination would be to not support that feature (caller's can 'or' the data themselves ... or use the search API) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.14</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>keeps it simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.29</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>lets db_ls() doing one thing simple/well too I think, give a list of geometry of given type(s)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.13</tt></td><td><font color="#c5c568"><tt>kesha__</tt></font></td><td width="100%"><tt>brlcad: touch as such serves no *special* meaningful purpose, it can be replaced by directly checking existance of file and also resulting would be lesser complex. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:36.12</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 57683 brlcad/trunk/src/libged/brep.c: Add an "--no-evaluation" option, using the old routine of converting comb without NURBS evaluations (CSG tree + brep).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:36.56</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 57684 brlcad/trunk/src/librt/comb/comb_brep.cpp: Mark conv_tree() with HIDDEN.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.42</tt></td><td><font color="#d16ed1"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : Thanks for the ppm files.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:50.23</tt></td><td><font color="#d16ed1"><tt>zero_level</tt></font></td><td width="100%"><tt><font color="#CC00CC">is analyzing the changes made.</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:59.26</tt></td><td><font color="#d16ed1"><tt>zero_level</tt></font></td><td width="100%"><tt>ok.</tt></td></tr>
+<tr><td><tt>06:12.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yiyus (1242712427@je.je.je)</font></tt></td></tr>
+<tr><td><tt>06:13.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed__ (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>06:13.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@49.249.17.64)</font></tt></td></tr>
+<tr><td><tt>06:14.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness___ (uid10044@gateway/web/irccloud.com/session)</font></tt></td></tr>
+<tr><td><tt>06:15.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad quantumkat (~kat@ip70-171-0-190.ga.at.cox.net)</font></tt></td></tr>
+<tr><td><tt>06:34.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@49.249.199.55)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:40.22</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Eduardolalla * 0 /wiki/User:Eduardolalla: </tt></td></tr>
+<tr><td><tt>06:53.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cogitokat (~kat@ip70-171-0-190.ga.at.cox.net)</font></tt></td></tr>
+<tr><td><tt>06:53.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness__ (uid10044@gateway/web/irccloud.com/x-xsamscszvskldbnl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:39.30</tt></td><td><font color="#63bdbd"><tt>kanzure</tt></font></td><td width="100%"><tt>brlcad: any hints on how i can pick which parts to wrap first? i've been working on bu and wdb but maybe i should be looking at other things too? are there a pile of tests i could re-implement into python?</tt></td></tr>
+<tr><td><tt>07:48.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>08:06.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr><td><tt>08:13.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AndChat|317009 (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr><td><tt>08:15.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr><td><tt>08:22.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr><td><tt>08:28.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>08:42.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>08:43.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr><td><tt>09:34.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Shadownet@195.24.220.16)</font></tt></td></tr>
+<tr><td><tt>09:48.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:59.25</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 57685 brlcad/trunk/include/bu.h: not sure what was intended, but this should suffice until something better appears</tt></td></tr>
+<tr><td><tt>10:07.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Shadownet@195.24.220.16)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:11.26</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NandlalPael * 0 /wiki/User:NandlalPael: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:15.05</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:tbrowder2 * 57686 brlcad/trunk/include/bu.h: correct glob expression</tt></td></tr>
+<tr><td><tt>10:49.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>11:06.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak__ (~Izak@195.24.220.16)</font></tt></td></tr>
+<tr><td><tt>11:12.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:26.08</tt></td><td><font color="#6fd46f"><tt>Izak__</tt></font></td><td width="100%"><tt>brlcad: ``Erik: I'm working on rt_hrt_plot() which depends on a private helper function rt_hrt_24pts().When testing in archer, this error ( see <a href="http://paste.kde.org/pfa8a5da8/)">http://paste.kde.org/pfa8a5da8/)</a> shows up. Can anyone help me out with possible clarifications on how to approach this error ?&nbsp;&nbsp;This is the&nbsp;&nbsp;rt_hrt_plot() code <a href="http://paste.kde.org/p75413ef1/">http://paste.kde.org/p75413ef1/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:09.19</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:indianlarry * 57687 (brlcad/branches/nurbs/include/bu.h brlcad/branches/nurbs/include/icv.h and 11 others): Merging trunk into branch 'nurbs' r:57668:57686</tt></td></tr>
+<tr><td><tt>12:13.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Gaganjyot (~gagan@125.62.105.4)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:18.40</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 6145 /wiki/User:KeshaSShah/GSoC13/Reports: /* Week 14 */</tt></td></tr>
+<tr><td><tt>12:24.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>13:00.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>13:18.29</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Gaganjyot (~gagan@125.62.105.4)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.39</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>kanzure: I'd suggest libged next ... that'd let someone basically write an entire editor if they really wanted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:59.57</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57688 brlcad/trunk/TODO: mirror command needs some tlc. the offset value looks like a translation after mirror instead of before.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.56</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 57689 brlcad/trunk/include/icv.h: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.09</tt></td><td><font color="#63bdbd"><tt>kanzure</tt></font></td><td width="100%"><tt>brlcad: thanks, i'll do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.58</tt></td><td><font color="#6fd46f"><tt>Izak__</tt></font></td><td width="100%"><tt>brlcad: can you help me with the concern I last posted ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.15</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 57690 brlcad/trunk/src/conv/tankill/g-tankill.c: add P to the usage, which was split in 2 due to warning about string length</tt></td></tr>
+<tr><td><tt>16:06.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>16:33.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Gaganjyot (~gagan@125.62.105.4)</font></tt></td></tr>
+<tr><td><tt>17:08.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kimzzzz (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr><td><tt>17:09.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FLOSSrookie (~brian@107-200-34-111.lightspeed.tulsok.sbcglobal.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.33</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>Izak_: what do you need?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.51</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it gave you a line number and there should be a stack trace saved in that log file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.27</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a memory validation error, one of the *_CK_*() checks to make sure something is properly initialized is failing, saying it's zero (i.e, unset)</tt></td></tr>
+<tr><td><tt>19:12.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AndChat|317009 (~AndChat31@1.38.31.154)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.24</tt></td><td><font color="#d67070"><tt>Ch3ck_</tt></font></td><td width="100%"><tt><font color="#CC00CC">runs home</font></tt></td></tr>
+<tr><td><tt>19:57.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mark@c-67-177-102-131.hsd1.in.comcast.net)</font></tt></td></tr>
+<tr><td><tt>20:01.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.46</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: since you apparently already have it set up somewhere, how might I entice you to run stack on brl-cad ? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.47</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>i've kicked it on three systems now and they all have a problem .. need to install llvm from scratch so I can compile stack cleanly, unfortunately not in a ports repository anywhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.31</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>brlcad: can I wait until winter? Then I can turn my furnace off for a few days while my computer heats the place :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.23</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>do you think it needs llvm at runtime? If not, I could send you a tarball</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.54</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>If I can force it to only run on some cores, I guess I can let it run in the background for a few days</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.41</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>ls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.44</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>ack</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.31</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>brlcad: ldd shows no dependencies on llvm, so it ought to work if I tar it up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.17</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>first, I'll see if I'm using a debug build or an optimized build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.17</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57691 (brlcad/trunk/src/librt/search.c brlcad/trunk/src/librt/search.h): OK, don't have the performance optimizations in yet but this looks like it gets -below working with the &gt;=, &lt;= and = optional addtions to limit returns.</tt></td></tr>
+<tr><td><tt>20:55.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad urubu (96a102c8@gateway/web/freenode/ip.150.161.2.200)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.02</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>brlcad: it *does* require llvm at runtime, unfortunately. I just updated to r57691 and started a build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.23</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>hello.&nbsp;&nbsp;It is possible to use brl-cad to "dump"&nbsp;&nbsp;a set of mathematical formulas that represent an object?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.29</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: no idea, willing to try a tarball</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.08</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, mpictor never mind -- see that you're running it .. awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.18</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>urubu: i'm not sure what that means</tt></td></tr>
+<tr><td><tt>21:30.15</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Gaganjyot (~gagan@125.62.105.4)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.38</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>brlcad: if you do run it at some point, it's pretty easy to change bin/poptck to limit the number of cores used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.56</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>urubu: i mean, i get describing an object with formulas, but they are rarely sufficient for describing an object (and no we do not have a generalized primitive that takes arbitrary equations)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.40</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: good to know</tt></td></tr>
+<tr><td><tt>21:35.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad urubu (96a102c8@gateway/web/freenode/ip.150.161.2.200)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>urubu: if you didn't get my reply, feel free to elaborate what you meant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.19</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57692 brlcad/trunk/NEWS: cliff improved the search command so that you can now specify &gt;= &lt;= and = depth options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.26</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: is it only -below or doing -above and -depth too?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.33</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57693 brlcad/trunk/src/librt/search.c: Also get -above working with the &gt;=, &lt;= and = optional addtions to limit returns.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.38</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>brlcad: hmm, okay. I was looking for examples/benchmarks to use in a project (volume computation with monte carlo). </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>ooh, I get it now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.26</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: -below and -above so far</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.41</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">could do depth too... hadn't thought about it, but logical</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.44</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>one sec...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.46</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>I saw that is possible to calculate volume of objects with brl-cad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.46</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.06</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>urubu: yes, the gqa/g_qa command is made for that (-Av option)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.23</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>needed a way to replace dbfind's trick of reporting combs that include a particular object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.35</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's a really simple object, like a single sphere or box, the 'analyze' command will directly calculate many mathematical properties</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.51</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>so I thought that maybe it would be possible to convert an object to a set of mathematical constraints</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.42</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you're not really "converting" anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.02</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: urm.&nbsp;&nbsp;Should I replace -maxdepth and -mindepth with just -depth and the &gt;&lt;= logic?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.05</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>just evaluating/describing that intrinsic characteristic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.16</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>suppose I'd have to deprecate those other two options...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.34</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: no, I'd match 'find'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.48</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>leverage the familiarity as much as possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.08</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's got all three</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.27</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57694 brlcad/trunk/doc/docbook/system/mann/en/search.xml: Add example using results from search with tcl, explain new path syntax.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.27</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>yeah, "convert" is not the best word </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.27</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.34</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>anyway, thanks for the help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.37</tt></td><td><font color="#ad5b5b"><tt>urubu</tt></font></td><td width="100%"><tt>bye o/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.40</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>urubu: cya</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.23</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>ok, I'll add depth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.53</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd try to support find's syntax exactly if possible first, just for usability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>then can be expanded with a more rich syntax too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.19</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>like "-depth 5" and "-depth &gt;5"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.07</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the latter is synonymous with -mindepth 6, I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.40</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>sure - that's a little different than what I've done for above and below, since they don't require an argument, but if -depth can require an argument that'll work fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.09</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, manpage seems to indicate gnu find supports both, but unclear what -depth by itself means</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.33</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">votes for requiring a numerical or inequality argument</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.20</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.42</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>-d/-depth implies a depth-first traversal with bsd find, which gnu find ignores</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.49</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>so yeah, no worries requiring it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>or something like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.45</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>you're OK with doing something different in search with it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.05</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't have the first idea how to do a depth-first search of our db hierarchy...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.44</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>nor any idea of when/why a user would want that...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.18</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>boolean evaluation is usually depth-first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.19</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>you traverse depth-first all the way to a leaf, get polys, come up, go down next path to leaf, get polys, come up, apply operator, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.44</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, right - I guess we see that in the facetize output, don't we</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.01</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>almost everything that calls db_walk_tree()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.15</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">forgot how much *fun* it is to add a new search option.  *rolls up sleeves*</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.29</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>just with no reg_start func</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.07</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like db_functree() is also a depth-first traversal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.41</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 57695 brlcad/trunk/src/conv/g-var.c: remove some unneeded braces and 1 'break'; implement h?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.55</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>and looks like db_preorder_traverse() is not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.31</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>db_walk_tree() depends on which callbacks are specified</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.12</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like db_recurse() also depends on callbacks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.56</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57696 (brlcad/trunk/src/librt/search.c brlcad/trunk/src/librt/search.h): Add a -depth option to search that supports &gt;&lt;= modifiers to a numerical depth.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.00</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: there we go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.27</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.31</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>what's the syntax?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.03</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>-depth 4 -depth &gt;4 -depth &lt;4 -depth &gt;=4 -depth &lt;=4?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.08</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.15</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57697 brlcad/trunk/src/librt/search.c: MUCH simpler way to do the min and max depth tests.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.20</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>-depth 0 wil lgive toplevel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.46</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, -depth =4 will also work (just falls out from string handling)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.10</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>-depth ==4 too? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.16</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>-above and -below don't have the space, because they need to work without arguments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.19</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>uh...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.26</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>not needed, just wondering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.39</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>no, actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.52</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>option parsing is too simple minded for that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.05</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>presumably then =&gt; and =&lt; also will not work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.24</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.55</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>we could make it work, would need to add more logic to the string_to_name_and_val function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.31</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to update the man page first though :-)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.05</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>and make sure all the NEWS worth stuff is in - don't remember if the new path specifier modifier</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.08</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>made it in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.50</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57698 brlcad/trunk/doc/docbook/system/mann/en/search.xml: Update search man page to document -depth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.23</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57699 brlcad/trunk/NEWS: Add the ability for either a generic toplevel search specifier or a specific object path supplied to the search command to specify it wishes to be treated as a 'flat' object - in other words, every object in the database (or, for specific objects, every object below that object) is added as a top level search starting point.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.48</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57700 brlcad/trunk/NEWS: Add a -depth command to search that allow specification of either absolute or relative depth limits.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.01</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 57701 (brlcad/trunk/include/raytrace.h brlcad/trunk/src/librt/ls.c): Remove the additive version of the db_ls flags - per Sean's suggestion, keep the function logic simple and focused.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.29</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 57702 brlcad/trunk/NEWS: (reword r56478 and expand name for post-processing) Cliff added -l option to comb command that 'lifts' the region flag to the top level (specified) comb and clears all region flags in the tree below that comb. Has some advanced features, like automatically wrapping regions that are used elsewhere in the .g file and referencing the comb created by the wrap, and refusing to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.31</tt></td><td><font color="#61b961"><tt>Notify</tt></font></td><td width="100%"><tt>perform the operation if it cannot be done without changing assembly definitions used elsewhere in the tree (see the comb man page for examples.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.49</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes search is not specific to mged</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.53</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: do you want me to yank the argv to dpv and vice versa functions until we've settled on their final form?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.59</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>er, right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.44</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry, was distracted trying to distinguish the -depth option from the additons to -above and -below in the other NEWS item... hard to avoid being confusing in one line...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.48</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yank? no, but I think the previous&nbsp;&nbsp;state you had them (before the argc/count additions) was better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.15</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">actually ended up not needing to convert an argv array in the end, so those functions actually aren't needed (yet)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.20</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>my point about NULL dp's was flawed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.32</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.56</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>I thought it made sense...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.06</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>a failed lookup would result in a NULL dp...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.54</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>23:36 &lt; brlcad&gt; starseeker: and I think there's already a pattern there, we can and should always return a struct directory for each argv .. they just may be&nbsp;&nbsp;RT_DIR_PHONY_ADDR with zero len, but even that is still incredibly useful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.10</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, gotcha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it may result in a null lookup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>but that doesn't mean we return null</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.31</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>could be pretty powerful actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.31</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry - brain trying to hold too much in too small a space today ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.55</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">fishes out the old form from the commit history</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.55</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>submit a list of names, get back a set of dps for them, fill in their details, write them to a db</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.46</tt></td><td><font color="#6161ba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will stub back in the old form, but suggests we keep it out of raytrace.h for this release...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:08.04</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>wow, stack only took 46 minutes on brlcad!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:08.31</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>I wonder if the big generated files slowed it down on stepcode</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.04</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>stack output here: <a href="http://pastebin.com/jc3B3G00">http://pastebin.com/jc3B3G00</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.05</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>oh, I did rebuild it with -O3 -march=native instead of the default -O2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.22</tt></td><td><font color="#61ba61"><tt>mpictor</tt></font></td><td width="100%"><tt>I'm sure that made some difference</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

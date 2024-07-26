@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20100330</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20100330</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:05.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>01:05.31</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD is now available on Gentoo! (20100225)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.02</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38223 10/rt^3/trunk/tests/GS/GeometryServiceTest.cxx: huh, I thought we changed this. fix braces, pulling them up to their statement line except for functions/classes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.57</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>d-lo: I assume you meant the sleep on GeometryServiceTest.cxx:778 .. that isn't important to the test, could just as well have it perform some blocking status call or a while loop that counts to some big number -- that said, a portable timing mechanism usually needs to be wrapped</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.20</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>to use whatever the native timing interface is, and depending on the needs of the timer (how high precision)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.28</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>for that test, it was just to "let time pass" before we query for events so there didn't have to be any other logic .. the test itself is just assuming "I got an event" means the evaluation succeeded anywyas -- it's intentionally very minimal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:51.08</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>d-lo: and more specific to answer your question: no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.04</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>there's not really a "better" way, at least not a portable one -- at best you might end up assuming a recent *nix and win* environment in which case you might get away with just a #define or two for sleep/_sleep/usleep/etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.01</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I'm not sure what you're referring to exactly, but you could make either a windows-specific "fork" (see our existing fork code) or use tcl threading</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.40</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>depending on communication and what data needs to be shared with what, tcl threading might be more beneficial in the long run if isolated to libdm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.58</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>libfb/libdm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.02</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.21</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>they are two peas in a pod</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.43</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>Not sure how "isolated" they would be - mged at least might have to be aware of the threads...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.00</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>probably needs a whiteboard discussion to figure out how it would all work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.34</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>(for me, anyway... :-/)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.46</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>from mged's perspective, it's "send this data to that dm/fb"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.59</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's a blocking call and/or there is a lot of data then you'd maybe need something more elaborate, but that's not been a problem </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.12</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.41</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>I'd really like to try and do it "right", assuming I'm capable of that type/level of programming</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.10</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>what is "it" that you're trying to do exactly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.34</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>you recall when you implemented the fork based approach to tk framebuffer? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.45</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.14</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>more proof of concept</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.16</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>We had discussed the possibility of Tcl threads, and at some point later in the channel you mentioned that the threads approach looked as if it would take a fair bit of work (or something like that, don't recall exactly)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.21</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>Given that the tk display manager fails in X11 Tk on the Mac (and especially how/when it fails) I'm guessing there are some similar issues with how the Tk code in libdm and MGED's Tk code are going to interact</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.29</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.49</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>er, I don't recall saying tcl threads would be a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.09</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>looking through the logs, my exact words and what comes to mind:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.12</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>"the next step you could take that would be even better than fork() and libpkg would probably be to use TclThread's and TclPipes ... should translate nearly 1-1"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.24</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>(and "just use aqua tk" ain't a viable solution from my point of view, I do remote X a lot)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.01</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>so fix it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.26</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>nah, it's easier to bitch and wait :D </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.46</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>mebbe when I'm not "prioritized" anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.52</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>rather counterproductive and annoying :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.31</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>bitch, I'll stab you O.o :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.54</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>you can try</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.29</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>knock the last of wax off tomorrie morning, salt free, w00t</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.57</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>hey if you're going to make pointless bitchy statements, don't be all whiny when someone bitches back at you for bitching pointlessly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.01</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>washed, vaccuumed... didn't wash the glass on the inside</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.31</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>you're just now getting salt off your car?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.36</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.43</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes head</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.49</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>there were crystals built up in the mirrors O.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.58</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>but I gave her a bath today</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.39</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: ok, sorry - my bad.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.44</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">mis-remembered</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.20</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>not saying it'll be "easy", but it should be relatively straightforward</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.34</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.40</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe go through some simple tcl threading tutorials/code first to get a feel for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.52</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>how you pass data between threads is the main question you'll have to figure out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.33</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>you either cheat and go with a tcl channel, which is similar to the hack it's doing now to pass the data back from child to parent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.47</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>or you use some tcl data passing mechanism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.59</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: are we OK with requiring threaded tcl for gui stuff?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.18</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: have you tried downgrading X11 on the Mac?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.04</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>you know of a reason why we wouldn't be?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.36</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:17.41</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>threading allows shared memory pools, so only locking is a concern... forking wtih threads requires fruitiness like shm to get that :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.04</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>er, not with threads, heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.51</tt></td><td><font color="#6161b9"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- rolls his arse to bed before he says anything else stupid O:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.48</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: not unless one of the platforms we support can't handle Tcl threads</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.21</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>then answering that probably answers your question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.26</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.29</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>I'll check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.45</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah.&nbsp;&nbsp;Restrictions: On some UNIX systems the pthread-library does not contain the functionality to specify the stack size of a thread. The specified value for the stack size is ignored on these systems. Windows currently does not support joinable threads. This flag value is therefore ignored on this platform. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.01</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>probably not a show-stopper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.29</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">prepares to warp his brain some more...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.08</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: quite a productive day.. nice!</tt></td></tr>
+<tr><td><tt>03:14.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jack (~jack@85.92.137.10)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.39</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38224 10/brlcad/trunk/NEWS: reword for clarity and tense. cliff made mged help menu list all commands that have docs; put_comb usage was improved. (broken state is not user-visible as it occurred between releases)</tt></td></tr>
+<tr><td><tt>03:30.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@69.90.48.97)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.47</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38225 10/brlcad/trunk/doc/docbook/system/mann/en/Makefile.am: whoops - missed a backslash.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.21</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38226 10/brlcad/trunk/NEWS: cliff improved put_comb usage statements and also added a new manual page for it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:17.58</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38227 10/brlcad/trunk/src/tclscripts/mged/man.tcl: Er, yeah... might want to sort those results - glob doesn't necessarily supply sorted lists.</tt></td></tr>
+<tr><td><tt>07:51.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jack (~jack@unaffiliated/jack)</font></tt></td></tr>
+<tr><td><tt>08:55.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@83.50.132.58)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:43.06</tt></td><td><font color="#b5b55f"><tt>d-lo</tt></font></td><td width="100%"><tt>G'Mernin all!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:45.25</tt></td><td><font color="#b5b55f"><tt>d-lo</tt></font></td><td width="100%"><tt>SO I know its noobish, but I was able to get rt^3 to compile, on windows, via Eclipse using mingw, cmake and QT.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:45.42</tt></td><td><font color="#b5b55f"><tt>d-lo</tt></font></td><td width="100%"><tt>Probably nuthin fer you esssssperts, but its a big deal for me :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:47.24</tt></td><td><font color="#b5b55f"><tt>d-lo</tt></font></td><td width="100%"><tt>starseeker: We need sync gym times :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:39.03</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>d-lo: heh - when I commit at 1am, usually early gym is beyond my resources</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:39.22</tt></td><td><font color="#b5b55f"><tt>d-lo</tt></font></td><td width="100%"><tt>I figured :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.02</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is kinda amazed to be awake now</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:31.23</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r38228 10/brlcad/trunk/src/tclscripts/swidgets/scripts/tree.itk: Added the following methods: selectpath, selectpaths, selectitem, finditem, findheritagepath and _call_querycmd.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.54</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r38229 10/brlcad/trunk/src/tclscripts/archer/ArcherCore.tcl: Added the sed command. Modified the mrayCallback_pick method to select the picked item in the tree.</tt></td></tr>
+<tr><td><tt>13:45.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.34</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38230 10/brlcad/trunk/BUGS: More comments on the result reporting bug.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.36</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>d-lo:&nbsp;&nbsp;oh, getting Windows to do anything is a big deal ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:25.57</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38231 10/brlcad/trunk/src/tclscripts/mged/man.tcl: Introduction isn't a command, filter it out of the list.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.39</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03indianlarry * r38232 10/brlcad/branches/STABLE/configure.ac: synced single line change from truck revision 38177 which removes the -gstabs+ and replaces with the -ggdb3 option. Should allow the MUVES S2 folk to test successfully on host 'hera'.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.33</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">eyes goblin... graph layout algorithms, lgpl, tcl/tk stuff...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:40.24</tt></td><td><font color="#5eb35e"><tt>starseeker</tt></font></td><td width="100%"><tt>more C++ though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.20</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38233 10/brlcad/trunk/src/mged/cmd.c: instead of creating and setting dynamic tcl strings, just append our ged result string. lines: 115 -&gt; 45</tt></td></tr>
+<tr><td><tt>16:23.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi_ (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr><td><tt>17:03.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.161)</font></tt></td></tr>
+<tr><td><tt>20:23.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.18</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38234 10/brlcad/trunk/src/libcursor/Makefile.am: turn on strict flags (already compiles clean on 32-bit x86 mac os x)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:49.55</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38235 10/brlcad/trunk/src/libdm/axes.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:49.55</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: viewSize is unused. looks like gdas_size is getting set very high up (tcl land)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:49.55</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: to the viewsize in base coords. one of the two don't belong, either viewsize</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:49.55</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: shouldn't be passed or (more likely) gdas_size shouldn't exist.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.49</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38236 10/brlcad/trunk/src/libdm/ (dm-Null.c dm-generic.c): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.49</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: move Nu_open over from dm-Null.c for the temporary. it's empty and only used in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.50</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: dm-generic right now during a dm_open. keep until interp can be refactored out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.50</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: and callback added to dm struct. clean up and reorganize dm-Null.c to avoid all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.50</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: forward declarations and quell all verbose compilation warnings.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.20</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38237 10/brlcad/trunk/src/libdm/dm-X.c: quellage.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.32</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38238 10/brlcad/trunk/include/dm.h: shouldn't need to export Nu_open() now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.53</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38239 10/brlcad/trunk/src/libdm/dm-generic.c: quell unused parameter warning by testing for null and leaving early (instead of potentially crashing)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.31</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38240 10/brlcad/trunk/src/libdm/dm-tk.c: more quellage, unused vars, param tests, cull out some of the X11 code from new tk interface, cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.36</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38241 10/brlcad/trunk/src/libdm/dm-Null.c: say null display</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.06</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38242 10/brlcad/trunk/src/libdm/dm-plot.c: quellage, unused vars, param tests, style, cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.58</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r38243 10/brlcad/trunk/src/conv/obj-g_new.c: reworking for nmg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.52</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38244 10/brlcad/trunk/src/libdm/dm-ps.c: quellage, unused vars, param tests, style, cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.12</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38245 10/brlcad/trunk/src/libdm/dm_obj.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.13</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: quellage, unused vars, param tests, style, cleanup. found a couple _function_</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.13</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: pointer addresses getting printed to a string. this is unacceptably worse than</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.13</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: printing data pointer values to strings, one that the standard explicitly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.13</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: prohibits. will remove soon.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.43</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38246 10/brlcad/trunk/src/libdm/dm_obj.c: sigh.. and the reverse. cannot convert between function pointers and void* .. must be fixed or removed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.15</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38247 10/brlcad/trunk/src/libdm/dm_obj.c: clientData in the struct isn't even a function pointer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.10</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38248 10/brlcad/trunk/bench/Makefile.am: try harder to fault if benchmark testing fails.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.04</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38249 10/brlcad/trunk/include/raytrace.h: 'normal' shadows a Carbon header enum on MacOSX</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.27</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38250 10/brlcad/trunk/TODO: fix archer/libged labels/axes pointer printing for 7.18 given they are security holes and ISO C standard violations.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.06</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38251 10/brlcad/trunk/src/libdm/labels.c: remove dead ifdef'0 code, quell warnings, remove unused parameters (related to lines), keep track of max plot so we don't overrun container and cause screwy display problems (possibly some observed in the wild)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.20</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38252 10/brlcad/trunk/src/libdm/labels.c: ws indent style cleanup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:42.22</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38253 10/brlcad/trunk/ (4 files in 3 dirs): remove third param, ged_view structure from dm_draw_rect (shouldn't be mixing libdm and libged, shouldn't be ged data structures in dm's public API)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:43.39</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38254 10/brlcad/trunk/src/libdm/Makefile.am: oops, not yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.44</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38255 10/brlcad/trunk/src/libdm/scale.c: final quellage. y1 from mac's math.h gets shadowed, so use xy/pos instead.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:49.52</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38256 10/brlcad/trunk/src/libdm/axes.c: xyz-end-12 are potentially usued unitialized in this function, so set them up as zero for starters.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.52</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38257 10/brlcad/trunk/src/libdm/dm_obj.c: cast through uintptr_t first so we don't lose precision. uintptr_t is only conveniently not considered a pointer type by this rev of gcc, but we're still in violation and doing it wrong.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.54</tt></td><td><font color="#5cafaf"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38258 10/brlcad/trunk/src/libdm/Makefile.am: passes verbose compilation on 32-bit mac and 64-bit linux. undoubtedly a few more warts to clear up, but good enough for strict.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

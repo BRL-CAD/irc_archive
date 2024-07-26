@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080328</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080328</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:10.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad iraytrace (n=iraytrac@cocoa.sci.utah.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.40</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>jdoliner: howdy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.59</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>brlcad: are you present</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.49</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>i am present</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.04</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.34</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>I've been looking over some papers on CSG algorithms for BREP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.12</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.57</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so how do things look?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.14</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>well the algorithms seem understandable enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.57</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>they just involve extending the features to affine spaces and then detecting their intersections with the other features</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.27</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>please do reference the papers you read in your submission</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.38</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>of course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.52</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>however I have a few questions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:18.02</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.52</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>firstly I'm afraid I'm not yet that knowledgeable about the brlcad code base, so I haven't seen precisely what our BREP structures look like so I wonder if you could tell me exactly where in the src they're located</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.51</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>also are there any major constraints for the algorithm that you think wouldn't be immediately obvious, for example is it important that polygonal structures maintain quads or not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.41</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, this is mildly complicated to explain, so bear with me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.26</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>we actually have two brep implementations in our codebase, one is the n-manifold support (i.e. "NMGs") in our librt library the other is through the openNURBS library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.26</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>our nmgs support both polygonal and spline surface breps, but there are rather significant differences between the two</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.56</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>such as</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.28</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>nmgs are huge body of code in src/librt/nmg*.c and that is the code that is called if you create an 'nmg' (polygonal), a 'bot' (bag of triangles), or a 'nurbs' brl-cad primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.07</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>the code for nurbs is in src/librt/nurb*.c .. it's another rather extensive body of code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.27</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>we're in the process of replacing the nurbs body of code (and 'maybe' later the nmg/bot implementations) with the openNURBS library facilities via the implementation of a new 'brep' primitive type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.08</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>your work relates to that latter new effort, part of the 'brep' implementation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.23</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.27</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so as I mentioned, we're using openNURBS for that implementation -- but openNURBS doesn't provide *any* geometry evaluation routines (such as CSG evaluation)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.28</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>So possibly my proposal could contain a new implementation of a 'brep' primitive and then CSG operations to go with it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.04</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>no, no -- you really couldn't possibly implement a new brep primitive nor do you need to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.07</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>we've already started on that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.14</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>src/librt/g_brep.c among other files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.18</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>oh I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.25</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it's about 90% complete for that matter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.49</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>where your work comes into play is that we have about 30 other primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.28</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>those primitives are presently represented in implicit form -- so we have plans to implement the necessary "describe be in brep form" function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.29</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>so the CSG algorithm needs to work on those primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.50</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>in brep form that is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.59</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.41</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so we can take an existing CSG model, that is stored in implicit form .. ask for it in brep form, evaluate the brep-on-brep csg to generate an evaluated brep result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.58</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>right that seems doable to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.41</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>what level of specificity is good for my proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.49</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>this might just amount to implementing functions that were removed from openNURBS for evaluating ON_Brep objects </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.32</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>they removed most of their evaluation functions as they only intend/want the library to be used for reading/writing the 3dm file format -- we're extending the library, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.21</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>(which is all kosher, just means we have a LOT of heavy/hard coding to do)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.56</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>be as specific as you care to be, the more detail the better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.27</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>this is a hot hot topic for us, so an outstanding proposal will easily be a high-priority contender for a slot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.55</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>show that you understand the algorithm and how to go about implementing it, how it relates to brl-cad (even if it includes rewording and reiterating what i've said here)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.22</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't have to talk about what files you'd be editing, there is too much detail -- don't expect everything to be figured out, but the proposal needs to instill confidence that you understand the task, are passionate about the work, interested in long term development (which I hope you are!) :), and can communicate your ideas well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.41</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>okay so basically the project boils down to: implement all of our 30 primitives as BREP objects, then implement CSG for BREP such that CSG model in implicit form could be converted into a BREP form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.47</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>also where are the primitives implemented</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.49</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.02</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>well, I wouldn't include the 30 primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.16</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>focus on the implementation of the CSG BREP evaluation routine first as the core</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.36</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>then maybe add in room to start on the 30 primitives if time allows it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.46</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>okay that seems reasonable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.02</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>some of the existing primitives will be very hard to describe in brep form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.17</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>there are several, however that are already done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.29</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>they're just implemented using the old nurbs code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.41</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>all the primitives for brl-cad are in src/librt/g_*.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.26</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.15</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>Okay I think that's all I have for right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.22</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>thanks a bunch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.31</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>look forward to seeing yours...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.52</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>what's your background coding?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:51.24</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>I've had formal education in both C and Scheme as I mentioned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.00</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, sorry -- been talking to a lot of folks, so need reminders :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.01</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>I really haven't been coding all that long</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.13</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>So formal in those two</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.24</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>have you ever read/written any C++ ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.58</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>Then I spent the summer coding at Fermilab</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:53.41</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>Yeah physics programs are all very hacked together so I saw and wrote some C++, as well as Fortran over the summer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.40</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>I can't claim to know the nuances by any means but I can hack</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.07</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>fortunately, you can conceivably stick "mostly" with C .. but openNURBS is a C++ API, so to dig in deep there in figuring out the ON_Brep object structure is going to require some getting up to speed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.50</tt></td><td><font color="#69c969"><tt>jdoliner</tt></font></td><td width="100%"><tt>I might have to brush up a bit before the summer starts then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.12</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.22</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>certainly not a show-stopper, it's not that much of a hurdle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.28</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>particularly for what you're doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.57</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>and all else failing, there's plenty of C routines related to this task that you could be refocused onto if you true do get stuck</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.03</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>s/true/truly/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:31.04</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>brlcad: mged works only after minimizing the graphics window</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:31.54</tt></td><td><font color="#bc6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries inkscape for importing a .fig file and it seems to do pretty well - just needs a little scaling</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:33.15</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>pacman87: you mean that undoes the lockup?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:33.51</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>brlcad: yes, after minimizing, the mged&gt; window opens</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.53</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>and cpu usages returns to ~0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.35</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>wow, wierd .. almost like it's stuck in a loop expecting an expose event</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.21</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>and if i click on a menu while it's locked up, it opens the menu after it's minimized (floating on my screen) and gives the 'window not visible' error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.35</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.47</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>the events are just queue'd up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.30</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you want to go old-school debug style, you could add printf's incrementally to find the call or loop it's blocking on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.41</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>src/mged/ged.c is where mged's main starts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.46</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>what compile flag do i need for gdb?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.12</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>i need to learn real debugging sometime, why not now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.10</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>gdb only needs -g (which is on by default for both optimized and unoptimized)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.25</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so unless you add --disable-debug, it should be debuggable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.42</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's optimized, symbols and line numbers may be off, but it should work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.22</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03johnranderson * r30573 10/brlcad/trunk/src/librt/db5_bin.c: eliminated excess logging</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.27</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>pacman87: it is really appreciated that you're working on a patch (at least it seems like that's what you're doing) but you can put in your submission in before the patch if you like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.34</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves in</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.38</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>hello cadheads</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.03</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it is important that the application be solid regardless of the patch, the patch is then a major criteria to help differentiate the finalists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.11</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy yukonbob </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.22</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>what's shaking, brlcad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.20</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03johnranderson * r30574 10/brlcad/trunk/src/tclscripts/mged/ (make_solid.tcl openw.tcl tclIndex): added binunif to create menu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.45</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>o.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.48</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>not much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.10</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>Mr. Anderson has been busy!</tt></td></tr>
+<tr><td><tt>03:05.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (i=ibot@pdpc/supporter/active/TimRiker/bot/apt)</font></tt></td></tr>
+<tr><td><tt>03:05.27</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || Channel logs at <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Release 7.12.0 imminent (no really!) || BRL-CAD is participating in the 2008 Google Summer of Code, see <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a> and join the developer mailing list || GSoC application submissions are now open, submission deadline is March 31st</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.33</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.19</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.49</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>heh -- /me locked self out of ssh'd/screen'd session w/ ipfw -- hence the (non)garbage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.13</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>fun</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.46</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>only briefly, thank goodness -- both machines happen to be in front of me too, so not that scary.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.50</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: you catch the brief dialogue other day (I don't remember if you were directly involved) about text in BRL-CAD?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.19</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>musta missed that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.03</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>it needs to be better documented and exposed in simple routines (like "draw this text here in 2D/3D")</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.42</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>brb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.46</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>hrmm -- ok -- part of it was about displaying text, and I think there are two basic options (iiuc) text-as-objects (a la POVRay (which is awesome)), or using the attributes of objects, and some auxillary display mech.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.50</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">waits</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.46</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">grabs other 'puter, starts playing with graphing software</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.25</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, text-as-objects would be annotation support</tt></td></tr>
+<tr><td><tt>03:43.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad iraytrace (n=iraytrac@c-67-172-239-24.hsd1.ut.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.46</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>you can use attributes to stash pretty much any random info, but not quite the same beast</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.00</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">returns -- ok -- here's my "I wonder" though: if one had text attributes, could one parse the attributes and annotate a display... so my question I guess is: "What is the display?", including the on-screen version, and a dumpted-to-file version -- does rt do the rendering and pass it off to something else, or is rt's work the end-all-be-all? Is Tcl involved in a pipeline here?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.16</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>*dumped-to-file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.32</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">hits hay -- ciao, all.</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.21</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>rt is the end-all-be-all of geometric display -- it certainly "could" pass it through another filter later, but that certainly would not be ray-tracing (and doe not presently occur)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:19.32</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">returns briefly</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.07</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>there is also a question of what you mean by display -- there is a "wireframe" display both projectable in 2D and in 3D, and possible 3D visualization (e.g. opengl), and 3D projected to 2D rasterization (i.e. ray-tracing)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.14</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>ok -- imagine if rt generated 'hints' for attributes to look-up and x,y positions to locate the attribute values, one could have the bitmap returned by rt annotated after-the-fact; not by ray-tracing, but some simple 2d-based annotation... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.31</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so an object could have some textual label attribute, for example -- you could easily show a wireframe for it (perhaps even in a given font) and in 2D or 3D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.57</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>but then that same label wouldn't ray-trace unless you give it "thickness"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.17</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>which we could do too .. e.g. assign annotations a default thickness of the current rendering cell size by default</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.50</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so the text would rasterize during ray-trace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:24.05</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>another possibility would be a separate render pass similar to what rtwizard does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:24.24</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>where you'd have a tool that would just rasterize the annotations onto a given image context</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:24.32</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>what if rt said in it's output "here's some meta-info about what I just gave you: there's an object foo, with center-of-mass at 200x99; there's an object bar with a center-of-mass at 40x90; there's an object baz with c-o-m @ 1000x777", and some other program took that, looked up the attributes (if available) for those objects, and then printed at the c-o-m appropriate labels (gleened from attributes) on the bitmap?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.42</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>that would be the separate pass tool I mentioned, albeit a slight variation for it to use the output -- it really just needs the view and it could figure out the rest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:26.10</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>is there such a tool atm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.46</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">really hits hay -- chat later :) (I'll check for response in AM)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.57</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>there is not such a tool at the moment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.10</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>there are no annotations at the moment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.15</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why it's on the list :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.14</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30575 10/brlcad/trunk/NEWS: john added support to mged for creating binunif objects via the Create menu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.40</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30576 10/brlcad/trunk/TODO: next release should be 'soon' so only promote rtarea, clone, and itcl build support</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:05.52</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30577 10/brlcad/trunk/src/ (9 files in 3 dirs): consistently spell out all references to 'prims' as primitives to help usability. not documenting in news cause it's stupid..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.46</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30578 10/brlcad/trunk/src/ (conv/off/off-g.c irprep/all_sf.c libpkg/pkg.c): remove t parameter from open calls. it's not posix and not needed (text mode is default on windows).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.59</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30579 10/brlcad/trunk/src/libbu/log.c: cleanup, remove dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:28.46</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30580 10/brlcad/trunk/src/util/pl-dm.c: make pl-dm compile once again, de knrify it, remove code not longer relevant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.40</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30581 10/brlcad/trunk/src/util/pl-dm.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.40</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: rip out the ogl and wgl code. it's highly unlikely that wgl will work without</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.40</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: modifications given X is required. also, it's just a horrible way to support N</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.40</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: dm interfaces .. the point is supposed to be that the dm interface incapsulates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.40</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: against doing this kind of stuff.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:38.09</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30582 10/brlcad/trunk/src/util/Makefile.am: add pl-dm back to the build if X is available</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:39.38</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30583 10/brlcad/trunk/src/util/Makefile.am: ws</tt></td></tr>
+<tr><td><tt>07:02.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>07:59.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>08:28.46</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jdoliner (n=jdoliner@cpe-24-59-109-153.twcny.res.rr.com)</font></tt></td></tr>
+<tr><td><tt>08:46.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad88 (n=3af7f95b@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>09:17.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (i=127@resnet-45-192.dorm.utexas.edu)</font></tt></td></tr>
+<tr><td><tt>10:18.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@203.200.95.130)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.23</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30584 10/brlcad/trunk/BUGS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.23</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: the opengl framebuffer problem on mac os x where parallel rendering was causing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.23</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: it to fail was indeed fixed (by adding the necessary requests for each thread to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.23</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: acquire the context), but something since then has changed -- it's just giving a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.23</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: blank window at the moment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:14.45</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30585 10/brlcad/trunk/BUGS: actually it is rendering, just not updating the window apparently until it gets expose events</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:21.10</tt></td><td><font color="#bc6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">scowls at Axiom and fires up Maxima instead...</font></tt></td></tr>
+<tr><td><tt>13:51.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@74.86.45.130)</font></tt></td></tr>
+<tr><td><tt>13:55.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:22.09</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>hello d_rossberg !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.13</tt></td><td><font color="#72d8d8"><tt>``Erik</tt></font></td><td width="100%"><tt>*yargn*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.06</tt></td><td><font color="#db7373"><tt>d_rossberg</tt></font></td><td width="100%"><tt>hello brlcad!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.17</tt></td><td><font color="#db7373"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i had to feed the rabbits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.57</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.05</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">did not know you had rabbits</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.28</tt></td><td><font color="#db7373"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i don't have rabbits - i have to feed them (at least today)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.48</tt></td><td><font color="#db7373"><tt>d_rossberg</tt></font></td><td width="100%"><tt><font color="#CC00CC">feeds the rabits of his daughter</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.22</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>mmm.. good eating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.27</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:16.59</tt></td><td><font color="#db7373"><tt>d_rossberg</tt></font></td><td width="100%"><tt>??? i hope there is a difference between "of" and "to"</tt></td></tr>
+<tr><td><tt>15:17.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54875FAB.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:21.56</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr><td><tt>16:20.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad docelic (n=docelic@78.134.200.134)</font></tt></td></tr>
+<tr><td><tt>16:26.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (i=127@resnet-45-192.dorm.utexas.edu)</font></tt></td></tr>
+<tr><td><tt>18:04.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad b0ef (n=b0ef@062016141231.customer.alfanett.no)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:13.13</tt></td><td><font color="#72d8d8"><tt>``Erik</tt></font></td><td width="100%"><tt>holy hand grenade of antioch?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.11</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>heya pacman87 </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.03</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>brlcad: hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.47</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>make any progress on that bug?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.41</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>line 570 in ged.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.18</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>then it runs into a whole mess of tcl stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.23</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>though when i just let it run, and did a ctrl+c at the hang, 'where' told me i was in the openGL libs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:09.47</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's definitely related to the embedded display manager</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.04</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>i got the latest nvidia driver last night, hoping to improve my bzflag framerate (from 100.xx to 169.12)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.09</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>and now it doesn't hang anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.18</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.50</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>though when i click in the graphics window, my other open windows get messed up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.58</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>and that didn't happen before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.36</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>the horizontal lines seem to be drawing at the wrong height</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.05</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>offset +/- a bit</tt></td></tr>
+<tr><td><tt>20:13.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad naomi_ (n=naomi@c-71-233-212-32.hsd1.ma.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.12</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>brb, restarting X</tt></td></tr>
+<tr><td><tt>20:19.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (i=127@resnet-45-192.dorm.utexas.edu)</font></tt></td></tr>
+<tr><td><tt>20:31.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad61 (n=50cab12a@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>21:11.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-82-138.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.56</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r30586 10/brlcad/trunk/src/proc-db/tire.c: Add first exploratory coding efforts related to tire proc-db.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.25</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r30587 10/brlcad/trunk/src/proc-db/Makefile.am: Add tire.c to proc-db Makefile.</tt></td></tr>
+<tr><td><tt>21:21.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54875FAB.dip.t-dialin.net)</font></tt></td></tr>
+<tr><td><tt>21:34.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad naomi__ (n=naomi@c-71-233-212-32.hsd1.ma.comcast.net)</font></tt></td></tr>
+<tr><td><tt>21:35.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54875FAB.dip.t-dialin.net)</font></tt></td></tr>
+<tr><td><tt>21:37.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54875FAB.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.09</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>pacman87: hum -- you might have better experience with 7.10.4 then .. there were changes made in 7.12.0 related to the display manager (that fixed several other bugs but apparently are causing your poblems) -- it's related to directcolor and colormapping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.51</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you want another point you can break on you could probably add a breakpoint for either ogl_open or dm_open in the debugger before that 'gui' tcl eval line on 570</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.08</tt></td><td><font color="#6666c3"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30588 10/brlcad/trunk/src/util/Makefile.am: need tk_cppflags</tt></td></tr>
+<tr><td><tt>22:52.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad naomi_ (n=naomi@c-71-192-44-55.hsd1.ma.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:32.41</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves in, reads scrollback</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.11</tt></td><td><font color="#bc6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves back</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.51</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>hey starseeker </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:40.23</tt></td><td><font color="#bc6363"><tt>starseeker</tt></font></td><td width="100%"><tt>how goes it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:41.05</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>not bad, I guess... I've been spending too much time on airplanes, and I don't have 7.12 running yet, but I'm alright :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:42.44</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so there's a slim chance that there might be a gsoc submission extension -- I wouldn't bank on it, but it'll depend how many students storm in over the weekend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:43.39</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>when is the deadline (as it stands atm)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:43.56</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>late monday</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.07</tt></td><td><font color="#6767c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.26</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>what's the current application count?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.51</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>last year, 75% of the submissions came in over the last weekend iirc, but apps were also open for two weeks instead of one, and easter wasn't so early</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.25</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>pacman87: *very* few .. many orgs are at about 1/5th the level they were last year by this time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.03</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>so that bodes really well for the folks that have been in here and interacting for a while already ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.41</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>especially since we really only want/need about 3 really good students ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:50.38</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>after running through the 'mug' Mged tutorial, i'm wondering if there's a vector-scale command to stretch/shrink primitives differently along different axes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.54</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>primitives can be scaled non-uniformly, except the torus</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.03</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>they can't be skewed, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.09</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>that's by design</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.50</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>and the torus was what i wanted to scale (for a better looking handle)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.01</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.22</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>I was just talking about that earlier today</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.35</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>i could be done using a sweep about an ellipse</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.40</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm thinking to add in support for non-uniform scaling to torus and skewing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.53</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>*it could</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.09</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>sweeps are on the gsoc new primitives list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.59</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>yeah, i figured i would start with the revolve, then do the sweep next</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.43</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, revolve should be pretty easy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.54</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>sweep can get *really* tricky</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.12</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>especially if you allow 2D and 3D sweeps and if you allow an orientation vector</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.33</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>path + orientation vector normal to path?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.15</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>that was another question i had about using 3D shapes as the base for these new primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.17</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>i mean an orientation vector maybe not normal to path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.26</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>as well as a twist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:58.03</tt></td><td><font color="#60b7b7"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e. two vectors and the path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.53</tt></td><td><font color="#76e0e0"><tt>pacman87</tt></font></td><td width="100%"><tt>twist = rotation about the path, and orientation = offset between path and shape's surface normal?</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20160904</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20160904</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:54.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>01:32.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@2600:8803:7a85:6d00:31c9:b100:c4bc:40cd)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.51</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: the current attribute system is defined as a string=&gt;string map, so introspection into the value is only arguably defined for the standard attributes (for which this tolerance setting isn't necessary, doesn't make any sense)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.50</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>I would think it perfectly safe, perhaps even desirable, to not have -t have any bearing on attributes, to not introspect attributes -- just compare and report when they differ</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.45</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not in mm because of asc -- it's because that is (intentionally) defined as the base unit for all storage and in-memory processing, that requested units merely affects presentation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.19</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>this is done for a variety of reasons, one example being that you wouldn't want to re-encode all values just by running setting different working units.&nbsp;&nbsp;that would be a source of error accumulation and be nearly impossible to manage code-wise</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.24</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>there are other reasons.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.43</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>so for clarity, I think your last point is spot on -- that we shouldn't do numerical difference filtering on attributes (at least until a schema defines the value as a floating point number, e.g., binary attributes)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.01</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: OK, I'll have to check what we do there - maybe need to do some work besides updating docs, not sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.03</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, structurally everything boils down to avs diffing, and I don't distinguish at the lower level between params and attrs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.49</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>even for primitives it's a problem, if some of them have numerical parameters that aren't dimensions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.47</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>almost begs for a per-primitive functab function that can intelligently diff two objects of the same type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.04</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>urk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.44</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>doing this right will take more time than I have available, certainly before the next point release or two - should we just disable the tolerance feature until we can do it right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:39.19</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces a little at yanking it immediately after announcing it, but it might be worse to leave it in a confusing state...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.07</tt></td><td><font color="#5bae5b"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68812 brlcad/trunk/TODO: Have man page for brlman now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.17</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, I'm remembering now - doing "smart" primitive diffing was more than I had time to do last time as well, so I added the numerical filter as a way to at least be able to cull really small differences out of the results, however crudely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.41</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt>the unintended consequences of that might not be worth it though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.06</tt></td><td><font color="#ad5b5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">blinks - I'll be darned, an MIT licensed cross platform text editor with both graphical and terminal modes that's written in C and lua: <a href="http://foicica.com/textadept/index.html">http://foicica.com/textadept/index.html</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.50</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: okay, that all makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.14</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>I think the only issue is one of how to explain it in the manual page, and what that means for attrs if anything at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.52</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>I think saying it's unitless will be unexpected/confusing, inconsistent, and potentially conflicting down the road ; saying it's "mm" is fully inadequate and wrong for some fields</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.18</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>the simple fix might be to just state what the tolerance is intended to describe (for comparing floating point geometry parameters) and caveating that it currently also applies to all other numeric fields as well (which should be fine because integral change is usually far greater than tol)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:26.36</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>so they'll have to be really cautious when working with tol &gt; 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:27.16</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>I can take a stab at it later and you can let me know how it reads</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:27.34</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>textadept looks really cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.57</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>also, fyi, I'd rather see a json-style callback that would let us universally diff any two objects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.20</tt></td><td><font color="#7474dc"><tt>brlcad</tt></font></td><td width="100%"><tt>there's lots of good examples of json diffing that could be modified for use here</tt></td></tr>
+<tr><td><tt>04:40.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad boj (~boj@2001:250:3c00:2074:b1e8:ee29:561b:e3e2)</font></tt></td></tr>
+<tr><td><tt>06:58.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby_ (~stefan@x5d847781.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>07:22.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d847781.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>07:31.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby (~stefan@x5d847781.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>08:05.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr><td><tt>09:53.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby_ (~stefan@x5d847781.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>09:53.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>09:56.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>10:55.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.217.123)</font></tt></td></tr>
+<tr><td><tt>11:10.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>11:13.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>11:17.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.217.123)</font></tt></td></tr>
+<tr><td><tt>11:31.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.217.123)</font></tt></td></tr>
+<tr><td><tt>11:48.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>11:55.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.217.123)</font></tt></td></tr>
+<tr><td><tt>12:40.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>12:46.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.244.182)</font></tt></td></tr>
+<tr><td><tt>13:17.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>13:17.03</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by tepper.freenode.net</font></tt></td></tr>
+<tr><td><tt>13:27.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:41.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.244.182)</font></tt></td></tr>
+<tr><td><tt>13:57.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.244.182)</font></tt></td></tr>
+<tr><td><tt>14:19.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby_ (~stefan@x5d847442.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>14:36.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.216.193)</font></tt></td></tr>
+<tr><td><tt>14:42.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>14:47.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@195.128.182.31)</font></tt></td></tr>
+<tr><td><tt>14:52.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@195.128.182.31)</font></tt></td></tr>
+<tr><td><tt>15:03.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.243.86)</font></tt></td></tr>
+<tr><td><tt>15:41.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ickby_ (~stefan@x5d847442.dyn.telefonica.de)</font></tt></td></tr>
+<tr><td><tt>15:44.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.243.86)</font></tt></td></tr>
+<tr><td><tt>16:02.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>16:20.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@195.128.182.31)</font></tt></td></tr>
+<tr><td><tt>17:02.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad m5w (~matthew@108-203-5-240.lightspeed.rlghnc.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>17:05.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.243.86)</font></tt></td></tr>
+<tr><td><tt>17:10.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>17:27.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad m5w (~matthew@108-203-5-240.lightspeed.rlghnc.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>17:52.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.243.86)</font></tt></td></tr>
+<tr><td><tt>18:28.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad m5w (~matthew@108-203-5-240.lightspeed.rlghnc.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>18:37.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.230.106)</font></tt></td></tr>
+<tr><td><tt>19:00.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@101.211.230.106)</font></tt></td></tr>
+<tr><td><tt>19:21.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad m5w (~matthew@108-203-5-240.lightspeed.rlghnc.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>19:44.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (6719e766@gateway/web/freenode/ip.103.25.231.102)</font></tt></td></tr>
+<tr><td><tt>20:10.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@2600:8803:7a85:6d00:31c9:b100:c4bc:40cd)</font></tt></td></tr>
+<tr><td><tt>23:19.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

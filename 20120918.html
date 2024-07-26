@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120918</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120918</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:11.21</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: also, have a system that's not properly detecting X11/Xlib.h, any hints?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.16</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>HAVE_X11_XLIB_H is not set, but it's in /usr/X11R7/include/X11/Xlib.h; that include dir is searched; X11_X11_INCLUDE_PATH:PATH=/usr/X11R7/include .. so I'm not sure where to look next</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.58</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>was a fresh build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.36</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>BRLCAD_ENABLE_X11=ON</tt></td></tr>
+<tr><td><tt>01:02.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (~DarkCalf@173.231.40.99)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.12</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, some progres -- the actual header check is only testing -I/usr/local/include and compiler-default include dirs (/usr/include)</tt></td></tr>
+<tr><td><tt>01:10.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.51</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>man, this is bizarre..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.41</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, apparently a bug that nobody can reproduce</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.45</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://www.cmake.org/pipermail/cmake/2011-October/046634.html">http://www.cmake.org/pipermail/cmake/2011-October/046634.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.06</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>if(var STREQUAL "HAVE_X11_XLIB_H")&nbsp;&nbsp;&lt;-- ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.27</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>if("${var}" STREQUAL "HAVE_X11_XLIB_H")&nbsp;&nbsp;&lt;-- FAIL</tt></td></tr>
+<tr><td><tt>01:27.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-68 (cia@cia.vc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.43</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, I think I see the issue too, it's treating the quoted string as a variable inconsistently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.03</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>actually the 'ok' above is a fail too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.53</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52473 10/brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: unclear why strequal doesn't seem to be comparing strings. add some comments and spacing for readability.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.53</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52472 10/brlcad/trunk/src/librt/test_botpatches.cpp: Use SVD to get the 'correct' plane for a given patch.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.23</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52474 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.23</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: turns out that BRLCAD_INCLUDE_FILE is only searching in system include dirs (and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.23</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: the appended /usr/local/include required dir) but not any of the X11 include</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.23</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: paths. regardless, we don't need to retry the search since we found it or not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.23</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: during FindX11 checking. Just add our config file entry accordingly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.30</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52471 10/brlcad/trunk/BUGS: looks like it may be private memory with the transparency problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.07</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52475 10/brlcad/trunk/src/librt/test_botpatches.cpp: start setting up to handle cases where the split results in two or more distinct patches.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.24</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52476 10/brlcad/trunk/CMakeLists.txt: helps to set a cmake variable if we're going to stash it as a #cmakedefine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.56</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>this is an interesting little resource:&nbsp;&nbsp;<a href="http://kaba.hilvi.org/pastel/pastel.htm">http://kaba.hilvi.org/pastel/pastel.htm</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.18</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: erm.&nbsp;&nbsp;sorry, had my head buried in the code all day :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.02</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I found a different workaround, but left some commented code that I couldn't wrap my head around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.11</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52477 10/brlcad/trunk/src/tab/script.l: tokens.h is in the same dir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.50</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52478 10/brlcad/trunk/src/tab/script.l: quellage, need missing headers -- particularly unistd.h for isatty() in generated sources on netbsd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.17</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52479 10/brlcad/trunk/src/libfb/if_ogl.c: convert to libbu memory management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:36.36</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52480 10/brlcad/trunk/src/tab/script.l: don't need yy_flex_strlen</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:50.56</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52481 10/brlcad/trunk/src/nirt/nirt.h: remove the antiquated __NetBSD__ section and authorship commentary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.57</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52482 10/brlcad/trunk/ (NEWS src/libfb/if_ogl.c src/libfb/if_wgl.c): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.57</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: revert r52256 and r52268 that defaulted the opengl interfaces to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.57</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: single-buffering. provokes some bugs that seem to be related to inconsistent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.57</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: state management. in particular, not painting the background until after a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.57</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: couple (additional) expose events.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.22</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: unfortunately, the patches had to be undone .. several issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.50</tt></td><td><font color="#75df75"><tt>elf_</tt></font></td><td width="100%"><tt>What kinda issues brlcad ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.58</tt></td><td><font color="#adad5b"><tt>brlcad</tt></font></td><td width="100%"><tt>read the preceeding lines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.40</tt></td><td><font color="#75df75"><tt>elf_</tt></font></td><td width="100%"><tt>I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:50.31</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52483 10/brlcad/trunk/src/other/togl/src/CMakeLists.txt: need the X11 include dirs...</tt></td></tr>
+<tr><td><tt>09:32.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@82.208.133.12)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.51</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52484 10/brlcad/trunk/src/libbu/vls_vprintf.c: put the char into an int to quell upcasting warning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:03.22</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52485 10/brlcad/trunk/src/librt/primitives/ (sketch/sketch_tess.cpp superell/superell_brep.cpp): initialize vars before use quellage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:10.38</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52486 10/brlcad/trunk/src/ (61 files in 27 dirs): swooping update to support platforms where the ctype API is implemented as a set of macros indexing into arrays instead of functions. we cast into int accordingly. supports netbsd 5.1 (gcc 4.1.3) compilation.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.06</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52487 10/brlcad/trunk/src/librt/test_botpatches.cpp: Add pointer to Soderkvist's handy course notes documenting the planar SVD fitting algorithm.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.53</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r52488 10/brlcad/trunk/src/librt/primitives/nmg/nmg_inter.c: Update to function "nmg_isect_two_face2p_jra" in file "nmg_inter.c". Code cleanup, used newer, easier to read macros for float compares.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.06</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r52489 10/brlcad/trunk/src/librt/primitives/nmg/nmg_fcut.c: Update to function "nmg_face_rs_init" in file "nmg_fcut.c". Fixed a bug where the entire "nmg_ray_state" structure was not being initialized.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.28</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52490 10/brlcad/trunk/src/canon/canonlib.c: one more straggler ctype fix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.43</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52491 10/brlcad/trunk/src/other/togl/demo/CMakeLists.txt: need X11 include dirs</tt></td></tr>
+<tr><td><tt>15:15.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yiyus (1242712427@je.je.je)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.29</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r52492 10/brlcad/trunk/src/librt/primitives/ehy/ehy.c: clean up ehy validity checks in rt_ehy_plot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.18</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52493 10/brlcad/trunk/src/librt/test_botpatches.cpp: minor tweaks to plotting code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.37</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r52494 10/brlcad/trunk/ (4 files in 4 dirs): Added functionality for detecting polygon overlaps.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.46</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r52495 10/brlcad/trunk/src/librt/primitives/ehy/ehy.c: clean up tolerance calculations and validity checks</tt></td></tr>
+<tr><td><tt>21:05.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>21:05.31</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congratulations to our 11 accepted GSoC students!!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.35</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r52499 10/brlcad/trunk/src/librt/primitives/nmg/nmg_bool.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.36</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: Created a new function "nmg_plot_open_edges" within file "nmg_bool.c". This</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.36</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: function finds open edges within an NMG object and creates a UNIX plot file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.36</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: containing these edges. Updated function "nmg_bool" to call this new function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.36</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: when a boolean operation fails due to dangling faces.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.04</tt></td><td><font color="#b5b55f"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52500 10/brlcad/trunk/src/librt/test_botpatches.cpp: If a patch splits topologically when removing triangles, make new patches out of the results.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,340 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20090429</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20090429</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:11.32</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r34358 10/brlcad/trunk/BUGS: good gravy nmgs render absurdly slow. order of magnitude. seems to get worse the bigger the smp too. included a lot of detail after investigating.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.12</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">can't believe his eyes.. rt_nmg_shot() .. are you serious?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.35</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, nmg_manifolds() ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.10</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>no, look near the end of shot..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.14</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>or going through and verifying that it's a valid NMG before bothering to shoot?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.31</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>"build table indicating"...?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.52</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>that's prep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.59</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>oh heh :D wrong func</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.25</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>bu_calloc(), nifty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.40</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>per ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.46</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>and the size isn't even dynamic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.51</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, instead of grabbing some off the stack</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.10</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's crazy, makes me think I have to be missing something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.01</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.08</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>the size is dynamic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.25</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>prep calculates a maximum possible number of hits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.38</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>it should probably be allocated at prep and retained in the soltab or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.40</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>per sho() it's not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.43</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>shot()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.52</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I mean, it's not dynamic per ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.56</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>right, but it's not a compilable static</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.57</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's fixed to the model size</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.09</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>right, yeah, didn't mean that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.21</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>rt_nmg_ialloc() is probably where it should be allocated (once)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.04</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>but that'll run up the memory footprint :/ (shouldn't be an issue these days, but that might've been the thinking a the time)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.42</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I know nmgs are second-class citizens, but it's really bad the way it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.52</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>not any worse than it is now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.03</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>huh?</tt></td></tr>
+<tr><td><tt>00:26.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@202.3.77.38)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's calling that malloc per shot() which is per thread</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.26</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>8 threads, 8 callocs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.47</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>which explains why it's a freaking order of magnitude slower than bot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.48</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>right... you kinda contradicted yourself there, though :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.50</tt></td><td><font color="#6767c5"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>hey brlcad </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.23</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>contradicted?&nbsp;&nbsp;perhaps misunderstood or wires crossed..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.53</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, okie, ordering issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.53</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>you said adding to rt_nmg_ialloc would run up the memory foot .. don't see how any change will run up the foot print</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.56</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">groks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.13</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>because it's already about worst case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.56</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>now the only question is whether that ray_data needs to have its own copy of the hitmiss table</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.00</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>if you have 100 nmgs in a scene, right now it allocates "big ugly" for each nmg in order, so "push pop push pop", if each holds its own from prep, it's push push pop pop</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.24</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>no?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.45</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>not sure how the rays interact with the model data exactly, but yeah that sounds like that is a possibility</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.00</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>and if ya have 1000 nmg's, each gobbling up a meg for the hit table, taht's a gig consumption *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.45</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>course right now.. if you have 100 nmgs.. that's 100 * width * height interleaved push/pops instead of just 100</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.48</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug* I d'no what the common utilization is :) might be one of those things where ya just have to try it and see if it breaks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.49</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>100 * width * height being just average too .. could be much worse (overlapping objects)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.14</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>either way, performance is absolutely abysmal on a simple sphere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.18</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>is that mod a 'jr developer' task?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>make sph sph ; facetize -n sph.nmg sph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.19</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if he's screwing up by trying to find and save these low hanging fruit tasks for new developers O.o</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.57</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r34359 10/brlcad/trunk/src/librt/primitives/nmg/nmg.c: style consistency cleanup, ws, indent, comments.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.59</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I wouldn't think this was one regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.45</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>mucking about in librt is rarely a simple task and should be "over tested" and done so carefully regardless of the change</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.46</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r34360 10/brlcad/trunk/src/librt/primitives/nmg/nmg.c: didn't mean to sneak in that ray_data.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.49</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>of course, mucho testing, but the change should be quite simple *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.38</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>i think your experience is blinding you, or we have very different thoughts on simple tasks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.02</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, I'm thinking folk who have a nontrivial background in C development but are new to BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.20</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>requires knowledge of optimization, profiling, testing, lots of librt (wtf is a hitmiss, what's a ray_data) to know what to change and how that will impact, to even know that shot() and prep() are and how they interact, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.15</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>the poolios, not the irix64s :D *duck*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.28</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>then yeah, different level</tt></td></tr>
+<tr><td><tt>00:51.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi_ (i=piksi@pi-xi.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.08</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm thinking someone with just a couple years coding experience at most, after intro C at a uni, maybe OO, maybe a couple projects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.42</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.freebsd.org/projects/ideas/">http://www.freebsd.org/projects/ideas/</a> is my mental model here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.51</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>something that doesn't generally require much planning or research</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.02</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>that's what the "junior kernel hacker TODO list" grew into</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.33</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>competency expected, but a mentor is assigned to help ease one into the twisted dark world of kernel development</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.34</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.46</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>what they mean by junior is something else entirely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.07</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>someone not yet in the core, not yet proven, regardless of ability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>to me, the delineation is more about ability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.36</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>we have plenty of "simple" tasks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.40</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>well, someone without a commit bit... core is more a guidance body than a development team</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.20</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>*shrug* depends on the target audience, I suppose :) BRL-CAD is not exactly a sophmore project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.13</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not, but the point is that there are plenty of tasks that don't require more than freshman knowledge, tasks that would be immensely helpful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.22</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>but are time-consuming and low-priority</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.07</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>yeah, we had a list of tasks with both technical ability and effort required rated at some point, is that still floating around?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.23</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>like a 1-5 scoring iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.33</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's in doc iirc, but it wasn't well organized</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.38</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>or at least was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.51</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>mebbe that's wiki meat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.03</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>probably really just need to add complexity to our todo list and expand it with more ideas</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.11</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>doc/ seems to elude a lot of people O:_)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.33</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>(I've seen projects transpose characters in their URL to act as a screen, btu I don't wanna be 'that' project... *shrug*)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.43</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>another relevant project: <a href="http://janitor.kernelnewbies.org/">http://janitor.kernelnewbies.org/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.52</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, I d'no, :) we might not have the pool of interested people to make an effort like that time effective *shrug* I d'no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.11</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>more inline with ability in mind .. checking for consistent return codes, function name consistency, api completeness (if you have an alloc routine, you should have a free routine, etc), static functions, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.07</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, -Wall -Werror -W -ansi -pedantic </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.13</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>and valgrind, pheer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.28</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, see that is stuff just about anyone can hit up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.36</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>and really is a great way to get familiar and get started</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.09</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>then tackling a simple project is probably the next step up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.58</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>(if someone has more than 4 gigs on a 64b system, I'd kinda like to see someone stub a 4gb allocate in main() and fill the pages to verify we're 64b safe... I hav ea gut feeling that we use unsigned int when we should use void * or size_t)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.20</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I looked around your car and didn't see any damage, didja get it repaired already?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.13</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>nope, I just cleaned it up well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>it's on the front</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.37</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, I did notice that wart growing out of your grill</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.58</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>didja get a 30 day fixit ticket?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.16</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>2 more weeks or so before I get mine back :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.34</tt></td><td><font color="#60b7b7"><tt>poolio</tt></font></td><td width="100%"><tt>``Erik: hey now, hey now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.48</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>hey then, hey then O.o :D</tt></td></tr>
+<tr><td><tt>01:12.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LarsG (n=lars@nusnet-228-5.dynip.nus.edu.sg)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.56</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">glares at doc/docbook/ some</font></tt></td></tr>
+<tr><td><tt>01:13.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:16.37</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: now what'd it do?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.11</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>too many directories with a single operation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.18</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, agreed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.37</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs to fix that...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.50</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>right after I figure out what I did with tire...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.59</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">bought a dual core lappie, gets strusfrated when he's cpu blocked without cooking them both :D</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:18.18</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: no, they don't give fixits just fines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.44</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, lame, I was told that they give a fixit and 30 days to show it was done :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.00</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>testing it out, not really happy with it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.10</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>half the cars in my cul de sac don't have front plates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.34</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>given that a sheriff and state trooper live here and there's no issue, I'm under the impression that it's not a very enforced law</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.41</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>said I was going to wait until I was stopped at least four of five times, that has already happened</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.52</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>still putting in for an exemption request</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.13</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>gets too much attention</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.16</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>it is an attention grabbing vehicle... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.31</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm sure it's just an excuse so they can look it over</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.49</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>for most of them, it was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.58</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>the sedate appearance is one of the things that drew me to the m3</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.00</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>warnings, wagging fingers, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.19</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>as they rubbed the drool off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.10</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>anyways, still trying to figure out a workable solution</tt></td></tr>
+<tr><td><tt>01:25.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad samrose (n=samrose@c-24-56-196-90.chrlmi.cablespeed.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.58</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>find a state that doesn't require a front plate? :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.14</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>PA</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.18</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>WVa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.01</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>pa is doable, wv is a bit of a commute :D plus ya went and bought a house heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.22</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>shoulda bought a house up in pa with a garage, dude ;) *duck*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.02</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>just imagine, you coulda started carpooling with ww when the rotational is over!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.41</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks he's getting his ass kicked tomorrow</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.36</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>hell, I wouldn't move</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.47</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>just get a residence address, enough for a license</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.03</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>PA would drive me insane, not for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd take no garage over that any day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.13</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>you don't HAVE to become amish to live in pa, y'know... it helps, but it's not mandatory... :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.24</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>nope, I'm a city bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.50</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>philly isn't a city? :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.10</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>has a lot of good rowing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.17</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- likes to be near a city, but at the edge of suburbia where it turns into farmland</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.07</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>I love knowing I can bike or even walk to just about anything that I need</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.18</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>essentials, recreation, whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.31</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>peaceful calm slow home life, but can drive down into the city to hit a show or whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.56</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>and dullards not all going to bed at 9pm, finding something more than taco bell open to eat at 3am</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.23</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">is old, woke up at 5am the last few days wtih no alarm :(</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.34</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>so did I :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.40</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>can't be arsed to drive to denny's, but ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.54</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I said am, not pm :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.58</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>to each their own, it's just not what makes me happy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.05</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>*nod*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.34</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm annoyed enough at hearing my neighbors here, *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.01</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>hello, #brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy yukonbob </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.38</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">saw a funny bumper sticker other day "Honk if you're Amish"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.31</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">contemplates reading 3-4 days of scrollback :P</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.08</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>there was a large amish community near springfield mo, the stores right on the road were ripoffs, but if you drive down the gravel roads for a bit, there was a totally awesome bulk store, good stuff :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.44</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries a quick nmg hack</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.58</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>the memory thing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.20</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">had to distclean and autoreconf, too much crap has changed :/</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.27</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>damn, no different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.35</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: <a href="http://paste.lisp.org/display/79377">http://paste.lisp.org/display/79377</a>&nbsp;&nbsp;try not to laugh too hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.10</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>urm.&nbsp;&nbsp;surprised there's no solution to the date thing already implemented</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.39</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I looked around, couldn't find one... I just posted it to #ucw, haven't gotten my beatdown yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.36</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://crit.brlcad.org:9090/dinreedit">http://crit.brlcad.org:9090/dinreedit</a> is the result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:55.35</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r34361 10/brlcad/trunk/BUGS: problem narrowed down even further. nmg hit/miss book keeping just sucks in a major way. quick test showed a tangible 3x increase, but will require a fair bit of restructuring.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.18</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes "bookkeeping" is one word</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.59</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>and book keeping it two words, it's late but not that late ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.16</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>fight! fight! fight!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.17</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">keeps his books away from yukonbob </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.42</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.57</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">was trying to parse that sentence and had to do double-take</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.03</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>(or is that doubletake?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.20</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>double::take;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.24</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.36</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>double take;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.51</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>take = bookkeeping();</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.24</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>allyourbookkeepingarebelongtome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.29</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>Icanhasbookkeeping?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.40</tt></td><td><font color="#c567c5"><tt>yukonbob</tt></font></td><td width="100%"><tt>in soviet russia, books keep YOU!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.19</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>y'know, he ended up in branson</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.35</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>about half an hour drive from where I used to live :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.29</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>someone really didn't like the ucw link O.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.46</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>(yet no one is adding links, bummer)</tt></td></tr>
+<tr><td><tt>02:39.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (i=bryan@66.112.232.233)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.44</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: nice work with the lisp site!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.03</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is jealous - ``Erik has actually made lisp do something useful</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.45</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>ô´heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.03</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm an 80's coder... I code to get shit done, not to code...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:16.33</tt></td><td><font color="#ae5bae"><tt>Ralith</tt></font></td><td width="100%"><tt>I code to cause jellied donuts to spontaneously appear.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.59</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>see, that's the thing... back in THE DAY &lt;/reverb&gt;, we didn't care of jellied donuts appeared... it was nice when they did, but that wasn't the goal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.51</tt></td><td><font color="#ae5bae"><tt>Ralith</tt></font></td><td width="100%"><tt>if jellied donuts weren't the goal you were doing something wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:23.38</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:23.44</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>don't make me stab you.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.09</tt></td><td><font color="#ae5bae"><tt>Ralith</tt></font></td><td width="100%"><tt>I've got powdered sugar and I know how to use it!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.53</tt></td><td><font color="#5cb05c"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>heheh 80's coder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.16</tt></td><td><font color="#5cb05c"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>gettin shit done in FORTRAN :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.02</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>bitch, I will beat your ass down</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.27</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>C is a 60's language, LISP is a 50's language, scheme is a 70's language, ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.52</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>smalltalk is 70's, objc and c++ are early 80's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.00</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">yawns</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.36</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>tsa is old news... I don't think there has been any real advancement since around '85 or so :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.19</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">stares at his ellipse equations and wonders why they heck they are working...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.55</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.57</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.55</tt></td><td><font color="#5cb05c"><tt>PrezKennedy</tt></font></td><td width="100%"><tt>``Erik, you should program with a 90's language... like Java! ;)</tt></td></tr>
+<tr><td><tt>04:29.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@202.3.77.38)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:55.11</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... these are going to be big enough and elaborate enough to need more room than I originally thought.</tt></td></tr>
+<tr><td><tt>05:18.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elena (n=opera@92.86.0.28)</font></tt></td></tr>
+<tr><td><tt>05:24.58</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad elena (n=opera@92.86.0.28)</font></tt></td></tr>
+<tr><td><tt>05:43.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.130.56)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:46.05</tt></td><td><font color="#68c7c7"><tt>madant</tt></font></td><td width="100%"><tt>are things all right in california ? declaration of emergency has pretty bad connotations in india ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:53.43</tt></td><td><font color="#68c7c7"><tt>madant</tt></font></td><td width="100%"><tt>hope this swine flu episode ends pretty soon.. flus are such a pain in humanity's ass to control..</tt></td></tr>
+<tr><td><tt>05:54.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (i=piksi@pi-xi.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:06.43</tt></td><td><font color="#c86969"><tt>pacman87</tt></font></td><td width="100%"><tt>starseeker: what ellipse equations?</tt></td></tr>
+<tr><td><tt>06:13.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elena (n=opera@92.86.0.28)</font></tt></td></tr>
+<tr><td><tt>06:13.24</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad elena (n=opera@92.86.0.28)</font></tt></td></tr>
+<tr><td><tt>06:16.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>06:38.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mouette (n=chatzill@fw1.phys.sinica.edu.tw)</font></tt></td></tr>
+<tr><td><tt>07:14.51</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad LarsG (n=lars@nusnet-228-5.dynip.nus.edu.sg)</font></tt></td></tr>
+<tr><td><tt>07:19.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14CED9.dip.t-dialin.net)</font></tt></td></tr>
+<tr><td><tt>07:44.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi_ (i=piksi@pi-xi.net)</font></tt></td></tr>
+<tr><td><tt>08:04.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>08:37.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@223.Red-83-49-86.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>09:38.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elena (n=opera@92.86.0.28)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:05.11</tt></td><td><font color="#68c7c7"><tt>madant</tt></font></td><td width="100%"><tt>how mafm </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:05.17</tt></td><td><font color="#68c7c7"><tt>madant</tt></font></td><td width="100%"><tt>oops.. howdy :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:11.48</tt></td><td><font color="#5db05d"><tt>mafm</tt></font></td><td width="100%"><tt>hai</tt></td></tr>
+<tr><td><tt>10:35.53</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad elena (n=opera@92.86.0.28)</font></tt></td></tr>
+<tr><td><tt>11:48.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad BigAToo (n=BigAToo@pool-96-230-124-67.sbndin.btas.verizon.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:07.13</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>pacman87: the ones solved by the tire tool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:08.55</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>now make this tread: <a href="http://www.apothema.gr/files/productImages/pilot_sportPILOT%20SPORT.jpg">http://www.apothema.gr/files/productImages/pilot_sportPILOT%20SPORT.jpg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:08.56</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:10.50</tt></td><td><font color="#6161b9"><tt>alex_joni</tt></font></td><td width="100%"><tt>``Erik: <a href="http://www.popsci.com/files/imagecache/article_image_large/files/articles/auto_tire485.jpg">http://www.popsci.com/files/imagecache/article_image_large/files/articles/auto_tire485.jpg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:11.56</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, the twheel, those're neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:12.07</tt></td><td><font color="#6161b9"><tt>alex_joni</tt></font></td><td width="100%"><tt>nice to model ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:12.16</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>tehre's a video where they slapped those on a high perfomrance mb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:12.23</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>but they never showed it actually running, just slowly driving</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:13.34</tt></td><td><font color="#6161b9"><tt>alex_joni</tt></font></td><td width="100%"><tt><a href="http://www.geek24.com/g/twheel-airless-wheel-technology-from-michelin">http://www.geek24.com/g/twheel-airless-wheel-technology-from-michelin</a> &lt;- from 2006, it is kinda working I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:13.48</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.youtube.com/watch?v=iOSAQjCbXZE">http://www.youtube.com/watch?v=iOSAQjCbXZE</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:15.05</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">wants to see what they do when put under extremes, like track driving</font></tt></td></tr>
+<tr><td><tt>12:57.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:00.44</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>*sigh* I made two collosal mistakes. 1) I read the comments on slashdot. 2) I looked up this 'boxxy' mentioned in a comment and now I am ... dain bramaged?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:01.36</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>I THINK it's a parody, but it's ... </tt></td></tr>
+<tr><td><tt>13:20.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dreeves (n=IceChat7@64.178.177.71)</font></tt></td></tr>
+<tr><td><tt>13:35.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=d@117.196.130.38)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.00</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>the maddest ant of the all :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.50</tt></td><td><font color="#68c7c7"><tt>madant</tt></font></td><td width="100%"><tt>:P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.06</tt></td><td><font color="#5c5caf"><tt>``Erik</tt></font></td><td width="100%"><tt>them all, even</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.26</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r34362 10/brlcad/trunk/src/libged/rotate_arb_face.c: Handle special cases for arb4 and arb6.</tt></td></tr>
+<tr><td><tt>15:54.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (i=erik@c-76-111-12-116.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>16:07.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (i=erik@c-76-111-12-116.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:28.22</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">watches b5</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.51</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>this is... actually... really bad...</tt></td></tr>
+<tr><td><tt>16:45.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@223.Red-83-49-86.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>17:13.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jdoliner (n=jdoliner@98.227.157.38)</font></tt></td></tr>
+<tr><td><tt>17:33.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.26</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>(alpha (beta)) == &lt;alpha&gt;&lt;beta&gt;&lt;/beta&gt;&lt;/alpha&gt; ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.34</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>woops, wrong winder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.59</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>hello d_rossberg </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.44</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves from home</font></tt></td></tr>
+<tr><td><tt>17:59.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>18:00.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.09</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>happy Walpurgisnacht eve</tt></td></tr>
+<tr><td><tt>18:01.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>18:02.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.15</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>:) it's the "Freinacht" in Bavaria</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.01</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r34363 10/brlcad/trunk/src/tclscripts/archer/CombEditFrame.tcl: Minor cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.40</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and tomorrow our village gets a new maypole</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.07</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>(sorry, i mean on May 1st)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.27</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r34364 10/brlcad/trunk/src/tclscripts/archer/ (5 files): Added code for prompting the user for a rotation point when rotating an arb face.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.32</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>maypole?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.43</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.48</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>interesting, never seen one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.00</tt></td><td><font color="#73da73"><tt>brlcad</tt></font></td><td width="100%"><tt>well, maybe I have, but I certainly don't remember -- was too young</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.41</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>they are very commonly here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.33</tt></td><td><font color="#c86969"><tt>pacman87</tt></font></td><td width="100%"><tt>hi d_rossberg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.00</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>hi pacman87</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.51</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i'm your mentor again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.26</tt></td><td><font color="#c86969"><tt>pacman87</tt></font></td><td width="100%"><tt>so i've noticed :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.28</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>but i think you know better than i what you have to do this GSoC</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.40</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.03</tt></td><td><font color="#c86969"><tt>pacman87</tt></font></td><td width="100%"><tt>i'll try to keep my dev log updated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.43</tt></td><td><font color="#d972d9"><tt>d_rossberg</tt></font></td><td width="100%"><tt>and maybe i can give some advices on higher order geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.47</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r34365 10/brlcad/trunk/src/tclscripts/archer/ArcherCore.tcl: Catch calls to toggleTreePath to so that mRestoringTree gets set back to 0.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.37</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r34366 10/brlcad/trunk/src/tclscripts/archer/Archer.tcl: Override the kill command in ArcherCore in order to remove any edit panels associated with the object(s) being killed/deleted. Will need to look at other commands that kill/delete objects from the database.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.04</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r34367 10/brlcad/trunk/src/libged/tire.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.04</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: Add more detailed commentary on the precise nature of the constraints imposed to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.04</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: define the elliptical torus shapes in the tire tool. The equations don't make</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.04</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: some of the sources of the constraints or the reasons they were used immediately</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.04</tt></td><td><font color="#c8c869"><tt>CIA-28</tt></font></td><td width="100%"><tt>BRL-CAD: apparent.</tt></td></tr>
+<tr><td><tt>20:56.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@223.Red-83-49-86.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.49</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: what are your tire dimensions again?</tt></td></tr>
+<tr><td><tt>21:40.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@223.Red-83-49-86.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.36</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>255-40R18?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:09.19</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;did something about rt_sketch_internal change?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:09.38</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm betting a bad pointer crash on sketch.c line 1868</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:09.43</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>er getting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.55</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>255/40-18</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.13</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>on the back, 225/45-18 up front</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.26</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">WOULD be testing that, if the friggin thing wasn't bombing all of a sudden</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.45</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>what the...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.53</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik:&nbsp;&nbsp;do you have a recent compile?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:43.20</tt></td><td><font color="#62baba"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">reverts - no time for this now</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

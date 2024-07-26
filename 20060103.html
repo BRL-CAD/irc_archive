@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20060103</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20060103</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>02:29.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mahesh (n=mahesh@12-217-228-235.client.mchsi.com)</font></tt></td></tr>
+<tr><td><tt>06:20.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-90-11.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>07:33.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-90-11.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>09:30.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>13:17.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@host217-35-76-52.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>13:42.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad joevalleyfield (n=joevalle@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>19:34.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>19:36.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pier (n=pier@151.56.220.10)</font></tt></td></tr>
+<tr><td><tt>19:56.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:06.35</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>Hi brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.57</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.42</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>hi..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.01</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>I am having a look at the g-dxf.c code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.34</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>and wondering where to look for the db_walk_tree function source</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.38</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>eep, you hopefully don't need to follow db_walk_tree beyone understanding that it walks the database geometry tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.49</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>regardless, it's in src/librt/db_tree.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.33</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>parallel tree walker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.16</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>looks like this function does a lot of very important things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.14</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>Does it brows the input file pointed by dbip?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.13</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>it does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.11</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>it walks through all the geometry in a directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.32</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>by itself, that is all that it does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.55</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>what makes it useful, though, is that you provide it function pointers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.43</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>nmg_booltree etc?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.44</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>those callback functions are called when various geometry are encountered</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.03</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>so these functions get out triangles from the shapes in the db tree?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.46</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>what are you looking at specifically?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.15</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>more than likely if db_walk_tree is being used with nmg evaluation, then yes.. the geometry is being extracted as triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.50</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>I was just trying to work out the way the code works but the deeper I go the harder it gets</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.36</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>in order to learn something more about&nbsp;&nbsp;the way you get the shell surface from a boolean combination of solid shapes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.42</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>you're starting with a pretty complicated converter to begin with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.22</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>all the nmg_* routines basically do the "get the shell surface from a boolean combination of solid shapes"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.25</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>... positive..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.36</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>so you presumably were looking at:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.40</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.40</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.40</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.40</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.40</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.42</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.44</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.49</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.25</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>when you open a geometry database, you're create a directory of the contents</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.37</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>that eventually gets you the dbip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.56</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.09</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>I get it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.16</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>the db_walk_tree function there has two callbacks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.39</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>whild it's walking the directory, it encounters combinations/regions and primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.48</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>the primitives are "leaf nodes"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.09</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>go on please</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.11</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>when it finds a combination/region, db_walk_tree() calls do_region_end()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.25</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>when it finds a primitive, it calls nmg_booltree_leaf_tess()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.41</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>nmg_booltree_leaf_tess() is provided by a library and basically tesselates the object into triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.54</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.05</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>do_region_end() is presumably a function in the dxf converter that puts it all together</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.21</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>I pondered your idea about getting plan views from a raycastin algorithm and I was trying to understand</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.36</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>the dxf outputting code to see if that aim could have been achieved by modifying the g-dxf code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.25</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>i thought about that a little bit more as well, the route I'd think about to get a non-discretized answer would require adding a routine to all the primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.39</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g. for the sphere primitive, there already exists a routine to evaluate/get the implicit for (the _shot() routine) and a polygonal explicit form (the _tess() routine)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.45</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>that somewhere finds the coordinates of all the objects in the db whose manipoulation I wouldn't&nbsp;&nbsp;like to get involved with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.33</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>ok but I got stuck when it comes to the hidden line removal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.53</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>if one added a _brep() routine or somesuch that returned the brep form, you could then rather easily directly extract exact spline projections</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.17</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>say I got a pipe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.11</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>you mean a cylinder?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.25</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>which can be thought of as a union rcc1 (with R) - rcc2 (r&lt;R)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.58</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>in a g file I ould retrieve the geometrical data of both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.59</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, so an actual hollow pipe, got it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.04</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.44</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>rcc1 (lenght L) rcc2 (l&gt;L)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.33</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>I could work out the maximum dimensions of the object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.56</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>Xmax Ymax Xmin Ymin to get a view port</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.41</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>from whose points shoot perpendicoular rays </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.15</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>am I on the right way?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.34</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>for a discretized method, sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.55</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>mmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.05</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>otherwise</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.36</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>for a shape one should consider the edges and project them on a plane</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.02</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.35</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>that's the method i'm referring to, it's just a matter of how to "get the edge"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.39</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>in the case of a cylinder two ellipses joined by two lines tangent to botw of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.18</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>you can get a discretized edge from ratracing (a pretty good one at that, but discretized nonetheless) and respline</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.24</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>for non-discretized splines, you can get the edges/outlines etc .. but that's where I said that it'll require modifying the primitives themselves since there currently aren't routines to do this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.01</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>the first is more simple (and could even be tacked into g-dxf or wherever, but the latter is a "better" solution from a numerical standpoint</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.11</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>for the sigle shapes (primitives) the projection shouldn't be hard as long as they are not concave</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.43</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>some primitives will be very hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.46</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>some not so hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.49</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.06</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>yes the ellipsoid for instance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.49</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>the only hard part will be implementing the boolean evaluation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.33</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>we have booleans on implicits and triangles, but not brep splines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.48</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>even for generalized polygons</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.48</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.17</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>it's more the amount of time/effort involved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.05</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>i'd gather it'd be a generous month or so to get splines in an rtedge fashion inside g-dxf</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.37</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>6+ months to get full brep support, maybe 2 or 3 for minimal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.48</tt></td><td><font color="#6565c1"><tt>``Erik</tt></font></td><td width="100%"><tt>MEER ME</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.50</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>and that's a lot of math</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.50</tt></td><td><font color="#6565c1"><tt>``Erik</tt></font></td><td width="100%"><tt>BEER</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.58</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>~beer ``Erik </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.59</tt></td><td><font color="#5cb05c"><tt>ibot</tt></font></td><td width="100%"><tt>ACTION deftly decants a fine Jever for ``Erik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.06</tt></td><td><font color="#6565c1"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, yelling typo's kinda spoiles the effect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.15</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>maybe for one who knows exactly what to do and where put hands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.24</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>yet conveniently still works when it's related to alcohol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.37</tt></td><td><font color="#6565c1"><tt>``Erik</tt></font></td><td width="100%"><tt>wish I had me some of that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.43</tt></td><td><font color="#6565c1"><tt>``Erik</tt></font></td><td width="100%"><tt>but, alas, I'm not allowed yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.54</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>pier: that was factored in somewhat :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.04</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.40</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>was thinking about matrix rotation to get ellipsoid projection on a plane but not sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.52</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>ok I'll think it over... going to bed now. Have a nice day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.04</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>not so hard if you have brep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.24</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>it all ends up being transformations on the splines like how triangles get transformed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.06</tt></td><td><font color="#63bdbd"><tt>pier</tt></font></td><td width="100%"><tt>put enough meat on the fire for me... risk going to get clogged up :) bye</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.15</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, cya</tt></td></tr>
+<tr><td><tt>22:48.56</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad pier (n=pier@151.56.220.10)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.31</tt></td><td><font color="#6565c1"><tt>``Erik</tt></font></td><td width="100%"><tt>so how's the new gui going?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.44</tt></td><td><font color="#dcdc74"><tt>brlcad</tt></font></td><td width="100%"><tt>no decent progress in dec</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20081117</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20081117</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>03:23.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Pimpinella (n=frank@gondolin.pimpi.org)</font></tt></td></tr>
+<tr><td><tt>04:35.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-68-54-174-162.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.07</tt></td><td><font color="#6ed16e"><tt>yukonbob</tt></font></td><td width="100%"><tt>win 3</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:33.10</tt></td><td><font color="#6ed16e"><tt>yukonbob</tt></font></td><td width="100%"><tt>ww</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.15</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: the problem is still there so long as we still use [X], [Y], [Z] in our code and use external codes that have #defines for X, Y, Z</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.41</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>adding them into an enum or enum in a namespace would still result in a failure if they have a #define that screws it up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:38.15</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: the case where you want that is to see objects positioned in a given context</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:39.51</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>but not in that context -- e.g., engine.r might be modeled at the origin, but actually positioned in some higher level assembly somewhere along the path like /tank/interior/drive_system/engine.r</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:46.03</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: I'm not suggesting putting it in a namespace, and I don't think a plain enum would break existing code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:46.25</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>It might not make naming conflicts *impossible*, but it makes them far more unlikely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:46.39</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>iirc the one I was running into was not in the preprocessor at all.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:47.08</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>work up a patch, see how it works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:47.15</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:47.33</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>should I see if I can manage a before/after performance test?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:47.45</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>not for an enum</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:47.50</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>they'll be the same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:47.53</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>that's what I thought</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:51.41</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>redundant #defines in brep.h and dm.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:51.47</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>what's that about?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:52.34</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>such as?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:52.49</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>include/brep.h:49:#define X 0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:52.52</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>include/dm.h:57:#define X0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.08</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>did you look at brep.h? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.17</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>ah.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.22</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>I was getting there &gt;_&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.33</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>still, that doesn't cover the why.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.38</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>it's got similar conflict issues because of openNURBS defines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.42</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>ahh.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.57</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>that's all fair-game to clean up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:53.57</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>adopting openNURBS's numbering scheme is not an acceptable solution?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:54.46</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>I suppose it would still be messy, though...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:55.00</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>those symbols aren't the same for them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:55.44</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>the undef/def hacks should certainly go away</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:56.04</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>opennurbs is C++?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:57.37</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:24.17</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>removing or changing the argument names from lines 60-63 of opennurbs_xform.h seems to take the enum &amp;&amp; hack removal past the first failure at no sacrifices to functionality. Not sure how hard it would be to push upstream. Thoughts?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:31.06</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">realizes that grep -R on the entirety of brlcad is going to take a while</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:31.34</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>...I say as it finishes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:00.15</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>think that it doesn't fix the problem since any header could use X/Y/Z for arg names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:00.51</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>it's almost always simple to fix, on our end or the other end .. that's partially why it's still the way it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:00.57</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>you could say the same for any globally scoped symbol, with varying degrees of likeliness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:01.35</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>not quite, it's specifically because these are preprocessor symbols that they cause problems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:01.47</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>if you made them enums, that should fix the opennurbs issue too I'd think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:02.58</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>it just won't fix usages, where it is a variable elsewhere and it might/could get our enum value instead of whatever the variable value was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:03.06</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>it doesn't fix the opennurbs issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:03.11</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>that's what I've been testing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:03.29</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>actually..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:03.31</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>maybe it does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:03.44</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>something else has been defining X and I can't find it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:03.57</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>cpp reports my enum as 0 = 0, 1 = 1, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:05.15</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>i just tested it here with a simple test case and it worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:05.48</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>you still have something defining X to 0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:05.54</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>right, there's still a #define X/Y/Z buried somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:06.00</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>so your enum gets busted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:06.19</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>just have to weed out the rest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:06.28</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>what's egrep syntax for whitespace of 1+ chars? Doesn't seem to be \w+</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:07.11</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>basic grep would just be '[[:space:]][[:space:]]*'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:07.44</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>or extended as '[[:space:]]+'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:07.59</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>\w is a perl extension iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:08.10</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>ahh.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:08.12</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>that explains that.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:08.49</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>perl added a slew of \* extensions that save keystrokes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:08.55</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>does that cover tabs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:09.00</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:10.06</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>[:something:] are posix character classes, probably documented on the re_format(7) manual page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:10.31</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>ahah!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:10.35</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>further #defines found!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:10.42</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>holy shit there's a lot of redundancy here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:11.32</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>not too surprising, the headers haven't had an overhaul cleanup in a long time but they get quick-patched a lot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:11.44</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>causes a lot of repeat fixing for trivial things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:13.55</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>you can't #define something that's already been #defined, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:13.57</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">longs to be done moving so he can spend all night and day coding again</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:14.12</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:14.18</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>you can, but you'll probably get preprocessor warnings or compilation woes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:14.34</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>'blah' was redefined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:16.45</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>kay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:17.04</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>so I can rely on that none of these numerous "#define X" instances override eachother?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:29.13</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>almost guaranteed that they're all just hacks around the fact that openNURBS was also using them, so whenever there's a snippet of code that was dual-processed as C and C++, it needed the protection</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:41.16</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33193 10/brlcad/trunk/src/librt/primitives/pnts/pnts.c: flesh out the rest of the fugly pnts export. seriously needs some refactoring cleanup. functify or macrify fer crissakes, or eliminate the cromulent types.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:44.09</tt></td><td><font color="#6e6ed2"><tt>Ralith</tt></font></td><td width="100%"><tt>so far so good...</tt></td></tr>
+<tr><td><tt>11:03.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@84-72-91-240.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>11:49.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
+<tr><td><tt>12:14.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:18.35</tt></td><td><font color="#63bcbc"><tt>mafm</tt></font></td><td width="100%"><tt>hi </tt></td></tr>
+<tr><td><tt>13:13.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad94 (n=543c3a7b@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>13:57.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad redvsblue (i=Pandora@c-69-247-220-102.hsd1.mo.comcast.net)</font></tt></td></tr>
+<tr><td><tt>14:04.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-68-54-174-162.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>14:04.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.50</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r33194 10/brlcad/trunk/src/librt/primitives/pnts/pnts.c: gave the pointer a type to do arithmetic</tt></td></tr>
+<tr><td><tt>14:25.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14F021.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:25.35</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">yawns</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.07</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33195 10/brlcad/trunk/src/librt/primitives/pnts/pnts.c: reduce some of the redundancy, add a routine to pack doubles into the buffer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.53</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;Is the points primitive ready to suck in data?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.06</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>nope, I just finished export</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.13</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>now I need to do import</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.35</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>another day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.42</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.11</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33196 10/brlcad/trunk/include/rtgeom.h: document why there are 8 point data containers</tt></td></tr>
+<tr><td><tt>15:09.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad punkrockgirl (n=Pandora@c-69-247-220-102.hsd1.mo.comcast.net)</font></tt></td></tr>
+<tr><td><tt>15:43.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad geocalc (n=geocalc@91-171-205-31.rev.libertysurf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.04</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">ponders the tree walking aspects of this problem and contemplates first working on the general tree walker</font></tt></td></tr>
+<tr><td><tt>17:09.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.09</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: your diagnosis was closer the first time on the rt path problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.55</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>there's also a little nomenclature that you don't know about -- the solids list is right, it's just not what you think it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.33</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>the primitives used to be called 'solids' .. i.e., solids == primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.15</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>so the solids list really is just a list of the primitives being drawn (since only primitives have wireframes given they're unevaluated and we don't display evaluated versions)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.28</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>so when you e up all.g, it adds all the relevant primitives to a solids list that it needs to draw all.g (full path to those primitives as there can be duplicates)</tt></td></tr>
+<tr><td><tt>18:29.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-68-54-174-162.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:29.58</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>alas, it has absolutely no distinction then between "e a.r" and "e a.r/b.c/c.s" since "e a.r" will cause an /a.r/b.c/c.s path to get added to the solids list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:30.22</tt></td><td><font color="#d16ed1"><tt>brlcad</tt></font></td><td width="100%"><tt>so mged needs to use different information, who needs to be changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.12</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r33197 10/brlcad/trunk/src/librt/primitives/metaball/metaball.c: do not display "goo" in listing when not appropriate</tt></td></tr>
+<tr><td><tt>19:00.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IceSPRITE (n=punk@217.118.79.44)</font></tt></td></tr>
+<tr><td><tt>19:03.28</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad IceSPRITE (n=punk@217.118.79.44)</font></tt></td></tr>
+<tr><td><tt>19:04.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-83-53.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.30</tt></td><td><font color="#63bcbc"><tt>mafm</tt></font></td><td width="100%"><tt>bye</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.04</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>well, that was an abrupt powerpoint crash</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.03</tt></td><td><font color="#b7b760"><tt>``Erik</tt></font></td><td width="100%"><tt>opposed to a carefully planned and meticulously executed powerpoint crash?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.46</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>well, usually I expect it to give out when i do something weird like paste an excel graph&nbsp;&nbsp;into a slide, not when editing a text object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.22</tt></td><td><font color="#b7b760"><tt>``Erik</tt></font></td><td width="100%"><tt>microsoft is continually looking for ways to improve the user experience, now you don't even need to do anything 'weird' to get that comfortably familiar response! :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.04</tt></td><td><font color="#69c8c8"><tt>starseeker</tt></font></td><td width="100%"><tt>next they'll be bundling the sledgehammer with which to destroy the offending OS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.17</tt></td><td><font color="#b7b760"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.tburke.net/fun_stuff/pictures/computers/windows-cement.htm">http://www.tburke.net/fun_stuff/pictures/computers/windows-cement.htm</a>&nbsp;&nbsp; an oldie but a goodie :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.45</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33198 10/brlcad/trunk/src/librt/primitives/pnts/pnts.c: just use a simple fixed value of 1 for sizeless points drawing axes until it can be better tested to work resolution independent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.27</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33199 10/brlcad/trunk/src/librt/primitives/sketch/sketch.c: ws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.18</tt></td><td><font color="#e1e176"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r33200 10/brlcad/trunk/src/librt/primitives/sketch/sketch.c: reduce the for loop depth insanity a few levels</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120612</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120612</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.16</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>can somebody with C++ skills point me to what I'm doing wrong here?&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/unordered_map_test.cxx">http://bzflag.bz/~starseeker/unordered_map_test.cxx</a></tt></td></tr>
+<tr><td><tt>01:09.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/fellow/louipc)</font></tt></td></tr>
+<tr><td><tt>01:47.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/fellow/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.33</tt></td><td><font color="#71d8d8"><tt>louipc</tt></font></td><td width="100%"><tt>wow I missed the last release until now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.47</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>louipc: it was quietly posted -- wait for 7.22</tt></td></tr>
+<tr><td><tt>04:08.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@2001:470:1f0f:1042:4261:86ff:fe43:bcad)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.59</tt></td><td><font color="#71d8d8"><tt>louipc</tt></font></td><td width="100%"><tt>I was poked to update my archlinux buildfiles hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.58</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>7.22 should be tagged tomorrow (Tuesday)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:15.14</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I suggest getting it working with a std::map first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:15.29</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem is probably with the insert() parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:15.54</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>at least with std::map, the insert() method takes a std::pair for the key/value</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.30</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>for example: <a href="http://bzflag.bz/~sean/tmp/map.cxx">http://bzflag.bz/~sean/tmp/map.cxx</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.49</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - yeah, I had it working with map</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.54</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>figured we'd probably want unordered_map for performance, but getting the pair thing working wasn't quite as simple as I'd hoped</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.48</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>that depends on so many factors it's not funny</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.25</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: yeah, at a glance it's not clear what's missing but it is related to the insert() call</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.35</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>BUT, that's a perfect case where a little knowledge might be doing injustice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.20</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>the order may be less at O(1) and O(logN), but that might not matter for some unknown value of "relatively small" data </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.43</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>moreover, all the hashing work may frankly make it even slower for some data sets</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.30</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>should still see a gain using a std::map if something isn't goofed, then that makes a great baseline for testing conversion to unordered or hash_map</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.12</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>keep it simple until a profile SHOWS you it's the biggest problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:20.40</tt></td><td><font color="#c06565"><tt>andrei_</tt></font></td><td width="100%"><tt>brlcad, I understand you are busy and I have no itention to insist pointlessly but, could you please give me some suggestions . What should I do next?</tt></td></tr>
+<tr><td><tt>06:36.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>07:20.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (~ksu@46.149.82.166)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:33.55</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Ksuzee 07<a href="http://brlcad.org">http://brlcad.org</a> * r3875 10/wiki/User:Ksuzee/Reports:</tt></td></tr>
+<tr><td><tt>08:50.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@152-209-201-46.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>09:04.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad anrgmrty (u6512@gateway/web/irccloud.com/x-gocnhzmtrmgcaokm)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:04.51</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>d_rossberg: hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:18.12</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>anrgmrty: how is your project's progress?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:19.14</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>hi, given an input .g file, i am able to output a text file that lists which voxels are present and which are not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:19.20</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>as 0's and 1's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:21.15</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>though i had to discuss how to shoot more than one ray through a voxel(your pseudo code mentioned it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:21.48</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>it said maybe randomly shooting the rays wasnt a good idea..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:23.36</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>also i am figuring out how gqa works because brlcd told me it resembles closely what i need to do..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:24.42</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>right, i would recommend to have a parameter n and then shoot an nxn pattern for each row of voxels</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:25.30</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>this way you have a nicely uniform distribution of your rays over the voxel</tt></td></tr>
+<tr><td><tt>09:26.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@209.248.147.2.nw.nuvox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:27.45</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>an nxn pattern for each row? or each voxel?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:29.09</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>you don't shoot only one voxel with each ray but all voxels along this ray (in your case in x direction)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:29.31</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>same is true for the nxn pattern</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:32.07</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>ok.. so, this parameter say n = 2.. then on each row of voxels 4 rays are uniformly shot? but wont many voxels be missed this way?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:33.26</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>i am actually talking about the raysPerVoxel parameter i used.. it is for changing the number of rays shot on each voxel..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:34.03</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>? at the moment you shoot one ray per row, with n=2 you'll shoot 4 rays per row</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:35.40</tt></td><td><font color="#e377e3"><tt>d_rossberg</tt></font></td><td width="100%"><tt>(the rows are parallel to the x axis in your case)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:36.37</tt></td><td><font color="#7575df"><tt>anrgmrty</tt></font></td><td width="100%"><tt>ohh.. got it now.. by row you mean parallel to x-axis..</tt></td></tr>
+<tr><td><tt>10:52.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:51.57</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r51061 10/brlcad/trunk/regress/dsp/: add dir to segregate multiple dsp tests</tt></td></tr>
+<tr><td><tt>12:21.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (~ksu@46.149.81.166)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.38</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>crud...&nbsp;&nbsp;metaball facetization isn't happy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.59</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>stuck here, looks like:&nbsp;&nbsp;nmg/nmg_fuse.c:1642</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:59.13</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>yep, infinite loop</tt></td></tr>
+<tr><td><tt>14:55.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (~DarkCalf@173.231.40.99)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.39</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r51062 10/brlcad/trunk/src/tclscripts/lib/Accordian.tcl: Removed debug statement. Added a state argument indicating whether or not a different button was pressed to the calls to the toggle panel callbacks.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.43</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r51063 10/brlcad/trunk/ (3 files in 2 dirs): Added a wrapper for calling rtwizard from libged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.04</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r51064 10/brlcad/trunk/src/ (libtclcad/tclcad_obj.c tclscripts/lib/Ged.tcl): Provided a tcl interface to the new rtwizard functionality in libged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.42</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r51065 10/brlcad/trunk/src/tclscripts/archer/ (4 files in 2 dirs): Added a new interface to Archer for creating rtwizard types of images.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:08.19</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51066 10/brlcad/trunk/src/other/step/src/express/expr.c: Warn about indexing a select with mixed base types. SCL git 67f8897.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:26.33</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51067 10/brlcad/trunk/src/other/step/src/ (3 files in 2 dirs): ws/style from SCL git 09f3472 and d94a449</tt></td></tr>
+<tr><td><tt>16:35.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (~ksu@46.149.81.166)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:38.42</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>hi ksuzee </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:40.37</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>brlcad: hello, Sean!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.11</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: <a href="http://pastebin.ca/2160570">http://pastebin.ca/2160570</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.37</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51068 10/brlcad/trunk/src/ (9 files in 4 dirs): Have SDAI_String and SDAI_Binary wrap std::string rather than inherit from it. SCL git 82898d7.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.15</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>brlcad: Sean, do you remember your explaining me of using CMakefiles and Makefiles? So everything's well - I made some such refactoring. Also I did so in libdm. Since it's a library, these 'make' files where different and I just put new file to libdm_la_SOURCES. And everything worked:) Am I right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.34</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>ksuzee: no, I've completely forgotten about that long discussion we had just last week .. remind me? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.38</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>are you sure?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.13</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it sounds like you did the right thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.27</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>yes, I'm sure)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.52</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>You made me be more confident</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.06</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>brlcad: I always forget to do this.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.35</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>it's more than just being confident, it's about asking yourself why you have doubt and doing what you need to confidently eliminate that doubt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.16</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>being very confident and always wrong is worse that being timid and right :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.21</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>apply logic, understand the situation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.28</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>I argree with you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.10</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>okay, so I'm working in right way. And what about new patches? I have quite enough. Shall I put them to the tracker or better to wait you check my previous?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.12</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>no waiting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.26</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>put up new patches as if you were committing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.45</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>as soon as the next round of patches can be reviewed, we'll see where you stand with regards to commit access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.06</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>we're in the middle of preparing a release, so resources and time are limited for the next couple days</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.36</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: O.o&nbsp;&nbsp;I've never seen that before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.41</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>what platform?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.15</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>cmake 2.8.4 on netbsd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.18</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>5.1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.33</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51069 10/brlcad/trunk/src/other/step/src/ (cldai/sdaiDaObject.h fedex_plus/classes.c): Borland-specific stuff from SCL git c0c423c and 3a9fa99.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.54</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm not even sure if that's something CMake controls... I take it the Autotools build works?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.44</tt></td><td><font color="#e277e2"><tt>brlcad</tt></font></td><td width="100%"><tt>didn't try</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.54</tt></td><td><font color="#77e2e2"><tt>ksuzee</tt></font></td><td width="100%"><tt>brlcad: ok, I'll put everything to the tracker tomorrow, I hope to have commit after reviewing, because I corrected and tested everything you told</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.06</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51070 10/brlcad/trunk/src/other/step/ (4 files in 3 dirs): put enums in separate table; SCL git c415e49</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.23</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r51071 10/brlcad/trunk/src/tclscripts/rtwizard/rtwizard.tcl: look for libtclcad and libdm in the right place on Windows (really need 'package require' for BRL-CAD libs...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.27</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51072 10/brlcad/trunk/src/other/step/ (3 files in 2 dirs): Warn about indexing binary types instead of failing. Allows fedex_plus to produce output for ap221 and ap235 express schemas. SCL git 4cd7e7c.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.46</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... looks like this particular facetization has been busted all along...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.10</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r51073 10/brlcad/trunk/src/tclscripts/lib/Accordian.tcl: Added the -padding option.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.10</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51074 10/brlcad/trunk/src/other/step/ (6 files in 3 dirs): remove 'backwards compatiblity' symbols; SCL git 1481950 and a63ac73</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.34</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>ah.&nbsp;&nbsp;OK, looks like I was mistaken - not an infinite loop, just a reeeaaaallly slow process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.43</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt>with a lot of shared data</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.06</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">sets up the run and stands back...</font></tt></td></tr>
+<tr><td><tt>19:03.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei__ (andrei@5-12-76-135.residential.rdsnet.ro)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.12</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r51075 10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl): Work toward not using RtControl. Also tweaked things a bit to better control autosizing when using the rtwizard modes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.00</tt></td><td><font color="#407a40"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">drools over Mac Retina display...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.23</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>built in battery is concerning, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.08</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>I'm getting ready to buy a third battery for my personal macbook, the second is bloating :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.27</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>Hey Erik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.44</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>sup, andrei? good progress on the tpkg thing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.52</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>err</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.01</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>I did ask some questions </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.06</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>brlcad said that I should have 3 loops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.29</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>one for package size ( the parameter that I added ) , one for file size and one for number of packages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.39</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>I don t see how number of packages can be a parameter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.57</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>and I m going do modify tpkg to return the number of packages sent instead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.35</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>O.o is this with 'speedtest.sh'?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.35</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>I submitted a very basic shell script as a patch. Could you please have a look at it and see if I m heading in the right direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.45</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.08</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>I ve modified that quite a bit, as I said before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.42</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>-b is setting the packet size?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.54</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>yes, I have fixed the tpkg patch aswell</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.05</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>( and updated it on sourceforge )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.56</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>looks roughly like the right direction... might be better to send random data instead of 0's to avoid transport compression</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.11</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>I thought of that but</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.18</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>and dump the results to stdout instead of filling an array, maybe in csv format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.22</tt></td><td><font color="#60b6b6"><tt>andrei__</tt></font></td><td width="100%"><tt>right, I ll finish it probably in several hours</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.47</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r51076 10/brlcad/trunk/src/librt/primitives/bot/tie.c: 0 out the treewalk stack</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.37</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r51077 10/brlcad/trunk/regress/ (22 files in 2 dirs): fill in preliminary dsp regressions tests for 2x2 and 3x3 cases; null case and 1x1 cases need work (if they can be done at all with current state of mged which seems to balk at creating such corner cases)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.14</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r51078 10/brlcad/trunk/src/other/step/src/fedex_plus/ (classes.c selects.c): Allocate aggregate members on heap. SCL git 809e1dd, 260fd55, and e421f70.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.44</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>andrei__: the tpkg.c patch still needs some work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.22</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r3876 10/wiki/User:Stattrav/GSoC2012_log: Updation of the logs.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.45</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r3877 10/wiki/User:Stattrav/GSoC2012_log: Updation of the logs.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.19</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03anrgmrty * r51079 10/brlcad/trunk/src/conv/g-voxel.c: g-voxel.c has been modified to shoot multiple rays per voxel(raysPerVoxel), unnecessary variables removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.22</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r51080 10/brlcad/trunk/regress/CMakeLists.txt: dsp-common.sh not in repository...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.19</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r51081 10/brlcad/trunk/src/fbserv/fbserv.1: work around errors noted by doclifter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.05</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Anuragmurty 07<a href="http://brlcad.org">http://brlcad.org</a> * r3878 10/wiki/User:Anuragmurty: /* Development Log */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.56</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Anuragmurty 07<a href="http://brlcad.org">http://brlcad.org</a> * r3879 10/wiki/User:Anuragmurty: /* Development Log */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.57</tt></td><td><font color="#7272d9"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r51082 10/brlcad/trunk/src/tclscripts/rtwizard/rtwizard.bat: Don't want to exit after running rtwizard.bat, now that there is a viable command line mode.</tt></td></tr>
+<tr><td><tt>22:53.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@2001:470:1f0f:1042:4261:86ff:fe43:bcad)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

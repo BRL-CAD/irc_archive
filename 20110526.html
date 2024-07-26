@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110526</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110526</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:24.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crazy_imp (~mj@a89-182-248-36.net-htp.de)</font></tt></td></tr>
+<tr><td><tt>00:30.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (~kvirc@bas2-sudbury98-1096601324.dsl.bell.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.22</tt></td><td><font color="#d3d36f"><tt>IriX64</tt></font></td><td width="100%"><tt><a href="http://pastebin.com/u/IriX64">http://pastebin.com/u/IriX64</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.34</tt></td><td><font color="#d3d36f"><tt>IriX64</tt></font></td><td width="100%"><tt>trying to install 7.18.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.56</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>Well, I have no idea on how to resolve this error: <a href="http://pastebin.mozilla.org/1234805">http://pastebin.mozilla.org/1234805</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.19</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>It's difficult to tell what I'm trying to compile tough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.00</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>Here's the cmake file I'm using: <a href="http://pastebin.mozilla.org/1234806">http://pastebin.mozilla.org/1234806</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.22</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>A weird thing is that the raytracer depends on a file named oslexec_pvt.h, which is only available in the osl source, not in the generated lib (that is, on dist/include)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.39</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt>kunigami_: have you tried sticking that file in the include dir?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.46</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>I added its directory with: include_directories(/Users/kunigami/dev/osl/src/liboslexec/)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.32</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt>kunigami_: grep in your build directory for osl and see which binary files match RendererServices</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.32</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt>my first guess is that you need to link in some other OSL library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.40</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>grep says that simplerend.o and testrender.o matches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.42</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt>nothing else?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.58</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt>where is RendererServices defined?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.58</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>hmm this is the testrender build. In the osl build there are a bunch of files that maches. The only library is liboslexec</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.11</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>ls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.14</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>oops </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.48</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt>try make VERBOSE=1 - does it definitely show the oslexec library being linked in?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.18</tt></td><td><font color="#b0b05c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">must head out - kunigami_, how did you build the original test program?  I'd look at what you did there vs. what's going on here, if that succeeded...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.46</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>I think so. The last executed command is? /usr/bin/c++&nbsp;&nbsp;&nbsp;&nbsp;-Wl,-search_paths_first -Wl,-headerpad_max_install_names&nbsp;&nbsp;CMakeFiles/testrender.dir/testrender.o CMakeFiles/testrender.dir/simplerend.o CMakeFiles/testrender.dir/sphere.o&nbsp;&nbsp;-o testrender&nbsp;&nbsp;/Users/kunigami/dev/osl/dist/macosx/lib/liboslexec.dylib /Users/kunigami/dev/osl/dist/macosx/lib/liboslcomp.dylib /Users/kunigami/dev/oiio/dist/macosx/lib/libOpenImageIO.dylib /opt/local/lib/libboost_filesystem-mt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.47</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>/opt/local/lib/libboost_regex-mt.dylib /opt/local/lib/libboost_system-mt.dylib /opt/local/lib/libboost_thread-mt.dylib </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.12</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>There's a /Users/member:kunigami/dev/osl/dist/macosx/lib/liboslexec.dylib&nbsp;&nbsp;there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.29</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>I built the original system with almost the same configuration of cmake. The difference was that testrender was under osl sources: /osl/src/testrender</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.36</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>also, when linking libraries: oslexec, oslcomp and oslquery, CMakeLists does: TARGET_LINK_LIBRARIES ( testrender oslexec oslcomp oslquery) because these libraries are being generated too (I'm not sure if I was clear)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.28</tt></td><td><font color="#77e2e2"><tt>kunigami_</tt></font></td><td width="100%"><tt>Well, I'll take a break now. Tomorrow I'm back!</tt></td></tr>
+<tr><td><tt>02:28.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-56 (cia@cia.atheme.org)</font></tt></td></tr>
+<tr><td><tt>04:45.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@loco-gw.ic.unicamp.br)</font></tt></td></tr>
+<tr><td><tt>06:09.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-61 (cia@cia.atheme.org)</font></tt></td></tr>
+<tr><td><tt>06:15.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.167.103.233)</font></tt></td></tr>
+<tr><td><tt>06:15.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>06:21.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@111.93.134.142)</font></tt></td></tr>
+<tr><td><tt>06:21.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>06:27.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crazy_imp (~mj@a89-182-248-36.net-htp.de)</font></tt></td></tr>
+<tr><td><tt>06:34.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr><td><tt>06:35.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>08:22.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@30.Red-83-45-252.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>11:29.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:39.40</tt></td><td><font color="#6bcccc"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r44696 10/brlcad/trunk/src/proc-db/ (CMakeLists.txt Makefile.am ringworld.c): Stub Niven's "ringworld" structure as a proc-db. It'd be an awesome stress test.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:43.37</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>hahahahahaha awesome :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:44.29</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>:D a few details at <a href="http://en.wikipedia.org/wiki/Ringworld">http://en.wikipedia.org/wiki/Ringworld</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:44.58</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>1.6m km wide, 1au radius</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:45.33</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>woops, oh, yeah, 1.6m km wide, 1.6k km tal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:46.08</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>could whack it with rtweight and come up with a rough density, too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:46.15</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>so, whats the Material Code for scrith ? =D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:46.40</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>42. :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:48.36</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, took him 10 years to write the sequel (ringworld engineers) to address the complaints about gaps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:48.50</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://en.wikipedia.org/wiki/The_Ringworld_Engineers">http://en.wikipedia.org/wiki/The_Ringworld_Engineers</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:49.08</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>Secondly, many fans had identified numerous engineering problems in the Ringworld as described in the novel.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:49.36</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>Niven says that one reason he wrote The Ringworld Engineers was to address these engineering problems.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:49.55</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>aaanyways, fun set of books :) I haven't picked up the latest one yet (2004)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:51.14</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">was thinking of coming up with the set of parms for the proc-db first, so'z it could do everything from a halo to a ringworld, with enough data to generate a newtonian model</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:52.50</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>then an anchored fractal to generate the 'tiles'</tt></td></tr>
+<tr><td><tt>11:55.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@187.106.4.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:06.01</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>that would be a fun project :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:08.05</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>and, to be honest... the hardest part would be the terrain generation</tt></td></tr>
+<tr><td><tt>12:22.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@111.93.134.142)</font></tt></td></tr>
+<tr><td><tt>12:22.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>12:35.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami1 (~kunigami@loco-gw.ic.unicamp.br)</font></tt></td></tr>
+<tr><td><tt>12:40.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:42.01</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>terrain generation how? it's a pretty basic fractal exercise... done it before, will do it again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:42.50</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>often, it's just taking a square, finding the center point, putting a random value there based on the neighbors, recurse... quadtree fractal pattern</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.53</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>right on.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.58</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>i ment relative difficulty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:55.30</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>the ring structure (aka a circular 'trench') is all of about 3 cyls :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:56.01</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>ring.r = u s1.s - s2.s - s3.s</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:56.03</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:56.22</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>so the fractal terrain gen is much more 'difficult' than that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:00.55</tt></td><td><font color="#6ccdcd"><tt>``Erik</tt></font></td><td width="100%"><tt>for a really basic one, yes... but we might need to go with DSPs to get the surface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.57</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>so it turns out that a sphere with a radius of 699500 km doesn't raytrace correctly :)&nbsp;&nbsp;(at least on my box)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.40</tt></td><td><font color="#6bcccc"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r44697 10/brlcad/trunk/src/proc-db/ringworld.c: remove 'count' check, since that doesn't exist.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.55</tt></td><td><font color="#cd6ccd"><tt>dloman</tt></font></td><td width="100%"><tt>lol, i just oened that file to fix that :)&nbsp;&nbsp;nice</tt></td></tr>
+<tr><td><tt>15:21.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@30.Red-83-45-252.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>15:53.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad WhiteCalf (MK@whitecalf.net)</font></tt></td></tr>
+<tr><td><tt>17:00.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.192.153.125)</font></tt></td></tr>
+<tr><td><tt>17:00.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>17:25.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-68-60-96-218.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.44</tt></td><td><font color="#6bcccc"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r44698 10/brlcad/trunk/include/config_win_cmake.h: remove duplicate WITH_TK definition</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.32</tt></td><td><font color="#6bcccc"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r44699 10/brlcad/trunk/src/librt/CMakeLists.txt: Use the same trick for librt as librt-static - Wno-error due to Mac OSX warning</tt></td></tr>
+<tr><td><tt>18:07.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>19:12.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@loco-gw.ic.unicamp.br)</font></tt></td></tr>
+<tr><td><tt>19:31.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@loco-gw.ic.unicamp.br)</font></tt></td></tr>
+<tr><td><tt>19:33.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crazy_imp (~mj@a89-182-248-36.net-htp.de)</font></tt></td></tr>
+<tr><td><tt>19:40.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr><td><tt>19:41.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.192.153.125)</font></tt></td></tr>
+<tr><td><tt>19:41.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>20:15.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@loco-gw.ic.unicamp.br)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.12</tt></td><td><font color="#6bcccc"><tt>CIA-61</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r44700 10/brlcad/trunk/src/other/iwidgets/generic/ (4 files): Temporarily deleted a few troublesome options that currently break things like iwidgets::fileselectionbox and rtwizard. Need to find out what's really going on here.</tt></td></tr>
+<tr><td><tt>21:14.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@165-62-94-178.pool.ukrtel.net)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

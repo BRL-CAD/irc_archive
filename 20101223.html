@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20101223</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20101223</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:57.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Aeamus (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr><td><tt>02:15.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crazy_imp (~mj@a89-182-209-220.net-htp.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.01</tt></td><td><font color="#ca6aca"><tt>``Erik</tt></font></td><td width="100%"><tt>candy mountain, charlie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.15</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: hehe.. "man 2 wait"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.36</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>ding nabbit - ok, what's the Windows version?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.07</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>google isn't very helpful on this </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.33</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41787 10/brlcad/branches/cmake/src/vdeck/vdeck.c: OK, that's not the wait functionality being assumed on Unix - what's the equalivent call on Windows?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.56</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>wait() is related to process management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.26</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>there isn't a 1-1 mapping for most of the process management calls, just like there's no fork()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.48</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>growl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.13</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>vdeck looks ancient - is it still used?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.14</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>but like with fork(), there's a way to create a new process (CreateProcess()), so there should be something similar like WaitForProcess() but undoubtedly not just a drop-in replacement</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.22</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.54</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>I was going to deprecate it a few months back and that month some conversation came up with someone using the vdeck tools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:33.18</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o&nbsp;&nbsp;com-geom card images?&nbsp;&nbsp;Wow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.54</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>growl... this can't be the first time this has come up - perhaps we should do a bu_wait and friends to wrap all of this?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.55</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>actually, it's worse - this sucker also needs /bin/sh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.08</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: what about this as a compromise - it looks like vdeck needs this stuff only when it exercises it's ability to run a unix shell command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.43</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>that "feature" is basically a security hole, so I wouldn't shed a tear to see it removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.53</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>that's obviously a no-go on Windows anyway - what about wrapping the code defining the shell stuff in ifdef HAVE_SYS_WAIT_H?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.24</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, better yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.38</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>it's possible to kick out to a shell on windows, could be made to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.42</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>but it's a dumb feature</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.42</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>can I just yank it or do we need deprecation?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.01</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>yank it from trunk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.06</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>righto</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.12</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>security issues don't follow deprecation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.28</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>akin to fixing a bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.12</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41788 10/brlcad/trunk/ (NEWS src/vdeck/vdeck.c): Remove the 'execute shell command' misfeature from vdeck.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.15</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>past tense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.28</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>er, yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.09</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe:&nbsp;&nbsp;"removed shell execution !command from vdeck"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.12</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41789 10/brlcad/trunk/NEWS: remove -&gt; removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.10</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>the one nice thing about that vdeck implementation was that it was close to what you'd need for a bu interface for running commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.52</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>just missing the windows logic, which would have actually been simpler than the unix code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.22</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>because you'd just CreateProcess() in the current process's context and it'd automatically block until return</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.51</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>what does nirt do?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.11</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>or does our command line nirt work on Windows...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.40</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41790 10/brlcad/trunk/NEWS: call out the command that was removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.32</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: what do you advise on the adrt stuff in Windows?&nbsp;&nbsp;wrap it with WIN32 conditionals until the new stuff is ready for trunk merge?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.43</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, nevermind, nirt doesn't need to fork processes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.45</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>silly me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.54</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>most of the adrt stuff in that build log looked pretty easy to fix</tt></td></tr>
+<tr><td><tt>10:47.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@253.Red-83-55-205.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:48.23</tt></td><td><font color="#74dd74"><tt>DaveLo</tt></font></td><td width="100%"><tt>Mernin</tt></td></tr>
+<tr><td><tt>12:17.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~suryajith@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>12:18.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist_emc (~archivist@217.34.113.62)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:20.19</tt></td><td><font color="#74dd74"><tt>DaveLo</tt></font></td><td width="100%"><tt>/*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:20.36</tt></td><td><font color="#74dd74"><tt>DaveLo</tt></font></td><td width="100%"><tt><font color="#CC00CC">warms up the commit machine.</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:21.03</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r41791 10/rt^3/trunk/src/GS/: Modified SVN:IGNORE</tt></td></tr>
+<tr><td><tt>12:26.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:01.38</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r41792 10/rt^3/trunk/src/ (8 files in 3 dirs): Insert sqlite 3.7.4 into src/other. Going to evaluate if sqlite is a good solution for the metadata processing we need for the Repository searching/filtering functionality</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:04.35</tt></td><td><font color="#ca6aca"><tt>``Erik</tt></font></td><td width="100%"><tt>what's the behavior of sqlite3 with multiple writer and reader processes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.56</tt></td><td><font color="#74dd74"><tt>DaveLo</tt></font></td><td width="100%"><tt>``Erik: the documentation *says* that multiple instances of SQLite can perform IO on the same DB file.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.04</tt></td><td><font color="#74dd74"><tt>DaveLo</tt></font></td><td width="100%"><tt>but I'll believe it when I see it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.27</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41793 10/brlcad/branches/cmake/ (8 files in 6 dirs): Sync CMake to trunk r41972</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.07</tt></td><td><font color="#ca6aca"><tt>``Erik</tt></font></td><td width="100%"><tt>so yeah, candy mountain, charlie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:54.33</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r41794 10/brlcad/branches/cmake/src/conv/dem-g.c: Start cleaning up dem-g - first, fix the variable size array declarations. This seems to work in testing on the Mac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.13</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>no clean up on trunk first?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.14</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>sqlite is acid compliant, it all works as you'd expect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.53</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>sqlite's biggest limitation is that it is basically typeless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.26</tt></td><td><font color="#7171d7"><tt>brlcad</tt></font></td><td width="100%"><tt>so any type checking has to happen in the application on both reads and writes from the database</tt></td></tr>
+<tr><td><tt>17:44.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurgi (~cosurgi@atak.bl.pg.gda.pl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.42</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r41795 10/rt^3/trunk/src/other/sqlite_3_7_4/ (SQLiteAndGSNotes.txt repo.db): Check in a notes file and a sample SQLite db file.</tt></td></tr>
+<tr><td><tt>18:53.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.06</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r41796 10/rt^3/trunk/ (4 files in 2 dirs): Move sqlite3.h to public include dir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.29</tt></td><td><font color="#74dd74"><tt>DaveLo</tt></font></td><td width="100%"><tt>Well, happy holidays all!&nbsp;&nbsp;I'm outtie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.26</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: er, yeah I guess that woudl be good wouldn't it - tend to forget about trunk when doing Windows fixes :-P</tt></td></tr>
+<tr><td><tt>21:25.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (~mafm@253.Red-83-55-205.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.58</tt></td><td><font color="#d97272"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r41797 10/brlcad/trunk/src/tclscripts/lib/TkTable.tcl: Added more windows and emacs style bindings for cell editing and traversal.</tt></td></tr>
+<tr><td><tt>22:56.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~suryajith@static.71.252.63.178.clients.your-server.de)</font></tt></td></tr>
+<tr><td><tt>23:18.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~suryajith@static.71.252.63.178.clients.your-server.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:23.53</tt></td><td><font color="#ca6aca"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.daggerpress.com/2010/12/19/harford-county%E2%80%99s-food-facility-inspection-violations-for-november-2010/">http://www.daggerpress.com/2010/12/19/harford-county%E2%80%99s-food-facility-inspection-violations-for-november-2010/</a></tt></td></tr>
+<tr><td><tt>23:35.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~suryajith@static.71.252.63.178.clients.your-server.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.06</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: hmm.&nbsp;&nbsp;sounds like a bunch of refrigerators need fixing ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.39</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>bit more concerned by the Basta sanitary procedures one - ew</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.19</tt></td><td><font color="#d871d8"><tt>starseeker</tt></font></td><td width="100%"><tt>Anybody here have any experience using dynamic dns to make it possible to log into one's machine from a remote computer?</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

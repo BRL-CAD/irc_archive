@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20130425</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20130425</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.56</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>"Because the Unigraphics-to-BRL-CAD converter, ug-g, was written using the Unigraphics UG/Open API library, users must have a Unigraphics UG/Open execute or development license in order to run it."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.16</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>is that true? there's a ug-g binary in brlcad that's useless without a license key somewhere?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.11</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>kanzure: if I remember correctly, that bit can't even be compiled without their API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.55</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>kanzure: that code is in src/external/Unigraphics</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.15</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>it hasn't been built in a long time - since well before the CMake build, actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.30</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>also, if I recall correctly that code, even when compiled up and working, won't import or preserve NURBS - it brings things in as BoTs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.03</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>ah fascinating.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.40</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>step-g is the wave of the future :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.22</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>well, the only reason i brought it up is because he claimed it can be used to get out usable files from solidworks. but that seems like a really weird claim to make if it requires a proprietary blob of code... because there's already tons of proprietary blobs of code that can do that.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.56</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - it might not be clear at a glance that it needs the external libs</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.08</tt></td><td><font color="#6161ba"><tt>brlcad</tt></font></td><td width="100%"><tt>kanzure: yeah, the ug-g converter is like our Pro/E export plugin -- they're link against their API/libraries and work with their runtime</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.21</tt></td><td><font color="#6161ba"><tt>brlcad</tt></font></td><td width="100%"><tt>hence why we shove them in src/external</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.42</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if they are even keeping around once the STEP support matures</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.52</tt></td><td><font color="#c668c6"><tt>starseeker</tt></font></td><td width="100%"><tt>s/even keeping/even worth keeping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.27</tt></td><td><font color="#6161ba"><tt>brlcad</tt></font></td><td width="100%"><tt>kanzure: and I think the compatibility he claims is unlikely (that .sldprt will sufficiently be read by something that reads .prt files) .. maybe, but that's certainly not something we've ever investigated or tested</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:33.46</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>oh there's also a Pro/E plugin. huh.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.19</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>starseeker: i think they should be tossed if STEP exports more data *and* the other application reads back out the same data</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.34</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>of course, STEP implementations vary..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.36</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>erm.. i mean, if the proprietary software produces an exactly equivalent "their native file format" version of a model both from (1) g-step output and (2) g-ug output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.43</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>although, this assumes a perfect g-ug implementation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.48</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>so that test might be inappropriate.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.23</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55236 brlcad/trunk/NEWS: nick improved the step-g importer in 55219 fixing a segfault and allowing the converter to handle more varied inputs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.51</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55237 brlcad/trunk/src/util/cv.c: if one section gets curlies, the other should too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:20.14</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55238 brlcad/trunk/src/util/decimate.c: call bu_exit() and avoid setting an expression boolean to a variable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.48</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>which proprietary cad tool has the best STEP importer/exporter? iirc opencascade supports STEP but it had spatchy coverage?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.53</tt></td><td><font color="#854685"><tt>kanzure</tt></font></td><td width="100%"><tt>cstirk: i guess that's a question for you.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:23.57</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55239 brlcad/trunk/src/libged/model2view.c: browder noticed that these two can be combined, simplifies even further.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.23</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55240 brlcad/trunk/NEWS: bob fixed a bug / expanded support in r52470 to better support multiple monitors under linux. for setups not using xinerama or some other mechanism for treating multiple hardware displays as one big virtual display, this fix makes it work even if X is configured to treat them separately, returning the proper visual for the right screen.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.56</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 55241 brlcad/trunk/NEWS: Ro?\195?\159berg fixed a memory leak in the pipe primitive where nobody ever implemented the rt_pipe_free() function to actually release memory. now does the deed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.54</tt></td><td><font color="#de7575"><tt>cstirk</tt></font></td><td width="100%"><tt>kanzure: CATIA of the major vendors, Datakit of the third-party translators.&nbsp;&nbsp; The data is here <a href="http://www.cax-if.org/vendor_info.php">http://www.cax-if.org/vendor_info.php</a></tt></td></tr>
+<tr><td><tt>04:21.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@202.164.53.119)</font></tt></td></tr>
+<tr><td><tt>06:01.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22 (~gcimaths@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>06:01.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>06:06.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>06:14.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Iordanis (Iordanis@host214-207.cvd.fit.edu)</font></tt></td></tr>
+<tr><td><tt>06:33.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@202.164.53.119)</font></tt></td></tr>
+<tr><td><tt>07:21.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@202.164.53.119)</font></tt></td></tr>
+<tr><td><tt>07:45.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>07:52.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@202.164.53.119)</font></tt></td></tr>
+<tr><td><tt>08:30.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@202.164.53.119)</font></tt></td></tr>
+<tr><td><tt>08:34.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>09:28.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~cezar@92.81.194.220)</font></tt></td></tr>
+<tr><td><tt>10:13.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hilnius_bnc (~hilnius_b@client-resel-2.enst-bretagne.fr)</font></tt></td></tr>
+<tr><td><tt>10:26.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hilnius_bnc (~hilnius_b@client-resel-2.enst-bretagne.fr)</font></tt></td></tr>
+<tr><td><tt>11:14.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~cezar@92.83.176.40)</font></tt></td></tr>
+<tr><td><tt>11:19.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23_ (~cezar@92.83.176.40)</font></tt></td></tr>
+<tr><td><tt>11:22.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (~erik@pool-74-103-121-45.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>11:52.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@124.253.31.174)</font></tt></td></tr>
+<tr><td><tt>12:29.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~chatzilla@117.253.228.187)</font></tt></td></tr>
+<tr><td><tt>12:38.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@124.253.24.225)</font></tt></td></tr>
+<tr><td><tt>12:40.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>12:41.24</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jasleen (~chatzilla@117.253.228.187)</font></tt></td></tr>
+<tr><td><tt>12:41.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~chatzilla@117.253.228.187)</font></tt></td></tr>
+<tr><td><tt>12:52.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>13:27.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak_ (~isaac@41.202.195.59)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.58</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5090 /wiki/User:KeshaSShah: Created page with "= Personal Information= Name: Kesha Shah E-mail address:[mailto:kesha.shah1106@gmail.com kesha.shah1106@gmail.com] IRC nickname: kesha_ =Brief backgrou..."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.09</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>hey</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.24</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>brlcad_: Do you use mged commands and other primitives to build a heart primitive</tt></td></tr>
+<tr><td><tt>13:33.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~chatzilla@117.253.228.187)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.35</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>jasleen_: How do you build a primitive out of the existing ones?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.07</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 55242 brlcad/trunk/TODO: mention the togl replacement intent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.47</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.50</tt></td><td><font color="#bb62bb"><tt>jasleen</tt></font></td><td width="100%"><tt>Izak_:you can make inbuilt primitives using commands or GUI and by using addition, subtraction operations of CSG (constructive solid geometry) you can make complex objects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.57</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Hi, i am working on Code refactoring project. I have also submitted proposal for it: <a href="http://brlcad.org/wiki/User:KeshaSShah">http://brlcad.org/wiki/User:KeshaSShah</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.39</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>I would like to know who will be mentoring this project? I would like to get reviews on it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.17</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt><font color="#CC00CC">is very excited to refactor and reduce BRL-CAD codebase</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.33</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>jasleen_: I want to build a heart primitive . So are you saying I will have to use mged commands ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.09</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>I have also tried to reach on mailing list. I will really appreciate if someone can help me out. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.10</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>kesha_: I am in the same soup .&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.27</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>It appears sourceforge lists have a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.15</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>izak_ : really ! I am so enthusiastic right now. Its too hard to be patient !</tt></td></tr>
+<tr><td><tt>14:01.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak_ (~Izak@41.202.195.59)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.32</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>izak_ : really ! I am so enthusiastic right now. Its too hard to be patient !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:02.31</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Kesha_: So what do you intend to work on ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.13</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Izak_: Code Refactoring and Code reducing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.22</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Izak_: N You ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.24</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>A heart surface primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.53</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Have you made the proposal ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.14</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>I am still doing so ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.15</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Who is your mentor ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.39</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>I have been told any one can mentor me. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.54</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Great !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:06.46</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Jasleen Kaur * 0 /wiki/User:Jasleen_Kaur: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.10</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Hey listen, I have got my final exams running now. I need to study ! Just few hrs left and have to burn my midnight lamp to study !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.14</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Catch You later </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.38</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Okay. One open source spirit bro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.52</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Izak_: *sis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.01</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt><font color="#CC00CC">is a girl</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.30</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Oh oh . I am sorry I concluded.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.40</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Hope you don't mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.52</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55243 brlcad/trunk/src/tclscripts/archer/ShaderEdit.tcl: Added support for the following shaders in Archer: texture(color), texture(b/w), bump and extern.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.08</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Never mind ! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.34</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>So what do you read - your major ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.34</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>I have to select it next Year. Right now, ICT - Information and Communcation Technology .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.00</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>HHmm. I see. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.19</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>I major in&nbsp;&nbsp;computer science </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.42</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Cool. In which University ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.06</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>The University of Buea , Cameroon , Africa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.18</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>N you ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:13.00</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Dhirubhai Ambani Institute of Information and Communication Technology, India, Asia</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.24</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Wow. I hear you guys and girls in India are the best programmers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.48</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>True that. Last year we had 17 students in GSoC. </tt></td></tr>
+<tr><td><tt>14:16.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~chatzilla@117.253.232.146)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:18.58</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>kesha_: Wow thats cool</tt></td></tr>
+<tr><td><tt>14:18.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.45</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>jasleen_: I want to build a heart surface primitive. Do I have to use the mged commands ? Can a script in the mged language be a useful patch in my proposal ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:22.12</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>kesha_: Do you the maximum number of proposals which&nbsp;&nbsp;are accepted each year by a mentor organisation ( like BRL CAD ) ?</tt></td></tr>
+<tr><td><tt>14:28.17</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad harmanpreet (~chatzilla@124.253.24.225)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.32</tt></td><td><font color="#bb62bb"><tt>jasleen</tt></font></td><td width="100%"><tt>Izak_: making an object is entirely different than making a primitive. MGED commands are used for making 3D models. Creating a new primitive include coding and maths intensive task.</tt></td></tr>
+<tr><td><tt>14:29.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Shabbir (6f4467a3@gateway/web/freenode/ip.111.68.103.163)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.47</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Izak_: Didn't get you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.03</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Jasleen_: I have found the math equation for a 3d heart ? Is that what I have to program ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.05</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Do you the highest number of students BRLCAD will take for the GSOC 2013 ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.47</tt></td><td><font color="#bb62bb"><tt>jasleen</tt></font></td><td width="100%"><tt>Izak_ :&nbsp;&nbsp;You have think logically.</tt></td></tr>
+<tr><td><tt>14:32.51</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad jasleen (~chatzilla@117.253.232.146)</font></tt></td></tr>
+<tr><td><tt>14:33.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~chatzilla@117.253.232.146)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.57</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Jasleen_: Sorry for bugging you . </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.23</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>I don't know this time.Last year there were 11 .</tt></td></tr>
+<tr><td><tt>14:39.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad code_walker (~Shubham@120.59.151.219)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:46.06</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 55244 (brlcad/trunk/src/conv/step/SurfaceCurve.cpp brlcad/trunk/src/conv/step/TrimmedCurve.cpp): Technically can't get an SDAI_Select out of a STEPaggregate, only a SelectAggregate; fix casts to reflect reality. Also, delete unloaded objects rather than storing them (see r55219).</tt></td></tr>
+<tr><td><tt>14:50.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad code_walker (~Shubham@120.59.151.219)</font></tt></td></tr>
+<tr><td><tt>14:54.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~cezar@92.81.193.91)</font></tt></td></tr>
+<tr><td><tt>14:55.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>14:55.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.51</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 55245 brlcad/trunk/src/other/poly2tri/poly2tri/sweep/sweep_context.cc: Don't make a zero lenght edge (i.e. the x and y points are identical) - avoids a crash</tt></td></tr>
+<tr><td><tt>15:12.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>15:18.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@41.205.13.130)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.58</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Hi guys</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.24</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>i just finished my code patch and sample project proposal for the pull routine </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.40</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>i know its not perfect so i need some feedback </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.55</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>brlcad: how do i submit my patch code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.24</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 0 /wiki/User:NyahCh3ck20: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.41</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.59</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>i just created it now..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.00</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so do i submit here?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.01</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 0 /wiki/User:Izakkayems: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.28</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: Have you submitted the proposal ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.43</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>not yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.56</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>still trying to work on the site..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.31</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: I have created an account and logged in. What's next to join the mailing list ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.54</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>have u joined the mailing list?</tt></td></tr>
+<tr><td><tt>15:35.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@124.253.144.208)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.42</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>sourceforge.net is not connecting ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.04</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck I think you need to use the Upload file tool ( top right hand corner of the page)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.29</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>well thats what i was thinking.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.19</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Kesha_: Have you successfully joined the mailing list ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.51</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: Are u on gmail , or fb now ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.30</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>gmail...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:48.12</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>how do i create a new page on brlcad.org wiki</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.15</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Do u see the toolbox on the top right hand corner ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:51.55</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Click on the upload file link</tt></td></tr>
+<tr><td><tt>16:01.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@41.205.13.130)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:02.52</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: How far </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:03.21</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>boy that thing is complex.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:03.29</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>have u already joined the mailing list.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.31</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>sourceforge is fucking up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:05.31</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: I am uploading a file to brlcad website</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.13</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 0 /wiki/File:Thesis_writing.pdf: This file helps postgraduate students in computing write their dissertations.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.21</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>which file?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.44</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Notify: how do i post my proposal on the wiki page?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.55</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>The file that Notify has shown above</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:07.26</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: Use the "upload file option "</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:08.57</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.48</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Is it going?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.50</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Izak: i can only upload image files..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.59</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: Notice that the file should be atmost 2MB </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.11</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>i have to add a new page and paste the information there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.11</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>No it also takes pdf files</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.20</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>my proposal is txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.59</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Copy it to openoffice and then save it as *.pdf</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.14</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Open openoffice.org</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.47</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>The upload permitted file types include pdf</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.56</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:26.35</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: When you copy and paste your proposal from / to openoffice.org , Go to "File" and choose the "Export as PDF" option , A window pops up , choose submit as PDF not FDF and "export". It gets saved in the chosen directory as a pdf file which you can then upload to BRLCAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.11</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Ch3ck_: I am going home now to see Amalia off .She is travelling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.28</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Give me some feedback</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.30</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>aight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.33</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.39</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>i'll do what you've said and see ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:28.07</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>I just tried it now and it successfully got saved as a pdf </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:28.11</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>Bye bye</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:29.06</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.07</tt></td><td><font color="#bb6262"><tt>Izak_</tt></font></td><td width="100%"><tt>See ya</tt></td></tr>
+<tr><td><tt>16:33.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vlad@188.25.239.23)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.17</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>hey guys i have finished a draft of my project proposal and i wanted to post for feedback so as to develop it better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.34</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>can some one please help me out here on how to paste on the wiki pages?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.45</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:37.53</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>i am a student too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:39.19</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>as I seen after creating an account on the wiki page you can access a URL like&nbsp;&nbsp;<a href="http://brlcad.org/wiki/User:USERNAME/Proposal">http://brlcad.org/wiki/User:USERNAME/Proposal</a> andyou have the option to create the page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:40.07</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>after you select the create tab a text box opens and you have the option to save the page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:40.22</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>I haven't saved any page yet but I suppose it should work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.02</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>I just created a template and seen the preview without saving the actual page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.07</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>hope it helps:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.33</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>also in order to create headings you should write something like =Project Information= </tt></td></tr>
+<tr><td><tt>16:50.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@210.56.127.140)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.17</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55246 brlcad/trunk/src/tclscripts/lib/Ged.tcl: Added validate2TupleNonZeroDigits and validate3TupleDoubles to cadwidgets::Ged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.04</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55247 brlcad/trunk/src/tclscripts/archer/ShaderEdit.tcl: Just a bit of cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.16</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>ok thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.27</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>vladbogo: thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.34</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>let me see </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.12</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>you're welcome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.32</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so what project are u working on?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.39</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5092 /wiki/User:Vladbogolin/Proposal: Created page with "=Personal Information= *Name: Bogolin Simion Vlad *E-mail address: vladbogolin@gmail.com *IRC username: vladbogo ===Background info=== ====Skils==== ====Projects==== =P..."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.14</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>New cross-platform 3D display manager</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.18</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>you?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.06</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>pull routine the reverse of the push command </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.09</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>in megd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.11</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>i have just created a page just with headings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.15</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>so it works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.32</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>it looks like this <a href="http://brlcad.org/wiki/User:Vladbogolin/Proposal">http://brlcad.org/wiki/User:Vladbogolin/Proposal</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.42</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so explain to me how this page thing works </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.05</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>cuz i tried pasting my proposal earlier and they spam warnings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.06</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>or somethx like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.35</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>i also wrote a patch for the proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.37</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>i think that if you press the edit button on the page i have just posted you can see what I actually written</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.46</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so how do i submit the patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.24</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so what should i write as summary of page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.40</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>and should i just cpy and paste my proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.46</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>or is there anything special i have to do.?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.34</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>the patch you should submit here <a href="http://sourceforge.net/p/brlcad/patches/">http://sourceforge.net/p/brlcad/patches/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.50</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>you need to create an account</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.31</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>well the editing is like this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.09</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>=Heading= creates a new heading that automatically appears on the Table of contents</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.54</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>if you want a sub header you simply write "==SubHeader=="</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.58</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.53</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>ok thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.01</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so which part of the world are u from?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.12</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>romania</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.16</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>you?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.02</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Cameroon, Africa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.06</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>u on facebook?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.11</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>or twitter?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.16</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>facebook</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.28</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>www.facebook.com/3lroy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.31</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>thanks my link</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.35</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>u?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.50</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt><a href="https://www.facebook.com/vlad.bogolin">https://www.facebook.com/vlad.bogolin</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.26</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>aight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.31</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>seen it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.05</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>me too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.29</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>creating the page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.45</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so are u a CSC major?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.28</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>yes i study CS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.41</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>you too I suppose?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.13</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yup..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.39</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so how many geeks are in ur community..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.50</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>cuz here its hard to find a good programmer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.58</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>except in school</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.38</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>vladbogo: i tried to save the page and it gave the following error "The text you wanted to save was blocked by the spam filter. This is probably caused by a link to a blacklisted external site. "</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.48</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>what does this mean?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.24</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>i don't have any idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.49</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>do you have any links in your text?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.38</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>here you can find quite a few good programmers but mostly just in school</tt></td></tr>
+<tr><td><tt>17:28.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Navdeep (75dcac39@gateway/web/freenode/ip.117.220.172.57)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.59</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.29</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>try removing the links and it might work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.17</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5093 /wiki/User:NyahCh3ck20/Proposal: Gsoc 2013 Proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.01</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.05</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>its starting to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.26</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5094 /wiki/User:NyahCh3ck20/Proposal: Gsoc 2013 Proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.32</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>that's good :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.21</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.32</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>but i have not succeeded in pasting all the parts</tt></td></tr>
+<tr><td><tt>17:51.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rays2pix (~deepak@14.139.226.34)</font></tt></td></tr>
+<tr><td><tt>17:57.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jasleen (~chatzilla@117.253.232.146)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.59</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5095 /wiki/User:NyahCh3ck20/Proposal: Gsoc 2013 Proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.16</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5096 /wiki/User:NyahCh3ck20/Proposal: Gsoc 2013 Proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.29</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5097 /wiki/User:NyahCh3ck20/Proposal: /*Links */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.51</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5098 /wiki/User:NyahCh3ck20/Proposal: /* Links */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.46</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5099 /wiki/User:NyahCh3ck20/Proposal: /* Development schedule */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.56</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5100 /wiki/User:NyahCh3ck20/Proposal: /* Development schedule */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:12.43</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5101 /wiki/User:NyahCh3ck20/Proposal: /* Time availability */</tt></td></tr>
+<tr><td><tt>18:15.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:17.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.57</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5102 /wiki/User:NyahCh3ck20/Proposal: /* Introduction = */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.14</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5103 /wiki/User:NyahCh3ck20/Proposal: /* The Working of the Pull Routine */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.03</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5104 /wiki/User:NyahCh3ck20/Proposal: /* July 1st (~ 3 weeks) */</tt></td></tr>
+<tr><td><tt>18:23.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@124.253.22.183)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.30</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>succeeded in posting my proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.38</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so how do i upload a patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.57</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>to submit a patch visit <a href="http://sourceforge.net/p/brlcad/patches/">http://sourceforge.net/p/brlcad/patches/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.20</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>log in and then press Create Ticket</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.45</tt></td><td><font color="#d16ed1"><tt>vladbogo</tt></font></td><td width="100%"><tt>you find additional info there on how to obtain the file you need to submit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.47</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Ch3ck: Did u check the mail ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.04</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.08</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>checked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.16</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>and i have already pasted my proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.28</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>just waiting for feedback from the mentors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.31</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.32</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>here is the link</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.35</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>link ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.20</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/wiki/User:NyahCh3ck20/Proposal">http://brlcad.org/wiki/User:NyahCh3ck20/Proposal</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.25</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.29</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>the link to my proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.47</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>just want to know what u think i can improve.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.36</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>I m not the right one to review. Even my proposal's review is pending .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.06</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Whenever develpers will get time, they will do it..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.11</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Have Patience !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.28</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Btw, Its looks great.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.46</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Did u go for it on melange ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.30</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.52</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>well i think my approach to developing the push routine needs more light</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.04</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>just waiting to hear what the mentors will say.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.47</tt></td><td><font color="#63bcbc"><tt>kesha</tt></font></td><td width="100%"><tt>Good Luck !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.17</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.24</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>so what project are u working on?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.28</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5105 /wiki/User:NyahCh3ck20/Proposal: /* Links */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.17</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5106 /wiki/User:NyahCh3ck20/Proposal: /* Links */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.34</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5107 /wiki/User:NyahCh3ck20/Proposal: /* Links */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.27</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>succeeded in submitting my code patch..</tt></td></tr>
+<tr><td><tt>19:06.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>19:13.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>19:16.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~cezar@92.81.196.42)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.18</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5108 /wiki/User:KeshaSShah: /* Problems I would encounter and how will I solve them ? */</tt></td></tr>
+<tr><td><tt>19:19.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad re-stage (~arseni@178.121.65.27)</font></tt></td></tr>
+<tr><td><tt>19:41.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@41.205.13.53)</font></tt></td></tr>
+<tr><td><tt>19:43.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.08</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 55248 brlcad/trunk/src/conv/step/SurfaceCurve.cpp: looks like t_pcurve_or_surface is the select type, and the underlying type should be one of pcurve or surface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.09</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>brlcad: waiting on your feedback from my proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.49</tt></td><td><font color="#6ac9c9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Good bye gus</tt></td></tr>
+<tr><td><tt>20:02.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rays2pix (~deepak@14.139.226.34)</font></tt></td></tr>
+<tr><td><tt>20:11.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mark@99-93-104-202.lightspeed.iplsin.sbcglobal.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.11</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55249 brlcad/trunk/src/sig/dauto2.c: rearrange blank lines for closer comparison with dauto.c source code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.14</tt></td><td><font color="#b35eb3"><tt>rays2pix</tt></font></td><td width="100%"><tt>I assume that in brlcad we are dealing with raster formats only. Do we need vector formats too?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:29.52</tt></td><td><font color="#b45e5e"><tt>``Erik</tt></font></td><td width="100%"><tt>at the moment, it's all raster... something like svg would be nice for things like rtedge, but we don't have that capability yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.11</tt></td><td><font color="#b35eb3"><tt>rays2pix</tt></font></td><td width="100%"><tt>Okay Erik, I will&nbsp;&nbsp; try to handle the various raster formats for GSoC project. If time permits I would extend it to SVG alikes</tt></td></tr>
+<tr><td><tt>21:08.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (0e8bf3a2@gateway/web/freenode/ip.14.139.243.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.54</tt></td><td><font color="#b66060"><tt>zero_level</tt></font></td><td width="100%"><tt>hii all..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.40</tt></td><td><font color="#b66060"><tt>zero_level</tt></font></td><td width="100%"><tt>how important is bactracking for BRLCAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.01</tt></td><td><font color="#b66060"><tt>zero_level</tt></font></td><td width="100%"><tt>I mean accessibility for current functions..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.17</tt></td><td><font color="#b66060"><tt>zero_level</tt></font></td><td width="100%"><tt>current tools in future versions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.18</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55250 brlcad/trunk/src/util/dbcp.c: supply D as a possible option, because the messages which have been furnished mention it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.35</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:r_weiss * 55251 brlcad/trunk/src/other/libregex/regex.h: Bug fix to "regex.h" for the bundled "libregex" to allow it to build on Linux 32bit.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.37</tt></td><td><font color="#6ccf6c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:r_weiss * 55251 brlcad/trunk/src/other/libregex/regex.h: Bug fix to "regex.h" for the bundled "libregex" to allow it to build on Linux 32bit.</tt></td></tr>
+<tr><td><tt>22:15.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rays2pix (~deepak@14.139.226.34)</font></tt></td></tr>
+<tr><td><tt>22:15.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad aks001 (uid10889@gateway/web/irccloud.com/x-kkouzuuqczuelqeo)</font></tt></td></tr>
+<tr><td><tt>22:15.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

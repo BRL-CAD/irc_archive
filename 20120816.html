@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120816</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120816</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:30.46</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03cprecup * r52059 10/brlcad/trunk/doc/docbook/system/mann/en/ (CMakeLists.txt graph.xml): Basic brlman documentation for the graph command and its current subcommands.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.07</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>andrei: sounds like a problem with the test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.12</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>double free or corruption</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.18</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, you found it</tt></td></tr>
+<tr><td><tt>01:43.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>02:01.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@125-30-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.12</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: so things like X24_open_existing in the framebuffer library really should be part of the FBIO interface structure?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.09</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: eh, sort of yes/no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.50</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>in general yes, but that particular function is implemented terribly right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.42</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>pointer values are serialized to a string and turned by into pointers in *_open_existing() which then calls a "real" function passing the pointers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.33</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>FBIO needs a way to get a handle on the "existing" interface, but shouldn't be aware of the types or raw pointers like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:31.11</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>do we still need to manually control things like cursors and color maps?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.09</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">supposes he is a rather poor judge of what a framebuffer needs, since he only ever uses it for holding raytrace outputs...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.50</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>concept of a cursor, probably</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:39.18</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>color map, less likely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:39.54</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>could even go without a cursor really, but need a way to query individual framebuffer values and subrects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.07</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>(pushing the cursor concept back onto the caller)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.42</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods... - I wondered a little if the "read" and "write" functions couldn't accept subrect definitions, and just default to the whole thing if those were NULL...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.46</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>i.e. consolidate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.22</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.42</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>then if we want the "bw" version (that's black and white?&nbsp;&nbsp;or maybe grayscale?) have some sort of flag - again, defaulting to default full color if null...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.13</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>I think it should default to double values</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.27</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.08</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>a LOT more memory, but supports anything we'll likely throw at it for the next 10 years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.59</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>are the max/min width and height, center, and such encoded in the FBIO for convenience?&nbsp;&nbsp;(As opposed to, say, having an fb_XXX_info callback that takes a set of standard enums to return the various settings?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.30</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>part simplicity, part convenience, part performance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.21</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>guess it just feels a little ackward to me to hard-code those into the struct... seems like an info function would be more flexible for minimal overhead...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.27</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>but maybe it wouldn't be so minimal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.01</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>not sure I follow, they need to be stored somewhere (at least width and height, maybe center if zoomed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.34</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>not all are inferrable from the context</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.14</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>sure, but just have them be internal to the particular fb instead of complicating the FBIO struct itself - i.e. the fb_XXX_info function would access the internal specific struct </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.55</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>i.e. fb_ogl_info(FB_WIDTH) instead of accessing a struct position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.36</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>then the FBIO compatibility doesn't depend on having the specific bits in the specific order in the struct...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.47</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, sure possibly -- though if *every* internal needed a given set, then that duplication could be suboptimal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.08</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>depends on which field specifically probably</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.32</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>... but aren't they all duplicated anyway, since each FBIO has it's own slot for all those values?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.19</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>one definition and N instantiations vs. N definitions and N instantiations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.38</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>in this case though, N is going to be pretty small (considering the information that will be stored - maybe a dozen or two integers?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.45</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>it'd be interesting to lay out on paper to see what the API might look like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.59</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.38</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would like to do that at some point... considering the importance of the libfb API, it just feels like something that deserves to be clean and polished</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.59</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>small doesn't matter to DRY principle if it's &gt; 1 and generally doesn't stay "small" if the interface survives a decade</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.27</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - I may be thinking about how these things are used wrong.  Definitely needs paper/whiteboard </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.52</tt></td><td><font color="#6ccf6c"><tt>starseeker</tt></font></td><td width="100%"><tt>anyhow, sorry to be obsessing about it - not really "on topic" at the moment</tt></td></tr>
+<tr><td><tt>03:28.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yiyus_ (1242712427@je.je.je)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:49.01</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03phoenixyjll * r52060 10/brlcad/trunk/src/librt/primitives/hyp/hyp_brep.cpp: Eliminate memory leak.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:49.47</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03phoenixyjll * r52061 10/brlcad/trunk/src/librt/primitives/ (7 files in 7 dirs): Eliminate memory leak.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.29</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03phoenixyjll * r52062 10/brlcad/trunk/src/libged/brep.c: Some clean up, add comments.</tt></td></tr>
+<tr><td><tt>07:56.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (~erik@pool-108-3-186-191.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>08:02.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>08:12.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>09:12.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (~ksu@46.149.81.166)</font></tt></td></tr>
+<tr><td><tt>09:25.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/fellow/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:45.20</tt></td><td><font color="#b25db2"><tt>ksuzee</tt></font></td><td width="100%"><tt>brlcad: I've updated 3533010 and 3534958 patches and will wait for your checking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:55.32</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 0314.139.128.11 07<a href="http://brlcad.org">http://brlcad.org</a> * r4337 10/wiki/MGED_CMD_voxelize: /* Argument(s) */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:01.25</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 0314.139.128.11 07<a href="http://brlcad.org">http://brlcad.org</a> * r4338 10/wiki/MGED_Commands: /* V */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:04.11</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 0314.139.128.11 07<a href="http://brlcad.org">http://brlcad.org</a> * r4339 10/wiki/MGED_CMD_voxelize: /* Syntax */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:37.06</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03anrgmrty * r52063 10/brlcad/trunk/src/libged/voxelize.c: sizeVoxel values are given by the user in his choice of units but need to be converted to mm</tt></td></tr>
+<tr><td><tt>11:07.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@82.208.133.12)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.23</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03LateshanldzqaodnsEddins 07<a href="http://brlcad.org">http://brlcad.org</a> * r4340 10/wiki/Techniques_for_a_Fruitful_Career_Transform: New page: It's never too late to proceed through a vocation change. A vocation change could be set off by several elements. You may be in the act of eventually knowing that you'll become more suitab...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:06.57</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03NicholkgqmhlsxbeRowlins 07<a href="http://brlcad.org">http://brlcad.org</a> * r4341 10/wiki/Wedding_Suppliers_in_Northern_Ireland: New page: Your wedding (also: [<a href="http://www.weddinghq.co.uk/petitcoat-lane-vintage-wedding-day/">http://www.weddinghq.co.uk/petitcoat-lane-vintage-wedding-day/</a> click resources])is really a milestone occasion. Very few moments that you experienced will have the abi...</tt></td></tr>
+<tr><td><tt>13:13.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei (~andrei@86.123.127.119)</font></tt></td></tr>
+<tr><td><tt>13:30.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~quassel@86.127.164.155)</font></tt></td></tr>
+<tr><td><tt>13:31.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cristina (~quassel@unaffiliated/cristina)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.22</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.18</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>my unit test for pkg_block ()&nbsp;&nbsp;is getting a segfault when it returns _pkg_dispatch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.25</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>this is the line which causes the segfault : for (i = 0; pc-&gt;pkc_switch[i].pks_handler != NULL; i++) {</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.26</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>it crashes there for each case I test and I don t really know how to fix this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.54</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>initally I wanted to make pc-&gt;pkc_switch[0].pks_handler = NULL;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.12</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>but I m getting this : error: assignment of member pks_handler in read-only object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.43</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03TriciamhgtygmvltMcqueen 07<a href="http://brlcad.org">http://brlcad.org</a> * r4342 10/wiki/Wedding_Manufacturers_in_Northern_Ireland_for_The_Wedding: New page: Your wedding (also: [<a href="http://www.weddinghq.co.uk/northern-ireland/hair/">http://www.weddinghq.co.uk/northern-ireland/hair/</a> Read On])is just a landmark function. Not many situations in your lifetime will be able to compare. Which means that ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.35</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>and I don t know how to solve this matter</tt></td></tr>
+<tr><td><tt>13:54.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrei (andrei@86.123.127.119)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.37</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Phoenix 07<a href="http://brlcad.org">http://brlcad.org</a> * r4343 10/wiki/User:Phoenix/GSoc2012/Reports: /* Week 13 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.28</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Cprecup 07<a href="http://brlcad.org">http://brlcad.org</a> * r4344 10/wiki/User:Cprecup/GSoC2012_progress: 14/08/2012 - brlman documentation for the "graph" command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.59</tt></td><td><font color="#76e176"><tt>cristina</tt></font></td><td width="100%"><tt>brlcad: Hi, I sent (you) a reply to the mailing list with the subject "Graph top-level commands grouped under a single "graph" command". Could you please read it and answer my questions? Thank you.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.03</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r52064 10/brlcad/trunk/src/libged/edbot.c: Minor cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.23</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r52065 10/brlcad/trunk/src/librt/primitives/nmg/nmg_fuse.c: Changed function "nmg_edge_g_fuse" in file "nmg_fuse.c". Removed the rotation of the vertices until more testing with this can be done.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.28</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52066 10/brlcad/trunk/misc/CMake/FindZLIB.cmake: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.00</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r52067 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.00</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: Updated functions "nmg_flatten_face" and "nmg_triangulate_fu" within file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.00</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: "nmg_tri.c". A tolerance is now passed into function "nmg_flatten_face" and this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.00</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: function better handles the special cases when the face is already flat.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.03</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03anrgmrty * r52068 10/brlcad/trunk/doc/docbook/system/mann/en/ (CMakeLists.txt voxelize.xml): MGED help for voxelize</tt></td></tr>
+<tr><td><tt>18:09.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ksuzee (~ksu@46.149.81.166)</font></tt></td></tr>
+<tr><td><tt>18:24.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.33.151)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.08</tt></td><td><font color="#6ccdcd"><tt>andrei</tt></font></td><td width="100%"><tt>brlcad : I ll try and finish the rest of the fixes tomorrow, and I need tu reupload the tests. I have changed them quite a bit. If t here s time, coould you please have a look at the question I wrote earlier? Thank you ! </tt></td></tr>
+<tr><td><tt>20:03.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf_ (~elf@p22.eregie.pub.ro)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:07.33</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52069 10/brlcad/trunk/misc/CMake/Fink_MacPorts.cmake: remove trailing blanks/tabs, and fix capital P in MacPorts in a quoted string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.37</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52070 10/brlcad/trunk/misc/CMake/LEMON_Util.cmake: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.08</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52071 10/brlcad/trunk/src/ (5 files in 3 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.09</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: Start the process of subbing openNURBS types in for Eigen types. We don't want</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.09</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: to depend on Eigen - ideally, openNURBs natives types will be used as far as</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.09</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: possible (i.e. up to the point of calling the actual solvers.) Once this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.09</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: process is complete and the solver is verified to be still working, can start</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.09</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: swapping in other solvers to see how they perform.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.29</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52072 10/brlcad/trunk/misc/CMake/PERPLEX_Util.cmake: remove trailing blanks/tabs, and fix a spelling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:59.23</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52073 10/brlcad/trunk/src/util/pix-bw.c: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:00.16</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52074 10/brlcad/trunk/src/util/pc_test.c: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.26</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52075 10/brlcad/trunk/bench/Makefile.am: change buildir to builddir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.41</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52076 10/brlcad/trunk/misc/CMake/RE2C_Util.cmake: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.01</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52077 10/brlcad/trunk/misc/CMake/ResolveCompilerPaths.cmake: remove trailing blanks/tabs and fix spelling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.13</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52078 10/brlcad/trunk/misc/CMake/TCL_PKGINDEX.cmake: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.50</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52079 10/brlcad/trunk/misc/CMake/ThirdParty.cmake: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.27</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52080 10/brlcad/trunk/misc/CMake/distcheck_in_src_dir.cmake.in: remove a trailing blank or tab, and fix a spelling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.59</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52081 10/brlcad/trunk/misc/CMake/distcheck_repo_verify.cmake.in: remove trailing blanks/tabs, and fix a spelling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.51</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52082 10/brlcad/trunk/misc/CMake/distclean.cmake.in: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.30</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52083 10/brlcad/trunk/misc/CMake/multiconfig_path_read.cmake.in: remove trailing blanks/tabs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.58</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52084 10/brlcad/trunk/misc/CMake/xsltproc.cmake.in: remove a trailing blank or tab</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.14</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03carlmoore * r52085 10/brlcad/trunk/regress/gcv/CMakeLists.txt: remove a trailing blank or tab</tt></td></tr>
+<tr><td><tt>22:36.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/fellow/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.49</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/upload: uploaded "[[Image:Absavgperfvsarch.png]]"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.45</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/upload: uploaded "[[Image:Absavgperfvsarchpermhz.png]]"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.46</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/upload: uploaded "[[Image:Absavgperfvsimages1.png]]"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.17</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/upload: uploaded "[[Image:Absavgperfvsimages2.png]]"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.39</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/upload: uploaded "[[Image:Absavgperfvsimagescomb.png]]"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.45</tt></td><td><font color="#6dcf6d"><tt>CIA-55</tt></font></td><td width="100%"><tt>BRL-CAD: 03Stattrav 07<a href="http://brlcad.org">http://brlcad.org</a> * r4350 10/wiki/User:Stattrav/GSoC2012_log:</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

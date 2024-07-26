@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20170917</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20170917</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:37.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yspoikgpunhhshzg (~armin@dslb-088-066-150-129.088.066.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.13</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: ah, right.&nbsp;&nbsp;hmm - I'll have to think about that one.&nbsp;&nbsp;I'd like to keep the -Wl,--no-undefined for GDAL if we can work it, since that's important when it comes to being able to successfully load gdal in the gcv plugin setup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.57</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>the "right" way to do it is probably to apply it just where it's needed in GDAL (per target) - if we're lucky we can apply it JUST to the gdal library target and leave it at that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.36</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>I'll have to do some testing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.45</tt></td><td><font color="#b15db1"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 70287 brlcad/trunk/src/other/gdal/CMakeLists.txt: CMake configures are serial - see if moving the flag setting *after* all the other tests fixes the observed issues.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.47</tt></td><td><font color="#57a657"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: it may be that simple (r70287) - let me know if you're still seeing problems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.13</tt></td><td><font color="#b15db1"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 70288 brlcad/trunk/include/bu/vls.h: documentation error if the typedef comes first, pull it up</tt></td></tr>
+<tr><td><tt>02:18.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.13</tt></td><td><font color="#b15db1"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 70289 brlcad/trunk/CMakeLists.txt: restructure the optimization flag testing so they're grouped by flag, not by language. also enable the link-time optimization flag (-flto) which results in a 2-10% runtime performance boost and additional compilation warnings (across units) but at the expense of increased link times. sprinkle comments throughout.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.43</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that seems to have done the trick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.05</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>also looks like I've gotten performance up by about 30%+ ... we may need to distribute regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.10</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>and spoke too soon:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.11</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ld: unknown option: --no-undefined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.11</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>clang: error: linker command failed with exit code 1 (use -v to see invocation)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.27</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>make[2]: *** [lib/libgdal.dylib] Error 1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.27</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>make[1]: *** [src/other/gdal/CMakeFiles/gdal.dir/all] Error 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.57</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>compiles fine with -Wl,--no-undefined ... clang's ld however is unhappy with it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:24.20</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it needs -Wl,-undefined,error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.31</tt></td><td><font color="#ad5b5b"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">fixes</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.59</tt></td><td><font color="#b15db1"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 70290 brlcad/trunk/src/other/gdal/CMakeLists.txt: clang prefers a different form for stopping on undefined and requires it on apple, so default to it when it instead of -Wl,--no-undefined</tt></td></tr>
+<tr><td><tt>08:50.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr><td><tt>10:06.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stragus (~alexis@modemcable131.0-202-24.mc.videotron.ca)</font></tt></td></tr>
+<tr><td><tt>10:30.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Outbound (~Outbound@bl5-92-78.dsl.telepac.pt)</font></tt></td></tr>
+<tr><td><tt>10:35.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@79.112.26.23)</font></tt></td></tr>
+<tr><td><tt>14:12.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Outbound (~Outbound@bl5-92-78.dsl.telepac.pt)</font></tt></td></tr>
+<tr><td><tt>15:09.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:53.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:56.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>16:37.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@79.112.26.23)</font></tt></td></tr>
+<tr><td><tt>17:23.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad telekon (~telekon@61.195.54.77.rev.vodafone.pt)</font></tt></td></tr>
+<tr><td><tt>18:18.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>18:29.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:41.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Outbound (~Outbound@bl5-92-78.dsl.telepac.pt)</font></tt></td></tr>
+<tr><td><tt>20:36.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:22.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gabbar1947 (uid205515@gateway/web/irccloud.com/x-abfpstwjfruustjh)</font></tt></td></tr>
+<tr><td><tt>21:42.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness (uid10044@gateway/web/irccloud.com/x-tzgrjdekatqdrrmm)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080708</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080708</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:13.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo (n=chatzill@189.71.27.163)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.59</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey guys</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.21</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy andrecastelo </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.39</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: how's your tracer coming along?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.24</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>Not upt to my expectations. I've written about it at the blog. Some functions are pretty similar to RT, probably need to be tweaked to support MLT better; rayhit is also akin to color_view(). Also, I'm not able to dedicate as I wanted to, due to school and laboratory responsibilities. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.53</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I read your update, several comments and responses if you're interested</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.28</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>those are really welcome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.07</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>hope you don't fall too far behind, there's a fair bit to go and afaikt you don't have it generating (any) images yet.. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.03</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>well the answer to a lot of your questions was "don't worry about that yet" .. your first step really needs to be a simple flat-shaded bitmap image</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.19</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>if you hit it, color the pixel on or color it the color of what you hit, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.37</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>before you get to the more complex summations needed for mlt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.50</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>you need that before you can sample hemispheres regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.21</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>and even getting that far will be a heck of a lot of motivation since you get to finally see something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.09</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>thanks, I will do my best to keep up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.15</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>did you comment on the blog itself?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.26</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>after you get that far, then we can start thinking about how to deal with reflections/refractions, forward path discovery, reverse path discovery, metropolis sampling, path jitter, depth of field, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.05</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>so, the idea is to build a simple tracer first?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.23</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>more specific to the code, even for bitmapping, you'll either color in ray-hit, or store the hit during rayhit and write to the image probably during viewend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.37</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, a *very* simple tracer, bitmap on/off even</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.11</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>no secondary rays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.19</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.27</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i really didn't think about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.45</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>if you don't have that much working, the rest is moot :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.20</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>it's certainly not wasted code, you need it regardless ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.09</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>thanks for the help, brlcad :D really appreciate it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.35</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>hello, cadheads</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.19</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.50</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>fyi, there's a support request in to sf.net to fix CIA</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.52</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem seems to be on their end</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.56</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>it was instantly marked high-priority so hopefully it should get resolved soon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.47</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">updates his copy of the svn repo...</font></tt></td></tr>
+<tr><td><tt>02:57.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Miesco (n=shawn@bas2-toronto12-1167860846.dsl.bell.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.41</tt></td><td><font color="#dddd74"><tt>Miesco</tt></font></td><td width="100%"><tt>Hi, how do I center an object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.47</tt></td><td><font color="#dddd74"><tt>Miesco</tt></font></td><td width="100%"><tt>I lost it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.29</tt></td><td><font color="#dddd74"><tt>Miesco</tt></font></td><td width="100%"><tt>I found it, I just did: center 0 0 0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.52</tt></td><td><font color="#dddd74"><tt>Miesco</tt></font></td><td width="100%"><tt>Hey how come in the MGED text is so big, like File, Edit, its way bigger then any other apps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.42</tt></td><td><font color="#6868c6"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: so, i think my view_pixel is broken :S</tt></td></tr>
+<tr><td><tt>03:36.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=timothy@71.170.63.120)</font></tt></td></tr>
+<tr><td><tt>03:37.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vedge (n=vedge@205-237-251-204.ilesdelamadeleine.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.53</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>Miesco: the 'center' command centers the view</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.08</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't change the object you're looking at, just the view</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.57</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>default text is so big because that was a common size requested by users -- it's configurable, though -- you can make it whatever size suits you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:15.57</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: might help to step back and relook at something more simple like rtarea -- you should be able to follow what is going on there but instead of tabulating the hits and printing a summary, you fill in a pixel array and write the buffer out to a file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.06</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>you should have the same basic callbacks going on in your code, except for a binary array it's even more simple than rtarea -- you only need first hit and only hit/miss</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:59.16</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>lots of autocad chatter on #tcl, so&nbsp;&nbsp;I pointed the nerds to <a href="http://www.brlcad.org...">http://www.brlcad.org...</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.04</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.25</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>tell them the modeler is a huge tcl/tk code base?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.52</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>some portions predate 8.0 days.. might scare some ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.12</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>of course mentioned the Tcl...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.13</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.33</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>Tcl is was brought _me_ to BRL-CAD ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.54</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.17</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>now I stay because BRL-CAD is 1) awesome 2) Has a great community (and awesome leader (Sean)) 3) Still has Tcl ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.03</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>heh "stay" -- I haven't touched anything for months :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:14.05</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>1) yes it is! 2) heh (pffft) 3) and probably always will in some central capacity even if the interface itself becomes less intertwined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.02</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>pfft to myself, not the community .. the community is great ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.08</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>:) -- well, like the attention or not, I think you do a wicked job here... but enough of that. How're things going?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:17.45</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>going a'ight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:18.16</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>working on some finishing touches for a geometry service visualization plan at the moment </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:19.07</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>central to the new modeler architecture among other things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:19.20</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>gsv -- a central geom server?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:19.34</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">is only guessing, by the name... </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:19.56</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>sort of, only part of it (a small part of what you could conceivably do with it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:20.10</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>interrogation ,etc. ,etc?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:22.13</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>sort of turning libbu, libbn, libwdb, librt, and mged into a unified API, allowing versioned object management on top of that as part of a new geometry kernel, and then providing means for storing/retrieving geometry, visual representations, and change notifications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:23.32</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>ever considered sqlite for version management?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:23.40</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>part of a grand master plan to modernize our services for application codes to use</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:23.44</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">has had this on his head for a while... </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:23.53</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, it's on the docket for some things already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:24.06</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods... </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:24.17</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>though for actual geometry management, the plan is presently a different (hybrid) approach</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:24.54</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>using sql for metadata directory services, using more traditional revision control for geometry itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:25.30</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>I'll see if I can post up this plan when I'm done, might help see things better (there are pretty pictures)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:25.37</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>hrmm...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:26.02</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>when you say more traditional revision control, are you thinking a lightweight svn?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:26.09</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>(for example)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:26.39</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>well I'm referring at a programmatic level, but yeah sorta</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:27.07</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>at a c/c++ coding level, managing revision controlled geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:27.09</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: are you familiar w/ another drh project, fossil (<a href="http://www.fossil-scm.org)?">http://www.fossil-scm.org)?</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:27.25</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, you mentioned them a week or two ago :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:27.47</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>Oops -- I one of _those_ people :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:27.48</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:28.05</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>UNfortunately, it's currently licensed gpl... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:28.25</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>but his (drh) coding style is very cool... built for integration... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.00</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>gpl is a non-starter, but there are other requirements too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.35</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>lgpl is the "worst" for consideration, no?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.51</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>ie: BSD is better... or other such permissive license?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:30.08</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g. something like mercurial would be interesting, but there's no low-level bindings; git has low-level api facilities but is a mess and isn't really cross-platform at all, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:30.22</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>ugh -- git</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:30.23</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>lgpl or bsd/mit are fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:30.38</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>8000 binaries to do your job</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:31.03</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>again, that's the high-level .. which we're not involved with :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:31.56</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>ya, true... but still. /me quit working with git when he discovered mercurial, then quit w/ mercurial when discovered fossil... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:32.19</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>looking at the reliability/portability/momentum landscape, the svn C libraries are actually pretty darn solid (just presently sans distributed capabilities, which we don't exactly want/need at this point)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:33.15</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>and since we're at a compile-time layer, we could add those capabilities ourselves if that requirement happens (though not likely)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:34.13</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>that's all just gravy-talk, the main effort is much more direct -- unify our services (which requires a *massive* rewrite at three separate levels)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:34.54</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>hence all the work lately on libged, upcoming C++ OO layer, and a network service layer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:35.12</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>that's more than enough to keep us busy for a year or three</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:36.01</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt>kewl, kewl, kewl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:40.53</tt></td><td><font color="#e277e2"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">hits hay -- tomorrow's another day (or so I'm told) -- chat later, brlcad </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:41.13</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>cya!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:41.24</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">suspects this might be an all-nighter</font></tt></td></tr>
+<tr><td><tt>07:17.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:37.09</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">suspected correctly</font></tt></td></tr>
+<tr><td><tt>09:14.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>09:21.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-60 (n=CIA@208.69.182.149)</font></tt></td></tr>
+<tr><td><tt>09:43.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:02.08</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:47.30</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:47.52</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">gets dressed</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:49.19</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt><font color="#CC00CC">won't look at brlcad</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:02.23</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:03.10</tt></td><td><font color="#6363bd"><tt>alex_joni</tt></font></td><td width="100%"><tt>mafm: smart move</tt></td></tr>
+<tr><td><tt>12:09.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.43</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>I'm all for not looking at naked guys</tt></td></tr>
+<tr><td><tt>12:33.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>12:49.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@123.208.78.253)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.13</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: more eye candy if you're not seen this already: <a href="http://slinky.imukuppi.org/zenburnpage/">http://slinky.imukuppi.org/zenburnpage/</a> (or the former <a href="http://slinky.imukuppi.org/zenburn/">http://slinky.imukuppi.org/zenburn/</a> )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.10</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>would be very cool to be able to use either vim files or one of the other "ports and derivatives" directly as a theming format for the gui's text</tt></td></tr>
+<tr><td><tt>13:42.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@58.171.249.146)</font></tt></td></tr>
+<tr><td><tt>13:52.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad HTT-Bird (n=Birdyz0r@unaffiliated/htt-bird)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.19</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>hey all, just installed BRL-CAD from the Windows binary yesterday to leverage its file-format conversion capabilities, but I only got the IGES and STL importers/exporters + the fast4 importer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.32</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>what do I have to do to get the other importers and exporters?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.46</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>HTT-Bird: the Windows port isn't as comprehensive as (all) other platforms</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.04</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>:( will I have to build the rest of the exporters from source?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.41</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>you have to either compile them directly yourself (setting up a studio project for some of them), try compiling under cygwin, use a non-Windows OS, or .. "wait"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.01</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>okiedokie, thank goodness I know how to compile stuff :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.09</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>which compile were you looking to use?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.15</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>s/compile/converter/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.39</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>the VRML exporter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:58.01</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>oh lol, turns out that the version linked to off the mainpage is OLD!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:58.01</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>(7.8.0 as opposed to 7.12.x)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.18</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>also, can the IGES importer read STEP too?&nbsp;&nbsp;the documentation alludes to STEP being an IGES refinement...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.49</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>alright, upgrading to 7.12.2 got me my importers and exporters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.50</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.00</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>no IGES cannot read STEP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.05</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>entirely different standards</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.55</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>ah...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.22</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt><font color="#CC00CC">crosses his fingers and hopes that the IGES importer works then</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.22</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>gah, I guess not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.14</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>STEP replaces IGES from an industry standardization perspective, but isn't a refinement </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.25</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>ok...ty for clearing that up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.39</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>the iges importer is rather .. "complex" .. there are various import modes possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.53</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>you have to pick the right modes and even then it will only pay attention to solid geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:13.14</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>well, I'm trying to import an assembly of 3 solid parts so I can send it right back out the door as VRML</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:13.36</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>and you only have it in iges format?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:14.21</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>converting from iges to brl-cad's nmg or bot formats is your best bet for getting to vrml</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:14.57</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>I have the original source of the model (as AIP2k8)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:14.57</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>just if you have spline nurbs surface solids in your iges file, that's the one case that might give you problems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:14.57</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>ah...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:14.57</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries a re-export</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.04</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>"might", depends on a lot of factors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.13</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>iges export has tons of options usually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.33</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>there are like three that should work perfectly, and about one or two dozen that will fail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.24</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>tried exporting Analytic instead of NURBS surfaces, and no dice :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:17.53</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>ok, Surface export seems to work using the importer's -n flag</tt></td></tr>
+<tr><td><tt>14:18.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@58.171.249.146)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:22.08</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>well...almost there :( I can't seem to get Mged to draw the object in the file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:28.55</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: what do you mean, having a code translating theme.vim to RBGui.theme?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.21</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>also, the text has format highlighting, which the RBGui's text widgets have no support for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.51</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>it's the format highlighting that make it useful ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.17</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>HTT-Bird: what does "tops" say in mged? 'e' that name</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.28</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>brlcad: already tried that :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.34</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>what'd it say?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.43</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>'all'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.58</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>but nothing happens in the console and no objects show up when I do 'e all'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.09</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>"l all"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.41</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>yeah, there's an object there, alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.10</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>perhaps the graphics display simply isn't updating? try moving the graphics window after e all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.58</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>do you want me to implement syntax highlighting for text widgets?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:36.11</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>brlcad: no, still just a black graphics window with the axes in it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.15</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: nah, layout and interaction is more important than styling for now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.37</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>HTT-Bird: if you run "rt", do you just get a black window?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.07</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>rt doesn't even get that far!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.17</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>rt_dirbuild(all) failure!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.29</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>ok, that was my bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.45</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>I don't know if more windows than the console would be heavily based in text</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.00</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>well, rt gives me an object, just the wrong object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.14</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>HTT-Bird: what color is it? black?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.36</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>brlcad: the object's there and nice and gray, it just is badly distorted from the original</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.01</tt></td><td><font color="#6d6dd0"><tt>poolio</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:45.04</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>lol, I just triggered a rather spectacular crash in iges-g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.31</tt></td><td><font color="#6dd0d0"><tt>clock_</tt></font></td><td width="100%"><tt>`iseg-f</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.33</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>HTT-Bird: badly distorted as in polygonal soup, too low tessellation?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.40</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>that should be export settings controllable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.40</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>brlcad: the tesselation is fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.52</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>pic?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.06</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>it's just that the object itself is distorted (a hemispherical shell became a sphere, for instance)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.51</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>well, I guess I'll go to a totally different solution</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.33</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>oh wait...some signs of life from the graphics window!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.29</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>yeah, it's IGES object soup that's my problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.41</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>so...now I know why IGES is bad.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:53.05</tt></td><td><font color="#ca6aca"><tt>HTT-Bird</tt></font></td><td width="100%"><tt>thx for the help brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:53.54</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>np</tt></td></tr>
+<tr><td><tt>14:53.57</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad HTT-Bird (n=Birdyz0r@unaffiliated/htt-bird)</font></tt></td></tr>
+<tr><td><tt>14:59.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
+<tr><td><tt>15:07.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo_ (n=chatzill@189.71.63.237)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.56</tt></td><td><font color="#71d771"><tt>CIA-60</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r31752 10/brlcad/trunk/TODO: cia test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.05</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>go CIA go!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.13</tt></td><td><font color="#7171d7"><tt>pacman87</tt></font></td><td width="100%"><tt>woohoo!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.42</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>Let CIA spy shamelessly on us and report to the rest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.05</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>One Oprah Show In Every Channel :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.29</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">laments that we couldn't actually find the problem</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.13</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>burley blames cia isp, but all indications still seem to point to an sf problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.31</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>it's working because we switched it over from using xmlrpc to using e-mails</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.36</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>good old technology :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.39</tt></td><td><font color="#71d771"><tt>CIA-60</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31753 10/rt^3/trunk/src/other/Makefile: Attempt to make the building of src/other to stop on the first failure, as suggested by Dawn Thomas</tt></td></tr>
+<tr><td><tt>15:59.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>16:27.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo__ (n=chatzill@189.71.38.236)</font></tt></td></tr>
+<tr><td><tt>16:49.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.20</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>re</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.53</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>too bad... I wasn't here to post the "frist commtit" comment :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.38</tt></td><td><font color="#71d771"><tt>CIA-60</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31754 10/rt^3/trunk/src/g3d/ (4 files): Adding command to set different polygon modes for the renderer (wireframe, solid, points), and another one to create and show simple geometries (only the command in place, still missing the geometry itself)</tt></td></tr>
+<tr><td><tt>17:50.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo__ (n=chatzill@189.13.240.57)</font></tt></td></tr>
+<tr><td><tt>19:56.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad smurfette (n=Pandora@c-69-243-244-154.hsd1.mo.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.09</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.12</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>commit early, commit often</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.34</tt></td><td><font color="#ce6c6c"><tt>brlcad</tt></font></td><td width="100%"><tt>I could certainly break cia again .. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.00</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>I can't commit more today</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.08</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>geometries refuse to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.20</tt></td><td><font color="#7171d7"><tt>pacman87</tt></font></td><td width="100%"><tt>they</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.26</tt></td><td><font color="#7171d7"><tt>pacman87</tt></font></td><td width="100%"><tt>they're going on strike?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.44</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>they're complaining because of the gas price or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.55</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>need a lot of power to run...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.22</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>well, I have to get going, I'm already late :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.33</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>hopefully I'll got it working by tomorrow!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.34</tt></td><td><font color="#7171d7"><tt>pacman87</tt></font></td><td width="100%"><tt>bye, and good luck</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.36</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>see you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.43</tt></td><td><font color="#5e5eb3"><tt>mafm</tt></font></td><td width="100%"><tt>same for you :)</tt></td></tr>
+<tr><td><tt>20:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@217-162-111-225.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>21:17.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo (n=chatzill@189.13.240.57)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20161001</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20161001</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:21.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rqsjpjkemuxnrxjz (~armin@dslb-088-065-187-184.088.065.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.11</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: it's a default cmake .. build, so mixed</tt></td></tr>
+<tr><td><tt>00:52.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:d5eb:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.42</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: <a href="http://pastebin.ca/3723654">http://pastebin.ca/3723654</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.20</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>LEMON_FOUND:STRING=LEMON-NOTFOUND</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.12</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: that's OK - what's LEMON_TEMPLATE set to in the cache?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.45</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>mine is /home/user/brlcad/misc/tools/lemon/lempar.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.45</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>unset</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.55</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>grep returns no matches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.59</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.55</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>line 71 in misc/tools/CMakeLists.txt should be setting it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, only gets there if line 70 has BRLCAD_BUNDLED_LIBS=BUNDLED and it's set to "AUTO"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.46</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>BRLCAD_LEMON should end up set to BUNDLED though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.49</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>since you're building it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.30</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>where's that set?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.37</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>grep returns empty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.43</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>should be in the THIRD_PARTY_EXECUTABLE macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.18</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so I see THIRD_PARTY_EXECUTABLE in ../misc/tools/CMakeLists.txt for lemon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.39</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>right - the macro definition is in misc/CMake/ThirdParty.cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.06</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>my guess is 503 should be setting BRLCAD_LEMON</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.29</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>403?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.03</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry - line 503 in misc/CMake/ThirdParty.cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.08</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that's what I meant too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.04</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>403 block should be setting BRLCAD_LEMON_BUILD=ON, LEMON_DISABLE_TEST=1, LEMON_MET_CONDITION=5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.34</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>that's if we have an explicit BUNDLED request for lemon, which we don't unless you're setting it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.42</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that means it won't get to line 503, because of line 481</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.33</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>our line numbers are slightly different - for me 481 is a blank line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.35</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, I see .. it's auto</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.48</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so it got there for LEMON</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.34</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>so if BRLCAD_LEMON is set to BUNDLED, the next question is why that didn't work for the misc/tools/CMakeLists.txt:71 test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.33</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>checking to make sure the var makes it there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.48</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>GOT HERE for LEMON, BRLCAD_LEMON="BUNDLED (AUTO)"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.25</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>but you said LEMON_TEMPLATE isn't set in the cache?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.17</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>what version of CMake?&nbsp;&nbsp;(maybe there's something funny about the MATCHES test...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.49</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>aha, couldn't this be the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.44</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>misc/tools/CMakeLists.txt:72 is where LEMON_TEMPLATE is set and line 71 is where we check BRLCAD_LEMON</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.59</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>and line 74 ... is where BRLCAD_LEMON is set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.23</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>the include?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.35</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>include(${BRLCAD_CMAKE_DIR}/FindLEMON.cmake)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.01</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>oh noes ... you know what, these sources are out of date!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.19</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wondered... line numbers appear to be one off...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.46</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, that's it .. fixed in current source</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.57</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>thanks for helping track that down</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.02</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>phew - that's why I can't reproduce it :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.03</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>np</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.14</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I must have missed svn upping that one... i'm compiling on four separate machines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.19</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>four separate failures...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.28</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.05</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>that's ironic - I was just running Windows builds and distcheck on linux and things were looking good...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.06</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>bsd is still failing because of cmake not adding a -L/usr/local/lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.15</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.32</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that was one of the linux failures, but clearly false positive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.54</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries bsd build</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.29</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>another linux succeeded build, but is failing make test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.40</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>you mean make check?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.45</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>make test is expected to fail...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.09</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>a particular test is failing that shouldn't </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the parallel test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.17</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.32</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like a genuine catch though, found a problem scaling to tons of cpus</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.51</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>on a 160 core box, it blows out our 1024 MAX_PSW limit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.58</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.01</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>~160*160</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.01</tt></td><td><font color="#67c567"><tt>infobot</tt></font></td><td width="100%"><tt>25600</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.05</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>that's fun </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.28</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's trying to kick off that many threads :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.59</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>erm.&nbsp;&nbsp;what's the preferred/correct behavior for a case like that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I fixed the book-keeping limit, but then pthread_create() fails with that many probably due to OS limit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.23</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>so we need a configure time test to find the practical upper limit?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.40</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, the uuid_generate function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.18</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I think bu_parallel might be able to throttle the work more intelligently so more than MAX_PSW many aren't created in the first place</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.33</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.36</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's all in how it is handling recursive parallelism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>probably needs some sort of worker pool instead of just dispatching everyone</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.31</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, so I know what the problem is on BSD .. just not how to fix it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.41</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is looking into it now</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.52</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it correctly finds uuid_generate in uuid/uuid.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>but the BRLCAD_CHECK_LIBRARY() call in top-level CMakeLists.txt:1874 for uuid_generate in uuid fails because there's no -L/usr/local/lib on the link line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.32</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, may need a FindUUID.cmake along these lines:&nbsp;&nbsp;<a href="https://github.com/PositronicsLab/reveal/blob/master/cmake/Finduuid.cmake">https://github.com/PositronicsLab/reveal/blob/master/cmake/Finduuid.cmake</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.45</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>hang tight, I'll see if I can get it working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.52</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>CMAKE_PREFIX_PATH does have /usr/local in it, but the CHECK_LIBRARY_EXISTS macro it's using in BRLCAD_CheckFunctions.cmake:260 doesn't use that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.40</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that guy's find script will probably work .. it uses find_library() instead of check_library_exists(), which respects the CMAKE_PREFIX_PATH</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.47</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:51.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>is there a reason we use check_library_exists(), haven't looked up what the diff is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:51.14</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>I think just convenience/convention</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:51.32</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm not sure find_library looks for a specific function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.30</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, good point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.04</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>woot, that worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.19</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I think I have a simple fix, can you check it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.22</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.34</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>a way that doesn't use FindUUID?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.35</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68953 brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: make CHECK_LIBRARY_EXISTS() respect the CMAKE_PREFIX_PATH during linking like find_library() does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.12</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: that will work only so long as CMAKE_PREFIX_PATH contains only one path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.38</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>it is set at the toplevel CMakeLists.txt:673, and it's currently set up to be a list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.14</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>it appears to contain only /usr/local currently, but unless we want to guarantee that there may be a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.22</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.40</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">also isn't quite following how -L/usr/local/lib ends up in the build logic for libbu just from adding it there...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.27</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68954 (brlcad/trunk/CMakeLists.txt brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake): check_library_exists() already respects cmake_required_flags, so let it get set when the cppflag is set.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.20</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes his head - still fails to build libbu from a clean build with r68954</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.24</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>of course you're right ... I'm surprised setting it globally doesn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.25</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>one sec...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.03</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>grr...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.03</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>ooh, think I might have found it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:17.04</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:17.52</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68955 brlcad/trunk/CMakeLists.txt: need to call LINK_DIRECTORIES() to set the ldflag search dir</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.23</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I just got the FindUUID working.&nbsp;&nbsp;Is the LINK_DIRECTORIES solution preferable?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.11</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>avoids special casing UUID, and definitely less code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>and confirmed,&nbsp;&nbsp; -L/usr/local/lib is in the link list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.24</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries it, but this time stashes his patch rather than blowing it away...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.31</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.07</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>honestly, your call .. don't know enough to answer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.11</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's definitely working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.35</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>that's find then - FindUUID would only be justifable if we wanted to be robust beyond /usr and /usr/local</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.44</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>which I don't think is an issue for uuid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.18</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>confirmed, works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.22</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.31</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">votes for that - simple and effective</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.20</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">blinks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.27</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>wait a minute - a clean build failed again...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.33</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>what the bleep...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.44</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>OK.&nbsp;&nbsp;clear build dir...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.48</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.50</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>cmake ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>just looking at it, the FindUUID logic might do a better job at finding more variants if it were upstream proper and kept improving</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>taking that guy's particular version, though, doesn't look to have an advantage I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.31</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.45</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>test_bu_uuid fails to link for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.59</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>make test_bu_uuid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.34</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.54</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>curious, working for me, has the -L</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.01</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>try clean build dir?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.06</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>doing that now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.47</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>fwiw, I just got a full successful build with the finduuid approach...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.47</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68956 (brlcad/trunk/CMakeLists.txt brlcad/trunk/src/libbu/CMakeLists.txt): This seems to give a reproducible successfull build on BSD. May be overkill, but checkpoint in working state so I don't lose the patch again...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.07</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>working approach wins</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.05</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>why run BRLCAD_CHECK_LIBRARY() and find_package?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.44</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>uuid_library and uuid_libraries is now listed in libbu's link btw, presumably only want one right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.07</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the bigger problem still remains for /usr/local/lib libraries, that they won't be searched</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.49</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like what happened .. LINK_DIRECTORIES didn't actually work .. must have been pulling a cached value</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.09</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>because BRLCAD_CHECK_LIBRARY(UUID uuid uuid_generate) failed/fails</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.55</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that might also be why it's working, if it's not actually using uuid_generate now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.03</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that's what's happening .. it's not using libuuid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.39</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68957 brlcad/trunk/src/libbu/CMakeLists.txt: only use pubic var UUID_LIBRARIES</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.28</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I think I have a fix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.38</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>retesting clean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.04</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68958 brlcad/trunk/misc/CMake/FindUUID.cmake: Add full license text</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.59</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68959 brlcad/trunk/CMakeLists.txt: check for uuid_generate only after we're sure we found the lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.20</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68960 brlcad/trunk/misc/CMake/BRLCAD_CheckFunctions.cmake: if we have the lib, conduct a different test that doesn't rely on searching for the library (since CHECK_LIBRARY_EXISTS doesn't respect required library flags). check for the function in the library specified via check_function_exists()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that seems to do the trick, sanity check?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>now only problem is that it runs FindUUID every time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.53</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68961 (brlcad/trunk/misc/CMake/BRLCAD_Options.cmake brlcad/trunk/misc/CMake/FindBRLCADTCL.cmake brlcad/trunk/misc/CMake/ThirdParty.cmake): consistent case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.16</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68962 brlcad/trunk/src/libbu/parallel.c: not an end-state, but slight improvement on machines with greater than 128 cores. with recursive parallelism, the number of subthreads is technically unbound, so we'll need some a better method for tracking ever-increasing quantities of threads (and how to do so while ensuring MAX_PSW containers remain consistent).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.29</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: sorry, goofing off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.58</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>re-calling find_package shouldn't be an issue... it will run once, then should skip repeating if it's found what it wants</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.29</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I think that looks OK</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.20</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it's calling it repeatedly here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.27</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>(and finding it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.36</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>ah - it might be printing messages repeatedly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.39</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.57</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>next issue is make check is failing hard... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.04</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>urk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.06</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>rtwizard --no-gui is hanging</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.10</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>on BSD?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>and spdi/shaders/.. are failing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.21</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.24</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>.bz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.02</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">growls...  can I stuff the rt/rtedge logic into librender?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.28</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>actually, that wouldn't do it... also need to add image filters to icv</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.18</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>well, fwiw, can confirm clean builds on both Linux and bz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.58</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, now that's quality .. trying to attach to rtwizard with gdb, gdb crashes :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.09</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.23</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>which then causes rtwizard to crash</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.40</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>beautiful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>(the latter is not rtwizards fault)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.38</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - suggests I did something really evil though to make gdb croak</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.43</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>the fact that spdi and shaders are failing means something else is wrong/changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.50</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.01</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>trying to think what that might be...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.10</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68963 brlcad/trunk/misc/CMake/FindUUID.cmake: Don't keep reporting we've found the lib if we already reported it once.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.20</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I think that should do it for the repeating message</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.11</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">has to call it a night - be back in the morning</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:09.52</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>okie okdokie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:10.01</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>thanks for your help, that was huge </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.40</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>just fyi, seeing cross-platform shader spdi solids test failures, so will have to investigate</tt></td></tr>
+<tr><td><tt>05:50.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@2600:8803:7a85:6d00:458d:eff6:6dd3:17a2)</font></tt></td></tr>
+<tr><td><tt>06:56.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>09:14.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>09:41.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>11:34.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.08</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>just as a data point, make check succeeds on Linux Mint, gcc 4.8.4</tt></td></tr>
+<tr><td><tt>14:26.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@47-3-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.24</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>seeing three failures here - solids, shaders and spdi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.16</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>(on bz)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.48</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: the failure appears between r68704 and r68717</tt></td></tr>
+<tr><td><tt>15:08.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.54</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>got it - it was r68707</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.01</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68964 brlcad/trunk/src/libbu/booleanize.c: revert r68707 until we can determine why it's breaking the spdi, solid and shader regression tests.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.53</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I'm not quite sure what the tests are unhappy about, unless the interpretation of 0/1 as false/true isn't working for some reason...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:59.43</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>just as a point of interest: make -j12 check seems to have a decent chance of tests wiping out (I've seen dsp, dem and bot fail) but if I back off to (say) make -j5 things complete successfully (on bz)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:07.45</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: here's what I'm seeing with rtwizard from gdb when it hangs:&nbsp;&nbsp;<a href="http://paste.lisp.org/display/327536">http://paste.lisp.org/display/327536</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.57</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>and info threads says there's just the one thread</tt></td></tr>
+<tr><td><tt>17:42.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@139-66-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.44</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: was Bmesh what you were talking about with Blender?&nbsp;&nbsp;<a href="https://wiki.blender.org/index.php/Dev:Source/Modeling/BMesh/Design">https://wiki.blender.org/index.php/Dev:Source/Modeling/BMesh/Design</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.02</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>if so, it looks like it is GPL:&nbsp;&nbsp;<a href="https://developer.blender.org/diffusion/B/browse/master/source/blender/bmesh/">https://developer.blender.org/diffusion/B/browse/master/source/blender/bmesh/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.25</tt></td><td><font color="#61ba61"><tt>starseeker</tt></font></td><td width="100%"><tt>this sounds kinda neat:&nbsp;&nbsp;<a href="http://www.pcworld.com/article/3118264/security/orwl-pc-the-most-secure-home-computer-ever.html">http://www.pcworld.com/article/3118264/security/orwl-pc-the-most-secure-home-computer-ever.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.57</tt></td><td><font color="#d3d36f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Jacquesmasso * 0 /wiki/User:Jacquesmasso: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.14</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that's what I saw in gdb for rtwizard yesterday too, not very helpful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:13.11</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>only thing of interest is it is using tcl 8.6 and a system pthread lib, maybe some dependency issue there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>on the surface, it seems that tcl eval failed on something (that's the important part) and it gets stuck trying to figure out / report the error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.18</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>Tcl_GetChannelError()</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

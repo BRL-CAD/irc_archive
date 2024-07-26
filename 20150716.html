@@ -1,0 +1,573 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20150716</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20150716</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.05</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>that's gonna be a problem with all these object types. but i'll think of a way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.17</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Fetching as a texture is faster than direct memory access on some hardware, Nvidia Kepler for example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.31</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>(2.5 times faster on Kepler, no kidding)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.32</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh it is?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.38</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>interesting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.55</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i thought they had changed the L2 cache so it wasn't a problem anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.17</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>then again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.25</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>it should be doing streaming loads.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.25</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.26</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Later Kepler with CUDA compute 3.5 has ldg() to fetch read-only data through the texture cache, but compute 3.0 must "manually" use the texture cache</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.43</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Doesn't matter, texture cache is always faster on CUDA compute 3.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.03</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so i have to use that ldg() syscall?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.12</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That only works on compute 3.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.20</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>If you want good performance on 3.0, you need texture fetches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.35</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>And that's a CUDA thing, no idea if it's available on OpenCL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.46</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.51</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.57</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>the opencl texture support is kinda crappy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.12</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>So... there are many good reasons to try to pack everything in a single big chunk of memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.17</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9019 /wiki/MGED_CMD_nmg: /* Example(s) */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.45</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i think i know what i'll do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.56</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'll first compute the size of each solid in the solid list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.08</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>and then i'll do a prefix sum to figure out the offset of each solid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.16</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Sounds reasonable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.49</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>the question is where to store the solid type data</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.20</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>In the same big chunk of memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.26</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>there are 44 solid types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.28</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.37</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>So? It's just data, doesn't matter what type it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.40</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>that's like 6 bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.50</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.02</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i could stuff it in the solid ids</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.14</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>and then i would have like 18 bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.20</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>28 bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.29</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>26</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.32</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>geez</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.32</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">scratches his head</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.34</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Right, 26 :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.57</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>67 million solids</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.02</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i think that should be enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.07</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9020 /wiki/User:Bhollister/DevLogJuly2015: /* Wed, July 15, 2015 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.35</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if we need more i'll just switch to 64 bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.48</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>and then we get 58 bits </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.53</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>No, just separate the two values then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.05</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>GPU hardware is better at managing 32 bits values than 64 bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.15</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.23</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'm supposed to use 64-bit doubles and everything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.29</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Ouch.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.31</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>really. its a design requirement</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.32</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.34</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>its baaaad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.53</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I understand why they need it, but it's not going to be very fast</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.03</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'll try to make it a compile option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.05</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>You could support both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.14</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Or a runtime option, better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.20</tt></td><td><font color="#b15db1"><tt>bhollister</tt></font></td><td width="100%"><tt>starseeker: updated design docs. need input on newly proposed subcommands before proceeding with their impl.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.03</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>that's gonna be a lot harder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.05</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>although...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.25</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>the thing about opencl is that you don't run binaries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.37</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>you pass source code to the driver and it compiles it on program load</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.53</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>There you go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.20</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yeah i can just pass a compiler flag to the graphics driver saying which type i want</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.06</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes well, your big-chunk-of-memory data must be of the right type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.28</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>In my raytracer, I compile the same files many, many times with different #if stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.39</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>To produce a bunch of pipelines optimized for different needs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.17</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>AoS it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.43</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>SoA is just too much of a problem with all these data types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.50</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>o.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.01</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Come on, you are going to absolutely destroy performance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.06</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.13</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.17</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>its never going to be good </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.29</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>because you can have different solid types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.32</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>It's never going to be good, so it can be much worse and it doesn't matter? :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.50</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That's not a problem if the rays are coherent, they will hit the same solids and be processed simultaneously</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.51</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>fine. tell me how to implement SoA with different solid types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.12</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>spheres, ellipsoids, torus, triangle meshes, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.13</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>You can even be clever with ballot() call for the wrap to "vote" on the best execution path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.15</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>all in the same cell</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.34</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Sure, so you make sure all rays process the same solids coherently, simultaneously</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.41</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.12</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i can leave that to the next guy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.18</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.19</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.24</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That next guy will have to rewrite your code to fix this! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.29</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.42</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.08</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>the thing is last time i read about it the coherent grid raytracing isn't faster than the non-coherent one on a gpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.23</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.30</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>The next guy will have to rewrite everything, all the data layout *and* the code, plus wrap coherency considerations and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.36</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>nah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.37</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Whatever you read, it is totally wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.43</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">wrote a CUDA raytracer</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.46</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>as long as its cache coherent its ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.12</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if the data is packed decently enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.16</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh now i remembered</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.21</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'm using spatial subdivision</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.28</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'll have solids in more than one cell</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.30</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>hmmmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.18</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so i can only do a coarse sort and hope its coherent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.18</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Coherent raytracing is like 10x faster than incoherent rays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.30</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>or i duplicate data and use more mem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.39</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>not on a gpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.42</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes, on a GPU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.45</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>at least its what people told me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.03</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Seriously, I wrote a CUDA raytracer, it was presented at a Nvidia conference, 1 billion rays per second on decent geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.11</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.20</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I have benchmarked all Nvidia hardware a lot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i talked with some UT Austin guys in 2009 and they told me that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.06</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>its the SIMT model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.10</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.20</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>all the threads will bang the same data anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.28</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>AMD hardware is similar, except a little less flexible than Nvidia's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.01</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>What you want is all rays to process the same solid simultaneously if they are going to hit it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.11</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>but they already do that more or less</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.17</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>or will anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.38</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if the traversal space is similar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.59</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Simutaleously? Not one ray processing it first because it reached an intersected cell first, followed by 25 more rays, then some 5 rays, and finally a last ray?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.03</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if it isn't the coherent grid thing doesn't help a lot either</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.05</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Your grid can break apart the bundle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.14</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yeah that's what will happen</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.19</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.30</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>later. much later.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.33</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>that's v2.0 stuff.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.43</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Okay. But just plan ahead for this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.06</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>its like i said i think a bvh would be better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.18</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so thinking about coherent grids probably a waste of time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.51</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Coherent grids can be faster if the geometry or objects are somehow uniformly distributed... which is not a common case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.54</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>lets just focus on eliminating dynamic memory allocations and gotos, and crap like that for now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.59</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>:) Okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.17</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if its really simple it can be changed later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.33</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>right now this thing is a nightmare to port to opencl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.57</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>It's certainly fine to start with something quick and dirty, but just plan ahead so the transition to something better will go smoothly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.09</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>unfortunately the quick and dirty is still taking a bloody long time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.30</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>because there's a looooot of things to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.33</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>:) Yes, I can imagine that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.50</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>the csg boolean thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.57</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>simplifying that will be interesting...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.01</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>a headache</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.15</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>last time i looked at it the code was branching like hell with gotos everywhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.12</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I assume you know it's important to keep the flow as synchroneous as possible on GPU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.24</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>A lot more computations is better than branches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.34</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.42</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>the question is how to do that to rt_boolweave</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.30</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">'s eyes hurt</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.40</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I sympathize.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.00</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>figuring out a way without dynamic memory allocation would be a start</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.26</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>that thing is all branches and dynamic double linked lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.56</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>and its called on the buffered dynamic linked list of multi-hit intersection for every single cell we intersect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.22</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>You should clarify with brlcad if you must somehow buffer all hits and return them to CPU code, or if a GPU inlined callback would be sufficient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.07</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>The first one is messy and slow, and that's a lot of data to constantly copy from GPU to CPU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.28</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.36</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>well they prefer to keep 100% compat with everything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.51</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so my guess its that they prefer the first option but its gonna be bad on the long run</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.07</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>They'll need new code to efficiently use a GPU raytracer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.34</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i thought first i could render on the gpu and cpu and somehow merge results of the whole render</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.42</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>but with this multi-hit thing its more tricky</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.12</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>like render the gpu accel solids on the gpu and the ones that aren't ported to the gpu would be rendered on the cpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.28</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if it was single-hit it would be easy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.29</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That doesn't sound good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.16</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>you would just need the depth, object, material, at each pixel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.25</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>on cpu and gpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.32</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>and then you figured out which was in front</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.37</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>for each pixel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.44</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>its not like i can call cpu code inside the gpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.49</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>unless i pause it all the time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.50</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.01</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That sounds like much more trouble than just porting all solid types</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.14</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>there's like 44 </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.15</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'm gonna port like i dunno 8</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.56</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Many of them will be very similar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>yeah but there's no time before gsoc ends</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.16</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I would port 8 and leave it to someone else to complete</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.23</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That cpu-gpu mix is really asking for trouble</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.27</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i also think its the best option yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.01</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'll need to talk about it again with sean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.11</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.10</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>thinking about it some more a bvh would simplify some things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.36</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>if i knew the leaves all had the same max number of objects i could still buffer the hits on each cell without using dynamic memory allocation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.24</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Why the leaves? Wouldn't it be the maximum count of intersections in the whole scene?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.38</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i won't claim that i get how the csg stuff works well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.49</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I would probably do something like... reserve 8 hits per ray, and each ray can "request" additional chunks of 8 hits when running out of hit space, through some atomics in a giant shared buffer for all hits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.50</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>but it seems to call rt_booleanweave for every cell it intersects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.12</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>... giant shared buffer for all rays*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.38</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>but yeah it probably just does that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.24</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>can't you incrementally do the csg?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.37</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>probably need to think this over</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.42</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>You probably know more about CSG than I do :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.16</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i don't know that much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.28</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i only know its boolean ops in ray tracing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.43</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i've seen brute force csg ray tracers </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.45</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>that's about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.49</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>but this one ain't brute force</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.06</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>at the time i started this sean suggested thinking about other similar algorithms to see if i could do this differently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.16</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That sounds like good advice to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.34</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>The algorithm's design is probably 30 years old</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.43</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Terry.e.wen * 9021 /wiki/User:Terry.e.wen/log: </tt></td></tr>
+<tr><td><tt>01:09.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc__ (~vasc@bl7-122-190.dsl.telepac.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.48</tt></td><td><font color="#ca6aca"><tt>vasc__</tt></font></td><td width="100%"><tt>night</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.44</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 65655 brlcad/trunk/src/libged/nmg_cmface.c: Apply patch #390 from Brad Hollister, removing unused tmp variable.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.39</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 65656 brlcad/trunk/src/libged/nmg_cmface.c: Apply patch #390 version 2 from Brad Hollister</tt></td></tr>
+<tr><td><tt>04:33.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@69-58-76-73.ut.vivintwireless.net)</font></tt></td></tr>
+<tr><td><tt>04:33.06</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congrats to all GCI 2014 winners Peter &amp; Marc! || Congratulations to our 12 GSoC students! || Don't ask if someone is here, just ask your questions and wait for a response. ;-)</font></tt></td></tr>
+<tr><td><tt>05:08.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (3b599fa2@gateway/web/freenode/ip.59.89.159.162)</font></tt></td></tr>
+<tr><td><tt>05:16.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@112.134.13.69)</font></tt></td></tr>
+<tr><td><tt>05:46.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.140.87)</font></tt></td></tr>
+<tr><td><tt>06:05.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.181.242)</font></tt></td></tr>
+<tr><td><tt>06:47.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.92.201)</font></tt></td></tr>
+<tr><td><tt>07:05.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@112.135.69.88)</font></tt></td></tr>
+<tr><td><tt>07:36.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@112.134.225.229)</font></tt></td></tr>
+<tr><td><tt>07:37.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:33.36</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 9022 /wiki/User:MeShubham99/GSoc15/log_developmen: /* Week 8 */</tt></td></tr>
+<tr><td><tt>09:15.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tess (~tess@122.173.205.133)</font></tt></td></tr>
+<tr><td><tt>10:04.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@69-58-76-73.ut.vivintwireless.net)</font></tt></td></tr>
+<tr><td><tt>10:04.49</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Congrats to all GCI 2014 winners Peter &amp; Marc! || Congratulations to our 12 GSoC students! || Don't ask if someone is here, just ask your questions and wait for a response. ;-)</font></tt></td></tr>
+<tr><td><tt>10:12.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (75c7660a@gateway/web/freenode/ip.117.199.102.10)</font></tt></td></tr>
+<tr><td><tt>10:31.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tess (~tess@122.173.205.133)</font></tt></td></tr>
+<tr><td><tt>11:20.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@112.134.236.34)</font></tt></td></tr>
+<tr><td><tt>11:28.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@112.134.236.34)</font></tt></td></tr>
+<tr><td><tt>11:53.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stragus (~alexis@modemcable090.29-19-135.mc.videotron.ca)</font></tt></td></tr>
+<tr><td><tt>12:44.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee-- (bc5c2134@gateway/web/freenode/ip.188.92.33.52)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:49.15</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 65657 brlcad/trunk/src/libgcv/conv/fastgen4/fastgen4_write.cpp: remove unnecessary try block</tt></td></tr>
+<tr><td><tt>13:53.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.66.153)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.25</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 65658 brlcad/trunk/TODO: some more thoughts on extending libbu's parallelism functionality</tt></td></tr>
+<tr><td><tt>15:00.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado (~konro@154.70.99.62)</font></tt></td></tr>
+<tr><td><tt>15:03.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tess_ (~tess@122.173.205.133)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.56</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MeShubham99 * 9023 /wiki/User:MeShubham99/GSoc15/log_developmen: /* Week 8 */</tt></td></tr>
+<tr><td><tt>15:25.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.185.227)</font></tt></td></tr>
+<tr><td><tt>16:23.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.185.227)</font></tt></td></tr>
+<tr><td><tt>16:54.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.204)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.54</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: vasc's problem (regarding solving all problems at once) is that he has a very strict near-term deadline, and has to have made some useful progress by the end .. AND then pass that work on to someone else to continue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.12</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>so he doesn't really have that luxury</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.16</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Ah right, I'm still not too familiar with the whole GSoC concept</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.46</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>By the way, I assume you know that if someone is going to port the raytracer to OpenCL, you really need to change the interface and adapt all the code using the raytracer...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.59</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>It's really not designed for parallel hardware</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.33</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: also the opencl implementat that calls a kernel on each solid intersection that you seemed surprised by had absolutely nothing to do with performance (it was only a validation of the calculations being correct for a specific primitive converted, full stop)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.23</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Right, makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.58</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: Can you please tell me what exactly poly2tri_CDT does ? I mean as a summary ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.17</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>"20:35 &lt; Stragus&gt; You should clarify with brlcad if you must somehow buffer all hits and return them to CPU code, or if a GPU inlined callback would be sufficient" &lt;-- well duh, we want both :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.28</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">is still reading backlog fwiw, not current discussion</font></tt></td></tr>
+<tr><td><tt>17:28.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~VASC@bl7-122-190.dsl.telepac.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.27</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>all caught up now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.17</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: yep, definitely know that the interface will need to eventually be adapted -- we'll also need a (slow) compatible interface first though so we can validate the computations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.43</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>but the goal indeed is to change the method so that analysis applications are also acceleratable and getting updates via callback or in batches or both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.16</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:MilindaFernando * 9024 /wiki/User:MilindaFernando/gsoc2015_devlog: /* STEP Viewer Project Development Log */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.24</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the purpose of the single kernel per solid intersection was indeed just to validate correct calculations, and indeed the first conversion was demonstrably different (i.e., wrong) due to precision/tolerance mismatches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.02</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: hmmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.24</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.38</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: can we please chat I need several things to figure out :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.53</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>brlcad: Right. I assume you know that any OpenCL "callback" would have to be built in the same "kernel" (sorry, CUDA speak) as the OpenCL raytracing code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.04</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's doing constrained delaunay triangulation using the poly2tri library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.19</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, turning the nurbs surface into triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.35</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>In my CUDA raytracer, the user would provide a "callback" and it would build the whole raytracing pipeline with that function inlined directly deep in the code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.13</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: I figured something like that would be necessary for optimal performance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.33</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>given how the projects are so varied and disjoint, that tight coupling might not be practical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.43</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Well, it's not just optimal performance: the other way involves buffering an arbitrary number of hits per ray, and that's really messy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.44</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>in which case we'll probably pass back bundles of results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>which they can process however they like, hopefully coherenty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.03</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: Assume we have surface triangles for an geometry. But How can we generate a solid from them ? I mean can you explain me how surface triangles would help to visualize the geometry as a solid in Open GL?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.05</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I would suggest designing the OpenCL code so that any code can build custom pipelines with a provided hit-handling callback</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.23</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Other code could rely on a default pipeline built with hit-handling code that somehow buffers up everything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.41</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: Using surface triangles what we get a mesh for the geometry. Is this correct ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.42</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>there's more than a dozen external groups that integrate librt for ray intersections for various analytic purposes .. there's no way they will all rework their interface so some will be slow .. some will likely make full accommodations, and others partial</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.50</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>but remember, some of them aren't even in C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.43</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>some callers are coming through java bindings, some through fortran</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.36</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: I'm not sure I understand your terminology</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.01</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: you don't need to generate a solid -- you need triangles you can pass to opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.11</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>getting triangles for each surface does exactly that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.51</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: so the final visualized shape would be a triangular mesh of the shape. ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.08</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.36</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: are we going to stop with that no solid geometry in the viewer ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.01</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: what does "solid geometry in the viewer" mean to you?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.08</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>because that terminology is not right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.14</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: I mean color shaded shape ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.52</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>you color and shade the triangles in opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>those triangles make a shape</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.18</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>ih8sum3r: I did not, the fibers component failed to compile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.20</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: so all the cad programs which does render the geometry as a "visually solid" does it by getting the triangular mesh and color triangles and rt it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.57</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>ih8sum3r: looks like relatively simple portability errors, but "npm install fibers" worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.02</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it installed 1.0.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.34</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: they get a trinagular mesh, color the triangles, and send it to opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.53</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: do you have an install of brl-cad handy?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.56</tt></td><td><font color="#b3b35e"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>brlcad: Same error on my side. Okay I will try with 1.0.6 version.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.11</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>howdy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.38</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>hi vasc </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.43</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>read your nice long convo yesterday</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>good thoughts all around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.12</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i still need to do a bunch of things before i start working on the boolean weaving though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.25</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the main limiting factor here is time and wanting something incrementally useful *before* gsoc is over (it's already crazy risky enough)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.34</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: No Should I install it ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.18</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: if you going to be calling into brl-cad libs, aren't having those libs installed required? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.20</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: yes I need to install them :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:53.28</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: So as the next step what should I do is a write a function which takes a ON_Brep structure and browse all the surface triangles ? Correct ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.04</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: then we can get a tringluar mesh at the viewer. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.42</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>well once you do that, you can find a simple 3dm model online (e.g., from grabcad.com), convert it with "3dm-g", then open that .g file with our "mged" application, and run commands that let you visualize ("tops" will tell you names to use, and "draw -m1 somename" will display that nurbs as shaded triangles)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.07</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: an ON_Brep intrinsically does not have surface triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.10</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>they have to be calculated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.46</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>that is exactly what we do (in rt_brep_plot_poly and the CDT library calls)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.41</tt></td><td><font color="#5db1b1"><tt>milinda</tt></font></td><td width="100%"><tt>brlcad: you mean I should Install the libraries and call them instead of writing new code to do that. ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.50</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>milinda: I think it took one of our devs about 4-6 months to calculate the triangles in a useful manner</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.31</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's easily a gsoc project all of it's own just to do that...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.53</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>so yeah, that's why in your original proposal, it was suggested that you leverage our work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.17</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>now whether you call a library or extract the code of signficance doesn't really matter (so long as attribution and legalities are correct)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.30</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so you just sample a bunch of points on the surface and triangulate that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.46</tt></td><td><font color="#b3b35e"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>brlcad: I guess fibers are not installed properly, I'm getting this error : Error: Cannot find module 'fibers'</tt></td></tr>
+<tr><td><tt>18:14.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.95.17)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.24</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>vasc: for triangulation, that's all you can do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.43</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>there are other modes of visualization, like just rendering the surface edge splines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.18</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>but the surface itself doesn't have anything intrinsic that can be sent to opengl, you have to evaluate surface polylines, points, triangles, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.34</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>an older slower method involved converting the nurbs surfaces into a set of bezier patches, and triangulating those patches for visualization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.48</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>some CAD systems still use that indirect method</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.59</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>triangulating bezier patches is also still just sampling points on the surface so you can make a mesh, it's just a much simpler evaluation than directly evaluating the complex nurbs surface (high high order equations)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.19</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i see. it seemed kinda of brute force so i thought that someone had come up with something better.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.15</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>polylines is arguably better, but opengl doesn't have support for shaded rendering of polyline strips </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.36</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>GLU has support for rendering NURBS, but it basically does the old bezier patch method</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.26</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>you can do adaptive sampling of the NURBS, and that's about as good as it gets for sending something to opengl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.04</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i'm gonna have a masters student working on NURBS next year so i was kind of interest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.05</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>ed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:29.32</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>i keep hearing that the latest opengl has tesselation support so i thought there would be some better way of doing it or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.12</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">growls at sourceforge...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.23</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>switch to github then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.54</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad-as-git-checkout is.... rather large.&nbsp;&nbsp;we have a lot of history</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.21</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>more than the linux kernel?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.26</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.28</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>1970s</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.41</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>how far back does the repo go anyway?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.46</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>1983</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.39</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>I've done a git conversion of our svn repo (even have the process quasi-automated) and it clocks in at 1.6 gigs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.40</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>even old than gcc then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.09</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh i see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.18</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>github says they want repos to be below 1GB</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.54</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><a href="http://blog.openhub.net/2012/10/oldies-but-goodies-seven-projects-still-rocking-open-source/">http://blog.openhub.net/2012/10/oldies-but-goodies-seven-projects-still-rocking-open-source/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.30</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>vasc, OpenGL has "tesselation shaders", and nobody uses them, just like geometry shaders</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.45</tt></td><td><font color="#61b961"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/brlcad.git">http://brlcad.org/brlcad.git</a> is daily conversion/mirror</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.01</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>It's too slow and limited. Compute shaders replace all of this mess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.41</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>we could probably do some tricks like one project per src/other folder to spread the pain out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.45</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hasn't tried building our history without src/other and misc/tools, but probably smaller</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.19</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is now curious...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.58</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>oh right the dependencies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.27</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>those are probably pretty big since have tcl/tk in there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.46</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>and a subset of boost, at some point in the history</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.33</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries a "quick and dirty" approach... to do this right would require some care...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.31</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt><a href="https://rtyley.github.io/bfg-repo-cleaner/">https://rtyley.github.io/bfg-repo-cleaner/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.48</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>maybe that will help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.26</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>vasc: the problem is stripping out large commits from older history would result in broken checkouts for those revisions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.40</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>it's occasionally necessary to test older revisions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.09</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>that would be good for checked in garbage, but when the large bits are actually *needed* we're worse off...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.37</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>might conceivably be acceptable for things that never worked right to begin with, but even that's a bit dicy...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>so you need this one <a href="http://git-scm.com/docs/git-filter-branch">http://git-scm.com/docs/git-filter-branch</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.57</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>probably, plus a *lot* of detailed history study to see what is in, what's out and what things look like for various options.&nbsp;&nbsp;Probably a lot of testing as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.12</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>another choice i guess is to break the repo at some point in time and archive that keeping on the repo only a shortened history</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.25</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>don't let brlcad hear you suggest that ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.13</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>self-hosting then :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.19</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.20</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>bbl</tt></td></tr>
+<tr><td><tt>19:03.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.75.66)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.59</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>bah - filtering out other only saved 150 megs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.07</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if he did something wrong...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.23</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>looks right...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.26</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>huh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.18</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if there are some commit size analysis tools available somewhere...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.48</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>and... of course <a href="https://code.google.com/p/gitinspector/">https://code.google.com/p/gitinspector/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.51</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>ah <a href="http://serverfault.com/questions/36784/search-for-large-checkins-in-a-subversion-repository">http://serverfault.com/questions/36784/search-for-large-checkins-in-a-subversion-repository</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.54</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I'm not at all keen on stripping or contorting the history for the sake of the tool/repo/size/whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.03</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">suspects BRL-CAD on github is probably a practical no-go</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.43</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm certainly not opposed, but I wouldn't switch on a whim</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.14</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>we'd basically have to explain the situation to them and get an OK, and even then they may not be too keen on 2 gig forks...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.45</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I would, but I'd doubt size would be a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's real history and there's no large files clogging it up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.03</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>just a ton of history</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.29</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>couple of our hacking book images would be a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.04</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>large ==&gt; &gt;100MB</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.34</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't think we have much at &gt;10MB</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.39</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, OK</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.50</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">thought a couple of the high quality renders were bigger</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.04</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>just my not-so-hot internet connection</tt></td></tr>
+<tr><td><tt>19:23.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.202.141)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.55</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>they got checked in?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.17</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah - we added the hacking book to the doc build (or at least I thought we did)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.47</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I know the book was added, but I didn't think the images were that big</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.52</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>they aren't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.58</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the biggest was probably teapot at 4k x 4k but in png format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.20</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>biggest is 12M</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.27</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>sphflace2_cc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.47</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>teh M1A1 is second at 8, rest are below 4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.06</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>s/teh/the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.41</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.06</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, cool - that svn size-of-revision script looks like it worked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.16</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>that sounds entirely reasonable to me </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.02</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>interesting - if I'm reading this right, even the largest merges are around 90 megs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.09</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like our biggest commit is r31506</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.16</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like a commit that added ogre</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.30</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Ogre? The 3D engine?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.37</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>is that bigger than r23577?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.47</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.02</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That's a weird dependency to have</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.21</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: we're a CAD system - why's a 3d engine a weird dep?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.41</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: experimental GUI work looking at using it for the CAD visuals</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.21</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Because a CAD system doesn't need a gaming-oriented 3D engine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.23</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: fwiw, we're also checking out OpenSceneGraph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.31</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">once also wrote an OpenGL-rendered GUI, but creating the widgets became tiresome... <a href="http://www.rayforce.net/glui000.png">http://www.rayforce.net/glui000.png</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not really any more gaming-oriented than openscenegraph, OSG, VTK, and a handful of others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.46</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: I've had half an eye on this for a long while hoping it would reach a usable point:&nbsp;&nbsp;<a href="https://github.com/zhanggyb/BlendInt">https://github.com/zhanggyb/BlendInt</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.07</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I haven't heard of that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.08</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>an engine is desirable for some pretty basic aspects like asset management and scene graph management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.37</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>writing the code to do that well is really a distraction to our goals, especially when they do it more than adequate for our needs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.52</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>My GL gui was quite usable, just still missing a bunch of widgets (that screenshot is also old)</tt></td></tr>
+<tr><td><tt>19:42.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milinda (~milinda@124.43.188.93)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.31</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: we've been looking at using Qt-in-GL, sorta like stellarium</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.01</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>there are actually some reasonably impressive demos with qml, but IIRC the primary widgets remain something of a challenge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.02</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>for GUI, I have many in depth strong opinions and am quite picky about usability characteristics -- at least for our 3rd generation interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.38</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>that's why starseeker considers qged 2.5gen ;-)</tt></td></tr>
+<tr><td><tt>19:45.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (3b5b7739@gateway/web/freenode/ip.59.91.119.57)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.44</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>why not embrace it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.11</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>what's the .5 missing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.41</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>satisfying the in depth strong opinions and usability characteristics ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.02</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would be content with cleaner-archer-not-needing-Tk as a start</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.28</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">has this habit of always writing everything from scratch, no dependencies</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.14</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: yeah, I get really pissed off at interfaces like that from a usability perspective... I admire the work, but the usability is usually just .. terrible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.22</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:59.91.119.57 * 9025 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.27</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Writing an OpenGL engine isn't that much work anyway, I wrote that some time ago: <a href="http://www.rayforce.net/newproject024.png">http://www.rayforce.net/newproject024.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.28</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>love the appearance of custom, though, that alone can be a saving grace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.32</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">figures a real 3rd gen interface will be a fairly significant depature from the mged/archer paradigms</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.56</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.28</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>significant in the sense that the new one should be explorable, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.44</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty and easier to learn, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.16</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Eheh brlcad, you want widgets that look and behave like the standard, right.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.20</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>functionality, though, no change really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.28</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.54</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>behavior to a limited extent (key bindings, some presentation patterns)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.01</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>appearance, definitely not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.44</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Okay, so what bothers you about the usability of different-looking GUIs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.46</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: well, for example, the original ogre/qt work was focused on Qt widgets in the 3d scene - that's something I didn't envision for qged.&nbsp;&nbsp;I'd be content to use osgQt to get an OpenSceneGraph window that gets passed to libdm (after upgrading libdm's API...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.09</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>cursed with having studied interface design measurement and usability theory -- there are some fundamental issues regarding design patterns, familiarity, efficiency, discoverability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.09</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>That depends entirely on how the programmer writes his code using the GUI, not the GUI itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.22</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: now you're talking about "how", not "what" .. I frankly don't care much how as long as it doesn't get in the way of maintainability and longer-term development</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.08</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>fair enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.15</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the issue is what usability patterns are made available, what steps the user takes to do some action</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.39</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it's very user-centric, which becomes the dev's problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.48</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>so from that standpoint, whether Qt elements are available in the 3D scene or not is a detail?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.26</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't just pop up a text field where a value needs to be input, which I could code up manually or delegate to a widget library and leave to whatever limitations/complexity that implies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>if the user is given a text field, it better behave to platform expectations -- which means they get navigation key-bindings, cursor controls, probably even basic field checking (e.g., spell checking, bounds checks, etc)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.37</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: that's a good case point example -- did you input a text input field?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.16</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes, with support for tab, alt+tab, arrow keys, shift+arrow, ctrl+arrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>ctrl-a, ctrl-e, ctrl-w, ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.21</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>those little nitpick issues seem inconsequential, but play a MAJOR role in long term usability and adoption</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.28</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Only the first one of these, but yes, you demand standard behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.33</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>did you spell check the words on the fly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.35</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Oh I agree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.39</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>No :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.47</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>that's just the tip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.30</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>that's we're leveraging something like Qt because valuable because they either have invested the effort already or provide all the necessary hooks </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.31</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I pretty much wrote that GUI system for my own needs as learning an existing GUI seemed... boring</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.39</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Indeed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.40</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>it can be boring, but that's where the fun is in stylistic presentation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.12</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>there is some amazing research work in GUI stylization </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.09</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">finds it more fun to optimize GPU texture caching of all GUI "images" with clever area invalidation, minimized scissoring, batching and other tricks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.17</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>But yes, I certainlt understand your points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.20</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>certainly*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: probably the biggest piece I see required for gen3 is a fully pervasive on-demand command functionality</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.54</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>(not the command console, that's a separate issue/feature)</tt></td></tr>
+<tr><td><tt>20:09.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izakey (~Isaac@41.205.22.26)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.21</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Izakey: still have that link handy?&nbsp;&nbsp;maybe starseeker can help...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.27</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>brlcad, I tried rectifying the libpng today and it blew away my entire GUI</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.56</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>ouch!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.02</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>I'm accessing this channel using a mobile device. Let me find the link however</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.11</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds like .. you did something wrong :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.05</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.42</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>Yeah, libpng was at 12. I installed,deleted and reinstalled libpng16.so.16 or so and my computer just powered itself off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.13</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>starseeker, this is the link <a href="https://paste.kde.org/pab6nw3ai">https://paste.kde.org/pab6nw3ai</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.10</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>A man without Xserver needs all the help he can get ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.15</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>libpng is not binary compatible between major versions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.46</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Reinstall libpng 1.2, or rebuild everything that depends on it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.17</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>Thanks Stragus. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.40</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">isn't fond of that whole Unix philosophy of software linking tons of libraries instead of including the dependencies at build time</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.55</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: if you want some GUI homework to look into, try playing with Kupfer! or Synapse on Linux -- they incorporate some relevant usability concepts based on research</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.26</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>somewhat similar to quicksilver on mac os x</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>or even spotlight, but that interface is only half-there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.41</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, Gnome Do might be similar too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>but i've just found that one now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.52</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt><font color="#CC00CC">will not advise playing with GUI after today's experience</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.09</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>"GNOME Do is inspired by Quicksilver" ... so apparently yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.29</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Izakey: you should be able to restore your GUI just by restoring libpng, no?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.40</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>what'd you do to it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.45</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Izakey, how did you end up replacing the installed libpng?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.05</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Gentoo builds libpng12.so, libpng13.so, libpng14.so, etc. to avoid that kind of problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.07</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>I used rpm to install the .rpm file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.36</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>just installing wouldn't have easily broken something unless an RPM overwrote a symlink</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.54</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>would have had to overwrite/delete a symlink or delete the old lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.57</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>My entire Fedora is bash - from login to what have you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.14</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>Izakey: also, needed the entire build log, including the cmake output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.23</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">prefers linux without an X server :)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.34</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>The cmake build log from yesterday ? brlcad </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.47</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I never got to see it because the url was blocked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.55</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I can probably get to it now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.55</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks Linux without Xserver can really suck </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.39</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">spent 2 days in text mode when his GPU fried from too much CUDA, a month ago</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.54</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>You get used to it, eh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.20</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt><font color="#CC00CC">fetches yesterday's build log </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.58</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>Izakey: did you try -DBRLCAD_ENABLE_ALL=ON ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.52</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>Yes starseeker ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.00</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>and you still got that error?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.23</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>Yes starseeker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.38</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>somethings wrong then - it's pulling the wrong libpng</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.43</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>it should be using a locally built copy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.01</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>ditto for zlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.03</tt></td><td><font color="#61b961"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, console 4evah!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.18</tt></td><td><font color="#61b9b9"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, need full log for this one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.56</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I frequently kill X and switch to raw console when I want precise benchmarks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.27</tt></td><td><font color="#61b961"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://elfga.com/~erik/tmp/ss20150716164155.png">http://elfga.com/~erik/tmp/ss20150716164155.png</a> is what my mac lappie usually looks like (sometimes I fullscreen terminal just to be cool, but usually it's just maximized) :D </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:45.19</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>console 4evah ! ``Erik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.02</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>I can relate: <a href="http://www.rayforce.net/desktop000.png">http://www.rayforce.net/desktop000.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.19</tt></td><td><font color="#61b961"><tt>``Erik</tt></font></td><td width="100%"><tt>still using bx?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.56</tt></td><td><font color="#42427e"><tt>Stragus</tt></font></td><td width="100%"><tt>Yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.39</tt></td><td><font color="#be64be"><tt>Izakey</tt></font></td><td width="100%"><tt>brlcad, I've given you access to the Google Doc. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.44</tt></td><td><font color="#61b961"><tt>``Erik</tt></font></td><td width="100%"><tt>I got sick of fighting the logging facility in bx, irssi did things 'mostly' right out of the box, so I was willing to spend the extra resources on it *shrug* :)</tt></td></tr>
+<tr><td><tt>20:56.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~vasc@bl7-122-190.dsl.telepac.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.22</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>man sf.net is still down</tt></td></tr>
+<tr><td><tt>20:59.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yash (3b5f267d@gateway/web/cgi-irc/kiwiirc.com/ip.59.95.38.125)</font></tt></td></tr>
+<tr><td><tt>21:06.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado (~konro@41.205.22.37)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:06.25</tt></td><td><font color="#6666c3"><tt>Yash</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr><td><tt>21:09.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yash (3b5f267d@gateway/web/cgi-irc/kiwiirc.com/ip.59.95.38.125)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.57</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Konrado DJ * 9026 /wiki/User:Konrado_DJ/GSoc2015/logs: /* 16 JULY 2015 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.56</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Konrado DJ * 9027 /wiki/User:Konrado_DJ/GSoc2015/logs: /* 16 JULY 2015 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.06</tt></td><td><font color="#407a40"><tt>vasc</tt></font></td><td width="100%"><tt>hello Yash </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.58</tt></td><td><font color="#6666c3"><tt>Yash</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr><td><tt>22:20.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~vasc@bl7-122-190.dsl.telepac.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.47</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9028 /wiki/MGED_CMD_nmg: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.37</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9029 /wiki/MGED_CMD_nmg: /* Example(s) */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.16</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9030 /wiki/MGED_CMD_nmg: /* Proposed subcommands */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.11</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9031 /wiki/MGED_CMD_nmg: /* Example(s) */</tt></td></tr>
+<tr><td><tt>22:42.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ih8sum3r (~ih8sum3r@122.173.205.133)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.15</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:202.164.45.204 * 9032 /wiki/User:Hiteshsofat/GSoc15/log_developmen: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:05.06</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9033 /wiki/User:Bhollister/DevLogJuly2015: /* Thurs, July 16, 2015 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:06.20</tt></td><td><font color="#97974f"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Bhollister * 9034 /wiki/User:Bhollister/DevLogJuly2015: /* Mon, July 20, 2015: Start of Week 9 (of 14) */</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

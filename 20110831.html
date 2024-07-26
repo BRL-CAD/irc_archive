@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110831</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110831</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:20.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.57</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;are globals allowed if its not possible to pass a variable to a function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.44</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>I need a dbip in the rt_bound_tree() function but it cant be passed via parameters(assuming the currents parameters are not changed)</tt></td></tr>
+<tr><td><tt>00:37.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.17</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>hm ok I ll just add it to the parameter list of rt_bound_tree()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.54</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>oops no cant do that , its used in too many places already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.35</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>global it is then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.37</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46494 10/brlcad/trunk/README.cmake: mention ccmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.59</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46495 10/brlcad/trunk/CMakeLists.txt: Explain the DEBUG header definition a little more thoroughly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.36</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: no, you cannot add globals to librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.55</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>yeah I made it an optional paramter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.03</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>rt_bound_tree(struct rt_i * rtip = NULL, const union tree *tp, fastf_t *tree_min, fastf_t *tree_max)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.12</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no such thing as an optional parameter in C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.16</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a c++ism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.24</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.43</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>what is it that you're trying to do?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.58</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>i am trying to fill out the case OP_DB_LEAF:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.22</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>so I am trying to lookup the encountered solid using stp = rt_find_solid(rtip, tp-&gt;tr_l.tl_name);</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.36</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>in that case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.17</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>I havent come across any other way to convert the information present in a OP_DB_LEAF node to a OP_SOLID</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.00</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>in fact the only single information present is the prim name :P, which is really very less info to proceed on :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.20</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>other than doing a lookup of some sort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>what does that have to do with rt_bound_tree() though?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.57</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>i mean the rtip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.11</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>so you can call rt_find_solid within rt_bound_tree()?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.16</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.17</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>like this : <a href="http://bin.cakephp.org/view/820530027">http://bin.cakephp.org/view/820530027</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.48</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>the return internal from rt_db_lookup_internal() has really mucked things up </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.52</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>so you can add a new parameter, but it'd need to be a different function (i.e., you'd need to copy most of rt_bound_tree()) because it breaks the API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.02</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.03</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.29</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>so back to the original idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.50</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>just add your own new function that converts the tp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.57</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>before it gets to rt_bound_tree()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.26</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>basically a switch for just that case statement in a new function, called before rt_bound_tree()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.36</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that way you can pass an rtip or whatever else you may need</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.44</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok , this function will also recursively desend the tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.49</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>calling rt_gettree()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.55</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>on any regions it encounters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.00</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that's fine -- maybe all the more reason to keep it separate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.08</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:39.13</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>that make sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.19</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>seems the delay in all this function will be much more than the way get_obj_bounds() does it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.52</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>but ok, all this occurs before the simulation, so it should be ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.21</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>they're also not expensive operations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.34</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.47</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>you could probably convert a tp a hundred times over and still achieve 100fps updates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.00</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.58</tt></td><td><font color="#5d5db1"><tt>abhi2011</tt></font></td><td width="100%"><tt>yeah makes more sense to traverse recursively anyway, since it *is* a tree,no logical errors that way due to a model having no groups, or no regions etc etc</tt></td></tr>
+<tr><td><tt>02:15.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.04</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46496 10/brlcad/trunk/ (101 files in 13 dirs): (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.04</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Took a stab at using <a href="http://www.projectpluto.com/win32a.htm">http://www.projectpluto.com/win32a.htm</a> (WIN32 native</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.04</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: curses) to get the terminal code working on Windows, but so far falling way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.04</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: short of success. The termio_win32.c file doesn't seem to have much in the way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.04</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: of contents, and termio.c doesn't want to build on windows (among other errors,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.05</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: getting illegal indirection errors associated with copyTio). Even when using</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.06</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: termio_win32.c, MSVC doesn't want to generate a .lib file. The pdcurses demo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.37</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:38.00</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>not really - so far it's slapping me around for daring to think I could compile it :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:38.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>fwiw, plain ol pdcurses should be more than adequate for our needs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.12</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - the win32a variation has been actively maintained very recently, and is trying to be merged into the "mainline"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.14</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't actually use curses, so everything win32a implements/extends won't actually get invoked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.20</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>I noticed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.25</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>looks good, if it works great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>if not, might try the fallback</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.39</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>pdcurses is dead simple to compile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.57</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>pdcurses isn't the issue - it's getting our code to use it (so far)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.21</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't even really need to modify our code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.24</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>just link the lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.39</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shakes his head - doesn't look like it</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:40.50</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>if that were the case, the above would have worked a while ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.09</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that presumes there's not bugs in win32a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.10</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>libcursor needed BC and UC, which aren't provided by pdcurses</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.20</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - fair enough</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.39</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>and libtermio is a lot more annoying</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.09</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>some of the compile errors for termio.c didn't appear related to termlib at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.36</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would appreciate a second pair of eyeballs - I'm in a bit over my head</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.49</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a lot of platform logic in there, it might need some minor mods</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.12</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>I was planning to reverse-merge 46496 to leave the build in a working state, but if you want to take a wack at it I can leave it for now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.23</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>BC and UC aren't important, if it has tgetstr() then we're good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.33</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>tgetstr("bc", ...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.56</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>seems to be in there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.41</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>hrm, actually...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.28</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>also, presume you meant UP, not UC ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.41</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>libtermlib defines those two globals</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.49</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>er, yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.57</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>but they're not really needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:46.25</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>so that'd be a two-line mod if pdcurses left them out for some reason (unlikely)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:46.58</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't have a windows environment set up at the moment to test it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.27</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: you can bump nick off my box temporarily tomorrow ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.51</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is not reassured by this:  (main pdcurses sources, not just win32a) <a href="http://pdcurses.cvs.sourceforge.net/viewvc/pdcurses/PDCurses/pdcurses/terminfo.c?revision=1.37&amp;view=markup">http://pdcurses.cvs.sourceforge.net/viewvc/pdcurses/PDCurses/pdcurses/terminfo.c?revision=1.37&amp;view=markup</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.00</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm backlogged with NURBS and GS work, it'll have to wait a bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.19</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a good friday or weekend project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.24</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.34</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>k - I'll revert it for now then, so the build still works for nick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:49.05</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>why is that not reassuring?&nbsp;&nbsp;what's it's supposed to reassure?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:49.10</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shouldn't have tangled with it either, just an impulse</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:50.13</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46497 10/brlcad/trunk/ (11 files in 10 dirs): Revert 46496 until more work can be done on it - leave trunk in a working state. Main point was to checkpoint, and revision history now has work done so far.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:50.43</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>tgetstr is a stub</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:50.50</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">doubts we want a stub</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:52.06</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>i.e. not a good sign</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:54.38</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note at some point to try the ersatz editor against pdcurses - that would be nifty it if ended up working</font></tt></td></tr>
+<tr><td><tt>04:55.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:55.18</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">splits before he gets in any worse trouble ;-)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:55.43</tt></td><td><font color="#c36666"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.48</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>erk:&nbsp;&nbsp;pdcurses term.h:&nbsp;&nbsp;PDCurses doesn't operate with terminfo, but we need these functions for compatibility, to allow some things (notably, interface libraries for other languages) to be compiled. Anyone who tries to actually _use_ them will be disappointed, since they only return ERR.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.14</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">really splits this time</font></tt></td></tr>
+<tr><td><tt>05:27.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.45</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note of this article for possible future reference:  <a href="http://www.halcyon.com/~ast/dload/guicon.htm">http://www.halcyon.com/~ast/dload/guicon.htm</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:46.26</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>this might be a useful guide for making an editor that doesn't use terminfo:&nbsp;&nbsp;<a href="http://sandyeditor.sourceforge.net/">http://sandyeditor.sourceforge.net/</a></tt></td></tr>
+<tr><td><tt>06:56.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.05</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/win-command-prompt.html">http://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/win-command-prompt.html</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:03.33</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>too bad he didn't succeed, that sounds quite interesting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:16.56</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>humph - ersatz against pdcurses is a no-go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:19.07</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>heavy terminfo use</tt></td></tr>
+<tr><td><tt>07:45.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.38</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>if I thought I could get away with it I'd CMakeify vim for cross-platform building and use that (maybe with vimacs mode...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.01</tt></td><td><font color="#70d670"><tt>``Erik</tt></font></td><td width="100%"><tt>nvi might be easier</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.20</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>looks like it needs terminfo of some sort too</tt></td></tr>
+<tr><td><tt>16:04.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>16:08.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr><td><tt>17:10.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@wlan-145-94-185-119.wlan.tudelft.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.38</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46498 10/brlcad/trunk/src/ (3 files in 2 dirs): Group names were being stored in volatile memory, causing garbage output. Now copying strings to memory we actually own.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.12</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46499 10/brlcad/trunk/src/conv/obj-g_new.c: Addressed compiler warnings.</tt></td></tr>
+<tr><td><tt>18:44.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.41</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46500 10/brlcad/trunk/src/tclscripts/mged/ (CMakeLists.txt exists.tcl tclIndex): add exists command to check whether a db object exists - maybe should be a libged cmd...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.02</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46501 10/brlcad/trunk/src/tclscripts/mged/ (CMakeLists.txt exists.tcl tclIndex): Nevermind, Bob is doing a libged version</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.37</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46502 10/brlcad/trunk/misc/CMake/FindLEMON.cmake: cmake -E rename isn't and won't be functional across multiple volumes - use cp or copy if we can find them, and rename as a last resort if we can't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.22</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46503 10/brlcad/trunk/src/tclscripts/archer/ (CMakeLists.txt PipeEditFrame.tcl): Added the initial code for editing pipes in Archer. More to come.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.42</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46504 10/brlcad/trunk/src/tclscripts/archer/Archer.tcl: Added the initial code for editing pipes in Archer. More to come.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.52</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46505 10/brlcad/trunk/misc/CMake/FindLEMON.cmake: Er whoops, need mv/move, not cp/copy. builds once more</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.57</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46506 10/brlcad/trunk/src/tclscripts/archer/ (21 files): Calling GeometryEditFrame::updateGeometry.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.06</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46507 10/brlcad/trunk/ (6 files in 5 dirs): Added ged_exists() in libged to check for the existence of a database object and make it available in mged and archer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.11</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46508 10/brlcad/trunk/src/conv/obj-g_new.c: Freeing all group strings and containing array; should be leak-free again.</tt></td></tr>
+<tr><td><tt>19:52.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad nsd_ (~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.11</tt></td><td><font color="#70d670"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: "catch [get $name]" isn't good enough? O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.20</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46509 10/brlcad/trunk/CMakeLists.txt: X11 is an advanced option under Windows, mark it as such.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.33</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.53</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46510 10/brlcad/trunk/ (4 files in 3 dirs): Start working on how to test for hypot on Windows - most of the warning messages we're getting in MSVC seem to relate to redefining that function in config_win (I think)...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.55</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46511 10/brlcad/trunk/ (CMakeLists.txt include/config_win_cmake.h.in): give this a hypot test a shot... don't know if it will work, untested</tt></td></tr>
+<tr><td><tt>20:43.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.13</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46512 10/brlcad/trunk/ (CMakeLists.txt misc/CMake/test_srcs/hypot_test.c): try required libs and check_function_exists</tt></td></tr>
+<tr><td><tt>20:54.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@186.136.168.73)</font></tt></td></tr>
+<tr><td><tt>20:54.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr><td><tt>21:12.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.33</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46513 10/brlcad/trunk/ (3 files in 2 dirs): utter failure - cannot confirm hypot is present as a function, always get unresolved errors even when I manually feed it msvcrt. revert for now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.39</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46514 10/brlcad/trunk/src/tclscripts/lib/Ged.tcl: Add "exists" to the help object.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.07</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46515 10/brlcad/trunk/src/tclscripts/archer/ (Archer.tcl ArcherCore.tcl): Using the exists command in a few places. It's cleaner.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.54</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46516 10/brlcad/trunk/ (3 files in 2 dirs): Try again - take a hit from kicad and use check_symbol_exists this time, let's see how that does</tt></td></tr>
+<tr><td><tt>22:10.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi477 (~jan@bas1-guelph22-1177695115.dsl.bell.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.48</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>yes, much better</tt></td></tr>
+<tr><td><tt>22:49.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi477 (~jan@bas1-guelph22-1177620315.dsl.bell.ca)</font></tt></td></tr>
+<tr><td><tt>22:54.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad nsd_ (~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.34</tt></td><td><font color="#6161ba"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46517 10/brlcad/trunk/src/ (conv/obj-g_new.c libgcv/wfobj/obj_parser_state.h): Properly allocating and freeing the rest of the file strings.</tt></td></tr>
+<tr><td><tt>23:19.42</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

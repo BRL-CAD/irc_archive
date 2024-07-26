@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110818</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110818</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:26.06</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46239 10/brlcad/trunk/src/liboptical/ (render_svc.cpp render_svc.h): the osl that I commited on svn defines a few more pure virtual functions. added definitons for these functions copying from /osl/src/testshade/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.06</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: regarding the bb function in librt, there was a issue with wdb_put_internal() always freeing the passed rt_db_internal *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.28</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>well making the rt_db_internal * parameter constant makes no difference</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.39</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>the compiler discards the const qualifier and throws a warning : warning: passing argument 3 of âwdb_put_internalâ discards qualifiers from pointer target type , which is due to the same parameter not being declarared as const in wdb_put_internal()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.45</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>so I currently allow it to be freed and look it up again afterwards using db_lookup()&nbsp;&nbsp;and rt_db_get_internal()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.28</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>however after this, when I try to walk the tree for a combination,&nbsp;&nbsp;using db_functree(dbip, dp, comb_func, leaf_func, &amp;rt_uniresource, NULL) the comb_func gets called as expected when the combination is detected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.54</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>but the leaf_func for the leaves of the combination, is not called</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.16</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>instead db_lookup() reports missing primitives, so I don't think the primitives' information is still available for adding to the in-mem dbip , using db_functree()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.04</tt></td><td><font color="#66c2c2"><tt>abhi2011</tt></font></td><td width="100%"><tt>here is the modified code : <a href="http://bin.cakephp.org/view/1374634731">http://bin.cakephp.org/view/1374634731</a>&nbsp;&nbsp; not committed yet as it does not work yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.55</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>abhi2011: it doesn't have to work to commit, it just has to build strict</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.05</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>abhi2011: there must not be any solids in your combination</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.17</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">redacts his last statement</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.47</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>I don't know what's happening, so personally, I would examine the tree in gdb</tt></td></tr>
+<tr><td><tt>04:07.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr><td><tt>06:56.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr><td><tt>07:44.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr><td><tt>09:51.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>10:34.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>10:40.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>11:41.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr><td><tt>11:44.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@201.255.22.2)</font></tt></td></tr>
+<tr><td><tt>11:44.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:57.49</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>is it possible to a script permanently set an environment variable? after building osl I'd like brl-cad to know where it is installed. any other option to do that? (maybe a config file...)</tt></td></tr>
+<tr><td><tt>11:59.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr><td><tt>12:07.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:09.39</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>kunigami: which part of BRL-CAD needs to know where osl is?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:10.35</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>starseeker: the cmake at liboptical and&nbsp;&nbsp;at other/osl/shaders</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:15.27</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46240 10/osl/trunk/compile.sh: added option to compile each library alone</tt></td></tr>
+<tr><td><tt>12:15.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:49.09</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>kunigami: I'd suggest looking at what we do for the src/other libraries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:49.44</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>however, if it's always going to be installed first, you probably want find_library </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:50.01</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>or write a FindOSL.cmake file</tt></td></tr>
+<tr><td><tt>12:56.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr><td><tt>12:56.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:09.00</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r46241 10/brlcad/trunk/sh/conversion.sh: added an OPATH (object path); added 's' to seconds displays; wrapped a long line for ease of checking output format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:09.38</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r46242 10/brlcad/trunk/NEWS: updated for change to conversion.sh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:10.18</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r46243 10/brlcad/trunk/NEWS: corrected my last entry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:11.07</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r46244 10/brlcad/trunk/NEWS: wrapped overflowing entry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:22.58</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>starseeker: but src/other libraries are build together with brl-cad, so it can set cmake variables that brl-cad sees. osl is build separately and is not necessarily build in any default place or a fixed place relative to brl-cad, so unless osl itself informs cmake, I don't see how find_library or FindOSL would be able to find it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.25</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46245 10/osl/trunk/openexr/configure: missing pthread flag on tests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.51</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46246 10/osl/trunk/openexr/exrenvmap/main.cpp: missing string.h library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.25</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46247 10/osl/trunk/openexr/exrmaketiled/main.cpp: missing string.h library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.56</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46248 10/osl/trunk/oiio/src/ico.imageio/icooutput.cpp: missing zlib.h header</tt></td></tr>
+<tr><td><tt>14:15.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr><td><tt>15:06.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>15:06.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr><td><tt>15:13.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.24</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>FindOSL would work like any other find_package file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.40</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>assuming you're installing osl somewhere standard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.31</tt></td><td><font color="#5badad"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, what does this mean? <a href="http://pastebin.com/hHMAsVYd">http://pastebin.com/hHMAsVYd</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:45.07</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: I can't see that site - can you use another pastebin?&nbsp;&nbsp;(mozilla's should work)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:45.37</tt></td><td><font color="#5badad"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, never mind, I guess it's due to gentoo cmake-utils eclass changes, fixed already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:45.51</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.29</tt></td><td><font color="#5badad"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, pushed to overlay, when will 7.20.4 be released?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.52</tt></td><td><font color="#5badad"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, either I should try to make cmake work for 7.20.2 or just wait for 7.20.4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:02.36</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would recommend waiting for 7.20.5</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:02.40</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>er 7.20.4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:03.03</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46249 10/brlcad/trunk/src/librt/primitives/ (part/part.c table.c): Add a bbox routine for part</tt></td></tr>
+<tr><td><tt>16:06.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.47</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46250 10/brlcad/trunk/NEWS: Tightened the bounding boxes for rpc primitives, particularly axis aligned rpcs - should slightly speed up rpc raytracing.</tt></td></tr>
+<tr><td><tt>16:10.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>16:16.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>16:20.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>16:22.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>16:30.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>17:28.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>17:33.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.05</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46251 10/osl/trunk/osl/src/cmake/externalpackages.cmake: on ubuntu, llvm is installed in /usr/lib/llvm-2.8/include - how to specify this path to cmake such that it works for any library version?</tt></td></tr>
+<tr><td><tt>17:42.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.18</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46252 10/brlcad/trunk/ (3 files in 3 dirs): epa bbox routine - also improved bounding boxes for epa, similar arrangement to the rpc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.18</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46253 10/brlcad/trunk/ (3 files in 3 dirs): Add improved bounding box logic for ehy, based on epa improvements.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.08</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>I'd like to use svn external do bring libz and libpng together with osl. Is it "svn propset svn:external <a href="https://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk/src/other/libz">https://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk/src/other/libz</a> osl" ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.20</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>command that worked: svn propset svn:externals '<a href="https://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk/src/other/libz">https://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk/src/other/libz</a> libz' .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.39</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46254 10/brlcad/trunk/src/librt/primitives/ (eto/eto.c table.c): Add bbox routine for eto.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.36</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46255 10/brlcad/trunk/src/libgcv/wfobj/ (obj_grammar.yy obj_parser.cpp obj_parser_state.h): storing lemon parser-handle in combined state object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:30.50</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46256 10/osl/trunk/: adding libz and libpng as external dependence of osl/trunk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.52</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46257 10/osl/trunk/compile.sh: added compile targets for libz and libpng</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.35</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46258 10/brlcad/trunk/src/librt/primitives/ (hf/hf.c table.c): add an hf bbox routine - not too worried about this one as hf is on its way out.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.47</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>hmmm osl is seg faulting with the local builds :( maybe it didn't like some of the versions.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.43</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46259 10/osl/trunk/: svn propset svn:externals is not additive. have to specify all external dependences at once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.44</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46260 10/brlcad/trunk/src/librt/primitives/ (dsp/dsp.c table.c): dsp bbox routine - this is another one that has to dupliate a lot of prep, so don't double up on the work - leave the prep calculations as-is.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.04</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46261 10/brlcad/trunk/src/liboptical/ (liboslrend.cpp liboslrend.h osl_rt.cpp sh_osl.cpp): removed unnused code, debug messages and the old AddShader, which is not to be used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.47</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r46262 10/brlcad/trunk/doc/docbook/system/mann/en/edit.xml: Started manual; more specifics on the argument style are needed. WIP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.52</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46263 10/brlcad/trunk/src/liboptical/ (CMakeLists.txt Makefile.am osl_rt.cpp): deleting the stand-alone osl rt. It was already out-dated and it has no use since sh_osl is functional</tt></td></tr>
+<tr><td><tt>19:12.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.33</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r46264 10/brlcad/trunk/src/libged/erase.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.34</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: This reverts the fix for r45409 (i.e. ged_splitGDL was no longer splitting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.34</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: things correctly. This caused a noticeable performance issue as well as the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.34</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: results of 'who' being wrong). The segmentation fault problem was resolved in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.34</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: _ged_eraseFirstSubpath.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.35</tt></td><td><font color="#64be64"><tt>plaes</tt></font></td><td width="100%"><tt>kunigami: it could be running against system library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.58</tt></td><td><font color="#64be64"><tt>plaes</tt></font></td><td width="100%"><tt>ldd is your friend ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.58</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>yup, ldd tells me it is using brlcad version. but that was the objective. I'm testing in a system with minimal system libraries to check if the libraries we're providing are enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.36</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46265 10/brlcad/trunk/src/librt/primitives/extrude/extrude.c: gah - extrude bbox logic is pretty close to worst case - don't see any immedate way to do a bbox better, so just try to do a 'self-contained' version that doesn't use stp structures and cleans up after itself.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.40</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46266 10/brlcad/trunk/src/librt/primitives/table.c: whoops, add to table.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.03</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46267 10/osl/trunk/jpeg-8c/Makefile.in: missing file...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.07</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>humph - the way submodel is set up, I can't do a bbox routine for it without adding an rtip parameter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.51</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46268 10/osl/trunk/tiff-3.9.5/Makefile.in: doh! missing file...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.09</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46269 10/osl/trunk/tiff-3.9.5/ (23 files in 23 dirs): hmm! actually there are a lot more Makefile.in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.05</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r46270 10/osl/trunk/compile.sh: set linker path for linux env and make oiio use tbb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.37</tt></td><td><font color="#66c366"><tt>kunigami</tt></font></td><td width="100%"><tt>here's the backtrace of the segfault: <a href="http://paste.ubuntu.com/669543/">http://paste.ubuntu.com/669543/</a> -- the program does not even finished to load... it seems to be a runtime linking error</tt></td></tr>
+<tr><td><tt>21:00.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr><td><tt>21:31.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.47</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: what handles the generation of html files from docbook format? Using synopfragment tags would be really nice for my uses, but they're not getting formatted correctly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.15</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>I'll take a look at it if you can point me in the right direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.12</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>um... the docbook stylesheets probably control that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.46</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>we haven't customized any of our output from docbook yet - that's a bit of a job</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.02</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt>seems odd that they wouldn't format their own tag correctly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.07</tt></td><td><font color="#6fd46f"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">investigates</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.27</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46271 10/brlcad/trunk/src/librt/primitives/ (cline/cline.c table.c): add bbox routine for cline</tt></td></tr>
+<tr><td><tt>21:51.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.41</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46272 10/brlcad/trunk/src/librt/primitives/ (superell/superell.c table.c): break out bbox logic for superell</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.57</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46273 10/brlcad/trunk/src/librt/primitives/ (4 files in 2 dirs): metaballs already had most of the bbox functionality broken out - make it conform to the new functab setup and have it call the sphere routine itself to make it standalone.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.23</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46274 10/brlcad/trunk/src/librt/primitives/ (brep/brep.cpp table.c): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.24</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Do the simple thing with rt_brep_bbox and call the openNURBS routine - a quick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.24</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: check results in a pretty good bbox, although we'll stick with the bvh result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.24</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: for prep. The fact that bi-&gt;brep is NULL'ed by prep is a bit worrisome, leading</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.24</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: to questions about whether this routine will work after raytrace - why are we</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.24</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: NUll'ing the bi-&gt;brep during prep?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.47</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46275 10/brlcad/trunk/src/librt/primitives/ (hyp/hyp.c table.c): Go with the epa/ehy approach for hyp too. Might actually be slightly larger surface area for some views when hyp is rotated, but MUCH better than sphere for axis aligned cases.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:40.33</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46276 10/brlcad/trunk/src/librt/primitives/ (revolve/revolve.c table.c): Make a stab at implementing a stand-alone bbox function for revolve - again, too much extra logic to want to have prep call it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.08</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r46277 10/brlcad/trunk/ (3 files in 2 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.09</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Wrote synopsis for 'edit translate'. It looks fine in brlman, but there is a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.09</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: mysterious line break in the html manual browser, and no line breaks in several</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.09</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: places where there should be. First priority is to fix the issue. Failing that,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.09</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: I can simply remove the synopfragment tags (which are what is breaking the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.09</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: formatting) and rearrange things a bit. Added synopsis for 'edit', and cleaned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.10</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: up indentation.</tt></td></tr>
+<tr><td><tt>23:46.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.00</tt></td><td><font color="#65c1c1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46278 10/brlcad/trunk/src/librt/primitives/ (pnts/pnts.c table.c): Points apparently don't have any prep, but go ahead and add a bounding box function.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

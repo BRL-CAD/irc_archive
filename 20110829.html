@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110829</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110829</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>03:50.06</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Jimblack 07<a href="http://brlcad.org">http://brlcad.org</a> * r3084 10/wiki/Main_Page:</tt></td></tr>
+<tr><td><tt>05:06.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>05:06.55</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release 7.20.2 is posted (20110701) || BRL-CAD is participating in the ESA Summer of Code in Space!</font></tt></td></tr>
+<tr><td><tt>07:18.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:35.05</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Abhi2011 07<a href="http://brlcad.org">http://brlcad.org</a> * r3085 10/wiki/User:Abhijit: /* Log */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:35.25</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Abhi2011 07<a href="http://brlcad.org">http://brlcad.org</a> * r3086 10/wiki/User:Abhijit: /* Log */</tt></td></tr>
+<tr><td><tt>11:10.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.19</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: about passing the struct db_i* in rt_bound_internal()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.13</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>it would be necessary to call rt_gettree() inside this function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.33</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>to get the primtives for a comb loaded</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.55</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>is that fine, or would it be better to avoid calling rt_gettree() ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.37</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>if I do need to call rt_gettree(), then the 2nd parameter is the name of the comb/primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:44.16</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>which is generally got using a directory pointer using dp-&gt;d_namep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:45.42</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>the only way to get a directory pointer is to use again use name of the comb and then db_lookup()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:48.17</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>I have been searching for getting the comb or primitive name from a struct rt_db_internal if at its possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:51.10</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>seems all of this can be avoided if the caller code simply calls rt_gettree() before passing the struct rt_db_internal*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:51.23</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>then we do not even need to pass the struct db_i *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:54.56</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>or the calling code can pass the name of the comb/primitive</tt></td></tr>
+<tr><td><tt>13:18.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.20</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46446 10/brlcad/trunk/TODO.cmake: Update todo items for CMake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.43</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46447 10/brlcad/trunk/src/other/CMakeLists.txt: mark BRLCAD_TERMLIB_BUILD as advanced</tt></td></tr>
+<tr><td><tt>14:53.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@wlan-145-94-186-249.wlan.tudelft.nl)</font></tt></td></tr>
+<tr><td><tt>14:57.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.18</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46448 10/brlcad/trunk/src/other/re2c/bootstrap/parser.hh: May need the parser.hh file too...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.54</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46449 10/brlcad/trunk/src/other/re2c/bootstrap/parser.hh: fix comment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.16</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46450 10/brlcad/trunk/misc/CMake/CompilerFlags.cmake: MSVC doesn't know what to do with D_FORTIFY_SOURCE, apparently</tt></td></tr>
+<tr><td><tt>16:38.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@wlan-145-94-186-249.wlan.tudelft.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.44</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: gah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.22</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a problem, rt_db_internals are nameless ... forgot about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.30</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>oh shoot :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.42</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yeah by the time its reaches the rt layer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.46</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>names are no longer relevant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.01</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that's by design, so you can write a given rt_db_internal as many times as you want with different names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.19</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.21</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you might have to resort one layer higher, with a struct directory *</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.26</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes , however a struct directory * is made using db_lookup(), which unfortunately also requires a name , and I cannot use a dummy name, I have to use the exact name of the comb the user passed </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.59</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>huh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.14</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>libged knows the name</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.26</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>the same name you used to get the rt_db_internal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.36</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>instead of that, you'll just pass the directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:48.48</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>oh ok, so I pass the directory and the struct db_i *, something like this : rt_bound_internal(struct db_i *dbip, struct directory *dp , struct rt_db_internal *ip, point_t rpp_min, point_t rpp_max) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.04</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>if you pass the dp, you no longer should pass the ip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.09</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you can get the ip from the dp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.12</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.15</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.26</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>I was wondering :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.39</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>why we simply have a function which accepts the dp and the name</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.52</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>um no scratch that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.05</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>dp and dbip is enough</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.38</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>i thought it would be easy to have a function that just accept the name of the comb/primitive and the dbip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.49</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>that would be easy to pass by a user</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.37</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>something like rt_bound_internal(char*name , struct db_i *dbip, point_t rpp_min, point_t rpp_max) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.14</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that's libged's responsibility</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.22</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.25</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>libged works with strings, names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.34</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.56</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yeah I get it now :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.57</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>really, I want to just pass the rt_db_internal, but as we already discussed, another routine needs to be written first to fill out the comb's tree properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.04</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.14</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>don't are about names (or even directory), just want the bb given geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.28</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.37</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>working with a dbip+dp is a start, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.13</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that can be refactored to call a lower-level calculate-my-bb-with-just-this-ip later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.53</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.59</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>I have a question regarding the transformation matrices of primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.45</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>so in the commands that somehow transform the object, I can see that the commands generally call rt_matrix_transform()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.00</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>and this function ultimately goes and put&nbsp;&nbsp;a new matrix in the tl_mat member of the struct union tree </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.22</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>that exists in the tr_l member of a union tree*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.40</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>usually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.46</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>however this is a transform matrix, not the matrix&nbsp;&nbsp;representing the absolute world position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.07</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>however bullet gives me the matrix that represents the transform in absolute world co-ordinates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.50</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>so if the object were to start from (0,0,0) and with no rotations along any of the axes, then the transform matrix from bullet can be applied to get the object to its intended position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.27</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>now the thing is, I generally copy an existing object in mged, and then apply bullet's transform on it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.41</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>however this new object is no made at the origin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.58</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>its made in the existing object's position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.09</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>which is correct as far as copying is concerned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.42</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">waits for the question</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.51</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>however , it would be great if I were able to reset any copies I make , to the origin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.02</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>there are no such commands to do this in mged however</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.38</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>and if I apply bullet's transforms on a copy, which is not in the origin, then the translation adds to the existing position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.57</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you're going way too far down the rabbit hole</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.08</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.11</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>ask a question :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.46</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>or at least ask me to explain how brl-cad tracks positions if you don't know what to ask :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:05.52</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.39</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yeah it would be better if you explain :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.02</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>my issue is how to apply the bullet transforms on a object which is not at the origin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.48</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>since the transforms got from bullet specify the translations of the object with respect to the origin, not the position of the object at the start of the simulation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.28</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>so if you remember my earlier comments from when you first got started -- and why you've been messing around with bounding boxes for so long...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.15</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>geometry in brl-cad is described in a rather pure mathematical sense, sometimes in implicit form and sometimes in an explicit form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.13</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.28</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>however the positions of the objects are stored explicitly somewhere in a comb/prims attributes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.44</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>yes and no&nbsp;&nbsp;(sorry multitasking)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.52</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>combinations, for example, have no position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.59</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>they are just a grouping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.06</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ah yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.08</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>they can apply a transformation to that grouping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.20</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.21</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that have an *implicit* position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.35</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.41</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>it's implied that the position of a combination is the position of all it's continuent submembers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.48</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.06</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>so if you calculate that bb of a comb, for example, you could pretend that one of the corners or that the center is that comb's "position"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.30</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.36</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>the same can be said of all of the primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.57</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>many/most of them have an explicit position, but it's defined per primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.18</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.25</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">remembers he needs to look at rt_bot_bbox again...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.26</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>for a sphere, it's the center point; for a cylinder, it's the center of the base oval; for a torus, it's also at the center which doesn't even happen to be *on* the object (it's in the void in the middle)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.00</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you could get at that "position", but it's somewhat meaningless for this purpose</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.10</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>all that matters really is having a consistent handle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.13</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that's where the bb comes in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.33</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.35</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>get the bb for any object, then you can consistently consider the bb center to be a position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.00</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.02</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>from bullet's perspective, all you're dealing with is a lot of boxes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.09</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.24</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you can implement an overlap/collision detection handler later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.42</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>however a bb would not roll on a surface even if it represents a sphere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.49</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.00</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>sure it will</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.24</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>at least, it should be able to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.47</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you're not using the "box" as *geometry*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.54</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that's just your handle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.59</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right I get that now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.20</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>its the handle to the geometry in mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.31</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>the bbox routines you're working with are also not oobb's, they' aabb's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.42</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.25</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>so even for simple arb8's, you'll not be able to get objects doing anything more than translating without collision detection</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.39</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>translation should be the first proof-of-concept step though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.58</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.49</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., take a 10x10x10 axis-aligned box at 0 0 100, drop it to a ground plane at 0 0 0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.06</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>demo should either stop immediately or bounce :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.12</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46451 10/brlcad/trunk/src/other/CMakeLists.txt: when doing win, also need xlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.17</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.51</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>but say the user runs the sim for 100 steps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.56</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that initial collision detection could rely purely on bullet since the bb's are all axis-aligned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.23</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>or you write a collision detection routine that just returns 1 if the bb's overlap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.23</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.33</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.52</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>about setting the position of the box</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.57</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>in mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.14</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>so for starters, you should only work with comb's for now (in mged and in code), just to keep things simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.18</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>one entity type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.07</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>no primitives by themselves</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.43</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok, and I set the comb position by simply obtaining how far the object has translated along z axis and using rt_matrix_transform() to translate the comb to the new position</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.06</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>I mean *how far the* comb* has translated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.28</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you know how to apply a translation matrix, I presume?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.53</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes, just pass it to rt_matrix_transform()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.12</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>with the proper elements set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.46</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>there are loads of vector and matrix routines in vmath.h and libbn (bn.h and src/libbn)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.24</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.16</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>for example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.57</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>the 'rot' and 'orot' (aka orotate) commands are how rotations are applied to geometry within mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.09</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>src/libged/rot.c and src/libged/orot.c </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.45</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you can see there how rot.c sets up a rotation vector and calls bn_mat_angles() to obtain a rotation matrix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.47</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes, I have seen rot.c and orot.c, they both transform the object's existing orientation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.56</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>similarly orotate.c calls bn_mat_angles() but then also bn_mat_xform_about_pt() along with some routines to normalize the matrix before applying it to a comb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.28</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>so I would need to get the transform of the comb wrt the position of the comb at the beginning of the sim</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.46</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>so if the comb is say at position 0,0,100 and at the end of it at 0,0,1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.19</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>then I would need the translation matrix to be set for a translation of 0,0,99</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.21</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>and not the translation with respect to the origin of 0,0,1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.36</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>for translation (what you need first), tra.c is keen which sets up a translation vector then calls vutil.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.15</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes I checked that yesterday, quite straighforward code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.57</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>the mistake I was making was applying the wrong translations (with respect to the origin)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.05</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>actually, if it starts at 0,0,100, it won't end at 0,0,1 .. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.37</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yeah it will fall to 0,0,0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.58</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>at the end</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.25</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>before bouncing around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.08</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>if the ground plane is at 0,0,0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.37</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>if the box is 10x10x10, and you're using center as V and ground at 0,0,0, then it'll stop at 0,0,5 :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.02</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes , i was ignoring the height, yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.06</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>so what I imagine will happen is you'll get the bb's for all objects, pass those to bullet to set up the scene, perform one timestep and bullet is going to return some information indicating that the box moves down (a vector) OR that the box is in a new position (a new position)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.14</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's a vector, you just apply it like tra</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.42</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>if it's a point, you calculate the vector based on the previous position and apply that vector like tra</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.13</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes , I would need to create a rigid body and give it a collision shape in bullet, so I ll just use a box for now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.49</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.03</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46452 10/brlcad/trunk/src/other/incrTcl/itk/CMakeLists.txt: Ah, right - if itk is taking responsibility for its path setting, need to be more complete.</tt></td></tr>
+<tr><td><tt>17:55.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad nsd_ (~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.34</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46453 10/brlcad/trunk/src/libgcv/wfobj/obj_grammar.yy: Only reporting first syntax error instead of all of them.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.22</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46454 10/brlcad/trunk/src/other/incrTcl/itk/CMakeLists.txt: more itk build logic cleanup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.07</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>nice ... in response to "why reinvent the wheel?"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.12</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>"Because after long enough time, there's always someone who's irked about the performance of the wheel and wants to replace it with conveyor belts or robot legs. Sometimes even square wheels. And because we've done round wheels for so long, old lessons have faded or been deemed outdated and so we try it. Then it turns out it's not that great except for very limited use cases, but we're too deep invested and stubborn so we'll try fixing it. After a lot of fightin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.48</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that probably trucated the end...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.50</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>"After a lot of fighting against windmills, we slowly reinvent and rediscover the reasons why we used a wheel in the first place. Then the cycle starts over. Same with most NIH projects, they start out as being radically different and then end up looking much the same after tackling the same challenges."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.01</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>heh </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.07</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">supposes some of the CMake logic probably would fall into that category...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.51</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>"oh, so THAT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.58</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>'s why that compile flag is there"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.17</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: you could change the -D_FORTIFY_SOURCE=2 to a #define and you'd elimiante the MSVC conditional</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.09</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>erm.&nbsp;&nbsp;you mean #define D_FORTIFY_SOURCE 2&nbsp;&nbsp;in brlcad_config.h?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.17</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>how would that eliminate the conditional?</tt></td></tr>
+<tr><td><tt>18:46.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.54</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>you're presently checking for a "c flag" (which is bogus, it's a cppflag) named "D_FORTIFY_SOURCE=2"</tt></td></tr>
+<tr><td><tt>18:47.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.12</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that turns into -D_FORTIFY_SOURCE=2 to gcc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.17</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.26</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>presumably /D_FORTIFY_SOURCE=2 for msvc or something similar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.06</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>either way, I assume you hit some compilation error due to that since the D_FORTIFY_SOURCE is rather lame gcc-specific way to test that flag</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.06</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46455 10/brlcad/trunk/src/conv/obj-g_new.c: Added check for valid number of command line arguments.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.17</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that is equivalent to #define _FORTIFY_SOURCE 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.25</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>not an error, just a blathering warning from MSVC</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.26</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>-DVAR=VAL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.36</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>is #define VAR VAL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.24</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>so that's my point, you could eliminate the blather by outputting the symbol instead of trying to pass it as a compile flag</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.40</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>less logic, no conditionals</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.07</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>if (MSVC) conditionals make baby jesus cry, el no le gusta</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.11</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>should it still be conditionalized on debugging?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.15</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.20</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.59</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>&lt;snort&gt; I'd say MSVC takes care of the crying all by itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.51</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, but it still gets to the whole platform vs feature issue -- the conditional is only valid today and is a major pita to maintain, debug, and unwind later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.11</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>there's always a better way and it's usually not even more code if refactored according to dry principle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.34</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46456 10/brlcad/trunk/ (3 files in 3 dirs): Make _FORTIFY_SOURCE a config.h define instead of a compile flag check.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.47</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>that what you mean?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.45</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.19</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders why he didn't do that initially... did I misread the autotools logic?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.09</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>wouldn't have been an msvc issue for autotools build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.27</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>most all *nix platforms support -DVAR=VAL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.37</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>s/platforms/compilers/ so the test works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.48</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.48</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>that assumption is flawed for non </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.54</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>"non gcc-like" compilers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.21</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>CHECK_C_FLAG_GATHER must be something you wrote?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.25</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.35</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>because stfw results only in references to brl-cad :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.44</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, there are a few custom macros - I really should probably try to cut down / consolidate those at some point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.32</tt></td><td><font color="#5fb4b4"><tt>n_reed</tt></font></td><td width="100%"><tt>brlcad: stfw... your initialisms are starting to get obscure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.59</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>~stfw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.59</tt></td><td><font color="#5cafaf"><tt>ibot</tt></font></td><td width="100%"><tt>[stfw] Search The F*cking Web.&nbsp;&nbsp;See <a href="http://justf*ckinggoogleit.com/">http://justf*ckinggoogleit.com/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.56</tt></td><td><font color="#5fb4b4"><tt>n_reed</tt></font></td><td width="100%"><tt>Already looked it up.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.02</tt></td><td><font color="#5fb4b4"><tt>n_reed</tt></font></td><td width="100%"><tt>Just that "pita" took me a sec because it wasn't in caps. "dry" I knew, but stfw...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.22</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>wow, you knew dry but now stfw.. that's pretty much backwards ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.36</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>dry is pretty obscure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.54</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>half million hits for stfw can't be that obscure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.20</tt></td><td><font color="#5fb4b4"><tt>n_reed</tt></font></td><td width="100%"><tt>well i don't text or chat as a rule, but i have read 97 things, so...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.26</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>stfw is pretty chat-specific, maybe even irc-specific</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.34</tt></td><td><font color="#e3e377"><tt>brlcad</tt></font></td><td width="100%"><tt>(but not likely)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.50</tt></td><td><font color="#b6b660"><tt>``Erik</tt></font></td><td width="100%"><tt>dry is pretty big with ruby and python folk O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.59</tt></td><td><font color="#5fb4b4"><tt>n_reed</tt></font></td><td width="100%"><tt>of which i'm neither; that makes sense though i guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.29</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o&nbsp;&nbsp;<a href="http://labs.qt.nokia.com/2011/08/24/qt-quick-3d-tutorial-video/">http://labs.qt.nokia.com/2011/08/24/qt-quick-3d-tutorial-video/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.52</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46457 10/brlcad/trunk/src/libgcv/wfobj/obj_grammar.yy: Allowing "" as a user-defined object name.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.14</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46458 10/brlcad/trunk/src/mged/CMakeLists.txt: Fix space in mged CMakeLists.txt - also did this for bwish, got sucked into a previous commit.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:29.41</tt></td><td><font color="#5cafaf"><tt>starseeker</tt></font></td><td width="100%"><tt>woot! new obj-g (kinda) works on Windows</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:14.36</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;I have a question regarding solid table pointers : const struct soltab</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.40</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>so is there a way to get one from the struct rt_db_internal of a primtive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.30</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>I need to insert it into the rt_comb_internal </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.40</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>while finding the bb of a primtive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.06</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>or I can avoid making a rt_comb_internal and just use the bounds already got in the rtip (as rt_gettree() has been called)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.07</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>there is a third option to use ip-&gt;idb_meth-&gt;ft_bbox() which is the new interface for finding bbs of primitives, but thats known to not work correctly for BOTs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.01</tt></td><td><font color="#6969c7"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm found rt_find_solid(), will use that</tt></td></tr>
+<tr><td><tt>22:11.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@24-13-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.30</tt></td><td><font color="#bfbf64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46459 10/brlcad/trunk/src/conv/obj-g_new.c: MSVC compiler doesn't support %zu format. Changed all instances to %lu.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

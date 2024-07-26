@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20180321</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20180321</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:12.08</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: could this be involved with the timespec business?&nbsp;&nbsp;<a href="https://sourceware.org/bugzilla/show_bug.cgi?id=21371">https://sourceware.org/bugzilla/show_bug.cgi?id=21371</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.10</tt></td><td><font color="#854685"><tt>gcibot</tt></font></td><td width="100%"><tt>[ 21371 â Missing timespec definition when compiled with _XOPEN_SOURCE and _POSIX_C_SOURCE ]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.12</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: what is the mtSignalWaitTimeout function trying to accomplish?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.33</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: unless I'm misreading this, cnd_timedwait is a C11 function: <a href="http://en.cppreference.com/w/c/thread/cnd_timedwait">http://en.cppreference.com/w/c/thread/cnd_timedwait</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.33</tt></td><td><font color="#854685"><tt>gcibot</tt></font></td><td width="100%"><tt>[ cnd_timedwait - cppreference.com ]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.58</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces - bit of a rabbit hole here...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.23</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>It waits on a condition variable with a timeout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.45</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>It's my wrapper for pthreads/winthreads, hence the unusual terminology</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.27</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>C11 threads aren't supported by many compilers... besides, a thin inline wrapper that works "everywhere" is trivial</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.31</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Not sure what version you got, but here's current:&nbsp;&nbsp;<a href="http://www.rayforce.net/mmthread.h">http://www.rayforce.net/mmthread.h</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.34</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, that looks very different from src/librt/primitives/bot/gct_decimation/auxiliary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.26</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: we're planning to bump the minimum standards after the next release to C++11 and as much as C11 as works with MSVC - once we do that, hopefully it'll be easier to integrate your newer code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.11</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Cool. I'm usually all C99 with optional GNU and MSVC extensions, and some kind of fallback without either</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.49</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, right... could be C99 or C11 I guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.06</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>C++11 for sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.03</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>I very much prefer C unless I'm forced to go C++ (I like when the code is explicit, and does exactly what it shows and nothing else)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.27</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>It would be fun to contribute something to BRL-CAD... Preferably paid work, otherwise it would be pieces that I write for myself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.45</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">has been writing a high performance fancy PBR OpenGL engine lately</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.22</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>cool!</tt></td></tr>
+<tr><td><tt>01:21.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad drmjsxpcunzonmcr (~armin@dslb-088-065-184-243.088.065.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.47</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>well, so far, I can't find a way to spoof this that both tinycthread and librt will accept</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.55</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>tinycthread eh, any reason for that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:31.42</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>A simple .h wrapper around pthreads/winthreads works great, no libraries needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.28</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: preferred to outsource it if possible and use a C standard(ish) API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.48</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>unfortunately, it would seem the rest of the world has moved on from C90 for some odd reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.21</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I'm not seeing an easy answer - if I'm understanding this correctly the bu_timer doesn't have the right functionality for what Stragus wants here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.16</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>What do I want? gettimeofday() for pthread_cond_timedwait()?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.41</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>you mentioned condition variable with a timeout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.48</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Ah, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.06</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>That seems like a very basic thing to have in any threading API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.36</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>sure - and probably a pthreads + Win32 threads implementation is quite possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.07</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>that may even be what your new mmthread.h offers, but retrofitting it to the existing code in librt may or may not be straightforward</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.56</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>You are certainly welcome to use the latest mmthread.h above, even the Winthreads backend requires something like... Windows 98</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.04</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - the problem here is this is looking like an increasingly non-trivial effort to support a standard we want to get off of for a feature that's not really production ready at the moment</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.43</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>for this feature I'd rather try to get your newer version of the code in and working if I was going to tangle with it in a big way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.50</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>from what I recall you made a lot of improvements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.14</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>but I sure don't want to do that until we get off of C90, and that's what's apparently causing a problem here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.29</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>All right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.50</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>so I'm faced with a bit of a dilemma</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.43</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: I can't remember - do you usually turn on all the pedantic compiler warnings?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.41</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't test beyond -Wall -std=c99</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.00</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>ah - ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.01</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Or -std=c89 actually, when trying to make code compile with MSVC</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.12</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't think you'll touch that with a 10 feet pole, but here's something else I use and love, atomics: <a href="http://www.rayforce.net/codedump/mmatomic.h">http://www.rayforce.net/codedump/mmatomic.h</a> <a href="http://www.rayforce.net/codedump/mmatomic-gnucx86.h">http://www.rayforce.net/codedump/mmatomic-gnucx86.h</a> <a href="http://www.rayforce.net/codedump/mmatomic-gnuc.h">http://www.rayforce.net/codedump/mmatomic-gnuc.h</a> <a href="http://www.rayforce.net/codedump/mmatomic-msvc.h">http://www.rayforce.net/codedump/mmatomic-msvc.h</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.46</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>With backends of x86/amd64 assembly, GNU sync, MSVC interlocked, etc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.05</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: very cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.31</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: it's not so much that I don't want to look into these things - it's more that we need to get out of the quickstand of ancient standards first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.00</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Sure, right</tt></td></tr>
+<tr><td><tt>04:00.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.57</tt></td><td><font color="#b2b25e"><tt>brlcad</tt></font></td><td width="100%"><tt>seems simple enough .. the first problem was calling timespec_get() which can be changed to gettimeofday().&nbsp;&nbsp;cnd_timedwait() didn't come up yet, but also simple enough to deal with.&nbsp;&nbsp;looks like part of the motivation for tinycthread is somewhat covered in this newer version of mmthread.h too.</tt></td></tr>
+<tr><td><tt>08:48.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gabbar1947 (uid205515@gateway/web/irccloud.com/x-utarplinktshxmkq)</font></tt></td></tr>
+<tr><td><tt>08:52.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@211-23-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>08:54.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>09:00.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:36.48</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Eh, GCC 7.1 does a decent job at auto-vectorization when you give it a proper memory layout designed for SIMD, and telling it pointers are aligned with __builtin_assume_aligned()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:37.29</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>The unreadable intrinsics path is... 23% faster, yay</tt></td></tr>
+<tr><td><tt>10:43.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee- (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>11:03.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@185.39.197.205)</font></tt></td></tr>
+<tr><td><tt>13:15.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:29.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness (uid10044@gateway/web/irccloud.com/x-ledjafxhmtrarvlj)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.52</tt></td><td><font color="#b2b25e"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, there's been a lot of effort in that area the past few years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.21</tt></td><td><font color="#b2b25e"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why I've been pressing hard to get rid of aliasing in brl-cad ... that shuts off autovec wholesale</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.04</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Indeed. I always have been a big fan of C99's restrict, now I'm a big fan of __builtin_assume_aligned()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.48</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Okay... Nevermind that, my intrinsics were only 23% faster because GCC and -ffast-math turned some sqrt() and divisions into approximates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.31</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>there are more issues with C90 gct than just tinycthread, looks like...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.31</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>or maybe it's the older POSIX standard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.57</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>wow... <a href="https://www.youtube.com/watch?v=j9uRckJLqLk">https://www.youtube.com/watch?v=j9uRckJLqLk</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.57</tt></td><td><font color="#854685"><tt>gcibot</tt></font></td><td width="100%"><tt>[ The 3D-Printed Curta Calculator - YouTube ]</tt></td></tr>
+<tr><td><tt>16:06.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@27.34.244.249)</font></tt></td></tr>
+<tr><td><tt>16:08.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet_ (~amarjeet@27.34.244.249)</font></tt></td></tr>
+<tr><td><tt>16:27.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:6f54:2268:9dff:fef9:3113)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.02</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>Stragus: out of curiosity, does mmthread implement the C11 API for threads or is that API not ideal for performance situations?</tt></td></tr>
+<tr><td><tt>17:01.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DenisP (d40d70a2@gateway/web/freenode/ip.212.13.112.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.47</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>phew - OK, at least locally, I'm building again with r70833</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.51</tt></td><td><font color="#818144"><tt>starseeker</tt></font></td><td width="100%"><tt>sigh... scanning online, it seems the concensus is that C11 threads haven't taken off and pthreads+win32 wrapping is still the preferred approach for C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.34</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>starseeker: The C11 threads API is far from universally supported</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.49</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>There is no compiler on Windows that implements them as far as I know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.23</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>Regarding the API, it's closely modelled on the pthreads API except with different names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.42</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>(the mmthread API that is)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.27</tt></td><td><font color="#97974f"><tt>Stragus</tt></font></td><td width="100%"><tt>I heard complaints about the C11 thread API, design flaws or something, but I can't see I have paid much attention. I have something that works and wouldn't care about C11 threads either way</tt></td></tr>
+<tr><td><tt>18:23.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>18:32.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AdityaGulati (ca034dcc@gateway/web/cgi-irc/kiwiirc.com/ip.202.3.77.204)</font></tt></td></tr>
+<tr><td><tt>18:34.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raingloom (~raingloom@C2267141.catv.pool.telekom.hu)</font></tt></td></tr>
+<tr><td><tt>19:37.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f720:db49:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr><td><tt>23:11.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20050505</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20050505</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>02:43.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad llew (~llew@adsl-69-227-153-5.dsl.renocs.nvbell.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.59</tt></td><td><font color="#da73da"><tt>llew</tt></font></td><td width="100%"><tt>new</tt></td></tr>
+<tr><td><tt>02:52.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad llew (~llew@adsl-69-227-153-5.dsl.renocs.nvbell.net)</font></tt></td></tr>
+<tr><td><tt>05:42.39</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad narnia (~terrylr@johann.blauedonau.com)</font></tt></td></tr>
+<tr><td><tt>05:56.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad narnia (~terrylr@johann.blauedonau.com)</font></tt></td></tr>
+<tr><td><tt>17:57.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-3 (~CIA@flapjack.navi.cx)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.51</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>would someone be able to give me an example where a degenerate toroidal surface is used? by degenerate toroidal surface major-radius &lt; minor-radius.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.47</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you mean by used?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.05</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>you shouldn't use degenerate toroidal surfaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.11</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>they're effectively "inside-out"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.45</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>unless if you're referring to super toroidal geometry, where one side of the torus is "pinched" to a point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.57</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad won't let you make the inside-out kind, and I supertoroids aren't implemented&nbsp;&nbsp;(superellipsoids are, but they're unfinished)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.11</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>ap203 has an entity degenerate_toroidal_surface ( as described above ) i am attempting to figure out how to map it to brl-cad.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.38</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>i take it from your comments above it should not be mapped.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.28</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>there are two cases: if major_radius == 0 and minor_radius &gt; 0 the torus has no hole. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.14</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>the 2nd case is: if the major_radius &gt; 0 and major_radius &lt; minor_radius. in this case the torus is self-intersecting.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:45.18</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>not exactly self-intersecting.. it's inside out per the definition</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:45.45</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>if that's the input, I'd swap them on import so that it's corrected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.46</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>a zero radius is also not supported -- it's mathematically undefined for the equation of a torus</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.35</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>there are several things that could be done with a zero-radius -- brl-cad's raytrace will abort on that degeneracy since, like I said, it's undefined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.21</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>but, I suppose you could either nudge it to a near-zero value (like 0.00001) or import as two objects (a torus with a central cylinder to fill the hole, for example)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:51.24</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, i see what you probably mean by the intersecting.. minor_radius can either be the radius of the "roll" or the radius from the center to the roll's edge, if it's the latter it's inside out, if it's the prior, it's intersecting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.27</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd have to check what we do for the self-intersecting case, but I expect it would abort saying something like "boo"</tt></td></tr>
+<tr><td><tt>23:15.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad narnia (~terrylr@johann.blauedonau.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:17.38</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>johann crashed. i thought for a moment i lost a scsi disk but i doubled check everything and johann appears to be fine. johann, was up 161 days before the crash. perhaps he just wanted a break or some attention.</tt></td></tr>
+<tr><td><tt>23:20.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (~Matthew@130.85.253.237)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.56</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>poor johann</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.08</tt></td><td><font color="#5db25d"><tt>brlcad</tt></font></td><td width="100%"><tt>johann the barbarian</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.55</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>okay back to degenerate toroidal surfaces.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.39</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>do you understand what i mean when i say the torus insects itself?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.53</tt></td><td><font color="#b05cb0"><tt>narnia</tt></font></td><td width="100%"><tt>do you understand what i mean when i say the torus intersects itself?</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

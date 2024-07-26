@@ -1,0 +1,931 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20150828</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20150828</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:35.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.212)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.19</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>You really should focus on a way to make this work in a single pass</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.41</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i think that would require a miracle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>have you seen how the regular algorithm works?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.21</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>calling it a single "pass" is a misnomer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.31</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I mean a single raytracing pass</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.34</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the same hit points are looped over and over and over again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.55</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Fine, at least gather the raytracing hits just once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.09</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Any kind of sorting obviously involves revisiting hits multiple times</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.14</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>that means buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.22</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>lots of buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.31</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the classical time vs space tradeoff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.58</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Hum yes, that's true in some ways</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>two z buffers two color buffer and one stencil buffer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.39</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Z buffers?...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.48</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Just gather and buffer all hits, sort, process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.08</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>you need to store the backs and the fronts of objects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.15</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so you can do the csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.19</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>That's the hits you buffer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>if i had those z-buffers i don't think i would need the per pixel hit list at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>you know... the DYNAMIC one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.18</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i haven't quite gotten the peculaliar of these methods yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.22</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Geometry is often flawed, it's possible to: Enter A, Enter B, Exit A, Exit B</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>some claim to be O(kN)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.29</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>So you do need to buffer stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the 1989 one said its complexity was based on the number of segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>per primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.56</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>max</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>that's why you need those two buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.19</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and the stencil bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.04</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>How many CSG primitivies can you have simultaneously with these stencil bits?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.14</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>depends on the paper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.28</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I mean... if you have 8 CSG primitives, then you could use a 8 bits stencil buffer to track if you are in/out of each object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.32</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>That's a little limited</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.45</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the bits are used to encode which state of the CSG tree you are in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>not the primitive per se</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.25</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Thinking.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.35</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>better ways of storing the csg tree mean more objects in same bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.23</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Right, I see what they mean, with the object-based space partitionning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>log2(n+2) stencil bits for number of primitives in expression for blister</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.48</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>which is the sorta crappy compress one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>if you read the rossignac paper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>he encodes the tree in a way that you can encode 10^38 primitives in 7 stencil bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.52</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>You'll want a 32 bits integer per ray anyhow, for efficient memory access, so that should be plenty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.52</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm not informed enough to know if all that is really preferable to buffering hits in shared memory and sorting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.27</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i haven't wrapped my head around this properly yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.32</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>quite</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it probably depends</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.48</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its sorting and more sorting vs buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and the sorting may have dynamic reallocs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.08</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i still haven't got how the sorting would be done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://i.imgur.com/YwIBlpt.png">http://i.imgur.com/YwIBlpt.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.02</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i don't get that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.14</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Probably some insertion sort since the hits will always be nearly sorted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>do i need like an array of size num_primitives+1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i mean a 2d array</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.18</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Hum, no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or a 1d list of tuples with 1+n_primitives elements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>like {distance, prim0bit, prim1bit,....}</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.27</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Let's assume you have some struct able to store 16 hits. Each ray is born which a bunch of such structs in shared memory. If they are exausted, then it's allocated dynamically from some global static buffer with atomics</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i'm just trying to understand this. in c.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or c++</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>then you apply that Roth table</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.34</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and filter stuff out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.10</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>The struct should hold whatever information you need to register for each hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.21</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Distance is obviously required for sorting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.42</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>yeah but what else do i need to annotate the hits with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and how to generate that table for a tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and how to apply the tree table to the hits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.08</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>to transform and then filter them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.27</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>at least the list length doesn't seem to increase in the temp steps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.49</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>also</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>from what i read you can compute if something is in/out by doing that dot(r.d,n) on the normal of each hit point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so you don't need to store the info on cols 1,2 at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:06.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>you can compute it with lots dot products</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so the first bullet and second bullet is tame</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.44</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>in fact 1 is kinda done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well 2 actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>just not the in/outs but that's just doing the normals with dot products</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.02</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so now we need that Roth table</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but for a TREE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.44</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>hm remembered one bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.21</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>better to have that per primitive tupples thingie after all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.21</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>more dynallocs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well at least this one is easy to compute</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.48</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i'm kinda curious how the current code actually does it again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>*shudder*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>last time i tried to read it was bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>time to fire old netbeans to swim into the noodlestream of BRL-CAD boolean eval</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.11</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>2118 lines of code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>maybe i should print it and go read it at the beach</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.07</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it just doesn't compute</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/websvn/filedetails.php?repname=BRL-CAD&amp;path=%2Fbrlcad%2Ftrunk%2Fsrc%2Flibrt%2Fbool.c">http://brlcad.org/websvn/filedetails.php?repname=BRL-CAD&amp;path=%2Fbrlcad%2Ftrunk%2Fsrc%2Flibrt%2Fbool.c</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.32</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and loads and loads of dynamic linked lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>rt_boolfinal and rt_weave0seg are the ones that matter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.58</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i mean rt_boolfinal and rt_boolweave</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i think i managed to remove the gotos of rt_boolweave once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.22</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>maybe i could try applying the automatic man-bot code cleaner on that code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>just like i did on the solver</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>turns BRL-CADish code into cleanish nearly OpenCL compatible code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i'm good at that. i turn my brain off and become a man-compiler</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.06</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>a great skill to have as a maintainer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>not much of a developer skill though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>must have been from reviewing reformatting, fixing like 2-3 patches a day for like 5 years for freeciv</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i got good at that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.32</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>first to check if those two functions are all we need</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>then time to get the hatchet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.18</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>remove unused functions and bug printfs done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>1578 LOC</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.42</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>that's 540 otu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.44</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>still too bleeping complicated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.22</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I'm not fond of the way the code was written</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.39</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I would have broken stuff into static inlined functions...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>next i'm gonna do inlining of small functions and cleanup more unused code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.22</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>In their defense, compilers might not have been able to do proper inlining when it was written</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.27</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but its still a mess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.11</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>try porting *that* to opencl...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>%s/register //g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.29</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I would understand the purpose and rewrite, but that's me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.49</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it's a real pain to rewrite this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.56</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>to convert it into opencl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.02</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>that's why i wanted something whole new</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.16</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I would find it easier than trying to work with the existing code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.22</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>new to BRL-CAD at least. just like i did for bvhs and bots.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.27</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>It's just... not designed for GPUs, or for parallel hardware</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.35</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i have been doing a mixed approach.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.14</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>some is conversion of brl-cad code to opencl. partly the primitives because we had specific requirements on error output on those</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and partly because the alternatives aren't that much better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>except the triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.40</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the bot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.43</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i did that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>even though its not complete</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.50</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Primitives were just math, that's fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it doesn't support the plate mode and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.00</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>This dynamic allocation stuff to manage hits and segments is... bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>then i used the bvh instead of whateverr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well yeah you saw the code right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.15</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Even if it were CPU code, I would never malloc() every little thing, I would use a static buffer that grows if and when required</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.20</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://pastebin.com/2mTFicUL">http://pastebin.com/2mTFicUL</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>this is the calling code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.25</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't like that code</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.54</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>just there it moves segments from one list to another, then another then another</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:17.05</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and that's without the boolean processing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.33</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://pastebin.com/1cfyRbHe">http://pastebin.com/1cfyRbHe</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>this is the boolean weaving</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.48</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>after i removed the debug messages. all over 500 LOC of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i still left comments...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>more list SHIT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>double linked list SHIT and GOTOS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.46</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Eh yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.02</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and guess what it uses that per ray bitvector which states ALL intersected solids that i worked so hard to remove</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.35</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it even has handlers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.37</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>A per-ray array of bits, N bits for N primitives?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>function pointers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>per ray array of bits. N bits for N primitives.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.56</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>rt_boolfinal uses it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.30</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>This is atrociously bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.35</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Seriously... WTF</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>const struct bu_bitv *solidbits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.12</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Don't bother trying to port to OpenCL, there's nothing you can use</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.17</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Everything has to be rewritten</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.22</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>see that's the thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.25</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i would like to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but it's so...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.29</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>GAH</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>after i dunno like 20 or 30 refactors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.55</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Understand what goes in, and what goes out, close your eyes and rewrite</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>maybe it would shape up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.03</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't think so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.23</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>The whole algorithm is based on fundamental concepts that must be changed, all of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.54</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>some lists are only being iterated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or copied verbatim to others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or filtered</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>good luck getting which is which though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>if i wanted to do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>first thing would be to change lists to arrays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.32</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>preferably well known sized arrays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and remove gotos</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and the function pointers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.39</tt></td><td><font color="#6464bf"><tt>Stragus</tt></font></td><td width="100%"><tt>Yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.17</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>ok i think i removed the function pointers and inlined one function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.19</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>4 gotos out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.23</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>another</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>10 more gotos</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>a couple more but this one is a bit tangled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.36</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>ok... another 12 gotos or so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.08</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and these were nearly useless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.07</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the compiler can optimize those branches easily</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.42</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>grep goto src/librt/bool.c |wc -l</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.42</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>49</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.45</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>this is the old file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>grep goto bool.c |wc -l</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>19</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.54</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>this is the new file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the most hairy one is the rt_boolweave</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.42</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i mean rt_booleval</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.06</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>13</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:23.23</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>12</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>bah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well at least i'll have something smaller to look at</tt></td></tr>
+<tr><td><tt>03:49.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@111-44-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>04:14.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~vasc@bl12-167-49.dsl.telepac.pt)</font></tt></td></tr>
+<tr><td><tt>05:03.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@83-29-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>06:33.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete (~piotr@dwd173.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr><td><tt>07:58.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@119-70-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>08:17.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@154.70.111.68)</font></tt></td></tr>
+<tr><td><tt>10:02.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>10:19.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.214.230.247)</font></tt></td></tr>
+<tr><td><tt>10:29.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dracarys983 (dracarys98@nat/iiit/x-nujuyalijwjubmio)</font></tt></td></tr>
+<tr><td><tt>10:29.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bhollister (~brad@2601:647:cb01:9750:7d54:b79d:72f2:3078)</font></tt></td></tr>
+<tr><td><tt>10:32.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bhollister (~brad@2601:647:cb01:9750:7d54:b79d:72f2:3078)</font></tt></td></tr>
+<tr><td><tt>10:34.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.214.230.247)</font></tt></td></tr>
+<tr><td><tt>10:53.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.214.230.247)</font></tt></td></tr>
+<tr><td><tt>11:00.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado (~konro@41.205.22.55)</font></tt></td></tr>
+<tr><td><tt>11:13.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shaina (~shaina@117.214.247.98)</font></tt></td></tr>
+<tr><td><tt>11:18.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ih8sum3r (~ih8sum3r@122.173.197.231)</font></tt></td></tr>
+<tr><td><tt>11:38.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>12:05.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.213.170.115)</font></tt></td></tr>
+<tr><td><tt>12:30.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>12:47.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>13:24.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@154.70.111.105)</font></tt></td></tr>
+<tr><td><tt>14:15.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~androirc@106.192.162.255)</font></tt></td></tr>
+<tr><td><tt>14:35.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ih8sum3r (~ih8sum3r@122.173.197.231)</font></tt></td></tr>
+<tr><td><tt>15:27.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad localhost__ (~Ch3ck@154.70.98.105)</font></tt></td></tr>
+<tr><td><tt>15:30.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.30</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: hah, that's awesome!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: did you have to make any source mods?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>ih8sum3r: can you be more specific?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.42</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>brlcad: Hello, I'm getting this error: <a href="http://paste.ubuntu.com/12195946/">http://paste.ubuntu.com/12195946/</a> when I run startvm on server</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.14</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.17</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>vboxheadless --startvm OGV gives this : exec: /usr/local/lib/virtualbox/VBoxHeadless: Permission denied</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:07.41</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>ih8sum3r: try running those commands via sudo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.07</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>my ssh stops again :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.38</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>contacting with my ISP provider to solve this, till then can you please set my ssh problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.16</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>i don't know what that means</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.35</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>with ssh to brlcad.org I'm getting this : ssh_exchange_identification: Connection closed by remote host</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>pm me your IP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.14</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>Okay doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.59</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>done please check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.14</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>eh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.32</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>send me your IP in a private message (via IRC)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.52</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that is not your IP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.57</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that is a local address</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.10</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad, I've been having a similar issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>go to whatismyip.com</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: ditto then... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.09</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad, (y)</tt></td></tr>
+<tr><td><tt>16:14.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dracarys983 (dracarys98@nat/iiit/x-kdustzmopbtsohxg)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:20.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>your ISPs are misconfigured, you IP address maps to a name and that name does not map back to that IP address</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:20.31</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>in both your cases, your IP maps to a name and that name does not resolve to anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:20.58</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why the denials started occurring -- that's a common trick of people spoofing IP addresses</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.09</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and is a failure of RFC931</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>try logging in now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.23</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>working now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>I note that both of you seem to be on dynamic IP addresses, which means this problem will continue as soon as your IP changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:24.34</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you should contact your ISP and ask them to either remove the DNS entry for their IP addresses or add the reverse mapping of DNS name to IP (which is currently missing)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.03</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you can confirm this yourself by running "nslookup YOURIP", then "nslookup WHATEVERNAME" that the first nslookup reported</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.07</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>they should match</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:26.22</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad, I see now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.41</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt><font color="#CC00CC">is back in bizznis!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.57</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you IP address is specifically whitelisted, so like I said -- you'll be unable to get in again as soon as your IP address changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:29.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>e-mail me or ``Erik your new IP (which may take hours/days to whitelist) to add to /etc/hosts.allow or bounce through an intermediate server that does not have misconfigured DNS and you should be good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.15</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad, Alright, will do. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.27</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>I have a small issue, it seems the bzflag server does not have gcc?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.40</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>I've tried compiling brlcad and there's no gcc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no symlink (apparently)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.28</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Ch3ck, i complied brlcad code on bz server using cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.34</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>probably upgrade wiped it out recently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>just use gcc47</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:33.23</tt></td><td><font color="#ad5b5b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>Alright</tt></td></tr>
+<tr><td><tt>16:43.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete (~piotr@acou191.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr><td><tt>16:56.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado (~konro@41.205.22.38)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.19</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: I am interested on doing work on the spherical convergence algorithm you talked about in my project. Is there something I can read to get more familiar with the idea?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.48</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: I see that it was kind of stupid of me to have gone the other way if at the end spherical is the one that would stay instead of what I did. </tt></td></tr>
+<tr><td><tt>17:19.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stragus_ (~alexis@modemcable090.29-19-135.mc.videotron.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.22</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>dracarys983: awesome!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.43</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>dracarys983: yes, start with researching pseudorandom spherical sampling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and/or spherical tessellation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.46</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>Okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you can think of spherical pseudorandom sampling as picking random points in a tessellation of a sphere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sorry QUASIRANDOM</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>wrong term</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.45</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>And we keep doing finer tessellation after each pass?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.12</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sampling with that approach, going from one quasirandom point to another quasirandom point, which ensures even unbiased coverage of the volume without any alignment affects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.16</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>effects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.38</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>Okay. quasirandom -- noted. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.39</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>no, you just keep picking different points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.32</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>well, I guess you could keep doing a finer tessellation .. that really would be an implementation detail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you're really just picking two quasirandom points at a given density and shooting a ray through those two points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.42</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>just have to make sure the points are on or outside the sphere (especially if you tessellate) and that you exhaust all points in a set so that your sampling is "even" density</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.49</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>Um, "even" density means points should always be taken in pairs and all should be exhausted?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.22</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>I have done multiple randomly rotated icosahedrons (or tesselated icosahedrons), seemed to work pretty well even with low sampling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.10</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>dracarys983: yes, you're shooting through those two points and sampling the volume .. so you want the interior sampled with an even density</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.34</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: Gotcha!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: yep, that's the basic idea for quasi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.24</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: Why is quasi-randomness important here?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.41</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>read up on what it means and it should hopefully become apparent ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.43</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>*nods* Just saying it's a good approach as some other quasi-random distribution techniques require way too many random numbers, it's costly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.28</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: Okay. Thanks for the heads up.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.16</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>dracarys983: whatever you do, keep track of your seed -- must be reproducible behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: *nod*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>though this isn't a performant-critical function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.02</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: Sure thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.06</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's for some unknowable analysis bit that will use the information for some application-domain calculation(s) that can take a while to be computed or compute in the background or whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.42</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>on-demand volume, surface areas, centroids, moments, interference reporting, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.13</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>basically all analysis performed right now by gqa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.22</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>Maybe plus a couple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.49</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>fast would be fine and dandy, but more concerned that the calculations are correct, values actually converge to within a specified epsilon, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.06</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>need to be able to compute the error bars on what is reported</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:40.44</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>Precision precedes speed here then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.14</tt></td><td><font color="#b0b05d"><tt>dracarys983</tt></font></td><td width="100%"><tt>brlcad: Will keep in mind.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.25</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">liked the part about unknowable analysus on undefined formation for vague applications in some ambiguous context</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.31</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>analysis* too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:46.12</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: thanks for all your help with vasc!&nbsp;&nbsp;I see he's still stuck on the terrible depth peeling papers, but you seemed to slowly start getting him convinced that a different direction is better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>depth peeling is just a terrible idea ... we tested it out 9 or so years ago and it completely falls apart on big models with the number of iterations it has to perform</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.06</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>Indeed, Lee had also hired some guy to try it out. I don't recall the numbers but Rayforce was over 100x faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>don't see why he's so averse to fast on-demand dynamic allocation (which will likely never need to occur or will probably only occur once some small percentage of the time)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.47</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>Probably because there isn't a paper about it :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>big static buffer to stash results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.51</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>Yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.53</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sort them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>eval</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.19</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>all crazy fast steps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.31</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes, and very GPU-friendly when done properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>even cpu friendly, coherent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's been plan for a long time to accumulate all partitions (and their segments) during tracing so that they can be sorted+evaled in separate steps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's basically the goto hell in boolweave now per ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.37</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>That code really needs to be rewritten, even on CPUs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>this is going to be a bit of code that will be REALLY easy to get wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.23</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>boolweave isn't just doing booleans -- it account for floating point fuzz in provably correct ways while also being performant (in 1980's terms)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:59.58</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>just eliminating the registeres and gotos without re-architecting the rest is pretty much guaranteed to slow it down by 5-25%</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and will likely produce wrong results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>I would eaily bet that vasc got that wrong the other night, introduced incorrect weaving</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:00.57</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>I really would rewrite the whole thing, but taking care of understanding all the floating point fuzz magic that the old code implemented</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>gotta back it up to what the algorithm is doing and just apply that to coherent processing (whether gpu or not)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the fundamental algorithm can be expressed in less than 100 lines of code iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.03</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>handling all geometry cases including bad geometry and fuzz jacks that up a bit, but not a crazy amount</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:02.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the other 10x code in boolweave+boolfinal is old school optimization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.48</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>Old school optimization should have involved not calling malloc() for every little piece of data :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.08</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>malloc used to be free compared to the calculations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and it doesn't actually alloc iirc -- it's using pooled structures getting added to lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: trying to load the virtual box kernel driver and it's saying: depends on kernel - not available or version mismatch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: can only presume that means /usr/src/sys is out of sync (ahead of) the running kernel?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.19</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>is there one staged for reboot or are the actual sources needing an update or something?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>"kldload vboxdrv" to see it</tt></td></tr>
+<tr><td><tt>18:12.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~vasc@bl8-192-144.dsl.telepac.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.32</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and there he be!&nbsp;&nbsp;howdy vasc :)&nbsp;&nbsp;depth peeling sucks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>rossignac is awesome, good old friend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.21</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but that was pretty much a toy technique -- it falls apart on real models really fast, really hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.34</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you end up with too many layers, way too many iterations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>great for demos with relatively simple somewhat flat hierarchies</tt></td></tr>
+<tr><td><tt>18:29.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izakey (~Izakey@41.205.22.9)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.33</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: no source mods</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: did you e-mail your log?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.42</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: wow, cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.53</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>What log?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>last time I tried, required a few mods</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.01</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>The benchmark one?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the benchmark log</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.11</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>All I did was install svn and cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.20</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>Check out, and built</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>optimized build?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.28</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>No</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.34</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, sweet .. even faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.03</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>if you can try an optimized / release build, would be great to get that log mailed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.16</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and know the vgr for it</tt></td></tr>
+<tr><td><tt>18:33.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~androirc@106.192.162.255)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.27</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I can run an optimized build.&nbsp;&nbsp;I guess that model pi is quad core, so I can speed up compilation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>no rush :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>how you been, ltns!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>google's completely redoing the gci interface this year, I shared what you worked on with them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.17</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I've been doing well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.33</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>helping with some of the design requirements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.34</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>Did you see the beta.brlcad.org/wp menubar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.40</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>Good about GCI</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>cool, no I hadn't seen that </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it's working responsive too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.01</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I need to do the circle around the logo.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.11</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I used the bootstrap menubar-makes things easier</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.13</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>logo color is a bit off too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.31</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes we need to publish an official icon set still</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.43</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>did you see sofat_'s documentation interface?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.50</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yee</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.51</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.08</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I used the same logo that was already there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.10</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>I want to link my work with this website</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.21</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>It is possible ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.22</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sofat_: yeah, definitely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.25</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I last took alook at sofat_'s stuff a few months ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: take a quick peek, it's pretty cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's just the docs, but it's sync'd with our repo docs and has awesome navigation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.29</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Any think wrong with my old stuff ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.34</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>sofat_: is it a wordpress plugin or something like that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>basic raw editing ability too, but won't be focusing on that the first go round</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.39</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>That is what I remember it being</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.46</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>But I didn't look closely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.21</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yes in gsoc i made plugin to handle the editing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.43</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sofat_: give him the url ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.26</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt><a href="https://github.com/sofathitesh/brlcad-code">https://github.com/sofathitesh/brlcad-code</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.06</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>For document we just made&nbsp;&nbsp;the page which hold the wordpress theme style</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.11</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>My work is there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.31</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>brlcad.org/~nouhrasofat/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.24</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>maths22, if you any problem to use plugin so please tell me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.29</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Face</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.04</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>sofat_: How is the language list genrated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.31</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Using google language translator plugin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.36</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I have read recently that it is a good idea to not use flags to indicate languages-particularly where the same language is spoken in many countries</tt></td></tr>
+<tr><td><tt>18:47.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Shubham (012720ce@gateway/web/freenode/ip.1.39.32.206)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.47</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>Using google translate makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.05</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yes ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.06</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's two language lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.10</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>The order of that list is rather odd as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.18</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: ours, and google translate's?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.32</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the drop-down is google translate, the ones before it are our manual translations (which will generally be superior)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.46</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>That makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.53</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the tutorials were all manually translated to spanish, for example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.53</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>What is the order of the drop down?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.22</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: I'm rebuilding in release mode on the pi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.41</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: any idea why I get an empty img tags on beta?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.52</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>see <a href="http://brlcad.org/tmp/missing.png">http://brlcad.org/tmp/missing.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.20</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>What is rebuilding please tell me?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.38</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>brlcad: Is this website's mockup made by inderpreet? If I'm not wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.44</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>beta.brlcad.org</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.46</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.01</tt></td><td><font color="#60b8b8"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">glowers at MSVC Release config...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.25</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>ih8sum3r: the mockup predates inderpreet iirc, but has had many people working on it the past ... four years?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.31</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it started as a GCI task</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.04</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: you recall the first originator?&nbsp;&nbsp;you?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.11</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>oh! I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.20</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I think I started it, then anita did the theme</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.34</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>The images were never there on beta</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.51</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>They never imported right from Anita's GCI task</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.06</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>I updated drupal my first year, then did the wordpress migration my second</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.32</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>ih8sum3r: inderpreet did the wiki, I think, but he did not do wordpress</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.33</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Waao</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.44</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>sofat_: ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.18</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: I also brought fisheye back online about a week ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.40</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, so I should keep an eye on the cpus?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.51</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>For you means great you have much knowledge in small age ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.29</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sofat_: he's not quite so young any more, but his level of experience is definitely advanced and impressive for someone of his age :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.43</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: probably, but they have seemed OK lately</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.49</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>No making branches :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.00</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>They just take a long time and a lot of cpu to process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's probably good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.07</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yes i see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.45</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>Because?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.18</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i'm working on my own toy technique</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: just because it had whatever problem it had before where it was locking up the server</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>giving it less work is a good idea until that is sorted out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>is it the same version or updated?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.33</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Hey i am passed my final evaluation . thanks to mr sean and starseeker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.41</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Thank you so much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sofat_: thank you for all your efforts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.13</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the work doesn't stop here, though ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.21</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Yah i know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.39</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you did well, despite the communication challenges</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.10</tt></td><td><font color="#dd74dd"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>Hey, I got mail too. Thanks everyone from the core of my heart. Specially to Sean my mentor, Erik who had provided me lot of guidance.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.14</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>Thanks so much for you trust on me</tt></td></tr>
+<tr><td><tt>19:10.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.51</tt></td><td><font color="#afaf5c"><tt>sofat_</tt></font></td><td width="100%"><tt>You gave me chance to did this think happen i just say thank you so much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.40</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>since notifications are going out already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:13.03</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>two more did not pass this year, so 9 out of 12 passed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>two others were very close to failure, maybe should have failed so they would learn, but were ultimately passed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.02</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: still the save version-will update soon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.31</tt></td><td><font color="#b660b6"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: where is the list of gsoc projects?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.58</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>brlcad.org/wiki/Google_Summer_of_Code/2015</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.44</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>hey brlcad, brlcad will be an org in Google Code in 2015?</tt></td></tr>
+<tr><td><tt>19:35.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~androirc@106.192.162.255)</font></tt></td></tr>
+<tr><td><tt>19:36.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@154.70.98.105)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Boquete: hablas espan~ol?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.23</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Boquete: that is not yet decided, but I do love GCI :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.31</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Sorry I do not speak spanish :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.56</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>brlcad, hope you will be there, I'm really looking forward to be in Brl-cad :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.04</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a place in panama called boquete -- thought you might be from there ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.31</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Boquete: glad to hear it, but you're welcome to get involved regardless ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.59</tt></td><td><font color="#63bcbc"><tt>konrado</tt></font></td><td width="100%"><tt>hello brlcad&nbsp;&nbsp;and other members of the community thanks for helping me get through with GSoC successfully. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>even if you have to jump ship to a different org, anything you do with us will almost certainly be experience that translates to better chances of winning ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.52</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>konrado: thank you for all your efforts!&nbsp;&nbsp;you made a lot of progress</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.08</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's obviously still more work, but it's an exciting feature that is much wanted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.04</tt></td><td><font color="#63bcbc"><tt>konrado</tt></font></td><td width="100%"><tt>I would do my best to make all the improvement I can.</tt></td></tr>
+<tr><td><tt>19:43.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete (~piotr@acou191.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.43</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>hmmm.. this almost works...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.23</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Sorry I disconnected :v brlcad about my nickname, It was "changed" word "bouquet", but funny thing is that I heard in .. spanish or portugeese it mean "bad/dirty" word :v That's why I was not sure about using it. I use it on IRC but on Google Melange I used "antonow" (like Oleg Antonow, you know this russian constructor). Hope nobody will feels bad about my nickname :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.16</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Ow I checked now what it mean in portugeese.. lol. I think I need change my nickname. BUT in spanish it mean gap xD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.02</tt></td><td><font color="#5eb2b2"><tt>Stragus</tt></font></td><td width="100%"><tt>"Bouquet" is a french word too, like a... bundle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.32</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Ow yes it's too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.36</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt><a href="https://en.wikipedia.org/wiki/Baguette">https://en.wikipedia.org/wiki/Baguette</a> That was first meaning of my nickname. I just changed it a little :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.49</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>Boquete: <a href="https://en.wikipedia.org/wiki/Boquete,_Chiriqu%C3%AD">https://en.wikipedia.org/wiki/Boquete,_Chiriqu%C3%AD</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:48.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a very beautiful place</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.23</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i always get the subtraction and the xor working but not the intersection</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>BAH</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.49</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>in my little toy example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.54</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>So I think I will keep this nickname. I hope that no one feels offended</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it means "gap" or some sort of opening in spanish</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.18</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you can't please everyone</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>similar to french meaning (a bouqet of flowers "opens up")</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.15</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>I wanted to changed on Google Melange from antonow to Boquete&nbsp;&nbsp;(I use it everywhere) but I think I cant. I will write to Stephanie before GCI :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.39</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>write the melange devs first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>see if one will change it for you instead of bothering steph</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.13</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Ow yes, right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.37</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>I will check it later (before GCI) and I will see hwo can I contact :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.44</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there is going to be a completely redesigned website for GCI 2015, so it might not matter at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.50</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the new site is not based on melange</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.52</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Ow I heard that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.57</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>I heard that ther's going to be few more changes but nothing sure so I don't want to spread the word :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.07</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there definitely will be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>one pretty big one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but it's a good one in the grand scheme of things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.13</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Last year that I can contribute in GCI 2015. So nervous</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>bouquet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.31</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>That's bad I didn't know about GCI before.. :/ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.34</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Yes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.59</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>no, not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.25</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>vasc: yes, just a typo ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.32</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>I mean "Yes?" was to vasc&nbsp;&nbsp;:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.53</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>he was correcting my spelling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.22</tt></td><td><font color="#62bb62"><tt>Boquete</tt></font></td><td width="100%"><tt>Oh ok :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.58</tt></td><td><font color="#63bdbd"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: /usr/src/sys and /boot/kernel should be in sync, but those should be newer than what's live right now, been waiting for a good time to reboot... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: ah, so that would explain why the module won't load</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.20</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>too many years of french classes to that to you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: good time for a reboot whenever you are ready, in case disaster ensues :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.48</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>missing, a word he is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>figures. it can't get the normals right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.01</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the surfaces either</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>bah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>this isn't working like its suppose to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well it kinda looks ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>kinda</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.06</tt></td><td><font color="#63bdbd"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: I'll be around for a little bit if you want to hit that big button... (I kinda don't want to be the trigger-man... might be good to crank a backup before doing that?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.06</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the normal look different from stock</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i think the normals are all screwed up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.50</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: good idea, okay I'll kick off a backup first .. that'll probably take a long time to finish, so maybe we can give the reboot a go on sunday if it's done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: is there anything specific needed to put the new kernel in place?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>or anything else that would be good to do while we're rebooting?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.58</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so what's bad about rossignac's paper brlcad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.04</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>hm?&nbsp;&nbsp;I shared the reasons why...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the too many iterations?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>we implemented that paper about 9 years ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.40</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>oh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.44</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>even using blister, you can see problems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>that paper is after blister</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.57</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>cst sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it claims to fix the blister surface acne</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but really just rebranded</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that was all really hable's work, rossignac was his advisor iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.42</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well yeah hable's the first author</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.44</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>regardless, the issue is that the method just really falls apart on real models</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.21</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't work well with arbitrary depth, really assumes few depths to be performant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>production models usually have crazy complexity, especially compared to our sample demos</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>object counts in the 10^5 to 10^8 range with depths commonly in the dozens to hundreds range</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.30</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and that's for a single vehicle, not considering full scenes with lots going on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so which method you use? it seems 1980s stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.06</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>what do you mean?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i cleaned up the code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.20</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and it just ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.21</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.35</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it generates list of segments and more lists of segments and evals them against the tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>I know, lots of comments and questions :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.56</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>uses a dynamic stack</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.07</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and a bitvector per ray with size of n primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>some things I noticed you changed were guaranteed to slow it down (but also necessary to ultimately speed it up)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.49</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the opencl code doesn't do csg right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.55</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you should have noticed that there's pretty much not a limit on anything -- that's part why everything was dynamic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.10</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>not just a throwback to days when malloc cost less than a division</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>there's always a choice between multiple passes and more memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>like the bitvector for one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i could just iterate the list of hits and see if the primitive is in there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>except traversing a list is slow as you noted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>in fact i did just that while i was trying to implement the goldfeather algorithm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>there's that too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.11</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>we need static arrays not dynamic linked lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.23</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>well, we need arrays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its a start to do the arrays first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.43</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and then bound them somehow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>whether they are technically static or just really big and rarely ever need to grow is the big question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.11</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i tried cleaning up the gotos in that code as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.15</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but its real hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.23</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i went down to 13 gotos</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's part where I can almost guarantee you didn't get it right ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.40</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and almost certainly slowed it down if you did straight up conversions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i didn't just use any mechanical algorithm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.54</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's lots of dragons in the boolean weaving goto logic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>want to try my version of it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.16</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>of course :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.40</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>haven't tried compiling it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>for what it's worth, I've rewritten the boolean weaving code three times over the years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.18</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the first time I was a naive student appalled at all the gotos, coming from a "all gotos are evil" education</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.35</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>let's see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>first attempt compiled great, and was outright wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.31</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>second attempt years later, wiser and more carefully undertaken compiled great, was demonstrably correct and was some 15% slower iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.09</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>third attempt was much better performance wise, but actually was more code and (arguably) harder to read</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.53</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>really for performance, the state of the current code is half-irrelevant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.12</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it needs to be completely restructured for coherency, processed differently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.19</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the core algorithm is something like 100 lines of code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.07</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>boolweave/final has a LOT of magic built into it for handling real geometry fast, i.e., handling floating point conditions with extreme consistency and verifiable behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's usually the part that gets dorked up on a naive restructure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i just cleaned up some gotos and inlined some functions and removed the debug thigns</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.43</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the debug messages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the robustness logic bumps that 100 lines of logic a fair bit and the rest you see (the goto spagetti) is mostly unrolled optimization, which kicks it up to the 1500-2000 lines sizing you see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>for gpgpu/opencl, it's really just a matter of going back to the core algorithm and inputs, and figuring out how to pack that data in arrays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.41</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>yes. when i know WHAT the core algorithm actually is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>which is almost certainly going to need to be large pages of memory storing results, sort them, evaluate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>sorting is quite likely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.45</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but the dynalloc i hope to avoid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i can just try redoing that algorithm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.15</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but its gonna be pain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>like i said i just replaced the kd-trees for the bvhs and it was fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>was trying to do the same here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>cpu code like that is really hairy to port over</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>we needed something less heavy on complexity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>no disagreement there, but that's also why I say trying to transcode the existing is going to be ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>really hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.47</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>I at least wouldn't start there -- I'd start with the same inputs and then compare outputs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e., just implement how I'd do the eval</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>for what it's worth, here's a completely different approach expanded with some of the production stability tolerance testing needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.30</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>written by one of our core devs years ago in java</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/websvn/filedetails.php?repname=BRL-CAD&amp;path=%2Fjbrlcad%2Ftrunk%2Fsrc%2Forg%2Fbrlcad%2Fgeometry%2FPartition.java&amp;peg=34288">http://brlcad.org/websvn/filedetails.php?repname=BRL-CAD&amp;path=%2Fjbrlcad%2Ftrunk%2Fsrc%2Forg%2Fbrlcad%2Fgeometry%2FPartition.java&amp;peg=34288</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://pastebin.com/QQrGudYu">http://pastebin.com/QQrGudYu</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.49</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>try this one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you can look for the intersect(), subtract(), and union() functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>can't get to pastebin.com, blocked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.54</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>~paste</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.54</tt></td><td><font color="#73da73"><tt>infobot</tt></font></td><td width="100%"><tt>i guess paste is <a href="http://pastebin.org/">http://pastebin.org/</a> or <a href="http://bin.cakephp.org/">http://bin.cakephp.org/</a> or <a href="http://pastebin.ca/">http://pastebin.ca/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>(org is blocked too)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>that doesn't have the boolean evaluator</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.31</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.33</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and ca, sorry -- debian's is good though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah it does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.41</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's completely OO fashion, very different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>gah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and iirc, that implementation was verified to a large extent (and written by one of our most senior devs before he retired, for fun)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>is it more accurate or less accurate?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.45</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>does not compute</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.49</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's faithful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>so it's doing the right thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so you mean you get the same results?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>even if it doesn't implement the xor operator?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't use xor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.36</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><font color="#CC00CC">scratches his head</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>i ripped that out of one of our branches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>xor will probably be gone in v8</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so you check the outputs and got the same outputs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.05</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>exact same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.36</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i'm usually not a big fan of java porting in a case like this because the code obfuscates memory allocation a lot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but i'll see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.57</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, it's just a reference for understanding the algorithm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.19</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>with all the C optimizations obviously yanked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's actually shorter than the C version by quite a lot, even more so if you ignore the logging statements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.27</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so why don't you port that over to C and use that instead ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.33</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and it fixed a limitation of the C version</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.55</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it was an order or so slower :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>even ported over?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.07</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>java is slowe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>slow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.32</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, untested what that code implemented coherently would be like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.42</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's still not using arrays and you'd want to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.05</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>still needs the partitions coming in sorted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>so you need them all first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.21</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>front to back processing, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.35</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its like this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.40</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the per pixel lists aren't that big</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.49</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>lists of what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>as a first approach i can just inline insertion sort them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>like we do in so much of the code already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>when i get a good library then i can do a global segmented sort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>how you sort probably won't make a huge difference</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>just saying that sorting is assumed with this evaluation approach/code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.09</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>certainly ways to do it without sorting, but haven't thought about it much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the sorting ain't the problem. the problem is the list partitioning and filtering and merging and dynamically growing them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.17</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and reallocating stacks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.19</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and so on and on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>gotos</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>lots and lots of memory caches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.44</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>per pixel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.03</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>so the lists you're referring to are partitions or segments along the shotline?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well its like this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.24</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders why you rarely answer questions :)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.34</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the current code first shoots all the rays and to compute how large the per pixel hit point lists will be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>then it does one huge malloc of that for all pixels</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.08</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and recomputes the shots again to fill those per pixel arrays of hit points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.14</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so i got the arrays of hit points per pixel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.35</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i was trying to use an algorithm which could enable me to do the csg incrementally so i would avoid all of this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>need more than hit points, you need at least segments, but ideally partitions and segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but nevermind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.50</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>to guarantee correct solidity preservation </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.58</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the segments are tuples of in/out hitpoints right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.09</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>now the partitions i'm more vague about</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.19</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and partitions are one or more segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you need to know that a given segment "belongs with" another </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.48</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>because?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.58</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>when evaluating them, it matters when it comes time to merge or split</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.10</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>merging and splitting. evil.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>is that the same object, or another reference from a different object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.31</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>CSG == lots of merging and splitting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well the goldfeather algorithm doesn't care about that crap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.15</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it only wants the front and back of an object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.25</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>this is also a huge deviation from most academia -- solid modeling has somewhat different requirements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.27</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>shame i can't implement it properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.32</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>no man</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there are older solid modeling papers on this topic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i read about the way you do the csg computation in a thesis by jahnsen</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.02</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>from 1989</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.11</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but it's ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.12</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>csg goes back to the 60's and 70's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.18</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well i can understand it conceptually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but as a practical high-performance algorithm? or a simple one? no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.08</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's also general CSG from a computational geometry perspective, CSG as a modeling operator on boundaries, and CSG for solid modeling (our domain)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>all three have somewhat different behaviors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>how you track and what you track is different for all three</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.49</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so let me see if i get this: you have initially a bunch of segments. and then you partition them.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but how and for what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and where does the tree eval kick in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.21</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and should be tree be optimized into a different form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.25</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>questions questions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>no no.. when you intersect a primitive, you get back a partition with one or more segments if there is a hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>jahnsen's thesis goes on and on about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.06</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but i didn't get it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>partitioning isn't an action</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's just a grouping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.27</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so initially a partition is one partition per object ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.49</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>at the leaves of the CSG hierarchy, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so you partition the hits of a primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a set of in/out segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.14</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and whether those can be combined per the boolean logic depends</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.43</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>ok but the boolean logic tree isn't in the order and some of those objects might not even be in that pixel even if they are in the tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and how do you combine the segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.58</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>do you sometimes break partitions?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.07</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>disregarding all optimizations (and there are many), consider a ray going through a complex single object (one boolean recipe)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>like split a primitive partition in the middle?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.34</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you evaluate the ray against all the primitives, each returning a partition with segments in it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.01</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>since this is the same object, that drives a given boolean evaluation to know that those partitions are mergeable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>so it can look at each segment in turn, and apply the boolean expression rules</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.52</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>which creates new segments, destroys segments, splits them, etc, based on the unions/subtractions/intersects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>evaluate the whole expression, and you're left with a partition with one or more segments for that object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>from what i get you only need like three operators. union, intersection, and negation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and maybe the solid one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the others can be done as combinations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's boolean algebra, you technically only need two operators, but in practice more are used in order to do various optimization operations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the user might like them but it doesn't mean the machine uses them directly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its a RISCy way of seeing things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.17</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., A xor B is equiv to (A minus B) union (B minus A)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.33</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but is evaluatable in one step, so I can put that in my boolean tree and cut two ops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the minus isn't a basic op either</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.08</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i wonder how simplifiable that is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sure it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.25</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>basic CSG is union, subtraction (minus), and intersection</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.49</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>boolean algebra brings in more concepts, but that's the userland of CSG</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.19</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>for solid modeling, for example, there's no conceptualization of a not operator (even though we obviously use that construct when evaluating an expression for efficiency)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.06</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you end up with infinity spaces, which violates notions of solidity closure testing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.34</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you can certainly use it when evaluating though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i mean a-b is kinda like a|~(a&amp;b)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.09</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, there are tons of transforms like that possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>given the entire expression, there are reductions possible, sometimes even eliminations (called null object tree contraction in csg parlance)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.45</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.59</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but let's say we support the goldfeather ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.19</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>union, intersection, difference</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i think it has negation too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>reductions are an optimization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the algorithm should work regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>now normalization is a different topic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.32</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but brlcad has half-planes yes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>half-spaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.51</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>want to use goldfeather's normalization approach, go for it (just recognize that it's one of many possible normalizations)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i just discard those right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.09</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>do we even use a normalization right now?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.11</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>they're a pain because they totally violate many notions :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>didn't seem like it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.25</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>librt has a variety of normalization routines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>wow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.36</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but for the eval, it just uses what it was given</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.50</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>so you could do any normalization you wanted beforehand</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.15</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's really your baseline that is needed regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.59</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's kind of getting ahead, optimizing something to evaluate less that doesn't yet evaluate anything :)</tt></td></tr>
+<tr><td><tt>22:21.43</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Izakey (~Izakey@41.205.22.9)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.39</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>forgot that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.40</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>if the expression is A u B u C - D and D's segments completely overlap ABC (creating a null case), there's nothing wrong with the boolean evaluator doing the unions (wasted computation) at this point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's so much validation that has to happen to prove the evaluation is correct, it's not funny</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.07</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.18</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i just want to understand the basic at this point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.59</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it definitely gets more complicated too .. my earlier example was a single object that was mergeable -- continuing up a hierarchy (above the region level) where overlaps become possible introduces another layer of complexity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.57</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>A u B where A and B are not mergeable results in a separate partition for A and B with an overlap getting reporting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.08</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>this starts getting into the solid modeling domain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>and in that same context, A - B is okay even though it's really existentially questionable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.30</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>what is a copper sphere subtracted from a wooden cylinder, for example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.54</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its good for drilling holes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.59</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>definitely can't union them, but we can say the shape is subtractable as conventino</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.41</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>at least without introducing a notion of multi-materials or different grouping operators</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.58</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>some unions aren't mergeable?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i mean i get all those log messages whenever i try to render everything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>like OVERLAP whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no copper in the wood, so subtracting it is kind of nonsensical except from a convention standpoint</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i get that the surface materials will look uhh odd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, those overlaps are technically modeling errors, but must be detectable and reportable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.00</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>unless you nanocoat that wood</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.23</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>if I coated it, I have introduced a new object C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.44</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it just grounded itself into the wood by friction you see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.54</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.59</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>solid modeling works on a materials science basis as these things are meant to represent physical things manufactured</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.06</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>in that case what you want is tools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>you have blocks of materials and you use TOOLS to carve them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.28</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>not csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.56</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>what's unobtanium subtracted from dark matter?&nbsp;&nbsp;or alloy #125 subtracted from alloy #82921</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.06</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's nonsensical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.11</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>you can't subtract them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.18</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>you can use a tool to drill a hole in it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.34</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>or cut it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.47</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>a materialess tool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.51</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>made of fluffleware</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.10</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you're not getting it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.40</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>you posed a non-problem ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.44</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.52</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>back to brass tacks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so the segments are indivisible and immutable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.18</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why we do allow subtractions and by *convention* we basically treat it as materialless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.20</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>but the partitions aren't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.46</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but it's important to realize it's just convention -- would be completely valid to say it's an invalid operation too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's allowed because modelers do that kind of thing all the time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.01</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its until something better comes along</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.16</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>did you see that video the other guy showed?</tt></td></tr>
+<tr><td><tt>22:35.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.32</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>not all the way through my backlog yet, don't think so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.34</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://www.mattkeeter.com/projects/antimony/3/">http://www.mattkeeter.com/projects/antimony/3/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.41</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>ah whatever back to csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.05</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its like this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.13</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i could reorder segments fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.19</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>it doesn't change array size</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.41</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i could even change the boundaries of the partitions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.50</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>at most you can have as many partitions as segments right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.53</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so its bounded too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.05</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the problem is duplication, elimination, and crap like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.57</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>can you have duplicate segments?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.55</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i also don't get where the equivalents of rt_boolean_weave and rt_bool_final are in that code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the java one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.18</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>sure you can have duplicates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>oh neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>they'd be in different partitions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.59</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>in the same partition would probably be a bug in a primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.05</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.27</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>would have to think about that more, might be some weird procedural case where that'd be valid somehow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.20</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>like I said, you will need to pay attention to both segments and partitions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>but in terms of processing limits, coherency containers and such -- sure, I think that's a limit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.07</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>trying to think if you could have a boolean recipe where you'd end up with more segments than you start with...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.29</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>at least the naive case of 1 long segment getting chopped up 10 short segments will result in 11 segments, so 1+10 isn't violated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.41</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i need to read jansen's thesis better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i feel like we are missing something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.58</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>even in this style of csg eval</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.08</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>2 long, 5 short subtractions on each gives 12, 2+5+5 is good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.14</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>its 111 pages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.25</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>not at all surprising</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.37</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>of all the things i read his is the one that describes your techniques the most</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.40</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>for the bool eval</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>link?&nbsp;&nbsp;feels like I read it, but not sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>not that I can get into browsing a 111 page thesis right this minute.. heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>well he describes every method really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.04</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>repository.tudelft.nl/assets/uuid...de4c.../TR%20DISS%201555(1).PDF</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.12</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>crap google</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.30</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://repository.tudelft.nl/assets/uuid:552472ce-de4c-42a9-9fb2-fd3919bb64b5/TR%20DISS%201555(1).PDF">http://repository.tudelft.nl/assets/uuid:552472ce-de4c-42a9-9fb2-fd3919bb64b5/TR%20DISS%201555(1).PDF</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>start at page 43</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.19</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i keep skimming it. it's well written but i don't have the mood for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.26</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>maybe eventually it will sink in</tt></td></tr>
+<tr><td><tt>22:55.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad chick_ (~chick_@41.205.22.26)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.38</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, have to be careful -- there's a lot of research, this included that talks about boolean evaluation of boundary representations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.00</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>surface evaluation, not necessarily solid evaluation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.26</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>facetted modeling and doing booleans on facet sets is another topic altogether</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.02</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's evaluating mesh against mesh, deriving resulting meshes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.28</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>this is very different from a ray-tracing based approach where you are directly evaluating primitives (and keeping them in implicit form)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.04</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the basic applications of booleans is about the same, but just have to make sure you don't go down a rabit hole</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.21</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>the java code should be more help in terms of figuring out how to apply booleans given two partitions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.24</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>the talk about solids comes way before that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.38</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>i think this is like the state of the art in csg whatever in 1989</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.41</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>on the surface, evaluating the segments is really really simple -- "A union B" takes the inHit of A to the outHit of B if the outHit of A comes after the inHit of B, resulting in a single segment ... otherwise it's two segments merged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.46</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>and guess what the same techniques apply too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.03</tt></td><td><font color="#c3c366"><tt>vasc</tt></font></td><td width="100%"><tt>so why not do that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.35</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>no reason not to! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.37</tt></td><td><font color="#73dbdb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why I showed you the java code that distills it that simply</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

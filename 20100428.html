@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20100428</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20100428</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>01:03.27</tt></td><td><font color="#af5caf"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wryly notes he needs to be sent to remedial OpenGL programming 101 for a week or so...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.54</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">just increased the performance of the the X dm interface by an order of magnitude</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.51</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">refactors his proof-of-concept test code into something more production-worthy</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.53</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38832 10/brlcad/trunk/include/dm_xvars.h: add a helper macro INIT_XCOLOR for initializing X11 XColor structures. many locally scoped XColor's in use are initialized with random contents, which can leave flags set affecting behavior.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.58</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38833 10/brlcad/trunk/BUGS: found a way to lock up mged reliably, if you Z or B the display while it's actively drawing a vlist. probably the geometry disappearing on the vlist, but easy to reproduce so should be traceable.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.57</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38834 10/brlcad/trunk/src/libdm/color.c: initialize XColors to zero, requires headers and quellage due to memset.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.31</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38835 10/brlcad/trunk/src/libdm/ (dm-X.c dm-tk.c): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.32</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: initialize all of the XColor local structures. otherwise, the structures can</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.32</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: have random memory contents where the flags, padding, and initial pixel values</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.32</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: might be non-zero. init to zero reflects expectation. also include debug code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.32</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: (ifdef0'd) on dm-X that shows a major performance problem.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.02</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38836 10/brlcad/trunk/src/libdm/dm-X.c: reorganize to elimiate forward declarations, make get_color() HIDDEN</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.15</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>woot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.16</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so I took a slight performance dip to not assume O(1) access and consume 200MB right off the bat, but now only use as much memory as the colors we draw.. about a 6x performance gain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.28</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>havoc is now nice and smooth</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.51</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38837 10/brlcad/trunk/src/libdm/dm-X.c: (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.51</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: replace the proof-of-concept with something slightly less impressive but still</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.51</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: with a dash of awesome. improve the performance of the X display manager by</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.51</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: eliminating repeat XAllocColor() calls. original test bed showed about an order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.51</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: of magnitude improvement and had O(1) lookup time, but ate about 200MB of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.51</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: memory. this uses a bu_list to stash the colors so we only use as much as we</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.52</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: need. seems to be still about a 5x-10x performance improvement over always</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.43</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38838 10/brlcad/trunk/TODO: need to release dm X color memory sooner rather than later, but definite improvement for release.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.38</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38839 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.38</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: improved the performance of the X11 (dm X) wireframes in mged/archer/rtwizard by</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.38</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: substantially eliminating memory allocations for colors. this is giving about a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.38</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 5-10x performance boost to the wireframe allowing highly detailed models to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.38</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: display more interactively.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.19</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38840 10/brlcad/trunk/include/conf/PATCH: the final stretch, bump minor to 7.16.8 for final steps and test pass.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.25</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38841 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.26</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: The backout/-b option to nirt is suppose to back the ray origin point out of the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.26</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: geometry. Internally the origin point was actually being backed up by the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.26</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: bounding sphere diameter. This backout method will still miss geometry if your</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.26</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: origin point is out past the bounding sphere distance. This option now backs out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.26</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: a bounding sphere radius distance in front of the bounding sphere. Fixed with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.27</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: r38575 by keith.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38842 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: probably most significant user-visible change, bob fixed the Mac input bug that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: was affecting 10.5+ platforms where mouse input would stall during interactive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: rotations. this would occur after a zoom (mouse click) event. Bob removed the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: calls to focus for button presses (even though they should be fine, so there's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: still something screwy).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38843 10/brlcad/trunk/NEWS: release should get tagged and bagged on the 28th.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.10</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38844 10/brlcad/trunk/src/ (3 files in 3 dirs): bump batch files to .8 (this should NOT be necessary..shouldn't have or need version here)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.11</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38845 10/brlcad/trunk/ChangeLog: update with changes from 2010-02-04 to present in preparation for release 7.16.8</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.50</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>ready to by sync'd to stable and final distcheck testing, alas I'm off to zzz now for a bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.02</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r38846 10/brlcad/branches/STABLE/ (78 files in 37 dirs): Sync STABLE to r38845</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.05</tt></td><td><font color="#b66060"><tt>yukonbob</tt></font></td><td width="100%"><tt>starseeker: is this sync a numbered release, or ??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.31</tt></td><td><font color="#af5caf"><tt>starseeker</tt></font></td><td width="100%"><tt>yukonbob: we'll know tomorrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.20</tt></td><td><font color="#b66060"><tt>yukonbob</tt></font></td><td width="100%"><tt>starseeker: regression tests?</tt></td></tr>
+<tr><td><tt>07:18.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.233)</font></tt></td></tr>
+<tr><td><tt>07:37.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.233)</font></tt></td></tr>
+<tr><td><tt>08:27.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.233)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:34.44</tt></td><td><font color="#b65fb6"><tt>d-lo</tt></font></td><td width="100%"><tt>Mernin all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:53.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38847 10/rt^3/trunk/include/GS/GSCommon.h: Add LOCAL_DISCONNECT_REQ failure code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.27</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38848 10/rt^3/trunk/include/libNetwork/NetPortal.h: Add a default value to NetPortal::disconnectFromNetHost</tt></td></tr>
+<tr><td><tt>12:04.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.233)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.43</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt>shoulda noted the time when I started this msvc compile, it sure seems awful slow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:25.35</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38849 10/rt^3/trunk/ (include/libNetwork/NetPortal.h src/libNetwork/NetPortal.cxx): Add isOpen to NetPortal for checking to see if the socket is still connected.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.49</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38850 10/rt^3/trunk/tests/GS/GeometryServiceTest.cxx: Implement connected() in GeometryClient. Also notated the remaining functions in GeometryClient with //TODO tags.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.13</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, gqa seems to poop itself in regress, asplodes 'nuff where it forgets the argv[0] name, creates (unknown)-XXXX-bomb.log</tt></td></tr>
+<tr><td><tt>15:00.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.233)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:07.56</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt>(which distclean doesn't catch during distcheck)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.01</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: gqa -Av -v dumps out GB's of data .. if disk is filled, may crash out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.08</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38851 10/rt^3/trunk/cmake/ProjectPrinter.cmake: Compact CMAKE printing into something more readable during config.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.42</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r38852 10/brlcad/trunk/src/librt/primitives/bot/bot.c: Allocate resources for thickness if it's plate mode.</tt></td></tr>
+<tr><td><tt>17:11.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.211)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.48</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt>more than 124 gigs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.56</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">continues experimenting</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.42</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38853 10/rt^3/trunk/cmake/rt3commons.cmake: Implement CMAKE macros for enhancing/simplifying project building. New architecture maintains lists of INST/NOINST headers, source files, required libs, etc, and will support the ability to install rt3 onto a computer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.39</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r38854 10/brlcad/trunk/src/librt/primitives/bot/bot.c: If the new bot is plate mode, set the thickness and face_mode for each face.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.54</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38855 10/rt^3/trunk/cmake/rt3commons.cmake: Fix some fouled INCLUDE path logic. Projects should now actually include all the paths set for it to include.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.42</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38856 10/rt^3/trunk/src/GE/CMakeLists.txt: Remove libGeometry, libImage, libNumeric, libRaytrace from build system for now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:03.55</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders if gqa grid resolutions should be changed to a bigger edge length for regression suite duration... is getting tired of waiting during distcheck</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.36</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38857 10/rt^3/trunk/ (CMakeLists.txt cmake/rt3commons.cmake): Make GLOBAL_INCLUDE_DIRS cache in cmake. Add a project's source path to the GLOBAL_INCLUDE_DIRS var if the project is a library.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.49</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38858 10/rt^3/trunk/TODO: Modify TODO</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.17</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38859 10/rt^3/trunk/ (60 files in 15 dirs): Modify libUtility cmake to use newer build macros. Cascading changes a plenty.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.08</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38860 10/rt^3/trunk/cmake/rt3commons.cmake: CMAKE library header generation macro was failing to put quotes around header file names. Fixed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.42</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38861 10/rt^3/trunk/ (6 files in 2 dirs): Refactor vague Utils to more precise DataStreamUtils</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.12</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38862 10/rt^3/trunk/ (9 files in 5 dirs): Enforce the use of libUtility.h rather than the individual header files (for now)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.30</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38863 10/rt^3/trunk/ (13 files in 7 dirs): Modify RT3_PROJECT_BUILD_EXE() and RT3_PROJECT_BUILD_LIB() to no longer need a target lib.exe name. Uses the PROJECT_NAME instead.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.32</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38864 10/rt^3/trunk/ (CMakeLists.txt cmake/rt3commons.cmake): Add VERBOSE_CMAKE_OUTPUT flag for quelling cmake screen vomit.</tt></td></tr>
+<tr><td><tt>19:09.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.211)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.12</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38865 10/brlcad/trunk/NEWS: include verbose wordage summary for release 7.16.8 detailing NURBS; MGED stability, performance, and Windows 64-bit; and Archer work.</tt></td></tr>
+<tr><td><tt>20:11.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.39</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38866 10/rt^3/trunk/cmake/rt3commons.cmake: Fix some logic concerning MOC-ing of qt4 classes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.26</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38867 10/brlcad/branches/STABLE/ (NEWS src/librt/primitives/bot/bot.c): merge trunk to STABLE from r38845 to HEAD r</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.21</tt></td><td><font color="#caca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>well that didn't work so well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.40</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r38868 10/rt^3/trunk/ (106 files in 10 dirs): Converted over libGS, geoserv and libNetwork to use the newer cmake macros. Stopped halfway through, commiting what I have. Will continue asap. Compile is currently broken.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.22</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38869 10/brlcad/trunk/ (TODO regress/gqa.sh): Tune back the grid resolution for the gqa regression test and note that the plot file issue should be looked at.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.44</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38870 10/brlcad/branches/STABLE/ (TODO regress/gqa.sh): merge trunk to STABLE from r38867 to HEAD r38869</tt></td></tr>
+<tr><td><tt>21:04.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.233)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.56</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38871 10/brlcad/trunk/src/lgt/ (glob.c prnt.c): remove the pointless version global</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.08</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38872 10/brlcad/branches/STABLE/src/libdm/dm-rtgl.c: somehow, this file is out of sync with head revision. manually sync.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.03</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r38873 10/brlcad/trunk/ (6 files in 5 dirs): remove unnecessary rcs variables that just make merges potentially difficult and source tree diff comparisons more complicated to review.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.15</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r38874 10/isst/trunk/src/gui.c: start setting things up to automatically set lookat, location, and mouse speed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.48</tt></td><td><font color="#6b6bcc"><tt>CIA-73</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r38875 10/brlcad/trunk/src/conv/obj-g_new.c: adding command line option logic, nmg creation testing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.39</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt>neat, got my joystick working with flightgear on my mac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.42</tt></td><td><font color="#6464bf"><tt>``Erik</tt></font></td><td width="100%"><tt>kinda</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

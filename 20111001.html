@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20111001</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20111001</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>03:50.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad nsd (~nicholas@c-24-0-153-224.hsd1.pa.comcast.net)</font></tt></td></tr>
+<tr><td><tt>06:07.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@152-234-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>06:56.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
+<tr><td><tt>08:27.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:24.56</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>Getting some weird cases like this now : <a href="http://postimage.org/image/lkepvy2s/full/">http://postimage.org/image/lkepvy2s/full/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:25.08</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>its due to recalculation of the bb each iteration</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:28.03</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>but should be gone when I start calculating the points using rt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:28.26</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>the challenge now is to generate contact points between colliding objects based on the same criteria that bullet does</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:36.20</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>apparently it generates points exactly along edges or to maximize the area covered by them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:40.23</tt></td><td><font color="#b96161"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47008 10/brlcad/trunk/src/libged/simulate/ (simcollisionalgo.cpp simphysics.cpp simulate.c): Added code to check the collision points during collision processing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:20.45</tt></td><td><font color="#b96161"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47009 10/brlcad/trunk/src/libged/simulate/ (simcollisionalgo.cpp simulate.c simulate.h): Added contact manifold related members to the sim_params struct to communicate them back to libged and display them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.30</tt></td><td><font color="#c6c668"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: looking great!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.00</tt></td><td><font color="#c6c668"><tt>brlcad</tt></font></td><td width="100%"><tt>I expected that the bounding box recalc would cause "wrong" collision detection, but it's right ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.42</tt></td><td><font color="#c6c668"><tt>brlcad</tt></font></td><td width="100%"><tt>so bullet can basically do preliminary intersection calculations applying velocity and rotation adjustments on objects that aren't touching without problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.00</tt></td><td><font color="#c668c6"><tt>``Erik</tt></font></td><td width="100%"><tt>bullet does 'sweep' cd, iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.14</tt></td><td><font color="#c6c668"><tt>brlcad</tt></font></td><td width="100%"><tt>until two bounding boxes intersect, at which point rays have to be fired to determine whether they "actually" intersect yet (and where those points are)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:58.08</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: yes, well bullet also calculates the same bounding box as we do at the start of each iteration, so the results should be ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:00.45</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes, so after every iteration I am going to fire a bunch of rays and report upto 4 points for every case where objects touch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.01</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>these have to have the maximum possible volume</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.17</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>which should be easy to get, just get the points with maximum x,y </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.24</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>and minimum</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.55</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>so where can i find some code to help me draw arrows in mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.32</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>i need to draw the contact normals to check if they are being calculated correctly, then reproduce the same through rt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:06.07</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>the normals have to point correctly so that forces are apllied in the right direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.47</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>thats strange , I am trying to setup a linked list of manifold points, but I get an error&nbsp;&nbsp;after the function that allocates memory for each node has completed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.06</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>#0&nbsp;&nbsp;0x00007fffe2e6a6eb in malloc_consolidate () from /lib64/libc.so.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.08</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>#1&nbsp;&nbsp;0x00007fffe2e6be14 in _int_malloc () from /lib64/libc.so.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.09</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>#2&nbsp;&nbsp;0x00007fffe2e6ed99 in malloc () from /lib64/libc.so.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.25</tt></td><td><font color="#b96161"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47010 10/brlcad/trunk/src/libged/simulate/ (simcollisionalgo.cpp simulate.c simulate.h): Trying to pass contact manifolds via a linked list back to libged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.56</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>are there any issues with bu_malloc() in c++</tt></td></tr>
+<tr><td><tt>20:27.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@177-241-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.54</tt></td><td><font color="#b96161"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47011 10/brlcad/trunk/src/libged/simulate/ (simcollisionalgo.cpp simulate.c): Fixed some memory bugs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:49.00</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ah shoot, it was a bug in my code...casting aspersion on bu_malloc() unnecessarily :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.45</tt></td><td><font color="#5db1b1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ah frack!!!....had the arguments for VMOVE() reversed, was therefore pushing weird data into the bullet simulation instead of getting points out and got some extremely strange results.....get a grip abhi !!!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.23</tt></td><td><font color="#b96161"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47012 10/brlcad/trunk/src/libged/simulate/simcollisionalgo.cpp: fixed order of arguments in the VMOVE() which retrieve the collision points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:04.12</tt></td><td><font color="#b96161"><tt>CIA-48</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r47013 10/brlcad/trunk/src/libged/simulate/simulate.c: More bug fixes, forgot to uncomment the memory cleanup routine</tt></td></tr>
+<tr><td><tt>23:37.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

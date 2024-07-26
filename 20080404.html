@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080404</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080404</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:33.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
+<tr><td><tt>02:04.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Daytona (n=jra@c-68-55-36-65.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.33</tt></td><td><font color="#d570d5"><tt>Daytona</tt></font></td><td width="100%"><tt>prasad_: Hey, how's it going?</tt></td></tr>
+<tr><td><tt>02:28.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (n=Timothy@resnet-45-192.dorm.utexas.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.13</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>yikes. I accidentally just removed my brlcad folder because the box I was ssh'd into has the same PS1 :'(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.02</tt></td><td><font color="#b35eb3"><tt>yukonbob</tt></font></td><td width="100%"><tt>:P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.42</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt><font color="#CC00CC">hopes he backed up everything</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.19</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>So I passed configure and when I went to building it failed because it could not find zlib.h. I installed zlib, but shouldn't configure have caught this?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.53</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>(it correctly detects that I do not have a working zlib though, maybe it should be pointed to brlcad's zlib.h?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:20.10</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>so the problem appears to be that I had working zlib runtime and not the development headers...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.34</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>hello Harriss </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.41</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>and howdy poolio </tt></td></tr>
+<tr><td><tt>04:20.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad wuxia (n=wuxia@unaffiliated/wuxia)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.15</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, the test is technically for both libs and (separately) for headers and (separately) for run-time functionality .. at least usually those three have to pass for a given lib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.28</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise it doesn't have what it needs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.33</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>hello wuxia </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.00</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>can anyone expain what the brlcad rendering algorithm does? i.e. does it only require that the geometry support a 'does this ray intersect with this shape' query? [I'm trying to find something similar to 'generative modeling language' or synder's 'genmod' ]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.35</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>depends what the "it" is in your sentence</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.32</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>in terms of implementing or adding new primitives, they basically just have to answer the "does this ray intersect with this shape" </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.36</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>hey, that's a good bot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.42</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>what algorithm? alice? elizra ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.54</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>~fishslap wuxia </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.54</tt></td><td><font color="#c2c266"><tt>ibot</tt></font></td><td width="100%"><tt>ACTION slaps wuxia up side the head with a wet fish.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:24.42</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>a human would have kicked me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.18</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>so comparing against all primitives, it ends up with lots of "segments" -- those are weaved together per the CSG rules</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.40</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>gotcha :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:25.54</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>is there any good interfaces between pbrt and brlcad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:26.04</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>I feel that pbrt does ray tracing better, but brlcad is better at modeling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:26.48</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>pbrt does a lot of things fundamentally differently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.15</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>is there any good bridge for taking a gbrlcad model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.20</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>and rendering it in pbrt?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.31</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>if generating pretty pictures is your goal, they certainly have a better global illum model integrated -- but then iirc they are almost exclusively explicit geometry models and not a shotline-capable solid geometry ray-tracer (evaluating all the way along through materials)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.48</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm not aware of any "good" bridge yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.01</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>mostly because of that implicit vs explicit geometry issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.02</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>what is 'shotline-capable solid geometry ray-tracer' ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.17</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a fair bit to explain, but basically a ray-trace engine that takes solidity into account -- not just surface-based or (the most common) first-hit based ray-trace interfaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.43</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>for a surface-based</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.47</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>I need only provide "does this ray intersect"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.57</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad's librt ray-trace engine is a full-path shotliner that will either report first-hit or all segments along the ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.04</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>what more complicated thing does "shotline-capable solid geometry ray-tracer' require me?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.10</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.14</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>and one way to do csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.19</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>is to report all semgnets along the ray?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.25</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>and then do the csg operations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.29</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>to decide which one it actually hit?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.07</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>actually you can evaluate the csg with just first hit or with all segments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.18</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not really different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.31</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm talking about other purposes of ray-tracing, not just generating pictures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.41</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.45</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>like firing a bullet into a tank?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.57</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.13</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>or simply answering the question of "how much of this material is on this shotline"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.09</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>with an explicit ray-engine, you end up with all sorts of analytic/analysis questions that are harder to guarantee without solid geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.48</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>why is that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.51</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>given a boundary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.54</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>if you assertively have "crack-free" geometry, and aren't inside things when you start a ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.03</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>why can't I get the 'solid geometry' by looking at entry and exit points?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:36.27</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>mostly because of numerics -- if your geometry isn't actually cracked (i.e. non-solid), there is a higher probability of numerical cracks due to floating point issues on the seams on the boundaries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:36.50</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>solid geometry entails a *guarantee* that there is no crack, numeric or otherwise</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.23</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>implicit geometry implicitly guarantees this, other CAD systems provide the guarantee through "crack-free" BREP implementations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.38</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>something that only generates pictures doesn't really have to care</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:37.57</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>anyway, why you ask? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:38.38</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>there are ways to extract an explicit geometry model from brl-cad geometry that you could undoubtedly feed to pbrt via one of their importers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.06</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>i want to render procedural sci-fi cities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.07</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>it conceivably wouldn't be that hard to write an exporter if you have their file format (especially if they support primitive descriptions)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.16</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>brl-cad looks awesome for geometry modeling; pbrt for rendering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.35</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>wuxia: for what it's worth, pbrt looks great because most of their shots have global illumination calcs turned on (which librt doesn't implement, though it is a gsoc topic)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.21</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>there's only two screenshots that use the global illum renderer we do have: <a href="http://brlcad.org/gallery/s/renderings/humvee.png.html">http://brlcad.org/gallery/s/renderings/humvee.png.html</a>&nbsp;&nbsp;and&nbsp;&nbsp;<a href="http://brlcad.org/gallery/s/renderings/stryker_slat.jpg.html">http://brlcad.org/gallery/s/renderings/stryker_slat.jpg.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.57</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>brute force solutions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.10</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>and required conversion to brep polygonal format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.21</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>why brep first?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.27</tt></td><td><font color="#66c266"><tt>wuxia</tt></font></td><td width="100%"><tt>why can't global illumination be done on csg's ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.19</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no reason it can't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:47.41</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>it just hasn't been done yet, that's why it's a gsoc suggested task</tt></td></tr>
+<tr><td><tt>04:50.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hippieindamakin8 (n=hippiein@203.200.95.130)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:55.01</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: wait, so then why did it fail compiling but pass configure? in config output it says it's using system zlib, but I fail the tests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:01.04</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>basically, I was just upset to see the build die :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.27</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>as you should be, build failures indicate something is probably wrong in configure :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:07.39</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>that third test -- the functionality test -- is either weak or non-existent for zlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.59</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>bah. I want configure to stop and print in big bold letters that I should not continue :) I ran configure and looked away, and the summary looked all fine and dandy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:13.58</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>that's what I mean -- it's probably missing a test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:14.02</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>it normally does halt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:14.44</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>ah Ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:14.49</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>thanks and sorry for the whining :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.10</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>hum, was just looking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.15</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>there is a functionality test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.26</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>so "something else" is wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.39</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>errr, I also just realized the build failed again later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.17</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>can you post your build log and config.log files?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.22</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>this is a trunk checkout by the way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.38</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>yeah, do I uninstalled the zlib1g-dev package and am going to regenerate the broken zlib.h error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:21.19</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: build is gonna take a little while, I'm on my shiny new, not that fast, x300 :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:23.15</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.20</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: config.log: <a href="http://poolio.org/files/config.log">http://poolio.org/files/config.log</a> and build: <a href="http://poolio.org/files/zlib_error.txt">http://poolio.org/files/zlib_error.txt</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:38.37</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: try editing src/other/tkimg/png/Makefile.am and add:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${LIBZ_CPPFLAGS} \&nbsp;&nbsp;&nbsp;&nbsp;after the PNG_CPPFLAGS line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:39.13</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: alright, I'm waiting for the build to finish with zlib-dev installed, so gimme a few minutes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:39.30</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt><font color="#CC00CC">is feeling the grind of the 1.2ghz for the first time</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:41.01</tt></td><td><font color="#6cce6c"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30625 10/brlcad/trunk/src/other/tkimg/png/Makefile.am: missing LIBZ_CPPFLAGS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:41.35</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I'm betting that was the problem -- tkimg's png module's build rules didn't have the header search path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:41.50</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>the configure tests worked, failed and was set to build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:43.21</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>alrighty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:47.38</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: <a href="http://poolio.org/files/htester_error.txt">http://poolio.org/files/htester_error.txt</a> is what I'm getting with zlib working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.10</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>didn't realize you're on ubuntu/debian?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.14</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>they have a busted libtool, it incorrectly strips out linkage paths</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.46</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>sorry :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.00</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>is there an easy fix?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.26</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>other than installing an unmodified libtool from gnu?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.37</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>unmodified works without a hitch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:01.58</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, I haven't completed debugging the libtool script itself to see if there's a good way to trick it or work around it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:22.18</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>that's weird, because when I was working on brlcad last summer I was using debian</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:24.28</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, the build options have changed to not be excessively redundant -- there was a recursive redundant declaration of libraries pushed down to the binary LD line instead of relying on libtool's usual dependency tracking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:25.03</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>pushed down to the binary ld option, debian's mods don't come into play</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:25.27</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>but that's a bear to keep -- libraries listed dozens of times over per binary</tt></td></tr>
+<tr><td><tt>06:59.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-92-162.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:07.38</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: sounds like a good dev choice, but having a source install not function on a very popular distro is a bad decision :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:10.28</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>of course</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:12.13</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>someone(tm) really needs to see if there's some way to work around the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:13.43</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>being popular isn't a good excuse for being wrong too, the problem has been reported by others to debian devs and they refuse to fix it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:15.25</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>we make workarounds for a lot of platform-specific stupidities, that one just isn't in the frequent testing rotation as nobody has stepped up to maintain the port</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:17.44</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>so feel free to be that someone(tm) and fix it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:18.08</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>shouldn't be too hard to find a work-around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:22.28</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: in a month or so I'll give it a shot :)</tt></td></tr>
+<tr><td><tt>08:20.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>08:47.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>09:53.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:54.40</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>hallo</tt></td></tr>
+<tr><td><tt>10:19.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (i=5207211c@silentflame/member/pdpc.base.minuteelectron)</font></tt></td></tr>
+<tr><td><tt>10:58.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (i=5207211c@silentflame/member/pdpc.base.minuteelectron)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:04.08</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy mafm </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:05.17</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:05.52</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>no love for twingy's photon mapping, I see O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.36</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>hmm, I have a linguistic question totally unrelated to the topic of the channel, may I?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.43</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>go for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.38</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>if I'm studying a degree, say CS, what's the name of the individual parts composing it, as in Programming I, Networks, Distributed Systems, AI, etc, comprising typically one semester or a year, one hour per day or so? it's "courses"?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.13</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, those are your courses</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.51</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>hmm, and you're from USA right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.19</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>i've lived in a number of places, and the usa is one of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.23</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>it's only to ask if you know if it's named the same across english-speaking languages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.55</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries to think what else you might call them</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.06</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>for some reason I was calling it "subjects", but I don't know where I took it :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.18</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>courses, classes, seminars</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.36</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>maybe it's that I directly translate from portuguese or something like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.37</tt></td><td><font color="#ce6c6c"><tt>prasad_</tt></font></td><td width="100%"><tt>hey is daytona == jra?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.41</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>usually "seminar courses" are a specific type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.44</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>prasad_: yup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.49</tt></td><td><font color="#ce6c6c"><tt>prasad_</tt></font></td><td width="100%"><tt>ah missed him</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.14</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: yeah, I think courses/classes are pretty much the terms</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.14</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>good, thank you very much</tt></td></tr>
+<tr><td><tt>13:56.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (i=5207211c@silentflame/member/pdpc.base.minuteelectron)</font></tt></td></tr>
+<tr><td><tt>14:09.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (n=MinuteEl@silentflame/member/pdpc.base.minuteelectron)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.40</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>svn: URL '<a href="https://brlcad.svn.sourceforge.net/svnroot/brlcad/trunk'">https://brlcad.svn.sourceforge.net/svnroot/brlcad/trunk'</a> doesn't exist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.44</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>what do you use as trunk?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.00</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>/svnroot/brlcad/brlcad/trunk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.35</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>oh thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.29</tt></td><td><font color="#71d7d7"><tt>brlcad</tt></font></td><td width="100%"><tt>~cadsvn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.29</tt></td><td><font color="#c2c266"><tt>ibot</tt></font></td><td width="100%"><tt>To obtain BRL-CAD from Subversion: svn checkout <a href="https://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk">https://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk</a> brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.43</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>not a light download, it seems :)</tt></td></tr>
+<tr><td><tt>15:28.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54875445.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.22</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>hmm, the things using C++ in brl-cad are related to 3rd party tools?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:03.56</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>and is it all in other/ 3rd party tools it seems?</tt></td></tr>
+<tr><td><tt>16:04.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.49</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: I have a problem compiling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.21</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>mafm: are&nbsp;&nbsp;you by any chance running a debian-based distro?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.49</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>nope, I don't run degenerates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:11.59</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>I use Debian itself :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.01</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>debian is debian-based, no?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.20</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>just kidding :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.30</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>so what's the problem with debian then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.42</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>mafm: So I just had the same problem earlier... brlcad says debian uses a broken libtool, and there's no easy fix other than installing a clean libtool </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.56</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>:S</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.34</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>what's a clean libtool? different versions, vanilla without possible distro patches?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.53</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>vanilla I would guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.48</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>/usr/bin/ld: warning: libtcl8.5.so, needed by ./.libs/libbu.so, not found (try using -rpath or -rpath-link)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.48</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>./.libs/libbu.so: undefined reference to `Tcl_ResetResult'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.48</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>./.libs/libbu.so: undefined reference to `Tcl_SetObjResult'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.49</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.55</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>is this your error too?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.57</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>Yep.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.40</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>:S</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.44</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>version?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:26.00</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>ii&nbsp;&nbsp;libtool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.5.26-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic library support script</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:40.28</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>1.5.26-2 here. It's more than just libtool, I tried out a vanilla libtool and that didn't fix it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.27</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>:S</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.23</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>mafm: Just softlink libtcl8.5.so.0 to libtcl8.5.so for now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.40</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>what vanilla libtool did you try? I installed the one from 'stable' distro, which is .22, and it just seems to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.02</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>or maybe it didn't reach the part failing yet, not sure :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:46.49</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>mafm: haven't tried vanilla, sorry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.24</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.30</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>but this .22 one seems to fix it, yuep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.32</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr><td><tt>17:12.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-86-67.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.26</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>does anybody know if it's worth patching the 3rd party tools for compiler warnings/errors?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.04</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, debian modifies libtool to "optimize" the link line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.17</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>the effect is that they strip out critical information needed to compile BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.26</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>mafm: don't worry too much about language barriers, both brlcad and I have lived in non-english speaking countries for several years, we will ask if we don't think we understand what you intend to say... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.37</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>now if I recall the issues with the debian libtool correctly from last time I chased that down, a system installed tcl85 will still work... and I THINK debian just picked up 85 into testing, d'no if that's floated to ubuntu or other derivatives just yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.57</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">may have to redo the debian script in BRL-CAD to use the system one</font></tt></td></tr>
+<tr><td><tt>17:50.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-33 (n=CIA@208.69.182.149)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.52</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>the language doubts were not meant to clear up misunderstandings, it's because I was updating my CV :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:56.29</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>well, to avoid the hassle I just put that tcl8.5 dir in the ld.so.conf file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:58.56</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>bah, a new related error :S</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.11</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>oh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.51</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>before that ... in libbu you use a temp.c to make temporary files... why not use mktemp calls instead? aren't they portable enough?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.36</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>``Erik: the new error is: <a href="http://rafb.net/p/YDu6XN14.html">http://rafb.net/p/YDu6XN14.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.01</tt></td><td><font color="#b05c5c"><tt>poolio</tt></font></td><td width="100%"><tt>mafm: I got there with the system libtool, linking libtcl8.5.so.0 to .so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.18</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>but it's not working for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.35</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>maybe I'm missing some additional library or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.20</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>looks like libXi.so isn't being picked up for some reason :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.24</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>``Erik: in libbu you use a temp.c to make temporary files... why not use mktemp calls instead? aren't they portable enough?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.07</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>mktemp is actually bad, mkstemp is better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.54</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>mktemp also doesn't work on all platforms, like old obscure ones (crayos? vms?) or stupid ones (windows?) iirc </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.37</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>*looklooklook*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.44</tt></td><td><font color="#b6b65f"><tt>alex_joni</tt></font></td><td width="100%"><tt>heh, stupid :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.07</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>doesn't work in windows?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.09</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.23</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>there was a similar issue with Aqsis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.28</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>ah, looks like it's a "safe" wrapper for mkstemp() with file marshalling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.50</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>I think that they used in there a relatively clean workaround, not so huge as in libbu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.54</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>and a very low level last ditch attempt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.02</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>huge as bu? temp.c is tiny</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.18</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>and works pretty much everywhere O.o :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.23</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>well, I'm talking about 10 lines or so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.34</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes that aqsis does not work on as many platforms as BRL-CAD</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.36</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>not in the hundreds of lines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.35</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>most of temp.c is error checking of some form or another *shrug*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.40</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>well, that's the question... it's in the ToDo or Buglist to remove that code, so I thought about that... but if it's not portable enough... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.55</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>a lot of the portability isn't NEEDED anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.05</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>we've stripped out some vax gould and crayos code already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.21</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>because no one uses 70's or 80's computers anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.33</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.00</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>also; few os's leave dangling file handles when an app is closed anymore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.07</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>In the TODO: * libbu routine to make a temp file reliably/consistently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.31</tt></td><td><font color="#69c869"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm, probably means brlcad spotted a place where mkstemp failed</tt></td></tr>
+<tr><td><tt>19:07.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gedex (n=gedex@222.124.185.169)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.09</tt></td><td><font color="#6cce6c"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r30627 10/brlcad/trunk/AUTHORS: add gillich to the contributors list for his g-sat importer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.28</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.40</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>well, I already produced a patch, even if not very useful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.53</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>if I have time maybe I'll do something better during the selection process :)</tt></td></tr>
+<tr><td><tt>19:10.13</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad gedex (n=gedex@222.124.185.169)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.40</tt></td><td><font color="#b35eb3"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves in</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.30</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>hallo yukonbob</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.58</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>have to go now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.25</tt></td><td><font color="#60b760"><tt>mafm</tt></font></td><td width="100%"><tt>bye</tt></td></tr>
+<tr><td><tt>19:40.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-86-67.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>19:56.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-86-67.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>20:43.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-86-67.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>20:55.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad prasad_ (n=psilva@70.108.244.218)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.07</tt></td><td><font color="#6cce6c"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r30629 10/brlcad/trunk/src/mged/mged.bat: Mods to get rid of complaints about nul.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.07</tt></td><td><font color="#6cce6c"><tt>CIA-33</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r30630 10/brlcad/trunk/src/archer/archer.bat: Move "ECHO OFF" up in the file.</tt></td></tr>
+<tr><td><tt>21:43.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pacman87 (i=127@resnet-45-192.dorm.utexas.edu)</font></tt></td></tr>
+<tr><td><tt>21:43.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mets (n=Mets@JETSTAR.RES.cmu.edu)</font></tt></td></tr>
+<tr><td><tt>21:43.54</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Mets (n=Mets@JETSTAR.RES.cmu.edu)</font></tt></td></tr>
+<tr><td><tt>21:57.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad iraytrace (n=iraytrac@trapezewireless114.insecure.utah.edu)</font></tt></td></tr>
+<tr><td><tt>22:12.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cad68 (n=59d93561@bz.bzflag.bz)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

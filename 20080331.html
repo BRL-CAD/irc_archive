@@ -1,0 +1,781 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080331</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080331</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.15</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>thanks, brlcad, i'll do some research, take a look at the code, write the application and see how it turns out ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.24</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>sounds good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.14</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so brlcad, are you available now to talk about that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.27</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>probably</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.22</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:16.53</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so what about the distributed approach, can you please elaborate or link to some document?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>well we have a raytracer in brl-cad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.19</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>lots of them, actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.34</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>all based around our librt ray-trace library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>we support parallel ray-tracing pretty pervasively</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.14</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>'rt' is the main ray-tracer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>we also have distributed ray-tracing via 'remrt' (remote rt) and 'rtsrv' (remote compute daemons)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.30</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>remrt and rtsrv basically set up manual communication pipes and negotiate packets as needed, and you have to specify all machines you want to work on </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.25</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>what we don't do easily though is 'automatic distributed' using something like mpi, pvm, or grid interfaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.44</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it would be nice if rt inherintly had distributed capacities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.45</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>are the computations heavy enough that it compensates to distribute them via network?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so that's the basic idea, either adding the functionality to rt or giving remrt/rtsrv major updates to improve them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that depends entirely on the model being rendered</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.41</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>some are blazingly fast, others swimmingly slow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.58</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>slow as in minutes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.19</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>anywhere from subsecond to hours</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so it really needs to auto-detect and load-balance accordingly, know when to farm out the job and when not to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the models might be just a few k or might be several GB in size too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.17</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>typical grid jobs, for scientific grids that I'm used to, usually take hours/days</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the two extremes where we usually want distributed are when someone's making a movie and rendering thousands of frames or someone rendering a really high-quality detailed complex model rendering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.44</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>and in most them the turnaround time for "hello world" is like 3-5 minutes :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.14</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so the idea would be to run them withing clusters I guess, with LAN setups?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.28</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.25</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I have programmed in PVM a bit, only at univ for test programs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.29</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>as well as loosely connected LAN-based setups over slow connections (a typical office with maybe 10-100 high-end workstations available to run compute nodes with an mpi config for example)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.45</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>and in MPI at work but only for testing, no real applications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.16</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>anyway the theory I think that I'm OK with it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.25</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>MPI or a solid grid framework would probably be ideal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.06</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>but I guess that for doing that from a ray tracer, I would have to have solid knowledge of the techniques of raytracing too?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>not necessarily</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>at least not beyond understanding the data model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>ray-tracing generally requires the entire model for example since rays can diverge in any direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.00</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so you either have some sort of master dispatch and distribute portions of data or distribute all the data to all nodes and dispatch rays/scanlines or some hybrid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.31</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>say that you want to render a village</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.47</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>the input are the solids represenging houses and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.59</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>the output would be what, just the 2D image?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.27</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>or a series of 2D images in the case of an animation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.19</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>say that you want an animation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.28</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey brlcad, the download page is a little off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.55</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>it points to the 7.10.2 release (at least the source)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.56</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>the output or intermediate calculations of one frame could be used for the second? (similar to what MPEG do)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.32</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.40</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it needs to be wikified</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>or made a module that auto-points to the latest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.05</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>rt already has inherint support for multiframe rendering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.33</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>(also, if i want to check the code, i get the 7.12.0 source, right?? how hard is it to compile in windows?? )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.40</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you feed it transactioned command lists and it deals with what needs to be reprepped accordingly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.00</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: there's an msvc studio project in misc -- should be click and run</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.25</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>great, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.29</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>if frames are interdependent, that turns it a bit difficult it seems</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>they're independent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.09</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's just you can speed things up if you don't need to reprep, so rt does so accordingly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.52</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>well yes, but if rendering them sequentially is much less effort than the sum() of separate efforts, the speedup of distributing it is not very big</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.05</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>with aqsis there was a similar problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.19</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>buckets (portions of the image) were in principle independent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.35</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>but constructing the octree was very expensive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.23</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so if you didn't take advantage of that, and construct the octree from scratch each time, the result was that it was more expensive when using several threads</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.56</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I think that there could be similar problems in brlcad, or you already have that part sorted out?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.09</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you're thinking thread-level, we have that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>parallel is a done deal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.36</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>distributed even works, it can just be heavily improved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.15</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I know the difference between theads and distributed, it was an example, to be extrapolated :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so yeah, buckets of an impage are independent -- but the model itself isn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.30</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>andrecastelo&nbsp;&nbsp;and mafm u guys&nbsp;&nbsp;might be interested in this <a href="http://www.siggraph.org/education/materials/HyperGraph/raytrace/rtrace0.htm">http://www.siggraph.org/education/materials/HyperGraph/raytrace/rtrace0.htm</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.45</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hippieindamakin8: thanks!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: sure, but the latency concerns between parallel and distributed are huge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.03</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>u wanted to know the raytracing fundamentals rt :) np</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that's why the real driver is big render jobs where we know implicitly that it's going to be a benefit (huge render or tons of frames)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.31</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>also - is a kd tree implemented??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.56</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>effectively, we have a hybrid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.04</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>brl-cad's rt is actually the first parallel distributed ray-tracer (per all published references), an early second-generation ray-tracer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.02</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>that's remrt+rtsrv?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.10</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the distributed portion, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.11</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>or the librt?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.30</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I mean, which parts would I have to modify?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>depends entirely on whether the idea is to improve remrt usability or add inherint distributed support to rt :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there are merits to both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.11</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>could read some of the published papers, this relates specifically to brl-cad:&nbsp;&nbsp;<a href="http://ftp.arl.army.mil/~mike/papers/95cadsymp/realtime.html">http://ftp.arl.army.mil/~mike/papers/95cadsymp/realtime.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.14</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>both them are in C it seems (browsing the repositories)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>more references in <a href="http://graphics.cs.uni-sb.de/Publications/2001/star.pdf">http://graphics.cs.uni-sb.de/Publications/2001/star.pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, 90% of the sources are in C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.09</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>only the new BREP code is in C++ plus a few modules, along with the tcl/tk modeler sources</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>rt stays C, remrt could be redesigned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.31</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>is there a "central" source file in librt where the high level stuff is implemented?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>what high-level stuff?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>high-level ray dispatching is in the binary front-end, src/rt src/remrt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.09</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I mean an important file in librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.21</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>to see how scary is the code :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.29</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>int is_hackers_night( struct timeval *tv );</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.33</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.48</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you wouldn't really be modifying anything in librt, at least I'd be surprised if you need to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, some of the core is in shoot.c, bool.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you really should start from srt/rt though -- librt is the library itself, even parallelism happens higher up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>src/rt/view.c do.c and most importantly worker.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:00.06</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>librt is all about the geometry representation and manipulations/transformations mostly </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.55</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>ok, looking at those :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.58</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>brlcad .. btw wat is the function of this server ? rtserver</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.24</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>librtserver is a C library that is loaded by a Java class to provide raytracing services for a Java App</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.28</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:07.42</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>tx :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.32</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>hmm, don't know brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.59</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>does this have more priority than the other idea?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.09</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>hippieindamakin8: If you have some ideas on how to improve that code, that would be great!!!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.11</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I haven't even seen it in the Project Ideas page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.13</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>daytona can u suggest me an appilcation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.36</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:) i just opened it&nbsp;&nbsp;daytona :P i wanted to apply for this OO API project so was going through the places where there is a possibility of rendering some geometry :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.57</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>as i get more familiar with brlcad i sure will :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: like I said -- a really solid application for any of the ideas trumps the priority aspect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.09</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>hippieindamakin8: The librtserver is just used in a JNI wrapper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.17</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohh there is this jade.jar in the src :) now i am connecting pieces </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.35</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>in case it is connected to this </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.08</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>the librtserver and the jbrlcad are not connected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.57</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>nono.. in the src there is this folder called java</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.05</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i aint talking about jbrlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.11</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>jade.jar is a units and measurments jar (now replaced by jscience)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.50</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>sorry.. :P i am mistaken.. i wanted to talk about brlcad server.java </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:16.11</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>sorry.. it was a long time :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:16.32</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: hmm, honestly, I'm not talking into getting into GSoC with BRL-CAD for being a higher priority project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>no comprendo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.02</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>hmm, let me think about how to explain it... (I'm a bit tired at the moment :) )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.11</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>~/brlcad7-10-2/src/java/mil/army/arl/brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:18.43</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>looks like there is almost nothing in that class</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.10</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya i shalll go through that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:20.50</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>the jbrlcad has a bit more functionality :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.27</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;brlcad&gt; mafm: like I said -- a really solid application for any of the ideas trumps the priority aspect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.46</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>when I'm asking about the priority, I don't mean to take it as an advantage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.10</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I mean if you suggest that because of my relation with distributed computing at work or what</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.28</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>or if you came up with that for other reasons</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:22.48</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, I only suggested it as a consideration because of your background</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.05</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, no different than then other listed ideas</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.12</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>yesterday we were talking about other proposals, it's you who started to talk about this one (IIRC, I was a bit sleepy)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there was someone (a student) that worked on an mpi layer for rt a couple years ago too, for several months, but they were learning everything from scratch and never finished anything more than job propagation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.36</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>aha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.58</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so one of the reasons is that maybe I see it as a more doable proposal than the other one?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>right, and I firmly believe that you need to be excited about the work --figured with your background that distributed might be of interest, if not then screw it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.20</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>well, certainly distributed computing it is interesting, but I enjoy many areas </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.18</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>working with a 3D engine to communicate with commands with a remote server is also another, making a multiplayer game it's similar in concept, I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.51</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so probably this project would have more chances to succeed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.54</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>some loose similarities, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.38</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>but I also understand that maybe it would be more valuable for you to make my application for other project, because is less common</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.02</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so if I was accepted and finish the program, there would be more chances for other people to do that OpenGL GU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.03</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>GUI</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>what's less common?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.23</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, yes -- it certainly has higher impact potential</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.30</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>the knowledge of MPI/distributed stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.36</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's also one that will be more critiqued design-wise :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.57</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>so in the case that I would go ahead, I would be beaten? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.15</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.45</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>good to know :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.47</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>well, I see two problems then:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.03</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>1) it's more difficult for me to come up with a plan,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.21</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>2) it's a more risky project I think, there are more chances of failure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>whether you're not accepted is dependent on the quality of your application (compared to quality of others), number of slots we accept (just 2-4), the topic being proposed, as well as any details about yourself and your abilities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:34.49</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>oh, and 3) I don't have the infrastructure to test the distributed rendering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so forget it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.07</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>not pressing the idea on you :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.14</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>pick whatever suits you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:37.48</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I don't feel pressed really, I just want to make explicit that it's more risky, in the case that I would be accepted and go ahead, I think that it could fail more easily</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.06</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>and I don't know if you could provide the infrastruture or what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.40</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>we have clusters (not very big) at my job, but they're in production and we cannot install new things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.45</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, you're just saying all of the reasons for why you shouldn't submit it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>forget about it! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.29</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>sighs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.40</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>btw, I could submit more than one proposal, you now :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.46</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that you could</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>but better to focus on getting at least one really solid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.19</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>have you guys received lots of applications??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.21</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i'd recommend doing one proposal and putting the extra effort on a better patch ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.34</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.56</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>and also - i see that you are part of the bzflags community as well, will you be a mentor both ??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:44.04</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>be a mentor in* both..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm admin for both, I hope to actually *not* mentor for either (officially) if I can get away with it ... but then still mentoring as usual group-mentorshipwise</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>if I do mentor, it's probably be for brl-cad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.17</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.07</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>there are no assigned/expected mentors yet, I guess?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.21</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>btw I hope that we have some extended period to submit the patch :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there's about another week to submit a patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.44</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>ah, good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:53.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it will be required of any serious candidates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.03</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e. any finalists for certain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.33</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>if someone can't make a basic patch out of a million line codebase, that bodes very poorly :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.40</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>sed -i 's/BRL-CAD/mafm-CAD/g' :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.56</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.14</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>that'd be at least 1000 lines changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.09</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that'd hit every file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>BRL-CAD is in the file header</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.18</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>btw, now I should still submit the proposal to the mailing list, or in parallel, or what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.24</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>"yes"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.41</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>could give a summary to the mailing list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.55</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>then extra detail to the wiki or as a submission</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.30</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>what if I paste the complete submission?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.41</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>in the wiki or so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.44</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you can put whatever you like into the wiki</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.03</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>good place for full/more detail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.07</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt><font color="#CC00CC">going to sell his wikispace for Google ads :P</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.36</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey brlcad, i was looking at the TODO list and found this in the lower priority part:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.37</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>* center of presented area</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.07</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>what is it exactly ?? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.13</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>( <a href="http://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk/TODO">http://brlcad.svn.sourceforge.net/svnroot/brlcad/brlcad/trunk/TODO</a> )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.32</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>in a given 2D projection, where is the center of presented area</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.42</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>is it simple enough to implement as the required patch ??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that task really souldn't take more than a couple days at best</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's possible .. a bit heavy for a patch, might take a day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>(i.e. a few hours)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.45</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm i see.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.28</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>but certainly would be impressive for a patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>folks for bz have already submitted patches that are actually harder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.07</tt></td><td><font color="#5db1b1"><tt>mafm</tt></font></td><td width="100%"><tt>I think that my router will reconnect, be right back :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.14</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>really?? hmm..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.19</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>we have one week to deliver, right ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>seriously though -- make the application itself good first :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.57</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>then work on the patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.02</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok.. will do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.13</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>another thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.56</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i'm having a problem running the program.. tried compiling from source and at first i've got "Build: 133 succeeded, 1 failed.."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.10</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>then tried again and got " Build: 0 succeeded, 0 failed, 134 up-to-date, 0 skipped"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.21</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>tried running and got some problem with libbu.dll</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.36</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe that could be your patch ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:14.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>a build system patch, figure out what went wrong</tt></td></tr>
+<tr><td><tt>02:15.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (n=mafm@89-180-59-113.net.novis.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.41</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.41</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, that's not enough info to say anything useful, would have to know what failed, what the error was, maybe other factors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:17.00</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>yes, i was pasting it- <a href="http://rafb.net/p/61FfDf17.html">http://rafb.net/p/61FfDf17.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:17.56</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's trying to run asc2g to build our models and failing to find some library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.13</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>was that the original 1 failed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.34</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>it fails to find libbu.dll.. but it compiled this library fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.13</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so needs a path added to the library search paths</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.33</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>ok, let me give it a try</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.42</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>the library compiled fine, i guess it's just a path problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.30</tt></td><td><font color="#76e0e0"><tt>mafm_</tt></font></td><td width="100%"><tt>mafm: go away!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.21</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>hmm, two mafm's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.37</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: <a href="http://rafb.net/p/jcpiTJ88.html">http://rafb.net/p/jcpiTJ88.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.43</tt></td><td><font color="#76e0e0"><tt>mafm_</tt></font></td><td width="100%"><tt>Daytona: as if one was not enough!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.49</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>LOL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.00</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>that'll show him :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.15</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: found the problem - <a href="http://rafb.net/p/5XE59Z48.html">http://rafb.net/p/5XE59Z48.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.43</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i guess brlcad is not portuguese-friendly ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>how so?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.57</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's failing because you don't have nsis installed -- that's used to build the installer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.04</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: true, but technically it would go to another directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>que?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:33.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it'll go wherever it's configured to go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.13</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok, i'll get nsis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.14</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>"and that full nonexclusive copyright will be assigned." -- what does that mean, that we have to assign copyright as FSF requires for their projects?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:39.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: yeah, we use single-copyright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.33</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: it's a minor bug perhaps concerning non-english windows</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.12</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: because english windows defaults installations to C:\Program files, and every other language version has its own "Program Files"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: perhaps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.21</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: i installed nsis to the default directory and the same problem occurred.. therefore we need to edit the correct file to use a "program files" system var</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.06</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>but what is the correct file ? :b</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.41</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i don't think there's a way to do that though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.25</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>the 3D engine to use is strongly preferred to be OGRE, anything, or not important to specify in the proposal?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.08</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>wat is it rt now ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.53</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>hippieindamakin8: that's a question for me?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.12</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>in general :) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.49</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>that's from the project ideas, to make an OpenGL-based GUI instead of MGED</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.01</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>and OGRE listed as possible one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.56</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohh ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.10</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>yaya rt now everything is based on MGED </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: for the submitter to decide really, from my own experience, testing, and connections, ogre really seems to be one of the best fits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.43</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>well, for me it's about the same if it's with CrystalSpace, OpenSceneGraph or OGRE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.48</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>but it could just as easily be a java3d interface with the right submittions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.01</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>I see OGRE or OSG more suited for BRL-CAD as we've talked yesterday</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.53</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>but since for me it's about the same, it's better to let core developers decide I guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.57</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>so maybe I leave it open in the proposal and to be decided later?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.26</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>btw andrecastelo, I think that you maybe this proposal is also well suited for you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.52</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.16</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i'm already studying the photonmap.c to see what has been done and what hasn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.05</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: it could be decided later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.12</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>another thing is, what's the functionality to replicate? e.g. 20% of MGED?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>more detail is generally better, but particularly if you don't have a strong justification then ogre would still be my preference as the one to start with (a LOT of time has already been spent evaluating the various options available) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.50</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>or it's only the framework and the functionality to be filled later?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.54</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>having a debug command console would be useful to have, logging services</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>but mostly the console</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>ability to get lists of geometry available, loading them, displaying various representations (wireframe, polygonal, etc)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.10</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>loading them as in drawing a cube inside OGRE?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.47</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>with the vertex data coming from the server backend?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.06</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>display lists, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.45</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there is a client/server protocol being developed (concurrently) that will manage the geometry itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:20.07</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the client is a *thin* client, it just passes commands/events to the backend and gets stuff back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:20.49</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>yep, but the client would have to convert the marshalled data to the 3d engine representation at list, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:21.21</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>and the same to position the camera and things like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.48</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>and/or make the protocol support reporting the data in the format that the engine requires</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:27.40</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>camera state management is predominantly a client issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.43</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: the protocol doing the translation you mean? that would be part of my project anyway, I guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.22</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey brlcad.. how functional is photonmap.c ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: if you pray to the gods and sacrifice the right sized chicken heads, it works great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.11</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:)) paganism :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.19</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>lol.. but do you know what exactly works and what doesn't?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.27</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>example photonmap rendering <a href="http://brlcad.org/tmp/moss_pm.png">http://brlcad.org/tmp/moss_pm.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.32</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm, that cube shadow is a little off isn't it ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: usability is pretty poor (it's complicated to use), effects through thin-walled objects is flawed (the photons bleed), performance sucks unless you put the objects in a box (all the photons go off into space)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>positionwise, no the shadows are right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a question as to whether it should be light due to reflections, but otherwise right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.58</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/tmp/moss_pm_2.png">http://brlcad.org/tmp/moss_pm_2.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.55</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>cya ppl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.00</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>cya hippieindamakin8</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.00</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.40</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>laterz :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.03</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: so, i'd have to rewrite part of it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.15</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: possibly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>implementing a bidirectional path-tracer would pretty much trump photonmapping though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.05</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>OK, I have everything but the plan :PPP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>or a path tracer with photomapping aspects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.33</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>or a path trace option to rt directly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.37</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>at least the kd-tree functions are already implemented.. those are usable, right ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, you really don't worry about any of that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>even for implementing some other global illumination interface, you wouldn't worry about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.29</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>is there some talk in the mailing list, wiki or whatever of the main features needed by the GUI?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.54</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i see.. well, i thought photon mapping was the most realistic method to implement GI</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.07</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: read up on <a href="http://brlcad.org/wiki/Developing_applications">http://brlcad.org/wiki/Developing_applications</a> .. talks about some of the basics of the shotline interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.21</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>no, photon-mapping isn't the most realistic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's the fastest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>at least it can be fast</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>bidirectional path-tracing is a brute-force solution to the rendering equation, and converges generally to a great answer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.46</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that's what most people see when they look at ultra-realistic images</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>usually MLT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.24</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: is there some talk in the mailing list, wiki or whatever of the main features needed by the GUI?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the brazil rendering system is probably one of the best MLT implementations (<a href="http://www.splutterfish.com/sf/WebContent/Index)">http://www.splutterfish.com/sf/WebContent/Index)</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: not really, at least not yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.13</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>:S</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.15</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>for now, just think of it as a thin graphical network client</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.34</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>yep, but I was trying to think about the milestones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.44</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that needs to display stuff obviously, look up geometry, display it, spin it around, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.48</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: those are amazing!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.11</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;slashdot&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.20</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>1) Create hello world</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.22</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>2) ???</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.30</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>3) GSoC completed!!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.34</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;/slashdot&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.35</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>4) Profit!!!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.38</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.02</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: they were one of the first to make detailed pictures that seriously looked real</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.27</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i was trying to write milestones too, that's why i was asking about photonmap.c functionality</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.59</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>holy cow! those images are truly amazing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.10</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the milestones aren't necessarily set in stone, it's mostly important to see that you've actually thought through a timeline and design process that we can then talk about</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.17</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>what are the most important things in an app ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.49</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>(for you guys)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.34</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>why is the logging thing an important one? it's logging what commands go back and forth for debugging, or what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.02</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>especially images like: <a href="http://www.splutterfish.com/sf/WebContent/Gallery/Image/283?category=2&amp;perpage=24&amp;page=7">http://www.splutterfish.com/sf/WebContent/Gallery/Image/283?category=2&amp;perpage=24&amp;page=7</a>&nbsp;&nbsp;and&nbsp;&nbsp;<a href="http://www.splutterfish.com/sf/WebContent/Gallery/Image/436?category=2&amp;perpage=24&amp;page=2">http://www.splutterfish.com/sf/WebContent/Gallery/Image/436?category=2&amp;perpage=24&amp;page=2</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: logging is one of those fundamental things nice to have sorted out early on, for testing, development, debugging, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>not critical for the app, I was just thinking of basic infrastructure items</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.23</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: omg, those are beautiful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you can do some cool stuff with metropolis light transport, global illumination ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.55</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>so milestones could be: logging, console, being able to communicate with the back-end, displaying geometries, rotating &amp; positioning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.48</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>displaying various representations (wireframe, polygonal, etc)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.03</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>plus maybe clean cross-platform build system integration, and input support (trackball, shift-grips)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.23</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: so, what would be better, photon mapping or bidirectional path tracing ??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: if you have experience with neither, path tracing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.24</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>ok, i'll have to do some research to write the application though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the algorithm for forward path-tracing is like 100-200 lines of code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe 10x for full bidirectional, and then some for usability and render options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:10.03</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>be right back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.44</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: what's your timezone ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:12.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>EDT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.05</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>how many hours from UTC ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.11</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>-4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.26</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:13.50</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i'll be back tomorrow in the morning to finish discussing the application ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:14.25</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>good night</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:14.32</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>mafm: good night man, cya</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.23</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.32</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>sighs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:34.43</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>maybe I'm lucky and get 3h of sleep today :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.13</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>brlcad: there it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.28</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there what is?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, to the mailing list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.45</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>got it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.24</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>and to the Google's webapp too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:43.54</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>looks good, gracias</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:44.01</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>yw :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:48.34</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>it's about time to sleep, night :)</tt></td></tr>
+<tr><td><tt>05:00.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad spik1 (n=spike@eridani.acm.jhu.edu)</font></tt></td></tr>
+<tr><td><tt>05:56.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@217-162-111-241.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>07:16.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>07:23.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=ca3fe93d@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>08:09.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob_ (i=1000@s142-179-54-198.bc.hsia.telus.net)</font></tt></td></tr>
+<tr><td><tt>08:09.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=ca3fe93d@bz.bzflag.bz) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>08:09.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>08:09.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-68-54-174-162.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>08:11.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>08:19.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob_ (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>08:19.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad homovulgaris (n=ca3fe93d@bz.bzflag.bz) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>08:19.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-68-54-174-162.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>10:01.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net)</font></tt></td></tr>
+<tr><td><tt>10:51.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad MinuteElectron (n=MinuteEl@silentflame/member/pdpc.base.minuteelectron)</font></tt></td></tr>
+<tr><td><tt>10:56.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo (n=pulse@189.71.62.248)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:56.53</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>good morning everyone</tt></td></tr>
+<tr><td><tt>11:27.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>11:58.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.52</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey brlcad :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.54</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>you there?</tt></td></tr>
+<tr><td><tt>12:47.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:48.45</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>hallo</tt></td></tr>
+<tr><td><tt>13:00.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-34 (n=CIA@208.69.182.149)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:22.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>hallo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.54</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>brlcad: the tags/7.12.0 won't compile on windows (cpp issue)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.09</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>it looks like bob solved it for the trunk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.26</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>cpp issue?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.00</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>math.h is included in a cpp file but in an extern "C" section</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.30</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the problem is: math.h defines templates if it is included in a cpp file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.53</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>however, this won't work with extern "C"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.13</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, yeah I think I actually may have fixed that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.41</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>yes, it looks like it's fixed on the trunk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.37</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the bigger question is why the .exe isn't working, haven't had a chance to poke at that yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.54</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>which exe? the install.exe and mged.exe work on my computer (MS Windows XP)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.13</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the 7.12.0 test binary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.37</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="ftp://ftp.brlcad.org/incoming/brlcad-7.12.0.exe">ftp://ftp.brlcad.org/incoming/brlcad-7.12.0.exe</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.40</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>the is what i was talking about</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>wim couldn't get it to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.20</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>what os does he use: xp or vista?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>course his e-mail apparently just died too -- him and another just got delisted from the mailing list due to bounced e-mails :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.11</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>BUT: rt does not work (at least from mged), even a ray-trace to a file fails</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.40</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i believe wim was on xp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:45.56</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>what's rt fail with? runtime linker error?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.19</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>nor error, it says "Raytrace complete"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>then it's probably crashing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.34</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>does it produce any output?&nbsp;&nbsp;like the prep output?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.11</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>no, at least not on the mged window</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.39</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>bob's finally back this week, I'll mention it to him</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.11</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>maybe i could be more useful if i get my new VS running</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.47</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>i got it today and at the moment i try to get my old projects running with it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.57</tt></td><td><font color="#c9c96a"><tt>d_rossberg</tt></font></td><td width="100%"><tt>this could take some time ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:00.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:02.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>feel free to comment on any of the submissions ..</tt></td></tr>
+<tr><td><tt>14:29.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andrecastelo (n=pulse@189.71.62.248)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>hello andrecastelo </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.01</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hi everyone</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.03</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.10</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>responded to your submission</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.14</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>just read the comment on the app</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.21</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>yeah, just saw it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.50</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>you want more detail about how MTL would interact with BRL-CAD's existing libraries, right ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, just a little more detail about how it ties to us</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.36</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm, ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you've shown reasonable competency in the task itself, but there's not much in the way of how it integrates with our code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.04</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm, ok, i'll try to detail further and it'll be ready in a minute</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>what library/routines would you possibly be using for example -- does it leverage existing functionality (or not)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>emphasis on most tools are tools that *integrate* with brl-cad cleanly, that aren't just stand-alone apps being added to an otherwise already massive codebase, replicating existing functionality for example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.12</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>also just to show me that you have at least done your homework on what we actually already provide</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you also never explicitly mention what language you'd be working in or forsee implementing this in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.14</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e. more implementation detail ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise a good submission</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.33</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok, i thought C was implicit :b</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.53</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i'll include these details, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:36.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>C or C++ is preferred, but not exactly required -- that's a design decision</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:36.27</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>I'd be perfectly willing to consider another language if someone makes a strong valid case (good luck with that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.00</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: is it possible to implement that in C++ ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.14</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.20</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i mean, wouldn't it kind of conflict with existing code.. ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it would have to live in a directory of its own, but no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.45</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>ok, i'll add some justification why C++ would be better then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.45</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>we already have some C++ interfaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.11</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you should know where we use C++ already :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>if you do propose C++, I'd also expect you to speak of basic performance profiling as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.43</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>performance profiling ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>sanity checks to make sure it's not spinning its wheels in abstractions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.16</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok ok..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.29</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>path tracers are very expensive, the same really holds true for a C implementation too -- but even more so for C++</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.28</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey brlcad - would it be better for me to reuse some of the ray tracer code for the path tracer or just write one from scratch ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.37</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.41</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>which do you think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.28</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>reuse the code for a prototype version</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>"10:33 &lt;@brlcad&gt; emphasis on most tools are tools that *integrate* with brl-cad cleanly, that aren't just stand-alone apps being added to an otherwise already massive codebase replicating existing functionality for example"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.33</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>then extend it to become fully functional</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.43</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>we already shoot rays</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.57</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>one of the specific intents is to use librt for ray shooting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>see the links I posted yesterday about developing brl-cad applications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.58</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>alright</tt></td></tr>
+<tr><td><tt>15:14.15</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad by brlcad -&gt; BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || Channel logs at <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD is participating in the 2008 Google Summer of Code, see <a href="http://brlcad.org/wiki/Google_Summer_of_Code">http://brlcad.org/wiki/Google_Summer_of_Code</a> and join the developer mailing list || GSoC application submissions are (STILL) open with a one-week extension, submission deadline is now April 7th</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>kudos to those of you that got your submissions in on time :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:16.50</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: this week will be really useful for me to get familiar with the code and detail it even further ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>andrecastelo: glad to hear it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.04</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: hm, so, i updated the application with the details you wanted ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.22</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i'm open to critics and suggestions now</tt></td></tr>
+<tr><td><tt>15:32.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Jai (n=Jai@202.3.77.38)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.40</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>1 week extensions???</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.27</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>mafm: yup :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.49</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>pff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.56</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>why pff ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.59</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>and I only slept 3h tonight because of that :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: hehe, well it does speak well for those that got their applications in on time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's an edge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.54</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>no need to send a box of Oporto wine to the mentors then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.02</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">never said he could or could not be bribed with women and alcohol</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.06</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>let's just keep the alcohol thing, you wouldn't want to meet most portuguese women :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.28</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>mafm: great, i'll supply the women</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.32</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:56.37</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>:P</tt></td></tr>
+<tr><td><tt>15:57.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Daytona (n=jra@c-68-55-36-65.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:58.22</tt></td><td><font color="#61b861"><tt>Daytona</tt></font></td><td width="100%"><tt>brlcad: I just saw that the application extension is official</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.57</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>that's a real news flash :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:01.27</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:01.46</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>drive by daytona!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.55</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;lh&gt; brlcad: you are cruel and vicious</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.56</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>lol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.11</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>I think that brlcad is served in the women dept.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.21</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">lubs the leslie</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.46</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>no luck for you andrecastelo, I think that you might better try with brazilian coffee or something :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: the comments also take on quite a different tone when you've met many of them :)</tt></td></tr>
+<tr><td><tt>16:15.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vedge (i=vedge@vedge.org)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.36</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>did you go to the mentor summit last year?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.44</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>fun stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.54</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>btw, how many applications are there? ~20 for CrystalSpace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>fewer, but close hold until the deadline :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:17.42</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>probably they'll get more too, it was less than 20 yesterday, but probably there will be 5 or 10 today before the former deadline</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:17.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the interesting thing is that right now there are probably 4 really strong applicants and we were only going to accept at most 4 ... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:18.35</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>how so? don't you want to accept more, if they give you the chance?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:18.36</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>hopefully the apps keep improving, it'll be a tight competition</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:18.50</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>no no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:19.28</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i just saying that 4 are *really* strong, so if there wasn't an extension -- the list of who gets selected is pretty straightforward</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:20.02</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>now with an extension, it just becomes more competitive .. if more really strong apps come in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:20.26</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>good morning fellows :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.12</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>I see :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.48</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>brlcad: how many mentors does brlcad have ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.59</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>that seems to be the student cap, right ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.19</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>we have 6 mentors at present</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.46</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>with two potential backups</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.57</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>but no, that's not the cap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>they can't all be managed effectively with that many -- that's why we're looking at just 2-4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.42</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>but the organizations do define a max number of students, right ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>takes time to integrate, review code, plan, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.46</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.48</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>our max is 4</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:24.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i don't want more than 4 for brl-cad this year</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:24.12</tt></td><td><font color="#818144"><tt>andrecastelo</tt></font></td><td width="100%"><tt>i hope i can make my application compete with those 4 strong ones you talked about :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:24.45</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>that's also why having students speak to what interests them in the long run becomes useful, we'd like new long-term developers not just projects worked on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>here's an example of a really strong application received for bzflag, <a href="http://my.bzflag.org/w/User:Jude-">http://my.bzflag.org/w/User:Jude-</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:26.33</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>detailed, careful thoughts on implementation, ties to our code, timelines, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.29</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>mafm are u dawn thomas ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.25</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohh its somebody else from india</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:39.01</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>nope, I'm Manuel A. Fernandez Montecelo (hence the acronym of my nick, not the most creative thing really)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.45</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.49</tt></td><td><font color="#e17676"><tt>yukonbob_</tt></font></td><td width="100%"><tt><font color="#CC00CC">waves in</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.00</tt></td><td><font color="#e17676"><tt>yukonbob_</tt></font></td><td width="100%"><tt>ohh --- I'm a ghosty</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.23</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy yukonbob_ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.28</tt></td><td><font color="#e17676"><tt>yukonbob_</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.44</tt></td><td><font color="#e17676"><tt>yukonbob_</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't have his tail-removing instructions with him atm :P</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.07</tt></td><td><font color="#e17676"><tt>yukonbob_</tt></font></td><td width="100%"><tt>it's a msg to nicserv, but I don't remember what... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.42</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>what's the status of the GSoC -- on schedule, or extended?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">points at topic ;)</font></tt></td></tr>
+<tr><td><tt>17:20.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.03</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>erm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.06</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>why?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.18</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>lack of solid submissions? :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.45</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- thought the expectation was ~50 "good" submissions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.13</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>no, I have not been reading my email.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.14</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.18</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>50 good submissions??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.06</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>that's a lot</tt></td></tr>
+<tr><td><tt>17:51.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54874DCE.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.58</tt></td><td><font color="#ae5cae"><tt>``Erik</tt></font></td><td width="100%"><tt>mebbe I had pie in the sky aspirations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.11</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i am done making a proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.48</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>about what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.27</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>hippieindamakin8: ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.35</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>OOP geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.23</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>its about OOP geometry engine mafm</tt></td></tr>
+<tr><td><tt>18:57.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-79-63.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.05</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>ah ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.21</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>I had thought about that project too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.01</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>re: topic, me nods, points out that the irrsi topic-line across top doesn't show novels ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.46</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i might put in a proposal for the web repository as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:17.48</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders, is there an official msg from Google re: this extension -- on the gsoc (code.google.com/...) the timelines still show the deadline as 31Mar</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.09</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: given how similar i'm seeing our rate is to bz's, that would have resulted in about 25 "good" ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.44</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks ``Erik should comment on the submissions more </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:19.38</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>yukonbob: do you mean if the extension is for&nbsp;&nbsp;real?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.31</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>mafm: see brlcad's note to me re: topic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.33</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yukonbob: depends how big your window is too :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.52</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">sees it all</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.08</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: heh -- not all of us are developing on 16-way multi-gpu chromium-equipped workstations ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>mmm.. 16-way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.34</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">laughs</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.39</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>what a bunch of nerds we are.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.41</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks for discussion brlcad and self had re: other projects... </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:27.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks yukonbob should mentor</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.38</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>why do you keep saying "re: something"? I don't understand at least half of your phrases</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.53</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>re: == regarding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.45</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: my heart has always been 100% agreeable to that, but I've held off just for logistic reasons... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.52</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">bets he _will_ mentor</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.59</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>do I need to register or anything?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you would need to, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.08</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>(by some deadline?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.12</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>ah ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.24</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>by then end of the week</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.36</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>fine, fine ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.39</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>er, by the time we start ranking actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>which is probably the day apps close</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.58</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>I can't add you though, you have to do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.23</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>ok -- I'll do that now... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.33</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>I guess that they'll extend it for another two weeks or something :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.11</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>mafm: 1 week</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.02</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, just one week, mentors then still have their 12+ days to deliberate, rank, and ask for more detail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.25</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>then there's a community bonding time frame for about 5 weeks </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.11</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>just kidding, I was saying that by the time that the new deadline is reached, maybe they extend it for another 2 weeks :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.16</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>where students get familiarized, hopefully start committing, learn what they need to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.24</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, heh, not likely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>4300 or so applicants was probably enough to stay on schedule -- adding another week it just going to make it a heck of a lot more competitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>as there will likely be 6000-8000 applicants I bet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:36.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>which means for a group like ours, we're going to have anywhere from 8-16 people competiting for 2-4 slots</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.03</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">finishes mentor application</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.07</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders wtf Avinash Dubey is</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">rejects</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.32</tt></td><td><font color="#76e0e0"><tt>mafm</tt></font></td><td width="100%"><tt>I go now, night</tt></td></tr>
+<tr><td><tt>19:45.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad spike_ (i=[U2FsdGV@centaur.acm.jhu.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.22</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">has to log-off temporarily (battery) -- chat later, folks</font></tt></td></tr>
+<tr><td><tt>20:51.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p54874DCE.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.20</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">returns, like he never even left (thx, screen(1))</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.16</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders (speaking of meta-projects like GSoC and BRL-CAD) -- is there any progress on Coverity and BRL-CAD?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.25</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>i emailed dave yet again, no response</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.08</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>hey brlcad are u there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.09</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.30</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>~ask</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.39</tt></td><td><font color="#b05c5c"><tt>ibot</tt></font></td><td width="100%"><tt>Questions in the channel should be specific, informative, complete, concise, and on-topic.&nbsp;&nbsp;Don't ask if you can ask a question first.&nbsp;&nbsp;Don't ask if a person is there, just ask what you intended to ask them.&nbsp;&nbsp;Better questions more frequently yield better answers.&nbsp;&nbsp;We are all here voluntarily or against our will.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.58</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">likes the "against our will" description</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.51</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya wanted to submit my proposal :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.54</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">receives cattle prod, and is instructed to refrain from meta-comments</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.25</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>hippieindamakin8: submit it, and it will be commented on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.47</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:) ya </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.29</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>brlcad can the user define his primitives ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.54</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>huh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.06</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>hippieindamakin8: in what sense? Primitives are "primitive" -- they're the core bits that "stuff" is made from... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.32</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>like in AUTOCAD inventor 3d modelling and solidworks .. i add 2 already existing primitives and they can define it as another primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.36</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>for his later worl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.46</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>*work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.00</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>read vol II, iirc about regions, etc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.17</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>smthing like.. a template</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.46</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, you can do that -- they're not called primitives, though -- they are combinations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>primitives are the most fundamental object type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.57</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohk.. like when i used AUTOCAD, it calls it user defined primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.22</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>just sent the proposal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.13</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>s/vol II/ Vol III/; s/regions/combinations and regions/ -- (<a href="http://brlcad.org/wiki/Documentation)">http://brlcad.org/wiki/Documentation)</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.37</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>thanks yukonbob</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.39</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>np</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.49</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>~doc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.49</tt></td><td><font color="#b05c5c"><tt>ibot</tt></font></td><td width="100%"><tt>Documentation can be found at <a href="http://digium.com/index.php?menu=documentation">http://digium.com/index.php?menu=documentation</a> or <a href="http://www.digium.com/handbook-draft.pdf">http://www.digium.com/handbook-draft.pdf</a> or <a href="http://www.voip-info.org/wiki-Asterisk">http://www.voip-info.org/wiki-Asterisk</a> or <a href="http://www.asteriskdocs.org">http://www.asteriskdocs.org</a> or <a href="http://www.oreilly.com/catalog/asterisk">http://www.oreilly.com/catalog/asterisk</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.00</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>hrm... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.12</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>^-- not for you, hippieindamakin8 </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.14</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.17</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.21</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya got it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.25</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>:), rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.44</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt><font color="#CC00CC">hates lab reports and open office the most</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.57</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">hates bad coffee</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.21</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt><font color="#CC00CC">is waiting for comments from brlcad and yukonbob</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.38</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>hippieindamakin8: be patient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.47</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohk :) i am </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.49</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it might take hours or even days</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.08</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>that was just a message .. i shall get back to my lab reports</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.11</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>work on a patch in the meantime :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.27</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>yaya.. hey is the nsis installer working properly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the patches will probably be a huge deciding factor given the extension</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.53</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i wanted to do that though :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.53</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>works for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.05</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya i understand :|</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.15</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>could do the localization fix that was mentioned yesterday</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.22</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so it doesn't just assume "Program Files"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.30</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ohk...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.34</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i ll have to chk.. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.56</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i have no windows rt now.. i shall get to it in a day or 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.22</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>wats the new deadline for the submission of patches ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.59</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>hippieindamakin8: you mean for GSoC proposals? 7 Apr.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.09</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>no the patches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.59</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>technically they're optional, but you'll not likely get selected if you don't provide a patch given how competitive it's going to be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>given we start ranking on the 7th, it's in your best interest to have something done by then or very shortly thereafter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.48</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya i sure want to submit a patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.27</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>go for it!!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.28</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you sure do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.43</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">cheers "submit a patch! submit a patch!"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.14</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">also gets a glass of water...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.09</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>hippieindamakin8: Submit a documentation patch :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.18</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: how's the gsoc going?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.27</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>cool :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.09</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya seen them in the list of TODOs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>code patch would probably be preferred since one of the points is to see how you code, but yeah, even a documentation patch would work :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.25</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: fun fun</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.33</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>some good proposals to evaluate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:12.36</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i shall try for a technical patch first and then i shall come up with docs when i am unable to do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.01</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i shall be submitting it by 9th .. will it do ?? too many academic committments rt now with the end semester examinations approaching</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>looking at the bug and feature requests on sf.net is also recommended</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.06</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i am trying to keep a track of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:43.44</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>brlcad: Sean w.r.t ur slashdot post </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.04</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>que?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.05</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.19</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't mean computer science degree students</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.34</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>i aint :) and it is open to all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.07</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the fact that they are working on code as stucents makes them "computer science students" over the course of the summer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.00</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:) thats true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.08</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: at some schools that's an insult</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the wording is actually based off of google's own original announcements from chris</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.56</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya my school considers my contribution to the firefox and imageprocessing community a big waste of time :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:47.18</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>more power to them if they're insulted, less rediculous people to have to deal with during the review process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:47.29</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>its ohk.. :) wat Sean wrote is actually rt but literally not :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:47.40</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>you're missing the point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:47.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>literally it is the case, it doesn't say degree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:47.59</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>aah yeah </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.12</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>ya that is ppl interested in CS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:49.33</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>my school is completely ridiculous in the point that when enrolled in mechanical engg u are just supposed to take mechanical engg courses when given an option for an elective</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:50.49</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>isn't that point neither here not there, though -- the only way the school (maybe) needs to be involved is to verify you're enrolled in school... you could get a job selling ice-cream for the summer if you like, too... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.19</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>...whether it's related to your studies or not, or whether the school likes it or not... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.23</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.33</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, in fact that's exactly what one of the bzflag gsoc students did last year</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>(and he was ultimately failed due to lack of progress and inadequate time put forth)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.45</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.25</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>off-topic: how suitable would the bzflag framework be to building a virtual world, a la second life... perhaps one could have a project setting up a virtual ice-cream shop?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.39</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, doable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.50</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes note</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.50</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>yukonbob: Just out of curiousity, for what purpose would this virtual world exist?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no dynamic geometry right now, that'd require modifications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.04</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>feh -- same reason second life exists, I guess... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.13</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>Although there are probably a ton of better frameworks out there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.19</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.27</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>yukonbob: entertainment? There are some AGI people trying to hook up to virtual worlds for the purpose of learning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>blasphemy!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.41</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>nothing is better than bzflag</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.45</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>except brl-cad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.46</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">laughs -- brlcad is agitated!!!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.51</tt></td><td><font color="#5bad5b"><tt>hippieindamakin8</tt></font></td><td width="100%"><tt>:))</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.52</tt></td><td><font color="#c065c0"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: Can I quote you on this?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe, sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:55.34</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">gets craving for chinese food</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.26</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">is interested in machinema (sp?) -- perhaps brl-cad and bzflag could provide the bulk of the framework to make a video... </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.37</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>meow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.30</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>does bzflag support any easy-to-do articulation? (/me thinks "no")</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.48</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>bzflag doesn't support any articulation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.58</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>"no dynamic geometry"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:58.04</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt>GSoC ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:58.19</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>not something I'd rank high on our priority list :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:58.56</tt></td><td><font color="#e17676"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">can hardly wait to get a 'puter w/ hardware acceleration to get bzflag installed again... </font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

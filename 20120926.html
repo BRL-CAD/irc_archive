@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120926</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120926</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:34.29</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: uhm, because "The code embodies decades of research and experience by Pixar, and a more recent and still active collaboration on fast GPU drawing between Microsoft Research and Pixar." :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.46</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>interesting font, looks like adobe themselves published it: <a href="http://www.tested.com/news/443102-adobe-releases-monospaced-open-source-font-source-code-pro/">http://www.tested.com/news/443102-adobe-releases-monospaced-open-source-font-source-code-pro/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.09</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf11_: I guess I'm still not seeing the problem -- if you know the values being fed to bullet are always a specific unit, you are providing bullet with a model sized consistently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.01</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf11_: is the problem that small objects will traverse a large distance with very few simulation steps or something like that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.28</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>brlcad, the thing is that you are feeding bullet what's stored in brl-cad, so if for example the simulation I did in mm will be translated to m, then since brl-cad stores sizes in mm, bullet will get 50000 m and not 50 000 mm from brl-cad, hence the scaling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.36</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>and small geometry results are not reliable because, bullet has a tolerance of 0.04m that's like 40mm, the simulation I did the biggest geometry was 30mm, lower than the tolerance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.42</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>so the cube was penetrating the surface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.33</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf11_: okay, but the mm to m translation would just be a one-time bug to get fixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.14</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>that also seems like a very high tolerance -- is it configurable?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.15</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>moreover, what would be the impact of scaling the geometry up so that it's always an order bigger than that tolerance?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:52.52</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>the mm to m translation is a few lines of code fix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.23</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>about the configurable part looked into it, didn't find yet a way to get it lower</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.27</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>or always scaling 10^6 even unless values are &gt;10^6 already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.56</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>hmm I tried the simulation I did for values like 10^2 bigger than the ones used, and it worked - the cube didn't fall through the plane, like just meter scaling all the geometry under the tolerance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.46</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf11_: the issue might be the rate at which it simulates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:09.29</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>you want X time steps to equate to the same amount of time and for the mass being simulated to reflect the sizes in brl-cad, not whatever size it might have been scaled to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:10.12</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>you could compensate with a 10^6 scaling with a similar mass scaling, but it'd have to be done carefully to be correct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.11</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>best to start as simple possible, unscaled and just document that you the model should be larger than 40mm in order for collision detection to be evaluated correctly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.58</tt></td><td><font color="#dede75"><tt>elf11_</tt></font></td><td width="100%"><tt>okay</tt></td></tr>
+<tr><td><tt>01:45.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (~DarkCalf@2002:ade7:2862::ade7:2862)</font></tt></td></tr>
+<tr><td><tt>02:33.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf_ (~elf@92.80.57.5)</font></tt></td></tr>
+<tr><td><tt>03:04.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@c-50-135-255-34.hsd1.wa.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.59</tt></td><td><font color="#7676e0"><tt>yukonbob</tt></font></td><td width="100%"><tt>hello #brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.47</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.46</tt></td><td><font color="#7676e0"><tt>yukonbob</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.13</tt></td><td><font color="#7676e0"><tt>yukonbob</tt></font></td><td width="100%"><tt><font color="#CC00CC">just saw news of Sony OSL, looked at license. Very impressed.</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.57</tt></td><td><font color="#7676e0"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: how're things going?</tt></td></tr>
+<tr><td><tt>03:57.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (~bch@c-50-135-255-34.hsd1.wa.comcast.net)</font></tt></td></tr>
+<tr><td><tt>05:04.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@117.200.84.29)</font></tt></td></tr>
+<tr><td><tt>08:40.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.37</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: interesting, rhino mostly punted: <a href="http://wiki.mcneel.com/rhino/meshtonurb">http://wiki.mcneel.com/rhino/meshtonurb</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.02</tt></td><td><font color="#6bcccc"><tt>brlcad</tt></font></td><td width="100%"><tt>though that base case does have some interesting implications that could be useful to support</tt></td></tr>
+<tr><td><tt>13:40.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@24-212-219-10.cable.teksavvy.com)</font></tt></td></tr>
+<tr><td><tt>16:34.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (Al_Da_Best@cpc2-shep12-2-0-cust21.8-3.cable.virginmedia.com)</font></tt></td></tr>
+<tr><td><tt>16:43.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tobiasu_ (~tobiasu@tin.tmux.org)</font></tt></td></tr>
+<tr><td><tt>17:10.26</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad PrezKennedy (~DarkCalf@2002:ade7:2862::ade7:2862)</font></tt></td></tr>
+<tr><td><tt>17:11.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (~DarkCalf@2002:ade7:2862::ade7:2862)</font></tt></td></tr>
+<tr><td><tt>17:35.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@64.235.102.210)</font></tt></td></tr>
+<tr><td><tt>20:31.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elf_ (~elf@92.80.33.182)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.42</tt></td><td><font color="#bf6464"><tt>starseeker</tt></font></td><td width="100%"><tt>Hmm - CIA still not working</tt></td></tr>
+<tr><td><tt>21:13.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (~jan@d24-204-236-81.home4.cgocable.net)</font></tt></td></tr>
+<tr><td><tt>23:24.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tobiasu (~tobiasu@tin.tmux.org)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

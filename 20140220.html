@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20140220</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20140220</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:31.35</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>andromeda-galaxy: that function is hooked into a table (along with a couple dozen others) and called dynamically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.46</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: ah, okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.50</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it's also declared through a macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.56</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>see src/librt/primitives/table.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.02</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: thanks!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.36</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I'm trying to figure out some way to get ridof the usage of Tcl_ListObjGetElements on the result of a Tcl_NewStringObj call</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.38</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>andromeda-galaxy: one possibility there, although it's a lot of work, is to replace the rt_*_tcl*() functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.45</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>with a binary json-style interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.53</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>that is what tcl is being used for in bot.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.30</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I see... that makes sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.00</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>Tcl_ListObjGetElements translates very trivially to something else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.19</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>basically is a function that converts a string into an argv</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.25</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>I was looking at libbu functions, but I couldn't see anything that dealt with tcl-style lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.38</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>it is being used on strings of this form, at least some of the time, as far as I can tell:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.03</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>{{e00 e01 e02} {e10 e11 e12} {e20 e21 e22}}</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.05</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>a tcl-style list is simply a string where {} are the quote characters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.22</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>except without the outermost brackets</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.17</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I was wondering if bu_argv_from_string would work, but rt_bot_adjust doesn't know how many elements would be in argv[1]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:38.27</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>and I don't think it would deal well with the fact that each sub-list had to be considered a separate object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.09</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>nothing is going to be a drop-in replacement without some work ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>or it would have been done a long time ago ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:39.27</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>still, this is just simple string stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.25</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I was wondering if, since this is used a lot in many of the rt_*_adjust functions, where a dedicated function to do it should go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.52</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>at worst, one could create new bu_* function that was nearly equivalent to the Tcl functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.19</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>what is the common pattern?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:42.45</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: as far as I can tell using Tcl_ListObjGetElements on lists of that form happens a lot in librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.05</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, but not what I mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:43.16</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>what for, data-wise</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.16</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I'm not completely sure yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.37</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>e.g., if we always called Tcl_ListObjGetElements simply to get a 'count', to always access that last element, for example, it wouldn't make sense to replicate that -- we'd make a function to access the last element </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.52</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>but the example that I was looking at just now involves using those nested lists as a way to list vertices for a db adjust command on a bot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.05</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>and I think that a lot of them are like that --- though sometimes having sublists and sometimes not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.17</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>for the not ones bu_argv_from_string would probably work...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.02</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: would it be acceptable to write a bu_tcl_argv_from_string function that works similarly to bu_argv_from_string but considers TCL sublists a single element?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.06</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>except bu_argv_from_string isn't going to delimit on {}</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.34</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I was saying bu_argv_from_string should work for those that do not require parsing sublists as a single entity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.55</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>it can't parse the top-level list correctly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.09</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a set of rules on tcl lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.25</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>things you could conceivably have that Tcl_ListObjGetElements will handle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.42</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>which a simple argv breakout based on spaces or whatever, will not do correctly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.13</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.39</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: the other thing that I was wondering about is whether it might make sense to make some of those commands not be based on TCL syntax at some point in the future</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.48</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I think something like bu_tcl_argv_from_string can work, but surely there's a better way? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:50.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>plus we don't want any API with 'tcl' in the name (can just call them a "list")</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>these commands should not be based on tcl syntax at all really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.27</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>so you could work on that instead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.47</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>probably better in the long run, but a little bit harder if you're not yet familiar with what you're working on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.04</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>(basically, create a binary interface)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maybe start with the simple string parsing function(s) first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:08.14</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: what are some specific thoughts on the mediawiki page?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.31</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>(I agree that it does not look great)</tt></td></tr>
+<tr><td><tt>02:29.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.52</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: see no reason for the style / theme to be any different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.50</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>than what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.20</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>By the way, if you click the logo, the menu bar appears.&nbsp;&nbsp;I think it should do that by default</tt></td></tr>
+<tr><td><tt>04:37.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (~infobot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>04:37.59</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD || <a href="http://brlcad.org">http://brlcad.org</a> || logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || GCI winners: Jacob Burroughs and Peter Amidon! Thanks to all of our participants for the awesome work; stay in touch! || We're applying to GSoC 2014</font></tt></td></tr>
+<tr><td><tt>07:30.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pulkit-pc (~chatzilla@14.139.82.6)</font></tt></td></tr>
+<tr><td><tt>08:18.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Anaphaxeton (~george@unaffiliated/anaphaxeton)</font></tt></td></tr>
+<tr><td><tt>10:18.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@117.214.200.13)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:18.22</tt></td><td><font color="#6f6fd4"><tt>ishwerdas</tt></font></td><td width="100%"><tt>Hi brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:39.24</tt></td><td><font color="#6f6fd4"><tt>ishwerdas</tt></font></td><td width="100%"><tt>Hi maths22</tt></td></tr>
+<tr><td><tt>11:01.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Anaphaxeton (~george@unaffiliated/anaphaxeton)</font></tt></td></tr>
+<tr><td><tt>11:05.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pulkit-pc (~chatzilla@14.139.82.6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:54.45</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59901 brlcad/trunk/src/libdm/dm-osg.cpp: Set but unused error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:55.36</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59902 (brlcad/trunk/misc/CMakeLists.txt brlcad/trunk/misc/doxygen/Doxyfile.in brlcad/trunk/misc/doxygen/doxygen_structure): break out libbn's doxygen structure setup.</tt></td></tr>
+<tr><td><tt>12:59.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@117.220.172.68)</font></tt></td></tr>
+<tr><td><tt>13:45.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad inderplus_ (~inderplus@117.199.97.115)</font></tt></td></tr>
+<tr><td><tt>14:07.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@ip24-255-223-153.ks.ks.cox.net)</font></tt></td></tr>
+<tr><td><tt>14:13.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:16.30</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 59903 brlcad/trunk/src/libdm/dm-osg.cpp: fix spellings in comments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.21</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 59904 brlcad/trunk/src/conv/patch/rpatch.f: fix .f file so it compiles: uncomment what had been 'haracter' (which I had detected in my spell checking), and fix the continuation line for format 101</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.44</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: it's quite different from the new wp theme</tt></td></tr>
+<tr><td><tt>15:51.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad andromeda-galaxy (~user@108-225-17-54.lightspeed.sntcca.sbcglobal.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.53</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>brlcad: last night I had to leave quickly,&nbsp;&nbsp;so I couldn't see all of what you were saying</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.19</tt></td><td><font color="#61ba61"><tt>andromeda-galaxy</tt></font></td><td width="100%"><tt>so I just want to check with you what you meant by 'create a binary interface'</tt></td></tr>
+<tr><td><tt>16:11.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pulkit-pc (~chatzilla@14.139.82.6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.37</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:18.00</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: did you see <a href="https://www.behance.net/gallery/BRL-CAD-mediawiki-design/14554071">https://www.behance.net/gallery/BRL-CAD-mediawiki-design/14554071</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:51.54</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: that is true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.07</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>inderplus_: I think brlcad would like the theme to be more like the mockup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.03</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>Ideally, other than the necessary tabs/sidebars, the viewer should not know whaen they are looking at wordpress and when they are looking at mediawiki</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.28</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>excatly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.20</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: no I haven't seen that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.10</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: can you see please have a look at it. Lot of effort underwent in making this theme.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.00</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: certainly will</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:18.48</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: Also, do we still want the slider (like the one at apple.com) on frontpage as proposed earlier ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.34</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>did you share that page somewhere else before that I missed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.32</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: No, I did not. When I showed the mock-up first time, this change was proposed. I am working on it now. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: ah, then why did you ask me if I'd seen it?? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.04</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: because if that done, then the wordpress theme won't be exactly like the mock up I showed earlier. It will have slider instead of a list of features. aka It would be somewhat different from the new WP theme we have.&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.38</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: I think you're not understanding my point :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.43</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: If provided consistency with wordpress and rest of the website, then is the current theme fine? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.48</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>if you ask someone if they've seen something, there should be some reasonable expectation that they maybe have seen it ... if you never shared it, I had no opportunity to have seen it.&nbsp;&nbsp;so asking me that becomes very unusual (and very confusing)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.17</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that is all, not saying anything at all about the work .. it's the question that has me confused</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.02</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>if you make me believe I missed seeing something, then I'm left to wonder what else I maybe missed, what discussion I missed perhaps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.56</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: okay, so basically what you're asking for or suggesting is a different theme to the website</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.29</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: Actually when I first showed you the mock up of new website, like for the very first time before GCI, at that time you showed interest in a flip gallery (the way it is at apple.com) , I loved that Idea and was working on it. I just wanted to confirm, if I am on right track.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.03</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>that discussion I recall</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.53</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no flip gallery depicted in the design you show on behance.net</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.44</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I think we need to merge the best features of the two designs because there are aspects to both that are very appealing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.11</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>exactly that's what I aim towards.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.34</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>I do think there should be just "one design"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.31</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>Yes, I got that. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.42</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: "Yes the position number of your server got confused with another clients. I have it labeled so this should never happen again."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.50</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: The design at behance.net does not contain flip gallery because flip gallery will only be on front page. Yes, there will be consistent design but landing page will have an extra flip gallery and a big download button, apart from that I will try to merge both designs. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.29</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: what label could they add that would not be there before :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:01.39</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>(Not a real question)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.55</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: Can I get ftp access to the mediawiki skin folder? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.10</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>I figured out part of why it looks bad: a lot of the css links to localhost, which does not make sense.&nbsp;&nbsp;It needs to somehow be relative</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.27</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>maths22: exactly, specifically speaking icon fonts are loaded using absolute paths. Rest of it is relative. It must look bad as instead of icons you must be seeing letters everywhere. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.25</tt></td><td><font color="#c467c4"><tt>inderplus_</tt></font></td><td width="100%"><tt>maths22: I will send you the newer files in morning (as per my time zone :P ) , it would be really easy for both of us, If I could get ftp access to the skins folder. So that I can make such changes and at-least for once get this theme working well on the server. Currently, it's in pretty bad shape on server. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.34</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: how would you like to proceed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.10</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: do you feel inderpreet is ready for access to the repo or would you rather work with him via commits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.59</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>we can set up beta to be exactly what is in the repo so people don't need direct access to the server</tt></td></tr>
+<tr><td><tt>19:18.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pulkit-pc (~chatzilla@14.139.82.6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.16</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>That would make sense to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.01</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>I would say give him it, and if you could comitt what is in beta now (After I tell you I checked for plaintext passwords), that would be great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.31</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>I also would like to know how to committ a large directory of new files at onc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.36</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>/onc/once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.33</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>I would think that we anyways would keep a degree of separation between the non-beta site and the repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.53</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>That way the repo would not immediately break the live site once it is based on the repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.22</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>we certainly don't need both physical access and commits for more people than currently have access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.15</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>if we set up commits, it should be sufficient to use that as the means for managing the site</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.23</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>how to commit a large directory of files depends on what is being modified, but should be as simple as svn add path1 path2 file3 file*.c</tt></td></tr>
+<tr><td><tt>20:37.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zxq9 (~ceverett@FL9-125-199-207-150.okn.mesh.ad.jp)</font></tt></td></tr>
+<tr><td><tt>20:51.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zxq9 (~ceverett@FL9-125-199-207-150.okn.mesh.ad.jp)</font></tt></td></tr>
+<tr><td><tt>21:06.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness___ (uid10044@gateway/web/irccloud.com/x-pynwrjlokdcycoyt)</font></tt></td></tr>
+<tr><td><tt>21:06.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>21:06.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pulkit-pc (~chatzilla@14.139.82.6)</font></tt></td></tr>
+<tr><td><tt>21:08.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad krushia (~krushia@saturn.pcsrvc.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.36</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>I tried that, but I got hook errors about file types or something like that-I'll check tonight</tt></td></tr>
+<tr><td><tt>21:31.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure_ (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>21:40.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pulkit-pc (~chatzilla@14.139.82.6)</font></tt></td></tr>
+<tr><td><tt>21:43.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cpc26 (~cpc26@fsf/member/cpc26)</font></tt></td></tr>
+<tr><td><tt>21:46.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad new_user (0e8b5206@gateway/web/ajax/mibbit.com/session)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.29</tt></td><td><font color="#5db1b1"><tt>kanzure_</tt></font></td><td width="100%"><tt>/win 5</tt></td></tr>
+<tr><td><tt>22:06.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad krushia (~krushia@saturn.pcsrvc.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.33</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 59911 (brlcad/trunk/src/nirt/nirt.c brlcad/trunk/src/nirt/nirt.h): nirt.c and nirt.h : implement h for help; old h becomes H; fix spacing in Usage; add commented off remarks in Usage about A,E</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.00</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59906 brlcad/trunk/src/libdm/dm-osg.cpp: Don't actually need the material here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.14</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59912 brlcad/trunk/src/libdm/dm-osg.cpp: Start working on matrix stuff.</tt></td></tr>
+<tr><td><tt>22:36.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad krushia (~krushia@saturn.pcsrvc.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.16</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59910 (brlcad/trunk/include/dm/dm-osg.h brlcad/trunk/src/libdm/dm-osg.cpp): Use a timer to provide incremental view updates during the drawing process. Commented out for now (need to fix the 'don't call drawVList unless you need to' problem first) and needs to be made an option since it does add some time to the overall drawing process.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.56</tt></td><td><font color="#5eb4b4"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: irritating, but at least we have an answer. :/ Be nice if they would've called you to say "uh, oops". fwiw, httpd did NOT come up automatically, so we spent an hour saying "nobody home" and taking the google hit for it</tt></td></tr>
+<tr><td><tt>22:47.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad krushia (~krushia@saturn.pcsrvc.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:03.36</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59913 brlcad/trunk/src/libdm/dm-osg.cpp: Better - still not fully correct in translation, but can rotate successfully.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.13</tt></td><td><font color="#5baeae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 59914 brlcad/trunk/src/libdm/dm-osg.cpp: Boiling it down to what 'works' - still not right, as we're not orthographic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.13</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: you fixed rc.conf? or did it not come up for some other reasons?&nbsp;&nbsp;I see an =YES there now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.38</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: <a href="http://brlcad.org/wiki/Mime-types">http://brlcad.org/wiki/Mime-types</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.57</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: basically, you have to have a .subversion/config file set up if you do not already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.06</tt></td><td><font color="#60b6b6"><tt>brlcad</tt></font></td><td width="100%"><tt>default is to manually specify</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:46.16</tt></td><td><font color="#73da73"><tt>maths22</tt></font></td><td width="100%"><tt>ok thanks</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

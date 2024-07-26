@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20161021</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20161021</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:10.43</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I narrowed it down to -DCMAKE_INSTALL_PREFIX:PATH=/usr/pkg, it creates fallout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.33</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>ok got it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.49</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>there was this CMAKE_SYSTEM_IGNORE_PATH</tt></td></tr>
+<tr><td><tt>00:57.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-092-075-155-039.092.075.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>01:27.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.31</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: you want to set an install dir (usually) that is not a system path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.14</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>yes I managed to do it, now I'm updating packages for itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.59</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: ah.&nbsp;&nbsp;note that some of the not found things aren't critical (I believe AVOID_LIBRARY is in that category)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.30</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: we do build on FreeBSD and (using the newer gcc) on OpenBSD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.34</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>fwiw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.36</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>starseeker: I packaged this library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.41</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>for netbsd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.44</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.51</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I noted that there is one thing unclear for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.52</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>just a sec</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.55</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hasn't tried NetBSD personally</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.11</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>pkgsrc normally installs into /usr/pkg,, and this is the reason why I lost the warnings about prefix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.13</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: IIRC, CMake logic doesn't usually search in /usr/pkg for stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.39</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>we have prepared cmake to do it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.46</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.09</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>PERPLEX does it exist as a standalone software somewhere?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.23</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>no - that's a tool we developed on top of re2c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.34</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>lemon and re2c exist as system installs, but not perplex</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.59</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I see, I'm using re2c and lemon from pkgsrc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.05</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>and perplex is bundled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.12</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>that sounds right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.39</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I think our lemon is too old, it doesn't accept the -T option, but it's not something to worry you about, I need to package itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.52</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - note that we need Itk 3</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.06</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>ah, and not the one from tcl 8.6?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.10</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>correct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.16</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>so standalone?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.22</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.24</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.25</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>itk3</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.42</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>itcl/itk3 will work with tcl/tk 8.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.43</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>are you using tbb?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.46</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>nope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.58</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I noted a cmake file for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.14</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: it's been looked at once or twice but we're not currently using it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.42</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I ported it to NetBSD yesterday or so (well for now it's just building and passing most of the tests)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.43</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: note that we aren't heavily tested with tcl/tk 8.6 - we're planning on moving to it, but right now we're still 8.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.49</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.11</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>luckily there is still tcl85+tk85 in pkgsrc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.21</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>fwiw, I think FreeCAD/opencascade can make use of tbb, if you're planning on bringing those to NetBSD as well...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.40</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I've ported opencascade as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.50</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>and its community version too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.55</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.16</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>but freecad is still work-in-progress, first brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.25</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.32</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>are you using tcloo? just asking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.37</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I nuked it a while ago..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.40</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>the new API? no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.44</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.05</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>it's a part of 8.6 as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.30</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>if you want to have all of our tcl deps as 3rd party packages, we need tkpng, tktable and tkhtml</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.40</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>this is done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.56</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>very nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.06</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>just this magic cmake stopped me for longer time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.17</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>be aware also that we've modded openNURBS somewhat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.18</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>it was randomly skipping libraries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.32</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>what's it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.40</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>one of our third party deps</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.41</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>modded=modified?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.44</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.45</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.53</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>is there need to use the bundled version?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.13</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>unfortunately, at least one of the changes does have functionality implications</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.44</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I'm building with -DBRLCAD_BUNDLED_LIBS=OFF</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.54</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>gutsy :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.06</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>and I hope to get it from bundled verstion regardless of that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.24</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>version&amp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.31</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>you can specifically enable indivdiual third party deps if needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.28</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>see <a href="http://www.dtic.mil/dtic/tr/fulltext/u2/a556727.pdf">http://www.dtic.mil/dtic/tr/fulltext/u2/a556727.pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.46</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>whoops, wrong one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.09</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt><a href="http://www.dtic.mil/docs/citations/ADA587400">http://www.dtic.mil/docs/citations/ADA587400</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.11</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>that's the one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.14</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>congrats!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.16</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>page 18 (pdf page 26) has an overview of our third party build logic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.42</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>heh - bit old now, but that diagram is still the best documentation we have for our third party dependency management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.42</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>excuse me, it's 5am and I need to commit something to tcl and wakeup for work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.57</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>cool - thanks for bringing BRL-CAD to NetBSD!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.04</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>fighting cmake took a lot of time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.20</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>could be worse - it could be autotools ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.26</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt><a href="http://www.netbsd.org/~kamil/CMakeCache.txt">http://www.netbsd.org/~kamil/CMakeCache.txt</a> it had no sense to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.44</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, that's not really intended to be user readable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.53</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>the cmake-gui is better about displaying vars for users</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.26</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>I suggest to add a bold warning that some paths will be skipped from lookup of dependencies.. unconditionally</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.28</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>CMakeCache.txt is essentially the "state" of the build stashed as a text file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.06</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>ryoshu: if NetBSD has paths that we should be searching as part of the Find* scripts, that's worth fixing/updating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.16</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>or even upstreaming to CMake proper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.22</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>pkgsrc has no paths in stone</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.45</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>/usr/pkg is the default one for privileged build, $HOME/pkg for unprivileged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.53</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>but it can be freely reconfigured</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.18</tt></td><td><font color="#b15db1"><tt>ryoshu</tt></font></td><td width="100%"><tt>goodnight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.21</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>night!</tt></td></tr>
+<tr><td><tt>04:00.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>06:53.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>07:53.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr><td><tt>08:02.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee] (bc5c2133@gateway/web/freenode/ip.188.92.33.51)</font></tt></td></tr>
+<tr><td><tt>13:12.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>13:41.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:59.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:02.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:28.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f720:5fc3:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.15</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>what? the internet is broken? damnit, bernice!</tt></td></tr>
+<tr><td><tt>19:00.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f720:353a:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr><td><tt>19:11.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.11</tt></td><td><font color="#6464bf"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 69161 brlcad/trunk/CMakeLists.txt: Make a note to reexamine how we're finding Qt5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.43</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>well hot diggity: <a href="https://blog.kitware.com/vtk-textbook-and-users-guide-now-available-for-download/">https://blog.kitware.com/vtk-textbook-and-users-guide-now-available-for-download/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.49</tt></td><td><font color="#71d7d7"><tt>starseeker</tt></font></td><td width="100%"><tt>CC-BY licensed no less</tt></td></tr>
+<tr><td><tt>23:01.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ryoshu (~kamil@ns3100396.ip-37-59-8.eu)</font></tt></td></tr>
+<tr><td><tt>23:06.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~Kim__@2600:8803:7a85:6d00:f44f:f08c:c43b:6224)</font></tt></td></tr>
+<tr><td><tt>23:07.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f720:353a:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr><td><tt>23:07.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (~erik@pool-100-16-14-17.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>23:07.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ryoshu (~kamil@ns3100396.ip-37-59-8.eu)</font></tt></td></tr>
+<tr><td><tt>23:07.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad nmz787 (~nmz787@bryan.fairlystable.org)</font></tt></td></tr>
+<tr><td><tt>23:07.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@104.225.5.10)</font></tt></td></tr>
+<tr><td><tt>23:07.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>23:07.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad maths22 (~maths22@unaffiliated/maths22)</font></tt></td></tr>
+<tr><td><tt>23:07.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-092-075-155-039.092.075.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>23:08.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@104.225.5.10)</font></tt></td></tr>
+<tr><td><tt>23:11.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>23:11.41</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o ChanServ] by tepper.freenode.net</font></tt></td></tr>
+<tr><td><tt>23:16.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ryoshu (~kamil@netbsd/developer/kamil)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

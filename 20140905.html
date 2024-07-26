@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20140905</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20140905</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:04.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (75c76ccb@gateway/web/freenode/ip.117.199.108.203)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.54</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62520 brlcad/trunk/doc/docbook/system/mann/en/search.xml: Add a -path example to the search man page.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:46.40</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 62521 brlcad/branches/brep-debug/src/libbrep/intersect.cpp: quell warning about var possibly being used uninitialized</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.10</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 62522 brlcad/branches/brep-debug/src/libbrep/boolean.cpp: copy input loops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.01</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>downloaded .. though it would be nice to get the original point cloud data (those pdf files are tessellations from geomagic)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.50</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>brlcad, you mentioned something related to Ball Pivoting from a starseeker commit, are you really implementing that technique? (This is Alexis from SURVICE, I wrote some code for that same technique, and... ewww!)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.50</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>It absolutely isn't designed to create watertight geometry, which is probably desired for the kind of stuff you guys do. Also, it's not robust by design, inconsistent.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.07</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>Stragus: hey alexis ... no, it's your code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.02</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>Ah right, didn't know it had found its way into BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.27</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>A different algorithm would have been far more appropriate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.48</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>funny you say that as that's certainly not how it's been promoted .. ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.20</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e., a next generation method for getting robust tessellations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.26</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>Darn :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.47</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>The mesh decimation code is pretty neat, but the ball pivoting was not the right algorithm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.51</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>Ball pivoting creates inconsistent results depending where "pivots" come from, leading to conflicts in creating the surface geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.09</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>And more than half the code is just "how to resolve conflicts"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.06</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>I believe it makes 16 attempts to rebuild conflicts with four different approaches, before giving up. So surface artifacts can be rare... but there's still no guarantees whatsoever about watertight geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.18</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.27</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>The normal itself could even be computed from the Nurbs equation I suppose, while ray intersection is dealing with triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.30</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>Oops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.38</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>For example, if you wanted to optimize the BRL-CAD CSG raytracer... It might involve reorganizing the whole memory layout, how all primitives are stored in memory for SSE processing, and much more</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.41</tt></td><td><font color="#5eb35e"><tt>Stragus</tt></font></td><td width="100%"><tt>Oops again</tt></td></tr>
+<tr><td><tt>07:48.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979EA84.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>08:43.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (caa43575@gateway/web/freenode/ip.202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>08:45.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder_ (caa43575@gateway/web/freenode/ip.202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>12:28.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr><td><tt>12:46.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad luca79 (~luca@ge-19-107-51.service.infuturo.it)</font></tt></td></tr>
+<tr><td><tt>12:47.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kanzure (~kanzure@131.252.130.248)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:51.52</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:indianlarry * 62523 brlcad/trunk/include/brep.h: Initialize m_start and m_end to ON_3dPoint::UnsetPoint and check before using in GetBBox()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:52.55</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:indianlarry * 62524 brlcad/trunk/src/libbrep/opennurbs_ext.cpp: Initialize min,max to ON_3dPoint::UnsetPoint before using trims to get a tighter bounding box. Then check to make sure both are set before adjusting the surface bounds.</tt></td></tr>
+<tr><td><tt>13:02.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:07.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.57</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Murray4332 * 0 /wiki/User:Murray4332: </tt></td></tr>
+<tr><td><tt>15:27.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (uid35020@gateway/web/irccloud.com/x-skytawdzxbfofmmp)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:43.47</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 62525 brlcad/trunk/doc/docbook/system/man1/en/pixshrink.xml: fixes to pixshrink man page; remove -h; fix an incorrect reference to -w (should have been -f)</tt></td></tr>
+<tr><td><tt>16:04.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.10</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62526 (brlcad/branches/dm-work/include/ged.h brlcad/branches/dm-work/src/libged/CMakeLists.txt and 5 others): Start migrating the display_list manipulation logic to something that doesn't explicitly involve gedp.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.51</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 62527 (brlcad/trunk/doc/docbook/system/man1/en/pixinterp2x.xml brlcad/trunk/src/util/pixinterp2x.c): fixes to pix2interp2x</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.09</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62528 (brlcad/branches/dm-work/include/ged.h brlcad/branches/dm-work/src/libged/bigE.c and 7 others): More gedp display list refactoring</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.36</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62529 (brlcad/branches/dm-work/src/libged/erase.c brlcad/branches/dm-work/src/libged/ged_private.h brlcad/branches/dm-work/src/libged/remove.c): get the rest of the erase.c functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.09</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62530 (brlcad/branches/dm-work/src/libged/CMakeLists.txt brlcad/branches/dm-work/src/libged/erase.c brlcad/branches/dm-work/src/libged/ged_private.h): move some logic around to start grouping display_list only functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.21</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:n_reed * 62531 brlcad/branches/brep-debug/src/libbrep/boolean.cpp: fix copy-paste error</tt></td></tr>
+<tr><td><tt>18:45.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>19:13.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock (~clock@77-58-143-135.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.25</tt></td><td><font color="#6363bc"><tt>``Erik</tt></font></td><td width="100%"><tt>is fisheye supposed to be cooking that much cpu?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.38</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62532 (brlcad/branches/dm-work/include/CMakeLists.txt brlcad/branches/dm-work/include/ged.h and 46 others): Ugly, but get dg.h and friends out of the BRL-CAD libraries. To keep mged working, stuck a hacked up wdb_obj in with src/mged to define the Tcl commands. This will need a fair bit of cleanup to be tolerable, but it serves the immediate need of not wanting to retrofit any display list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.40</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>bits in the deprecated dg.h logic.</tt></td></tr>
+<tr><td><tt>19:57.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@CPE602ad06bea2a-CM602ad06bea27.cpe.net.cable.rogers.com)</font></tt></td></tr>
+<tr><td><tt>20:05.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@CPE602ad06bea2a-CM602ad06bea27.cpe.net.cable.rogers.com)</font></tt></td></tr>
+<tr><td><tt>20:17.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@CPE602ad06bea2a-CM602ad06bea27.cpe.net.cable.rogers.com)</font></tt></td></tr>
+<tr><td><tt>20:59.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@CPE602ad06bea2a-CM602ad06bea27.cpe.net.cable.rogers.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.06</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62533 (brlcad/branches/dm-work/src/libged/autoview.c brlcad/branches/dm-work/src/libged/display_list.c brlcad/branches/dm-work/src/libged/ged_private.h): refactor dl bounding sphere logic into a function and out of autoview.c</tt></td></tr>
+<tr><td><tt>21:25.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@CPE602ad06bea2a-CM602ad06bea27.cpe.net.cable.rogers.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.48</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 62534 brlcad/trunk/include/raytrace.h: provide a static initializer for resource structs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.53</tt></td><td><font color="#b15db1"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: dunno, but I killed it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.08</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 62535 (brlcad/branches/dm-work/src/libged/bot_dump.c brlcad/branches/dm-work/src/libged/display_list.c brlcad/branches/dm-work/src/libged/ged_private.h): A fair bit of work for marginal type hiding, but it does get the explicit dl_headSolid out of bot_dump.c</tt></td></tr>
+<tr><td><tt>22:14.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stragus_ (~alexis@modemcable008.161-160-184.mc.videotron.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.10</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:BNRAlberto * 0 /wiki/User:BNRAlberto: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.21</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 62536 brlcad/trunk/doc/docbook/system/man1/en/plot3-hpgl.xml: remove a word from a man page</tt></td></tr>
+<tr><td><tt>22:38.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@CPE602ad06bea2a-CM602ad06bea27.cpe.net.cable.rogers.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:25.50</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 62537 brlcad/trunk/src/librt/globals.c: zero-initialize the rt_uniresource</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.54</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 62538 brlcad/trunk/src/librt/prep.c: clean up rt_init_resource() to validate all arguments and not set the magic until done initializing (todo: don't conditionally init the lists and ptbls nor allocate them memory until they need it.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:44.47</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 62539 brlcad/trunk/include/raytrace.h: mention that resource structs are are per thread of execution and that you usually want an array of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.19</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 62540 (brlcad/trunk/include/raytrace.h brlcad/trunk/src/librt/prep.c): document the rt_init_resource interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:58.47</tt></td><td><font color="#76e0e0"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 62541 brlcad/trunk/include/raytrace.h: stray end-comment</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

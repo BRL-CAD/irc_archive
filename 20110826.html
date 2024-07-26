@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110826</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110826</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.17</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the goal, to me, is to get the sim working for the purpose of demonstrating contact/collisions and having objects respond</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so I can drop a box onto a ground plane, and watch it tumble after hitting the ground</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.01</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>or simulate a virtual brl-cad pool table with accurate friction resistance, spin, n-body collisions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.12</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the goal is the sim itself :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.37</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok yes I understand</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.37</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>by the way I was trying to have some fun with the current state of the simulate command :P </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.44</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>so I was running the simulate command in a tcl loop in mged the other day, and the positions were not getting updated till the loop completes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.02</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>but that I guess is due to the change you mentioned a while back that is required to made</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.25</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>before position updates can occur </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.39</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.00</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>if you want to see the updates now, you could write a shell script that invokes mged for each iteration and renders a frame </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>or you could write a tcl proc that invokes your tcl script for just one timestep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.47</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>iirc -- it should update interactively, just not via the 'source' command </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.47</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.20</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>I noticed the line SET(GEDSIM_LIB libgedsim) was added to the simulate/CMakeLists.txt file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.49</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>so do I still proceed with changing the name of the build target to simulate ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.59</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>like so : BRLCAD_ADDLIB(simulate "${SIMULATE_SOURCES}" ${BULLET_LIBRARIES})</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.20</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>same reasonsing still holds true :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.08</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not a library, don't want to start a convention for libged commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.13</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>it's only being built as a library due to cmake limitations -- and it might still get folded into the parent SOURCES with different rules later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.29</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes, ok then I will proceed with the change to the target at both places, libged/simulate/CMakeLists.txt and libged/CMakeLists.txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.25</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>umm by parent sources you mean mged's code ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.36</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>libged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.40</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46423 10/brlcad/trunk/TODO: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: need to create a class that inherits from ON_Brep so we can cleanly implement</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: methods that openNURBS intentionally removes. that way we won't have to fork</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: and merge changes each time openNURBS is updated, our additions can be managed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:26.00</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: more easily, and our changes can be consolidated.</tt></td></tr>
+<tr><td><tt>00:49.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:58.34</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46424 10/brlcad/trunk/src/librt/opennurbs_ext.h: if the child node being added is null, do nothing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.24</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46425 10/brlcad/trunk/src/librt/opennurbs_ext.cpp: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.24</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: so the big crash is happening due to the surfaces being NULL after a call to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.24</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Split(). not yet at all clear how that's happening so add debug abort code,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.24</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: return null, and protect against null derefences. would be cleaner to ensure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.24</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: that subdivideSurfaceByKnots() will never return NULL (and someone (tm) should</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.24</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: fix that) but it's not immediately clear to me what the Split() failure means</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.25</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: yet.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.13</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46426 10/brlcad/trunk/src/librt/opennurbs_ext.cpp: ws indent consistency cleanup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:16.47</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46427 10/brlcad/trunk/src/librt/pr.c: why hasn't this missing semicolon caused a build failure before now??</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.35</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>regarding the cmake target changes for simulate, I wanted to confirm that these were the desired changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.40</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>here is the diff : <a href="http://bin.cakephp.org/view/269125967">http://bin.cakephp.org/view/269125967</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.03</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>I removed SET(GEDSIM_LIB libgedsim) as the new target 'simulate' can be directly specified everywhere instead of another variable ${GEDSIM_LIB} ..or ${SIMULATE}</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.05</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46428 10/brlcad/trunk/src/librt/primitives/ (4 files in 3 dirs): more missing semicolons.. wtf.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: most of the devs receive an e-mail for every commit that includes the diff -- if there's a problem, someone will usually say something or fix it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.01</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>so don't hesitate on committing unless you've not tested it or know it'll break something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.44</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok, yes I have tested it, since its the build system, being careful :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.22</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03abhi2011 * r46429 10/brlcad/trunk/src/ (3 files in 3 dirs): Changed the name of the simulation sources build target to simulate, removed GEDSIMLIB</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.51</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>being careful is good, but being productive is better ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.36</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>true :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:31.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>no worries, someone will let you know if it's messed up, and if it is then it definitely is your responsibility to fix (ideal) or revert (if you can't fix it immediately)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.44</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46430 10/brlcad/trunk/src/libwdb/pipe.c: aha! it was the (void *)0 change to the runtime-debug disabled mode macros (knew it would catch if-statements, did not expect it to catch missing semis). awesome side effect. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:40.42</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>woot, raytrace works!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:45.43</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46431 10/brlcad/trunk/src/conv/patch/patch-g.c: last one, another semi missing.</tt></td></tr>
+<tr><td><tt>01:57.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (~louipc@archlinux/trusteduser/louipc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.42</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm, trying to find out how you resolved that missing semi colon issue , looking at pipe.c and magic.c, so NO_BOMBING_MACROS is used when runtime debug is disabled ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.01</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>* is defined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.31</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>disabling runtime debug sets NO_BOMBING_MACROS (among others)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.53</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>the macros used to be empty when disabled, so no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.06</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>likewise, when enabled, it was an if {} so no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.19</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46432 10/brlcad/trunk/src/ (4 files in 4 dirs): Make a stab at a CMake setup for libged commands in subdirectories.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.32</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>turned into a no-op statement, though, it became a syntax error and the missing semis could be detected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.07</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.45</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r46433 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.45</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: due to the slew of 'i seemed to encounter bad geometry' messages that print out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.45</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: during raytracing, note that the fix for the m1151 geometry that made rt stop</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.45</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: crashing was probably due to bad geometry. either way, it was a crash case that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.45</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: is no longer crashing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.18</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>abhi2011: give that a a shot for ged simulate building - I can't test it on this machine (no bullet) but hopefully that will be cleaner</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:33.24</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, 5 hours to prep if it were single cpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:33.30</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>(nurbs)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.47</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.06</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46434 10/brlcad/trunk/CMakeLists.txt: Fix comment - we aren't interested in setting for debug on Windows at the moment - usual pattern there is to run from build directory and then create the .exe installer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.59</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46435 10/brlcad/trunk/src/libged/CMakeLists.txt: Ah, right - need to format this so that the BRLCAD_ADDLIB macro is OK with it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.24</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>there we go - simulate command builds on my home box now</tt></td></tr>
+<tr><td><tt>07:19.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:29.56</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03jordisayol * r46436 10/brlcad/trunk/sh/make_rpm.sh: Add "ISO-8859-1 75dpi fonts" for fedora rpm building dependency.</tt></td></tr>
+<tr><td><tt>09:21.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:53.15</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>starseeker: yes the changes built cleanly on my machine as well</tt></td></tr>
+<tr><td><tt>11:44.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr><td><tt>12:13.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@wlan-145-94-186-249.wlan.tudelft.nl)</font></tt></td></tr>
+<tr><td><tt>12:36.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad betta_y_omega (~betta_y_o@90.166.231.220)</font></tt></td></tr>
+<tr><td><tt>12:43.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr><td><tt>14:01.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad plaes_ (~plaes@gn237.zone.eu)</font></tt></td></tr>
+<tr><td><tt>14:06.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>14:28.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami2 (~kunigami@loco-gw.ic.unicamp.br)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.35</tt></td><td><font color="#854685"><tt>brlcad</tt></font></td><td width="100%"><tt>gmornin peoples!</tt></td></tr>
+<tr><td><tt>14:44.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-62 (~CIA@cia.atheme.org)</font></tt></td></tr>
+<tr><td><tt>15:10.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.57</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>goedemorgen brlcad :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.16</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm RT_GET_TREE(tp, &amp;rt_uniresource); doesnt appear to be setting a good magic number when I try to create a rt_comb_internal by manually filling up a tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.44</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>got something like this now : <a href="http://bin.cakephp.org/view/151711593">http://bin.cakephp.org/view/151711593</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.39</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>RT_GET_TREE() sets a wierd magic number like ((tp))-&gt;magic = 0x91191191</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.02</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>there is probably a version specific marco for setting a valid number</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.27</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>will try RT_TREE_INIT(tp);</tt></td></tr>
+<tr><td><tt>15:49.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:18.27</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: is there a reason why OP_DB_LEAF is not handled in rt_bound_tree() ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:19.06</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>I use it when filling up the values in a rt_comb_internal for primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:28.18</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>tp-&gt;tr_l.tl_op = OP_SOLID does not work , and that is the closest case I can see(to primitives)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.24</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>hm, maybe I should start with an union op in the tree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:48.27</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46437 10/brlcad/trunk/src/librt/prep.c: Removed dead code from rt_clean_resource_basic. It was an uncompiled duplication of the code in rt_clean_resource_complete.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.04</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok I need to use OP_SOLID and somehow I need to convert the idb_meth member in rt_db_internal * to the a struct soltab *stp; so rt_bound_tree() can get the bb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.22</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>aaaargh....almost there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.29</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46438 10/brlcad/trunk/src/librt/shoot.c: rt_res_pieces_clean was dereferencing rtip without checking for NULL value.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.30</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>well it seems the struct soltab is not needed and nor is rt_bound_tree() for primitives,&nbsp;&nbsp;a simple call to ip-&gt;idb_meth-&gt;ft_bbox(ip, &amp;rpp_min, &amp;rpp_max) suffices for getting the bb of primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.33</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46439 10/brlcad/trunk/src/conv/obj-g_new.c: Cleaning rt_uniresource after it's no longer needed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.45</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>its onto regions now</tt></td></tr>
+<tr><td><tt>18:29.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ScribbleJ (~chris@99-35-164-204.lightspeed.dwgvil.sbcglobal.net)</font></tt></td></tr>
+<tr><td><tt>18:38.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.13</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm, no , cant just insert a new OP_DB_LEAF case into rt_bound_tree() , seems even after I reach the leaf, the most information I can get from the leaf node is the name of the primitive, with no other information , like points etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.47</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>seems a rt_db_internal representing a region has only information about the operations that build the region and the primitive names, not the shape information about the primitives themselves</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.58</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46440 10/brlcad/trunk/src/libgcv/wfobj/ (obj_grammar.yy obj_parser_state.h): indent/ws cleanup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:13.28</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46441 10/brlcad/trunk/src/libgcv/wfobj/ (7 files): Applied standard headers and footers.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.29</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>abhi2011: that bbox interface is brand new, and some of them (BoT for certain) aren't really correct yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.49</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>abhi2011: if you want to use that, you probably need to start by fixing rt_bot_bbox</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:15.06</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r46442 10/brlcad/trunk/src/libgcv/wfobj/obj_parser_state.h: stray character</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.40</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>starseeker: oh shoot, no easy way out then :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.21</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>abhi2011: well, fixing rt_bot_bbox is definitely the right way to go - the intent is for rt_*_bbox routines to be a fast way to get a correct bbox</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.58</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would suggest looking at what rt_bot_plot does - it can draw lines, so it must have logic for visiting the data structure</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.24</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok, by the way do you have any idea about the other issue, about the op_db_leaf case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.39</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>i though OP_SOLID would be used uniformly for primtives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.46</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>in the tree nodes I mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.08</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>not offhand - would have to study the code, and unfortunately I'm in the middle of house stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.16</tt></td><td><font color="#b760b7"><tt>starseeker</tt></font></td><td width="100%"><tt>(nice big storm on the way...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.30</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>ah yah i heard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.38</tt></td><td><font color="#9b519b"><tt>abhi2011</tt></font></td><td width="100%"><tt>irene ?</tt></td></tr>
+<tr><td><tt>20:26.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>20:30.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr><td><tt>20:43.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ScribbleJ (~chris@99-35-164-204.lightspeed.dwgvil.sbcglobal.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.08</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46443 10/brlcad/trunk/src/conv/obj-g_new.c: Removed call to perror after syntax error. Error message is already printed elsewhere, and errno is not set.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.51</tt></td><td><font color="#ce6c6c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03n_reed * r46444 10/brlcad/trunk/src/libgcv/wfobj/obj_grammar.yy: Making return codes clear.</tt></td></tr>
+<tr><td><tt>22:50.57</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad n_reed (~molto_cre@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>23:30.41</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad roberthl (~robert@mediawiki/RobertL)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110815</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110815</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:02.30</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: cursor.c errors are back <a href="http://paste.pocoo.org/show/458445/">http://paste.pocoo.org/show/458445/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.03</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: scratch that, appears to be my fault</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.44</tt></td><td><font color="#65c1c1"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok I get an error in analyze.c : /home/abhi/socis/brlcad/src/libged/analyze.c:312:5: error: call to function ârt_arb_centroidâ without a real prototype</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.00</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: double scratch that... not my fault</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.44</tt></td><td><font color="#65c1c1"><tt>abhi2011</tt></font></td><td width="100%"><tt>some more : /home/abhi/socis/brlcad/include/raytrace.h:3354:23: note: ârt_arb_centroidâ was declared here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.17</tt></td><td><font color="#65c1c1"><tt>abhi2011</tt></font></td><td width="100%"><tt>seems the declaration is not being taken correctly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.02</tt></td><td><font color="#65c1c1"><tt>abhi2011</tt></font></td><td width="100%"><tt>bhinseley: your error seems also related to implicit declarations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.57</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.52</tt></td><td><font color="#65c1c1"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm even in track.c its the same thing: error: call to function âtrack_mk_combâ without a real prototype</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.35</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45979 10/brlcad/trunk/src/libged/edit.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.37</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: During certain batch translations, objects after the first target object simply</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.37</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: moved to the same location as the first target object. This was due to certain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.37</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: translation vectors not being recalculated after executing the first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.37</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: translation. Since information about an argument is lost after the first vector</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.37</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: is calculated, there needs to be a new vector (and therefore struct edit_arg)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.38</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: for each translation.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:53.12</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: can you give me a make VERBOSE=1 with the cursor error?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:53.55</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>also, can you tell me if brlcad_config.h has #define HAVE_TERMCAP_H 1 ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.13</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>there is no #define HAVE_TERMCAP_H</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.19</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>growl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.19</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>I'm running make right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.33</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>one sec... let me see if I accidentally undid my fix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.48</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>I saw it there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.13</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45980 10/brlcad/trunk/src/other/CMakeLists.txt: Oops - variables changed, so update conditionals that use them...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.18</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: give that a shot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.39</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>sigh... the hazards of radical rework</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.05</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>rebuilding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.10</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, does cmake scripts support system tcl/tk now?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:07.28</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, instead of brlcad local building</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.02</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: it should - testing that now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.28</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45981 10/brlcad/trunk/src/other/CMakeLists.txt: Be slightly more aggressive with the find_library command for itcl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:09.56</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, great, because gentoo people still don't accept my packages, due to mandatory tcl/tk local building</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.09</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces - yeah, not surprised</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.54</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: still working on local itcl/itk - one second</tt></td></tr>
+<tr><td><tt>02:21.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad juanman (~quassel@unaffiliated/juanman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.08</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45982 10/brlcad/trunk/src/ (3 files in 3 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.09</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Ah, right. Original CMake logic written assuming package require based Itcl/Itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.09</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: usage - when C libs were again necessary, just hacked in quickly. Can't get away</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.09</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: with that anymore, so use variables where appropriate and look for itk C library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.15</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: give that a shot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.02</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, revision 45982</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.16</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, testing now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.23</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>that works for me here with system tcl/tk and itcl/itk - I don't have a system iwidgets, tkhtml, tkpng or tktable </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.53</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>the raster toolkit, opennurbs and STEP Class Libraries will stay on because we're currently maintaining our own versions of those</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.02</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: also, remember the cmake options have changed a lot - still probably in flux, actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.35</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, this is reported configure options:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.38</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, <a href="http://pastebin.com/g7dD2VMP">http://pastebin.com/g7dD2VMP</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.21</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - surprized the optimized release summary option isn't printing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.36</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>is that a clean configure from a fully updated trunk?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.53</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>what configure options are you passing in?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.37</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: builds fine, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.40</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, options passed to cmake: <a href="http://pastebin.com/h3ELaNfD">http://pastebin.com/h3ELaNfD</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.16</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: ah, let me translate those</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.58</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: will gentoo accept a BRL-CAD build of tkhtml?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.08</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, should be fine, since there's no tkhtml package in gentoo yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.50</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>they don't want static libs?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.36</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, I think it's ok, but they want to be sure about how libs are used/linked, so, package manager can avoid broken libraries better, package deps better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.34</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: um - surprised you turned off the example geometry - is that a policy?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.04</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>with EXTRADOCS off, the html documentation won't be available</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.56</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, it's controlled by USE flag: examples</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.43</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, <a href="http://pastebin.com/7ndb9WDQ">http://pastebin.com/7ndb9WDQ</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.16</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, so, USE="doc" will enable extradocs, extradocs_pdf, extradocs_man</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.20</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, aqua, does brlcad support aqua?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.35</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.41</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, then, it's a mistake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.02</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>what are you specifically setting up with the Gentoo build type?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.22</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>we generally have Debug and Release - I haven't tried feeding in something else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.30</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, only debug and release, if USE="debug" it's Debug, otherwise Release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.49</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>you're passing in CMAKE_BUILD_TYPE=Gentoo though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.25</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, it must be from the gentoo default :( need to disable that then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.42</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: well, it might work - just completely untested</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.21</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: this is closer, given our current state: <a href="http://pastebin.mozilla.org/1300959">http://pastebin.mozilla.org/1300959</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.31</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>you can see what happens with that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.07</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>I will test with a "nonsense" build type setting and see what happens once...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.29</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, that's why the optimize and debug flags were not set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.15</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, I can try to set default build type to Release, then, if USE=Debug, set it to Debug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.44</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: I wouldn't worry too much about the pdf doc building just yet - if you still want to enable it, the options are BRLCAD_EXTRADOCS_PDF and BRLCAD_EXTRADOCS_PDF_MAN</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.54</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>remember Apache FOP is needed for that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.24</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: well, a non-standard build type should still do SOMETHING sane</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.43</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm not sure how successful we'd be fighting with the gentoo guys about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.09</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker,&nbsp;&nbsp;BRLCAD_EXTRADOCS_PDF and BRLCAD_EXTRADOCS_PDF_MAN were already in the package script</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.40</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.10</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, the complete gentoo package (ebuild) for the svn live version: <a href="http://paste.pocoo.org/show/458500/">http://paste.pocoo.org/show/458500/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.34</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45983 10/brlcad/trunk/misc/CMake/BRLCAD_Util.cmake: Er, oops - fix default fallback settings for auto_option macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.55</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: that should help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.11</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>or at least, the settings are saner - trying the build now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.58</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, this should fall back to the /usr/brlcad path, no optimization and no debug flags by default</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.49</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>note that tcl/tk need to be 8.5 - 8.4 will no longer be enough, IIRC (ttk widgets, among other issues)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.35</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>tnt and jama are headers, and if I'm remembering right we need our local copies</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.46</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>shouldn't be a build issue at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.09</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>(as far as conflicting with a system install anyway, unless we're copying those into our install tree - I'd need to check.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.39</tt></td><td><font color="#d16ed1"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, building, let's see how it works out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.55</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: any luck?</tt></td></tr>
+<tr><td><tt>18:08.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>18:08.28</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release 7.20.2 is posted (20110701) || BRL-CAD is participating in the ESA Summer of Code in Space!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45990 10/brlcad/trunk/src/archer/archer: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Warn if we appear to be running archer from a non-install directory with an</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: install already in place - this is the situation where .tcl files will get</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: pulled from /usr/brlcad/* instead of local copies, which if unnoticed by the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: developer makes for some very frustrating troubleshooting (particularly for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.44</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: those not familiar with bu_brlcad_root's behavior). We have enough information</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.45</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: to spot this situation at runtime, so do it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:12.54</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: alright. Their verbage was a bit strong/misleading.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.49</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: they have to write that for borderline cases where a student might be trying to sprint right at the end and shoves so much code at a mentor right before the eval that they *can't* properly evaluate it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.43</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.42</tt></td><td><font color="#b961b9"><tt>kunigami1</tt></font></td><td width="100%"><tt>just wondering: is it feasible to pack boost compressed in the osl code? the 7ziped version has ~40MB</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.14</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>kunigami1: um.&nbsp;&nbsp;you couldn't extract the parts you need?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.47</tt></td><td><font color="#b961b9"><tt>kunigami1</tt></font></td><td width="100%"><tt>I still can't. I tried with 1.46.1. I'm currently trying with 1.47.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.24</tt></td><td><font color="#b961b9"><tt>kunigami1</tt></font></td><td width="100%"><tt>I asked in boost dev list, but the guy suggested to me exactly what I did</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.32</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r45991 10/brlcad/trunk/sh/conversion.sh: add a SAVE option to keep converted tgm from being deleted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.38</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03tbrowder2 * r45992 10/brlcad/trunk/NEWS: documented change for users</tt></td></tr>
+<tr><td><tt>20:22.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr><td><tt>20:30.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@137-79-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.07</tt></td><td><font color="#b961b9"><tt>kunigami1</tt></font></td><td width="100%"><tt>good, seems that was a bug with boost 1.46. let me see if oiio and osl compile with this smaller version</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.56</tt></td><td><font color="#6f6fd4"><tt>plaes</tt></font></td><td width="100%"><tt>gotta love git-send-email \o/</tt></td></tr>
+<tr><td><tt>21:25.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK_ibmlaptop (~kkirwan@209.248.147.2.nw.nuvox.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.59</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45993 10/brlcad/trunk/misc/CMake/CompilerFlags.cmake: Don't try adding the debug flag manually if it's Xcode - let Xcode itself handle things. Trying it manually caused an options conflict.</tt></td></tr>
+<tr><td><tt>22:55.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:03.09</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45994 10/brlcad/trunk/src/tclscripts/rtwizard/lib/PictureTypeBase.itcl: rt isn't always in the path. Use the bu_brlcad_root, rtwizard.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:07.40</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45995 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:07.40</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: rtwizard was relying on rt being present in the system path in order to run it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:07.40</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: and generate a picture - instead, have it find and use the rt command specific</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:07.40</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: to its own BRL-CAD release without needing rt to be in the path.</tt></td></tr>
+<tr><td><tt>23:15.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@250-21-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:17.12</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>how do I get the natural origins of primitives?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:17.20</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">cries uncle</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.40</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45996 10/brlcad/trunk/src/tclscripts/rtwizard/lib/PictureTypeBase.itcl: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.41</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Wow. Apparently the only reason rtwizard wouldn't output png ouput if you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.41</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: specified a .png extension was due to its regarding the filename as a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.41</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: framebuffer (-F) target instead of an output file (-o). Literally a one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.41</tt></td><td><font color="#64be64"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: character fix, and rtwizard will now output png files if given a .png filename.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.57</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: "natural origins?"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:23.14</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>yes, that's what brlcad called it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:23.37</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>as opposed to the bounding box center... he said that there is a natural starting point of primitives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:23.39</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>uh.&nbsp;&nbsp;is that the point that (say) the sed command grabs from a primitive?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:23.42</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>oh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:24.22</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>I'm not sure, I'll have to look at sed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:24.35</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would suggest checking what sed does</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:24.46</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>that'd be my fist step anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:24.50</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>first step even</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:25.08</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>(probably be shaking a fist at it too, come to think of it...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:25.23</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:26.10</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>look for f_sed in chgview.c in mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:26.20</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:27.23</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... that doesn't help much...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:28.45</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>I guess that's the problem, starseeker; I don't really know what I'm looking for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:29.06</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>bhinesley: that's a little outside my expertice also - let me dig a minute</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:29.20</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>alright, thank you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.29</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>you might try looking at curr_e_axes_pos being set in edsol.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.14</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>ah hah!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.23</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>get_solid_keypoint, edsol.c 9222</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.38</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>looking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.09</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>looks promising; I was thinking that it would have to be different for each primitive type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.24</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>retrieving it, I mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.19</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces - OK, if that's actually it, the options are 1) make a libged version of that 2) refactor it into per-primitive calls via the functable (a better way but more time-consuming) 3) ask brlcad what to do (the best way but probably the most work :-P)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.44</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>hahaha @3</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.30</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>I'd say start with 1) for now (lord knows we've got lots of logic like that in there that needs cleanup) and see if you can get it to actually work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:39.57</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>if that's what we need, then it'll be already isolated from mged and easier to use for the "right thing" refactoring step</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:42.21</tt></td><td><font color="#9b519b"><tt>bhinesley</tt></font></td><td width="100%"><tt>ok, it doesn't sound so bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:50.57</tt></td><td><font color="#af5c5c"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: regarding r45996, does rtwizard's preview option still work?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.51</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>I believe so...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.33</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tests</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.50</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, wait - point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.54</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>it might not...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:54.12</tt></td><td><font color="#cc6bcc"><tt>starseeker</tt></font></td><td width="100%"><tt>crud, yeah no dice</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110809</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110809</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:04.54</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami: it's because some files are listed in your ~/.subversion/config global-ignores directive, files that are "usually" auto-generated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.25</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>Makefile.in files being a byproduct of automake, though some projects choose to be autoconf-only and use Makefile.in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.53</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>remove the directive and should resolve itself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.34</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>that's strange, my global-ignores only includes .o, .lo and .la</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.45</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: we've got something odd going on with bu_ipwd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:27.58</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm trying to run archer from build directory, and it's not finding the plugins</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.31</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>the problem traces to how plugins are loaded - the current working directory is changed to being fairly deep in the share structure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.43</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>when there, bu_brlcad_data no longer gives useful results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.38</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: try running bwish from share/brlcad/7.20.3/plugins/archer/Utility</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.05</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>e.g ../../../../../../bin/bwish</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:30.11</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>then try bu_brlcad_data ""</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.30</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, is there any known issue with building brlcad against libpng-1.5?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.19</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: trunk can (we actually just upgraded to 1.5)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:36.44</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, thanks a lot! just got a bug report from gentoo</tt></td></tr>
+<tr><td><tt>00:41.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.44</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r45835 10/osl/trunk/openexr/ (396 files in 67 dirs): adding latest version of openexr (v1.6.1)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.53</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>openexr requires zlib, which is packed with brlcad. but openexr uses autotools to build. should I modify it to automatically find the brlcad version or may I assume that the user will take care of this dependence?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.05</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami: that is pretty odd then .. it's in my config (but then I added it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.18</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>as for zlib, is there already a configure option for --with-zlib=/path/to/zlib or somesuch?&nbsp;&nbsp;otherwise the top-level build file can take care of passing it in the build flags</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.42</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>brlcad: hmm, let me check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.54</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>there's no such option. so the idea is that one top-level file builds all osl dependencies?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.16</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, something very simple to assist builds on linux/bsd/mac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.12</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>hm, ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.16</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>either a makefile or a script, whatever is easiest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.54</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>I'd go for script. I'm not that fluent with makefiles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.49</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: data path loading requires either a) that one of the libbu path functions is called prior to a directory change or b) that the resources are in their install location</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.03</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>if both those are false, then there's no way for libbu to know what the initial working directory path was (other than a hard override)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.14</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45836 10/brlcad/trunk/src/libged/edit.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Batch arguments were expanding, but only the first set was being executed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Fixing this meant writing a function to duplicate command argument groupings,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: which in turn required changing the subcommand functions for looping through</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: args. The counters needed to be exposed as paramaters, and made non-static...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: which should have been done in the first place. Updated the half-dozen or so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:11.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: places that depended on the old logic.</tt></td></tr>
+<tr><td><tt>02:20.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:04.18</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45837 10/brlcad/trunk/src/libged/edit.c: off by one errors introduced r45836</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.53</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: it can't key off the location of the bwish binary?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.49</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm... may want to re-examine the mechanism being used for plugin loading</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.14</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45838 10/brlcad/trunk/src/libged/edit.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Simplified/removed some things in edit(), and resolved several unrelated issues,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: many of which were recently introduced. Translate isn't quite working yet. There</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: seems to be a problem getting the apparent coordinates of objects, which I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: might all be evaluating to (0,0,0). Also, there are several untested option/arg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.15</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: combinations.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.31</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: if the "change to current working directory before doing things" approach is what's causing the break, I wonder if it might be workable to scrap that altogether</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.30</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>or "change the current working directory" rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:07.44</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't quite see why that's essential</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.16</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 0399.125.86.110 07<a href="http://brlcad.org">http://brlcad.org</a> * r3060 10/wiki/User:Bhinesley: /* Log */ today, plan</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:22.46</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 0399.125.86.110 07<a href="http://brlcad.org">http://brlcad.org</a> * r3061 10/wiki/User:Bhinesley: /* Log */ typo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.21</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: why what is/isn't essential?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:32.42</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>archer needing to change the cwd sounds bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:33.49</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>and even if it "needs to" for some odd reason, it should be getting the current dir (via libbu) first so the path can be restored</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.28</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>Archer::pluginLoadCWDFiles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:42.09</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will try to sort it out tomorrow</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:06.05</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, without getting into the nitty gritty, there doesn't sound like there's any reason it needs to load files from "cwd" .. it needs to load files from a plugin dir, determined from bu_brlcad_data "path/to/plugin/dir"</tt></td></tr>
+<tr><td><tt>05:46.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad blindbox (~UPPnub@60.51.60.209)</font></tt></td></tr>
+<tr><td><tt>06:32.52</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad blindbox (~UPPnub@60.51.60.209)</font></tt></td></tr>
+<tr><td><tt>08:33.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>08:58.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>09:56.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@ip170-79-211-87.adsl2.static.versatel.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.33</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: I am working on a new function to be added to librt which will reside in librt/bbox.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:32.57</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>the function looks like this : rt_bound_dbfullpath(const struct db_full_path *pp, struct rt_i *rtip, fastf_t *tree_min, fastf_t *tree_max)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.31</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>so it will take a db_full_path&nbsp;&nbsp;and return the bb for the combination or region in that path, otherwise return an error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.08</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>however for finding the bb a db_full_path is not needed, generall the databse would be opened using rt_dirbuild() which returns a struct rt_i and not struct db_i</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.29</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>from that point onwards only rt_* functions would be involved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.59</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>so I am currently using db_path_to_string() to convert the struct db_full_path passed to rt_bound_dbfullpath(), to a string representation of the path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.04</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>I can use this string representation of a region/group to search the list of regions available in the struct rt_i * trip </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:42.27</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>once the region&nbsp;&nbsp;is found then I can use rt_bound_tree() to get the bb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.11</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>so my point is that db_path_to_string() seems to be the only way to jump from using db_* functions to rt_* functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.55</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: the function shouldn't take an rtip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.19</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>that's an implementation detail .. needs to be a simple form of "here's an object, get the bounding box"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.14</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>either using db_full_patths or rt_db_internal objects, not immediately clear to me which is better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.42</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>also, in general, the database won't necessarily be opened with rt_dirbuild() .. that's only for raytracing applications.&nbsp;&nbsp;they may simply call db_open() or db_open_inmem() or wdb_dbopen() or ... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.19</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>that's one of the points of creating this function, hiding the fact that we create a raytrace context so we can call prep so we can get the bounding boxes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:12.05</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45839 10/brlcad/trunk/src/proc-db/csgbrep.cpp: eliminate the remainder of dynamic memory allocation now that it is no longer needed. greatly simplifies creating sketch objects procedurally.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.58</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45840 10/brlcad/trunk/src/librt/primitives/dsp/dsp_brep.cpp: help prevent crashing if the data file cannot be found, validate before trying to use the mapped file. this should be using dsp_get_data() instead of replicating logic.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.07</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45841 10/brlcad/trunk/TODO: sketch objects get copied deeply now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:55.38</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45842 10/brlcad/trunk/TODO: most of the wdb routines now properly make a copy so wdb_export can free it. possibly a few stragglers remaining, but not nmg and sketch previously mentioned.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45843 10/brlcad/trunk/src/proc-db/sketch.c: no more dynamic mem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.43</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>brlcad: ok I get it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45844 10/brlcad/trunk/src/proc-db/csgbrep.cpp: we already created a db_internal, don't call mk_sketch() directly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.25</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>all the prep functions take an rtip as input however i.e. rt_prep(struct rt_i *rtip) &amp; rt_prep_parallel()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.43</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">knows that :)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.51</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>I am guessing these are the only 2 ways to get the bb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.00</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>you need an rtip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.06</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>the function, however, does not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.06</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>hmm so I would need to convert the input to an rtip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.14</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.19</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>rt_dirbuild() would open up the database and return a rtip, but we dont want the caller to pass the database name as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.27</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>just an object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.30</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.50</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>and they might not be a raytracing app, so all they have is a filename and/or a dbip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.20</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>you might get away with passing a (struct db_i *, struct rt_db_internal *, min, max)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.46</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>or db_i, name, min, max</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.49</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes i am looking at rt_new_rti() which has db_i</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.57</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>as input</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.25</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>yah I am guessing the user will have at a minimum the db_i</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.33</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>else they wont have a file open :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.21</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>they won't necessarily have a file open</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.33</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>you can create memory-only database instances</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.39</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ah yes right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.48</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>but that's still encapsulated in a dsip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.52</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>*dbip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.55</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>both ways, the db_i would exist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.02</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok I ll proceed assuming that a db_i can be passed by the caller , as of now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.29</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45845 10/brlcad/trunk/src/external/Unigraphics/ug-g.c: call rt_curve_free() for consistent cleanup</tt></td></tr>
+<tr><td><tt>17:17.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>17:17.34</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release 7.20.2 is posted (20110701) || BRL-CAD is participating in the ESA Summer of Code in Space!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.00</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok, what is an in-mem,&nbsp;&nbsp;you mean an in memory representation of the comb, which can be prepped ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.30</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>db_open_inmem()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.39</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a dbip that only lives in memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.52</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>you can create an in-mem dbip, add the struct rt_db_internal * to it, call rt_new_rti() to get an rtip, and finally call rt_gettree() to evaluate the bounding boxes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.26</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45846 10/brlcad/trunk/src/conv/dxf/dxf-g.c: free the sketch now that mk_sketch() doesn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.48</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>I see a duplication in 1 thing though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.12</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>since db_* functions already provide database manipulation capabilities on disk and in-mem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.38</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>is there any need to duplicate it in functions like rt_dir_build()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.40</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45847 10/brlcad/trunk/src/conv/dxf/dxf-g.c: struct is embedded, can't be null, and rt_curve_free() wants a pointer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.02</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>eg. rt_dir_build() and db_open() both open a database</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.07</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>but perhaps its because rt_dir_build() opens a on disk database and very conveniently returns a rt_i which can be used further down the raytracing system</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.13</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>rt_dirbuild() calls db_open()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.26</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>oh ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.09</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>the goal of dirbuild is to give a raytrace instance, the point of open is to get a database instance .. different (albeit related) purposes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.37</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes I get understand</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.03</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45848 10/brlcad/trunk/src/conv/shp/shp-g.c: no longer need to allocate dynamic memory for the sketch, keep it on the stack and just free the minimal set of dynamic memory that was needed for the sketch's curve segments.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45849 10/brlcad/trunk/src/libged/tire.c: another rt_sketch_internal that no longer needs to be dynamic. release the dynamic data associated with it though, now that mk_sketch() won't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.15</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>i was looking at d b _ c r e a t e _ i n m e m() as well and I see that it add a&nbsp;&nbsp;default _GLOBAL object as well, but what would be the point of adding such an object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.54</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't matter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.18</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>_GLOBAL holds the working units for the geometry in question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.30</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.47</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45850 10/brlcad/trunk/src/libged/make.c: enable creation of the old/original sketch object if a LIBGED_MAKE_SKETCH environment variable is set to 1. useful for debugging purposes and makes the code get compiled so it doesn't fall out of sync with the api.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.24</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>I was reading about sketches at <a href="http://brlcad.org/wiki/Sketch">http://brlcad.org/wiki/Sketch</a> , since I see a lot of code changes going on related to them,&nbsp;&nbsp;I guess they are simply a line and curve based drawing of a model's shape ?</tt></td></tr>
+<tr><td><tt>18:02.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-68-84-167-135.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:04.07</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: they're autocad-style 2d "drawings"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:05.17</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r0 10/wiki/Special:Log/upload: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: uploaded "[[Image:Example sketch.png]]": This is an example sketch that can be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: created with the ''make'' command if the LIBGED_MAKE_SKETCH environment variable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: is set to 1. This example sketch is primarily used for demonstration and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: debugging purposes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.51</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3063 10/wiki/Sketch: link to the example sketch object image</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.11</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3064 10/wiki/SGI_Cube: clean up alignment with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.04</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3065 10/wiki/SGI_Cube: swap images?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.55</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45851 10/brlcad/trunk/ (include/raytrace.h src/librt/htbl.c): use size_t for hit table indexing</tt></td></tr>
+<tr><td><tt>19:03.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (~ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>19:03.43</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || BRL-CAD release 7.20.2 is posted (20110701) || BRL-CAD is participating in the ESA Summer of Code in Space!</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.21</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>Trying to convert the struct rt_db_internal to bu_external now as wdb_export_external() accepts only bu_external</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.32</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>some of the primitives&nbsp;&nbsp;of librt do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.57</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>like rt_ell_export5() in librt/primitives/ell/ell.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.03</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>specifically the htond() and ntohd() seem to do conversions from an external db format bu_external to an internal rt_db_internal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.19</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: sounds too low-level</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.46</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>wdb_put_internal() and rt_db_put_internal() both work at a higher level</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:22.55</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>well I wish there was a wdb_export_external</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.02</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>*wdb_export_internal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.04</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ah ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.36</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>get/put read/write to disk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.54</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes I need to look through the libwdb functions more carefully :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:23.55</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>import/export convert from/to serialized (i.e., disk) format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.25</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>it's understandably complex to fresh eyes :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:24.58</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>yah the thing is all the functions are there to make life easy, just need to run doxygen once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.39</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>even with doxygen, there are a LOT of functions .. so it takes a while </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.52</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.59</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r45852 10/osl/trunk/compile.sh: Added a script to build ilmbase and openexr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.42</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami: ready for testing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:07.06</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:07.51</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>I'm currently trying to force openexr to use the local version of libz. It's getting from system]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.06</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>unless that causes a problem, wouldn't worry too much about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.38</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>actually I don't know how to tell openexr where to look if it's not installed on the system :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.04</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>main options are 1) install brlcad, then osl, then reinstall brlcad; or 2) link libz as svn external, then osl, then brlcad; or 3) copy libz, then osl, then brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.44</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>autoconf supports setting CFLAGS/CXXFLAGS/CPPFLAGS/LDFLAGS during configure, that'd be how</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.20</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>./configure CPPFLAGS=-I/path/to/libz/include LDFLAGS=-L/path/to/libz/libdir </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.20</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>oh ok, great then. (by the way, I didn't understand what you meant in those three options)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.12</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>in terms of dealing with libz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.18</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>basically three options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.45</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>if you assume brlcad is already compiled/installed (so you can use the libz it compiled), then you'll have to build brl-cad twice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.31</tt></td><td><font color="#b2b25e"><tt>kunigami</tt></font></td><td width="100%"><tt>true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.06</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>alternatives are to link in libz sources (svn:external) or svn cp (i.e., fork them in)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45853 10/brlcad/trunk/src/ (6 files in 3 dirs): Simplify loading of Archer plugins - use bu_brlcad_data and avoid all the CWD logic. Good cleanup, and plugin loading now works in the build directory.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.40</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>awesome</tt></td></tr>
+<tr><td><tt>20:48.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (DC@173.231.40.98)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.04</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45854 10/brlcad/trunk/src/libbu/basename.c: Generalize bu_basename with the BU_DIR_SEPARATOR variable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.52</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45855 10/brlcad/trunk/src/libbu/basename.c: Fix comments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.32</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: i imagine the bu_basename() change is user-visible in some fashion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:12.41</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>possibly the plugins one too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.11</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>possibly... plugins is visible only when running from the build directory (probably why it never got addressed sooner...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.21</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">adds NEWS item for basename</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.33</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, plugins wouldn't be then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45856 10/brlcad/trunk/NEWS: Generalized the bu_basename function to work with Windows paths - allows libraries and programs to capture their executable name without path information.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.40</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>which means what to the&nbsp;&nbsp;user?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.03</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: not entirely sure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.09</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.25</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>what wasn't working that now is working?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.28</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: things *might* not work because of that, but we apparently hadn't run into anything</tt></td></tr>
+<tr><td><tt>21:23.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad saltan (~lieven@d51530284.static.telenet.be)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.37</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45857 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.37</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: how about this. cliff and bob improved mged/archer/bwish run-time behavior on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.37</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: windows by fixing bu_basename() to work with the windows path separator. this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.37</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: low-level interface is used for capturing the path to the running executable,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.37</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: data resources, and more; so fixing the routine should generally make things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.37</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: better, making apps more consistent for windows users.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.14</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">prepares a large whoosh commit</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.16</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>that'll work :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.22</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">ducks and hides</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45858 10/brlcad/trunk/ (88 files in 23 dirs): (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Convert all BRL-CAD magic numbers to uint32_t. This change affects more than a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: dozen structs and more than 500 usages throughout the code including many</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: function signatures, but is still considered minimally impacting. This</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: consolidates the slew of int, long, unsigned int, unsigned long, etc definitions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.12</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: of magic numbers that were assuming to be 4 bytes for magic number validation.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.13</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: It also exposed a curious book-keeping practice in NMG where pointers to the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:51.42</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tests the woosh</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.56</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>yep, seems to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.13</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>argh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r45859 10/brlcad/trunk/src/libtclcad/tclcadAutoPath.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Need to copy result of call to bu_brlcad_root() into local storage before</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: calling bu_brlcad_data() because bu_brlcad_root() uses static char array and</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: bu_brlcad_data() calls bu_brlcad_root() overwriting what was previously in the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: static array.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.28</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>rt_uniresource is often(always) specified with rt_db_put_internal()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.43</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a global</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.47</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>I understand that it contains settings for uni processor machines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.56</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>yes </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.57</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>sort of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.09</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>so what happens for multi cpu machines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.26</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45860 10/brlcad/trunk/src/librt/ (4 files in 2 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.26</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: add a new private header for dsp-implementation use, moving the DSP() macro from</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.26</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: dsp.c to this new dsp.h header so that the brep routine can use the same macro.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.26</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: remove the dsp_val() debugging wrapper function while we're at it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.52</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a "cpu resource" structure used for book-keeping </tt></td></tr>
+<tr><td><tt>22:26.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.15</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.29</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>the rt_uniresource can only be used by one cpu at a time, so it effectively makes that function&nbsp;&nbsp;single-threaded</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.51</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>oh ok, some semaphore is present to enable that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.59</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>many functions pass resources around, but don't actually do anything with them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.13</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>others use the resource structure if they're SMP-aware</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.17</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>like the ray tracer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.22</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.29</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, don't worry about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.35</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.43</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>if you were passed a resource, then pass it forward</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.57</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise if you need to call something and don't have a resource, use the rt_uniresource</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.17</tt></td><td><font color="#dfdf75"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45861 10/brlcad/trunk/src/librt/primitives/dsp/dsp_brep.cpp: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: make the dsp brep implementation use the new private dsp.h header for the DSP()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: macro instead of duplicating the code (bad, no donut for you). similarly, there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: shouldn't need to be any need to validate the dsp_ip or load it because that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.35</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: would have already happened during import. redoing that here will just leak</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.36</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: memory and be not as good as what is done during import.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.08</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45862 10/brlcad/trunk/src/other/tk/CMakeLists.txt: Make sure FREETYPE_LIBRARIES is empty if FREETYPE_FOUND is a no-go.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.40</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>/var/tmp/portage/media-gfx/brlcad-7.20.2-r1/work/brlcad-7.20.2/src/libged/png.c:363:38: error: 'Z_BEST_COMPRESSION' undeclared (first use in this function)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.10</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, so, 7.20.2 is not compatible with libpng-1.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.14</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, is there a patch to make 7.20.2 build with libpng-1.5?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.15</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>that's actually a zlib symbol, one that's been there for a long time :/ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.15</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>dli: suspect that's not the actual first error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.38</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>probably preceeded with some failure to find/include zlib.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:43.47</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, seems to be, I do "make" again, that's the only error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.11</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>show the entire output from the compile line on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.33</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>make VERBOSE=1 if you're using cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.54</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, <a href="http://pastebin.com/xH38anuF">http://pastebin.com/xH38anuF</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.05</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>can't get to pastebin.com</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:45.26</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>try <a href="http://paste.ubuntu.com/">http://paste.ubuntu.com/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.20</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>gnarly, that really is the first error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.44</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, <a href="http://paste.ubuntu.com/662232/">http://paste.ubuntu.com/662232/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.06</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>so then it's finding some zlib.h that doesn't declare Z_BEST_COMPRESSION</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.25</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, let me try to build zlib</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.27</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: um.&nbsp;&nbsp;I suppose I could make a patch...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.36</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>dli: what does your system zlib.h look like?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:50.51</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, if it's not too much work :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:51.39</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>so far this has little if anything to do with libpng-1.5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.03</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, <a href="http://paste.pocoo.org/show/455636/">http://paste.pocoo.org/show/455636/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.09</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>you fools have 8 minutes until <a href="http://www.humblebundle.com">http://www.humblebundle.com</a> is over, if'n ya wanna show your support for linux or osX :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.53</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>dli: yeah, that zlib.h definitely defines Z_BEST_COMPRESSION</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.08</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>edit that file and put a #error on the line before Z_BEST_COMPRESSION</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.13</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>see if it's actually included</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.19</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, so, it's the building scripts or configure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.37</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>either neither?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.12</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: this is most of it:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/png_patch.diff">http://bzflag.bz/~starseeker/png_patch.diff</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.30</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>given it's gentoo, I'm assuming you're not using our src/other copies of zlib or libpng?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:56.42</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.09</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>the error says it's not declared, the source includes zlib.h, zlib.h lists it declared</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.15</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>ergo, there is no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.23</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, no other people, I'm the only one maintaining brlcad in gentoo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.32</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>2.5 minutes on humblebundle.com O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.08</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>nothing in libpng-1.5 changes Z_BEST_COMPRESSION</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.30</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>so it's still an unknown problem, and libpng update is possibly a big red herring</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.33</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">knows - was just giving him changes he will likely need later.</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.58</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>OH</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.13</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm looking at head .. did 7.20.2 not include zlib.h ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.19</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, why do I still need this patch? <a href="http://paste.pocoo.org/show/455638/">http://paste.pocoo.org/show/455638/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.21</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>(in src/libged/png.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.47</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>that would explain it, lucy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.59</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, the svn trunk builds without issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.04</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: um... may have something to do with spaces in paths...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.40</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>or just spaces in general</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.42</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>dli: yeah, that explains it all -- the problem is a simple one-liner header #include missing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.14</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, add the header to the c file itself?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.21</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>hm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.29</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: does the patch I posted fix it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.31</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>#include "zlib.h"&nbsp;&nbsp;was missing from that file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.45</tt></td><td><font color="#ad5b5b"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, let me try</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:01.54</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker's patch, <a href="http://bzflag.bz/~starseeker/png_patch.diff">http://bzflag.bz/~starseeker/png_patch.diff</a> fixes it for the previous release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.13</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>png.h must no longer auto-include zlib.h for you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:04.17</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45863 10/brlcad/trunk/src/librt/primitives/dsp/dsp.h: prevent crashing if the dsp buffer isn't set yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:04.46</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45864 10/brlcad/trunk/src/proc-db/csgbrep.cpp: initialize all of the dsp fields so we don't crash on export</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:08.01</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>yup, 1.4 has #include &lt;zlib.h&gt;, 1.5 does not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.22</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>png.h indicates that you should pass an actual number and that they may not correlate to the zlib values in the future</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.08</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>line 1646</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.45</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>funny, their manpage gives an example using Z_BEST_COMPRESSION :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:13.06</tt></td><td><font color="#6fd3d3"><tt>``Erik</tt></font></td><td width="100%"><tt>(does his best wallace shawn voice) docs that're out of date? inconceivable!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:14.49</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r45865 10/osl/trunk/compile.sh: added oiio compilation. there's an issue with cmake mixing TBB versions (like it does with opengl in brlcad), so by now I just set TBB_USE=0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.43</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45866 10/brlcad/trunk/src/libged/edit.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.43</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Enabled use of bounding box centers of objects as points. Basic object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.43</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: translations are working "translate -k obj1 -a obj2 obj3", "translate -a obj2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.43</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: obj1", etc. (redrawing is broken, the objects have to be blasted). It turns out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.43</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: that getting the natural origin is what is causing the 0,0,0 coordinates;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.44</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: haven't been able to figure out why. Many things aren't working yet. At least</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.44</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: some translations using reference vectors are working.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.21</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45867 10/brlcad/trunk/src/librt/primitives/ (20 files in 20 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.21</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: make the caller allocate an ON_Brep object, maybe they want to avoid dynamic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.21</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: memory allocation altogether. this plugs a leak in the csgbrep proc-db and begs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.21</tt></td><td><font color="#60b7b7"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: changing the *_brep() param to a simple ON_Brep * instead of a double pointer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.42</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">cheers on bhinesley </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.55</tt></td><td><font color="#7070d5"><tt>brlcad</tt></font></td><td width="100%"><tt>progress, :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:20.04</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>yes, finally :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:21.49</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>still a lot to fix/test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.18</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>for instance "translate 5 obj1.c" is broken</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.20</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">rolls eyes</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.31</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>heh - hang in there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:22.46</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt>that "it's all coming together" feeling is a lot of fun</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:25.59</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>starseeker: agreed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:30.04</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>if I could do one thing differently, I would have used simple linked lists of arguments with flags, instead of a union of subcommand structs of args. That made so much more work and caused so many problems, that it couldn't possibly have been worth it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:32.56</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>the only 'pro' is that it should make it easier to build subcommand arguments programatically. Create a union, attach a command name, stuff the arguments in the correct elements and go.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.09</tt></td><td><font color="#6f6fd4"><tt>bhinesley</tt></font></td><td width="100%"><tt>s/Create/declare</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.25</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - hindsight is often like that</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:49.32</tt></td><td><font color="#73da73"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note to check this out later:  <a href="http://dgnlib.maptools.org/">http://dgnlib.maptools.org/</a></font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

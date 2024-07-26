@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20061122</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20061122</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>03:08.05</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Erik or anyone else : is there a portable solution for detecting the size of pointers at preprocessor time? I'm not sure __WORDSIZE is really portable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.24</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>Maloeran: I'm not aware of a truely portable means to do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:26.15</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>probably the closest that comes to mind would be some hack-trick of defining some internal struct with a pointer in it and using the offsetof() macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.16</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I need to know at preprocessor time, sizeof() and offsetof() are not available then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.54</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>If there's no standard cpp macro available, the only thing I can think of is sticking some test in configure.ac to dump the result in config.h and use that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.20</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>offsetof is a preprocessor macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.51</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>though it probably still won't evaluate to something like a numeral .. hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.16</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I just need to know if I'm dealing with 32 or 64 bits pointers at compile time when doing some messy SSE operations on pointers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.19</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>write a little test program that returns the size</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.38</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>return sizeof(ptr_t);</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.14</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>put the test in configure.ac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.28</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>either way you gotta do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.04</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>ooh, for *that*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.19</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, just make a little program .. that gets shoved into the configure script rather trivially</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.25</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>then you have your symbol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.40</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>for that matter, there are predefined autoconf macros to do exactly that for you already</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.40</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>why not use the HAVE_64bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.04</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>AC_LONG_64_BITS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.08</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt># figure out what size pointers the compiler is actually generating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.09</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>AC_CHECK_SIZEOF(int)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.09</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>AC_CHECK_SIZEOF(long)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.09</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>AC_CHECK_SIZEOF(long long)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.09</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>AC_CHECK_SIZEOF(void *, 4)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.18</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>AC_LONG_64_BITS is shorter :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.32</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I just put these things in configure.ac?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.33</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>that just checks if longs are 64 bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.43</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>depends what it is exactly that you want to know</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.59</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I want to know the size of pointers, integer data types are already all defined in limits.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.04</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>all depends on what OS/Arch you're supporting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.19</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>then probably just that last one, using void * or char * etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:53.30</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>it'll give you a preprocessor symbol for the result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.04</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>I haven't setup a mail server since before I joined ARL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.20</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>doing postfix + imap + dns + web + roundcube is making me type too much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.20</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Neat, thanks. I got my SIZEOF_VOID_P symbol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:56.50</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>I've almost saved a bulgogi lunch worth of energy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.08</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>in terms of cost</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.36</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>1 bulgogi lunch buys you 50kWh of electricity, heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.55</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Yes, that's a much more standard unit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.28</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>ramen is a good one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.36</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>I might have to do kiloramen though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.41</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>otherwise the number gets too big</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.06</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>794 960 joules</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.00</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>4.5285 ramen per kilowatt hour</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.09</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>a hair more than a twinkie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.14</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>my roof reminds of the space race in civilization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.15</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>how much are you using for ramen cost?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:04.26</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>190 calories = 4.5285 kWh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:05.29</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>the inverse of that rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:05.54</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>humans require 2.0 - 2.3 kWh a day to live</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.22</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>erm DRA is 2000 calories average, most eat 3k .. i think i average about 4k with the workouts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.29</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>I try to stay around 2000 with a 2 mile run every other day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:16.49</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a pretty sure way to lose weight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:17.55</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>probably burning about 200-500 for the immediate run, plus a few hundred more residual through the day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.33</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>I run after work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.43</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>which makes it difficult</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:19.07</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>been doing this for the last 3 years or so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:19.53</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:19.59</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>imap is not letting me log in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.23</tt></td><td><font color="#61b961"><tt>Twingy</tt></font></td><td width="100%"><tt>problem to solve tomorrow, bed time</tt></td></tr>
+<tr><td><tt>05:10.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dragonlake (n=dragonla@221.221.238.208)</font></tt></td></tr>
+<tr><td><tt>08:07.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.05</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>It's really hard to believe no one taught compilers how to manage registers properly yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.27</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: that's the theory of register allocation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.48</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>You make a variable lifetime analysis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:16.31</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>and then colour the DAG with the same number of colours as you have registers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.02</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>That's some nice theory, all the implementations are terribly broken in practice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.28</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>you mean like gcc producing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.30</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>mov ax,cx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.32</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>mov ax,bx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.33</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.11</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>The list of horrors goes on and on... Typical non-sense : Load A into xmm0, load B into xmm1, move xmm0 to xmm2, load C into xmm0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.48</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>It could have loaded A right into xmm2, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:20.08</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: but then the alrogithm is wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:20.22</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>it should have figured out it's a single variable and give it a single register</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:20.27</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>and not smear it all around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:21.04</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>These are not even "variables", just internal temporaries</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:21.34</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>well, it then needs internal temporary dependence graph colouring :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:21.49</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>It's really a mess, and it's saturated of such inefficient use of registers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.03</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>it's easier for the ivory tower kooks from gcc when they live in an illusion they are good than if they actually did something that is really good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.51</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Last time I quickly rewrote a big chunk of code in assembly, it was 30% faster just because of the half-decent register management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:23.51</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: tell them about the problem - and they will ignore you. Insist on solution of the problem - they will mark you as their enemy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.11</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>GCC has got to understand that the variables in inner loops are _more_ important, and to keep the good stuff in registers instead of hitting the stack constantly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.25</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: yes but everyone will tell you that today it doesn't pay off to write assembly code because today's compilers produce better code than a human assembly writer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:24.41</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I heard that many times, compilers are pathetic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.02</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: mov ax, cx mov ax, bx should have ben caught at least by the peephole optimization!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.12</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>But this shows that even such a trivial peephole is not programmed in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.19</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>mov r1, r2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.24</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>mov r1, r3 translates into</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.27</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>mov r1, r3</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.57</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: but there are worse problems in the world than bad compiler output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:25.59</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>It goes that frequently when trying to shift by a variable count of bits, value must be in %rcx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.01</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>for example a lack of sex</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.13</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>But it will never load the value in that register directly, just move it around</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.47</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: why do you care? What kind of code do you write that you need speed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.58</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>High-performance ray-tracing code ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.04</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>BRL-CAD?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.13</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Yes, the next raytracer of BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.23</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>are you paid for that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.26</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.34</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>I want to be paid for such things :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.07</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>:) These are interesting problems to play with, it's great to be able to do that full-time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.22</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: I can do fast programs even without assembly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.42</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: for example run the Links browser. Display some big fat JPEG so that it is rescaled in the process.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.19</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Then relax and realize that the rescaling is performed in linear photometric space with 48bits per pixel and there is gamma correction and dithering applied after, even on 24bpp display</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.27</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>And it's not even in assembly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.40</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>But people tend to say my dither.c is hard to understand</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.41</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Using mmx there?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.45</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>no mmx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.49</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>just ordinary C compiler output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.14</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Nice, though the problem is rather simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.23</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: I realized Linux people don't like self-modifying code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.33</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>so I found out how to work around this limitation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.53</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>I generate a separate routine for every memory organization using a #define template :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.56</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Processors generally don't like it much, but it's worth it if you modify once and execute million times</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.16</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Would you have an amd64 opcode emitter at hand?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.25</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Well - all the linux folks reached with their anti-self-modifying-code stance is that the code has to be bigger</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.30</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>but is as fast :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.46</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>what is an opcode emitter?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.07</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>To be able to generate binary encoding of instructions at runtime from code, to be able to run it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.52</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>you mean to link an assembler into the program and then the program compiles parts of itself on the fly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.09</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>More or less, the program generates optimized pipelines for the task at hand and executes them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.09</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>I don't have amd64 assembler at hand.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.43</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: what computer did you start with?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.58</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I would prefer to do that instead of fixed assembly pipelines, once I get too tired of compiler incompetence</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.14</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>I begun coding on a 486</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.36</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>I began basically with assembly on ZX Spectrum when I was 13.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.44</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Trying to do fancy graphics on the thing, 2d and 3d, I learned assembly back then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.58</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>I did fancy graphics too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.05</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Eheh nice. I was 12-13 as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.13</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>for example I wrote a doom engine where there was a bathroom where there was 10 cm of blood on the floor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.28</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>when you walked there, it did real waves and circles like on water which reflected off the walls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.55</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Impressive, I struggled for a while to understand the basics of 3d rendering back then, quaternions especially</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.56</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>and when you killed an enemy, blood sprayed around the screen and then the drops slowly moved down</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.59</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Doing any work on or related to BRL-CAD lately?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.09</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>no but I would like to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.18</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>now I work as a C/ASM programmer on an embedded 186 platform</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.31</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Eheh, neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:37.57</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>but we are using Borland C compiler where the optimizations don't work at all even if there are flags for it. I find this compiler a big turnoff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.01</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>It's buggy too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.06</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>and it's a fossil.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.25</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>and the CPU is buggy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.51</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>What are the chips used for?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:38.59</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>for a MP3 player</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.05</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>or Internet radio</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.18</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: that's normal with today's products</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.41</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: if it happens more than once in 5 minutes it's suspicious, but 1 per day is normal today</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:42.29</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>unfortunately.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:43.10</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Microsoft really managed to get the masses used to deal with crappy software</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.13</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Another "detail" : GCC never understood that movlps only takes 2 cycles instead of the 3 cycles of movss on amd64/Opterons for the same result in most cases</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.24</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: I have two penguin plush dolls, one 60cm high, another 15cm high</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.43</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>movss for memory load that is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:45.29</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Maloeran: you can't really expect me to understand movlps by heart when I am working on a 186 platform and the last time I wrote assembly for fun, the latest processor was Pentium</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.07</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Eheh, sorry. In a context of scalar operations, movlps loads 64 bits from memory into xmm register and leaves the upper 64 bits untouched, movss loads 32 bits from memory and clears the upper 96 bits to zero</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.54</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Especially when the load is followed by a shuffle to replicate the float 4 times in the register, as it's often the case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.07</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>does it calculate correctly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.13</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Or does it divide like Pentium?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.49</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Sure it's correct, and they fixed most of the "rounding mode" and denormals mess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.12</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>wow!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.19</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Correct floating point implementation!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.23</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>The instruction set it still a mess and the instruction encoding is atrociously long because all the short opcodes are used for legacy 8086</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.33</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>Like I worked with some arm920t from Cirrus Logic and they had crappy FPU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.40</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>sometimes it produced opposite sign etc. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:50.46</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Woohoo :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:51.08</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>sometimes you had to wait a bit so it wouldn't make mistake etc. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:51.14</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>It's nowhere near the elegancy and efficiency of Altivec, but... it's usable, unlike mmx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:51.23</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>what is altivec?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:51.54</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Apple's SIMD instructions on their IBM processors, G3/G4/G5</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.05</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>it was crappy, but it had a bold-sounding name MaverickCrunch(TM)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.20</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>You now today it doesn't matter if it works right or wrong - all that matters is the marketing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.53</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>If your engineers cannot fix it, one addition (TM) will do.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.57</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>That's mostly true, unfortunately</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.08</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>And that's also why I am doing <a href="http://ronja.twibright.com">http://ronja.twibright.com</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.16</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>and why I bought an old 8-bit computer yesterday.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.25</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>I want to have at least one BugFree(TM) computer at home</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:53.35</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>It's the same model I had as a kid.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:54.58</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Sounds nice. I grew up with a 486 and a Pentium 133</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:55.20</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>You never rode a healthy silicon horse :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:55.43</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>healthy pony better than a sick stallion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.35</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>But Frederico Faggini was at least able to do it right on the first try</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.38</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>The stallion doesn't run straight and occasionally crashes in stuff on the way, but it's still better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:58.08</tt></td><td><font color="#5d5db1"><tt>Maloeran</tt></font></td><td width="100%"><tt>Not a name I'm familiar with, not finding much on google</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.42</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>THe guy who designed Z80</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:03.37</tt></td><td><font color="#6b6bcd"><tt>archivist</tt></font></td><td width="100%"><tt>Z80 was slow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.49</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>yes Pentium 4 @ 3GHz is faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.54</tt></td><td><font color="#6b6bcd"><tt>archivist</tt></font></td><td width="100%"><tt>2meg 65C02 is da man in those days</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:05.04</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>6502 was buggy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.01</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>omg the old discussion what was better, whether a buggy 6502 virtually without registers that took little cycles per instruction or BugFree(TM) Z80 with tons of registers that took at least 4 ticks per inisn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.26</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>"and Z80 didn't have the CRS instruction!"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.40</tt></td><td><font color="#69c869"><tt>clock_</tt></font></td><td width="100%"><tt>CRS = CRash System</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:27.42</tt></td><td><font color="#b4b45f"><tt>brlcad</tt></font></td><td width="100%"><tt>yay, ponies</tt></td></tr>
+<tr><td><tt>22:21.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.35</tt></td><td><font color="#b45e5e"><tt>``Erik</tt></font></td><td width="100%"><tt>o.O</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:19.06</tt></td><td><font color="#b45e5e"><tt>``Erik</tt></font></td><td width="100%"><tt>/nick quanzaclause</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

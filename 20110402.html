@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110402</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110402</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:35.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@S010600221561996a.vc.shawcable.net)</font></tt></td></tr>
+<tr><td><tt>01:11.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crazy_imp (~mj@a89-182-193-252.net-htp.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:15.47</tt></td><td><font color="#d97272"><tt>bhinesley</tt></font></td><td width="100%"><tt>Whew, my proposal is in. Best of luck to you all. I'm taking the rest of the night off.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.13</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>bhinesley: awesome!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.31</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>perfect timing too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.24</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami: that's sort of the gist ... but not exactly interpolating rtedge output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.09</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>rtedge shoots a grid of rays, one ray per pixel, keeping track of what is hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.26</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>anywhere there are two neighboring rays that hit two different objects, it colors one of the two pixels so an edge is drawn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.47</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>repeat over all pixels and you have an edge outline of the model in raster image form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.38</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>to make a vector image instead of a raster image, you need spline curves, so you're trying to evaluate and "fit" a curve that will match the edges that you detect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.39</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>you could use rtedge's output, but that will generally result in a very crappy set of curves unless you shoot a very very dense grid (i.e., a big image)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.22</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>better would be to detect edges at a given resolution, then refine to even higher resolution so you "hone in" on the real edge, then use that for the spline curve control points, trying to find a balance of not too many or too few control points, and producing a vector image within a reliable timeframe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.44</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: would it be correct to say that the focus for an image conversion library would be on robustness and efficienty rather than covering a lot of formats?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:16.54</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>(robustness referring to things like handling very large images without wiping out on ram limitations and dealing with corrupt data...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.30</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: my priorities would be on 1) API design, 2) robustness, 3) breadth of support, and 4) performance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.12</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>it's hard to perform slow image processing, I'm not too worried about that unless it's abysmal :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.38</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>getting the API right is the hardest part that probably deserves a couple solid weeks attention</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.33</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>surveying and overviewing/reviewing all of the current image processing tools, figure out how they might fit into the API ...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.54</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>figure out a way to make the library emminently extensible pluggable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.41</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>bhinesley: really nice work on your proposal, additional feedback should be sometime this weekend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.09</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">was under the impression that handling really large images in low memory situations was something of a problem...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.19</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, I think every one of our image converters presently assumes the image will fit in-core</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.36</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>if the API is right, then it's just an implementation detail to optimize that later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.47</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.48</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>where you tile and use scratch disks or whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.12</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't exactly hit that limit very often</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.48</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.22</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>guess I'm thinking about it due to those gargantuan scans from the National Archives, but that's a one-off situation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.33</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, you scan data that big .. but you rarely render an image that big :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.58</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>heh - high res posters ftw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.49</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>still if it's done right, then merging in support for a given filter or conversion format could make sure the iterators are all 64bit unsigned ints</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.43</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>or at least 32bit unsigned ints .. 4294967295 x 4294967295 is a pretty big image..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.39</tt></td><td><font color="#d97272"><tt>bhinesley</tt></font></td><td width="100%"><tt>brlcad: thank you, I look forward to it</tt></td></tr>
+<tr><td><tt>04:28.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>04:36.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kasuga5 (~kasuga5@wlnt-02-042.dsl.netins.net)</font></tt></td></tr>
+<tr><td><tt>05:02.12</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>06:50.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>07:26.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad adityag1 (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>07:34.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>08:02.22</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>08:08.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@dsl-173-248-203-45.acanac.net)</font></tt></td></tr>
+<tr><td><tt>09:33.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@dsl-173-248-203-45.acanac.net)</font></tt></td></tr>
+<tr><td><tt>10:39.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>11:08.43</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>12:05.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crazy_imp (~mj@a89-182-193-252.net-htp.de)</font></tt></td></tr>
+<tr><td><tt>14:49.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad WhiteCalf (MK@whitecalf.net)</font></tt></td></tr>
+<tr><td><tt>14:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik__ (Here@c-69-140-109-104.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.09</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>huzzah, I has intarwebz again</tt></td></tr>
+<tr><td><tt>15:57.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr><td><tt>16:11.09</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad adityag (~ADITYA@182.237.144.88)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.45</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: do you know of any lisp or scheme implementation that bootstraps itself using only assembly and has no C code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.42</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>most schemes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.49</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>oh, wait, no C? hrm, no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.18</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>C is lingua de franca, it's hard to find anything at all that doesn't use it to bootstrap :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:24.53</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>ooooold lisp 1.5 is asm only, but for the, uh, ibm 704 and pdp1 iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.42</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>graham says you can be working with 7 primitives, right? self-bootstrapping shoudln't be TOO hard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.53</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, that's why I was wondering if someone had done it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.03</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>maybe movitz, have to check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.11</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>(mebbe we shoulda asked sbcl to submit a self-bootstrap to gsoc O.o)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.36</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>7 primitives is very basic though - don't know if you can get to threads or system file io stuff with that...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.39</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.15</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is goofing off by digging around the whole "minimal bootstrap, literate lisp" thing again</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.26</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>two most interesting sources so far are the islisp spec (which unlike ANSI is explicitly public domain, albeit quite a bit smaller) and sacla</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.47</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>given that on most os's, any syscall is a C function, I don't know how well you'll do avoiding C without working directly on the metal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.14</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>what about writing directly in assembly?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.40</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>doable, if you happen to match the kernels call convention... which can be tricky</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.18</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>my brainfuck compiler to asm has "if mac, do this, if bsd, do this, if this version of linux, do this, if that versino of linux, do that..."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.56</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.20</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>most of that is just frontmatter... generally, it breaks down to unix/bsd/mac style vs linux/dos style... but there're still gotchas</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.43</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>(yes, linux is closer to dos than unix at that level.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.48</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>ow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.31</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">huts for old lisp 1.5 sources...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.46</tt></td><td><font color="#d4d46f"><tt>``Erik</tt></font></td><td width="100%"><tt>I got mine at the simh site</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:39.59</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>hah - no license info though <a href="http://www.softwarepreservation.org/projects/LISP/lisp1.5/">http://www.softwarepreservation.org/projects/LISP/lisp1.5/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.06</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>this one still has unisys propritary notes on it:&nbsp;&nbsp;<a href="http://www.frobenius.com/source.htm">http://www.frobenius.com/source.htm</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.55</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>ah:&nbsp;&nbsp;<a href="ftp://ftp.informatimago.com/pub/free/develop/lisp/lisp15-0.0.2.tar.gz">ftp://ftp.informatimago.com/pub/free/develop/lisp/lisp15-0.0.2.tar.gz</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:54.04</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>probably would have to check with MIT, but that might be usable...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:11.03</tt></td><td><font color="#b4b45e"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm.&nbsp;&nbsp;<a href="http://c2.com/cgi/wiki?LispImplementationsWrittenInLisp">http://c2.com/cgi/wiki?LispImplementationsWrittenInLisp</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.53</tt></td><td><font color="#b15db1"><tt>kunigami</tt></font></td><td width="100%"><tt>brlcad: thank you for the clarification. I couldn't get a draft of the proposal. I'm considering focusing in the two other proposals I've submitted.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.47</tt></td><td><font color="#60b7b7"><tt>CIA-52</tt></font></td><td width="100%"><tt>BRL-CAD: 0399.30.66.238 07<a href="http://brlcad.org">http://brlcad.org</a> * r2795 10/wiki/User:Bhinesley: GSoC proposal information removed (has been submitted)</tt></td></tr>
+<tr><td><tt>20:25.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad AbhijitKane (~Abhijit@111.93.5.194)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.43</tt></td><td><font color="#b86161"><tt>AbhijitKane</tt></font></td><td width="100%"><tt>I've submitted a draft proposal on the GSOC website.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.23</tt></td><td><font color="#b15db1"><tt>kunigami</tt></font></td><td width="100%"><tt>hi, is there some reference on rt stand-alone usage? I've seen mged reference, but I'm confused with rt, specially with defining the objects. thanks!</tt></td></tr>
+<tr><td><tt>21:44.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@d142-058-173-143.wireless.sfu.ca)</font></tt></td></tr>
+<tr><td><tt>22:21.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@d142-058-173-143.wireless.sfu.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.50</tt></td><td><font color="#b15db1"><tt>kunigami</tt></font></td><td width="100%"><tt>sorry, I was too hasty in asking that. I found a lot of documentation in brlcad/doc/. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.04</tt></td><td><font color="#5d5db1"><tt>brlcad</tt></font></td><td width="100%"><tt>np</tt></td></tr>
+<tr><td><tt>23:28.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dassouki (~ahmed@142.167.162.112)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:29.39</tt></td><td><font color="#c16565"><tt>dassouki</tt></font></td><td width="100%"><tt>this might seem like a silly question, but where can I find sets of plans for architecture related projects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:29.42</tt></td><td><font color="#c16565"><tt>dassouki</tt></font></td><td width="100%"><tt>like full projects</tt></td></tr>
+<tr><td><tt>23:51.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dassouki (~ahmed@142.167.162.112)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

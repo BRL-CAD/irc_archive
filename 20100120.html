@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20100120</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20100120</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.10</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>rightly so.. it's not what RT_BOT_CK_MAGIC expects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.17</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.42</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>we're feeding it a bot_specific there .. but that's not what that macro was written to test for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.50</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a bad check, not a bad pointer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.54</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, OK</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.05</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>so we shouldn't be checking there at all?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.15</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>um, like defgeneric vs no defmethod, 'r sumfin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.32</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>magic type assertions O.o :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.41</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nukes the check and recompiles</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.12</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>bot_specific doesn't seem to have a magic field at all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.48</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">winces - so 7.16.4 won't raytrace bots</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.00</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>well, unoriented bots anyhow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.02</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note to make some bot examples and stick them into the regression test suite</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:07.56</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37319 10/brlcad/trunk/src/librt/primitives/bot/ (bot.c g_bot_include.c): bad MAGIC check. it's not a rt_bot_internal so the check on a bot_specific is wrong. that variable isn't even used, so remove it as a parameter.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.13</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>I didn't expect 7.16.4 to be up more than a couple weeks regardless</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.21</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.38</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>still, that probably warrants a NEWS item - visible to at least one user :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.04</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>a regression test on all the bot types would be good to have .. make one of each type on a sphere, make sure they all match</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.17</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, that's end-user visible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.20</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>36919... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.51</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>(another thing to add to the regression test suite?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.45</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37320 10/brlcad/trunk/NEWS: Sean fixed a bad MAGIC check being performed on bots, resolves raytracing failure on unoriented bots.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.59</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>interesting, I wasn't doing the test compiles right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.09</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, well - live and learn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37321 10/brlcad/trunk/NEWS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: might as well fill out as much info as we have room for, and past tense. fixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: raytrace abort on unoriented bots due to a bogus badmagic check (testing for the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: wrong structure type).. a regression test on the various bot types is in order.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.40</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37322 10/brlcad/branches/dmtogl/src/other/tkhtml3/tclconfig/: Add some svn:ignore settings for the autotools files.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.28</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37323 10/brlcad/branches/dmtogl/src/other/tkhtml3/ (. src/): More tkhtml3 svn:ignore tweakage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.08</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37324 10/brlcad/trunk/regress/ (Makefile.am bots.sh): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.08</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: add a new regression test to test BoT functionality. more specifically, see if</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.08</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: the various oriented and unoriented volume mode bots all work as expected.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.08</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: tests various bot commands such as facetize, bot_flip, bot_merge, bot_sync,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.09</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: bot_vertex_fuse, bot_face_fuse. still WIP. next need to make sure they all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.11</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: render identical.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.21</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37325 10/brlcad/trunk/regress/bots.sh: add in raytrace comparisons too. curiously, they all exhibit off-by-one differences from each other even though their got vertices seem to match exactly (per print resolution).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.28</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37326 10/brlcad/trunk/regress/bots.sh: more turds to clean up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.43</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>there, that should catch bot changes now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:52.49</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>the off-by-one differences are certainly peculiar but minor .. there is one sensitive test in there that compares a merged an unmerged bot (comparing their db get V strings for both bots) but thusfar is an exact match</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.37</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37327 10/brlcad/trunk/src/libbu/malloc.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.37</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: encountered a bizzare crash where a zero-length realloc ended up getting called.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.37</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: sure enough, we weren't testing for 0-length bu_realloc() (we only checked</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:01.37</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: malloc/calloc), so add the sanity test and bomb like we're supposed to.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:05.49</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37328 10/brlcad/trunk/src/libbu/log.c: plug a memory leak</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37329 10/brlcad/trunk/src/mged/setup.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: bleh, make sure line is a non-null pointer before calling bu_log. moreover,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: make sure we provide a format specifier in case the line we parsed has format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: specifiers embedded in it! that had to be at least a few of the observed mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:16.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: crashes..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.05</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37330 10/brlcad/trunk/src/libged/rt.c: clamp ReadFile to RT_MAXLINE like we do for the unix call; add a little bit of sanity clamping just in case we stumble down through the code with badness.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.48</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37331 10/brlcad/trunk/src/librt/primitives/bot/bot.c: add some no-op +0's to keep things lined up nicely.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.08</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37332 10/brlcad/trunk/include/rtgeom.h: ws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.00</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>cool - the trunk tkhtml3 build succeeded on Redhat, Mac, and Gentoo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.22</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">waits for ``Erik to complain about it breaking on FreeBSD...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:09.18</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>dmtogl branch is the beginnings of the "correct" solution, but that has a lot of testing and probably a lot of work ahead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:09.21</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>neato, five errors in the bot.sh regression test :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:09.44</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: won't know until tomorrow... someone shoved all that docbooks tuff in there and now I can't fit it on my home fbsd machine... :D</tt></td></tr>
+<tr><td><tt>04:25.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
+<tr><td><tt>04:26.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=Warlock@bas2-sudbury98-1177680376.dsl.bell.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:35.21</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37333 10/brlcad/trunk/src/librt/primitives/ (35 files in 34 dirs): add a slew of validation checks on the vhead parameter (independent of the checks done by the macro when adding to the list)</tt></td></tr>
+<tr><td><tt>04:54.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:54.18</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37334 10/brlcad/trunk/src/libged/draw.c: minor cleanup. ws. added null check.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:57.55</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: errors?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:06.28</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37335 10/brlcad/trunk/TODO: upshift my tasks expected for the remainder of this month.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.38</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37336 10/brlcad/trunk/TODO: add stephen's work to implement a new rt lighting model.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:13.40</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37337 10/brlcad/trunk/TODO: oop, it was already listed down below -- move it on up.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:22.08</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: here's a nickel kid, go get yourself a new harddrive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:22.29</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37338 10/brlcad/trunk/src/ (libgcv/Makefile.am libged/Makefile.am): re-enable strict flags in libgcv, placehold in libged. purported jump clobber issue isn't going to sort itself out. (fix it..)</tt></td></tr>
+<tr><td><tt>06:56.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
+<tr><td><tt>07:10.39</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+o brlcad] by ChanServ</font></tt></td></tr>
+<tr><td><tt>10:58.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:16.25</tt></td><td><font color="#6060b7"><tt>d-lo</tt></font></td><td width="100%"><tt>Morning all!</tt></td></tr>
+<tr><td><tt>12:02.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>12:12.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.48.97)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:24.17</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: <a href="http://pastebin.bzflag.bz/d28740b31">http://pastebin.bzflag.bz/d28740b31</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.01</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: got one, and a new machine... but I'm pulling a brlcad and taking forever to migrate... :D (I may need to fix parts of the kenrel to get things to work right)</tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.48.97) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-82 (n=CIA@208.69.182.149) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (n=erik@c-69-140-109-104.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d-lo (n=claymore@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@emc/developer/SWPadnos) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurg1 (n=cosurgi@atak.bl.pg.gda.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (n=alex_jon@emc/board-of-directors/alexjoni) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (n=robert@silentflame/member/roberthl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (n=indianla@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (n=sean@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:32.38</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+oo ChanServ brlcad] by irc.freenode.net</font></tt></td></tr>
+<tr><td><tt>12:43.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:43.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.48.97) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (n=erik@c-69-140-109-104.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d-lo (n=claymore@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@emc/developer/SWPadnos) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurg1 (n=cosurgi@atak.bl.pg.gda.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (n=sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (n=indianla@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (n=robert@silentflame/member/roberthl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:45.43</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+oo ChanServ brlcad] by irc.freenode.net</font></tt></td></tr>
+<tr><td><tt>12:45.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@87-194-141-154.bethere.co.uk)</font></tt></td></tr>
+<tr><td><tt>12:46.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-82 (n=CIA@208.69.182.149) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:46.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (n=alex_jon@emc/board-of-directors/alexjoni) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:46.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (n=sean@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (n=alex_jon@emc/board-of-directors/alexjoni) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-82 (n=CIA@208.69.182.149) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@87-194-141-154.bethere.co.uk) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (n=robert@silentflame/member/roberthl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (n=indianla@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurg1 (n=cosurgi@atak.bl.pg.gda.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@emc/developer/SWPadnos) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d-lo (n=claymore@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (n=erik@c-69-140-109-104.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.48.97) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>12:52.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:52.44</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+oo brlcad ChanServ] by irc.freenode.net</font></tt></td></tr>
+<tr><td><tt>12:55.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:55.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:58.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>12:58.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (n=sean@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (n=alex_jon@emc/board-of-directors/alexjoni) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-82 (n=CIA@208.69.182.149) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@87-194-141-154.bethere.co.uk) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (n=robert@silentflame/member/roberthl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (n=indianla@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurg1 (n=cosurgi@atak.bl.pg.gda.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@emc/developer/SWPadnos) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d-lo (n=claymore@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (n=erik@c-69-140-109-104.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.48.97) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>13:16.24</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+oo brlcad ChanServ] by irc.freenode.net</font></tt></td></tr>
+<tr><td><tt>13:19.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:19.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ChanServ (ChanServ@services.)</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad poolio (n=poolio@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@121.Red-81-32-105.dynamicIP.rima-tde.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (n=archivis@87-194-141-154.bethere.co.uk) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@69.90.48.97) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (n=erik@c-69-140-109-104.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad louipc (n=louipc@archlinux/trusteduser/louipc) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d-lo (n=claymore@63.246.136.16) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@emc/developer/SWPadnos) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cosurg1 (n=cosurgi@atak.bl.pg.gda.pl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (n=starseek@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (n=sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianla1ry (n=indianla@BZ.BZFLAG.BZ) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (n=maloeran@glvortex.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (i=1000@s142-179-54-198.bc.hsia.telus.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad roberthl (n=robert@silentflame/member/roberthl) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:36.57</tt></td><td colspan=2><tt><font color="#009900">*** mode/#brlcad [+oo ChanServ brlcad] by irc.freenode.net</font></tt></td></tr>
+<tr><td><tt>13:39.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Computer (n=Computer@unaffiliated/computer) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:39.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Yoshi47 (n=jan@64.235.102.210) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:42.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-82 (n=CIA@208.69.182.149) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:42.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (n=alex_jon@emc/board-of-directors/alexjoni) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>13:42.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PrezKennedy (i=Matthew@whitecalf.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.32</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03irpguardian * r37339 10/brlcad/trunk/src/rt/view.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.32</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Properly initialized timeTable with '-1' when first created. This however causes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: program to die when more than 1 processor works on it. (Adding semaphores made program</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: hang).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.33</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Fixed pointers returned from timeTable_init to allow them to work correctly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.35</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Inverted test Image now renders with 1 processor, as opposed to having a bus error.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.08</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37340 10/rt^3/trunk/ (3 files in 3 dirs): Drop NMAD stuff for now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:26.47</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37341 10/rt^3/trunk/ (10 files in 2 dirs): Drop AbstractDBObjectSource and subclasses for now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:06.30</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37342 10/rt^3/trunk/ (30 files in 11 dirs): Roll contents of iBME/iBMECommon.h to GS/GSCommon.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.30</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37343 10/rt^3/trunk/ (8 files in 3 dirs): Move array.h</tt></td></tr>
+<tr><td><tt>16:21.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (n=kvirc@p5B14945A.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37344 10/rt^3/trunk/include/common/: Drop unused dir.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:29.03</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37345 10/rt^3/trunk/ (5 files in 4 dirs): Drop Object class. There's just no point in keeping it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03irpguardian * r37346 10/brlcad/trunk/src/rt/view.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Basic Heat-Graph now works! ...with single processor only.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Currently uses only 3 different shades of colors to represent time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:30.36</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: taken to process image. Blue-short, Yellow-Medium, Red-Long.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.16</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37347 10/rt^3/trunk/include/iBME/String.h: Drop String class. There's just no point in keeping it either.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:36.27</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37348 10/rt^3/trunk/include/iBME/: Drop unused dir.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:38.30</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37349 10/rt^3/trunk/src/ (3 files in 2 dirs): Consolidate Util classes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:40.39</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37350 10/rt^3/trunk/src/GS/CMakeLists.txt: Forgot mod to CMakeLists.txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.54</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37351 10/rt^3/trunk/src/utility/: Drop unused dir.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:54.44</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37352 10/rt^3/trunk/ (9 files in 8 dirs): Drop DataStream. Using QT's instead.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:03.58</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37353 10/rt^3/trunk/ (23 files in 5 dirs): Drop now obsolete io stream classes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:09.56</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37354 10/rt^3/trunk/include/GE/io/array.h: Drop Array.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.00</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37355 10/rt^3/trunk/ (include/GE/io/ src/GE/io/): Drop unused dirs.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:14.51</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03davidloman * r37356 10/rt^3/trunk/ (include/uuid/ src/other/CMakeLists.txt src/other/uuid/): Drop third party UUID package, using QT's</tt></td></tr>
+<tr><td><tt>17:18.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
+<tr><td><tt>19:13.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite (n=matthew@dhcp-143-177.mcme-students.carleton.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.34</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37357 10/brlcad/trunk/regress/bots.sh: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.34</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: mged spits out a 'Using Tcl Library...' message for certain build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.34</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: configurations, so make sure we strip that out. another plug to get better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.34</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: separation of stdout from stderr for MGED/LIBBU so command results are written</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.34</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: to stdout with info sent to stderr, all via libbu logging mechanism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.47</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03irpguardian * r37358 10/brlcad/trunk/src/rt/view.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.47</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Heat-graph now has a set greyscale color distribution, where light pixels took the longest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.47</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: while dark pixels took the shortest. Still only works with 1 processor.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.43</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">growls... big E and little e commands complicate man page naming</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.13</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">makes a note to merge the doc on the new sca options into the docbook version...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.23</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37359 10/brlcad/trunk/ (127 files in 2 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.23</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Add extensive work by Janine Gettier on generating MGED comman man pages in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.23</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: Docbook. Haven't proof-read these for indenting/etc. but they do all compile to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.23</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: html and man page, so go ahead and add them to revision control.</tt></td></tr>
+<tr><td><tt>20:55.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
+<tr><td><tt>21:02.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (n=Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.07</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37360 10/brlcad/trunk/TODO: need a bu logging mechanism that allows better separation of stderr from stdout while still being a bu_log() style mechanism. mged particularly needs this as do the ray tracers.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.52</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: e is 'draw', E is usually 'bigE' </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.04</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.39</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>e is draw, d is erase ..&nbsp;&nbsp;it doesn't get much better than that :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.01</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>can we fix that in 8.0? :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.06</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.55</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>but it's so intuitive, just like the vim commands I was telling bob about earlier... :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.53</tt></td><td><font color="#af5caf"><tt>louipc</tt></font></td><td width="100%"><tt>hey guys. How would I embed math into mged commands. I think I recall someone using Tcl...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.51</tt></td><td><font color="#af5caf"><tt>louipc</tt></font></td><td width="100%"><tt>something like 'in shaft rcc 0 0 0 0 0 10 [math 2/2]'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.56</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>[expr 5+3]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.53</tt></td><td><font color="#af5caf"><tt>louipc</tt></font></td><td width="100%"><tt>hmm seems to throw an error for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.08</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>globbing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.16</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>turn globbing off or escape the brackets :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.05</tt></td><td><font color="#af5caf"><tt>louipc</tt></font></td><td width="100%"><tt>aarrr thank you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.09</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt>yargh, np</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.27</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>set glob_compat_mode 0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.40</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03irpguardian * r37361 10/brlcad/trunk/src/rt/view.c: Made the background better contrast to dark and light colors in heat-map</tt></td></tr>
+<tr><td><tt>22:01.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Phurl (n=mdupont@ip-81-210-245-60.unitymediagroup.de)</font></tt></td></tr>
+<tr><td><tt>22:08.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad akafubu (n=akafubu@unaffiliated/akafubu)</font></tt></td></tr>
+<tr><td><tt>22:29.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Phurl (n=mdupont@ip-81-210-245-60.unitymediagroup.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.14</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37362 10/brlcad/branches/dmtogl/src/other/tkhtml3/src/Makefile.am: Take a stab at creating a pkgIndex.tcl - dlopen doesn't seem to like the target library for some reason when given the output fo this rule as a pkgIndex.tcl, so some issues to resolve.</tt></td></tr>
+<tr><td><tt>22:40.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite (n=matthew@dhcp-143-177.mcme-students.carleton.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.03</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37363 10/brlcad/branches/dmtogl/src/other/tkhtml3/src/Makefile.am: Tkhtml Makefile.am fixes - this setup has now successfully installed Tkhtml in such a fashion that package require Tkhtml succeeded.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.52</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes he still has to deal with the whole STUB thing...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:08.54</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: just when you get a sec - I note the presence of "developer commands" in the Vol II appendix - would those also go under man1 or would it be better to stick them somewhere else?&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.40</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">would like to document devel only commands, but is aware they need to be (minimally) flagged as not for end-user consumption - man8 seemed like it is the closest conceptual map, but is flagged as avoid in the docbook README file</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.56</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt>should we just leave the devel command descriptions in the source only?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:11.46</tt></td><td><font color="#539e9e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks rset in particular benefit from a man page and some common use examples, but that's just me...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:30.46</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03irpguardian * r37364 10/brlcad/trunk/src/rt/view.c: Code cleanup, and commenting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:50.55</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>mv: cannot stat `e_muves.1': No such file or directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.22</tt></td><td><font color="#6ed16e"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">saw that earlier, too</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:53.23</tt></td><td><font color="#4b904b"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, looks like E_MUVES.1 is getting put into doc/docbook/.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:56.46</tt></td><td><font color="#b15db1"><tt>CIA-82</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37365 10/brlcad/trunk/doc/docbook/system/man1/en/e_muves.xml: e_muves not E_MUVES for the refname, also set a refentry id</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

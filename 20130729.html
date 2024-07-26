@@ -1,0 +1,559 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20130729</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20130729</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:08.51</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56298 brlcad/trunk/src/libged/polyclip.cpp: well if they are, should be okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.24</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56299 (brlcad/trunk/src/libged/polyclip.cpp brlcad/trunk/src/libged/view_obj.c and 4 others): eliminate undocumented dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.58</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56300 brlcad/trunk/src/libpc/solver_test.cpp: document why the libpc tests are disabled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.45</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56301 brlcad/trunk/src/librt/cut.c: eliminate the manual recursion dead code since rt_ct_optim() is better reuse and the implications of the dead one are not clear.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.22</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56302 (brlcad/trunk/src/librt/mkbundle.c brlcad/trunk/src/librt/tests/CMakeLists.txt): extract the ray bundle test harness into its own proper test program</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.46</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>brlcad : I found an interesting and an annoying bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.48</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>at L:811 in viewedge.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.09</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>When i remove the acquire semaphore (comment it)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.53</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>the rtedge command works fine. else it hangs in between ?Do we need the semaphore there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.43</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>Because evidently even if it is done parallelly. each process will be writing at separate lines.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:55.40</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56303 brlcad/trunk/src/libbrep/intersect.cpp: If we insert the inner points of overlap2d like this, the points may not be in order. So we don't use these points. A better approach would be using a mapping of m_a and m_b.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.40</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level_: yes the semaphore is needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.46</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if it hangs, something else is wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:58.55</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>like something else acquired that same semaphore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.17</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>or even the same process that is running acquired one and didn't release it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:08.53</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:phoenixyjll * 56304 brlcad/trunk/src/libbrep/intersect.cpp: Remove duplicated curves.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level_: make sure icv doesn't acquire that same semaphore before calling/returning back to viewedge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:14.11</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56305 (brlcad/trunk/include/icv.h brlcad/trunk/include/magic.h brlcad/trunk/src/libicv/fileformat.c): Converting ICV_IMAGE_FILE_MAGIC to ICV_IMAGE_MAGIC.</tt></td></tr>
+<tr><td><tt>04:37.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level_ (0e8bf3a2@gateway/web/freenode/ip.14.139.243.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.02</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>brlcad : icv doesnt acquire any semaphore.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:39.55</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>brlcad: can it be machine dependent ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:49.43</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>It is something like a deadlock happening here.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:49.53</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>And I seem to have no idea how to resolve this.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:50.22</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>brlcad : can we track the acquired semaphores ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:07.46</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level_: you can set BU_DEBUG_PARALLEL, but you'll do better to set breakpoints in a debugger</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.49</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>BU_DEBUG_PARALLEL is set with the bu debug flags (which is the -! option for rtedge, see src/rt/opt.c)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.58</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>see include/bu.h for the value to set (in hex)</tt></td></tr>
+<tr><td><tt>05:10.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level__ (0e8bf3a2@gateway/web/freenode/ip.14.139.243.162)</font></tt></td></tr>
+<tr><td><tt>05:15.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level_ (0e8bf3a2@gateway/web/freenode/ip.14.139.243.162)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:15.40</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks ab bu.h</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.10</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>brlcad : I found this error by setting debug points in the code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.21</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>which debugger do u suggest ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.52</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>also i saw the presentation you gave</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:17.26</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>It helped me understanding the architecture of rt</tt></td></tr>
+<tr><td><tt>05:59.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.175.255)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:55.03</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt>brlcad : one of the threads of bu_parallel in do_run(..)&nbsp;&nbsp;function in worker.c is not getting completed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:55.23</tt></td><td><font color="#71d7d7"><tt>zero_level_</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonder how has this anything to do with icv ?</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:59.59</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Phoenix * 5862 /wiki/User:Phoenix/GSoc2013/Reports: /* Week 7 */</tt></td></tr>
+<tr><td><tt>08:46.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad phoenixyjll (0e889157@gateway/web/freenode/ip.14.136.145.87)</font></tt></td></tr>
+<tr><td><tt>09:05.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.175.255)</font></tt></td></tr>
+<tr><td><tt>09:22.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>09:30.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@195.24.220.16)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:16.43</tt></td><td><font color="#6161b9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Hi i've just logged into my bz.bzflag.bz account and I wish to change my password. Can anyone tell me how?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:19.46</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>run 'passwd'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:23.21</tt></td><td><font color="#6161b9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>yeah did that already thanks</tt></td></tr>
+<tr><td><tt>11:48.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>12:09.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>12:15.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalf (~DarkCalf@173.231.40.99)</font></tt></td></tr>
+<tr><td><tt>12:17.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:21.15</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>hi ``Erik, brlcd : still unable to find the bug.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:23.08</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>It seems that at 819. the semaphore is not acquired thus a deadlock</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:23.24</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>at 819 in rt/viewedge.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:23.26</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>with icv saving in viewedge.c? I don't remember exactly what, but there was something 'weird' about it that required a special bailout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:24.31</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>iirc (and this is a huge if, that was years ago), once I figured it out, I just put in the fix with the plan to re-do viewedge.c completely to make it more like a normal rt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.11</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>unfortunately, I failed to document it and did not rewrite viewedge and don't remember what the exact issue was :/ srry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.26</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>no issues.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.35</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>i am just copying what I found.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.44</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>We can together fix it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.03</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>at 757 in worker.c parallel process are created.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.13</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>in function do_run(..)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.19</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>yes, via bu_parallel()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.59</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>all parallel function call worker(..0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:27.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>worker then call do_pixel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:27.45</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>do_pixel() then calls view_eol(...) in viewedge.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:28.12</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>I believe I was wrapping the icv stuff in a bu_semaphore, that might be unnecessary... if we can trust that each worker has an exclusive memory segment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:28.38</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>A semaphore is to be acquired in view_eol for wriiting in the icv_struct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:28.42</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>exclusively accessed, but globally accessable, so the final write out can get them all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yes, indeed I asked brlcad : and he says the semaphore is required.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.19</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>why?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.35</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I tried to get rid of the semaphore (commenting them) and it worked.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.55</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:58 &lt; brlcad&gt; zero_level_: yes the semaphore is needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.57</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:58 &lt; brlcad&gt; if it hangs, something else is wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.57</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:58 &lt; brlcad&gt; like something else acquired that same semaphore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.57</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:59 &lt; brlcad&gt; or even the same process that is running acquired one and didn't release it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:29.58</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:58 &lt; brlcad&gt; zero_level_: yes the semaphore is needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.00</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:58 &lt; brlcad&gt; if it hangs, something else is wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.03</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:58 &lt; brlcad&gt; like something else acquired that same semaphore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.05</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>23:59 &lt; brlcad&gt; or even the same process that is running acquired one and didn't release it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.08</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>oops ! copied twice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.30</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>please don't paste large bodies to channel, if it's more than a line or two, use one of the paste websites :) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.39</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>there's no answer in what he said</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.39</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:30.47</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:32.13</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>viewedge adds some necessary locking requirements, but it also has a lot of very bad approaches... my take-away was that the original author had no idea what they were doing and hacked until it seemed to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:32.54</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>it uses two pixels on the current scanline and one on the previous scan line to compute the color, iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:34.17</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>so there is some weird memory management and locking that has to occur, but ... hm, I'd need to review the code and collect my thoughts to see where I'm going :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:34.27</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:34.47</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>it's a "here be dragons" bit of code, I'd recommend putting it on the back burner and focusing elsewhere in the meantime</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:35.00</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alrigt.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:35.30</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>But we goto do smth since this bugs an important command.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:35.39</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>If u suggest i can remove that semaphore.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:35.48</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Since it works without it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:36.25</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>try removing the semaphore and then doing a raytrace on bz with, hm, say 16 threads... or 100... and see if the output seems correct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.00</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>can i compile the src code on bz.?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.03</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>if you have a machine with more than 8 cores, try on that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:37.17</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>sure, bz has a full dev suite</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.05</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik : If I recall correctly from my class knowledge, Semaphore is required when a resource is to be used by more than one process.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.21</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>it's currently slightly hacked up to force clang instead of gcc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.22</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>where as here each process will be writting different line.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.47</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>that is true, and since each line is a unique chunk of memory, there should be no conflict</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:38.56</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yes. Exactly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:39.50</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>&lt;-- points up where he said that the bu_sempahore might be unnecessary since the workers have access to an exclusive memory segment :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.39</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.22</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik is there a documentation on how to compile on bz&nbsp;&nbsp;?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.36</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>same as any unix machine, get a fresh checkout, run cmake, run make</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.45</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:42.38</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>if you need any tools installed on that machine, let me or brlcad know and we'll figure it out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:43.17</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Also ``Erik apart from the rtede issue.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:43.50</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I think the FIXME in rt/do.c is now fixed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:44.29</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>regarding bw images and rtxray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:55.23</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>I've sent myself an email to my work account and will look over these with care tomorrow, ok? today is one of my 'unemployed' days and I have some ios work to do :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:55.56</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>sure no issues.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:57.10</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>I'll still keep an eye on irc if any immediate questions come up, so still feel free to ask/contemplate in chan, just don't expect a code review until tomorrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:57.53</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>effin' ios 7 deleting the top status bar and moving 0,0 up to dead coordinates</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:58.16</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik I will also want to learn IOS stuff from you. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:58.47</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>I'd probably be the wrong person to learn from... but if you have a certain interest, I can probably direct you towards a good resource</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:00.24</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>I have a trivial "lottery calculator" app in the store, an opengl based version of the atari classic "kaboom!" that they won't accept due to the artwork and I'm currently gearing up to do a guitar tuner app... I'm no guru for ios :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:03.11</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>i am getting this strange issue on svn at bz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:03.14</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>svn: E170000: Unrecognized URL scheme for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:03.53</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>on searching, they direct to re install.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:04.01</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>crap, ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:04.02</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>i am sure i am doing smth wrong here.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:04.05</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:04.31</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>I've been having issues with flags on the subversion install and handling of repo's via libcurl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:05.40</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>maybe try svn checkout svn://svn.code.sf.net/p/brlcad/code/brlcad/trunk brlcad-code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:07.28</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>works.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:07.31</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:07.48</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>might be a bad solution.. I'm reinstalling svn and going to try with the http addy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.11</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>ok, svn should be fixed on bz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.16</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>(works for me)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:15.43</tt></td><td><font color="#6161b9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>initially tried an svn checkout with svn https link and it said svn does not work but with the link u've just given works fine for me too</tt></td></tr>
+<tr><td><tt>13:24.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@195.24.220.16)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.43</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Apparently It turns out i cannot do sudo make install on bz.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.02</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>did make install </tt></td></tr>
+<tr><td><tt>13:28.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak_ (~Izak@195.24.220.16)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.24</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>not sure if it will compile correctly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.06</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>currently compiling code here and getting the same problem looks like its in Polyclipp.cpp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.21</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>Build is failing due to a typo in line 286 src/libged/polyclip.cpp. currently fixing this typo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.43</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>waiting on some corrections of this.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>so Izak_ so that be small v instead of CAP V</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.09</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.51</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>yes I am working on that patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.36</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>could someone please fix thing and update code repository? flying blind here!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.05</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>gotta continue working on libbn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.07</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Level zero * 5863 /wiki/User:Level_zero/GSOC13/logs: LOGS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.08</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: what I don't yet understand is how you are encountering a hang with rtedge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.42</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so let me be more specific as to what I hear you're suggesting and you can correct me if what I'm saying is not true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.16</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>you're encountering some sort of hang with rtedge (on/near line 811) and if you remove the semaphore lock, it works, no longer hangs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.28</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.14</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if I remove the semaphore lock, rtedge reliably produces a segmentation violation (it crashes) because of multiple unprotected writes to framebuffer memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.56</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>this means you've got the initiative</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.10</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>why is yours locking is the first question to figure out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.27</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>not what line of code causes it to lock, WHY is it locking conceptually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.59</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: do you see it hanging on an unmodified brl-cad?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.06</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>thats what ``Erik suggested </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.09</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>or is the hang due to something you've changed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.11</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>to run</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.16</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>it on bz.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.33</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>It doesnt hang on unmodified.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so then almost certainly it is something you've introduced/changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.00</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>make a smaller modification</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.28</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>do you think you understand how locking works?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.42</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>never tried practically.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.50</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>apart from systems lab</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.59</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>though have some textbook knowledge.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.23</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>also brlcad do we have some flag to find semaphore locks ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.25</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm talking about general textbook knowledge of what a semaphore/mutex lock is and how it pertains to code execution</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.33</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.14</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so then all you need to know is to understand how libbu does it's locking, which is actually quite a simplified form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.58</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>some debug flags to find locks?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.17</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>you could add something simple, but no this is usually not an issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.22</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5864 /wiki/User:NyahCh3ck20/GSoc2013/Coding_Repor: /* 29 July - 4 August */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.25</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>bu_semaphore_acquire(KEY) ... bu_semaphore_release(KEY)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:58.26</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>for that line 811 to hang, it really only means one thing has happened</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:58.57</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that a lock has already been acquired on the KEY=BU_SEM_SYSCALL semaphore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.03</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: if you run in a debugger, just put a break point on bu_semaphore_acquire</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>probably at L:695</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.40</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>line numbers aren't going to be useful if you've made a modificiation, since it's the modification that is introducing a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.50</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>oops! nevermind :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:02.02</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>doesnt go to that block</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:02.04</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yepp.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.17</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I think you need to make your patch smaller to where you isolate what exactly is causing this, if you cannot use the debugger to find it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.29</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>do you know how to set a breakpoint on functions in a debugger?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.42</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>no!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:03.56</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>well why not? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.00</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>can u suggest me a debugger.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.05</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>:-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.11</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>gdb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.16</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.19</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>gdb</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.33</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>but it has issues related to commands with args.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.48</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it doesn't have issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.51</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>you might have issues :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.52</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.04</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>sure then I am on my way to gdb.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.27</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>gdb --args bin/rt share/db/moss.g all.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.37</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>b bu_semaphore_acquire</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:05.38</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>run</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:06.33</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>gdb is a bit tricky to get started with, but is a very powerful tool... (much like vim or emacs)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.12</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>also; you won't get sudo. by the time you're ready for sudo, you won't really want it. so forget that, just ask brlcad or me for software installs, we'll assess and if it makes sense, we'll take care of it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.52</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Alright, I understand its server issue.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.16</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>But can i still install brl-cad.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.54</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>when you run cmake, do -DCMAKE_INSTALL_PREFIX=$HOME/brlcad or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.55</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.00</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.10</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>hey what about this error on polyclipp.cpp that i'm getting when compiling code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.15</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>anybody fixed it yet?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.37</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>ps developers : Apply ticket 218 of patches on sf.net </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:18.17</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>brlcad: A small typo on line 286 of src/libged/polyclip.cpp has been fixed in ticket 218 . ps apply so build succeeds :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:25.04</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56306 brlcad/trunk/src/libged/polyclip.cpp: Fixing typo. Applying patch 218 by Isaac Kamga.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:26.24</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Izak_ u must do an svn up now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:26.39</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Ch3ck : one can edit the file manually ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:26.47</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>yap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:28.30</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah did that code compiles now perfectly :)</tt></td></tr>
+<tr><td><tt>14:29.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.12</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Izak_: thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.57</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: you'll wnat to delete your build directory and re-run cmake with that -DCMAKE_INSTALL_PREFIX option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.17</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so that brl-cad installs into your home directory instead of the system path</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.48</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : did u run the rtege command without removing the bu_log_semaphore ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:39.49</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: the issues that starseeker was telling you last night are all things that I've said as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.10</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.13</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I run it all the time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.17</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it's a heavily used command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.30</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I mean after applying icv</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.32</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>changed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.40</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>that is modified icv</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.46</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>so to say</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.49</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>no, of course not - I hear it hangs ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.59</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>can u do it now ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.02</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.09</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm in the middle of several other things</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.09</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.12</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.31</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad: Well I thought if i finish combining the push/xpush it'll give me commit access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.35</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which is what i've done.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.45</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I can try to take a look later this evening, but this really is your issue to resolve since you introduced it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:41.57</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: commit access does not work like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.08</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.38</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>commit access is a process unique to each individual depending on how good they are at communicating, creating good patches, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.32</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that task to merge push+xpush could have been sufficient, but it's problematic because of the way it's been worked and communicated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.55</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>for example, you said last night that you could not see a way to break the patch up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.15</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>which I think is curious, because I can think of dozens of ways to break that patch up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.35</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>with the goal-mindset you have, sure, but then patches are NOT about the goal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:44.47</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>they're about demonstrating competency communicating with other developers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:45.19</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:46.21</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if you can only explain a concept by making me read the entire concept, you've not yet figured out how to communicate effectively, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:46.35</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>Did not see it that way. Was thinking more about getting the problem solved.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:46.52</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>which it doesn't do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.01</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>sure it merges the two </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.11</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>but the PROBLEM is what I stated on the mailing list many weeks ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.21</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.25</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if the two are going to be merged, the user interface question has to be addressed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.49</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>you don't address that, you just merged them code-wise without regard to the interface impliciation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.06</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>which means the code must be scrutinized that much more closely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.09</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>Well I made xpush 'push -x'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.14</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.16</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>is that best?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.18</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>and push stayed the same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.31</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>how does that affect users?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:48.45</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well you had told me to write in such a way which the command could figure that out and do the right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.01</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>thing. Which I could still do.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.21</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>figure what out?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.46</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>in case where an object that moves in more than one direction is given to the push command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.15</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>the command will be able to detect that case and do the right push on it which is like 'xpush' ing the object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.58</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>are you saying you made 'push' without -x behave that way?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.03</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.06</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if so, how's that different from push -x ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.18</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well its the same thing basically </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.29</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>then its preferable i remove the push -x</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.32</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>and leave it as push </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.33</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so then you just made the old push command go away?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.51</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>No the old push </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.51</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>s/command/functionality/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.17</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>command is stil there but&nbsp;&nbsp;in a case where an object is detected to be moving in more than one direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.42</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>the push command calls a special pushx() routine which then pushes the object.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:52.59</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which is like xpush ing the object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:53.46</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>so there will be no need for neither push -x nor xpush altogether</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:53.51</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: I presume that is you crashing tools? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.21</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which I figure will be cleaner and easier for end-users who'll not need to remember so many commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.24</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: so on the surface that sounds good but it's also a HUGE change in behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.42</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>at least for the use-cases where the previous push command was desirable over xpush</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.45</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if any</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:55.25</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well the old push command still stays in tact</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:55.46</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>but I added the ability for it to detect the special case of xpush and still do a push on it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:55.53</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>not what you just said, you said it calls this xpush() routine when an object is duplicate-referenced</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:55.54</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>using the pushx() subroutine in push.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.30</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well not xpush() pushx() which works like ged_xpush()</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.38</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>similar but not the same </tt></td></tr>
+<tr><td><tt>14:56.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hickoryknoll (~hickorykn@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.40</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:56.45</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if I just run push() does it call pushx() or does a user have to specify an option?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.01</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>if he does it'll work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.09</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>and if the user does not do it'll still work\</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.17</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that doesn't answer my question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.39</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>if I just run ged_push(), does it call pushx() automatically when it detects duplciate reference or does a user have to specify an option?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.49</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.54</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it's not a yes no question!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.54</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>it calls automatically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.06</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>Yes it can call automatically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.22</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so then that's a change in behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.31</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.55</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>all the more emphasis on what starseeker was saying then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.00</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't just change things on users</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.04</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that's the best way to lose users</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.20</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>so how do I proceed now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.22</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it can be changed, but the impact has to be inspected</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.30</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.43</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>well since the aim was to merge both commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.46</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>this is a question you probably cannot answer, except maybe to try and start a discussion on the mailing list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.56</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>NO</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.02</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>the aim was to get you commit access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.06</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>through a set of simple patches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.13</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.27</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>merging push+xpush had the potential to be a reasonable set of patches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.34</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>but not like this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.04</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>So how best do i do it..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.15</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>and the notion that you still do not understand why just further indicates the need for more patches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.32</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>do you really not see how this could have been a set of patches? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.38</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>instead of one big patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.43</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>I now see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.02</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>I have made alot of changes and included in one big patch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.28</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>which I could have made in a small set of incremental changes and uploaded small patches instead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:02.34</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>thats the error I made</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.05</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>Well concerning commit access that's why i'm looking at the libbn </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.14</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>even if you had not changed push's default behavior, this could have been done step by step (and you would have had commit access more than a month ago)... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.36</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>to see how I could optimise some of its routines.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:03.49</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>do you know what a unit test is?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.00</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.03</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.38</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>say I gave you a function, maybe even that pushx() function or really ANY single function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.52</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>and I asked you to prove that the implementation is correct for all possible inputs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.58</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.16</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>so you write a little main() program ... and feed it all possible inputs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.31</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>and check what you expect the value to be from what the function actually produces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.38</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that's basically a unit test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.49</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok like the one I did for my_inverse routines..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.53</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>not really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:06.07</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it's similar in the sense that it's a small program</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:06.19</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>but that program did not test for correct behavior</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:06.31</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:06.31</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it merely tested the last computed one to make sure it matched</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:06.58</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>unit tests should test all possible values without user having to inspect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:07.31</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>what happens if I feed an array of 'inf' or 'nan' values or a mix of both to the inverse routine?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:07.36</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>does it produce the right answer?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:07.39</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>does it crash?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:07.53</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>a unit test ideally answers those questions automatically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.05</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr><td><tt>15:08.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak_ (~Izak@195.24.220.16)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: you're familiar with sscanf() I presume?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.56</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:09.07</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>we implement our own secure version of sscanf in LIBBU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:09.26</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>and there's a unit test to make sure that our implementation behaves identically to the system libc scanf() implementation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:09.34</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>see src/libbu/tests/bu_sscanf.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:09.45</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:09.57</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that's one extreme</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.20</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>in the same folder, you can see src/libbu/tests/bu_dirname.c which is a much more simple unit test that compares with libc's dirname() function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.43</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>perhaps a better simple example to start with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.49</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:10.59</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>read both quickly just to get an idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:11.28</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>the complexity of the robustness requirements usually drives the complexity of the unit test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:11.47</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>in bu_sscanf's case, it's a crazy complicated command so the test is crazy complicated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.01</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>in bu_dirname's case, the function is very simple, so the test is simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.24</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.26</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>libbn doesn't yet really have any unit tests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.33</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.47</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>So i'm to write some for libbn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.49</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:12.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>all of it's CURRENT testing is done at a very high level through what are called integration tests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.08</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>we make sure outputs are what we expect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.13</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that would be good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.13</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: you can make your patches be anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.18</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>the smaller the better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.22</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.35</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>the point is to demonstrate your ability to communicate, not get homework completed ... remember that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.46</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>this is a communication problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.47</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>So i could write tests for basically most of the functions in say /src/libn/mat.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.48</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>not a code problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.02</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I would suggest starting more simple actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.09</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>yes.. GSoC has taught me that.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.15</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>you could do mat.c, but it's one of the biggest files in libbn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.22</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>:) ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:14.57</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>So i'll start writing some unit tests to make sure most of the functions are actually doing what they're expected to do right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.10</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.43</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>actually, I have a good one for you that is actually needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.47</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>test poly.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.48</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok&nbsp;&nbsp;thanks :) will get on that and make sure everyone is informed </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.49</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr><td><tt>15:15.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.83.175.255)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.01</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: or src/librt/roots.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.29</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>Ch3ck_: when I say it's a communication problem, that doesn't mean spamming the mailing list with a lot of information about your progress</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.38</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>it means creaing a patch that tells a simple and clean story</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.46</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>a patch that conforms to our style</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.58</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>that is in "our language"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.39</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>Yes :) I get it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.58</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>brlcad: i enjoy your sense of humour :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.26</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I wasn't aware I had one ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:19.38</tt></td><td><font color="#cf6dcf"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>nahh :) you really have..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.02</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:d_rossberg * 56307 (brlcad/trunk/doc/docbook/system/man1/en/CMakeLists.txt brlcad/trunk/src/conv/raw/CMakeLists.txt): apply Jonathan's patch from <a href="https://sourceforge.net/p/brlcad/patches/195/">https://sourceforge.net/p/brlcad/patches/195/</a> adding a g-raw converter in response to the GCI task <a href="http://www.google-melange.com/gci/task/view/google/gci2012/7945223">http://www.google-melange.com/gci/task/view/google/gci2012/7945223</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.40</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>woo hoo!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.05</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>ejno: congrats</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.45</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad :on bz?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad: rt tools ?</tt></td></tr>
+<tr><td><tt>16:04.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha__ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>16:09.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~mohit@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.01</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: yes, on .bz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.47</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>and I see that it was actually Ch3ck_ with the crashes, not you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.56</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:29.42</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5865 /wiki/Patches: /* How to Submit a patch */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.06</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : I got the error.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.26</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt><a href="http://blogs.adobe.com/flascc/2012/11/30/finding-multi-threading-bugs-with-gdb/">http://blogs.adobe.com/flascc/2012/11/30/finding-multi-threading-bugs-with-gdb/</a></tt></td></tr>
+<tr><td><tt>16:43.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.85.90.139)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:43.56</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>my writeline function allocates memory.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.13</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>UCHAR -&gt; Double conversion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.30</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>and bu_malloc acquires the same semaphore.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:44.37</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>BU_SEM_SYSCALL</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:45.35</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>gdb rocks.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:47.17</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>zero_level : sure it does :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:49.19</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Izak_ : I lacked motivation initially.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:50.46</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>zero_level: understood :) have you closed the ticket you just applied ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:53.57</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56308 brlcad/trunk/src/libicv/fileformat.c: Free redundant memory in icv_image_writeline</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.28</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : I am not sure which semaphore must be apt there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.46</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>at819 in viewedge.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.21</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I wish to define another semaphore for icv activities</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.56</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I mean there will be many cases where one might wish to writelines in parallel.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.06</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>write pixels in parallel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.15</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>or indeed do many image proessing tasks in parallel.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.32</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I think i have.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.39</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks again.</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:59.48</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Izak_</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.25</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Izak_ : yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.40</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik any suggestions regarding semaphore for ICV ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.44</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>zero_level :Still shows status : open</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.42</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Izak_ : <a href="http://sourceforge.net/p/brlcad/patches/218/">http://sourceforge.net/p/brlcad/patches/218/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:01.53</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>closed-accepted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.01</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>zero_level:seen it :) its closed :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.13</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Izak_ thanks :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:02.27</tt></td><td><font color="#6dd0d0"><tt>Izak_</tt></font></td><td width="100%"><tt>thanks too :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:06.46</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>zero_level: remove 'em and see... hit it with a multi-proc machine (like bz), I'll take a more meticulous look tomorrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.38</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>in rt, each proc will try to address a single scanline, so lockless should be ok... in rtedge, you need just enough locking to guarantee that the previous scanline has had it's primary shot set done before the pixel value run is done... it might make sense to break it up so a pass of all depths is done, then the 'edge' algorithm is done on the result</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:10.46</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: outstanding, that's probably your best accomplishment to date, figuring that out :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.06</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>makes perfect sense .. malloc also acquiring the lock</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.37</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>learning a debugger should be required first-year coding activity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:12.52</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: it SHOULD be possible to access libfb (fb_write() and friends) without semaphore locking .. why rtedge does it will require some rework/fixing</tt></td></tr>
+<tr><td><tt>17:13.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mark@2601:d:b280:b5:d63d:7eff:fe2d:2505)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.42</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>might require re-writing rtedge, but that's not that hard either</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:13.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>i've done it in a couple days before, we could do it again .. probably should just to fix some other issues</tt></td></tr>
+<tr><td><tt>17:19.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hickoryknoll (~hickorykn@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.46</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5866 /wiki/User:Izak/GSOC_2013_logs: /* From July 22th to July 27th */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.24</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : Its a bug i introduced. Wasted my two days. Can take that as the best accomplishments.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:31.57</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>but yes in the meanwhile i learnt to learn new things.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.14</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>correction/Can/Can't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.50</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik, brlcad : I suggest introducing a new semaphore. BU_SEM_ICV</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.08</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>among the list of semaphores in bu.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.05</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:KeshaSShah * 5867 /wiki/User:KeshaSShah/GSoC13/Reports: /* Week 7 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.20</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I will need guidance to rework on rtedge.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:36.46</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad: We both can work together to fix issues.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:37.14</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>But first we need to identify issues and a plan on how to handle them.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.12</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>education is valuable... </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.27</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>new semaphore is probably a bad idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.35</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>alright.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:41.59</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5868 /wiki/User:Izak/GSOC_2013_logs: /* Mid-term Evaluation week */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>but ``Erik writting in a memory buffer categorized as system semaphore ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.32</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>could be... is there a reason to lock the memory writes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:42.44</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>dont know ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.48</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:IIIzzzaaakkk * 5869 /wiki/User:Izak/GSOC_2013_logs: /* Mid-term Evaluation week */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.50</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>then you need to read/learn more :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.51</tt></td><td><font color="#ba61ba"><tt>``Erik</tt></font></td><td width="100%"><tt>how apropos.. just now in another channel: 13:44 &lt; oGMo&gt; C itself may complicate issues, though like wiht most things in C, if you can't determine it's safe you don't do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.37</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik write.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.50</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>oops!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.10</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik how do u think we shld aproach this issue now ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.19</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>was going through the log of this file. It turns out that the src had the semaphore from its existence.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:53.06</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik : apart from r27878 (by you).&nbsp;&nbsp;"spinlock to avoid scanlines being written out of order"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.57</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>``Erik ran rtedge on bz with -P100 option.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.13</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>without semaphores.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.24</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>turns out that it works fine.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.31</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>check this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.32</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/~mohit/new.png">http://brlcad.org/~mohit/new.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.35</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>also ran with 10,20,30,40,100,500 threads</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.48</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad, ``Erik : results are identical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.51</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>see this </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.59</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/~mohit/rtedgeMP/">http://brlcad.org/~mohit/rtedgeMP/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.11</tt></td><td><font color="#5959a9"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:mohitdaga * 56309 brlcad/trunk/src/rt/viewedge.c: Fixed bug of rtedge after applying modified icv. Apparently icv_image_writeline usage bu_mallo(..) which in turn acquires semaphore BU_SEM_SYSCALL. Thus there was a deadlock. After removing this semaphore tested on bz with 10,20,30,40,100,500 process and resultant image was identical and correct.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.10</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad, ``Erik view.c also has similar semaphore</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.24</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>at line:571</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.58</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: I was just doing to say that the bug is not specific to to rtedge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.10</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>rt hangs as well once I put a full compile through its paces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.02</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : yes atleast rtedge is fixed now. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.13</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>lets move to next command in raytracer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.37</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I shld be able to fix them all</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.54</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: it's not fixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.03</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>now rtedge crashes for me after your 56309</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.17</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>oops !!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.25</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>how many process ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.39</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>can u run gdb?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.43</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.08</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>on it ran perfectly alright .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.45</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>^bz it ran ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.33</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>the non-existence of a crash doesn't say anything about the existence of a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.34</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>I need to run some more tests to make sure there aren't ancilliary affects involved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.36</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>see if rt works for you after applying a similar change</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.36</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>logically its tue.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.36</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>logically its mon.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.36</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : but i went to the logs to find out the origin of semaphores</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.37</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>*true.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.38</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : and as ``Erik wrote on the logs of r27878:- "spinlock to avoid scanlines being written out of order" </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.40</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>conceptually, it seems on the surface that it should work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.17</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>so there shld be no issues of such kind with icv.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.47</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>because icv uses pointer airthmetic to find the start of the scaline in the image_struct-&gt;data/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.14</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>like I said, it should work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.37</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Although I am not sure about fb_write, where spinlock was originally introduced.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.18</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>blocking around fb_write() is the fundamental issue, as that is platform specific -- you don't know what kind of libfb interface will be used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>yes on 27 Jan 2007; ``Erik found that ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.04</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>no 16 Mar 2007.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:07.52</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>but we shldnt refrain from testing more result.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.32</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I am planning to test on more bigger images.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:08.51</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad: can suggest some tests.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.28</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>can ^you suggest</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.28</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>benchmark is a first pass test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.37</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>"make benchmark" or just "benchmark" post-install</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:15.07</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>Fatal error.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.58</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>I am testing that after removing semaphore from view.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.46</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt><font color="#CC00CC">sees midterm evaluation is on at melange</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:21.17</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : benchmark is producing results.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.54</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : In some time I should be able to send you benchmark results.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.18</tt></td><td><font color="#67c5c5"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : I am running benchmark after removing semaphores from view.c</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

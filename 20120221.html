@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120221</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120221</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:53.21</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: nod, just wondering -- often useful scavenge ideas from other devs that commit to hightly familiar code (such as you and scl's cmake logic) to see if there are ideas worth incorporating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:53.37</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>not necessarily code or exact names of things, but concepts that might be leveraged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.14</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>namely because if another dev needed it for some reason, likely someone else might too (and who best to review)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.30</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>jordi's need for mtune=generic is in a similar vein, actually, just a little less obvious</tt></td></tr>
+<tr><td><tt>00:57.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@184-48-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.41</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49481 10/brlcad/trunk/misc/CMake/CompilerFlags.cmake: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.41</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: add -mtune=generic to release builds in order to help ensure that -O3</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.41</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: compilations are still portable for a given target architecture. this may or</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.41</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: may not be the issue reported in sf support request # 3464421 but give it a try.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.41</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: also, only set -std=gnu89 if we're a debug build. that way you can specify NONE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.42</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: for the build type and avoid both std flags.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:11.53</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>something for jordi to try when he gets back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:12.51</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm still doubtful that is the issue, didn't think gcc defaulted to cpu-specific tuning at O3 or otherwise unless you set an march or mtune option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.08</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>given the crashes were in tcl, perhaps it's some flag in tcl's build logic..</tt></td></tr>
+<tr><td><tt>02:17.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@188-55-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.34</tt></td><td><font color="#b1b15d"><tt>starseeker</tt></font></td><td width="100%"><tt>that's probably more likely - the tcl/tk logic is independent of our own</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.44</tt></td><td><font color="#b1b15d"><tt>starseeker</tt></font></td><td width="100%"><tt>(still our headache, of course...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.40</tt></td><td><font color="#b1b15d"><tt>starseeker</tt></font></td><td width="100%"><tt>I'll need to do another "apply lessons learned" pass over the src/other build systems at some point, and Tcl/Tk is usually where that comes up the most</tt></td></tr>
+<tr><td><tt>03:11.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@110-63-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:23.39</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>a quick grep didn't uncover any mtune/march hints in tcl/tk/incr</tt></td></tr>
+<tr><td><tt>05:02.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amit (3bb1cbb7@gateway/web/freenode/ip.59.177.203.183)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:06.38</tt></td><td><font color="#69c8c8"><tt>Guest36931</tt></font></td><td width="100%"><tt>hi, I am an computer engineering 3rd year student, I wanted to take part in gsoc with your organisation. Can you please help regarding the steps i should take . </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.31</tt></td><td><font color="#69c8c8"><tt>amit_12</tt></font></td><td width="100%"><tt>hi, I am an computer engineering 3rd year student, I wanted to take part in gsoc with your organisation. Can you please help regarding the steps i should take .</tt></td></tr>
+<tr><td><tt>05:38.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordisayol (~jordisayo@unaffiliated/jordisayol)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:20.15</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>brlcad: I see you added -mtune as flag</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:21.41</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>I made some test on my system, and it appear that -mtune=generic do not change anything on resulting object</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:21.49</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>$ test "$(gcc -m32 test.c -o test -O3 &amp;&amp; md5sum test)" = "$(gcc -m32 test.c -o test -mtune=generic -O3 &amp;&amp; md5sum test)" &amp;&amp; echo "match" || echo "don't match"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:22.54</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>return "match". same for g++</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:26.43</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>"test.c" is a very simple printf("hello world!"); code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:27.39</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>s/don't match/mismatch/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:23.25</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>jordisayol: yeah, I'm not convinced it'll do anything useful but it also shouldn't hurt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.14</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>your test isn't enough to exercise it, though .. you'd need something that would actually be optimized by -O3 in a potentially platform-specific way (math, lots of math and branching)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.14</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>aha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.47</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>the real test is to make a new .deb compiled with mtune=generic and see if that user still gets an illegal instruction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:25.15</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>I suspect it'll still crash -- if it does, then the flag can be removed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:25.38</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>aha, I'll ask to him if want to do this test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:26.02</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>anyway, I'll remove the flags from deb building process </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:26.13</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.38</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>sorry, nods? :-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.09</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm nodding my head :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.18</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>it means I understand or I agree or both :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.46</tt></td><td><font color="#65c1c1"><tt>jordisayol</tt></font></td><td width="100%"><tt>ok, many thanks for teach me :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.53</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.56</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49482 10/brlcad/trunk/src/other/libpng/ (34 files in 5 dirs): Update libpng to 1.5.9</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.47</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49483 10/brlcad/trunk/src/other/libpng/Makefile.am: re-add the changes to Makefile.am from 46025</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.46</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49484 10/brlcad/trunk/src/other/libpng/CMakeLists.txt: Go with 'lib' for all instances of CMAKE_LIBRARY_OUTPUT_DIRECTORY (r49115)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.03</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49485 10/brlcad/trunk/src/other/libpng/projects/vstudio/pngstest/: pngstest is still empty (r49239)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.50</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03jordisayol * r49486 10/brlcad/trunk/misc/debian/rules: remove unneeded flags on deb building process.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.20</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: awesome, I was just thinking about that update yesterday .. there's a CVE out on that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:08.33</tt></td><td><font color="#e076e0"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">goes to get a rental</font></tt></td></tr>
+<tr><td><tt>15:52.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:55.46</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49487 10/brlcad/trunk/src/librtserver/CMakeLists.txt: Get librtserver closer to building properly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:57.32</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49488 10/brlcad/branches/STABLE/src/librtserver/CMakeLists.txt: Add the librtserver build tweaks to STABLE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:08.58</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49489 10/brlcad/branches/STABLE/src/librtserver/CMakeLists.txt: Ah, right - too early for that version of the INCLUDE_DIRS macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.25</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r49490 10/brlcad/branches/STABLE/src/librtserver/CMakeLists.txt: Fix form, not just name...</tt></td></tr>
+<tr><td><tt>19:07.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@110-63-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>20:02.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@87-52-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.18</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49491 10/brlcad/trunk/TODO: svg is in the same boat as pdf conversion export</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.20</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49492 10/brlcad/trunk/TODO: benchmark needs to include compiler details too.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.17</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r49493 10/brlcad/trunk/src/tclscripts/lib/TkTable.tcl: Update cadwidgets::TkTable::handleKey to potentially call the dataCallback when a cell in column 0 receives a keypress.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.34</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r49494 10/brlcad/trunk/BUGS: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.34</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: the yacc parsers are failing on non-bison platforms due to differences in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.34</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: behavior. it'll be at least a few months before all are converted to lemon, so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.34</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: note the bug in the meantime. the fix looks pretty simple (FindYACC.cmake), but</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:54.34</tt></td><td><font color="#bd6363"><tt>CIA-128</tt></font></td><td width="100%"><tt>BRL-CAD: needs testing.</tt></td></tr>
+<tr><td><tt>23:20.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20100203</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20100203</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>01:00.20</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: well, except when we require something newer than the distro has packaged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.05</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>debian stable used to be notorious for being a few years behind, I used 'testing' when I ran debian servers...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:13.56</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>Well, that figures.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:14.30</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>Looks like the whole thing of mixing multiple raytracing threads and Tcl interps is going to have to be handled with some care</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:15.16</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>If I'm understanding right, the initial success of the framebuffer code on non-corefoundation X11 was more accidental than a consequence of intended system features</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.27</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>how annoying</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:18.06</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hopes the framebuffer approach and tcl's correct threading features are compatible</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.38</tt></td><td><font color="#c567c5"><tt>poolio</tt></font></td><td width="100%"><tt>Stattrav: (really delayed reply), but the undergrad graphics course at CMU</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.23</tt></td><td><font color="#c567c5"><tt>poolio</tt></font></td><td width="100%"><tt>brlcad: Have you ever played around with signed distance functions?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.10</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: more importantly, Tcl should not be involved in the raytracing-&gt;framebuffer process</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.34</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>poolio: not much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.51</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>they're very much related to the way we solve implicit primitives, though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.32</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>just a bit more generalized (or a different characterization of the surface as a function)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.52</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>dynamic implicit surfaces</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:34.34</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: uh... considering we're using tcl/tk mechanisms to draw the pixels to the framebuffer, and using a Tk_Photo as the image repository...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:35.49</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>the raytracing process generates the lines of data, but it's up to tcl/tk to actually draw it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:36.05</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is confused</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.44</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>my understanding of the problem was we have (say) 8 threads, each generating their own little piece of the puzzle, and calling tk_write to get it on the framebuffer.&nbsp;&nbsp;However, since tcl/tk limits things to one thread per interp, it was getting lots of nonsensical stuff when trying to do the update call</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.52</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, you mean the new Tk framebuffer, I thought you were just trying to get the existing X11 framebuffer working with the new Tk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:40.58</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, no :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:41.17</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">isn't paying any attention to the X framebuffer atm ;-)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.25</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is naively sticking a Tcl_Mutex into if_tk.c to see what that does, but since the old way happens to work on my setup it's no better than a guess</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:42.42</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>just a "does this crash" test, until I get it on a Mac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.41</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is reminded of Tim Daly's favorite saying - "there's no such thing as a simple job"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.00</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>in some ways, it's almost worse when something accidently works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:44.07</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>so then am wondering since you did a fairly major upgrade, whether the previous still works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.06</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>mm.. pretty much certain that I'm not going to be driving tomorrow.. already have about three inches here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.27</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>coming down nice really nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.32</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>I believe it works if you compile with --disable-core something or other</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.39</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, getting a lot here too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.42</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, --disable-corefoundation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.49</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>but of course that rules out AquaTk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.18</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hasn't tried --disable-corefoundation with 8.6 on the Mac, 'cause that kinda misses the whole point</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.05</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>the whole tcl/tk/itcl/itk upgrade caused other problems - MGED doesn't start in dmtogl branch at the moment, even if you do manage to compile it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.34</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>I had to hand feed tcl a final gcc compile line that linked in our libz .o files in lu of theirs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.54</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>if their build logic has a concept of an external libz I haven't found it yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.21</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>and other fun</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.10</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>yeesh, I may be snowed in tomorrow as well, doubt they'll plow in time O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.44</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>nothing insurmountable I'm sure, but a headache</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.50</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: yeah, I'm thinking that too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.17</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>even if I dig the driveway out, I'm not equipped to deal with this kinda stuff unplowed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.51</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>and they say there's a WORSE storm that may show up at the end of the week?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.54</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>blegh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.56</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>up to 40 tomorrow, snow on friday(38)/saturday(31), so'z it might not be all that bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.31</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, above freezing will help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.39</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.europeanfecalstandardsandmeasurements.org/">http://www.europeanfecalstandardsandmeasurements.org/</a>&nbsp;&nbsp;O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.15</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>uh...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.30</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is afraid to ask what browsing habits brought ``Erik to that particular site...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.44</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>south park links</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.23</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, that figures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.19</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs a new, faster computer...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.43</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>how fast?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.55</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>probably not invented yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.07</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>hah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.23</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>are you trying to break the latest crypto?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.30</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>mine makes hard work with the docbook pdf stuff, especially when there are hundreds of 'em</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.50</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>aarg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.56</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">supposes he should default PDF build to OFF in the man directory...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.22</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>yeah good idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.25</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>definitely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.54</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will have to break out the docbook build options some for that... hmm...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.42</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>I wish there was a better format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.06</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">shrugs - right now it's a compile headache, but in 10 years we'll have a zillion cores on desktops and it will happen in a few seconds - then other factors besides compile time become important</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.24</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>but then we'll need to power our computers by nuclear fusion or something :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.28</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.38</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>you say that like it's a bad thing :-))</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.45</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>aannnnd... Tcl_Mutex just sits there when doing a raytrace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.02</tt></td><td><font color="#6161b8"><tt>louipc</tt></font></td><td width="100%"><tt>well, seems like a waste of energy just to watch youtube or whatever</tt></td></tr>
+<tr><td><tt>06:42.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@202.3.77.161)</font></tt></td></tr>
+<tr><td><tt>07:42.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad PhurlIpv4 (~mdupont@cl-1773.dus-01.de.sixxs.net)</font></tt></td></tr>
+<tr><td><tt>09:45.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elrohir (~kvirc@p5B14962D.dip.t-dialin.net)</font></tt></td></tr>
+<tr><td><tt>10:35.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad |Elrohir| (~kvirc@p5B149B3D.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:35.32</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">groans - 5:30am snow shoveling sucks...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:36.05</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>ah, well - roads plowed, driveway shoveled, wheee</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:43.31</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>erahum.&nbsp;&nbsp;brlcad, do you know if we build tcl with --enable-threads ?&nbsp;&nbsp;If not, could we?</tt></td></tr>
+<tr><td><tt>11:56.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>11:56.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Phurl (~mdupont@ip-81-210-228-126.unitymediagroup.de)</font></tt></td></tr>
+<tr><td><tt>12:05.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>13:38.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (~erik@c-69-140-109-104.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.09</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.17</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>think it's just the defaults</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.30</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>mostly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:54.38</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37532 10/brlcad/trunk/HACKING: add a (temporary) section on refactoring individual files. highly overlaps with the style section so .. the doc needs some refactoring of its own.</tt></td></tr>
+<tr><td><tt>17:19.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>17:19.37</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs at <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Happy Open Source Anniversary! (December 21st) || Release 7.16.4 in prep, should be posted 20100114</font></tt></td></tr>
+<tr><td><tt>17:22.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yukonbob (1000@s142-179-54-198.bc.hsia.telus.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.00</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>*yawn*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.04</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">pulls up the rtedge code - this "render to a buffer and have the "main" thread handle the draw calls idea is interesting...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.56</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>d-lo: was 'darkstar' the thing you were looking at for game infrastructure?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.13</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is soooo tempted to get a github account and start hosting an attempt to libtoolize/Makefile.amify the tcl/tk/itcl/itk codebases and friends, even if it is a really dumb idea...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.35</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: src/rt/viewedge.c lines 533, ~770, 779... everything that uses 'bif'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.48</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>viewinit and viewend are main thread functions, view_eol is a worker thread func, iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.44</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.46</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>that semaphore probably isn't needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:09.27</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs faster 'puters :/ 8 3ghz cores just ain't 'nuff</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.14</tt></td><td><font color="#b6b660"><tt>starseeker</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:28.33</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r37533 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri_mc.c: note position in table</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:34.46</tt></td><td><font color="#73da73"><tt>Stattrav</tt></font></td><td width="100%"><tt>``Erik: :O</tt></td></tr>
+<tr><td><tt>19:38.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@99.Red-83-45-252.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.42</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks for something sharp to jab into brlcad until he gets answers</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.01</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>cmd for altering bot (orientation, plate mode, whatever)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.57</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>que?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.37</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>attr set somethingorrather, but I don't know the magic names</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.11</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>cat regress/bots.sh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.14</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>form bot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.26</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>get somebot orient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.39</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>bot_sync makes all normals point one way, bot_flip makes them all point the opposite way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.54</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>dang input bug :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:41.13</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>veeeedddyyy iiiinterestink</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:41.17</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>bot_merge btw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.38</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>thnx, now'z I have some functions to try to visualize O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.59</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>what about bot_merge?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.17</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>that combines bot data sets together, the script shows it in action too along with then recondensing if you have overlapping bots</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.34</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>fg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:59.01</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>did, not sure if my bad data is from my nmg construction or the table... gonna build a 'put' command in a bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:00.48</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37534 10/brlcad/trunk/src/librt/CMakeLists.txt: add new generic.c file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.36</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>huh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.08</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>brl-cad doesn't use even numbers not even (no pun intended) for bugfix releases?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.38</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>even is a release, odd is a development phase</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.46</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>I knew that for the "minor", second component</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.58</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>but didn't know that I applied to the third one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.52</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.09</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>how would I compile without the stuff in src/other?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.29</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>other than disabling it one by one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.53</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>if it can detect stuff, it should infer the --disable-</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.03</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: --disable-all will turn everything off (and configure will then abort if it doesn't find something it needs)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.05</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>yep, but I want to force the disable for all 3rd party software, to try to evaluate the difficulty to get brl-cad into debian</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.30</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>mm, good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.35</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>thx</tt></td></tr>
+<tr><td><tt>21:40.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.21</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: options are described in detail in the INSTALL file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.48</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>you will probably have to build at least openNURBS and a couple others</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.37</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>urt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.45</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>I believe I summarized things in the gentoo portage tracker a little whileback regarding where things are at</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.45</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>did it ever got into gentoo?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.14</tt></td><td><font color="#ae5cae"><tt>Tecan</tt></font></td><td width="100%"><tt><a href="http://www.missoulian.com/news/state-and-regional/article_9db5e032-0a22-11df-95bc-001cc4c002e0.html">http://www.missoulian.com/news/state-and-regional/article_9db5e032-0a22-11df-95bc-001cc4c002e0.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.22</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>configure: WARNING: The floating point implementation does not seem to be IEEE 754&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.32</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>cue the Pentium rounding error jokes... :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.13</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>it doesn't detect the tcl libraries or something :|</tt></td></tr>
+<tr><td><tt>21:59.36</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Tecan (~fsadf@unaffiliated/unit41)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.20</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>| #ifdef HAVE_TCL_H</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.21</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>| #&nbsp;&nbsp;include &lt;tcl.h&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.23</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>| #endif</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.44</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>it seems that, by disabling-all, this is not defined and thus the test fails (?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.40</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>a lot of systems don't seem to be IEEE 754 compliant (and nothing requires them to be really)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:08.48</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>not usually an issue</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:09.46</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>that define comes from earlier tcl.h header checks, so if it fails, something is either not installed, not compatible, or search flags aren't set right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.00</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>all of the checks are pretty independent, there are header checks, library checks, and then functionality (make sure it works) checks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.17</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>all three have to pass</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.23</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>well, it's there: /usr/include/tcl8.4/tcl.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.42</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>and how does it know to look there for it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:16.40</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>i.e., "not compatible, or search flags aren't set right"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.22</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>iiiiinteresting patterns</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.53</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>iirc, there's a way to convince the intel fpu to do zomfg 754/854 at the cost of performance, but the only bit it really comes up is the ntohd htond calls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.18</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r37535 10/brlcad/trunk/src/libged/ (54 files): Quell a few warnings when compiling 64-bit Windows.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.32</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, ntohd and htond is the only scary bit, if the byte representation couldn't be parsed by a different compile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.15</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, thanks bob :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.28</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>brlcad: do you have a gtk2 enabled machine handy?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.43</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>hm, lemme check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.19</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/~erik/oddnmg.g">http://brlcad.org/~erik/oddnmg.g</a> <a href="http://brlcad.org/~erik/oddbot.g">http://brlcad.org/~erik/oddbot.g</a>&nbsp;&nbsp;(rt will crap itself on oddnmg.g, but will kinda sorta render oddbot.g... both results of the same g-nmg, just the -b flag and name)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.49</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>isst will crank them up and assume unoriented, and allow ya to look around a bit :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.15</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>neat stuff, ainnit? I'll be busy tomorrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.20</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>well that's promising</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.58</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>there're some details that strike me as vrrrry odd and looking closely with isst</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.42</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>hopefully, the table I stole is correct :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.36</tt></td><td><font color="#61b861"><tt>``Erik</tt></font></td><td width="100%"><tt>aaanyways, time to roll out, bbi45m O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.41</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>cya</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.47</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, no gtk2 handy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.09</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>--tcl-includes=/usr/include/tcl8.5/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.11</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>configure: error: unrecognized option: --tcl-includes=/usr/include/tcl8.5/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.25</tt></td><td><font color="#cf6dcf"><tt>brlcad</tt></font></td><td width="100%"><tt>that looks like an invalid configure option to me too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:00.29</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r37536 10/brlcad/trunk/src/liboptical/ (material.c sh_stxt.c shade.c): Quell a few warnings when compiling for 64-bit Windows.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:15.31</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>so what does this means, then?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:15.36</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>X features:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:15.37</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.02</tt></td><td><font color="#5b5bad"><tt>mafm</tt></font></td><td width="100%"><tt>I expect to use "--tcl-includes=DIR" when I want to include that directory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.01</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r37537 10/brlcad/trunk/include/bu.h: Quell a few warnings when compiling for 64-bit Windows.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:41.53</tt></td><td><font color="#6bcc6b"><tt>CIA-43</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r37538 10/brlcad/trunk/src/libpkg/pkg.c: Quell a few warnings when compiling for 64-bit Windows.</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

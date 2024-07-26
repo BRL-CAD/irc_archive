@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20130804</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20130804</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>01:30.19</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: the context for me is passing in an argv-style array as an argument to a function (an array of path names, specifically) - if I stipulate that the input has to be a null-terminated char ** array, I should be OK without needing an explicit path count variable in addition</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.31</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>(unless I'm missing something - hence my question)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.51</tt></td><td><font color="#ad5b5b"><tt>``Erik</tt></font></td><td width="100%"><tt>if this is for a libged func, I'd think you'd be ok... (mebbe use the argc as a sanity check?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.29</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: actually, librt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.47</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>considering how to define a saner librt search API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.46</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>db_search(const char *plan, const char *paths[], &lt;database stuff&gt;) seemed intuitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:52.31</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>considering whether to have multiple functions for different search types, or just add a flag to indicate search type and always return a bu_ptbl (with the type of the pointer in the table dependent on the type of search requested)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.13</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>so struct bu_ptbl * db_search(int search_type, const char *plan, const char *paths[], etc.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.50</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>which could (I think) handle most scenarios</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.09</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>current API for search evolved accidently while chopping up find code (Sean pointed out that everything shouldn't live in src/libged/search.c, and my first cut was... crude and quick.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:57.53</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>trying to fix that now, since I'm actually starting to use the librt API for other commands (long been a goal, just hadn't come up until the comb options last week.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.45</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>dbfind can go now (deprecated a while back) so also time to make sure search covers those features</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.13</tt></td><td><font color="#6ed16e"><tt>starseeker</tt></font></td><td width="100%"><tt>(or functionality at least - don't care much for how dbfind does output...)</tt></td></tr>
+<tr><td><tt>07:31.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.85.83.158)</font></tt></td></tr>
+<tr><td><tt>09:52.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@195.24.220.16)</font></tt></td></tr>
+<tr><td><tt>10:37.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.85.83.158)</font></tt></td></tr>
+<tr><td><tt>10:56.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>11:29.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:33.41</tt></td><td><font color="#66c2c2"><tt>kesha</tt></font></td><td width="100%"><tt>tofu: did u give an application on behalf of BRL-CAD for doc camp ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:34.04</tt></td><td><font color="#66c2c2"><tt>kesha</tt></font></td><td width="100%"><tt>Deadline is approaching ..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:19.41</tt></td><td><font color="#cb6b6b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>calm down...</tt></td></tr>
+<tr><td><tt>12:40.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>13:13.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:10.42</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56506 brlcad/trunk/src/libbn/tests/bn_poly_multiply.c: the copyright statement is misleading, pull the explanation comment down closer to the values inline.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:32.12</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>zero_level: so the lesson from that rtweight mess is to make sure that you run "make regress" and "make test" for ALL of your changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:33.05</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>if another dev has to fix a bug you introduce, that's bad (net negative)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.17</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>so you must take time to 1) prevent introducing errors in the first place, 2) NOTICE problems that have been introduced (by being aware of commits and testing all the time), and 3) stop work to fix any issues introduced completely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:35.27</tt></td><td><font color="#af5caf"><tt>tofu</tt></font></td><td width="100%"><tt>zero_level: and good call on the shrink question, using more memory is usually fine within reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.39</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: it depends how you intend to change the librt interface to search, but it is a published API change and it wasn't introduced just last release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:42.20</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>so yeah, the previous interface should be deprecated (and perhaps more thought into the new interface so it survives longer)</tt></td></tr>
+<tr><td><tt>16:48.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.05</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: there isn't a need to pass argc, but it does make it so we don't have to manually calculate it in every program and you can do things like argv[argc-1] to get the last arg, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:52.49</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>afaik, argv has always been null-terminated (since the 70's) and even the c90 standard specified it</tt></td></tr>
+<tr><td><tt>16:54.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak_ (~Izak@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>16:55.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izak__ (~Izak@195.24.220.16)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.23</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>14:12 &lt; Izak__&gt; Well I have already written prep,shot,bbox,print,vshot and curretly on norm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:08.31</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>if you're written prep and shot, we should be seeing pictures...</tt></td></tr>
+<tr><td><tt>17:18.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vladbogo (~vlad@188.25.239.5)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:22.52</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56507 brlcad/trunk/regress/testlib.c: the regex is out of date and 'invalid' as preprocessor-disabled code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:23.10</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56508 brlcad/trunk/src/bwish/input.c: no if 0 case, remove the if 1 wrappage.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.27</tt></td><td><font color="#cb6b6b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>brlcad: just finished writing the unit tests for poly.c </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.35</tt></td><td><font color="#cb6b6b"><tt>Ch3ck_</tt></font></td><td width="100%"><tt>awaiting your reviews.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:30.08</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56509 brlcad/trunk/src/conv/asc/g2asc.c: combine the commentary on previous value with the new zero value for the comgeom region #.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.07</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56510 (brlcad/trunk/src/conv/g-dot.c brlcad/trunk/src/conv/ply-g.c): remove dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.27</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : I was later able to do it without using extra memory. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:38.39</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56511 (brlcad/trunk/src/external/ProEngineer/proe-brl.c brlcad/trunk/src/external/Unigraphics/ug-g.c and 2 others): remove dead code from our external plugin modules. they're updated far too infrequently for any reference code to have more utility than just figuring out what needs to be done going forward should a need arise.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.17</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: at what cost?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.27</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>code complexity?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>if an algorithm can be done 2x as fast by using 2x memory, it's usually worth it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:43.55</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>memory is cheap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.22</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>I used the same buffer and wrote it in.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.27</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>later used realloc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:44.54</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>is there a specific commit that shows what you did?</tt></td></tr>
+<tr><td><tt>17:45.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Notify (~notify@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.12</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>check decimate.c and shrink_image(..)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:45.38</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56512 (brlcad/trunk/src/libdm/dm-ogl.c brlcad/trunk/src/libdm/dm-rtgl.c and 3 others): more dead code elimination</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.07</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>well i could give u a revision number. But that doenst come from a specific rev. Its sort of combinations.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:47.55</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56513 brlcad/trunk/src/libdm/knob.c: de-k&amp;r and remove dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.06</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>check r56498</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:48.32</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>but it has been modified in r56505</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:50.29</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>Indeed its same complexity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:52.33</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>also i modified pixshrink.c and bwshrink.c . They were sort of adding bits redundantly. Modified it to correctly implement Box Averaging for shrinking the image.</tt></td></tr>
+<tr><td><tt>18:09.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@45-66-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.58</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56514 brlcad/trunk/src/libged/arb.c: the more I dig, the worse it looks. this begs for refactoring.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:10.43</tt></td><td><font color="#ad5b5b"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://arcanis.github.io/sparkle/example/">http://arcanis.github.io/sparkle/example/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.18</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56515 brlcad/trunk/TODO: leave a todo for the bounding box mess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.48</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : i am trying to rename decimate.c to scale.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.12</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>used svn mv src/libicv/decimate.c src/libicv/scale.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.35</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>But on svn diff i see only deletion and not addition</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:28.47</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 5920 /wiki/User:Harman052/GSoc2013/Logs: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:30.05</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 5921 /wiki/User:Harman052/GSoc2013/Logs: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.23</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: shrink_image() needs some work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:32.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>several issues, some I'm sure were in the originals but some you've introduced</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.23</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like most of the issues I'm seeing you didn't introduce though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:33.40</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: "facsq,x,y,py,px,c;" is your doing ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.10</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>the biggest issue is parameter validation, making sure that factor is &gt; 0.0 and &lt;= 1.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.51</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>and making sure facsq &gt; 0.0</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.26</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: svn status src/libicv will tell you what it plans to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.47</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>you should see an A and a D for a move</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.11</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>otherwise, you'll need to revert and figure out what you did wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.12</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56516 (brlcad/trunk/src/libged/bigE.c brlcad/trunk/src/libged/bot_dump.c): more dead code elimination</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.25</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56517 brlcad/trunk/src/libged/bot_dump.c: make the date string be auto-formatted to correspond with the actual runtime date/time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.47</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56518 brlcad/trunk/src/libged/bot_dump.c: it's the length of the string minus the newline character</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.09</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56519 brlcad/trunk/src/libged/bot_dump.c: don't lie, we're not always NT</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.32</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vladbogolin * 5922 /wiki/User:Vladbogolin/GSoC2013/Logs: /* Week 7 */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.27</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56520 brlcad/trunk/src/libged/bot_dump.c: document the SAT header</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.39</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56521 brlcad/trunk/src/libged/bot_dump.c: there's nothing special about the 'produce ID' and many (non-Solidworks) examples are abound online, so use our name. keep the ACIS version identifier though since they probably key off of that for the file format.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.16</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56522 brlcad/trunk/src/libged/bot_dump.c: nothing temporary about it, but it's clear why the old version didn't work (the product ID strlen is wrong)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.13</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56523 brlcad/trunk/src/libged/bot_dump.c: refactor the SAT header writing into a static function since it's used in three places</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:29.15</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:erikgreenwald * 56524 brlcad/trunk/src/libbrep/intersect.cpp: change NULL to false in boolean default</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.42</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56525 brlcad/trunk/src/libged/bot_dump.c: rename all of these functions so they're consistently fmt_verb_noun() with the format prefixing the function name so it's clear what groups with what.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.42</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56526 brlcad/trunk/src/libged/brep.c: comment why these export lines are here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.28</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56527 brlcad/trunk/src/libged/dg_obj.c: remove dead deprecated code</tt></td></tr>
+<tr><td><tt>19:51.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@45-66-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.21</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>brlcad : factor is an integer value there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.33</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>If Factor is 2.this halves the images.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.12</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>Also you must have notice this is hidden function.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.27</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>there is a wrapper function comming.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.37</tt></td><td><font color="#5fb55f"><tt>zero_level</tt></font></td><td width="100%"><tt>which will validate the data.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.57</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56528 brlcad/trunk/src/libged/loadview.c: that remark was made in 1996... there's nothing temporary about this (or literally everything could be called temporary), so update the code accordingly.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.57</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>zero_level: good point about it being an int, but the comments still hold</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.08</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>functions being introduced should always validate their parameters for expected valuesd unless there's a specific reason not to (usually performance or size)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.41</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>if the factor is always positive, then it should be an unsigned int and then one only needs to test that facsq is not zero</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.00</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>I take that back, still have to check 'factor' too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.12</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>(height could be zero)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.46</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>a wrapper doesn't address this concern (it actually compounds the issue)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:29.37</tt></td><td><font color="#af5caf"><tt>brlcad</tt></font></td><td width="100%"><tt>a wrapper won't necessarily know that shrink_image is going to perform a division, which is where there is a risk here of an application crash</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.48</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56529 brlcad/trunk/src/libged/png.c: unclear to me why there's padding on this allocation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.54</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56530 brlcad/trunk/src/libged/view_obj.c: bad assumptions in there with the magical 1.0e10 but this is a deprecated interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.51</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56531 (brlcad/trunk/src/libfb/if_X.c brlcad/trunk/src/liboptical/sh_gauss.c and 3 others): remove dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.13</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56532 brlcad/trunk/src/libwdb/mater.c: not implemented for v4 and probably never will be. remove the regionid-based-coloring implication for v4.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.34</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56533 brlcad/trunk/src/mged/dm-generic.c: bye bye dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.33</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56534 brlcad/trunk/src/mged/clone.c: call cmd_redraw_vlist() instead of drawtrees() after calling 'tracker' to replot the wireframes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.20</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56535 brlcad/trunk/src/mged/clone.c: looks like we can keep it even simpler and go through libged by calling redraw_visible_objects().</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.47</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56536 brlcad/trunk/src/mged/dodraw.c: eliminate 545 lines of code no longer in use by eliminating the old drawtrees() mged function. this functionality was migrated to libged/draw.c a long while back.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.44</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56537 brlcad/trunk/src/libwdb/mater.c: mp is no longer used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.42</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56538 (brlcad/trunk/CHANGES brlcad/trunk/doc/docbook/system/mann/en/CMakeLists.txt and 7 others): eliminate the 'redraw_vlist' command completely in favor of just re-issuing the 'draw' command again. looks like it might not even be working any more, but lets even more code get consolidated.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.33</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56539 (brlcad/trunk/src/mged/edarb.c brlcad/trunk/src/mged/scroll.c): more dead code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.04</tt></td><td><font color="#ae5bae"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 56540 (brlcad/trunk/src/mged/CMakeLists.txt brlcad/trunk/src/mged/cmd.h brlcad/trunk/src/mged/setup.c): pjt never finished import_body/export_body, commands for low-level reading/writing of geometry to files. doesn't seem like a great idea to me. say buh bye. as the main reason for db5_types.c, there may be other related code needing to go under the hatchet.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:45.41</tt></td><td><font color="#ad5b5b"><tt>``Erik</tt></font></td><td width="100%"><tt>zero_level: you seem to have issues in libicv/operations.c : you frequently do if(img-&gt;flags &amp;&amp; ICV_OPERATIONS_MODE) which will always be true... I think you mean img-&gt;flags &amp; ICV_OPERATIONS_MODE to do a bitwise AND?</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

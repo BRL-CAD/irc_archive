@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20160604</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20160604</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:01.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-088-064-038-224.088.064.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.59</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>Hi brlcad, could you help checking my recent work on plate mode NURBS and give me some suggestions?</tt></td></tr>
+<tr><td><tt>03:19.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>03:21.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad boj (~boj@210.75.252.226)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.02</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>boj: which recent work, writeup or code?&nbsp;&nbsp;didn't see a discussion..</tt></td></tr>
+<tr><td><tt>03:30.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad boj (~boj@210.75.252.226)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:30.43</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>boj: just saw your note to the list ... daniel has you on the right track ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.58</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>thanks brlcad, what I do now is to start from a simple case, and refine it later..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.21</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>what I am doing now is acceptable? or do I need to make any refinement?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:35.42</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>acceptable, absolutely .. it's excellent progress</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.01</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>at this rate, you may end up ahead of schedule working on additional tasks like tessellation ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:36.36</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>getting global thickness to work right is probably adequate, maybe even sufficient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.27</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't actually use the bot per-face thicknesses and they bloat the serialized size substantially/unfairly the way they're currently stored</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.41</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>yes, that is what I do at present, I think it is a simple case and just make it global..if necessary, I can try to modify it to per-face, will not be a hard problem..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.59</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>note you can also create some simple test cases manually if you need to</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.04</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>see src/proc-db/*.cpp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.22</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a couple nurbs cubes in there that shows how they can be constructed manually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.39</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>could trivially create a non-solid single surface patch and get it working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.47</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>yes, I write a new tool called brep_surf.cpp, it just generate a single surface.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.11</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods, saw that</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.19</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>didn't know if you used the proc-db examples or whipped it up yourself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.09</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>not really, I mimic the examples like brep_cobb and brep_cube..and create a brep_surf. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.37</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, good that you found them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.37</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>what I worry about is, part of my code in brep_surf is a duplication from brep_cobb/brep_cube</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.56</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>so is brep_surf really necessary?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:42.36</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>not long-term, but we need some means to create plate-mode until ray tracing is working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.03</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>proc-db is a sandbox for testing out new ideas, not user tools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.26</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>yes, that is what I think, just using it as a test case..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.30</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.34</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>originally for creating complex geometry through simplified procedures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.02</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>most of the useful proc-db's gradulated to src/shapes as proper documented tools</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.34</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>i don't see this needing to graduate ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.42</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>do I need to work toward this target?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.17</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>what target?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.48</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>trying to make a brep with thickness in MGED.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.17</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>besides, what is src/shapes used for?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.22</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>eventually there should be some means, but import makes sense first since that's where they're coming from now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.12</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>if you pull a random .step file, it will likely have non-solid nurbs entities in it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.19</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>iges is the same case too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.44</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>so just focus on getting ray tracing working like bots ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.56</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>for a simple single surface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.06</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>yes, that is my work next week. :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.44</tt></td><td><font color="#61ba61"><tt>boj</tt></font></td><td width="100%"><tt>thanks brlcad :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.48</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>sure!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.02</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">continues working on getting all that terrain data off of .bz's full hard drive</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.28</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: wiping out jenkins... buildbot wins :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.59</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: you apparently had it checking out the whole repo (every branch every version)... huge :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.16</tt></td><td><font color="#c8c869"><tt>brlcad</tt></font></td><td width="100%"><tt>no worries, though, workdir is wiped </tt></td></tr>
+<tr><td><tt>04:39.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.217.160.14)</font></tt></td></tr>
+<tr><td><tt>06:35.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jordi_sayol (~jordi@53.132.21.95.dynamic.jazztel.es)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:36.38</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>I got an error building brlcad when changed prefix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:36.42</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>$ cmake -DCMAKE_INSTALL_PREFIX=/usr/brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:36.54</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>make</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:36.58</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.38</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>[100%] Generating ../../share/db/NIST_MBE_PMI_11.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.38</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>[100%] Built target NIST_MBE_PMI_11.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.38</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>Scanning dependencies of target NIST_MBE_PMI_7-10.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.38</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>[100%] Generating ../../share/db/NIST_MBE_PMI_7-10.g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.38</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>db/nist/CMakeFiles/NIST_MBE_PMI_7-10.g.dir/build.make:61: recipe for target 'share/db/NIST_MBE_PMI_7-10.g' failed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.40</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>make[2]: *** [share/db/NIST_MBE_PMI_7-10.g] Error 139</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.42</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>CMakeFiles/Makefile2:39004: recipe for target 'db/nist/CMakeFiles/NIST_MBE_PMI_7-10.g.dir/all' failed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.44</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>make[1]: *** [db/nist/CMakeFiles/NIST_MBE_PMI_7-10.g.dir/all] Error 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.46</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>Makefile:160: recipe for target 'all' failed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:37.48</tt></td><td><font color="#60b7b7"><tt>jordi_sayol</tt></font></td><td width="100%"><tt>make: *** [all] Error 2</tt></td></tr>
+<tr><td><tt>07:57.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sniok (~sniok@89.252.29.238)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:11.01</tt></td><td><font color="#c668c6"><tt>tandoorichick</tt></font></td><td width="100%"><tt>in setup.c in the struct mged_cmdtab, what is the second attribute in all of the records?</tt></td></tr>
+<tr><td><tt>08:12.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad djkonro (~konro@41.202.219.67)</font></tt></td></tr>
+<tr><td><tt>08:26.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick1 (~Thunderbi@117.230.155.91)</font></tt></td></tr>
+<tr><td><tt>09:42.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.230.155.91)</font></tt></td></tr>
+<tr><td><tt>10:08.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.230.155.91)</font></tt></td></tr>
+<tr><td><tt>10:08.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>10:13.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad djkonro (~konro@41.202.219.66)</font></tt></td></tr>
+<tr><td><tt>10:19.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad asad_ (~asad00@23.213.eduroam.dynamic.rbg.tum.de)</font></tt></td></tr>
+<tr><td><tt>10:44.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:45.47</tt></td><td><font color="#d97272"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, looks like new elevation data has been released, some dude cooked a quick opengl grand canyon renderer <a href="https://www.michaelfogleman.com/articles/2016-05-06/grand-canyon/">https://www.michaelfogleman.com/articles/2016-05-06/grand-canyon/</a></tt></td></tr>
+<tr><td><tt>10:52.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad boj (~boj@210.75.252.226)</font></tt></td></tr>
+<tr><td><tt>11:48.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>12:00.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>12:05.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>12:18.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>12:42.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>12:50.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad shubham (71c1885d@gateway/web/freenode/ip.113.193.136.93)</font></tt></td></tr>
+<tr><td><tt>13:02.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>13:53.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@189-18-174-137.dsl.telesp.net.br)</font></tt></td></tr>
+<tr><td><tt>14:02.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>14:04.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@181-84-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>14:05.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.209.198.233)</font></tt></td></tr>
+<tr><td><tt>14:09.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick1 (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>14:12.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad boj (~boj@210.75.252.226)</font></tt></td></tr>
+<tr><td><tt>14:21.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>14:24.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@101.214.62.116)</font></tt></td></tr>
+<tr><td><tt>15:18.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>15:20.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mathnerd314 (~quassel@supertux/Mathnerd314)</font></tt></td></tr>
+<tr><td><tt>15:40.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>15:41.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:45.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>15:48.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>15:53.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.233.254.88)</font></tt></td></tr>
+<tr><td><tt>15:56.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick1 (~Thunderbi@117.219.145.130)</font></tt></td></tr>
+<tr><td><tt>16:41.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad asad_ (~asad00@23.213.eduroam.dynamic.rbg.tum.de)</font></tt></td></tr>
+<tr><td><tt>16:42.28</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad asad_ (~asad00@23.213.eduroam.dynamic.rbg.tum.de)</font></tt></td></tr>
+<tr><td><tt>17:00.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mandeep_Singh (~mandeep@117.199.104.217)</font></tt></td></tr>
+<tr><td><tt>17:13.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick (~Thunderbi@117.219.145.130)</font></tt></td></tr>
+<tr><td><tt>17:30.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad tandoorichick1 (~Thunderbi@103.207.143.143)</font></tt></td></tr>
+<tr><td><tt>17:35.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad asad_ (~asad00@host10-2.natpool.mwn.de)</font></tt></td></tr>
+<tr><td><tt>17:37.57</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad asad_ (~asad00@host10-2.natpool.mwn.de)</font></tt></td></tr>
+<tr><td><tt>19:32.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>22:49.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

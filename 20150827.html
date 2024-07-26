@@ -1,0 +1,611 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20150827</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20150827</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:21.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado_ (~konro@41.205.22.58)</font></tt></td></tr>
+<tr><td><tt>00:30.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~vasc@bl12-167-49.dsl.telepac.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the quartic solver is broken</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:31.20</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>bn_poly_quartic_roots</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>because bn_poly_quartic_roots is broken what gets called to solve the equation on a quartic when you call rt_poly_roots is actually bn_poly_findroot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.19</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>which uses Laguerre's method</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>anyway i'll cleanup the cubic and quadric code with code i got from numerical recipes in C</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'm still banging on how to do the proper quartic solver</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.53</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hm nevermind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.57</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i found my bug :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.19</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>vasc: IIRC, the numerical recipes in C code is not compatibly licensed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.25</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>in fact, very much NOT compatibly licensed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:24.46</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>i.e. not usable :-(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:25.52</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well we already in svn quadric solver uses their code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.08</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>kinda</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i can revert the cubic root one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.23</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>the regular code or the opencl code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.35</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it's buggy anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.39</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the regular one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it uses the same algorithm...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.50</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>except it supports imags</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:26.59</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>same algorithm sure, but we have to stear clear of the code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.33</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>which code? i wrote it by reading the book in maths</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:27.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i didn't use code samples</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.55</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>vasc: when you say "uses their code" that has a pretty specific meaning - generally, it's not "independent implementation of mathematical algorithm" </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:28.56</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its kind of a shame. the code had less branches but it has some z-shit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.20</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>uh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>sure whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i didn't copy c code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:29.55</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://www.it.uom.gr/teaching/linearalgebra/NumericalRecipiesInC/c5-6.pdf">http://www.it.uom.gr/teaching/linearalgebra/NumericalRecipiesInC/c5-6.pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.11</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i used this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>section 5.6</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.37</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and then i optimized it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.48</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and it seems to have a bug...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.50</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>my code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.53</tt></td><td><font color="#d9d972"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.42</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>bah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:36.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>revert time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:38.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it had so many less branches :-(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.12</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think its because of how B is computed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.14</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'll try something else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.54</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ah whatever. it ends up being the same...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:41.55</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>kind of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.01</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>BRL-CAD's original C code was too branchy?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:42.33</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>They made sure that code was pretty accurate even in pathological cases and such, you'll have to be careful if you use new code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:43.05</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr><td><tt>01:46.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:46.11</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>geez</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:48.25</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>damned insidious glitch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.12</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>duh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it looks great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so the problem is calling the quartic solver direct?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:00.28</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>pathetic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.47</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>just in case i won't replace the cubic solver</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:06.34</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ah now i see&nbsp;&nbsp;what was the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its some quartic that is probably close to cubic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:08.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>or some division issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.23</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ah whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.39</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>in fact both look the same as the code in numerical recipes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.49</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>except they have a lot more tests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>algorithms</tt></td></tr>
+<tr><td><tt>02:29.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>03:42.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>04:16.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad gurwinder (~chatzilla@117.212.51.123)</font></tt></td></tr>
+<tr><td><tt>04:29.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado (~konro@41.205.22.45)</font></tt></td></tr>
+<tr><td><tt>04:50.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bhollister (~brad@2601:647:cb01:9750:5c7a:866:4799:eae)</font></tt></td></tr>
+<tr><td><tt>06:06.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>07:34.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>09:17.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@92.60.189.225)</font></tt></td></tr>
+<tr><td><tt>09:57.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>10:33.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>10:49.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck_ (~Ch3ck@154.70.99.129)</font></tt></td></tr>
+<tr><td><tt>11:34.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ih8sum3r (~ih8sum3r@122.173.189.145)</font></tt></td></tr>
+<tr><td><tt>12:08.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izakey (~Isaac@41.205.22.23)</font></tt></td></tr>
+<tr><td><tt>12:10.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete (~piotr@acmb68.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr><td><tt>12:13.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.208.131.132)</font></tt></td></tr>
+<tr><td><tt>12:29.56</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad Izakey (~Isaac@41.205.22.23)</font></tt></td></tr>
+<tr><td><tt>12:33.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>12:42.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~androirc@202.164.45.212)</font></tt></td></tr>
+<tr><td><tt>12:44.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@92.60.189.225)</font></tt></td></tr>
+<tr><td><tt>13:02.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee-- (bc5c2134@gateway/web/freenode/ip.188.92.33.52)</font></tt></td></tr>
+<tr><td><tt>13:22.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vasc (~vasc@bl12-167-49.dsl.telepac.pt)</font></tt></td></tr>
+<tr><td><tt>13:25.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.209.194.150)</font></tt></td></tr>
+<tr><td><tt>13:37.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.209.194.150)</font></tt></td></tr>
+<tr><td><tt>13:41.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>13:47.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete_ (~piotr@dwd173.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr><td><tt>14:06.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>14:22.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>14:25.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.209.194.150)</font></tt></td></tr>
+<tr><td><tt>14:30.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries_nicked (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>14:33.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@101.209.194.150)</font></tt></td></tr>
+<tr><td><tt>14:34.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~androirc@202.164.45.204)</font></tt></td></tr>
+<tr><td><tt>14:46.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>14:53.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>14:58.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~androirc@202.164.45.204)</font></tt></td></tr>
+<tr><td><tt>15:03.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>15:03.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@49.138.136.177)</font></tt></td></tr>
+<tr><td><tt>15:03.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad konrado (~konro@41.205.22.20)</font></tt></td></tr>
+<tr><td><tt>15:12.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~sofat@202.164.45.208)</font></tt></td></tr>
+<tr><td><tt>15:33.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete (~piotr@dwd173.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr><td><tt>15:34.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~androirc@49.138.136.177)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.32</tt></td><td><font color="#d06d6d"><tt>maths22</tt></font></td><td width="100%"><tt>I just compiled BRL-CAD on the Raspberry Pi 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.36</tt></td><td><font color="#d06d6d"><tt>maths22</tt></font></td><td width="100%"><tt>It works: <a href="http://brlcad.org/CDash/buildSummary.php?buildid=198">http://brlcad.org/CDash/buildSummary.php?buildid=198</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.03</tt></td><td><font color="#d06d6d"><tt>maths22</tt></font></td><td width="100%"><tt>Benchmarks are decent: <a href="http://brlcad.org/~maths22/bench/run-16638-benchmark.log">http://brlcad.org/~maths22/bench/run-16638-benchmark.log</a></tt></td></tr>
+<tr><td><tt>15:54.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat_ (~sofat@202.164.45.208)</font></tt></td></tr>
+<tr><td><tt>16:01.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>16:09.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.212)</font></tt></td></tr>
+<tr><td><tt>16:14.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dracarys983 (dracarys98@nat/iiit/x-nujuyalijwjubmio)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:26.29</tt></td><td><font color="#6f6fd4"><tt>ih8sum3r</tt></font></td><td width="100%"><tt>``Erik, brlcad : Can someone please make OGV VM up as I'm getting permission denied error every time, so that I can proceed further.</tt></td></tr>
+<tr><td><tt>16:28.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Boquete (~piotr@dwd173.neoplus.adsl.tpnet.pl)</font></tt></td></tr>
+<tr><td><tt>17:12.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.212)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:25.33</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66073 (brlcad/trunk/src/librt/primitives/arb8/arb8_shot.cl brlcad/trunk/src/librt/primitives/bot/bot_shot.cl and 9 others): add ocl colors to regions. add multi-hit rendering option.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.10</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66074 (brlcad/trunk/include/rt/defines.h brlcad/trunk/src/librt/primitives/bot/bot_shot.cl and 4 others): support doubles or floats on ocl upon compilation.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:26.15</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 66075 brlcad/trunk/src/libbu/parallel.c: need to think through this some more but keith noted projects with recursive parallels where a given child might not actually be done working, thus it should not PUT their id back marking it as available for subsequent use as it may not actually be terminating (consider a case calling recursive bu_parallels() in a loop)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.06</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66076 (brlcad/trunk/src/librt/primitives/common.cl brlcad/trunk/src/librt/primitives/primitive_util.c brlcad/trunk/src/librt/primitives/rt.cl): fix ocl linking errors with amd ocl.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.08</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66077 brlcad/trunk/src/librt/primitives/primitive_util.c: ocl program loading fixes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.19</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66078 (brlcad/trunk/src/librt/primitives/primitive_util.c brlcad/trunk/src/librt/primitives/rt.cl and 3 others): fix ocl color rendering. fix issue when rendering scene with nothing on screen.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.28</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66079 (brlcad/trunk/src/librt/primitives/primitive_util.c brlcad/trunk/src/librt/primitives/rt.cl): fix whitespace.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.30</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66080 brlcad/trunk/src/librt/primitives/primitive_util.c: revert improperly applied patch.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.40</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66081 (brlcad/trunk/src/librt/primitives/bot/bot_shot.cl brlcad/trunk/src/librt/primitives/primitive_util.c brlcad/trunk/src/librt/primitives/rt.cl): ocl color fixes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:27.58</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66082 (brlcad/trunk/src/librt/cut.c brlcad/trunk/src/librt/prep.c and 6 others): improved ocl stats.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.04</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66083 brlcad/trunk/src/librt/primitives/rt.cl: use pown since exp is int.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.25</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 66084 brlcad/trunk/src/other/openNURBS/opennurbs_array_defs.h: revert 65966 as casting merely makes the overflow occur silently, badness.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:28.27</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 66085 brlcad/trunk/src/other/openNURBS/opennurbs_array_defs.h: avoid signed overflow by subtracting ele_cnt from both sides of the expression. subtraction underflow is okay -- the lesser-than side of the expression goes negative and the expression remains consistent.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:29.04</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66086 (brlcad/trunk/src/librt/primitives/primitive_util.c brlcad/trunk/src/librt/primitives/rt.cl): automagically set local workgroup size in ocl kernel launches. gets us like 2x speedup on GTX TITAN.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:32.09</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66087 (brlcad/trunk/src/librt/primitives/ehy/ehy_shot.cl brlcad/trunk/src/librt/primitives/primitive_util.c and 3 others): use less memory to store solid ids and materials in ocl. eliminate some more branches and simplify logic in solver.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.10</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66088 (brlcad/trunk/src/librt/primitives/common.cl brlcad/trunk/src/librt/primitives/solver.cl): eliminate branches from ocl cubic solver code. fix ocl quartic solver code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.15</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66089 (brlcad/trunk/src/librt/primitives/common.cl brlcad/trunk/src/librt/primitives/solver.cl): revert ocl cubic solver.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:33.18</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:vasco_costa * 66090 (brlcad/trunk/src/librt/primitives/tgc/tgc_shot.cl brlcad/trunk/src/librt/primitives/tor/tor_shot.cl): update ocl tor implementation to look more similar to tgc.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.36</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:85.245.48.64 * 9461 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.38</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:85.245.48.64 * 9462 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.40</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 0 /wiki/File:Cl_golliath.png: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.42</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9464 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.45</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9465 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.47</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9466 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 12 : 10 Aug-16 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.49</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9467 /wiki/User:Vasco.costa/GSoC15/logs: /* Development Status */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.52</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9468 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.53</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9469 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:34.55</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9470 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.01</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9471 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.01</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9472 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.01</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9473 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 12 : 10 Aug-16 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.03</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Gurwinder Singh * 9474 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.05</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9475 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.07</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Saaj brlcad * 0 /wiki/User:Saaj_brlcad: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.09</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Einsteinjunior * 0 /wiki/User:Einsteinjunior: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.11</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:FrankBirdsong * 0 /wiki/User:FrankBirdsong: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.13</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9476 /wiki/User:Vasco.costa/GSoC15/logs: /* Development Status */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.15</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9477 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.17</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9478 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.19</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9479 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.21</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Vasco.costa * 9480 /wiki/User:Vasco.costa/GSoC15/logs: /* Week 13 : 17 Aug-23 Aug */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.23</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Gurwinder Singh * 9481 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.25</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Liitmyalit * 0 /wiki/User:Liitmyali: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.27</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Gurwinder Singh * 9482 /wiki/User:Gurwinder_Singh/GSoc15/log_developmen: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:35.29</tt></td><td><font color="#dd74dd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Zeno . X . * 0 /wiki/User:Zeno_._X_.: </tt></td></tr>
+<tr><td><tt>18:01.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>18:03.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.212)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.04</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>starseeker, I am facing this error in resource how I solve this ".txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.05</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;vasc&gt; actually this is the syntax</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.05</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;sofat_&gt; ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.05</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;vasc&gt; iso-8859-15 is same thing as iso-8859-1 except it has the euro sign () in it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.05</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;sofat_&gt; hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.05</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;vasc&gt; you can use either and it should work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.07</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;vasc&gt; prolly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.09</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;sofat_&gt; how i tell these reasons&nbsp;&nbsp;to brlcad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.11</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;vasc&gt; beats me. i don't know what's his problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.13</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;vasc&gt; can only guess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.17</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>&lt;sofat_&gt; ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:06.19</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>* Disconnected (Connection reset by peer)."</tt></td></tr>
+<tr><td><tt>18:06.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad sofat (~sofat@202.164.45.212)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:07.06</tt></td><td><font color="#e17676"><tt>sofat</tt></font></td><td width="100%"><tt>" CMake Error: Parse error in cache file /home/nouhrasofat/brlcad/CMakeCache.txt. Offending entry: We cannot execute java"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ok, just wasted 6 hours of my time trying to put the aila &amp; laine renderer in our code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i.e. the traversal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.28</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it's SLOWER</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:16.21</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>how awfully gratifying that was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so much for dynamic ray fetching</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.49</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>just breaking it into small tiles does the trick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.58</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and its TWO lines of code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.59</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Dynamic ray fetching? That sounds like a bad idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.00</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>maybe THREE</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.12</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>not all rays have same length right. so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.29</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>There are always academics claiming about some fancy new idea like runtime ray sorting, dynamic whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.32</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>maybe this thread ended and you want it to pick something else before the whole workgroup finishes too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.46</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes, and it becomes totally incoherent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:18.51</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Therefore, bad idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.25</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well i didn't reorder the rays in z-order first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.42</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and it was almost as fast as our current code once i change some parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.43</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>almost</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.51</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but it needed PTX instructions for that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.55</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Don't believe what the papers say, and feel free to bounce ideas with me about raytracing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well it was a ... highly celebrated paper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.25</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Your coherent rays should be much faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.36</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Do you any kind of voting before intersecting primitives?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i just split the screen into 8x8 tiles and blammo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:23.51</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>no</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.00</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>"At least N of all threads in warp wants to intersect, therefore we go in, otherwise wait"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.03</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that other code did that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:24.24</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think i'll store the patch in the bug tracker just in case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.03</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt><a href="https://sourceforge.net/p/brlcad/patches/416/">https://sourceforge.net/p/brlcad/patches/416/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:31.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>in case you are interested</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'm tired</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.58</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i want to make it even faster but other than the 8x8 subblocks i'm stumped</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i shrank some data structures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that was about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.18</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Ah optimization, the fun part</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:37.25</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>(No sarcasm, I love optimization)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.07</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Did you make sure all reads/stores are coherent, if rays are also coherent?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.16</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Warp voting before intersection would be a good idea</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.42</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>right. that OTHER patch did that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.44</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Branch merging too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:38.54</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>uses PTX instructions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.03</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Yes well, without any dynamic fetch garbage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the rays are primary rays right now and i'm using 8x8 bundles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.14</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't think they want any assembly in there...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so i would say they are coherent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.39</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>What do the memory write patterns look like?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:39.56</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well we have a couple of read and write pattern issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.01</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Does each thread N always write results to some array[N]?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.11</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the bvh is in one piece of memory, the objects data in another</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.11</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>And not array[N*foo+something]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and the image is not stored in z-order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:40.38</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Memory access patterns are critical for GPU optimization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.01</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>And proper use of the shared memory, *NOT* global memory for any kind of temporary results or data</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the thing is i could use a regular clImage and it would do it for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.14</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but then we can't use that clImage data on the backend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:41.38</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>we would have to change format from RGBA8 to RGB8DEPTHBE64</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>unless we rewrite the whole backend</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>with all its multiple render targets</tt></td></tr>
+<tr><td><tt>18:42.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bhollister (~brad@2601:647:cb01:9750:5c7a:866:4799:eae)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:42.34</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>like a dozen of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well the hit point lists are in global memory right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:43.59</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>There, that's a major bottleneck to fix</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.14</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Far more critical than dynamic ray whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i don't wanna change that until i figure out&nbsp;&nbsp;which algorithm i wanna use</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>peeling or whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.23</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Fair point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.43</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>we need something that can do transparent rendering with multi-hits and csg too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:44.56</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i read some paper that claimed you could compute the csg incrementally using two buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>one for the in points another for the out points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:45.19</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but i don't remember the reference anymore :-|</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think it was&nbsp;&nbsp;10-20 years olds</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:46.38</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Probably not useful for GPU hardware</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it sound like i could avoid the dual passes with that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.33</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'm doing dual passes now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:47.55</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>one to count the required memory for the hit point lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and the other to actually store data in them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.24</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>maybe i'll come up with something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.29</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I told you, giant static buffer of "bundles" of N hits, allocated through multiple atomics</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.38</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Single pass, pretty efficient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.47</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>is it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.59</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it kinda doesn't pass my smell test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.06</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>You could even make the writes coherent by always allocating N hits for all rays of the warp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>something tells me i can do it incrementally with a couple of static buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:49.16</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>You don't allocate every single hit, you allocate bundles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.03</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>The other, better solution is buffering all hits in shared memory and resolving the segments right there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>e.g. the way i do the multi-hit transparency right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i traverse in depth order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and add colors up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:50.29</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it accumulates the colors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.14</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>there's nothing preventing me doing the traversal in reverse depth order... except...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.24</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Reverse depth order? Why?...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.34</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.37</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>even then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.42</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Front-to-back is the only way that makes sense, especially if you want to be able to terminate rays early</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:51.52</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>basically that color computation is essentially a huge scan operation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.32</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>which i am doing linearly right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i know scan operations like that can be done much faster</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:52.57</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>In my raytracer's inlined callbacks, I accumulate colors in plain *registers*, then in the Final() inlined callback, I write the final color to global memory just once</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that's what i'm doing now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.29</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Okay good, I understood something else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.30</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but it also means you're using a single thread to do that accumulation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.42</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Each thread accumulate its own ray, yes?...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:53.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.20</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't see where the scan operation comes in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.36</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/w/images/7/7d/Cl_golliath.png">http://brlcad.org/w/images/7/7d/Cl_golliath.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:54.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>multi-hit goliath</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.08</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>just summing the color contributions along the ray points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think i'm doing something wrong there but...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.27</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Can't you do that just as hits are produced?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>no because its transparent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:55.49</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>And?...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.06</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it would have to be processed front to back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.19</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>That's not the way rays are traced?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.19</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>or it would look bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.28</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>rays are processed recursively</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i trace one ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.34</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hit a surface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.37</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>trace another ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.39</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.43</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>then i add the contributions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.52</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it does the last piece first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:56.54</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>get it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.18</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>That implies you have to buffer everything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>in here i'm cheating coz i'm not doing snell's law of anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.36</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i just shoot one ray and it always goes straight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.38</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>nyayaya</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.46</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>That's what raytracers do :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.56</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>not physically based ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:57.57</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If someone wants a ray that bends direction, he'll shoot a new ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.22</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Actually, my raytracer can handle a new direction vector from within the hit() callback, but let's not go there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.24</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>this one goes straight through the entire scene. thought things too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.29</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its just to make pretty pictures</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:58.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>kind like fake translucency</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>actually its translucency where there is no reflected part of the ray</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it goes all in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.38</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>both angles on snell's law are the asme</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.41</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:59.54</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>My multi-hits: <a href="http://www.rayforce.net/rfmultihits.png">http://www.rayforce.net/rfmultihits.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.02</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I know what it is :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.06</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>cute</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so do you do it back to front of what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i guess i need to read the depth peeling paper again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:00.51</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Front to back, hits are processed as they come, *nothing* is buffered, no memory is ever written until the end: the final pixel color</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.08</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Depth peeling is terrible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>Depth peeling works by rendering the image multiple times.[1] The twist is that depth peeling uses two Z buffers, one that works conventionally, and one that is not modified, and sets the minimum distance at which a fragment can be drawn without being discarded. For each pass, the previous pass' conventional Z-buffer is used as the minimal Z-buffer, so each pass draws what was "behind" the previous pass. The resulting images can be combined to form</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.28</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Bad, bad bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.49</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>man but you can't do it front to back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.51</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Trace the rays *once*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:01.56</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the transparency will look wrong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.01</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>No!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.18</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>First hit, accumulate color, reduce the ray's intensity for the following hits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.26</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Like... reduce ray intensity by 0.8 for each hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:02.36</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hm i see</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.06</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i guess i could do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.08</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Doing it that way, you can also cut off rays when they are too "weak"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.23</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Which is very similar to bullets shooting through geometry, they have no energy left and you can cut them off</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.08</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>It is highly efficient, I'm talking about 500 million rays per second in that scene</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so i don't need two passes for multi-hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>great</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.38</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Absolutely no need for multiple passes, and depth peeling is absurd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.48</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>now the question is csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.19</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Right, that is more complex. Temporary hits may have to be stored in shared memory to recompose the proper "segments", or whatever terminology is used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think they call them segments in BRL-CAD</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.56</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Okay, I wasn't sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:05.56</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>a segment has an 'in' and 'out' hit point</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.00</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>papers call those surfels or seomthing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:06.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:10.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://i.imgur.com/YwIBlpt.png">http://i.imgur.com/YwIBlpt.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.44</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>You should be able to buffer and work on all that in shared memory</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:11.57</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If it doesn't fit, it gets a little more complicated</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.06</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the problem is i don't know the size of the list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.11</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its probably gonna be small but</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and i need that memory per thread</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.11</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Right, it needs to be able to extend storage to global memory in the worst case</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:16.34</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Which get messy... but the vast majority of cases will be very efficient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.36</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.39</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>on second thought</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.53</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it still won't work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>let's say i have the hit callback right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.08</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it gets called on each hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>unless you attenuate with distance...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:47.35</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>was that it?</tt></td></tr>
+<tr><td><tt>19:56.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C47E.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>any good absorbency functions?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.21</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'm trying dist, dist*dist, dist*dist+dist</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.23</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>That doesn't sound right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:10.50</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If you only want to register hits with surfaces, then reduce by 0.8 or so the ray's intensity every hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.45</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If you want to compute absorption within a material, then it's some exp() funtion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the hits won't be in order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.47</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>let's say you are processing hits on a cell. the hits on the cell may be out of order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.52</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>even bounding boxes can overlap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so even the 2nd processed bounding box may end up having a closer hit</tt></td></tr>
+<tr><td><tt>20:21.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Izakey (~Izakey@41.205.22.46)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.19</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Ah yes, that's the issue with objet-based partitionning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.31</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Then you have to buffer hits in shared memory and reorder</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.04</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>When you know, during the traversal, that new hits won't appear before existing hits, then you can sort the buffered hits and process them right away</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the log() and pow() seem to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.29</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Uh, okay... not sure why you would need that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.47</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Absorption through a transparent material is based on exp(), if that's what you are doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>uh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>forget it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.05</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the exp grows too fast</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.23</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>adjusting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.48</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>exp( -distance / opacity );&nbsp;&nbsp;?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.03</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">has no idea what you are doing</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:29.06</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>yeah i'm trying that now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.02</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it looks ok but similar to 1.0/(distance*distance) right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:31.32</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Well, that isn't physically correct</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.30</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt><font color="#CC00CC">did some of that absorption stuff in radiation raytracing for fire simulation in computational fluid dynamics</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>well even 1.0/dist looks ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.41</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>we use that for atmospheric attenuation in ray tracing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.00</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>you just need a smooth function that falls off with distance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.55</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>exp() is the correct one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.02</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Anything else is an approximation just to look okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.12</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i guess i'll use that then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.44</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Approximate CUDA exp() is pretty fast</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.51</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Err, OpenCL exp(), same thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.19</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:41.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that can be done cummulatively</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:41.59</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ain't done now coz the callback doesn't have the data pointers to materials and stuff but can be done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://i.imgur.com/cu0xPXt.png">http://i.imgur.com/cu0xPXt.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>vs my old one using ray-tracing method</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.34</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/w/images/7/7d/Cl_golliath.png">http://brlcad.org/w/images/7/7d/Cl_golliath.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.42</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i like old one better even if its two pass...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.11</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Always prefer the correct method, this is physics :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>light makes rightr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.50</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>you can see more detail on yours though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>now the question is how to compute the opacity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.17</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>maybe user slider</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.58</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>anyway once i integrate this into one pass function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>then it will work with one pass</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.27</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>some more trashing though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.53</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>to load materials and crap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>kewl thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>another essential mode that doesn't need multiple passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.56</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Good :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.57</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the distance should probably the converted into world box coordinates or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ah ewll</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its a matter of fudging </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.48</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the attenuation needs to take into account the model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.49</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Opacity per meter should be defined somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.57</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>hm ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>now the other question is should i only be doing this for the IN points </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and not the OUT points...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.47</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>eheh</tt></td></tr>
+<tr><td><tt>20:55.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ih8sum3r (~ih8sum3r@122.173.189.145)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.04</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Opacity is a function of distrance travelled between in and out?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.18</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>distance* too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.41</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ohhhh. ... that's messed up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but not impossible actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.02</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If you just want to show surfaces, then accumulate all hits, reduce ray intensity every hit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>like i said they aren't ordered</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.31</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>[...] accumulate all sorted hits [...]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:00.30</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'll think about it a bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:01.05</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so its exp(-hit_dist*1e-3)*length_segment?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:06.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that doesn't look so good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:14.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>aw the first one is ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.06</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>vasc, it's exp( -SegmentLength * opacity );</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.15</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>It's&nbsp;&nbsp;/ opacity&nbsp;&nbsp;depending on your units</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.47</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>It's the energy absorption of the ray for some given distance through some opaque material</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.26</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>You still need to go front-to-back and reduce the ray's energy as it traverses material, each loss of energy gives a color depending on the material</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.48</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>gah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.54</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that bytes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.00</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>you can't do that without two passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>you need an ordered list of hits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.27</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>bites</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.33</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>even with the ordered list its a pain</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.05</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its like you get out a primitive into air</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and then into a primitive again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and inside a primitive that's inside another</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.19</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and they cross</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and whatever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>man i found this guy's phd thesis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>he's went overboard on the topic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.11</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'll skim it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.14</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.47</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>You buffer all hits in shared memory, as soon as you know any new hit will *not* occur before existing buffered hits, you process all these hits and flush the buffer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.18</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>With the buffered hits, you can determine entry/exit points and build the segments</tt></td></tr>
+<tr><td><tt>22:16.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bhollister (~brad@2601:647:cb01:9750:7d54:b79d:72f2:3078)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.11</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it's messed up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>coz i don't know if i'll overflow until i process a primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and if i do it in the middle i'll have to backtrack</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.33</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and its a mess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.36</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>don't wanna do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think there is a better option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.58</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the buffer thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but i'm reading more</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.44</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>The hit buffering can technically overflow... but darn, shoot small packets of rays with a huge static chunk of global memory to allocate on-demand, the risk is very low</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>Near real-time CSG rendering using tree normalization and geometric pruning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.02</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>And if it *does* happen, you break the packet into smaller bundles of rays and try again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.34</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>The good answers don't have to be in papers, you know :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.48</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>"Near real-time CSG rendering using tree normalization and geometric pruning"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.51</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Though I certainly recognize you are from academia, eh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.54</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>dude</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.02</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i had the gut feeling it could be done</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.14</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>with something other than storing the whole list somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>in an incremental fashion</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.23</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so i searched and searched</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.30</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and found TWO papers that already do that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.58</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it's the XXIst century. everyone is bound to have thought of a way to do it yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.02</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>even if it SUCKS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>:-D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.34</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Sometimes. And not everyone bothers writing papers about it, and a lot of people needs to write papers, even if filled with garbage, to fill their quotas</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:21.55</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.08</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>see i have to write mine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.30</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'm just concerned if the buffering approach is prone to errors or not</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.36</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>such approaches usually are</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:22.52</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so i've been reading everything else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.03</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>including this reconfigurable hardware system some japanese made in the 1970d</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.08</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that bad</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.09</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Errors like what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.23</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>you know like z-shit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>things in wrong order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.33</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>crap like thart</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:23.49</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If the hits don't fit in the memory allocated, you bail out, the CPU C code detects the error condition, it breaks the packet of rays into smaller independant bundles and try again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.07</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>man</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.13</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that's like calling a syscalls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>from the gpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it's what i want to avoid</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.23</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>The probability of this happening is **very** low</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>famous last words</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.43</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>But it might still happen, so that's why you have code to handle it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:24.45</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that reminds me of located</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.24</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>man if i wasn't interested in understanding the actual problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.35</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>instead of reading this phd thesis of this guy and all this crap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.39</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>If it happens just once, you know that the heuristics used for hits/ray have to be revised in this particular scene, for future raytracing operations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:25.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i would just get the rossignac paper and implement that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:26.52</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>from what i get the rossignac paper is that goldfeather paper with more pizzaz</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.12</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>20 years of hindsight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.32</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i'll just continue reading about csg</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.38</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>in this hundreds of pages this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.40</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I have no idea about these papers... I just think I know both raytracing and CUDA, and I feel like I very much see what the best solution is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:27.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>thesis</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.03</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i used to want to be an historian before i went into computer engineering</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so i dig this stuff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.14</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Eh, all right then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.21</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>seeing the path others have throdden and failed and so on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:28.45</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I don't like reading papers, it ruins the fun of figuring things out and, worst of all, it contaminates the thought process to figure out new solutions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>see that's the thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>there's beauty not only in the discovery but in the travel as well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.37</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it's like when i saw The Lord of the Rings in Movie form even though I already had read the books and knew the story</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.05</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>For some, the travel can be sitting in front of black sheets of paper for hours, eh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.11</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>of blank* sheets</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:37.06</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>I quite enjoy that actually, sometimes the solution turns out better than the existing ones, sometimes it's already out there. But it was more fun either way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i've done the opposite too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>start blank sheet and work on it for 2-3 months</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.27</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>then i realize its all in a 15 year old paper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i work on it another 2 months and its state of the art paper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>both approaches are ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.16</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that was some long 111 pages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>next</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:46.57</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>How many lines of it were interesting? :p</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>about 5-6 pages</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it was good enough to make me realize the problem is more complicated than i thought it was</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:48.37</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i.e. how to map that CSG tree to the points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.05</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and how to evaluate a tree like that efficiently</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.30</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it went into these bit coding schemes but i kinda didn't read it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.26</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>this 2011 paper sounds familiar . he's doing the same as me. counting the sizes of the lists in a first pass, doing a scan, and allocating the buffer to fill them next</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:57.28</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>herp derp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.02</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>he even uses small list sorting. just like we do. herp derp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.25</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>except he uses shell sort i think we use intersection sort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.30</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>gotta try something else</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:58.46</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>maybe bubblesort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.31</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>yeah the old bubblesort. gotta try that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:02.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>nothing better to sort already sorted lists. its optimal</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:09.51</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that's was kind of fun seeing another guy doing the&nbsp;&nbsp;same</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>of course he didn't bother mentioning the problems i actually have left to solve. fegh.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:21.06</tt></td><td><font color="#ad5b5b"><tt>Stragus</tt></font></td><td width="100%"><tt>Papers often do that. They present a technique, and completely omit discussing the serious problems and issues of the technique</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:31.18</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:31.44</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so at least the old style buffer techniques have the issue that for convex primitives (think tgc) you need multiple passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:31.51</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the more convex the more passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:31.58</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i mean concave</tt></td></tr>
+<tr><td><tt>23:32.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@85-7-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:32.50</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>e.g. for the torus it would require two passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.01</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>that's what they mean by n-convex</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.22</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the number of in-out pairs a ray can pass most through a primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:33.40</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so it's a least two passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.09</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>we can compute the number of passes in runtime</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.21</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>just check the number of hits per primitive we intersect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.25</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>and divide by two</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:34.51</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>the max for all those primitives is the number of buffer passes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:35.35</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>using the goldfeather algorithm,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i saw nothing about transparency too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.15</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>i think its done for opaque </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:36.19</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>but its 1989</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.10</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>now this century</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.20</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>btw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.34</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>it required two z-buffers and 3 bits buffers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:37.47</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>we can have all the buffers we wnt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.04</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>its not like we are limited to kludges to use the opengl buffer like those other guys</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.14</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>from the late 1990s early 2000s</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:38.27</tt></td><td><font color="#adad5b"><tt>vasc</tt></font></td><td width="100%"><tt>so i'll ignore those for most part</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

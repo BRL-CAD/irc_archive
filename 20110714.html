@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110714</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110714</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:36.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crux000 (~dan@66.110.178.234)</font></tt></td></tr>
+<tr><td><tt>00:37.50</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad crux000 (~dan@66.110.178.234)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.53</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r45470 10/brlcad/trunk/src/liboptical/sh_osl.cpp: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.53</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Instead of copying only a_rtip, a_hit and a_miss from the previous application,</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.53</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: I'm now copying the whole structure before calling rt_shootray at osl_render. I</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:45.53</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: have no idea why it worked for single threads but not for multiple threads.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:47.29</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45471 10/brlcad/trunk/ (7 files in 5 dirs): replace BU_LIST_MAGIC_OK() and BU_LIST_MAGIC_WRONG() with BU_LIST_MAGIC_EQUAL() in order for the API to be more consistent with convention already established in libbn.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:48.00</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami_: aha, so that fixed it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:49.23</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>didn't realize you were doing a partial copy there .. there are cpu-specific resource structures in an application struct, so when you weren't copying them it would have been in some peculiar uninitialized state (not suitable for threaded use)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:51.37</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45472 10/brlcad/trunk/include/bu.h: remove BU_LIST_CLOSE() since it appears to not be in use any where and it's use is rather limited with the embedded return; there's also no corresponding 'open' so it was just bad API to begin with</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.33</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45473 10/brlcad/trunk/src/ (3 files in 3 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.33</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Add edit and translate/rotate/scale to Archer. Edit command aliases are</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.33</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: intentionally only available to Archer, to keep existing mged commands intact</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.33</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: for the time being. Once everything is working, translate/rotate/scale will be</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:55.33</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: mapped directly to ged_edit.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.18</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, your new application struct wasn't being initialized properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:57.07</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>anytime you do a full struct copy, you should denote it with a /* struct copy */ comment or similar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.42</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: is nirt building on windows?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:03.56</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, I see you just disabled those files .. never mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.28</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45474 10/brlcad/trunk/src/nirt/dist_def.c: use FMAX() instead of fmax() since the latter is C99</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.51</tt></td><td><font color="#6fd46f"><tt>kunigami_</tt></font></td><td width="100%"><tt>brlcad: it seems to have been solved :) I'll add that comment</tt></td></tr>
+<tr><td><tt>02:13.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@252-7-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>02:29.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@90.Red-83-42-153.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>02:49.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (~root@bas2-sudbury98-1177871903.dsl.bell.ca)</font></tt></td></tr>
+<tr><td><tt>02:55.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64_ (~root@bas2-sudbury98-1177872273.dsl.bell.ca)</font></tt></td></tr>
+<tr><td><tt>03:00.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (~root@bas2-sudbury98-1096601331.dsl.bell.ca)</font></tt></td></tr>
+<tr><td><tt>03:05.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64_ (~root@bas2-sudbury98-1128564768.dsl.bell.ca)</font></tt></td></tr>
+<tr><td><tt>03:35.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.25</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45475 10/brlcad/trunk/src/nirt/ (CMakeLists.txt Makefile.am dist_def.c): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.25</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: remove dist_def.c which was disabled from compilation, but appears to have been</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.25</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: related to an earlier implementation of nirt's backout command. since that code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:18.25</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: has since changed and been improved, just kill this old bit.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.53</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45476 10/brlcad/trunk/ (3 files in 3 dirs): remove nurb's MIN/MAX macros since we already rely on FMIN/FMAX elsewhere.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.06</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45477 10/brlcad/trunk/src/burst/grid.c: remove the min()/max() functions since there don't seem to be any uses that will have side-effects, use FMIN()/FMAX() instead like already being used.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:28.52</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45478 10/brlcad/trunk/src/proc-db/masonry.c: get rid of the min/max macros in favor of the FMIN/FMAX decls from common.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.58</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45479 10/brlcad/trunk/src/fb/pl-fb.c: remove unused min() macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:36.12</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45480 10/brlcad/trunk/src/librt/primitives/brep/brep.cpp: call NEAR_EQUAL() instead of BN_APPROXEQUAL() since they do the same thing and the latter is unnecessary api.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:41.03</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45481 10/brlcad/trunk/include/bn.h: remove BN_APPROXEQUAL since NEAR_EQUAL is practically equivalent just without requiring a bn_tol. looks like the only use was isolated to brep.cpp, so yank it.</tt></td></tr>
+<tr><td><tt>04:48.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:58.48</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45482 10/brlcad/trunk/src/irprep/ (CMakeLists.txt Makefile.am ir-sgi.1 ir-sgi.c): remove the antiquated ir-sgi tool since IRIX is no longer a supported platform</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.04</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45483 10/brlcad/trunk/src/irprep/ (CMakeLists.txt Makefile.am irdisp.c pictsgi.1 pictsgi.c): same for pictsgi and irdisp tools, which called ir-sgi. remove pictsgi since it's no longer functional without ir-sgi.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:10.11</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45484 10/brlcad/trunk/include/ (bu.h raytrace.h): remove sgi/mips references, platform no longer relevant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.58</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45485 10/brlcad/trunk/src/lgt/ (6 files): remove all references to sgi since the platform is no longer maintainable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:37.28</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45486 10/brlcad/trunk/src/canon/ (Makefile.am canonlib.c): more sgi/irix/mips removal. no longer need libds too.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:45.48</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45487 10/brlcad/trunk/src/libfb/if_X.c: we still need this with Xorg, not SGI-specific</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:46.02</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45488 10/brlcad/trunk/src/libfb/ (fbserv_obj.c if_ogl.c): remove sgi from comments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:50.50</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45489 10/brlcad/trunk/src/libfb/if_X.c: actually, it looks like peeking at the fd is the only internal we look for so call ConnectionNumber() to get it so we can unset XLIB_ILLEGAL_ACCESS.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:52.53</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45490 10/brlcad/trunk/src/ (bwish/Makefile.am conv/Makefile.am): LINK_STATIC_REQUIRED was needed for irix, simplify</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.36</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45491 10/brlcad/trunk/ (16 files in 9 dirs): the sgi/irix/mips platform is no more and has been that way for many years now. reduce maintenance cost, remove and refactor accordingly.</tt></td></tr>
+<tr><td><tt>06:17.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.178.195.64)</font></tt></td></tr>
+<tr><td><tt>06:17.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>07:12.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr><td><tt>08:05.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr><td><tt>09:34.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@247.Red-83-38-35.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>11:49.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad abhi2011 (~chatzilla@wlan-145-94-187-000.wlan.tudelft.nl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.57</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45492 10/brlcad/trunk/CMakeLists.txt: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.57</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Ah hah. Per <a href="http://www.cmake.org/Wiki/CMake_Version_Compatibility_Matrix,">http://www.cmake.org/Wiki/CMake_Version_Compatibility_Matrix,</a> the</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.57</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: *IGNORE_PATH variables weren't around until 2.8.3 - that's probably why the new</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.57</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: mechanism for ignoring install paths wasn't working in some tests. Bump our</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:01.57</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: required version, as we need to avoid finding old installed BRL-CAD libraries.</tt></td></tr>
+<tr><td><tt>12:22.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:33.34</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>moin</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:18.35</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45493 10/brlcad/trunk/src/ (5 files in 4 dirs): more irix reference removals.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.51</tt></td><td><font color="#7373dc"><tt>``Erik</tt></font></td><td width="100%"><tt>yargh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:30.34</tt></td><td><font color="#7373dc"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, broken stuff, but vaccuum lady is here :/</tt></td></tr>
+<tr><td><tt>13:43.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.178.195.64)</font></tt></td></tr>
+<tr><td><tt>13:43.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>14:07.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami__ (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr><td><tt>14:18.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@dsl-67-204-13-217.acanac.net)</font></tt></td></tr>
+<tr><td><tt>14:40.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@66.49.171.226)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.50</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r45494 10/brlcad/trunk/src/librt/primitives/ars/ars.c: (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.51</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Updated the rt_ars_tess function within file ars.c. I disabled the functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.51</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: nmg_shell_coplanar_face_merge and nmg_simplify_shell unless the prototype</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.51</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: triangulation is enabled. The problem is these functions simplify the ars which</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.51</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: causes more work for later triangulating the ars. The original triangulation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.51</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: code is unable to triangulate the resulting ars after being simplifed. In order</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:34.52</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: to raytrace an ars, it is first converted to a bot primitive which requires</tt></td></tr>
+<tr><td><tt>16:36.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@173.248.249.148)</font></tt></td></tr>
+<tr><td><tt>16:56.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@66.49.131.81)</font></tt></td></tr>
+<tr><td><tt>17:03.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.31</tt></td><td><font color="#65c0c0"><tt>starseeker</tt></font></td><td width="100%"><tt>whoops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.52</tt></td><td><font color="#65c0c0"><tt>starseeker</tt></font></td><td width="100%"><tt>make makes a note that quit != part in issi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:04.55</tt></td><td><font color="#65c0c0"><tt>starseeker</tt></font></td><td width="100%"><tt>irssi even</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:19.20</tt></td><td><font color="#7373dc"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, nope, not equal :)</tt></td></tr>
+<tr><td><tt>17:30.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr><td><tt>17:42.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr><td><tt>18:04.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>19:18.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@122.178.195.64)</font></tt></td></tr>
+<tr><td><tt>19:18.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.17</tt></td><td><font color="#5eb35e"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45495 10/brlcad/trunk/src/libged/edit.c: remove trailing ws</tt></td></tr>
+<tr><td><tt>19:54.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (~kvirc@bas2-sudbury98-1096601243.dsl.bell.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.44</tt></td><td><font color="#cc6b6b"><tt>IriX64</tt></font></td><td width="100%"><tt>brlcad/regress is missing CMakeLists.txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.49</tt></td><td><font color="#cc6b6b"><tt>IriX64</tt></font></td><td width="100%"><tt>btw i run el6Workstation now, cygwin is retired :)&nbsp;&nbsp;ill ask my self to leave now.</tt></td></tr>
+<tr><td><tt>20:02.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (~kvirc@bas2-sudbury98-1096600661.dsl.bell.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.50</tt></td><td><font color="#cc6b6b"><tt>IriX64</tt></font></td><td width="100%"><tt>shouldn't do this so soon but cmake generates man/html, configure generates man/html/pdf if anybody cares</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.19</tt></td><td><font color="#cc6b6b"><tt>IriX64</tt></font></td><td width="100%"><tt>i hear me asking myself to leave again, wont be back today</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.33</tt></td><td><font color="#6fd46f"><tt>kunigami_</tt></font></td><td width="100%"><tt>13min to render a scene with one processor. 14min to run with 2 :) The problem is that I'm blocking the OSLRender every time I query a color, which is probably where most all the time is spent. I'm currently looking for multi-threaded examples using OSL system to block less parts of code.&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.14</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>cmake trouble: [ 17%] make[2]: *** No rule to make target `usr/brlcad/share/tclscripts/archer/tclIndex', needed by `src/tclscripts/archer/CMakeFiles/archer_tclIndex'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:58.54</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>hmm.. . it's working for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.14</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>dli: are you working on a recent svn checkout, a tarball, or what?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.25</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, 7.20.2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.36</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>windows?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.43</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, linux</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.11</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>unless someone else has an idea, I will take a look but it will take me a bit to download/compile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.49</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, this is my cmake line: <a href="http://pastebin.com/hrXWMCZn">http://pastebin.com/hrXWMCZn</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.52</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>hmm... starseeker may have to take a look at that one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.24</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">is just a student</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.30</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, I know he started the cmake branch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.55</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>yep, he's your man</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.54</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, also, I have to tweak CMakefile.txt a little bit: <a href="http://paste.pocoo.org/show/438902/">http://paste.pocoo.org/show/438902/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.47</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>odd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.33</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>what is there currently: <a href="http://pastebin.mozilla.org/1272356">http://pastebin.mozilla.org/1272356</a></tt></td></tr>
+<tr><td><tt>21:13.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@247.Red-83-38-35.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:14.12</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, current some ${${path_label}_LABEL} contain space within</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.11</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, therefore, sending more than two arguments to LENGTH, and break cmake</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.57</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>yeah, I misread, your original is identical to the current revision</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.35</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>I won't waste your time: I wouldn't know how to fix it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.03</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, don't worry :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.56</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, seems to be something wrong with make configure line, it builds now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.11</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>can you show me what you changed it to?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.32</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, sure</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.52</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, <a href="http://paste.pocoo.org/show/438926/">http://paste.pocoo.org/show/438926/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.10</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, I guess the incorrect PREFIX broke it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.20</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>dli: yeah I see that there there is no DCMAKE_PREFIX in your correct version, but there are two DCMAKE_INSTALL_PREFIX's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.28</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>er, working version</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.46</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>er DBRLCAD_PREFIX I mean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.27</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, it's okay, one instance is always added by the gentoo script, the second one overrides it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.55</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.28</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>^[[0m[ 98%] Built target step-g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.28</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>make: *** [all] Error 2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.32</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>no luck :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.45</tt></td><td><font color="#6ed1d1"><tt>bhinesley</tt></font></td><td width="100%"><tt>:-/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.04</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, can I disable step-g ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.33</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>bhinesley, it says 'built', so it's not step-g</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.40</tt></td><td><font color="#b5b55f"><tt>brlcad</tt></font></td><td width="100%"><tt>make VERBOSE=1</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.55</tt></td><td><font color="#d1d16e"><tt>dli</tt></font></td><td width="100%"><tt>brlcad, doing that now</tt></td></tr>
+<tr><td><tt>22:16.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:30.57</tt></td><td><font color="#7373dc"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">notes that --no-undefined is not a recognized option on some of his compilers O.o (like the mac)</font></tt></td></tr>
+<tr><td><tt>23:54.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami_ (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr><td><tt>23:56.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kunigami__ (~kunigami@201.53.206.27)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:57.00</tt></td><td><font color="#65c0c0"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: yeah, need to test for that somehow or other</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.36</tt></td><td><font color="#65c0c0"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: "usr" is still a really bad value for CMAKE_INSTALL_PREFIX</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:59.53</tt></td><td><font color="#65c0c0"><tt>starseeker</tt></font></td><td width="100%"><tt>also, you don't need to set BRLCAD_PREFIX any more - it's just an interal thing now</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

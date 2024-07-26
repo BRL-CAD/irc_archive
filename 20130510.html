@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20130510</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20130510</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>01:29.29</tt></td><td><font color="#5bae5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: was talking about the render with Keith - he thinks he knows what to do to correct that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.31</tt></td><td><font color="#5bae5b"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: all you have to do is remove the stdio.h include from the first one and then try to build with MSVC - it'll complain like crazy about attempting to re-define ftelli64</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:30.54</tt></td><td><font color="#5bae5b"><tt>starseeker</tt></font></td><td width="100%"><tt>I don't have a cut and paste handy - i can probably prepare one tomorrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:32.08</tt></td><td><font color="#5bae5b"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">hopes there is a better solution but I didn't see how to go about it...</font></tt></td></tr>
+<tr><td><tt>03:14.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>03:45.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad h_sax (0e603a80@gateway/web/freenode/ip.14.96.58.128)</font></tt></td></tr>
+<tr><td><tt>03:53.03</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad h_sax (0e603a80@gateway/web/freenode/ip.14.96.58.128)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:24.41</tt></td><td><font color="#5cb05c"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I don't doubt that there's an issue and it's that easy to provoke, it's just what the actual problem is </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:29.03</tt></td><td><font color="#5cb05c"><tt>brlcad</tt></font></td><td width="100%"><tt>like for the ftell define alone -- is the problem that stdio does a #define ftell unconditionally and so when stdio.h comes second, we get a redefine error on their *ftell* define OR does our define of ftell to ftelli64 cause some sort of different declaration/define error (like if they #define ftelli64 ftell unconditionally)?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:30.31</tt></td><td><font color="#5cb05c"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem is that there are other things being defined in the config that must come before all system headers for the opposite reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:31.21</tt></td><td><font color="#5cb05c"><tt>brlcad</tt></font></td><td width="100%"><tt>and they're not syntax errors, some are behavior-related so we'll just get crashes or wrong semantics from functions</tt></td></tr>
+<tr><td><tt>05:06.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>06:14.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>07:28.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>08:40.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad hsrai_ (~hsrai@202.164.53.116)</font></tt></td></tr>
+<tr><td><tt>08:53.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23_ (~caen23@92.85.93.49)</font></tt></td></tr>
+<tr><td><tt>09:01.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.85.93.49)</font></tt></td></tr>
+<tr><td><tt>09:12.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad caen23 (~caen23@92.85.93.49)</font></tt></td></tr>
+<tr><td><tt>09:19.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (~erik@pool-74-103-121-45.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>09:23.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>10:28.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~androirc@14.139.82.6)</font></tt></td></tr>
+<tr><td><tt>11:05.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~androirc@14.139.82.6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:15.37</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55367 brlcad/trunk/src/tclscripts/lib/Ged.tcl: Expose the following commands in cadwidgets::Ged - bu_units_conversion, bu_brlcad_data, bu_brlcad_dir, bu_brlcad_root, bu_mem_barriercheck, bu_prmem, bu_get_value_by_keyword, bu_rgb_to_hsv and bu_hsv_to_rgb.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:20.55</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55368 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose the following commands in cadwidgets::Ged - debugbu, debugdir, debuglib, debugmem and debugnmg.</tt></td></tr>
+<tr><td><tt>11:37.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (~androirc@14.139.82.6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:51.32</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55369 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose the following commands in cadwidgets::Ged - view2grid_lu, view2model_lu and view2model_vec.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:06.00</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55370 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose the following commands in cadwidgets::Ged - model2grid_lu and model2view_lu.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.40</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55371 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose the following commands in cadwidgets::Ged - grid2model_lu and grid2view_lu.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:27.13</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55372 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose hdivide to cadwidgets::Ged. Create eye_pt alias to ged_eye().</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:31.03</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:d_rossberg * 55373 rt^3/trunk/src/coreInterface/Arb8.cpp: VCROSS requires a trailing semicolon now (see revision 54821, 54822 commits)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.27</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55374 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose joint to cadwidgets::Ged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:06.53</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55375 (brlcad/trunk/src/libged/debugmem.c brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose memprint in cadwidgets::Ged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:18.59</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55376 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose nmg_fix_normals in cadwidgets::Ged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.08</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55377 brlcad/trunk/include/ged.h: Declare ged_memprint().</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:11.54</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55378 brlcad/trunk/src/libged/CMakeLists.txt: Add polybinout to libged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:20.43</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>starseeker: <a href="https://github.com/davazp/jscl">https://github.com/davazp/jscl</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.32</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>effin' awesome <a href="http://lmgtfy.com/">http://lmgtfy.com/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.57</tt></td><td><font color="#d1d16e"><tt>``Erik</tt></font></td><td width="100%"><tt>the 'about' page is "This is for all those people who find it more convenient to bother you with their question rather than google it for themselves."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:52.05</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55379 (brlcad/trunk/src/libtclcad/tclcad_obj.c brlcad/trunk/src/tclscripts/lib/Ged.tcl): Expose polybinout in cadwidgets::Ged.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.54</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:indianlarry * 55380 brlcad/trunk/src/librt/primitives/brep/brep.cpp: Walking the half-step up to 1000 iterations before bailing on the shotline was killing BREP raytrace timing. Added bail-out when the step would walk outside the current SBV. Also added half-step bail-out when the current solution already within ROOT_TOL distance of the solution. Now stopping the half-step at the 5th step will look into</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.56</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>why the newton iterator isn't behaving on the EHY conversion. May actually be something in the surface definition?</tt></td></tr>
+<tr><td><tt>16:23.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ch3ck (~Ch3ck@41.205.13.64)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.35</tt></td><td><font color="#7272d9"><tt>Ch3ck</tt></font></td><td width="100%"><tt>Hi</tt></td></tr>
+<tr><td><tt>16:55.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha_ (~kesha@49.249.19.210)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.02</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55381 brlcad/trunk/src/libged/nirt.c: We still need to quote the arguments in nirt.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:00.53</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55382 brlcad/trunk/include/ged.h: Add declaration for ged_polybinout.</tt></td></tr>
+<tr><td><tt>17:18.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@124.253.16.107)</font></tt></td></tr>
+<tr><td><tt>17:36.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad zero_level (0e8b5206@gateway/web/freenode/ip.14.139.82.6)</font></tt></td></tr>
+<tr><td><tt>17:40.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rays2pix (~deepak@14.139.226.34)</font></tt></td></tr>
+<tr><td><tt>17:44.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@210.56.120.78)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.10</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:bob1961 * 55383 brlcad/trunk/src/tclscripts/lib/Ged.tcl: Typo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:49.55</tt></td><td><font color="#5bae5b"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: phooey - GPLv3.&nbsp;&nbsp;Still, interesting project!</tt></td></tr>
+<tr><td><tt>17:59.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@24-212-219-10.cable.teksavvy.com)</font></tt></td></tr>
+<tr><td><tt>18:12.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harmanpreet (~chatzilla@124.253.144.213)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:17.43</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55384 brlcad/trunk/src/conv/3dm/3dm-g.cpp: remove unneeded '==1', and go for a more standard usage statement; notice that some options are incomplete!</tt></td></tr>
+<tr><td><tt>18:47.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk_ (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr><td><tt>18:49.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk__ (~quassel@c-71-56-216-45.hsd1.co.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:04.42</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55385 brlcad/trunk/src/anim/anim_cascade.c: implement Usage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.39</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55386 brlcad/trunk/src/anim/anim_fly.c: implement Usage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:30.03</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55387 brlcad/trunk/src/anim/anim_hardtrack.c: implement Usage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.00</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55388 brlcad/trunk/src/anim/anim_keyread.c: implement Usage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.57</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55389 brlcad/trunk/src/anim/anim_lookat.c: implement Usage</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:14.48</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5252 /wiki/User:NyahCh3ck20/Proposal: /* The Working of the Pull Routine */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.53</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:NyahCh3ck20 * 5253 /wiki/User:NyahCh3ck20/Proposal: /* The Inverse of the Transformation */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.25</tt></td><td><font color="#b0b05c"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:carlmoore * 55390 brlcad/trunk/src/anim/anim_offset.c: implement Usage (as I go along, I am also putting in h?)</tt></td></tr>
+<tr><td><tt>20:57.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mpictor (~mark@99-93-104-202.lightspeed.iplsin.sbcglobal.net)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

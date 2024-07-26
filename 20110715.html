@@ -1,0 +1,284 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110715</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110715</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.14</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, yes, I figured it out by trying brutal force :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.33</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry - been busy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.48</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, how do I add LDFLAGS for itcl and itk? still broken after 98% built</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:01.24</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>growl.&nbsp;&nbsp;pastebin?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.03</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>usr/lib/gcc/x86_64-pc-linux-gnu/4.5.2/../../../../x86_64-pc-linux-gnu/bin/ld: cannot find -litcl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.35</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>um - are you using system itcl or the local one?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.46</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, and itcl is at: /usr/lib64/itcl3.4/libitcl3.4.so , using system one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.54</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>what does your CMakeCache.txt say for ITCL_LIBRARY?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:03.57</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, do I need CMAKE_LINK_FLAGS or could it auto detect system itcl/itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.16</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>I thought I had set up detection for Itcl/Itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.43</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, grep ITCL_LIBRARY CMakeCache.txt found nothing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:04.47</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>I seldom build with system libs, so it's possible the Find* logic for Itcl/Itk isn't functioning quite right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.09</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - you do have a CMakeCache.txt file?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:05.18</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, grep ITCL found something: <a href="http://paste.pocoo.org/show/439032/">http://paste.pocoo.org/show/439032/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:06.17</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm - so the question is what the find routines are doing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:08.05</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, for the time being, I will try CMAKE_LINK_FLAGS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:09.19</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>If the find routines were working, you wouldn't be getting itcl</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.04</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, do you mean be getting itcl/itk trouble?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.17</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45496 10/brlcad/trunk/CMakeLists.txt: Quote some path strings for robustness - need more testing of the logic with spaces and other unfriendly characters paths</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.31</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli:&nbsp;&nbsp;I'm assuming your using system Tcl/Tk?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:10.40</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.04</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: what happens if you just run cmake without forcing off libraries?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.18</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>(i.e what does the summary report at the end?)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.28</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>it will try to use system libraries if it can find them by default</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:11.53</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, I will try that later, it's building with CMAKE_LINK_FLAGS now :( slow core2duo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.12</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>k - if it's not using system Tcl/Tk, there's probably a reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.34</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>forcing system lib usage when the cmake logic doesn't select them by default is problematic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:12.49</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>if the cmake logic is doing its job, it is rejecting them for a reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:13.31</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, summary of report: <a href="http://pastebin.com/AkxGVSdZ">http://pastebin.com/AkxGVSdZ</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:14.07</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>and your CMakeCache.txt file still doesn't have ITCL_LIBRARY?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:15.10</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, no, still no ITCL_LIBRARY</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.04</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>OH.&nbsp;&nbsp;I know what's going on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.14</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>this is a consequence of switching back to using the Itcl/Itk C API</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.45</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, so, I probably need a patch for 7.20.2</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:17.59</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>I had changed things so that we were simply doing package require Itcl where needed - brlcad got a report of some breakage somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.07</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>I never could reproduce it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.24</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: you might try the autotools build - that should still work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:18.40</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, already tested, it works</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.13</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, I'm trying to make a gentoo ebuild for cmake building</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:19.14</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: do you recall what the problem was with using package require and what the conditions were to reproduce the bug?&nbsp;&nbsp;If it's a choice between fixing that bug and reworking the Itcl/Itk detection logic to find the C API I'd vote for fixing the bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:20.53</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: this isn't all that simple - the Itcl/Itk C headers require internal headers we can't count on from an installed system version</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.27</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, but autotools still build it properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:21.43</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: yes, because all the necessary scary logic is already in there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.09</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>we shouldn't actually need the Itcl/Itk C api at all - I yanked it out once, but there was a report of a bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.23</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>something about loading iwidgets twice IIRC, but I couldn't duplicate it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.47</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, I would love to see itcl/itk removed. :(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:22.58</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: we can't remove it - it's used extensively</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.13</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>once we can just do "package require Itcl" it gets a lot easier</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:23.52</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>The Tcl/Tk headers are horrible about API separation - lots of extensions need access to "internal" headers just to build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.06</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, for the time being I can force local building of itcl/itk, seems to be a workaround</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.14</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: yeah, that should work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:24.29</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>although if you're doing a gentoo ebuild they'll never go for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:25.12</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, let me try ;(</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.26</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, I have to enable tcl/tk local building, not simply itcl/itk, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.40</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>um.&nbsp;&nbsp;You can try just itcl/itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:28.58</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>not sure if that'll fly without the tcl/tk internal headers, but you can give it a shot</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.28</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, no such flag ITCL/ITK in CMakeLists.txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.44</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>-DBRLCAD_BUILD_LOCAL_ITCL=ON</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.55</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>-DBRLCAD_BUILD_LOCAL_ITK=ON</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:29.57</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>try those</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:32.24</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>Is there any way I can get the identifier of a thread in a sh_xyz code?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.14</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, no, no effect, cmake still found system itcl/itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:33.25</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>one sec...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.12</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>crud - yeah, you may need to enable tcl/tk then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:34.37</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>I was probably thinking a "sane" Itcl/Itk build couldn't depend on a system tcl/tk install having what it needed anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.07</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>This identifier should be passed along application and probably set at do_pixel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:37.28</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>kunigami__: sorry, that's a little outside my expertice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.09</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: the only reason we can even "mix" system Tcl/Tk and local package builds in the old autotools setup is due to our logic supplying our own local include directories in src/other to the builds of those extensions that need them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.11</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, still no luck, cmake still found system tcl/tk/itcl/itk</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.36</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>starseeker: no problem :) I'm just thinking aloud to see if I can get some feedback</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.36</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>]</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.48</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>-DBRLCAD_BUILD_LOCAL_TCL_FORCE=ON</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.11</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>or rather -DBRLCAD_BUILD_LOCAL_TCL_FORCE_ON=ON </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:44.02</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, yes, FORCE_ON does the trick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.41</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:59.19</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45497 10/brlcad/trunk/CMakeLists.txt: Comment out the --no-undefined linker option until I figure out how to test it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:17.15</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>thanks :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:18.09</tt></td><td><font color="#854685"><tt>dli</tt></font></td><td width="100%"><tt>starseeker, yes, with FORCE_ON, it builds properly. Thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:19.28</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>dli: no problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:23.44</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r45498 10/brlcad/trunk/src/liboptical/ (liboslrend.cpp liboslrend.h sh_osl.cpp): changing OSLRender methods to static. I think this will be necessary to increase parallelism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.22</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>When I have argc &gt; 1 and my command returns GED_HELP, Archer prints the error "No ledger entry found for help." What am I missing?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.48</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>in that case, argv[2] was help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.41</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>excuse me, argv[1] was help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:37.16</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45499 10/brlcad/trunk/include/ged.h: moved ged_edit to more appropriate place</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:43.55</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45500 10/brlcad/trunk/src/ (8 files in 3 dirs): Validate subcommand names, add ged_edit stuff to a few places I missed before, cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:45.58</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03bhinesley * r45501 10/brlcad/trunk/src/libged/edit.c: quiet compiler warning about unused variable</tt></td></tr>
+<tr><td><tt>02:52.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.36</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami__: libbu's parallelism passes the cpu/thread id to the worker callback</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.54</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>for rt, that's the worker() function in src/rt/worker.c, which in turn calls do_pixel() with the cpu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:13.44</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>the application struct's a_resource is then set to a cpu-specific resource structure safe for that thread to use without blocking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:14.18</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>why you'd need to know that is a bit of a mystery, though ... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.28</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>bhinesley: I'm not sure what archer was set up to use, but it may be pulling help from src/tclscripts/helplib.tcl and/or src/tclscripts/help.tcl&nbsp;&nbsp;... old help interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.59</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>the modular command refactoring that I started is the beginnings of making those obsolete</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:16.57</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>brlcad: that was sort of a bad example. It prints "No ledger entry found for &lt;whatever argv[1] is&gt;"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.42</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>assuming that I return GED_HELP</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.09</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>both mged and archer tell you that or just archer?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.13</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>just archer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.36</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>you weren't kidding... there really are a lot of places to make changes when you add a command</tt></td></tr>
+<tr><td><tt>03:19.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@dsl-69-172-83-119.acanac.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:21.46</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's really terrible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.23</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>15 years of a very active dev not doing hardly any proper refactoring, at least not for the DRY principle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.17</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>part of the problem is that even with a clean refactoring towards libged, a silly route was taken to make it fit the existing archer interface .. once again needing to repeat all commands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.43</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>all of the *_obj.c files should be killed, but that's a refactoring task in itself -- feel free to tackle any and all of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.46</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.55</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>definitely no lack of things to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.53</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>he's also like the 3rd or 4th most experienced tcl dev on the planet (at least as measured by ohloh), so (for him) he's very adept wandering around the bowels of mged and archer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.14</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>sort of has his own perspective on maintainability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.02</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>is he ever in here?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:34.12</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>or lists only?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:37.52</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>mostly mailing list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.08</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>so that ledger issue, more replication crap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.36</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>and it's not code I really understand, so can't be of much help -- might make a good mailing list question if you have any</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.42</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>alright, well, it's not inhibiting the functionality of the command, so I won't worry about it right now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.00</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>tclscripts/archer/Archer.tcl&nbsp;&nbsp;AND&nbsp;&nbsp;tclscripts/archer/ArcherCore.tcl .. both list commands for some reason</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.19</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>I presume if you don't list the command that it's calling some generic wrapper, and pulling the wrong argv for your command or something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:39.54</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt><font color="#CC00CC">looks into this</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.07</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>hey, ohloh is pretty neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.10</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>just now checking it out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.17</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>really? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.33</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt><a href="http://www.ohloh.net/p/brlcad">http://www.ohloh.net/p/brlcad</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.37</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>first thing I did was search for brlcad ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.20</tt></td><td><font color="#5db2b2"><tt>bhinesley</tt></font></td><td width="100%"><tt>96 commits... hm... I'd better step it up a notch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.40</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>add two orders of magnitude and you'll be in the #3 spot ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.59</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>that's like two years</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.19</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3008 10/wiki/Non-vacuum_gravity_simulator: missing paren</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:20.37</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3009 10/wiki/Celestial_mechanics_particle_system: link to some 3rd party libs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:21.08</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r3010 10/wiki/Non-vacuum_gravity_simulator:</tt></td></tr>
+<tr><td><tt>04:41.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@67.55.33.66)</font></tt></td></tr>
+<tr><td><tt>07:09.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>07:10.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr><td><tt>07:12.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>07:12.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>07:16.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>08:02.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@193.254.217.44)</font></tt></td></tr>
+<tr><td><tt>09:10.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (~mafm@120.Red-83-42-153.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>09:18.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:56.23</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>brlcad: it seems I need to set different vars for each thread when first calling OSLRender and I dont know how to do that without an identifier for each thread.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:08.14</tt></td><td><font color="#71d7d7"><tt>kunigami__</tt></font></td><td width="100%"><tt>unless I initialize OSLRender right in do_pixel</tt></td></tr>
+<tr><td><tt>11:02.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@67.55.33.66)</font></tt></td></tr>
+<tr><td><tt>11:20.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>11:39.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad __name__ (~name@sburn/devel/name)</font></tt></td></tr>
+<tr><td><tt>11:47.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>12:13.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr><td><tt>14:05.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dli (~dli@66.49.183.65)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.42</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>kunigami__: you could use the address of the struct resource in the application struct -- that is unique per process/thread</tt></td></tr>
+<tr><td><tt>15:12.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm_ (~mafm@120.Red-83-42-153.dynamicIP.rima-tde.net)</font></tt></td></tr>
+<tr><td><tt>16:47.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad __name__ (~name@chello080108038152.1.11.vie.surfer.at)</font></tt></td></tr>
+<tr><td><tt>16:47.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad __name__ (~name@sburn/devel/name)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:11.42</tt></td><td><font color="#6666c2"><tt>__name__</tt></font></td><td width="100%"><tt>Hello! I've been reading your SOCIS projects and would be interested whether there are any tools of preference for the web applications (language, DB, whether it's supposed the be ajaxy, etc.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.48</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r45502 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.48</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Updated the prototype version of function cut_unimonotone within file nmg_tri.c.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.48</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: This function supports the prototype version of function nmg_triangulate_fu.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.48</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: These prototype functions are disabled by default. This is a work is progress.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.48</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Changed the test for an infinite loop and added more error checking. Also did</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:21.49</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: code cleanup.</tt></td></tr>
+<tr><td><tt>18:11.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad name (~name@sburn/devel/name)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.55</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>hello __name__ </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:35.45</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>__name__: there isn't a strong preference, but something that works for most users, is easy to install and maintain, and does the job best</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:36.16</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>current website is a drupal+mediawiki combo</tt></td></tr>
+<tr><td><tt>18:46.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DarkCalff (DC@173.231.40.98)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:48.44</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r45503 10/brlcad/trunk/src/libged/edit.c: Clean up C90 warning on some compilers.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:12.08</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r45504 10/brlcad/trunk/src/irprep/ (Compile.sgi Makefile.am): sgi files are gone in irprep - let the Makefile.am know about it.</tt></td></tr>
+<tr><td><tt>19:34.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@188.119.210.222.dynamic.eurona.net)</font></tt></td></tr>
+<tr><td><tt>19:34.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad epileg (~epileg@unaffiliated/epileg)</font></tt></td></tr>
+<tr><td><tt>19:40.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad indianlarry (~indianlar@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:50.42</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>wootness</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.14</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: hmm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.30</tt></td><td><font color="#d0d06d"><tt>__name__</tt></font></td><td width="100%"><tt>brlcad: Well you cannot really base a benchmark web-UI on either of those.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.37</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r45505 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.37</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Updated the prototype version of the function nmg_triangulate_fu within file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.37</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: nmg_tri.c. This function is disabled by default. This is a work is process. The</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.37</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: majority of the changes were code cleanup. Added logic to prevent unnecessary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:08.37</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: processing of already triangulated faceuse.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.19</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45506 10/brlcad/trunk/misc/CMake/CompilerFlags.cmake: Clang likes to complain about unused command line arguments, and we don't really care.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.19</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>first crack at building BRL-CAD with clang/clang++ in XCode 4:&nbsp;&nbsp;<a href="http://pastebin.mozilla.org/1272704">http://pastebin.mozilla.org/1272704</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.45</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>__name__: sure you could -- I could make plain html work too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:19.50</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>all in the design</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.02</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't mean you're constrained to those, just saying what's already handy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.08</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't know enough about why those externs are there to know if they are still needed...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.09</tt></td><td><font color="#d0d06d"><tt>__name__</tt></font></td><td width="100%"><tt>brlcad: Doesn't sound like a good idea though.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.21</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>that's a different statement ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:20.31</tt></td><td><font color="#d0d06d"><tt>__name__</tt></font></td><td width="100%"><tt>(Generating pure HTML.)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.05</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>big difference between "cannot" and "not a good idea" ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.15</tt></td><td><font color="#d0d06d"><tt>__name__</tt></font></td><td width="100%"><tt>brlcad: Fair point.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.20</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>you have a windows build handy?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.29</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>sry, starseeker: <a href="http://pastebin.mozilla.org/1272704">http://pastebin.mozilla.org/1272704</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.38</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>bah .. starseeker: you have a windows build handy?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.13</tt></td><td><font color="#d0d06d"><tt>__name__</tt></font></td><td width="100%"><tt>brlcad: Anyway. I'd be happy to do the web-application (or any other not-too-physics-heavy task).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.12</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: not at the moment - problem?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.13</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: huh, interesting warnings .. apparently llvm thinks that declarations can shadow declarations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.34</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>liboptical isn't happy either:&nbsp;&nbsp;<a href="http://pastebin.mozilla.org/1272706">http://pastebin.mozilla.org/1272706</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.16</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: the good news is that those are just duplicate decls and llvm can help weed them out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:25.49</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>just remove the redundant duplicate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.32</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: and no, not a problem -- I just have an implementation of fchmod() for Windows that will likely break the Windows build, need someone to test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.51</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:27.25</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, probably would take me at least an hour or so to kick my Windows build back into gear</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.47</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45507 10/brlcad/trunk/src/ (libfb/fb_generic.c librt/tcl.c): remove duplicate decls (XCode 4 clang no likie)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.54</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">bounces over to the Windows box...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.09</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: whats the MFUNCS thing all about?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.31</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>hold a sec, looking</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.26</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45508 10/brlcad/trunk/src/libbu/fchmod.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.26</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: implement fchmod() for Windows. this will likely break the Windows build, but</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.26</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: committing it since the only issue should be minor header and preprocessor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.26</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: symbolage. in order to implement fchmod on Windows, we rely on chmod() instead</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.26</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: which is available but requires a filename. this is normally not knowable, but</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.27</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: windows provides a roundabout way to get it, so run with it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.57</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45509 10/brlcad/trunk/src/liboptical/sh_wood.c: duplicate declarations in sh_wood.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.28</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03r_weiss * r45510 10/brlcad/trunk/src/librt/primitives/nmg/nmg_tri.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.28</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Updated the prototype function nmg_plot_fu within file nmg_tri.c. This function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.28</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: supports the prototype function nmg_triangulate_fu. These functions are disabled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.28</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: by default. This is a work in process. The changes were code cleanup.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.05</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45511 10/brlcad/trunk/src/ (14 files in 10 dirs): Remove all non-liboptical shadowing warnings.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.01</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>ah right, the optical/multispectral thing </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.06</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45512 10/brlcad/trunk/src/liboptical/init.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.06</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: Some of these MFUNCS are declared in the header for libmultispectral - for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.06</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: those, don't do the extern struct part of the original MFUNCS macro. Add a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.06</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: DMFUNCS macro for both the extern and the mlib_add shader call, and make MFUNCS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.06</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: just do the mlib_add_shader bit.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.04</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45513 10/brlcad/trunk/src/fbed/fbed.c: f_Stop doesn't take any arguments</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.46</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45514 10/brlcad/trunk/src/libmultispectral/init.c: Same trick for libmultispectral as for liboptical.</tt></td></tr>
+<tr><td><tt>22:09.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad piksi (piksi@pi-xi.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.57</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45515 10/brlcad/trunk/src/gtools/beset/population.c: resp was unused here? Not really sure what the intent of that statement was.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.47</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45516 10/brlcad/trunk/src/rt/ (viewarea.c viewfrac.c viewpp.c): Some more duplicate declarations.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.38</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: MFUNCS is how each shader is registered with liboptical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.53</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45517 10/brlcad/trunk/src/lgt/do_options.c: More functions that don't take any arguments.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.26</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>the problem is that a few shaders might have to be declared for libmultispectral, so some are declared in optical.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.56</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: right - I had forgotten about that, something I think from the Windows build</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.59</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>I got is straight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.17</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>they shouldn't need to be declared in optical.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.21</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>Woot!&nbsp;&nbsp;clang build with XCode 4 finished</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.30</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>sort of breaks the whole modularity DRY principle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.42</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty cool, yay for portability</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.08</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: what was the intent of that bset/population.c line I wonder?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.50</tt></td><td><font color="#b9b961"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't see a beset line</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.05</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>r45515</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.32</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>svn diff -r45514:45515</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.52</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>Ouch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.59</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>benchmark results:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.07</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>clang vgr:&nbsp;&nbsp;13540 </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.21</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>gcc vgr:&nbsp;&nbsp;14944</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.30</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>(debug builds in both cases)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.05</tt></td><td><font color="#d8d871"><tt>``Erik</tt></font></td><td width="100%"><tt>optimized?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:47.12</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: working on it now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.14</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: fchmod.c Windows build failures:&nbsp;&nbsp;<a href="http://pastebin.mozilla.org/1272750">http://pastebin.mozilla.org/1272750</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:03.53</tt></td><td><font color="#5caf5c"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r45518 10/brlcad/trunk/src/mged/utility1.c: clang is reporting these as unused. Looks like this is part of the stuff that has moved to libged - nuke.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:16.46</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>gcc vgr (optimized): 33425</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:18.01</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">can already tell the clang results will be slower</font></tt></td></tr>
+<tr><td><tt>23:20.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad webmaster (~webmaster@93-152-34-168.xln.managedbroadband.co.uk)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:30.26</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>clang vgr (optimized): 30409</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:30.56</tt></td><td><font color="#8c4a4a"><tt>starseeker</tt></font></td><td width="100%"><tt>sigh.&nbsp;&nbsp;Oh, well - at least it's a useful tool for debugging - I like the error messages</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

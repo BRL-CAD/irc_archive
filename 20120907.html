@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20120907</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20120907</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:39.41</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>brlcad, I have a problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.26</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>the cvt_vlblock_to_solids function call in the f_jmesh call </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:40.36</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>I don't know how to add it to the libged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.08</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>it's there in the libged library something similar to the cvt_vlblock_to_solids function?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.45</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>This one is all over mged library, and has lots of dependencies that are not that easily to be translated </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.58</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>and I don't know if I am allowed to add them to libged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:47.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52388 10/brlcad/trunk/src/librt/test_botpatches.cpp: Try to build larger patches with the reject bots, instead of accepting a single face by default - in many cases we still end up with one face per patch, but we do get a few larger patches.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:54.57</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: good question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:56.29</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: that one is definitely tricky, just comment out the function call for now and add a bu_bomb() call saying it's not yet converted, also a comment with more detail</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.07</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.13</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>something like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.25</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>So you want the f_jmesh function not to be called, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.44</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>doesn't matter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.56</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>probably better to let it be called</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.04</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>Well there's another problem since the f_jmesh is used in previous functions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.07</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>but with the bu_bomb() it will not succeed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.28</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>all the more reason to let it be called</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:58.45</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>okay, so I let it be called and add the bu_bomb() with the comment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:59.19</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>and there's also the refresh() function, it's there something similar for redrawing the screen in libged?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.03</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>not exactly, just comment those out as well for now with a comment</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:02.11</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>okay </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.04</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>actually better yet, replace those refesh() calls with these two lines:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.05</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.05</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>&lt;PROTECTED&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:04.30</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>okay got it :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:10.28</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52389 10/brlcad/trunk/src/libnurbs/CMakeLists.txt: ignore Makefile.am</tt></td></tr>
+<tr><td><tt>02:16.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mahi (~Mahi@ec2-50-16-47-142.compute-1.amazonaws.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.56</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52390 10/brlcad/trunk/src/mged/dodraw.c: comment cleanup, make more globals static scope</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:38.06</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52391 10/brlcad/trunk/src/mged/ (chgview.c dodraw.c dozoom.c mged.c): more cleanup, isolate globals, descope to static where possible, reorder to avoid decls</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:46.49</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>Here is the joint.c file <a href="http://paste.ubuntu.com/1190064/">http://paste.ubuntu.com/1190064/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.02</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>the joint.h file <a href="http://paste.ubuntu.com/1188767/">http://paste.ubuntu.com/1188767/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.18</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>and the columns.c file <a href="http://paste.ubuntu.com/1188769/">http://paste.ubuntu.com/1188769/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.31</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>the last 2 haven't been modified since last time</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.36</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>now about the joint.c file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.53</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>the accept, mesh and solve options are not working properly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.09</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>they depend on the f_jmesh() function call</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:48.51</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>also, brlcad can you please look into the f_Jmesh() function and tell me if the bu_bomb() function call is used properly, please?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.49</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>does it compile?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.59</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>looks right to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.19</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like you're about done, anything remaining?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.49</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>I've run it with a sim.g database and looks alright</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.59</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>besides the 3 options that I mentioned</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.44</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52392 10/brlcad/trunk/src/mged/dodraw.c: minor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.11</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: sounds good then, time to move on :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.02</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>so wrap that up, make a patch file, be sure to use svn rm on the old/deleted joint files and svn add on the new libged ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.17</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>remove the joint2 if you still have any traces of it in src/mged</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:00.46</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>then post the patch file generated via svn diff</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.50</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>assuming all is in order, you should now be able to have a much better understanding for what is going on in src/libged/simulate/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.55</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>I suggest starting there by browsing through the code, find the ged function callback in mged for the simulate command, find the function in libged, read it to get a basic understanding of how it's set up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.50</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>okay, so I will remove all the old joint files, animedit.c and joints.h and delete all the traces that are in the mged library of the joint command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:05.32</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>and after that I will look into that simulate command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r52393 10/brlcad/trunk/src/ (6 files in 2 dirs): (log message trimmed)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: remove the old vrmgr 'Virtual Reality manager' interface to mged. it provided a</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: libpkg network interface to mged whereby you could feed mged commands remotely.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: aside from being a gaping security hole riddled with problems due to a lack of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: sandboxing, it is no longer being used. ironically, it's more of a geometry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.01</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: service than that 'other' effort ever became, but it's still not worth keeping.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.02</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: the code needs updates and is accessing some functions that it shouldn't, so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.29</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>all traces of the OLD joint command .. there should still be a joint command, and it should of course now reference your new version in libged :)</tt></td></tr>
+<tr><td><tt>03:12.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad milamber (~devlin@d118-75-244-176.try.wideopenwest.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.42</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: make sense?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.21</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>Yes it does, I am looking for those f_joint() function references right now :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.40</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>then will test it again to make sure only the joint from libged it's still there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:20.05</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>excellent</tt></td></tr>
+<tr><td><tt>03:45.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mahi (~Mahi@ec2-50-16-47-142.compute-1.amazonaws.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:06.33</tt></td><td><font color="#6e6ed1"><tt>elf_</tt></font></td><td width="100%"><tt>brlcad, I added the patch </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:11.31</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03Elf11 07<a href="http://brlcad.org">http://brlcad.org</a> * r4386 10/wiki/User:Elf11: /* Log */</tt></td></tr>
+<tr><td><tt>06:17.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (~erik@pool-108-3-186-191.bltmmd.fios.verizon.net)</font></tt></td></tr>
+<tr><td><tt>06:56.33</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Al_Da_Best (~Al_Da_Bes@5e0e1434.bb.sky.com)</font></tt></td></tr>
+<tr><td><tt>10:00.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@82.208.133.12)</font></tt></td></tr>
+<tr><td><tt>11:15.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>11:34.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>11:56.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>12:35.17</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>13:27.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.45</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>hah - <a href="https://bitbucket.org/Coin3D/coin/wiki/Home">https://bitbucket.org/Coin3D/coin/wiki/Home</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.40</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>they really did BSD license it</tt></td></tr>
+<tr><td><tt>17:17.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.28</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>oops, didn't realize I was detached</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.46</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>elf_: patch applied, thanks!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:19.54</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>mostly looked good, but a few mistakes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.03</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>I commented on them in the tracker, but nothing major so good to go tackling the simulate command</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:22.27</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>suggest for your next step to actually compile and run the simulate command</tt></td></tr>
+<tr><td><tt>18:25.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-68 (cia@cia.vc)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.28</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">hugs CIA-68 </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:26.28</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt><font color="#CC00CC">hugs brlcad</font></tt></td></tr>
+<tr><td><tt>18:47.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad stas (~stas@188.24.33.5)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:03.42</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52397 10/brlcad/trunk/misc/CMake/BRLCAD_Targets.cmake: Fix macro behavior for pure CXX libs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.15</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52398 10/brlcad/trunk/src/librt/test_botpatches.cpp: Checkpoint - may not need this at all if surf-surf intersection works.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:49.25</tt></td><td><font color="#69c7c7"><tt>CIA-68</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r52399 10/brlcad/trunk/src/librt/test_botpatches.cpp: Try the surface_surface_intersection function on the NURBS patches generated by the fitting routine. Looks promising</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.54</tt></td><td><font color="#cc6bcc"><tt>brlcad</tt></font></td><td width="100%"><tt>2that was quick</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.13</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>some issues with the fit definitely show up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.22</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>the intersection curves also don't look as pretty as the bezier approximations - I need to look at either tweaking the fitting process, inserting points from bezier curve approximations into the fitting process, or... something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.15</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>actually kinda cool - the mesh based curves serve as a check on the SSI results, and the SSI results are helpful for spotting areas where the "correct" intersection curves don't jibe with the real ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.27</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>slows the sucker waaay down, of course...</tt></td></tr>
+<tr><td><tt>22:18.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad crdueck (~cdk@24-212-219-10.cable.teksavvy.com)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20080611</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20080611</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:39.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@74.92.144.217)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:41.05</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>``Erik: hm, yes, i'll take a look.. but does one_hit impact that much on reflections and refractions?? Because the ray will reflect based on the material it hits, it can reflect "inside" the material, refracting.. what do you think?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.04</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>those require changing the ray direction/origin, so one_hit is still ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:33.08</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>evening, twiggly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.17</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey ``Erik, I think there are too many structures in viewmlt (mlt_app, path_list and point_list). Perhaps path_list can be eliminated? I'm thinking about connecting the mlt_app directly to a point_list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.18</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>the application sequence could be something like: shoot ray in a random direction, build path (each point added to mlt_app-&gt;point_list), verify if path is valid, mutate path and store information about it in the image (repeat this n times, perhaps a user supplied parameter?), then shoot another random ray.. repeat proccess </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:49.24</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>what do you think?? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.19</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>is it possible to do this?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:50.35</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>shoot, it's late and hot, lemme read that a few times and think about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.16</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:51.52</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>it's like 26c here in my house, and I'm a wussy seattle boy, so anything above like 21c is hot to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.02</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>heheh, i'm something like that, inverted.. anything lower than 21c is too cold :b</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:53.52</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, I can run around in snow barefoot wearing just pants and a tshirt without being concerned, and I have plenty of warm clothes :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.09</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>uhm, lets see, application has a generic user pointer you could use as your top level</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:54.49</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>yup, that solved building the path list </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.46</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>hrmmmm, not seeing a generic pointer in ray_data</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.20</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hmm, i'll commit, so you can see what i have done, ok?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.37</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>commit to which?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.43</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>viewmlt.c ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.02</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>the less impact on brlcad/include/*.h the better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.19</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>woo hoo, finished the priorities/passions document rewrite</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.47</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>yukonbob: you'll have to let me know how the update looks, lot of your comments taken into account (wrt layout/emphasis)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:01.02</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>``Erik: yup, commit to viewmlt.c</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.08</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>for anyone interested:&nbsp;&nbsp;<a href="http://brlcad.org/~sean/BRL-CAD%20Priorities.pdf">http://brlcad.org/~sean/BRL-CAD%20Priorities.pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.12</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>acrobat seems to render it as teh suck on Mac</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.43</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03andrecastelo * r31360 10/brlcad/trunk/src/rt/viewmlt.c: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.43</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: Changed mlt_hit() and mlt_miss() to rayhit() and raymiss(), respectively. Added</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.43</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: a link between struct mlt_app and struct application, using a generic pointer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.43</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: (ap-&gt;a_uptr). Added comments to rayhit() regarding what it will do and how it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:08.43</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: will do it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.30</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>it should look like: <a href="http://brlcad.org/~sean/BRL-CAD%20Priorities.png">http://brlcad.org/~sean/BRL-CAD%20Priorities.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:10.37</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">will have to catch up with log later</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:11.20</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>``Erik: i did add a few comments to struct rt_pt_node, in raytrace.h, about the files that use it. Bad idea?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:15.37</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>comments aren't usually a problem unless they're a heavy maintenance burden (for whatever reason)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:16.57</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>except for bad comments of course that say something wrong or confusing; or comments that change a deprecation status</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.16</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">wanders on home</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.23</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok, i think it is going to be useful, to look for rt_pt_node instances and butify them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:20.50</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>hrmmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:21.26</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>are you going to have support for both ortho and perspective view, and setting of fov?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:23.52</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>hrmmm, 'register' is pretty pointless these days, I think</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.21</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>x86 simply doesn't have sane registers and compilers are pretty solid at painting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.09</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks he might actually need to read up on mlt :D</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.18</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hm ok ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:25.52</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>``Erik: i'm writing my idea in a step by step form, going to update the blog in a while</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:27.01</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>is the support for different views really complex? what do you think about setting a "domain" of valid initial directions to shoot from?? (i think this would be perspective)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.10</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>``Erik: <a href="http://andrecastelo.wordpress.com/">http://andrecastelo.wordpress.com/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.11</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>nah, the view thing is just a different way to set up your initial set of rays, i think most of the rt's do it procedurally on the fly, each "struct resource" grabbing the next scanline</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:29.36</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>and it's just a matter of either picking a direction and mutating the origin or picking an origin and mutating the direction</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:33.00</tt></td><td><font color="#dd74dd"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: /me checks the new pdf</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.56</tt></td><td><font color="#dd74dd"><tt>yukonbob</tt></font></td><td width="100%"><tt>brlcad: looks nice -- one grammar point (I'm not sure that I'm correct on this) is "emplaced" -- perhaps "forever firmly placed as open source..."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.53</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>"in order to catch a fairy, I'll have to think like a fairy" -Stewie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.33</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>emplace is archaic, but correct... O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.41</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>hey guys, i'm off :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.48</tt></td><td><font color="#c36666"><tt>andrecastelo</tt></font></td><td width="100%"><tt>cya guys tomorrow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.03</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">likes archaic</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.09</tt></td><td><font color="#dd74dd"><tt>yukonbob</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.17</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>cya andre|away </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.18</tt></td><td><font color="#dd74dd"><tt>yukonbob</tt></font></td><td width="100%"><tt>hey brlcad... what's happening?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.50</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>oh, just got home .. big inbox, ton of irc channels lit up, kinda hungry, should probably sleep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.57</tt></td><td><font color="#dd74dd"><tt>yukonbob</tt></font></td><td width="100%"><tt>feh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.10</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>andre|away: this is a really nice overview presentation if you haven't seen it:&nbsp;&nbsp;<a href="http://www.cs.ucf.edu/~colbert/presentations/mlt.pdf">http://www.cs.ucf.edu/~colbert/presentations/mlt.pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.52</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: maybe of interest to you too, I ran into that a couple months ago while reading up on it again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.01</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>really like the 2D example</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.28</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>kinda tempted to implement it though there wouldn't be much point :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:01.46</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, I was hoping it was stephen colbert :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:02.48</tt></td><td><font color="#dd74dd"><tt>yukonbob</tt></font></td><td width="100%"><tt>emmy please.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:03.51</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>heheeh lena :)</tt></td></tr>
+<tr><td><tt>04:26.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vedge (n=vedge@205-237-251-204.ilesdelamadeleine.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.59</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>cool, mafm's changes look good</tt></td></tr>
+<tr><td><tt>05:56.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-94-148.dclient.hispeed.ch)</font></tt></td></tr>
+<tr><td><tt>07:05.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>07:30.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
+<tr><td><tt>08:14.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (n=rossberg@bz.bzflag.bz)</font></tt></td></tr>
+<tr><td><tt>09:08.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=elite01@dslb-088-071-046-051.pools.arcor-ip.net)</font></tt></td></tr>
+<tr><td><tt>09:49.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mafm (n=mafm@elnet-111.lip.pt)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:56.18</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>hi there, folks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:17.35</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>howdy!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:17.58</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>"cool, mafm's changes look good" -- from a while ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:23.08</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>who dared!?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:26.16</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>I'm trying to find out with big bot-rher :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:26.28</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>btw, the bot doesn't log /me's</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:27.47</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>(no clues from the bot logs, demmit)</tt></td></tr>
+<tr><td><tt>11:13.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@zux221-122-143.adsl.green.ch)</font></tt></td></tr>
+<tr><td><tt>11:37.25</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing0 (n=ric@58.171.248.102)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:09.43</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">takes up the habit of speaking in all ctcp actions to avoid surveillance O.o :D</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:11.15</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:11.23</tt></td><td><font color="#bdbd63"><tt>archivist</tt></font></td><td width="100%"><tt><font color="#CC00CC">logs actions</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:12.28</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">goes all gitmo and waterlogs archivist ;D</font></tt></td></tr>
+<tr><td><tt>13:20.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5487680F.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:24.16</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>when life gives you limes, make a gin and tonic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:29.49</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>when life gives you microsoft, go pencil and paper?</tt></td></tr>
+<tr><td><tt>13:41.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.39</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>hmm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:21.56</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>the MGED command window should stay in the GUI too, with more or less the same capabilities, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:24.18</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>or if not, can anybody point to examples or requirements of what should be implemented?</tt></td></tr>
+<tr><td><tt>14:26.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad madant (n=homovulg@202.63.233.61)</font></tt></td></tr>
+<tr><td><tt>14:35.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@210-9-140-165.netspeed.com.au)</font></tt></td></tr>
+<tr><td><tt>14:46.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad thing1 (n=ric@203-59-26-22.perm.iinet.net.au)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.10</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31361 10/rt^3/trunk/src/g3d/ (GuiConsole.cxx GuiConsole.h): Perfecting the implementation of the console, mainly history handling</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.56</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>"Logging in to SourceForge.net is currently disabled."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:40.14</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>holy cows!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:28.02</tt></td><td><font color="#c36666"><tt>andre|away</tt></font></td><td width="100%"><tt>mafm: not watching the soccer match ? :b</tt></td></tr>
+<tr><td><tt>16:31.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr><td><tt>16:57.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Axman6 (n=Axman6@pdpc/supporter/student/Axman6)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:16.13</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://img.photobucket.com/albums/v674/moonlight80/DodgeTrucks.jpg">http://img.photobucket.com/albums/v674/moonlight80/DodgeTrucks.jpg</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:51.36</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31362 10/rt^3/trunk/src/g3d/GuiConsole.cxx: Small modifications removing redundancy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:09.29</tt></td><td><font color="#d871d8"><tt>CIA-22</tt></font></td><td width="100%"><tt>BRL-CAD: 03mafm * r31363 10/rt^3/trunk/src/g3d/GuiConsole.cxx: Header cleanup, to not include full OGRE and OIS headers and other unneeded ones</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:14.16</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>mafm: yes per examples/requirements .. in a bit, gotta munch some first :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.10</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>oki</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:15.43</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>I'll have to run in a moment though, it's my last opportunity to watch Blade Runner, director's cut in the cinema :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.35</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt><a href="http://brlcad.org/wiki/User:Mafm#Log">http://brlcad.org/wiki/User:Mafm#Log</a> -- update, with screenie included</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:25.44</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>not very impressive really :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:27.30</tt></td><td><font color="#e377e3"><tt>mafm</tt></font></td><td width="100%"><tt>I go now, take care</tt></td></tr>
+<tr><td><tt>19:17.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow_ (n=dtidrow@c-69-255-182-248.hsd1.va.comcast.net)</font></tt></td></tr>
+<tr><td><tt>20:06.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad SWPadnos (n=Me@emc/developer/SWPadnos) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>20:06.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad prasad_ (n=psilva@h-67-103-183-185.mclnva23.covad.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr><td><tt>20:06.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik (i=erik@c-68-54-174-162.hsd1.md.comcast.net) [NETSPLIT VICTIM]</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:13.04</tt></td><td><font color="#b25db2"><tt>pacman87</tt></font></td><td width="100%"><tt>well, i'm finally making progress on tess()</tt></td></tr>
+<tr><td><tt>20:14.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Elperion (n=Bary@p5487680F.dip.t-dialin.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.53</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://www.theonion.com/content/video/warcraft_sequel_lets_gamers_play">http://www.theonion.com/content/video/warcraft_sequel_lets_gamers_play</a></tt></td></tr>
+<tr><td><tt>21:52.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad clock_ (n=clock@77-56-94-35.dclient.hispeed.ch)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:59.19</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>home at last</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:43.08</tt></td><td><font color="#b55f5f"><tt>``Erik</tt></font></td><td width="100%"><tt>carter, hand me my thinking grenades</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:49.08</tt></td><td><font color="#71d671"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

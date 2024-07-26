@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20161003</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20161003</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>03:26.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: sorry, I had to take a break from it -- filed a bug report</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:27.56</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>pretty certain I found the cause, just spent hours trying to find a workaround</tt></td></tr>
+<tr><td><tt>06:16.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@80-29-133-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>06:29.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:41.50</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>spectacular... cmake segfaulted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:42.11</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>finally devised a workaround, terrible but working</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:27.01</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68968 brlcad/trunk/CMakeLists.txt: after MUCH thrashing, here is a rewrite the add_test() wrapper that fixes a problem with the previous version. previous was not actually handling empty strings, which are used by a significant number of our tests. it was silently not passing them to the test program. turns out that cmake really does not like consistently dealing with empty string/list elements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:27.03</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>and loses it once we're in the wrapper. once it's processed into list form (e.g., ARGV/ARGN), it gets ignored by _add_test(). this may be due to cmake_parse_arguments() being used within _add_test() which also unexpectedly ignores empty list elements. reported behavior as bug to upstream.after much trial and error (more error than trial), a workaround was finally found and is implemented here. basically, we</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:27.05</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>reconstruct an invocation of add_test() in the wrapper so empty strings are passed as such, not via a list. this is fugly and inane and would be fragile, but there are a couple protections included that greatly help future-proof the wrapper. other comments should also help the next dev figure out what's going on....</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:29.06</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68969 brlcad/trunk/src/libbu/tests/CMakeLists.txt: reorganize the booleanize tests a little bit for clarity. add another arg indicating the expected output result.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:30.37</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68970 brlcad/trunk/src/libbu/tests/bu_booleanize.c: rewicker that booleanize test to not rely on some built-in notion of true or false that can become inconsistent with what libbu defines. just make it take the expected result as input, then test and compare.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:31.47</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68971 brlcad/trunk/include/bu/str.h: clarify that empty strings are whitespace-trimmed</tt></td></tr>
+<tr><td><tt>07:46.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>08:14.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>08:37.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@92.60.189.225)</font></tt></td></tr>
+<tr><td><tt>09:03.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:30.45</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ZitarMorningStar * 0 /wiki/User:ZitarMorningStar: </tt></td></tr>
+<tr><td><tt>12:15.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr><td><tt>13:30.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:d5eb:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr><td><tt>14:43.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.59</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: one way we might avoid the problem would be to have add_test maintain a list in CMake land of all defined targets - our adding to unit and check is based on name, so we could just post-process the list after all tests are added</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:00.23</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>pwd</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:01.21</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68972 brlcad/trunk/misc/CMake/FindUUID.cmake: ws</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:04.38</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">has other things he needs to add to CMake to avoid the need for the _ prefix redefinition - I'll add that to the list</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:05.23</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68973 brlcad/trunk/src/libbu/CMakeLists.txt: Only use UUID_INCLUDE_DIR if it's valid</tt></td></tr>
+<tr><td><tt>15:11.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@169.149.136.110)</font></tt></td></tr>
+<tr><td><tt>15:22.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>15:23.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~Amarjeet@169.149.136.110)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:35.30</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that would be a good fix this particular case .. what about scripting something around: ${CMAKE_COMMAND} --build . --target help</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:36.06</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>could create a function like "get_targets()" to get the current list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.38</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: the trick is we need the list before the CMake configure is fully complete, and I don't know if CMAKE_COMMAND would report correctly before the final CMake generation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:57.54</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I posted to the list to see if that information is available somewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:58.50</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>there is of course the possibility of just manually adding each test to the check/unit dependencies, but imho that won't scale</tt></td></tr>
+<tr><td><tt>16:07.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.00</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, good point .. can't run cmake yet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:18.14</tt></td><td><font color="#b0b05c"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">agrees the latter doesn't scale</font></tt></td></tr>
+<tr><td><tt>20:01.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Guest33108 (~joel@dhcp-004073.ics.uci.edu)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.02</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68974 (brlcad/trunk/include/nmg.h brlcad/trunk/include/rt/nmg.h and 105 others): Well, that was amazingly painful. Get all rt_vlblock_init calls up out of the nmg code. Removing RTG.rtg_vlfree as a global variable access flowed up through a lot of calling functions, which in turn required updating code calling them.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.22</tt></td><td><font color="#c567c5"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: that may not be minimally impacting, but it was enough work I had to try - it's one of the preliminary moves needed for relocating the nmg code out of librt</tt></td></tr>
+<tr><td><tt>22:08.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@93-195-113-92.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>22:16.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:51.37</tt></td><td><font color="#6ccdcd"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:ejno * 68975 brlcad/trunk/src/libbu/color.c: only check errno if the return value of strtol()/strtod() is exactly 0.0</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

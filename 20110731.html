@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20110731</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20110731</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>06:01.21</tt></td><td><font color="#cf6dcf"><tt>``Erik</tt></font></td><td width="100%"><tt>hm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:55.10</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>ok figured out the build system, seems like i have to add all include directories to the configure script with checks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:54.11</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:54.46</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>I have inserted some headers from the bullet library into brlcad and I have modified the build logic to look in the include library</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:55.19</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>however the compile stops when it sees the 'class' c++ keyword&nbsp;&nbsp;in one of the bullet headers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:55.53</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>i think perhaps libged is not being compiled with some c++ compiler flag being appropriately set</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:08.05</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt><a href="http://bin.cakephp.org/view/1255993858">http://bin.cakephp.org/view/1255993858</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:05.08</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>Generally successful compiles with Bullet go as follows : g++ -I/usr/local/include/bullet main.cpp -L/usr/local/lib -lBulletDynamics -lBulletCollision -lLinearMath</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:20.26</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: you can't include a c++ header into a .c file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:20.58</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>you'll have to layer the interface so that the c++ is encapsulated </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:21.48</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>one way would be to have the src/libged/yourfile.c call functions from a src/libged/implfile.cpp (which includes the bullet header)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.04</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:28.30</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>and the libraries need to be added to the configure script as well ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.51</tt></td><td><font color="#cf6dcf"><tt>``Erik</tt></font></td><td width="100%"><tt>when the symbols are needed, they will need to be linked against the library or binary, yes... (might be better to use cmake instead of automake at this point)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.39</tt></td><td><font color="#d06dd0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03kunigami * r45736 10/brlcad/trunk/src/liboptical/liboslrend.cpp: discovered how to get the object color from the closures. the next step is how to make the closure tell me to perform reflection</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:37.59</tt></td><td><font color="#d06dd0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45737 10/brlcad/trunk/CMakeLists.txt: CAD_VERSION was only needed to bridge an m4 variable to a shell variable, cmake can just set BRLCAD_VERSION. on that note, use it where triplets are called for and keeping with our naming guidelines.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:21.55</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>right, thanks brlcad and Erik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.28</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>yah I would use cmake as soon as the issues with gcc 4.6.0 are resolved</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.48</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>abhi2011: most if not all of the issues should be resolved now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.56</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>as of a couple days ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.03</tt></td><td><font color="#61b961"><tt>abhi2011</tt></font></td><td width="100%"><tt>cool, i will give it a try :)</tt></td></tr>
+<tr><td><tt>17:33.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@117.192.137.213)</font></tt></td></tr>
+<tr><td><tt>17:33.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr><td><tt>17:38.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav_ (~Stattrav@117.192.139.18)</font></tt></td></tr>
+<tr><td><tt>17:40.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Stattrav (~Stattrav@unaffiliated/stattrav)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.53</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: ``Erik: ping</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.58</tt></td><td><font color="#6aca6a"><tt>brlcad</tt></font></td><td width="100%"><tt>~seen tharis20</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.08</tt></td><td><font color="#ba61ba"><tt>ibot</tt></font></td><td width="100%"><tt>tharis20 &lt;~tharis@2.83.244.20&gt; was last seen on IRC in channel #brlcad, 4d 21h 27m 46s ago, saying: 'oh man, I don't know how I'm going to wake up early tomorrow...'.</tt></td></tr>
+<tr><td><tt>22:17.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad brlcad (~sean@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:29.39</tt></td><td><font color="#d06dd0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45738 10/brlcad/trunk/TODO: document initial thoughts on a 'simulate' command syntax</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:55.25</tt></td><td><font color="#d06dd0"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r45739 10/brlcad/trunk/TODO: options for applying or not applying standard gravity in a simplified form (-g being default)</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

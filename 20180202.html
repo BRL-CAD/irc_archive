@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20180202</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20180202</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>01:19.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad infobot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>01:19.42</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD and open source CAx discussion ! Also @ <a href="http://brlcad.zulipchat.com">http://brlcad.zulipchat.com</a> ! Logs @ <a href="http://infobot.rikers.org/%23brlcad/">http://infobot.rikers.org/%23brlcad/</a></font></tt></td></tr>
+<tr><td><tt>01:41.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad pjwzimnbznwkcgbt (~armin@dslb-088-065-185-188.088.065.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.07</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: did you take a look at why the gethostname() cmake test failed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:47.28</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>hello yukonbob </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.57</tt></td><td><font color="#b2b25e"><tt>yukonbob</tt></font></td><td width="100%"><tt>maw brlcad </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.41</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: I did - should be fixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:45.53</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>is it still busted?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:28.19</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: no, i'm curious how it failed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:33.36</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>saw _WINSOCKAPI_ workaround, but implies the gethostname test fails -- curious why</tt></td></tr>
+<tr><td><tt>10:23.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo_ (~merzo@63-16-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.26</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: on Windows (IIRC) there is a gethostname, but with a different function signature</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:40.55</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>so the "failure" was actually that the test succeeded, but there was a linking error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.45</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>I think the actual decl test didn't work because the standard headers for that test don't include the Windows headers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:43.44</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm sure a more elaborate test for gethostname could handle it, but I'm not sure how "worth it" it is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:46.05</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>sorry, that wasn't clear - the "function exists" part of the test succeeded, the decl test failed, and libbu tried to do what it does in the decl failure case and defined the signature, which doesn't match the Windows signature</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:50.33</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>I suppose if none of the standards have hammered out that one we should special case that specific test</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:51.47</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>aaaand it's non-standard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:51.54</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>phooey</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:25.23</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>wouldn't worry about it, just was curious </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:25.37</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>the winsock api is "special"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.16</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>on linux, it happens to be in glibc, but windows solaris and others commonly put networking into different libs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.03</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>was just curious how it failed because I've not looked at winsock in a while, but hasn't changed from the sound of it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.14</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>if things haven't changed, compile would use windows.h which includes the older winsock.h api unless you define WIN32_LEAN_AND_MEAN (which our common does) or if winsock2.h was already included (both have gethostbyname)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:38.18</tt></td><td><font color="#d9d972"><tt>brlcad</tt></font></td><td width="100%"><tt>link would then probably fail unless you made sure to test and link the ws_32.lib or ws2_32.lib winsock libraries</tt></td></tr>
+<tr><td><tt>13:47.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2a02:a03f:406f:ad00:2268:9dff:fef9:3113)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.01</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>howdy yorik </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.09</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>what's new in the FreeCAD world?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.49</tt></td><td><font color="#6161b9"><tt>yorik</tt></font></td><td width="100%"><tt>starseeker: not much new right now, because it's feature freeze time... New release soon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:15.57</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>sweet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.09</tt></td><td><font color="#6161b9"><tt>yorik</tt></font></td><td width="100%"><tt>But some parts have progressed much over the last months, basically CNC/Path, FEM and the Sketcher. Plus, there is now a myriad of plugins</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:17.44</tt></td><td><font color="#bf64bf"><tt>starseeker</tt></font></td><td width="100%"><tt>are you still using OCE on the backend?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:20.14</tt></td><td><font color="#6161b9"><tt>yorik</tt></font></td><td width="100%"><tt>OCE is not much updated anymore, and its "original" version, OpenCasCade, is several versions further and is now a much better open-source citizen (they changed their license, are using cmake, etc), so most folks have actually switched to it. We'll do that for the official release too I guess</tt></td></tr>
+<tr><td><tt>18:30.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@63-16-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>21:05.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness (uid10044@gateway/web/irccloud.com/x-lkeswescjdxpchwz)</font></tt></td></tr>
+<tr><td><tt>21:08.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad KimK (~KimK@2001:579:d00c:800:f145:8dd7:fb04:7fb8)</font></tt></td></tr>
+<tr><td><tt>21:28.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@11-26-132-95.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>23:00.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Radicarian (~Radicaria@199.189.26.12)</font></tt></td></tr>
+<tr><td><tt>23:10.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Radicarian (~Radicaria@199.189.26.12)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

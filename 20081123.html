@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20081123</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20081123</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:00.14</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Hmm - the copies did somewhat better, but whether it was the copy or the scan it looks like there was even then a little distortion on a couple of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:00.16</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah, well</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:02.03</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">must once again give props to netpbm</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:00.25</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: because gary was constantly reinventing the wheel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:00.47</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>there's no reason gridrotate shouldn't use vmath.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:00.47</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah, there we go:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/National_Archives/USS-Monadnock.png">http://bzflag.bz/~starseeker/National_Archives/USS-Monadnock.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:01.10</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>not sure that idents.c would actually benefit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:01.54</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:01.59</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: it uses the vector element names, at the very least</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.01</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>however:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.11</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>when I use vmath.h, I get undefined refs to a few vector funcs</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.47</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>e.g.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.48</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>burst-gridrotate.o(.text+0xe1):/home/ralith/dev/brlcad/brlcad/src/burst/gridrotate.c:70: undefined reference to `Scale2Vec'</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:02.57</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I'm thinking it isn't linking to libbn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.04</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>or something along those lines</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.16</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>any tips as to how to get that to happen?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.30</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>that's not the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.43</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>ah.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:03.48</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>it's saying there is a reference to Scale2Vec that isn't defined</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.03</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.05</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.15</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>and might it not be defined by linking in the bit where it is?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.24</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>Scale2Vec is indeed used.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.25</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>so you either a) need to define it (i.e. provide an implementation) or b) remove the references to it (which can be code or object code)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:04.58</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>Scale2Vec isn't a libbn symbol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:05.10</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>oh, they're implemented as macros in vecmath.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:05.31</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>that would be a way to do b)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:05.39</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>are they redundant to anything, or would it be appropriate to move them into vmath.h?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:06.10</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;that's cleaned up a tad - the (reduced size) original is here:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/National_Archives/USS-Monadnock_thefirstmonitor_NARA_RG19_136-9-49_Inboard-Profile-and-Main-Deck_28inx6ft_0.25scaled.png">http://bzflag.bz/~starseeker/National_Archives/USS-Monadnock_thefirstmonitor_NARA_RG19_136-9-49_Inboard-Profile-and-Main-Deck_28inx6ft_0.25scaled.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:06.27</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>looks to be redundant</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:07.30</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>most of vecmath (if not all of it) has a corresponding alternative in vmath.h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:07.42</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>that bad, huh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:07.46</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>and sure, it would be very appropriate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.07</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>gridrotate should be covered fine by the tests, right?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:08.27</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>i.e. I'll know if I've messed something up?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.10</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't have any tests (that I'm aware of) that exercise the burst code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.15</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>:/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.23</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>well then</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.24</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>write one :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.26</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I guess I'd better be careful!</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.34</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">has no idea what this code even does</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:09.39</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>some are dreadfully simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.07</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>like how ScaleVec(a,s) is identical to vmath as VSCALE(a,a,s)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.18</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>starseeker: nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.20</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.23</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I can see that much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.38</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;thanks :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.41</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>starseeker: I have some drawings like that of some commercial aircraft</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.56</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>the beauty of this one is it's totally copyright free :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:11.59</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>on paper though.. I have no idea how to scan those huge drawings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.02</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>in theory it's straightforward</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.04</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>ah sweet</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.15</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>Scale2Vec(a,s,b) ==&gt; VSCALE(b,a,s)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.31</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.37</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;give me about 10 minutes and I'll have another one up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.38</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>it's very clear and comprehensible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.42</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>just apprehensive of a stupid mistake :P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:12.47</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:13.28</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>just do them one at a time, could even write a little test.c that exercised each one before/after with a simple test case input</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:13.42</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>also, the emacs local variable blocks are very handy.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.28</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>how's that?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.56</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>it's always a pain to swap configs across projects of differeing styles (of which I have several)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:17.03</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:17.11</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>makes it that much easier to just jump into</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.34</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: alright to wrap proc-db/brep_[simple|cube].cpp in an anonymous namespace to prevent an enum conflict w/ vmath?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:29.50</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>a little hacky, but imo still a step up from the undef that used to be there.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:39.22</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>it built :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:43.24</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>woo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:43.39</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>regression tests seem to pass, if that means anything</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:43.58</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">REALLY needs to get more RAM to deal with images of this sort</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:47.21</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>somebody want to explain to me why line 35-36 of brep.h has #ifdef __cplusplus \n extern "C++" { ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:47.43</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Here we go:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/National_Archives/M2A4.png">http://bzflag.bz/~starseeker/National_Archives/M2A4.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:47.57</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;That one you may like a bit better :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:48.30</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>that's really neat</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:49.18</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>That one was a good exercise in cleanup techniques:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/National_Archives/M2A4_NARA_RG156_ARC-789126_fldr7_Left-Side_Elevation_0.5scaled.png">http://bzflag.bz/~starseeker/National_Archives/M2A4_NARA_RG156_ARC-789126_fldr7_Left-Side_Elevation_0.5scaled.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:49.53</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:50.03</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>holy ramrape</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:50.45</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>ah removing the static eh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:50.59</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:51.30</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>are you going to draw them up in autocad or something now? hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:55.36</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;If you think that one is bad, try this:&nbsp;&nbsp;<a href="http://bzflag.bz/~starseeker/National_Archives/full/USS-Monadnock_thefirstmonitor_NARA_RG19_136-9-49_Inboard-Profile-and-Main-Deck_28inx6ft.png">http://bzflag.bz/~starseeker/National_Archives/full/USS-Monadnock_thefirstmonitor_NARA_RG19_136-9-49_Inboard-Profile-and-Main-Deck_28inx6ft.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:55.45</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;Maybe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.08</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>starseeker: no thanks; it took firefox a few seconds to give me interaction back even with the former.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.19</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;Yeah, sorry about that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.23</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>wait</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.29</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>was that the boat you linked earlier?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.47</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>That was the original image from which the boat image I linked to came from</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.12</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>I had to resort to netpbm to do anything with the original</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.25</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>firefox tells me that last one contains errors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.31</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Imagemagick when down with nary a wimper</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.36</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>stylistically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.42</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>if I'm wrapping a lot of code in an anonymous namespace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.49</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>should I indent said code another unit?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.56</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;The big one?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.59</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm not surprised</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.09</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt><a href="http://bzflag.bz/~starseeker/National_Archives/full/USS-Monadnock_thefirstmonitor_NARA_RG19_136-9-49_Inboard-Profile-and-Main-Deck_28inx6ft.png">http://bzflag.bz/~starseeker/National_Archives/full/USS-Monadnock_thefirstmonitor_NARA_RG19_136-9-49_Inboard-Profile-and-Main-Deck_28inx6ft.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.16</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>yeah, that's the big one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:58.48</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Better to stick to the smaller one - with that view no important detail is lost at the lower res, really</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.05</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>yeah it's broken</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.14</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>libpng error: IDAT: CRC error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.17</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>it would make the diff a lot cleaner, but I'm not sure what The Right Thing is.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.38</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;It should like this better <a href="http://bzflag.bz/~starseeker/National_Archives/USS-Monadnock-large.png">http://bzflag.bz/~starseeker/National_Archives/USS-Monadnock-large.png</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.32</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>starseeker: on that tank, what do the little crosshairs represent? rivets?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.33</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.49</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;I believe so</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:01.27</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;I actually have an svg file from potrace with inkscape touchups, with the text added after bitmap export by the Gimp</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:02.46</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>problem is the svg file is almost as big as the bitmap, due to so many control points</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:02.53</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:03.06</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>crank up simplification a little?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:03.16</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>tried</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:03.29</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>potrace doesn't seem to look for macroscopic "lines"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:03.35</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>:/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:03.50</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>tried inkscape's native trace? or is the image too big to even attempt?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:03.52</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>it follows edges of features, and a "line" to it seems to just be a feature with a really wild outline</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:04.08</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;I think that's based on potrace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:04.42</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>autotrace is the only other free tracer I know of, but it really cranks away at this and I'm not sure how much better it would do than potrace</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:05.54</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>actually</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:06.12</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I wonder if inkscape's simplification applied after the trace might produce usable output?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:06.23</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>you could even apply it selectively to big, simple shapes, although it'd take a lot of work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:06.35</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I don't suppose you even really need a high quality vector of it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:08.05</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;depends on the purpose</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:08.31</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Probably the way to go if I really needed it would be to flip up the bitmap inkscape and trace it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:08.35</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>by hand</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:08.58</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>or some cad program ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.14</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>potrace really is a help here though, since it make the noise easy to target and eliminate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:09.20</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>(relatively speaking)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:10.33</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>louipc:&nbsp;&nbsp;Yeah, actually we might have some image utilities that would be a help in this situation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:10.39</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>need to check it out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:11.28</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Regardless though, these diagrams are pretty cool in and of themselves</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:11.54</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is afraid the scanner may have distorted 2 of the tank views...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:12.39</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>If you care to check out everything, just look in <a href="http://bzflag.bz/~starseeker/National_Archives">http://bzflag.bz/~starseeker/National_Archives</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:12.56</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>watch out for the stuff in full however - it's REALLY big</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:13.40</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders why the ImageMagick guys don't incorporate netpbm...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:13.58</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>what dpi is USS-Monadnock-large.png?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.08</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>um.&nbsp;&nbsp;good question</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.27</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>the drawing itself was 6 feet long</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.36</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>but that's been scaled a few times</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:14.51</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>ah wow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:15.10</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>that's why the original image is so incredibly huge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:15.32</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>and why my computer died of ram starvation when Gimp or ImageMagick tried to do anything at all with it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:15.34</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>so that's only like 70dpi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:15.51</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:16.13</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Because of the nature of the drawing though, it's not so critical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:16.25</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>stuff like the M2A4 is more critical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:16.30</tt></td><td><font color="#bc6363"><tt>louipc</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:17.27</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">should jot down a quick article about how he went from original drawing to final image...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:18.56</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">afks breifly</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:19.04</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>afks?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:19.09</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>away from keyboards</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:19.12</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:19.14</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>:P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:19.39</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: I've got a patch ready for vector elements as an enum, btw; not sure if I should commit it w/o review</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:34.41</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">returns</font></tt></td></tr>
+<tr><td><tt>06:35.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad marko1 (n=mark@cpe-74-72-195-92.nyc.res.rr.com)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:45.23</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah, that's where I messed up with the Gimp - incorrect Tile Cache size</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:50.31</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>no, still doesn't like the original tiff file</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:50.39</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">needs more horsepower</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:25.00</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I am a little surprised that there isn't budget for uberpowerful workstations for you guys to use for stuff like this</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:25.25</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>I guess that's what you get for making brl-cad light on hardware requirements</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:58.33</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>hm.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:58.39</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>Anyone here tried g3d recently?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:58.51</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>it loads a blank window, cranks on the hdd for a while, then segfaults here</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:06.14</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt><font color="#CC00CC">polls brlcad </font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>08:15.03</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>if anybody's awake, anyone have recommendations for software for solving systems of linear equations?</tt></td></tr>
+<tr><td><tt>09:25.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad alex_joni (n=juve@emc/board-of-directors/alexjoni)</font></tt></td></tr>
+<tr><td><tt>10:51.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr><td><tt>12:03.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.30</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;Oh, if I were using work computers it would be a different story</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.18</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ralith:&nbsp;&nbsp;For liner equations software - If you're talking symbolic Maxima or Axiom are the free options</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:31.44</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Octave is pretty good for numerical stuff (or so I hear)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:32.51</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>tab-completion ftw</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.28</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>you'd realize he's not here if you did</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.32</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:33.36</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>phooy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:34.17</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;What do you think of that tank diagram?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.34</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: it's pretty cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:47.53</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>so you got some good materials when you visited (was that fri?)</tt></td></tr>
+<tr><td><tt>16:43.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ``Erik_ (i=erik@c-68-54-174-162.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:56.44</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad:&nbsp;&nbsp;Yep, just not on the tank I was hoping for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:57.22</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>I made a copy of the list of what they do have - I'll show you on Monday if you're in</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:58.49</tt></td><td><font color="#42427e"><tt>starseeker</tt></font></td><td width="100%"><tt>Unfortunately copying them is a tad expensive (between copy and scanning just what I've got up now came to about $100) but the quality of the blueprints was too good to pass up, particularly as public domain (I'm pretty sure the M2A4 stuff is public domain since Rock Island was a government operation)</tt></td></tr>
+<tr><td><tt>20:38.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (n=ralith@216.162.199.202)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.52</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>brlcad: ping?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.09</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>Ralith: pong</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.11</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.14</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>get my message last night?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.56</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>I saw that you said the patch for the enum was ready -- go ahead and apply it and I can review it via the mailing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.20</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>also saw that g3d crashed on you, but no crash log to look into it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.29</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.32</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>that's not even your area, is it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.55</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>why wouldn't it be? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.00</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>iunno</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.08</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>sort of assumed mafm was largely the sole contributor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.16</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>what with how you're giving priority to the geometry service, etc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.44</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>he has been, but there's no code "ownership" in brl-cad -- just points of contact, but any dev should be able to work in any other area so long as they're intercommunicating</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.13</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>didn't mean to imply ownership so much as familiarity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.23</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, well code is code :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.34</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>indeed.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.06</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>code that another dev can't jump into and contribute to probably needs some usability/documentation/cleanup</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.17</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>good point.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.48</tt></td><td><font color="#7676e1"><tt>CIA-62</tt></font></td><td width="100%"><tt>BRL-CAD: 03ralith * r33247 10/brlcad/trunk/ (13 files in 8 dirs): Replaced preprocessor defines with an enum for vector element identification to reduce naming conflicts.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.07</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.09</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>~ralith++</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.19</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>^^</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.24</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>I can do some more extensive testing later tonight</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.36</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.06</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>but looks good at a glance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.15</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt>can probably go even farther with the comgeom/burst bits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.49</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>yeah, I debated killing the vecmath header(s) entirely</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.57</tt></td><td><font color="#62bb62"><tt>Ralith</tt></font></td><td width="100%"><tt>but decided that it would be best to do that in another commit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.23</tt></td><td><font color="#bb6262"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr><td><tt>22:41.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad elite01 (n=omg@unaffiliated/elite01)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

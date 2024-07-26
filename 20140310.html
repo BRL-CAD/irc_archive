@@ -1,0 +1,549 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20140310</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20140310</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr bgcolor="#eeeeee"><td><tt>00:17.45</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>f_nirt passes the right arguments to ged_nirt, so the problem must be there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.16</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: i found what i think is the cause of the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:01.52</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: in ged_nirt, there is a line that says: "bu_vls_printf(&amp;p_vls, "dir %lf %lf %lf; s", dir[X], dir[Y], dir[Z]);"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.21</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: the problem is the "; s" in the string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:02.59</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: this causes nirt to shoot a ray without waiting for configuration instructions from the -e option</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:04.55</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: is there a simple way to modify and recompile the source to see what the effect of changing that line would be?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:21.29</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: actually, looking over the results from echoing the commands in mged (by clicking "echo cmd" in the query ray control panel), it seems like the problem is far from that simple</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:35.21</tt></td><td><font color="#a25555"><tt>dennisy</tt></font></td><td width="100%"><tt>brlcad: anyways, i would like to thank your for your help again, and i'll be back tomorrow to take another crack at this bug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.57</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: does inderpreet have commit access now?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.39</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I would prefer if he do any theme changes in his git repo, but some stuff might require the svn one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:25.50</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I'll try to set the git repo to auto-pull if I can figure it out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:26.59</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>doable but bidirectional is problematic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.10</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>have to continually rebase</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.17</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>(assuming commits are happening)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.49</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't know his username to add his access and havne't seen him to ask here (too busy with the migration to seek him out)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:27.54</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>It only ought to be uni-directional</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:28.59</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Eventual goal: commit to git which syncs to beta</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.17</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>if looks good on beta, commit (w/ compiled css) to svn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:29.27</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>svn would go to the live site</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:30.13</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods, sounds good</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:31.17</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt><a href="https://help.github.com/articles/creating-webhooks">https://help.github.com/articles/creating-webhooks</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:32.03</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Ideally the svn repo would be able to do that too, but I don't think sourceforge supports that type of thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.52</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>it does/did, but it's a bear to set up</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:33.10</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>don't know about the new infrastructure</tt></td></tr>
+<tr><td><tt>04:51.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@59.91.239.215)</font></tt></td></tr>
+<tr><td><tt>05:13.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness___ (uid10044@gateway/web/irccloud.com/x-znsfgwuamstauosi)</font></tt></td></tr>
+<tr><td><tt>08:34.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>09:31.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:34.06</tt></td><td><font color="#b15db1"><tt>ishwerdas</tt></font></td><td width="100%"><tt>harmanpreet: h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:34.14</tt></td><td><font color="#b15db1"><tt>ishwerdas</tt></font></td><td width="100%"><tt>oops hi</tt></td></tr>
+<tr><td><tt>09:51.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee_ (bc5c2134@gateway/web/freenode/ip.188.92.33.52)</font></tt></td></tr>
+<tr><td><tt>10:19.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dervan (4e0904e2@gateway/web/freenode/ip.78.9.4.226)</font></tt></td></tr>
+<tr><td><tt>10:30.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>10:44.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad richa (b49531e7@gateway/web/freenode/ip.180.149.49.231)</font></tt></td></tr>
+<tr><td><tt>10:51.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>10:59.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad richa (uid11933@gateway/web/irccloud.com/x-inmqerzmqmtkahug)</font></tt></td></tr>
+<tr><td><tt>11:51.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kesha (~kesha@14.139.122.114)</font></tt></td></tr>
+<tr><td><tt>12:40.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr><td><tt>13:01.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@190.9.171.121)</font></tt></td></tr>
+<tr><td><tt>13:43.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad starseeker (~starseeke@66-118-151-70.static.sagonet.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.27</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>I have downloaded brlcad from <a href="http://brlcad.org/d/download">http://brlcad.org/d/download</a> for linux</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.53</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>When i follow installation instructions and run cmake ../brlcad-X.Y.Z -DBRLCAD_BUNDLED_LIBS=ON -DCMAKE_BUILD_TYPE=Release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.22</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>I get an error that the source directory does not contain CMakelists.txt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.42</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>What is the solution to this?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.07</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>richa: which file did you downloaded? *.deb or *.rpm?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.27</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>its .zip</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.55</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>this was probable the runtime DLL for Windows</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.39</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>try this one: <a href="http://sourceforge.net/projects/brlcad/files/BRL-CAD%20Source/7.24.0/brlcad-7.24.0.tar.gz/download">http://sourceforge.net/projects/brlcad/files/BRL-CAD%20Source/7.24.0/brlcad-7.24.0.tar.gz/download</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:58.00</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:59.53</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>Also, Is there some specific layout which gsoc students must follow while writing their proposals?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:04.33</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>You should look here to see how they could look like: <a href="http://brlcad.org/wiki/Google_Summer_of_Code/2013">http://brlcad.org/wiki/Google_Summer_of_Code/2013</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:07.59</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>btw, you should subscribe this group too: <a href="http://groups.google.com/d/forum/gsocax?hl=en">http://groups.google.com/d/forum/gsocax?hl=en</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.58</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>yeah, ok</tt></td></tr>
+<tr><td><tt>14:25.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad cstirk (~Carola@67.96.180.126)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:26.42</tt></td><td><font color="#7171d7"><tt>teepee_</tt></font></td><td width="100%"><tt>d_rossberg: isn't that the wrong year? ;) <a href="http://brlcad.org/wiki/Google_Summer_of_Code/Project_Ideas">http://brlcad.org/wiki/Google_Summer_of_Code/Project_Ideas</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.47</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6540 /wiki/Online_Geometry_Viewer_Back-end: Content added</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.49</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6541 /wiki/Online_Geometry_Viewer_Back-end: /* Requirements */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.51</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6542 /wiki/Online_Geometry_Viewer_Back-end: </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.54</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6543 /wiki/Online_Geometry_Viewer_Interface: Content added</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:29.56</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Harman052 * 6544 /wiki/Online_Geometry_Viewer_Interface: References and requirements added</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.03</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 6545 /wiki/Summer_of_Code/Acceptance: remove the brl-cad specific language, generalize and condense verbosity a fair bit</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.05</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 6546 /wiki/Summer_of_Code/Acceptance: add one more top-level category to break the flow a little</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.07</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 6547 /wiki/Summer_of_Code/Acceptance: /* Write maintainable code */ another cad ref</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.09</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Sean * 6548 /wiki/Summer_of_Code/Acceptance: /* License appropriately */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:30.59</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60106 (brlcad/branches/openscenegraph/CMakeLists.txt brlcad/branches/openscenegraph/INSTALL and 2 others): Get local openscenegraph build going. Will need both better handling of the build dir plugin situation and an upgraded ThirdParty macro that allows for version specification. Needs a bit of a rework of top level option handling across the board to be done right.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.46</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>teepee_: ??? where, which year?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.59</tt></td><td><font color="#7171d7"><tt>teepee_</tt></font></td><td width="100%"><tt>d_rossberg: your gsoc link to 2013</tt></td></tr>
+<tr><td><tt>14:32.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.43</tt></td><td><font color="#7171d7"><tt>teepee_</tt></font></td><td width="100%"><tt>oh, the last years proposals are also linked there?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.38</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>yeas, i meant richa should look at last years proposals to get an idea how a good one should look like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.42</tt></td><td><font color="#7171d7"><tt>teepee_</tt></font></td><td width="100%"><tt>d_rossberg: right, the penny dropped meanwhile :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.24</tt></td><td><font color="#6dd0d0"><tt>d_rossberg</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:35.52</tt></td><td><font color="#7171d7"><tt>teepee_</tt></font></td><td width="100%"><tt><font color="#CC00CC">was thinking about the checklist page <a href="http://brlcad.org/wiki/Summer_of_Code/Checklist">http://brlcad.org/wiki/Summer_of_Code/Checklist</a></font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.08</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60107 (brlcad/trunk/INSTALL brlcad/trunk/configure and 3 others): Use CMakeParseArguments to make the THIRD_PARTY macro more flexible.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:30.47</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60108 brlcad/trunk/misc/CMake/ThirdParty.cmake: remove debugging printing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:39.51</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60109 (brlcad/branches/openscenegraph/AUTHORS brlcad/branches/openscenegraph/INSTALL and 4 others): Update ThirdParty macro from trunk, make appropriate tweaks.</tt></td></tr>
+<tr><td><tt>15:40.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel_ (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:04.43</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:5.15.167.51 * 6549 /wiki/User:Cprecup: /* About me */</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.31</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60110 (brlcad/branches/openscenegraph/misc/CMake/FindOpenSceneGraph.cmake brlcad/branches/openscenegraph/src/libdm/CMakeLists.txt brlcad/branches/openscenegraph/src/other/CMakeLists.txt): More build tweaking for OSG. Need another feature in the ThirdParty macro - a list of variables to reset for the search. STEPcode will probably need something similar once we actually start looking for</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.33</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>system versions...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:25.08</tt></td><td><font color="#5fb5b5"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, 200hp motorcycle from lotus: <a href="http://www.lotus-motorcycles.com/">http://www.lotus-motorcycles.com/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:29.54</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60111 (brlcad/trunk/misc/CMake/BRLCAD_Summary.cmake brlcad/trunk/misc/CMake/ThirdParty.cmake brlcad/trunk/src/other/CMakeLists.txt): Add an optional ability to specify vars to reset to third party macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:31.50</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60112 (brlcad/branches/openscenegraph/misc/CMake/BRLCAD_Summary.cmake brlcad/branches/openscenegraph/misc/CMake/ThirdParty.cmake and 4 others): grab trunk ThirdParty update</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:41.38</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 60113 brlcad/branches/openscenegraph/src/other/CMakeLists.txt: Make sure the include dirs are set.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.29</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: holy crap</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>17:07.33</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's awesome!</tt></td></tr>
+<tr><td><tt>17:44.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>18:00.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (7aac7bdf@gateway/web/freenode/ip.122.172.123.223)</font></tt></td></tr>
+<tr><td><tt>18:07.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:20.44</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>teepee: that checklist is going to get updated, but it's a good general guide</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.35</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>richa: I see now that it wasn't your fault :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:21.40</tt></td><td><font color="#c3c367"><tt>teepee</tt></font></td><td width="100%"><tt>brlcad: I think it's a nice starting point already</tt></td></tr>
+<tr><td><tt>18:28.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad witness___ (uid10044@gateway/web/irccloud.com/x-ylzuqzgmsbzbgkfd)</font></tt></td></tr>
+<tr><td><tt>18:52.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad inderplus_ (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>19:12.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad inderplus_ (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>19:25.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad harshkothari (~harshkoth@wikimedia/Harsh4101991)</font></tt></td></tr>
+<tr><td><tt>19:27.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.37</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>I am a GSoC candidate interested in working on "Synchronize wiki with Docbook"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:32.12</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>I would like to discuss some details regarding this project</tt></td></tr>
+<tr><td><tt>19:33.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:33.50</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>I am not clear with how do a general user edit Docbook</tt></td></tr>
+<tr><td><tt>19:35.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm (75e5a9b8@gateway/web/freenode/ip.117.229.169.184)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.14</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>richa: figuring out an approach is part of the project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.39</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>there are several "tiers" of support</tt></td></tr>
+<tr><td><tt>19:38.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad inderplus_ (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.24</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>starseeker: Yeah, I am figuring out some approaches</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:38.25</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>the simplest is a window that shows the DocBook xml to the wiki user, and then "compiles" the xml after they have edited it to produce the HTML web output</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:39.13</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>that requires contributors to have a knowledge of how to write DocBook markup, which is a high hurdle, but would still be better than what we have now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.42</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>in that scenario (which might be a good first step, regardless of what comes next) the editing process would look very much like our current wiki edit-and-submit cycle, except the markup in the editing window would be DocBook and the "Preview" would be the backend processing the docbook and showing the HTML</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.26</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>there are several possible "next" steps, all focused on the "better ways to edit DocBook in a browser" problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.29</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Krajkreddy * 6550 /wiki/User:Krajkreddy/main: Current Works.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:42.26</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>hi richa! I hope my inputs were useful. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.01</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>raj12lnm: yeah, they were!</tt></td></tr>
+<tr><td><tt>19:43.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ishwerdas (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.33</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>richa : I am also a aspirant GSOC student. </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:43.41</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>starseeker: Is there some existing code for this or do I need to start from scratch?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.11</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>kanzure : Can you help me ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.19</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>raj12lnm: Which project are you interested in?</tt></td></tr>
+<tr><td><tt>19:44.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad vegantrex (925f141f@gateway/web/freenode/ip.146.95.20.31)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:44.42</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>richa : I am working on python bindings.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.07</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>richa: well, it's not entirely clear</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.08</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>kanzure : I am looking for sample values for vol primitive for the python code.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.29</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>starseeker : can you help me regarding sample values for vol primitive ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:45.34</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>I sent an email.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.08</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>There are a few existing open source codes that might be relevant (there was even a GSoC project in 2009 called Beacon to create a WYSIWYG web-based DocBook editor)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.50</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>starseeker : I have copy pasted my email here also. <a href="http://tny.cz/90f9d8d2">http://tny.cz/90f9d8d2</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.56</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>Can you please look at it ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:46.59</tt></td><td><font color="#6c6ccd"><tt>raj12lnm</tt></font></td><td width="100%"><tt>and guide me.</tt></td></tr>
+<tr><td><tt>19:50.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad raj12lnm__ (~androirc@122.172.123.223)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:51.15</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>raj12lnm: um. I'm not all that familiar with the vol primitive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.19</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>raj12lnm__: i do not have samples</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:52.38</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>richa: I'd definitely suggest checking out Beacon as a precursor to your proposal - either have an idea how it might be used or (if it can't be used) how what they tried can inform what you propose to do for this project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.15</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>raj12lnm__: btw, i think that one of the most needed pieces of python-brlcad is better automated testing (especially on windows) possibly through <a href="http://travis-ci.org/">http://travis-ci.org/</a> and <a href="http://vagrantbox.es/">http://vagrantbox.es/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.26</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>starseeker: Till now I have understood that I need to convert docbook syntax to mediawiki syntax and vice-versa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.33</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>Am I going on the right path?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:53.42</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>doesn't pandoc do that automatically?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.14</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>docbook&lt;-&gt;mediawiki wikitext</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:54.15</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>richa: i would suggest that as a later stage of the project</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:55.27</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>the problem of lossless translation between markup formats is (I hope!) a much tougher problem than a basic "edit and display this DocBook xml page"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:56.09</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>it's probably worth doing a few quick experiments with pandoc to see what translations to and from our DocBook pages look like</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:57.36</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is frankly skeptical that that sort of automated translation will suffice or be worth the effort - more likely that carrying through on a WYSIWYM editing widget that strives to respect and preserve the original DocBook would be more practical</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.03</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>but I don't know that for sure</tt></td></tr>
+<tr><td><tt>19:58.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad javampire (~ncsaba@p4FF70940.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr><td><tt>19:58.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad inderplus_ (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.28</tt></td><td><font color="#6d6dcf"><tt>harshkothari</tt></font></td><td width="100%"><tt>richa: I think you have to define some kind of dictionary for doing vice versa conversion </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:58.47</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>i would expect this to be the type of problem that everyone has tried to solve but everyone hate :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.09</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>kanzure: see Beacon for an example of that ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:59.27</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>do i dare..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.13</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>the problem with wikitext is that it's really hard to parse later. oh well.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.22</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>"the way to parse it is to run php/mediawiki, have fun"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:01.39</tt></td><td><font color="#6d6dcf"><tt>harshkothari</tt></font></td><td width="100%"><tt>kanzure: but again mediawiki parsers very less so it wouldnt be so difficult </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.00</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>is this a discussion about what should be the original format of documentation ? :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.39</tt></td><td><font color="#6d6dcf"><tt>harshkothari</tt></font></td><td width="100%"><tt>javampire: that is till now skeptic :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.41</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>kanzure : i will look if i can set up a travis baswed automated testing.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.42</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>format translation ("old guy problems")</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:02.54</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>raj12lnm__: i would be open to other forms of continuous integration/testing, too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.18</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Inhave seen travis working in some oither repo.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.26</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>javampire: we're using DocBook for our primary format</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.29</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>I will find out how to integrate it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.47</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>raj12lnm__: right now one of the problems is that not all pull requests are tested against windows, so windows is periodically falling behind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:03.50</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>javampire : hi</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.03</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>starseeker: I would say it's a good choice - but I have not seen the full discussion to know what is this about :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.05</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Ok kanzure.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.18</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>raj12lnm__: hi Raj !</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.36</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>javampire: the project context is "how do we edit our DocBook documentation in a web context?"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.41</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>raj12lnm__: any luck with the VOL ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:04.49</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>kanzure : let me introduce myself with you.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.03</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>starseeker: ok, that's an interesting topic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.20</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>javampire : i have pushed the changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.25</tt></td><td><font color="#6d6dcf"><tt>harshkothari</tt></font></td><td width="100%"><tt>javampire: indeed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.39</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>But it gives an error of unreasonable parameters.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:05.46</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>raj12lnm__: did you manage to run a test case ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.02</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Yes.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.12</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>raj12lnm__: let me test too...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.19</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>It gives an error related to tge parametees.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.32</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>there's also this project:&nbsp;&nbsp;<a href="https://code.google.com/p/docbookeditor/">https://code.google.com/p/docbookeditor/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.45</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>And its hard for me to imagine parameters. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:06.48</tt></td><td><font color="#6d6dcf"><tt>harshkothari</tt></font></td><td width="100%"><tt><font color="#CC00CC">clicked</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.10</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>javampire : if you could modify the default parameters such that they become "reasonable"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.27</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>I think you will then be able to run the test.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.42</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>raj: let me test first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:08.47</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:09.02</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>As i said it given s error :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:09.12</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>*gives</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.01</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>starseeker: What is my first step?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:11.13</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>1. creating a web based docbook editor</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:12.00</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>2. developing a mediawiki extension which converts mediawiki syntax to docbook syntax and vice-versa</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.29</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>starseeker: BTW, is it really needed to edit doc-book in the web ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:16.54</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: what is the preferred method you'd like them to get in touch with you?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:17.22</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: ditto, prefferred contact method (irc, e-mail, ..)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.03</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>kintel: ditto, preferred method?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.20</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>starseeker: Can you give me your e-mail id?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.45</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>richa: you should join our mailing list instead of directly e-mailing mentors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:18.59</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>that way other mentors have an idea what is being discussed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.23</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>brlcad: yeah, I have already joined the mailing list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.25</tt></td><td><font color="#c36666"><tt>mpictor</tt></font></td><td width="100%"><tt>brlcad: contact method for students? IRC is probably best</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.31</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>mpictor: thx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:19.57</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>richa: as to your question -- which of those two steps is more interesting to you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.26</tt></td><td><font color="#d2d26f"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: have you done anything about the website repository? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.41</tt></td><td><font color="#d36fd3"><tt>kintel</tt></font></td><td width="100%"><tt>brlcad: irc, mailing list, personal email in that order of preference</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:20.59</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: yes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.03</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>kintel: thx</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.19</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: IRC, forum chat or mail, doesn't matter to much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.22</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>not putting your personal e-mail, but you're welcome to ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.47</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: do you want all three listed?&nbsp;&nbsp;wasn't planning on listing forums</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:21.57</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>certainly can though if that's better for you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.01</tt></td><td><font color="#6cce6c"><tt>richa</tt></font></td><td width="100%"><tt>brlcad: I am familiar with creating mediawiki extensions since I was an intern at Wikimedia Foundation last year, so I am more comfortable with 2nd one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.16</tt></td><td><font color="#d2d26f"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: Do mail me the details, I have edited the theme to look almost like our wordpress theme (except the sidebars ofcourse) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.17</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: what sort of contact are we talking about?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.29</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>richa: then I would totally recommend leveraging that strengths .. it's a big one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.40</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: will do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:22.54</tt></td><td><font color="#d2d26f"><tt>inderplus_</tt></font></td><td width="100%"><tt>brlcad: Is there anyone else working on wordpress theme ? </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.02</tt></td><td><font color="#d2d26f"><tt>inderplus_</tt></font></td><td width="100%"><tt>thanks :) </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.18</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: i'm updating our checklist instructions with succinct summary steps, basically telling them where to go to introduce themselves</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.30</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: not that I'm aware of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.43</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: I like a visible introduction.. wouldn't forum not be best?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:23.52</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: I was briefly during GCI, as well as the 2-3 GCI submissions</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.06</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I think maths22 has done some good theme inspection too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.36</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: if that's what you use, certainly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.44</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>we don't use our forums much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:24.57</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>everyone mostly gets directed to IRC or mailing list</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.08</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>though we do have them and they're sometimes used</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.12</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: out of curiocity, what do you use for communication? Mailing list?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.28</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>Ahh ok, our forum is a mailing list aswell... so we have both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:25.50</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, we're on mailman, so no go there ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.05</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>they need to get that sorted out</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:26.14</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>google groups are eating their lunch</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:27.11</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>inderplus_: fyi, maths22 is okay if the wp theme is done via svn, but the mediawiki theme should be forked off the existing github repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.19</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: if your forum/mail are one in the same, then should be okay to just list it once, yes?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.25</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>or do you want all three listed?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:28.36</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>or label it Forum just to encourage it that way?</tt></td></tr>
+<tr><td><tt>20:29.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad inderplus_ (~inderplus@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.34</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: I would use this one : <a href="http://librecad.org/cms/home/get-help/forum.html">http://librecad.org/cms/home/get-help/forum.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:30.46</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>I have no idea anymore how nable handles mailing list subscriptions only</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.00</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>trying to get specific, how about: <a href="http://forum.librecad.org/LibreCAD-dev-f4361976.html">http://forum.librecad.org/LibreCAD-dev-f4361976.html</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:32.01</tt></td><td><font color="#d2d26f"><tt>inderplus_</tt></font></td><td width="100%"><tt>harmanpreet: I guess we are now pretty sure of vision as well as the technologies regarding OGV, shall I start working on it ? Any tips or some guidance ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.12</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: that's fine with me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.22</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: cool, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:33.32</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>should have the checklist done in a few minutes to review</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:34.10</tt></td><td><font color="#5fb5b5"><tt>``Erik</tt></font></td><td width="100%"><tt>huh, some company in germany is trying to remake the lancia stratos: <a href="http://www.new-stratos.com/en/">http://www.new-stratos.com/en/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:35.42</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>no way that's going to be US street legal anytime soon</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.39</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>0-60 in less than 3.3, nice</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.44</tt></td><td><font color="#c36666"><tt>mpictor</tt></font></td><td width="100%"><tt>it comes in a 2-wheeled version that you probably *can use in the US ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:36.49</tt></td><td><font color="#c36666"><tt>mpictor</tt></font></td><td width="100%"><tt>*can*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:37.19</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, nobody cares if you die on a motorcycle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:38.05</tt></td><td><font color="#c36666"><tt>mpictor</tt></font></td><td width="100%"><tt>bicycle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.14</tt></td><td><font color="#6fd3d3"><tt>ries</tt></font></td><td width="100%"><tt>*all-new Lancia Stratos</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:39.46</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>what's the top speed you ever achieved driving a car ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.15</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>140</tt></td></tr>
+<tr><td><tt>20:40.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad TCD (~TheCommie@152.78.235.20)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.28</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>kmh ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.29</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Km/h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:40.35</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:41.04</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Indian roads but :-P</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:41.46</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>about 200km/h</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.06</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>well here on the german highway it's not unusual if a car literally flies by you while you drive 200kmh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.45</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>but I find it scary</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.57</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>it's no fun anymore...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.07</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>brlcad : have you been to india ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.13</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>raj12lnm__: I wish</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.28</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Plan this summer.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:43.46</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>I will ask mohit (zero_level) also.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.00</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>We can have a small meetup :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.25</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>heh, that'd be awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.51</tt></td><td><font color="#c869c8"><tt>TCD</tt></font></td><td width="100%"><tt>Evening.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:44.59</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>I also exchanged few emails with kesha_</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:45.09</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>She could also join :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:45.44</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>also brlcad : please reply to the email i sent, once you get time. :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.34</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>raj12lnm__: I will help you tomorrow to figure out the param problems by navigating the BRL-CAD C code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.51</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Ok javampire.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:46.59</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>that's a good skill anyway to develop on your own :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.11</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>I did navigate the code using grep.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.25</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>But fiund that they are not used.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:47.47</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>likely were looking for the wrong things :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.03</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Ok.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.10</tt></td><td><font color="#d06dd0"><tt>raj12lnm__</tt></font></td><td width="100%"><tt>Reply on the list.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:48.45</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.06</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>raj12lnm__: you could try to create a VOL wiki page similar to the EBM page</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.20</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>if you can document it, you probably understand it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.33</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>we have a gci task description for that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:50.55</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>Raj, you can try this: find src/ -name '*.c' -exec grep -l 'mk_vol' \{\} \;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.07</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok, that will not help too much, admittedly, but it will give you the file which implements the method</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.10</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>javampire: pretty sure he's correct that we don't actually call mk_vol() anywhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.33</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>yes, but the implementation could give a hint what's the problem</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.38</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a few of our more "advanced" primitives that are like that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.48</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>he could search for the error message to see where it is coming from</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.05</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>superellipsoid is another, point clouds, .</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.20</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>he's getting an error? (missed somethign)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.21</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>well most of the remaining ones are like that, I'm definitely fan of low hanging fruits, and those are done ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.40</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>gotcha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.50</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, creating a valid vol</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.09</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>that gets back to using the 'in' command manually with the EBM example to follow</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.18</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>then trying to understand the vol's params</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.21</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>he gets: "Unreasonable VOL parameters"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.24</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>or just ask someone here ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.29</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.32</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>he asked :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:54.41</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">slaps raj12lnm__ for being unreasonable</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.05</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I mean ask what some prompt from 'in' means</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.13</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ah ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.18</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>more specific than "I'm getting this error, help"</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.27</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>but I guess in will ask the same as the mk_vol parameters</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.52</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>almost certainly, but they're slightly more verbose prompts than a variable name</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:55.58</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>true</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.05</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>along with the EBM tutorial, should help make sense of them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.21</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>since it's params are almost identical</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.33</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>at least conceptually VERY similar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.40</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>brlcad: will you answer Raj's email with pointer to that tutorial ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.47</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>making tables in mediawiki really SUCKS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.01</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>brlcad.org/wiki/EBM</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:57.21</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I got to get this checklist finished first, gonna be a couple hours</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.38</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>OK, I answered him</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.48</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>cool thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.56</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>on another topic: what are you using to write doc-book ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.14</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I use emacs with a docbook-xml mode</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.00</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>I found some time ago syntext-serna to be a cool wysiwyg editor for doc-book, it is not available for download anymore from the makers, but the free version was licensed as GPL3 so I guess it will be still existing somewhere on the net</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.47</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: what I would like even more, however, than wordpress in the svn repo is a separate git repo for that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:16.35</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: reason for not just putting it all in one place?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.06</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I guess I could use tags instead, but I like the idea of the svn repo being what is live</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.26</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>i don't care if progress is happening where it happens, but ideally the instructions for setting up a mirror involves as few steps as possible</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.32</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>in some ways, a release and a devel repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.41</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>right: to clone, use the svn one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:17.56</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>That one would always work, since it would be what is on the live server</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.13</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>so I guess I don't care what precedes the clone as that's probably what I'd check out to make changes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.30</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Here would be my ideal situation:</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:18.42</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>A git repo with two branches: release and devel</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.27</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>beta would sync with devel, and the live site would sync with release</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:21.34</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I see two common use cases (only?) ... A) I need to roll out some change/update that I want to go live asap or B) I'm trying something out so I set up my own mirror and try things in advance</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:22.11</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I can see how that might make more sense</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.07</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>now how A and B happen is almost unlimited possibilities, but ideally .. fewer steps is better ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.19</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>if you want to use git, go for it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:23.45</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't think the detail of revision control system matters for this really much</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.31</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>could utilize our official github repo for that even, or keep them per user adhoc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:24.53</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>the main site would just need to know who/where to pull from (whether git or svn)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.01</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>i'm okay with there being only one branch for starters to keep things simple, or protected like you suggest with the layered syncing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:26.43</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>it's historically REALLY hard to get web devs using revision control, so i'm happy if it exists in any form :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.12</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I'm thinking master would be dev, and release separate</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.43</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>my reason for liking the git is that it encourages revision control as one works, rather than just at the end of a big change</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:28.57</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>However, at the same time, it would be tested before breaking the main site</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:29.56</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>no concern there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.04</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>like I said, I don't see that as a concern myself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.07</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>people committing "at the end of a big change" are doing svn wrong :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.12</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>brlcad: I'm not familiar with the plans you have for the web, but I would really like to see more automatically generated parts of it which come directly from the code, keeping documentation next to the implementation</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.31</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>whether it happens or not .. personally I commit like a monkey no matter what the scm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.45</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>javampire: ditto</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:30.51</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>the problem with the current web is that it drifts too fast from the code</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.07</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's part of our docbook integration goals .. so we can "compile" our docs and that becomes part of the site</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.10</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>having it close to it would perhaps encourage the coder to keep it up to date...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.12</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>and it's all revision controlled</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.24</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>my other reason for liking the 2 branches is that, if something works on a dev machine, it gets commited to beta</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.32</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>so when code changes, the docs change, and we can put *source* processes in place to ensure they stay up to date</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.39</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>then, we know if it works ok before it goes to the main site</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.50</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:31.50</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: go for it ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.37</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>can you add me to the github brlcad org</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.49</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: my only quip from earlier is that you said a second "git repo" .. which seems unnecessary to me -- it's just "the web repo" to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:32.55</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>that way the repo is not a personal one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.04</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I did not mean a second repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.15</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's a personal and project one, you might be looking at mine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:33.24</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ahh, then we're good! :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.13</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>if it works, it would be merged into the "release" branch and pushed again</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.25</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt><a href="https://github.com/BRL-CAD">https://github.com/BRL-CAD</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.32</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>that is the org one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.33</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:34.38</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>username?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.01</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>maths22</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.04</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>"This organization has no public repositories." - is this intended ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:35.54</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>javampire: yeah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.09</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>soon there should be one-the web one</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.11</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>most are hosted on sourceforge or on our server (including our git mirror)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.25</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.30</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>and I can see moving our web geometry projects to github if that's where folks want to work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.43</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>My favorite thing about github over sourceforge are pull requests</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:36.48</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>well github is quite convenient</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.03</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>obviously, there are advantages for other reasons the other way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.15</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yes, advantages and disadvantages on both sides</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.17</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>it's definitely easier to follow other's work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.46</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>wish sourceforge had the social/comment and code review aspects github has (which has literally nothing to do with git, but makes the site powerful)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:37.47</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I agree: github has put a lot of effort into a very good UI</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.04</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>github's power is not in the "git" half, but the "hub" half</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.08</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yep</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.38</tt></td><td><font color="#c869c8"><tt>TCD</tt></font></td><td width="100%"><tt>I more or less couldn't care between git, svn, hg, or whatever else; I just like github because it's so sleek</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.39</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">just needs an svnhub</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:38.51</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>or scmhub even better</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.01</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>BTW, you know gitlab ? <a href="https://www.gitlab.com/">https://www.gitlab.com/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.05</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>let me pick the community interaction profile</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.14</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I do now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.56</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>a friend of mine wrote Review Board, similar</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:39.59</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>well I still find git better than svn when it comes to distributed coding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:40.54</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>it has a steeper learning curve, but allows a lot more </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.07</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I find them both pretty much identical in that regard</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.17</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>except for offline commits, but I'm basically never offline and haven't been in nearly a decade</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.32</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>I'm commuting 2 hours a day on trains ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.35</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Offline is my favorite aspect about git for robotics club</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:41.50</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>we often are connected to robots, but I can commit and worry about sharing later</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.15</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>plus I just stashed my work to test Raj's branch - with svn I'm not sure if there's anything similar short of checking out another copy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.34</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>In theory, I like svn's linearity more, but in pratice, I have found git to be useful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:42.42</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Once I was willing to try it, that is</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.15</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I still have a problem with the antisocial traits that it encourages (which is part why it's become so popular, heh)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.33</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>git ? antisocial ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:43.54</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>it encourages working off in corners without sharing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.14</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yep, from a big picture perspectives .. remember we're talking about git and not 'hub' ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.32</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>hmm... how is svn different in that respect ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.51</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>If you use the revision control at all, it is inherently public immediately</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.54</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>you have to interact and discuss because your work is basically auto-pushed to everyone else interested</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.57</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>oh, you mean you can't commit locally</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:44.58</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>active participation instead of passive</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.51</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>look at linenoise, for example:&nbsp;&nbsp;<a href="https://github.com/antirez/linenoise">https://github.com/antirez/linenoise</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.53</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>but git in turn allows you to track multiple remotes, so you can in fact switch between the work of all your peers</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:45.57</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>147 forks on github</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.17</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>some of them add significant functionality</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.43</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>basically, you don't have to talk .. so many don't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.45</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>but you'll have to look through them manually and "pick and choose", because the work of integrating those improvements back into the "main" project is undone</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:46.59</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>that's seen as a strength, and I don't dispute that for some situations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.02</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>and there's no "master" branch which regularly integrates the rest ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.07</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>but I would claim that it's inherently antisocial</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.32</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>I mean it's all management</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.40</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>all git forks are 'equal' by design - a "master" fork is up to the community</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:47.57</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>if there is somebody who pushes the changes in a master branch, then it will work</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.22</tt></td><td><font color="#6b6bcb"><tt>starseeker</tt></font></td><td width="100%"><tt>that's why I cited linenoise - proof that it doesn't always happen</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.45</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>antisocial != bad ... but it's whether communication is suggested (git master fork) or doesn't happen (most common git use case) or required (svn)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.48</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>with svn the changes wouldn't have happened at all ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:48.57</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>sure and maybe that's a good thing :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.04</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok, I'm not sure what to think - but my gut feeling is that lots of random changes + selection = better than no change</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.32</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>kind of evolution applied to coding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:50.48</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>it means the groups that do communicate and coalesce are inherently collaborating, cooperating with mutual interests, often for a greater good than their own</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:52.36</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>in any case I still think git will allow more collaboration, even if it doesn't mandates it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.11</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>I think gitHUB does that more than GIThub ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.36</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>could be...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:53.36</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>imagine svn under the hood and most of the merits people associate with it still apply</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.03</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>well not really, I can fork git repos on my gitLAB too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:54.39</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>but I'm not sure how that would work with a SVNhub</tt></td></tr>
+<tr><td><tt>21:55.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad TCD (~TheCommie@152.78.235.20)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.03</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>and you can be sure I would have done much less progress with svn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:55.59</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's nothing hard about forking an svn repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.25</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>yes, but it's much harder to push-pull</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:56.51</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>and yes, github is helping there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.02</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>in a non-trivial way</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.30</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>i'd argue that it's actually easier with svn if you had a central authority like github dishing out the forks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:57.42</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok, so the hub is important, but still, git is better for this scenario then svn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.08</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:LenardslvxbdxchqPostley * 6551 /wiki/Gadgets34creative_ideas: Created page with "Technology Blog, your everyday technology, Over the last years, technology has been rapidly changing and expanding in every field imaginable the main purpose of technology is ..."</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.11</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>brlcad: let me know when I am added, and I will set up the repo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.18</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>wasn't making a statement about that either way ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.19</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I'll also hunt down the spam</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.34</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>just that there is an inherent antisocial nature (whether good or bad)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:58.55</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>that doesn't exist in svn by the nature of the design (enforced push)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.18</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>which almost certainly does shut off activity</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.25</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>whether that's good or bad ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.28</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Maths22 * 0 /wiki/User:LenardslvxbdxchqPostley: Spamming w/ bad username</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.37</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok, I was just about to say that too :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.47</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>personally, I think there are fantastic use cases for both</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.53</tt></td><td><font color="#72d972"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD Wiki:Maths22 * 0 /wiki/Gadgets34creative_ideas: Spam</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.58</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>for me it's clear: I'm working on the train ~1 hour a day</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:59.59</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>neither answers every social dynamic</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.27</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>I have SVN repos on a stick, so I can check in there too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:00.58</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ironically and anecdotally, the folks I've saw adopt git the hardest (sans github) when it came out were the more difficult people I knew</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.02</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>but I still like git for all the tools it offers...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:01.13</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>and the dev teams I knew that rejected it were already communicating fantastically</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.17</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>ben collins-sussman had a great article on how things would unfold like 10 years ago, and it pretty much was spot on</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:02.20</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>eery :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.13</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>I had difficulty learning git at first, because it has too many ways to use it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.47</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>there's no one best way which you can learn from a 10 mins tutorial</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:03.54</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's biggest detriment is the user interface</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.07</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: what was that ping line? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.35</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>I'm not talking about GUIs, I never used one for source code control</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:04.46</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">either</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.22</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>git simply has too many concepts compared to SVN or CVS, and many more scenarios</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.30</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I personally like sorucetree for a git gui</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:05.39</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>r/sorucetree/sourcetree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.01</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>and there's not one recommended way to use it, so it is hard for a beginner to figure out what is the right way to use it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:06.56</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>github is recommending you a work-flow, explaining each step of it, and that's why it's succesful</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:07.50</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>in a certain way brl-cad has similar problems with complexity :-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:10.25</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, sort of</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.06</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>my first impression of brl-cad was: CSG, nice concept, I like it... so where do I start ? Get a tutorial, build a model... ok, I need now a primitive I didn't find in the tutorial, where should I look for it ? It was not always easy to find the answers.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.08</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>in any way, I think those two are basically going to eventually converge</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.31</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>git will end up with automatic pushes (without you having to manually set it up)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:11.38</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>svn will end up with offline commits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.06</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>this reminds me of a joke of how english and german will be the same language in some years ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.06</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>and probably a means to push/pull to remotes</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.31</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>a bigger chasm there ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.01</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>there's very few features that separate git and svn that couldn't be resolved within a couple years if someone pushed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:13.14</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>really within a year</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:14.13</tt></td><td><font color="#d0d06d"><tt>javampire</tt></font></td><td width="100%"><tt>ok, so let's settle with: both have advantages and disadvantages, and the hub is making the difference ;-)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.19</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.26</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>we should write an article</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:15.55</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so back to point .. maths22 adding you to the project, have at it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.00</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: added</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:19.19</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:20.23</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I think you need to create a repo to add to the webdev team</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.20</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: what name?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:30.26</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>"web"?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:31.30</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>"magic-juju"?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:32.42</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>created web</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:33.20</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>sounds good</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:34.57</tt></td><td><font color="#cf6ccf"><tt>kanzure</tt></font></td><td width="100%"><tt>brlcad: irc, email, phone in that order, although all are okay</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.38</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Could I have, for the repo, admin access to set it up for a few hours?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:35.56</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>You can then remove it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:39.31</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: let me know, but I think you're already set up with full access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:40.45</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>maths22: see if you can get to the add webhooks section</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.35</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I can't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.24</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt><a href="https://help.github.com/articles/what-are-the-different-access-permissions">https://help.github.com/articles/what-are-the-different-access-permissions</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:42.39</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>Admin Access Teams: Repository access</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:52.54</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, I thought I'd selected that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.01</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>but apparently only set it to Read</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.01</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>fixed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:53.07</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>thanks</tt></td></tr>
+<tr><td><tt>23:13.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad FreezingCold (~FreezingC@135.0.41.14)</font></tt></td></tr>
+<tr><td><tt>23:48.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad notify-web (~notify-we@192.30.252.46)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.48</tt></td><td><font color="#e277e2"><tt>notify-web</tt></font></td><td width="100%"><tt>[13web] 15maths22 pushed 3 new commits to 06master: 02<a href="http://git.io/kwZupA">http://git.io/kwZupA</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.48</tt></td><td><font color="#e277e2"><tt>notify-web</tt></font></td><td width="100%"><tt>13web/06master 14fe84bbb 15Jacob Burroughs: added .htaccess</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.48</tt></td><td><font color="#e277e2"><tt>notify-web</tt></font></td><td width="100%"><tt>13web/06master 148c51f03 15Jacob Burroughs: added mediawiki</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:48.48</tt></td><td><font color="#e277e2"><tt>notify-web</tt></font></td><td width="100%"><tt>13web/06master 1484cfe80 15Jacob Burroughs: added wordpress</tt></td></tr>
+<tr><td><tt>23:48.48</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad notify-web (~notify-we@192.30.252.46)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:49.08</tt></td><td><font color="#6262bb"><tt>brlcad</tt></font></td><td width="100%"><tt>awesome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:52.07</tt></td><td><font color="#61ba61"><tt>maths22</tt></font></td><td width="100%"><tt>I like the notifier</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

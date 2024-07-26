@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>irclog2html for #brlcad on 20060715</title>
+	<meta name="generator" content="irclog2html.pl by Jeff Waugh">
+	<meta name="version" content="Version 1.5 - 11th May 2000">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>irclog2html for #brlcad on 20060715</h1>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:00.56</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@c-69-250-236-111.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:35.12</tt></td><td><font color="#b86161"><tt>CIA-9</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * 10brlcad/src/mged/typein.c: fixed a minor issue with the metaball interactive prompt</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:49.37</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: that structure is a list element -- part of how libbu does list structures is by embedding the list structure as the first element as utilizing aliasing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.07</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>in this case, bu_list structures have a magic, which is what wdb_pipept is using since it's a list element</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:50.58</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>and not a isolated structure in the case of the rt_pipe_internal (which has it's own magic as the first element more visibly)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:57.12</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>note that the bu_list trick is only used on actual list node elements, not structs that reference some list as is seen elsewhere</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.07</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>ohyeah... fergot about that, I knew bu_list had bu_prev and bu_next and did ugly off-sized struct casting</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.44</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>fergot they stored magic, too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:03.53</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>erm, forw and back, rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.28</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's a great C hack that just causes compiler's too much grief :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:12.43</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>C polymorphism</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:13.25</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>i though about trying to unwide it in brl-cad too so aliasing could be removed.. but that really would be an utterly massive effort</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.22</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>indeed... heh, I was talking to jason this morning about it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:18.39</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>that plus the heavy macro usage in like vmath makes something like swig... intractable</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:19.34</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>hrm?&nbsp;&nbsp;what does vmath have to do with swig?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.17</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>vmath has lots of macros...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.26</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>in order to expose something to swig, it has to be a function, not a macro</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:20.38</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>so all that crap in vmath.h cannot be exposed to the scripting language :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:21.18</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>vmath is entirely macros</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.04</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>there are (or at least were) actually functional equivalents of most of the macros in vmath in libbn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.13</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>ayup... that's why jason brought it up as the representative problem file... the issue is with macros, not functions... :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:22.27</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>they were just refactored away due to a very clear performance boost</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.10</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>even with compiler inline directives, which sometime's wouldn't, though most of the code preceeds the inline directive by about a decade</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.32</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>vmath is a fairly special case though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:23.37</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>not really representative</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:24.19</tt></td><td><font color="#b25e5e"><tt>brlcad</tt></font></td><td width="100%"><tt>the vast majority of the librt api isn't macros after all .. so what if scripts have to figure out how to add a vector all by themselves</tt></td></tr>
+<tr><td><tt>03:31.48</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad digitalfredy (n=digitalf@200.71.62.161)</font></tt></td></tr>
+<tr><td><tt>14:45.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad digitalfredy (n=digitalf@200.71.62.161)</font></tt></td></tr>
+<tr><td><tt>16:48.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rmorse (n=rmorse@cpe-69-133-80-81.twmi.res.rr.com)</font></tt></td></tr>
+<tr><td><tt>16:57.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad rmorse (n=rmorse@cpe-69-133-80-81.twmi.res.rr.com)</font></tt></td></tr>
+<tr><td><tt>16:57.59</tt></td><td colspan=2><tt><font color="#000099">*** part/#brlcad rmorse (n=rmorse@cpe-69-133-80-81.twmi.res.rr.com)</font></tt></td></tr>
+<tr><td><tt>17:24.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@c-24-23-59-104.hsd1.mn.comcast.net)</font></tt></td></tr>
+<tr><td><tt>19:12.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@toronto-HSE-ppp4307940.sympatico.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:14.18</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>irssi is too cadillacy for me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:20.13</tt></td><td><font color="#b760b7"><tt>``Erik</tt></font></td><td width="100%"><tt>so you used ircII, or telnet?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:25.03</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>ermmff galactick communicator :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:26.25</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>irssi assumes all cygwin environments are the same :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:31.33</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>heh ``Erik -- both ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:35.33</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>hate fargin projects that dont honour --prefix properly.</tt></td></tr>
+<tr><td><tt>19:36.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64_ (n=IriX64@toronto-HSE-ppp4307940.sympatico.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.04</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>ahh it works now.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:37.59</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>hmph no version reply.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:41.52</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>I'm doing all right, getting good grades, futures so bright, i gotta wear shades.</tt></td></tr>
+<tr><td><tt>19:50.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad bjorkBSD (n=bjork@ip70-178-169-173.ks.ks.cox.net)</font></tt></td></tr>
+<tr><td><tt>21:22.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad digitalfredy (n=digitalf@200.71.62.161)</font></tt></td></tr>
+<tr><td><tt>21:37.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@c-69-250-236-111.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>22:28.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Twingy (n=justin@c-69-250-236-111.hsd1.md.comcast.net)</font></tt></td></tr>
+<tr><td><tt>22:36.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@c-24-23-59-104.hsd1.ca.comcast.net)</font></tt></td></tr>
+<tr><td><tt>22:36.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad IriX64 (n=IriX64@toronto-HSE-ppp4307940.sympatico.ca)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:36.58</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>rubes,dudes,dudettes,and rowdies, how's it?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:38.14</tt></td><td><font color="#5e5eb4"><tt>IriX64</tt></font></td><td width="100%"><tt>bb l8r, still having system grief, anybody got a bandaid for my knuckles. :)</tt></td></tr>
+<tr><td><tt>22:40.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@c-24-23-59-104.hsd1.ca.comcast.net)</font></tt></td></tr>
+<tr><td><tt>22:42.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad DTRemenak (n=DTRemena@c-24-23-59-104.hsd1.ca.comcast.net)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl by
+<a href="mailto:jdub@NOSPAMaphid.net">Jeff Waugh</a> - find it at
+<a href="http://freshmeat.net/appindex/2000/03/28/954251322.html">freshmeat.net</a>!
+Modified by <a href="http://www.Rikers.org">Tim Riker</a> to work with
+<a href="http://blootbot.sourceforge.net/">blootbot</a> logs, split per channel, etc.
+</body></html>

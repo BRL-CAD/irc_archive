@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20100223</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20100223</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:50.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>00:50.47</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Happy Open Source Anniversary! (December 21st) || Release 7.16.6 tagged today (20100205)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.11</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, seems busted</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:54.24</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>ptrdiff_t not being defined before it's used to define ssize_t</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.20</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><a href="http://paste.lisp.org/display/95452">http://paste.lisp.org/display/95452</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>00:56.57</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">gets his recycling together</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>01:05.56</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37706 10/brlcad/trunk/configure.ac: Have the AC_CHECK_TYPE for ssize_t define HAVE_SSIZE_T if found, so the conditional in common.h will work (not defined on gentoo amd64 in testing - not sure if this is needed universally).</tt></td></tr>
+<tr><td><tt>01:06.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~jesica@201.255.236.19)</font></tt></td></tr>
+<tr><td><tt>01:38.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~jesica@201.255.236.19)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.11</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>grr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.26</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>rtgl doesn't seem to like my new machine - Z clears it but B doesn't</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:56.50</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">must work up a more robust jobs manager</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:58.22</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>02:59.10</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks rob is going to email starseeker real soon now</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:02.41</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: what'd I break?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:03.36</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>third party apps trying to build against BRL-CAD flip over the ssize_t dealio</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.15</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>all I did was define HAVE_SSIZE_T if it's actually there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:06.31</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>looking at common.h, we're expecting that (apparently)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.04</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>the ssize_t stuff other than the HAVE_SSIZE_T definition was already there</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.16</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, I d'no, I'm getting osX build breakage on ISST now, I'll look into tomorrie</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.28</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks out isst</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:07.41</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>needs gtk+2 and pango</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:09.24</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>well... ok, I'll look into it day after tomorrow, I think I'm busy all day :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:12.15</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(and if ISST doesn't "just work", what makes ya think some xmkmf/imake monstrosity will? :D )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:16.15</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tries defining HAVE_SSIZE_T in isst's configure.ac, but it doesn't seem to "take"</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.20</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, I tried that</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:17.53</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>wait, lemme try something</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:18.43</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">whistles innocently</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:19.16</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r37707 10/isst/trunk/ (configure.ac src/local_worker.c src/main.c src/net_worker.c): include isst_config.h...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:22.27</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>either way, might need to give them a heads up about the change, they tend to freak out easily</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:24.05</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(and you're the poor schlub that gets thrown under the train either direction :D )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:28.11</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>heh, beat me to it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.32</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: did that define in configure.ac fix your build as well?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.38</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>in BRL-CAD I mean?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:31.58</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>O.o tessellating pinewood sucks on this machine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:32.22</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:33.07</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.03</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>well, ktank loads fast...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.47</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>the controls suck, don't they? :D *duck*</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:38.55</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>sure do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.46</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>you attending that 'thing' tomorrow morning?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:40.56</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>huh?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.24</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>with the presentations?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.33</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>oh, that thing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:41.40</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>dunno</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.48</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>yay, crash</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:43.59</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>ERROR: bad pointer x1f13b40: s/b region(x23232323), was model(x12121212), file ../../../brlcad/src/adrt/load_g.c, line 80</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:44.46</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>heh, with fill #'s, it was sent a badly formed NMG, huzzah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.02</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>``Erik: if you get a chance, try g-nmg on pinewood and see if isst can view the results</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.18</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>um, I think I have a converted version at the office</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:45.41</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>if you have an older version laying around... something was horribly broken in NMG's recently which causes failures out the wazoo</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.01</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>no, latest checkout</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.37</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yes... something in our NMG code broke in the last month or so, we can no longer convert like we used to...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.53</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>so if you have an older version handy, use that to convert...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:46.54</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>:D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:47.30</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>so despite a fully successful conversion, the result is invalid?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.06</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>the, uh, big model I showed this morning was done on 7.16.2, the most recent version bombed with a similar error which kept me from using that model at the airfield</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.40</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>grr</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:48.44</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:49.49</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>is that from g-nmg -b generated shtuff, or running isst_gtk on an 'unprepped' geometry?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.33</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">assumes it was not set up for fast loading, since that code shouldn't be hit</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.42</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(yes, it needs the -b flag right now)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:50.58</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>hitting it with rt or mged would be the ultimate test, I surpose</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:51.34</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>hehehe, good old southpark :D </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.29</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>ooops</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.32</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>forgot the -b flag</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:52.35</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">tires again</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:54.57</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't remember why he has the NMG codepath disabled</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:55.49</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>hrm, mebbe it IS enabled in the svn version heh O.o</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.27</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>ohhhh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.30</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:57.59</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>n/m, that's right, I disabled the NMG fast-loading BECAUSE it tickeld that error</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>03:59.31</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(there is something screwed up with the NMG code, though... I'll have to look into that more later)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>04:00.36</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r37708 10/brlcad/trunk/src/adrt/load_g.c: disable NMG fastloading for now</tt></td></tr>
+<tr><td><tt>04:04.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite (~matthew@206-248-130-132.dsl.teksavvy.com)</font></tt></td></tr>
+<tr><td><tt>04:06.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad dtidrow (~dtidrow@c-71-238-51-148.hsd1.mi.comcast.net)</font></tt></td></tr>
+<tr><td><tt>04:45.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad talcite_ (~matthew@69-165-146-198.dsl.teksavvy.com)</font></tt></td></tr>
+<tr><td><tt>05:05.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Hirvinen (pahirvin@melkki.cs.helsinki.fi)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.34</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: unistd.h doesn't/shouldn't define any HAVE_* .. system headers really shouldn't ever</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:16.46</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>the typo is AC_CHECK_TYPE vs AC_CHECK_TYPES</tt></td></tr>
+<tr><td><tt>05:23.59</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Hirvinen (pahirvin@melkki.cs.helsinki.fi)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:25.13</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>ah</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:31.18</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37709 10/brlcad/trunk/include/common.h: need to include the header that provides ptrdiff_t if we're going to typedef it, otherwise needs to turn into a #define instead.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:32.30</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37710 10/isst/trunk/configure.ac: Don't need to manually define - use AC_CHECK_TYPES (thanks Sean)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:33.48</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37711 10/brlcad/trunk/configure.ac: Use AC_CHECK_TYPES to look for ssize_t</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:35.52</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, that should do it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:36.49</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>aww, AC_TYPE_INT32_T and friends are new</tt></td></tr>
+<tr><td><tt>05:38.51</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Ralith (~ralith@216.162.199.202)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:40.39</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37712 10/brlcad/trunk/configure.ac: AC_TYPE_INT32_T and friends were added in 2.59 so can't use them. our minimum is 2.52</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:10.25</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37713 10/brlcad/trunk/autogen.sh: merge in changes from upstream repo to check for new macros</tt></td></tr>
+<tr><td><tt>06:12.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad jack- (~jack@unaffiliated/jack)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:12.56</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>brlcad: woot, you're coding for bzflag as well?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:15.41</tt></td><td><font color="#67c4c4"><tt>Jonimus</tt></font></td><td width="100%"><tt>jack-: thats how I found out about bzflag, I was looking at him on CIA.vc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:16.06</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>:)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:16.40</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>i just noticed it in #commits</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:16.48</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>(cia.vc as well)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:23.21</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>jack-: happen to be one of the bzflag project admins too</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:24.38</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">hearts bzflag</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:25.28</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>cool :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:25.36</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>it rocks, i love it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:25.48</tt></td><td><font color="#67c4c4"><tt>Jonimus</tt></font></td><td width="100%"><tt>I suck at it but its pretty damn fun anyway</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:26.36</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37714 10/brlcad/trunk/include/common.h: still not perfect but this should help things along for 3rd party codes that don't have a HAVE_SSIZE_T define. only provide the typedef if we can't find hint of SSIZE_MAX. (untested)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:29.13</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>``Erik: perhaps you can test that - you should definitely NOT have to create a AC_CHECK_TYPE macro in isst/trunk/configure.ac in order to use the API .. nor should other folks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:31.42</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37715 10/isst/trunk/configure.ac: this type check should not be required for 3rd party codes (codes that link off an installed brl-cad).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>07:04.51</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37716 10/brlcad/trunk/src/libged/ (ged_private.h rt.c): move the struct into the only file that actually uses it.</tt></td></tr>
+<tr><td><tt>08:54.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad d_rossberg (~rossberg@BZ.BZFLAG.BZ)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:03.22</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03d_rossberg * r37717 10/brlcad/trunk/ (18 files in 7 dirs): </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:03.22</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: another iteration step in forcing back ssize_t: removed all references from the headers (exept for the declaration)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>09:03.22</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: poorly tested</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:27.01</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>another bzflag man</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>10:27.07</tt></td><td><font color="#6666c3"><tt>jack-</tt></font></td><td width="100%"><tt>cool :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>11:49.00</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, I have pinewood both as nmg and bot here, starseeker</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:25.27</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm k</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.17</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>jack-: not another bzflag person -- many cad and bz people all connect from the same server (bz.bzflag.bz)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.13</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>awesome: <a href="http://www.ornl.gov/sci/radiation_transport_criticality/BekarPubs/MCNP_BRL_A_Linkage.pdf">http://www.ornl.gov/sci/radiation_transport_criticality/BekarPubs/MCNP_BRL_A_Linkage.pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.32</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: cool</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.36</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>is that a new paper?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.26</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>I'm familiar with the effort, we helped them with that about 5 years ago</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:56.33</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>but yeah, new paper, at least new to me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.16</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>looks like it was published in end of 2009</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.45</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>K. Bekar and T. M. Evans, "MCNP-BRL: A Linkage between MCNP and CAD Geometry," Trans. Am. Nucl. Soc. 101, 623-626 (2009).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:08.51</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37718 10/brlcad/trunk/doc/BRL-CAD.bib: Add reference to Bekar paper.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.45</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>ack beat me to it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.57</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>hehe</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:14.39</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37719 10/brlcad/trunk/doc/BRL-CAD.bib: expand volume</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.01</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>hm, graph of pubs per year might be a telling visualization</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.47</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>depressing you mean...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:15.56</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>here's another, but BRL-CAD only gets a light mention as it was starting: <a href="http://www.ornl.gov/sci/radiation_transport_criticality/Blakeman_Pubs/PWR_Facility_Modeling_TM_2007_133.pdf">http://www.ornl.gov/sci/radiation_transport_criticality/Blakeman_Pubs/PWR_Facility_Modeling_TM_2007_133.pdf</a>&nbsp;&nbsp;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.01</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>never said good telling :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:16.51</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>another new one to me: <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.113.5775&amp;rep=rep1&amp;type=pdf">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.113.5775&amp;rep=rep1&amp;type=pdf</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:17.07</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">will leave that one for BRL-CAD if he wants (Blakeman)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:17.56</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>the first one isn't worth adding</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:17.59</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>the second one is though</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:18.59</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>there's apparently another paper referenced, "MCNP-BRL: An External Geometry-Driven Version of MCNP" but I can't find it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:20.07</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>sounds like a task to keep our local library busy</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:32.39</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37720 10/brlcad/trunk/doc/BRL-CAD.bib: Toss in references to recent tech reports.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:34.58</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03starseeker * r37721 10/brlcad/trunk/doc/BRL-CAD.bib: Add link to online scan of Deitz paper untl we find a better one.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:38.38</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r37722 10/brlcad/trunk/src/librt/primitives/poly/poly.c: Changed the %d directive to %lu to accomodate size_t.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:40.45</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37723 10/brlcad/trunk/doc/BRL-CAD.bib: add another tabary reference. this one for Coupling photon Monte Carlo simulation and CAD Software. Application to X-ray nondestructive evaluation.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.06</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r37724 10/brlcad/trunk/src/conv/g-egg.c: Fix vertex pool display. Add polygon information to output. Fix various flaws in output.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:42.12</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">will test that when he gets home O.o</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.34</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>and mebbe do an nmg-&gt;bot conversion to get more efficient data packing</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:43.55</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(currently storing 36 vertices for a cube)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.04</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r37726 10/brlcad/trunk/src/librt/primitives/poly/poly.c: quell %lu vs size_t warning</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:59.25</tt></td><td><font color="#b760b7"><tt>CIA-41</tt></font></td><td width="100%"><tt>BRL-CAD: 03bob1961 * r37727 10/brlcad/trunk/misc/win32-msvc8/ (164 files in 164 dirs): Turn the Detect64BitPortabilityProblems option on for x64.</tt></td></tr>
+<tr><td><tt>15:09.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad CIA-91 (cia@208.69.182.149)</font></tt></td></tr>
+<tr><td><tt>15:13.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Maloeran (~maloeran@glvortex.net)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:13.33</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: could you refresh my memory - what is the argument against going to C99?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:15.35</tt></td><td><font color="#6bcb6b"><tt>d_rossberg</tt></font></td><td width="100%"><tt>starseeker: MS Visual Studio, e.g.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:17.02</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>d_rossberg: btw, on the conversion from ssize_t to size_t - did you check if any of the code is returning error values that are negative?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:18.59</tt></td><td><font color="#6bcb6b"><tt>d_rossberg</tt></font></td><td width="100%"><tt>yes, this special value is (and was) RT_DIR_PHONY_ADDR</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:20.59</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>How much of C99 does Visual Studio support?&nbsp;&nbsp;The do support some I believe, and they might support the parts we really want (like printf and zu, for example...)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:22.57</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">supposes we could snarf an advanced printf code from somewhere and roll it into libbu...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.13</tt></td><td><font color="#6bcb6b"><tt>d_rossberg</tt></font></td><td width="100%"><tt>I'm not familar with what is already C99 and what is not, maybe you can give me an example of what you plan to do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:27.59</tt></td><td><font color="#6bcb6b"><tt>d_rossberg</tt></font></td><td width="100%"><tt>however, i'll have a look at it tomorrow because i've to hurry</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.05</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>Well, with size_t being variable size depending on platform, things like printf kinda have issues</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.17</tt></td><td><font color="#6bcb6b"><tt>d_rossberg</tt></font></td><td width="100%"><tt><font color="#CC00CC">prefers c++ streams :)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:28.43</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>apparently, the C99 answer to this is to define %zu for printf, but that doesn't help C90 coders</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:29.51</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>unless we make a "smart" bu_printf that handles C99 style things...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:40.49</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>vc6 support was initially one of a handful of issues, but I don't think vc8+ will have any trouble with c99</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.16</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: the biggest issue was simply becoming c89 compliant first</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.21</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.43</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>with the size_t conversions starting in earnest, it'd be really nice to have the z options in printf</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:41.58</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">gawks at the FreeBSD printf code...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:42.21</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>we only recently became strict c89 compliant with the warning quellings</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:42.49</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>I least I vaguely recall that being one of my compilation tests a few weeks back -- would have to reverify</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:42.50</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>hehe - comment at the top of the file:&nbsp;&nbsp;Actual printf innards. This code is large and complicated...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.12</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>"smart bu_printf" is bu_log</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:44.55</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>could expand that with zu, but it's not a big deal (and there's not many that aren't already taken care of)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:45.05</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>casting on print to the print type</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:46.01</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">doesn't see anything horrible with: size_t i = 123; printf("%lu", (long unsigned)i);</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:48.34</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>Bob's saying that truncates the size_t in half on windows</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>15:49.43</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>apparenty unsigned long is 32 bit on Windows and size_t is 64 bit...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:00.30</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>sure, so %llu</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:01.53</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>there's only a few places we should be printing things that big</tt></td></tr>
+<tr><td><tt>16:06.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:09.26</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>but will llu work in the 32 bit case?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:13.41</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>you'll still need to print conversion cast, but yeah it should work just fine</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:14.45</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>size_t i = 123; printf("%llu", (unsigned long long)i); or printf("%llu", (uint64_t)i); if we need to play well on c89</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.04</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>long long is a c99ism though many c89 compilers provided it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.20</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">wonders how unpalatable %p is</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:15.42</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(or mebbe bu_flog() )</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:16.36</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>bu_flog(FILE *, const char *, ...);</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:17.01</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>bu_snlog() ? :D</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:19.34</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>we're using %p already all over</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:21.14</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>if we had to, there's macro foo we could use to specialize for platforms (e.g., %Id on windows, %zd for c99, %ld for 32-bit, etc) but that'd be a PITA</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:22.25</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>printf("This is " SIZE_T_FMT " times more annoying than %%llu with a cast.", i);</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:23.44</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>if windows has %zd then great, but last I looked they didn't: <a href="http://msdn.microsoft.com/en-us/library/tcxf1dw6(VS.100).aspx">http://msdn.microsoft.com/en-us/library/tcxf1dw6(VS.100).aspx</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>16:24.17</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>course, that doesn't list %p and we use that, so who knows</tt></td></tr>
+<tr><td><tt>16:24.43</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi_ (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr><td><tt>16:57.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr><td><tt>17:36.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi_ (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>18:34.42</tt></td><td><font color="#adad5b"><tt>CIA-91</tt></font></td><td width="100%"><tt>BRL-CAD: 03Sean 07<a href="http://brlcad.org">http://brlcad.org</a> * r2203 10/wiki/Mime-types: show how to manually set props</tt></td></tr>
+<tr><td><tt>19:58.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad parigaudi (~quassel@pd95b7f5e.dip0.t-ipconnect.de)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:42.01</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt>hmm, cool:&nbsp;&nbsp;<a href="http://www.itl.nist.gov/div897/sqg/dads/">http://www.itl.nist.gov/div897/sqg/dads/</a></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:52.29</tt></td><td><font color="#da73da"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks this might be how we're doing n-ary trees:  <a href="http://www.itl.nist.gov/div897/sqg/dads/HTML/binaryTreeRepofTree.html">http://www.itl.nist.gov/div897/sqg/dads/HTML/binaryTreeRepofTree.html</a></font></tt></td></tr>
+<tr><td><tt>20:53.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad mac- (~mac@sunrise.pi.net.pl)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:53.26</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>hello</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:56.55</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>any one know if there is any GNU equivalent to MSC Nastran ?</tt></td></tr>
+<tr><td><tt>20:58.41</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Nohla (~jesica@201.255.236.19)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:02.53</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>mac-: haha</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.19</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>Salome maybe ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:03.25</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>anyone works on it ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.21</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>I mean if it is possible to create element / whole model under BRL-CAD and then open it in i.e. Salome for proceed with simualtions ?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:05.56</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>like it is on MSC Nastran, where I can create model in i.e. Catia and then open it in Nastran to make simulations</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:09.55</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>mac-: best I can suggest is to give it a try on a simple model</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.10</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>you certainly can model something with BRL-CAD and import that into Salome</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.11</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.12</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>:&gt;</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:10.43</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>whether it's sufficiently "equivalent" depends on WAY too many factors</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:11.55</tt></td><td><font color="#60b660"><tt>louipc</tt></font></td><td width="100%"><tt>mac-: why GNU specifically? </tt></td></tr>
+<tr><td><tt>21:12.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad R0b0t1 (~Enigma@unaffiliated/r0b0t1)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.13</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>main target is to run under Linux, and to not pay half bilion of dollars for it :/</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:13.53</tt></td><td><font color="#63bd63"><tt>brlcad</tt></font></td><td width="100%"><tt>GNU has little to do with that target, you just want something open source</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:14.48</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>not exactly</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:14.53</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>I`m not a programmer</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>21:15.03</tt></td><td><font color="#b5b55f"><tt>mac-</tt></font></td><td width="100%"><tt>I do not want to change code i.e.</tt></td></tr>
+<tr><td><tt>22:02.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>22:02.06</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Happy Open Source Anniversary! (December 21st) || Release 7.16.6 tagged today (20100205)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:12.14</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>ahh, home at last</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:17.28</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks mac- wants "(free||cheap)&amp;&amp;worksonlinux", not necessarily open source O.o</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:18.43</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt><font color="#CC00CC">thinks jack doesn't understand a lot about the various licenses O.o *duck* :)</font></tt></td></tr>
+<tr><td><tt>22:39.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ibot (ibot@rikers.org)</font></tt></td></tr>
+<tr><td><tt>22:39.07</tt></td><td colspan=2><tt><font color="#009900">*** topic/#brlcad is BRL-CAD Open Source Solid Modeling || <a href="http://brlcad.org">http://brlcad.org</a> || <a href="http://sf.net/projects/brlcad">http://sf.net/projects/brlcad</a> || #brlcad logs: <a href="http://ibot.rikers.org/%23brlcad/">http://ibot.rikers.org/%23brlcad/</a> || Happy Open Source Anniversary! (December 21st) || Release 7.16.6 tagged today (20100205)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:41.10</tt></td><td><font color="#b96161"><tt>CIA-85</tt></font></td><td width="100%"><tt>BRL-CAD: 03erikgreenwald * r37731 10/brlcad/trunk/src/conv/g-egg.c: fix reported # of triangles</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:44.19</tt></td><td><font color="#b96161"><tt>CIA-85</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37732 10/brlcad/trunk/NEWS: erik fixed bugs in the g-egg exporter. Z is up! .. and fixed polygon format decl with correct num of reported triangles.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>22:49.07</tt></td><td><font color="#b96161"><tt>CIA-85</tt></font></td><td width="100%"><tt>BRL-CAD: 03brlcad * r37733 10/brlcad/trunk/include/bu.h: clean up example structparse code (several typos).</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.20</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>yeh, it actually works now, opposed to producing busted geometry heh</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.52</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>(at least, I think it works, the panda conversion tools seem to like it, able to do funky round robin shit, like g-egg, egg2dxf, dxf-g and get a valid cube back</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:10.55</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>23:49.09</tt></td><td><font color="#5bad5b"><tt>``Erik</tt></font></td><td width="100%"><tt>\/cl</tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>

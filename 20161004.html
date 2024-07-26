@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+ <title>IRC log for #brlcad on 20161004</title>
+ <meta name="generator" content="irclog2html.pl">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body text="#000000" bgcolor="#ffffff">
+<h1>IRC log for #brlcad on 20161004</h1>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Default -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1563266826402652"
+     data-ad-slot="5026919875"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<form action="http://www.google.com" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="partner-pub-1563266826402652:3301963896" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="text" name="q" size="55" />
+    <input type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en"></script>
+<table cellspacing=3 cellpadding=2 border=0>
+<tr><td><tt>00:26.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad LordOfBikes (~armin@dslb-092-074-225-166.092.074.pools.vodafone-ip.de)</font></tt></td></tr>
+<tr><td><tt>01:50.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>02:16.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad archivist (~archivist@host81-149-189-98.in-addr.btopenworld.com)</font></tt></td></tr>
+<tr><td><tt>03:59.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:54.27</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: I didn't scrutinize it that closely for impact .. any non-NMG public API had to change?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:56.22</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>smells bad having a free list added to so many function args</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:57.06</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>free lists are usually just an optimization and a poor one at that these days -- did you see if you could just eliminate its use altogether?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>05:59.13</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>don't know about the specific nmg case, but usually they are a list of free'd items, so when the next allocation comes, it pulls from the free list instead of allocating again ... a really really inefficient optimization that we might be able to change to just allocate on-demand or in-advance, no free lists</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.04</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I do know that's what we need to do in others parts of librt, particularly in db hash</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:00.24</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>kudos on getting through all that grunting .. herculean</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:30.30</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68976 brlcad/trunk/src/libbu/booleanize.c: restore booleanize back to r68707 with slight modification that was causing the spdi/shaders/solids regression tests to fail. the problem was simply that errno needed to be reset before calling strtol(). now all regress tests are passing again.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>06:35.27</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68977 brlcad/trunk/src/libbu/opt.c: few other places we do not properly reset errno before calling a function that potentially sets it (e.g., strtod, strtol)</tt></td></tr>
+<tr><td><tt>07:27.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@202.164.53.117)</font></tt></td></tr>
+<tr><td><tt>07:35.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr><td><tt>07:42.22</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>08:07.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Caterpillar (~caterpill@unaffiliated/caterpillar)</font></tt></td></tr>
+<tr><td><tt>08:20.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>09:05.34</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr><td><tt>10:11.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@92.60.189.225)</font></tt></td></tr>
+<tr><td><tt>10:32.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>10:55.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>12:10.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@202.164.53.117)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:12.34</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68978 (brlcad/trunk/src/libged/gqa.c brlcad/trunk/src/libpkg/pkg.c brlcad/trunk/src/util/ttcp.c): more places we need to initialize errno before we test it.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:28.29</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: how do you have things set up to run the static analyzer?&nbsp;&nbsp;anything special?&nbsp;&nbsp;I'd like to squish some issues in idle time.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:41.37</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68979 brlcad/trunk/src/libbu/badmagic.c: make bu_badmagic actually not return, always</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:44.36</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68980 (brlcad/trunk/include/bu/log.h brlcad/trunk/include/bu/magic.h): mark bu_badmagic as not returning and document it as such</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>12:48.52</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:brlcad * 68981 brlcad/trunk/include/bu/magic.h: clean up alignment so they're consistent (and relocatable)</tt></td></tr>
+<tr><td><tt>13:11.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+<tr><td><tt>13:16.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:17.09</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: There's a basic script in misc - I don't think I've got the more elaborate one committed yet (that breaks things down by lib) - I'll check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:20.01</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: offhand I don't recall any non-NMG API changing - the reason I had to go with passing the list around is I wasn't sure what other programs (say, MGED) were depending on the drawing work taking place specifically in RTG.rtg_vlfree</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:22.08</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>it may be that it truly doesn't matter, but given how massive the task is I was trying for the minimal change to avoid unanticipated side effects</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:23.00</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm willing to re-grunt through it and clean it up if we determine it's not needed</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:30.14</tt></td><td><font color="#65c065"><tt>ries</tt></font></td><td width="100%"><tt>ping Sean, any update?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.56</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68982 brlcad/trunk/misc/clang-static-analyzer-run.sh: A somewhat more elaborate clang static analyzer script with more nuanced reporting of what is and is not expected to pass (and reports specific to each library.) In a perfect world this would actually be generated by CMake - the major weakness of this setup is that the target list is static in the file and dosn't automatically update when</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:33.58</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>the build changes. Still, it's a start.</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:34.00</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.04</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: that'll probably be actively damaging to your shell scripting sensibilities, but it also contains the logic for how to do the static analysis building</tt></td></tr>
+<tr><td><tt>13:35.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad yorik (~yorik@2804:431:f721:d5eb:290:f5ff:fedc:3bb2)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.53</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>hey you</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:35.59</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>er yorik</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.19</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: yes, he should be good to go</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.20</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>be nice if my fingers acted like the're actually connected to my brain...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.31</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ries: can you have him send me an e-mail?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.44</tt></td><td><font color="#65c065"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: yes I can</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:36.49</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>great, thanks</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.06</tt></td><td><font color="#65c065"><tt>ries</tt></font></td><td width="100%"><tt>brlcad: it has been very quite on the channel lately..</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.08</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I'll cc you on the info, just going to let him know what to expect</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.23</tt></td><td><font color="#65c065"><tt>ries</tt></font></td><td width="100%"><tt>ok</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:37.30</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, it's been crunch time for several of us</tt></td></tr>
+<tr><td><tt>13:37.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-141.skif.com.ua)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:39.24</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: got why you were changing it -- no problems there -- just a note that there may be an easy way to make it go away (as it should eventually go away), especially if you tackle other global constructs like it</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.09</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods - sounds good.  I should have thought about that before diving in, but I was in one of my "I want to DO something, now" moods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.13</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>that'll teach me</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.35</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>i've done it myself</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:40.57</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>thanks for the script</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.03</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>the other other major global I've spotted so far (probably there are others, but this is the obvious one) is the RTG.NMG_Debug flag</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.07</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>np</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.21</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>RTG.NMG_debug rather</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.28</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.36</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>I'm assuming we'll do with that what we do for the other libs and make it nmg_debug</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.41</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I think nearly everything in RTG can go away</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:41.43</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt><font color="#CC00CC">checks</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:43.44</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>a somewhat thornier issue is how to handle the snurb and cnurb pieces.&nbsp;&nbsp;As a first cut, I'd like to pull them out into libnmg rather than trying to excise them - they're hooked in in quite a fe places</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:44.06</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>yeah, only tricky one is rtg_headwdb, and rtg_vlfree might propagate into a lot of places with the RT*VLIST() macros</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.13</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>pulling them over into libnmg first is what I would do</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.16</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>once we have the bspline bits separated out into libnmg, it's actually a better environment to evalute them as compared to their openNURBS counterparts</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:46.29</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>as few changes as possible really, just enough to decouple the libs from a symbol standpoint</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.01</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>eh?&nbsp;&nbsp;evaluate what? :)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.03</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">nods.  Should probably also hook up that thing you did a few years ago to use the new brep raytracing routines to raytrace older bspline objects by default</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.22</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: one of our long term TODO tasks was to see if we have any worthwhile nurbs routines not in openNURBS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.33</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">isn't familiar enough with that logic to say one way or the other</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:47.42</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ah, that's different</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.05</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>bspline stuff in nmg should go away fully, it overlaps with openNURBS, but there are some functions in there we might want to keep/recode</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.20</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">figures the bspline primitive should boil down to IO routines and the translation between data structures...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:48.24</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>mostly an eye towards nmg_misc iirc</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.17</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>can check release notes, but I'm not sure bspline was ever considered finished/published</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.25</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is actually starting to wonder a bit if the original goal of NURBS-in-NMG might be of interest - openNURBS hasn't released since 2013...</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:49.58</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: sure, but to maintain the ability to read old .g files at least the IO bits have to survive somewhere...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:50.58</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>not if it wasn't ever published in any way .. only ones affected would be a dev</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:51.30</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I don't know of that capability ever making it into a users hands, but would certainly check</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.02</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>biggest problem would be if we have any tools that create them, effectively putting them into user hands</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.05</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>oh - did you create the files for comparison when you checked the old bspline raytracer against the new work?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.20</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>but proc_db's don't count, and that's the only one that comes to mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.48</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>well, wdb.h has mk_bspline...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.48</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>ahhhh, no .. damn</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:52.57</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>at, the IGES converter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.00</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>there is a tool that published them</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.02</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>right</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.10</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>okay, so never mind</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:53.43</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>so, boil bspline down to the IO routines and the translation to openNURBS</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:54.54</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>and while we're at it, either remove the proc-db tools that use mk_bspline or recode them to use breps...</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:55.54</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>and update the iges converter</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.33</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt><font color="#CC00CC">is astounded by the number of bu_bomb calls in nmg code</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>13:57.55</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>almost 700</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:01.31</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: should we mark mk_bspline as deprecated?</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:09.51</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>hadn't done that yet just because mk_brep is rather unsatisfying</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.43</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>the proc-db tools would make for some fun nurbs test cases</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:10.51</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>(recoded)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:11.30</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>nmg used bu_bomb as an exception handling mechanism, so not surprising</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:12.29</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>if it were c++, they might as well be a ton of "throw ..." statements, which 700 would not be at all unusual</tt></td></tr>
+<tr><td><tt>14:19.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@92.60.189.225)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:31.39</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68983 brlcad/trunk/src/libbu/badmagic.c: %s for string</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:33.20</tt></td><td><font color="#bd6363"><tt>starseeker</tt></font></td><td width="100%"><tt>brlcad: fair enough, but if we go with the principle that it's not a library's responsibility to crash under most circumstances, reworking all that is going to be a Big Job</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:47.13</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>oops, thanks for the fix .. was just compiling now</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.08</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>starseeker: that's just it -- the library doesn't technically violate that principle</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:49.49</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>it uses bu_bomb as an exception handler, like throw/catch, and callers are expected to catch/handle any errors specifically so it doesn't crash </tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:50.23</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>I could literally rename them all to .cpp, replace with throw statements, and it would be no different design intent</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:51.27</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>not really any different end result either with calling code updated with try/catch instead of BU_SETJMP/UNSETJMP</tt></td></tr>
+<tr><td><tt>14:52.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@user-94-45-58-138-1.skif.com.ua)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:53.14</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>you're right that it will certainly be a job to change it to anything else, though ;)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:54.59</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>the point was merely that 700 exception conditions is not in any way unusual (in fact, it's probably low for code that complex with that many functions)</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:57.46</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>pick a poison: 700 bu_bomb calls with caller set/unset jumping, 700 throws with caller try/catching, 700 return conditions that would entail a huge cascade of every function call needing to get checked for return codes, 700 state settings in a struct getting passed to and checked by every function</tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>14:58.35</tt></td><td><font color="#5bae5b"><tt>brlcad</tt></font></td><td width="100%"><tt>not saying I prefer it, but using bu_bomb in this fashion is actually probably the least complicated and least code of all the options -- it has merit</tt></td></tr>
+<tr><td><tt>15:18.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad amarjeet (~amarjeet@169.149.136.110)</font></tt></td></tr>
+<tr><td><tt>17:58.14</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mandeep_Singh (~mandeep@2405:205:4083:b4c2:bc26:74bc:571a:c31d)</font></tt></td></tr>
+<tr><td><tt>18:16.07</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad Mandeep_Singh (~mandeep@2405:205:4083:b4c2:f92d:aebd:3037:8673)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:40.30</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68984 brlcad/trunk/src/libbg/chull3d.cpp: double can't hold DBL_MAX*DBL_MAX...</tt></td></tr>
+<tr><td><tt>19:46.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:48.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>19:49.12</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68985 (brlcad/trunk/src/librt/primitives/bot/gct_decimation/auxiliary/mm.c brlcad/trunk/src/librt/primitives/bot/gct_decimation/auxiliary/mmbinsort.c and 7 others): avoid gcc pragmas with icc</tt></td></tr>
+<tr><td><tt>19:49.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:51.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:52.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:55.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:57.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>19:59.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr bgcolor="#eeeeee"><td><tt>20:00.00</tt></td><td><font color="#5eb35e"><tt>Notify</tt></font></td><td width="100%"><tt>03BRL-CAD:starseeker * 68986 brlcad/trunk/src/other/libnetpbm/pm_config.h.in: make sure _MSC_VER is defined before comparing it</tt></td></tr>
+<tr><td><tt>20:01.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:03.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:07.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:08.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:11.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:14.00</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:16.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:18.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:19.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:21.18</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:23.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:25.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:27.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:28.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>20:28.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:30.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:31.45</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:33.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:34.53</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:37.27</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:39.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:41.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:43.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:44.42</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:46.16</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:48.50</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:50.24</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:51.58</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:54.32</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:57.06</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>20:58.40</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:02.15</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:03.49</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:05.23</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:07.57</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:10.31</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:12.05</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:13.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:15.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:17.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:20.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:22.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:24.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:26.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:28.39</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:31.13</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:32.47</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:34.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:36.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:38.29</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:40.03</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:42.37</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:44.11</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:46.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:48.21</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:49.55</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:51.30</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:53.04</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:54.38</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:56.12</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>21:57.46</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:02.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:03.54</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:08.28</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:10.02</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:12.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad merzo (~merzo@93-195-113-92.pool.ukrtel.net)</font></tt></td></tr>
+<tr><td><tt>22:13.36</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:15.08</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad ries_ (~ries@D979C7EF.cm-3-2d.dynamic.ziggo.nl)</font></tt></td></tr>
+<tr><td><tt>22:15.10</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:16.44</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:20.19</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:21.52</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:24.26</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:27.01</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:28.35</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>22:30.09</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad kintel (~kintel@unaffiliated/kintel)</font></tt></td></tr>
+<tr><td><tt>23:24.20</tt></td><td colspan=2><tt><font color="#009900">*** join/#brlcad teepee (~teepee@unaffiliated/teepee)</font></tt></td></tr>
+</table>
+
+<br>Generated by irclog2html.pl
+Modified by <a href="http://Rikers.org">Tim Riker</a> to work with
+<a href="http://infobot.sourceforge.net/">infobot</a>.
+</body></html>
